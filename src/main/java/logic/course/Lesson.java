@@ -3,9 +3,10 @@ package logic.course;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import logic.Event;
 import logic.course.StuffMember;
 
-public class Lesson {
+public class Lesson implements Event {
 	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT}
 	
 	protected final StuffMember representer;
