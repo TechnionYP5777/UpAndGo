@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionEvent;
 import java.awt.Point;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -64,7 +65,9 @@ public class SchedualView {
 	private void initialize() {
 		String[] data = {"a","b","c","d","e","f","g","h","i"};
 
-		
+		DefaultListModel<String> model = new DefaultListModel<>();
+				 for(String val : data)
+				         model.addElement(val);
 		frame = new JFrame();
 		setFrameOptions();
 		
@@ -88,7 +91,7 @@ public class SchedualView {
 		setListHeader(listScroller, listHeader);
 		
 		@SuppressWarnings("unused")
-		JList<Object> list = new JList<Object>(data);
+		JList<String> list = new JList<String>(model);
 		
 		listScroller.setViewportView(list);
 		setJlist(list);
@@ -146,7 +149,7 @@ public class SchedualView {
 		lblCourseAdded.setVisible(false);
 	}
 
-	private static void setJlist(JList<Object> ¢) {
+	private static void setJlist(JList<String> ¢) {
 		¢.setBounds(new Rectangle(0, 0, 0, 50));
 		¢.setSize(new Dimension(120, 50));
 		¢.setPreferredSize(new Dimension(120, 50));
