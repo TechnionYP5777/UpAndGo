@@ -56,7 +56,7 @@ public class Schedule {
 	}
 	
 	@SuppressWarnings("static-method")
-	public boolean hasConstraint(@SuppressWarnings("unused") Constraint c) {
+	public boolean hasConstraint(@SuppressWarnings("unused") Constraint __) {
 		//TODO: implement
 		return true;
 	}
