@@ -9,23 +9,42 @@ import org.apache.commons.io.FileUtils;
 
 public class RepFile {
 	
-	private static URL RepFileUrl;
-	private static File RepFileLocal;
+	private static URL repFileUrl;
+	private static File repFileLocal;
 	
-	public static void downloadRepFile(){
+	public static void initialize(){
 		try {
-			RepFileUrl = new URL("http://ug3.technion.ac.il/rep/REPFILE.zip");
+			repFileUrl = new URL("http://ug3.technion.ac.il/rep/REPFILE.zip");
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		RepFileLocal = new File("REPFILE.zip");
+		repFileLocal = new File("REPFILE.zip");
+	}
+	
+	public static void getData(){
+		downloadRepFile();
+		unZipRepFile();
+	}
+	
+	public static void downloadRepFile(){
 		try {
-			FileUtils.copyURLToFile(RepFileUrl, RepFileLocal);
+			FileUtils.copyURLToFile(repFileUrl, repFileLocal);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+	
+	public static void unZipRepFile(){
+		if(repFileLocal != null && repFileLocal.exists() && !repFileLocal.isDirectory())
+			try {
+				UnzipUtility.unzip((repFileLocal + ""), "REPFILE");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 
 	}
 	
