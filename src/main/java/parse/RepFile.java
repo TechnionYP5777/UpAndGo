@@ -1,9 +1,11 @@
 package parse;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -30,7 +32,8 @@ public class RepFile {
 	public static void getData(){
 		downloadRepFile();
 		unZipRepFile();
-		printRepFile();
+		//printRepFile();
+		processRepFile();
 	}
 	
 	public static void downloadRepFile(){
@@ -67,6 +70,32 @@ public class RepFile {
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
 					System.out.println(line);
 				buffReader.close();					
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+	}
+	
+	public static void processRepFile(){
+		Charset ibm862charset = Charset.forName("IBM862");
+
+		File repyIn = new File("REPFILE/REPY");
+		File repyOut = new File("REPFILE/OUT");
+		if (repyIn.exists())
+			try(
+				FileInputStream fis = new FileInputStream(repyIn);
+				InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
+				BufferedReader buffReader = new BufferedReader(reader);
+				FileWriter fr = new FileWriter(repyOut);
+				BufferedWriter buffWriter = new BufferedWriter(fr))
+			{
+				if (!repyOut.exists())
+					repyOut.createNewFile();
+				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
+					buffWriter.write(line + "\n");
+				buffReader.close();
+				buffWriter.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
