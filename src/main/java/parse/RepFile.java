@@ -1,9 +1,14 @@
 package parse;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 
@@ -25,6 +30,7 @@ public class RepFile {
 	public static void getData(){
 		downloadRepFile();
 		unZipRepFile();
+		printRepFile();
 	}
 	
 	public static void downloadRepFile(){
@@ -48,5 +54,24 @@ public class RepFile {
 
 	}
 	
+	public static void printRepFile(){
+		Charset ibm862charset = Charset.forName("IBM862");
+
+		File repy = new File("REPFILE/REPY");
+		if (repy.exists())
+			try(
+				FileInputStream fis = new FileInputStream(repy);
+				InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
+				BufferedReader buffReader = new BufferedReader(reader))
+			{
+				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
+					System.out.println(line);
+				buffReader.close();					
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+	}
 
 }
