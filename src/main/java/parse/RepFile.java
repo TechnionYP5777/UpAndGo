@@ -81,7 +81,7 @@ public class RepFile {
 		Charset ibm862charset = Charset.forName("IBM862");
 
 		File repyIn = new File("REPFILE/REPY");
-		File repyOut = new File("REPFILE/OUT");
+		File repyOut = new File("REPFILE/REPHEB");
 		if (repyIn.exists())
 			try(
 				FileInputStream fis = new FileInputStream(repyIn);
@@ -93,7 +93,7 @@ public class RepFile {
 				if (!repyOut.exists())
 					repyOut.createNewFile();
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
-					buffWriter.write(line + "\n");
+					buffWriter.write(HebReverse.reverseTextNotNumbers(line) + "\n");
 				buffReader.close();
 				buffWriter.close();
 			} catch (FileNotFoundException e) {
