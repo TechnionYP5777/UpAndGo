@@ -1,10 +1,10 @@
-package logic.course;
+package model.course;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import logic.Event;
-import logic.course.StuffMember;
+import model.course.StuffMember;
 
 public class Lesson implements Event {
 	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT}

@@ -1,7 +1,7 @@
 package controller;
 
-import logic.course.Course;
 import model.Model;
+import model.course.Course;
 import view.View;
 
 /**

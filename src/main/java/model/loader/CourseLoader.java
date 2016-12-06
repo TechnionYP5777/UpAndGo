@@ -1,8 +1,8 @@
-package model;
+package model.loader;
 
 import java.util.HashMap;
 
-import logic.course.Course;
+import model.course.Course;
 
 /**
  * Interface for loading courses data from outside.
@@ -11,5 +11,5 @@ import logic.course.Course;
 public interface CourseLoader {
 	//TODO: I'm not sure, whether it should be a List or HashMap
 	// apparently it's a hashMap with mapping (courseName -> course)
-	HashMap<String, Course> loadCoursesFrom(String path);
+	HashMap<String, Course> loadCourseFrom(String path);
 }

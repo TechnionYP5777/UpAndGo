@@ -1,4 +1,4 @@
-package logic.schedule;
+package model.schedule;
 
 import logic.Event;
 
