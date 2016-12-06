@@ -1,4 +1,4 @@
-package logic.course;
+package model.course;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

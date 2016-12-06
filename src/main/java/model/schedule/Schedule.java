@@ -1,8 +1,8 @@
-package logic.schedule;
+package model.schedule;
 
 import java.util.List;
 
-import logic.course.Course;
+import model.course.Course;
 
 
 public class Schedule {
