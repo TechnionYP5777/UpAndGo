@@ -2,6 +2,9 @@ package model.course;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.loader.CourseLoader;
+
 import java.lang.RuntimeException;
 import java.time.LocalDateTime;
 
@@ -24,7 +27,7 @@ public class Course {
 	protected int laboratoryHours;
 	protected int projectHours;
 	
-	public Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
+	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
 																		LocalDateTime aT, LocalDateTime bT) {
 		
 		if((name1==null) || (id1==null) || (faculty1==null))
@@ -45,16 +48,11 @@ public class Course {
 		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
 	}
 	
-	public void addLesson(Lesson ¢) {
-		this.lessons.add(¢);
-		¢.assignTo(this);
-		addHours(¢);
-	}
 	
-	public void removeLesson(Lesson ¢) {
+	
+	protected void addLesson(Lesson ¢) {
 		this.lessons.add(¢);
-		¢.removeFromCourse();
-		removeHours(¢);
+		addHours(¢);
 	}
 	
 	public String getName() {
@@ -114,8 +112,70 @@ public class Course {
 		//TODO: add number of hours in course with respect to the lesson type
 	}
 	
-	protected void removeHours(@SuppressWarnings("unused") Lesson ¢) {
-		//TODO: remove number of hours in course with respect to the lesson type
+	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
+		return new CourseBuilder();
+	}
+	
+	public static class CourseBuilder {
+		
+		protected String name;
+		protected String id;
+		protected String faculty;
+		protected int points;
+		protected LocalDateTime aTerm;
+		protected LocalDateTime bTerm;
+		
+		protected final List<StuffMember> stuff = new ArrayList<>();
+		protected final List<Lesson> lessons = new ArrayList<>();
+
+		public CourseBuilder setName(String ¢) {
+			this.name = ¢;
+			return this;
+		}
+		
+		public CourseBuilder setId(String ¢) {
+			this.id = ¢;
+			return this;
+		}
+		
+		public CourseBuilder setFaculty(String ¢) {
+			this.faculty = ¢;
+			return this;
+		}
+		
+		public CourseBuilder setPoints(int ¢) {
+			this.points = ¢;
+			return this;
+		}
+		
+		public CourseBuilder setATerm(LocalDateTime ¢) {
+			this.aTerm = ¢;
+			return this;
+		}
+		
+		public CourseBuilder setBTerm(LocalDateTime ¢) {
+			this.bTerm = ¢;
+			return this;
+		}
+		
+		public CourseBuilder addStuffMember(StuffMember ¢) {
+			if(!this.stuff.contains(¢))
+				this.stuff.add(¢);
+			return this;
+		}
+		public CourseBuilder addLesson(Lesson ¢) {
+			this.lessons.add(¢);
+			if(!this.stuff.contains(¢.representer))
+				this.stuff.add(¢.representer);
+			return this;
+		}
+		
+		public Course build() {
+			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm);
+			for(Lesson ¢: this.lessons)
+				$.addLesson(¢);
+			return $;
+		}
 	}
 	
 }

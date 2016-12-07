@@ -12,7 +12,14 @@ import model.course.Course;
 public abstract class CourseLoader {
 	//TODO: I'm not sure, whether it should be a List or HashMap
 	// apparently it's a hashMap with mapping (courseName -> course)
-	protected HashMap<String, Course> courses;
+	protected final HashMap<String, Course> courses;
+	protected final Course.CourseBuilder cb;
+	
+	public CourseLoader() {
+		this.courses = new HashMap<>();
+		this.cb = Course.giveCourseBuilderTo(this);
+		
+	}
 	
 	public abstract HashMap<String, Course> loadCoursesFrom(String path);
 	
@@ -25,4 +32,5 @@ public abstract class CourseLoader {
 	public HashMap<String, Course> getAllLoadedCourses() {
 		return new HashMap<>(courses);
 	}
+	
 }

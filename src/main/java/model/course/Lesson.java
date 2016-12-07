@@ -14,9 +14,10 @@ public class Lesson implements Event {
 	protected final int duration;
 	protected final String place;
 	protected final Type type;
-	protected Optional<Course> course;
+	protected final int group;
+	protected final Course course;
 	
-	public Lesson(StuffMember repr, LocalDateTime theStartTime, int dur, String place1, Type t) {
+	public Lesson(StuffMember repr, LocalDateTime theStartTime, int dur, String place1, Type t, int g, Course c) {
 		if((repr==null) || (theStartTime==null) || (place1==null))
 			throw new NullPointerException();
 		
@@ -25,24 +26,11 @@ public class Lesson implements Event {
 		this.duration = dur;
 		this.place = place1;
 		this.type = t;
-		
-		this.course = Optional.empty();
+		this.group = g;
+		this.course = c;
 	}
 	
-	// add this lesson to the specific course
-	// note that one can call this method only from the same package
-	void assignTo(Course ¢) {
-		this.course = Optional.of(¢);
-	}
-	
-	// remove this lesson from the assigned course
-	// note that one can call this method only from the same package
-	void removeFromCourse() {
-		this.course = Optional.empty();
-	}
-	
-	
-	public Optional<Course> getCourse() {
+	public Course getCourse() {
 		return this.course;
 	}
 
