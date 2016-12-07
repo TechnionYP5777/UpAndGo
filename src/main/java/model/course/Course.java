@@ -27,6 +27,8 @@ public class Course {
 	protected int laboratoryHours;
 	protected int projectHours;
 	
+	protected final List<CourseListener> listeners;
+	
 	//TODO: create interface LessonGroup as mediator between Lessons and Course?
 	
 	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
@@ -46,6 +48,8 @@ public class Course {
 		
 		this.stuff = new ArrayList<>(st);
 		this.lessons = new ArrayList<>();
+		
+		this.listeners = new ArrayList<>();
 
 		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
 	}
@@ -116,6 +120,20 @@ public class Course {
 	
 	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
 		return new CourseBuilder();
+	}
+	
+	public void addListener(CourseListener ¢) {
+		this.listeners.add(¢);
+	}
+	
+	public void removeListener(CourseListener ¢) {
+		this.listeners.remove(¢);
+	}
+	
+	// TODO: how someone can change Course without braking incapsulation?
+	public void updateListeners() {
+		for(CourseListener ¢: this.listeners)
+			¢.getUpdate(this);
 	}
 	
 	public static class CourseBuilder {
