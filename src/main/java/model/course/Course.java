@@ -27,6 +27,8 @@ public class Course {
 	protected int laboratoryHours;
 	protected int projectHours;
 	
+	//TODO: create interface LessonGroup as mediator between Lessons and Course?
+	
 	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
 																		LocalDateTime aT, LocalDateTime bT) {
 		
