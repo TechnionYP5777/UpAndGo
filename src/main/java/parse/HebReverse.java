@@ -7,38 +7,16 @@ public class HebReverse {
 	
 	public static String reverseLine(String line){
 		
-		String reversed = new StringBuffer(line).reverse().toString();
-		return reversed;
+		return new StringBuffer(line).reverse() + "";
 	}
-	
-	
+
 	public static String reverseTextNotNumbers(String line){
 		
-	    String res = reverseLine(line);
-	    Matcher matcher = Pattern.compile("\\d+[\\/\\.\\d]*\\d+").matcher(res);
-	    while (matcher.find()) {
-	        String number = matcher.group();
-	        String reveresedNumber = new StringBuilder(number).reverse().toString();
-		    System.out.println(reveresedNumber);
-	        res = res.substring(0,matcher.start()) + reveresedNumber + res.substring(matcher.end(),res.length());
-	        
-	    }
-	    System.out.println(res);
-	    return res;
+	    String $ = reverseLine(line);
+	    for (Matcher ¢ = Pattern.compile("\\d+[\\/\\.\\d]*\\d+").matcher($); ¢.find();)
+			$ = $.substring(0, ¢.start()) + (new StringBuilder(¢.group()).reverse() + "")
+					+ $.substring(¢.end(), $.length());
+	    return $;
 	}
-/*	
-	public static String reverseOnlyHebrew(String line){
-		
-	    String res = line;
-	    Matcher matcher = Pattern.compile("[\\u0590-\\u05FF]+( [\\u0590-\\u05FF[\\-]]+)+[\\u0590-\\u05FF]").matcher(res);
-	    while (matcher.find()) {
-	        String number = matcher.group();
-	        String reveresedNumber = new StringBuilder(number).reverse().toString();
-		    System.out.println(reveresedNumber);
-	        res = res.substring(0,matcher.start()) + reveresedNumber + res.substring(matcher.end(),res.length());
-	        
-	    }
-	    System.out.println(res);
-	    return res;
-	}*/
+
 }
