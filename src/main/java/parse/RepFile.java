@@ -107,16 +107,17 @@ public class RepFile {
 	}
 	
 	private static String getRepFileAsString(){
-		File repfile = new File("REPFILE/REPHEB");
-		String fileAsString = null;
-		try {
-			BufferedReader repFileReader = new BufferedReader(new FileReader("REPFILE/REPHEB"));
-	        StringBuilder sb = new StringBuilder();
-	        
+		String $ = null;
+		try (
+			BufferedReader repFileReader = new BufferedReader(new FileReader("REPFILE/REPHEB"));)
+		{	
+			StringBuilder sb = new StringBuilder();
 			for (String line = repFileReader.readLine(); line != null; line = repFileReader.readLine())
 				sb.append(line).append("\n");
 
-			fileAsString = sb.toString();
+			$ = sb + "";
+			
+			repFileReader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,16 +125,14 @@ public class RepFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return fileAsString;
+		return $;
 	}
 	
 	public static void getCoursesFromRepFile(){
-		String repFile = getRepFileAsString();
-		Pattern regex = Pattern.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE);
-		Matcher regexMatcher = regex.matcher(repFile);
-		while (regexMatcher.find()) {
-		     System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName"));
-		} 
+		for (Matcher regexMatcher = Pattern
+				.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE)
+				.matcher(getRepFileAsString()); regexMatcher.find();)
+			System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
 	}
 
 }
