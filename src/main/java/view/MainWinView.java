@@ -41,6 +41,11 @@ public class MainWinView extends JFrame {
 	static JList<String> lstChosenCourses;
 	static DefaultListModel<String> courseModel;
 	static DefaultListModel<String> ChosenCourseModel;
+	private JLabel lblTitle;
+	private JScrollPane scpChosenCourses;
+	private JScrollPane scpCourseDescription;
+	private JScrollPane scpCourseList;
+	static JButton btnRemoveCourse;
 
 	/**
 	 * Launch the application.
@@ -80,7 +85,7 @@ public class MainWinView extends JFrame {
 	private void initComponents() {
 		setWindowPreferences();
 
-		JLabel lblTitle = new JLabel("Choose Your Courses!!!");
+		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
 		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" , "k" ,"l" ,"m" ,"n" ,"o" , "p" };
@@ -90,19 +95,20 @@ public class MainWinView extends JFrame {
 			courseModel.addElement(val);
 		lstCourseList = new JList<>(courseModel);
 
-		JScrollPane scpCourseList = new JScrollPane();
+		scpCourseList = new JScrollPane();
 		setCourseListArea(scpCourseList);
 
-		JScrollPane scpCourseDescription = new JScrollPane();
+		scpCourseDescription = new JScrollPane();
 		scpCourseDescription.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		setCourseDescriptionArea(scpCourseDescription);
 		ChosenCourseModel = new DefaultListModel<>();
-		JScrollPane scpChosenCourses = new JScrollPane();
+		scpChosenCourses = new JScrollPane();
 		setChosenCoursesArea(scpChosenCourses);
 
 		btnAddCourse = new JButton("Add Course");
+		btnRemoveCourse = new JButton("Remove Course");
 		btnSaveChoice = new JButton("Save");
-		setButtonsPreferences(btnAddCourse, btnSaveChoice);
+		setButtonsPreferences();
 
 		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnSaveChoice);
 	}
@@ -116,13 +122,15 @@ public class MainWinView extends JFrame {
 		lblTitle.setFocusTraversalKeysEnabled(false);
 	}
 
-	private static void setButtonsPreferences(JButton btnAddCourse, JButton btnSaveChoice) {
+	private static void setButtonsPreferences() {
 		btnAddCourse.setMaximumSize(new Dimension(150, 25));
 		btnAddCourse.setPreferredSize(new Dimension(130, 25));
 		btnAddCourse.setMinimumSize(new Dimension(130, 25));
 		btnAddCourse.setVisible(false);
 		btnSaveChoice.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnSaveChoice.setVisible(false);
+		btnRemoveCourse.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnRemoveCourse.setVisible(false);
 	}
 
 	private static void setCourseListArea(JScrollPane scpCourseList) {
@@ -184,45 +192,52 @@ public class MainWinView extends JFrame {
 
 	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
 			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING,
-				gl_contentPane.createSequentialGroup().addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING,
-								gl_contentPane.createSequentialGroup().addGap(158)
-										.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addGap(106))
-						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-										.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 164,
-												Short.MAX_VALUE)
-										.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
-						.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap()
-				.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(158)
+							.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(106))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+								.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(scpChosenCourses, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-												190, Short.MAX_VALUE)
-										.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190,
-												Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnSaveChoice))))
-				.addContainerGap()));
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(scpChosenCourses, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+									.addComponent(btnRemoveCourse)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSaveChoice))))
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 		return;
 	}
@@ -253,6 +268,7 @@ public class MainWinView extends JFrame {
 				courseModel.remove(lstCourseList.getSelectedIndex());
 				lstChosenCourses.setVisible(true);
 				btnSaveChoice.setVisible(true);
+				btnRemoveCourse.setVisible(true);
 				if (!courseModel.isEmpty())
 					return;
 				txtCourseDescription.setText(" No Courses Left ");
