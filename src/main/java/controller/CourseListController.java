@@ -43,7 +43,7 @@ public class CourseListController extends Controller{
 	public List<String> getCoursesNames() {
 		// TODO: get list
 		// e.g.:
-		// model.getCourses();
+		// model.getCoursesNames();
 		return new ArrayList<>();
 	}
 	
