@@ -22,7 +22,8 @@ public abstract class Controller implements ActionListener{
 	public Controller(Model model, View view) {
 		this.model = model;
 		this.view = view;
-		
+
+		this.model.addListener(view);
 		this.view.addListener(this);
 	}	
 }
