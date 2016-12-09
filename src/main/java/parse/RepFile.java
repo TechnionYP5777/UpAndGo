@@ -5,12 +5,15 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
@@ -101,6 +104,36 @@ public class RepFile {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
+	}
+	
+	private static String getRepFileAsString(){
+		File repfile = new File("REPFILE/REPHEB");
+		String fileAsString = null;
+		try {
+			BufferedReader repFileReader = new BufferedReader(new FileReader("REPFILE/REPHEB"));
+	        StringBuilder sb = new StringBuilder();
+	        
+			for (String line = repFileReader.readLine(); line != null; line = repFileReader.readLine())
+				sb.append(line).append("\n");
+
+			fileAsString = sb.toString();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fileAsString;
+	}
+	
+	public static void getCoursesFromRepFile(){
+		String repFile = getRepFileAsString();
+		Pattern regex = Pattern.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE);
+		Matcher regexMatcher = regex.matcher(repFile);
+		while (regexMatcher.find()) {
+		     System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName"));
+		} 
 	}
 
 }
