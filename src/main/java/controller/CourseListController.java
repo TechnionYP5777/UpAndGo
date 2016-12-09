@@ -24,7 +24,7 @@ public class CourseListController extends Controller{
 		// TODO Auto-generated method stub
 		// enforce logic of model
 		// e.g.:
-//		if(view.wasPicked)
+//		if(view.wasPicked())
 //			model.pickCourse(view.getHighlightedCourseName());
 //		else
 //			model.dropCousre(view.getHighlightedCourseName());
