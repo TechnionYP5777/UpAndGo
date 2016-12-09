@@ -23,6 +23,8 @@ public abstract class CourseLoader {
 	
 	public abstract HashMap<String, Course> loadCoursesFrom(String path);
 	
+	public abstract void updateCourseIn(Course c, String path);
+	
 	// TODO: make this method final?
 	public Optional<Course> getLoadedCourse(String name) {
 		return Optional.of(courses.get(name));
