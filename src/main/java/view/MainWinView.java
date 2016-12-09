@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,8 +11,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -243,6 +240,7 @@ public class MainWinView extends JFrame {
 						: "Course " + lstCourseList.getSelectedValue() + " Description Here ...");
 				txtCourseDescription.setVisible(true);
 				btnAddCourse.setVisible(true);
+			
 			}
 		});
 		btnAddCourse.addActionListener(new ActionListener() {
