@@ -16,7 +16,7 @@ public class RepFileTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testGetData() {
-		RepFile.getData();
+		RepFile.downloadData();
 		assertTrue(true);
 	}
 	
