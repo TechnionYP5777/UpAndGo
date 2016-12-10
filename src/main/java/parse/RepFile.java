@@ -15,7 +15,19 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class RepFile {
 	
@@ -32,7 +44,7 @@ public class RepFile {
 		repFileLocal = new File("REPFILE.zip");
 	}
 	
-	public static void getData(){
+	public static void downloadData(){
 		downloadRepFile();
 		unZipRepFile();
 		//printRepFile();
@@ -106,7 +118,44 @@ public class RepFile {
 			} 
 	}
 	
+
+	public static void getCoursesFromRepFile(){
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.newDocument();
+			Element rootElement = doc.createElement("Courses");
+			doc.appendChild(rootElement);
+			
+			for (Matcher regexMatcher = Pattern
+					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE)
+					.matcher(getRepFileAsString()); regexMatcher.find();){
+				//System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
+				Element course = doc.createElement("Course");
+				course.setAttribute("id", regexMatcher.group("CourseID"));
+				Element courseName = doc.createElement("name");
+				courseName.appendChild(doc.createTextNode(regexMatcher.group("CourseName")));
+				course.appendChild(courseName);
+				rootElement.appendChild(course);
+			}
+			
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/REP.XML"))));
+
+		} catch (ParserConfigurationException | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+	
 	private static String getRepFileAsString(){
+		File repFile = new File("REPFILE/REPHEB");
+		if(!repFile.exists())
+			downloadData(); 
+
 		String $ = null;
 		try (
 			BufferedReader repFileReader = new BufferedReader(new FileReader("REPFILE/REPHEB"));)
@@ -128,11 +177,5 @@ public class RepFile {
 		return $;
 	}
 	
-	public static void getCoursesFromRepFile(){
-		for (Matcher regexMatcher = Pattern
-				.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE)
-				.matcher(getRepFileAsString()); regexMatcher.find();)
-			System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
-	}
 
 }
