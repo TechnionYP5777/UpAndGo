@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Course {
 	
 	protected final String name;
-	protected final String id;
+	protected final int id;
 	protected final String faculty;
 	protected final int points;
 	protected final LocalDateTime aTerm;
@@ -31,12 +31,12 @@ public class Course {
 	
 	//TODO: create interface LessonGroup as mediator between Lessons and Course?
 	
-	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
+	protected Course(String name1, int id1, String faculty1, List<StuffMember> st, int acPoints,
 																		LocalDateTime aT, LocalDateTime bT) {
 		
-		if((name1==null) || (id1==null) || (faculty1==null))
+		if((name1==null) || (faculty1==null))
 			throw new NullPointerException();
-		if((name1.isEmpty()) || (id1.isEmpty()) || (faculty1.isEmpty()) || (st.isEmpty()))
+		if((name1.isEmpty()) || (faculty1.isEmpty()) || (st.isEmpty()))
 			throw new RuntimeException("The empty field was found!\n"); //$NON-NLS-1$
 		
 		this.name = name1;
@@ -65,7 +65,7 @@ public class Course {
 		return this.name;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 	
@@ -139,7 +139,7 @@ public class Course {
 	public static class CourseBuilder {
 		
 		protected String name;
-		protected String id;
+		protected int id;
 		protected String faculty;
 		protected int points;
 		protected LocalDateTime aTerm;
@@ -153,7 +153,7 @@ public class Course {
 			return this;
 		}
 		
-		public CourseBuilder setId(String ¢) {
+		public CourseBuilder setId(int ¢) {
 			this.id = ¢;
 			return this;
 		}
