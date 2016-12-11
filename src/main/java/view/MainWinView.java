@@ -265,6 +265,7 @@ public class MainWinView extends JFrame {
 		});
 		btnRemoveCourse.addActionListener(new ActionListener() {
 
+			
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				if (lstChosenCourses.getSelectedValue() == null)
