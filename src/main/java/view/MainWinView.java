@@ -72,6 +72,7 @@ public class MainWinView extends JFrame {
 		setTitleLbl(lblTitle);
 
 		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+		
 		// String[] data = { "a", "b" };
 
 		courseModel = new DefaultListModel<>();
