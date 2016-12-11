@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -47,33 +46,17 @@ public class MainWinView extends JFrame {
 	private JScrollPane scpCourseList;
 	static JButton btnRemoveCourse;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					MainWinView frame = new MainWinView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public MainWinView() {
 
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		initComponents();
 		createEvents();
 
@@ -88,8 +71,8 @@ public class MainWinView extends JFrame {
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
-		//String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-		String[] data = { "a", "b" };
+		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+		// String[] data = { "a", "b" };
 
 		courseModel = new DefaultListModel<>();
 		for (String val : data)
@@ -283,17 +266,17 @@ public class MainWinView extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent __) {
-				if (lstChosenCourses.getSelectedValue() == null )
+				if (lstChosenCourses.getSelectedValue() == null)
 					return;
-				if (courseModel.isEmpty()){
+				if (courseModel.isEmpty()) {
 					txtCourseDescription.setText(" Choose course to add ");
 					btnAddCourse.setEnabled(false);
 				}
 				courseModel.addElement(lstChosenCourses.getSelectedValue());
 				ChosenCourseModel.removeElement(lstChosenCourses.getSelectedValue());
-				
+
 				if (ChosenCourseModel.isEmpty())
-					btnRemoveCourse.setEnabled(false);			
+					btnRemoveCourse.setEnabled(false);
 			}
 		});
 	}
