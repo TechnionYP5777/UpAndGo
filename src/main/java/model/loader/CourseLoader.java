@@ -26,8 +26,8 @@ public abstract class CourseLoader {
 	public abstract void updateCourseIn(Course c, String path);
 	
 	// TODO: make this method final?
-	public static Course getLoadedCourse(String name) {
-		return Optional.of(courses.get(name));
+	public Course getLoadedCourse(String name) {
+		return courses.get(name);
 	}
 	
 	// TODO: make this method final?

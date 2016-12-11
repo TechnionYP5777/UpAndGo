@@ -20,22 +20,24 @@ public abstract class Model {
 	
 	protected List<Course> courseList;
 	protected List<ActionListener> listenersList;
+	protected CourseLoader loader;
 	
-	public Model(){
+	public Model(CourseLoader loader){
 		this.courseList = new ArrayList<>();
 		this.listenersList = new ArrayList<>();
+		this.loader = loader;
 	}
 	
-	void addListener(ActionListener ¢) {
-		if (¢ == null)
+	public void addListener(ActionListener Â¢) {
+		if (Â¢ == null)
 			throw new NullPointerException();
-		this.listenersList.add(¢);
+		this.listenersList.add(Â¢);
 	}
 	
 	public void pickCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		this.courseList.add(CourseLoader.getLoadedCourse(name));
+		this.courseList.add(loader.getLoadedCourse(name));
 	}
 	
 	public List<String> getCoursesNames() {
