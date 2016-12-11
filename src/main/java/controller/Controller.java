@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.event.ActionListener;
+import java.util.Observer;
 
 import model.Model;
 import view.View;
@@ -15,7 +15,7 @@ import view.View;
  * In many frameworks, the controller appears as a collection of methods and listeners built into both
  * the data model and the view.
  * */
-public abstract class Controller implements ActionListener{
+public abstract class Controller implements Observer {
 	protected Model model;
 	protected View view;
 	
@@ -24,6 +24,6 @@ public abstract class Controller implements ActionListener{
 		this.view = view;
 
 		this.model.addObserver(view);
-		this.view.addListener(this);
+		this.view.addObserver(this);
 	}	
 }

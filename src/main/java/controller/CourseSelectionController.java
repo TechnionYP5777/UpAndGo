@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.event.ActionEvent;
+import java.util.Observable;
 
 import model.Model;
 import view.View;
@@ -13,14 +13,12 @@ public class CourseSelectionController extends Controller {
 	}
 
 	@Override
-	public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-		// TODO Auto-generated method stub
-		// TODO:
-		// model.saveSelection(view.getSelectedCourses());
-	}
-	
-	public void loadSelection() {
-		// TODO:
-		// view.setSelectedCourses(model.loadSelection());
+	public void update(Observable o, Object arg) {
+		// enforce logic of model
+		// e.g.:
+//		if(view.wasPicked())
+//			model.pickCourse(view.getHighlightedCourseName());
+//		else
+//			model.dropCousre(view.getHighlightedCourseName());
 	}
 }

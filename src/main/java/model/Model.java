@@ -32,10 +32,10 @@ public abstract class Model extends Observable {
 	
 	@SuppressWarnings("sync-override") //no idea what this is
 	@Override
-	public void addObserver(Observer ¢) {
-		if (¢ == null)
+	public void addObserver(Observer Â¢) {
+		if (Â¢ == null)
 			throw new NullPointerException();
-		this.listenersList.add(¢);
+		this.listenersList.add(Â¢);
 	}
 	
 	public void pickCourse(String name) {
