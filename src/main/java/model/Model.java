@@ -37,7 +37,7 @@ public abstract class Model {
 	public void pickCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		this.courseList.add(loader.getLoadedCourse(name));
+		this.courseList.add(loader.loadCourse(name));
 	}
 	
 	public List<String> getCoursesNames() {

@@ -1,7 +1,7 @@
 package model.loader;
 
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.List;
 
 import model.course.Course;
 
@@ -12,27 +12,21 @@ import model.course.Course;
 public abstract class CourseLoader {
 	//TODO: I'm not sure, whether it should be a List or HashMap
 	// apparently it's a hashMap with mapping (courseName -> course)
-	protected final HashMap<String, Course> courses;
 	protected final Course.CourseBuilder cb;
+	protected final String path;
 	
-	public CourseLoader() {
-		this.courses = new HashMap<>();
+	public CourseLoader(String path) {
 		this.cb = Course.giveCourseBuilderTo(this);
-		
+		this.path = path;
 	}
 	
-	public abstract HashMap<String, Course> loadCoursesFrom(String path);
+	public abstract HashMap<String, Course> loadCourses(List<String> names);
 	
-	public abstract void updateCourseIn(Course c, String path);
+	public abstract void updateCourse(Course c);
 	
-	// TODO: make this method final?
-	public Course getLoadedCourse(String name) {
-		return courses.get(name);
-	}
+	public abstract Course loadCourse(String name);
 	
-	// TODO: make this method final?
-	public HashMap<String, Course> getAllLoadedCourses() {
-		return new HashMap<>(courses);
-	}
+	public abstract HashMap<String, Course> loadAllCourses();
 	
+	public abstract List<String> loadAllCourseNames();
 }
