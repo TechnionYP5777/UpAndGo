@@ -46,7 +46,6 @@ public class MainWinView extends JFrame {
 	private JScrollPane scpCourseList;
 	static JButton btnRemoveCourse;
 
-	
 	/**
 	 * Create the frame.
 	 */
@@ -72,7 +71,7 @@ public class MainWinView extends JFrame {
 		setTitleLbl(lblTitle);
 
 		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-		
+
 		// String[] data = { "a", "b" };
 
 		courseModel = new DefaultListModel<>();
@@ -235,9 +234,9 @@ public class MainWinView extends JFrame {
 	private static void createEvents() {
 
 		lstCourseList.addListSelectionListener(new ListSelectionListener() {
-			@SuppressWarnings("unused")
+
 			@Override
-			public void valueChanged(ListSelectionEvent __) {
+			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
 				txtCourseDescription.setText(lstCourseList.getSelectedIndex() == -1 ? " Choose course to add "
 						: "Course " + lstCourseList.getSelectedValue() + " Description Here ...");
 				txtCourseDescription.setVisible(true);
@@ -247,9 +246,9 @@ public class MainWinView extends JFrame {
 			}
 		});
 		btnAddCourse.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
+
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				if (lstCourseList.getSelectedValue() == null)
 					return;
 				ChosenCourseModel.addElement(lstCourseList.getSelectedValue());
@@ -265,9 +264,9 @@ public class MainWinView extends JFrame {
 			}
 		});
 		btnRemoveCourse.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
+
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				if (lstChosenCourses.getSelectedValue() == null)
 					return;
 				if (courseModel.isEmpty()) {
