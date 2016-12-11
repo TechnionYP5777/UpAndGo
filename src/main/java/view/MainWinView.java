@@ -165,11 +165,12 @@ public class MainWinView extends JFrame {
 
 	private void setWindowPreferences() {
 		setPreferredSize(new Dimension(450, 160));
-		setMinimumSize(new Dimension(450, 160));
+		setMinimumSize(new Dimension(450, 300));
 		setTitle("Schedual Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setMinimumSize(new Dimension(450, 300));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	}
