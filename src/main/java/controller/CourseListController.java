@@ -16,7 +16,7 @@ public class CourseListController extends Controller{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
 		// enforce logic of model
 		// e.g.:
 //		if(view.wasPicked())

@@ -13,7 +13,7 @@ public class CourseSelectionController extends Controller {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable __, Object arg) {
 		// enforce logic of model
 		// e.g.:
 //		if(view.wasPicked())
