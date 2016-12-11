@@ -1,12 +1,14 @@
 package view;
 
-import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
-public interface View extends ActionListener{
+public interface View extends Observer{
 	// TODO: implement
 	// I think GUI consists of these Views.
 	// And maybe it will be good to use Composition Pattern for them.
 	
-	void addListener(ActionListener l);
+	@Override
+	void update(Observable obj, Object arg);
 	
 }
