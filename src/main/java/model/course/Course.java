@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.loader.CourseLoader;
 
-import java.lang.RuntimeException;
 import java.time.LocalDateTime;
 
 // after object creation one can only add or remove lessons

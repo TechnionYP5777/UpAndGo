@@ -5,6 +5,8 @@ package launcher;
 
 import java.awt.EventQueue;
 
+import model.ConcreteModel;
+import model.loader.XmlCourseLoader;
 import view.MainWinView;
 
 /**
@@ -19,7 +21,7 @@ public class Launcher {
 			@Override
 			public void run() {
 				try {
-					MainWinView frame = new MainWinView();
+					MainWinView frame = new MainWinView(new ConcreteModel (new XmlCourseLoader("../../../../REPFILE")));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
