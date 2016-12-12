@@ -15,34 +15,23 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import model.course.Course;
-import model.course.Course.CourseBuilder;
 
 class xmlParser {
 	public static List<Course> getCourses() {
 		Course.CourseBuilder cb = new Course.CourseBuilder();
-		List<Course> resList = new LinkedList<Course>();
+		List<Course> $ = new LinkedList<>();
 		// resList.add
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse("REPFILE/REP.XML");
 			NodeList coursesList = doc.getElementsByTagName("Course");
-			//System.out.println(ridesList.getLength());
-			for (int i = 0; i < coursesList.getLength(); i++) {
+			
+			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
-				if (p.getNodeType() == Node.ELEMENT_NODE) {
-					//System.out.println("ok");
-					Element course = (Element) p;
-					// String id = ride.getAttribute("id");
-					Integer id = Integer.parseInt(course.getAttribute("id"));
-					String name = course.getElementsByTagName("name").item(0)
-							.getTextContent();
-
-					
-					
-					Course c = cb.setId(id).setName(name).build();
-					resList.add( c  );
-				}
+				if (p.getNodeType() == Node.ELEMENT_NODE)
+					$.add(cb.setId(Integer.parseInt(((Element) p).getAttribute("id")))
+							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
 
 		} catch (ParserConfigurationException e) {
@@ -55,6 +44,6 @@ class xmlParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resList;
+		return $;
 	}
 }
