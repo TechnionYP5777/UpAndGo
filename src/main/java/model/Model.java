@@ -31,10 +31,11 @@ public abstract class Model extends Observable {
 	}
 	
 	@Override
-	public synchronized void addObserver(Observer a) {
-		if (a == null)
+
+	public synchronized void addObserver(Observer ¢) {
+		if (¢ == null)
 			throw new NullPointerException();
-		this.listenersList.add(a);
+		this.listenersList.add(¢);
 	}
 	
 	public void pickCourse(String name) {
