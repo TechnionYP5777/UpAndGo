@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Course {
 	
 	protected final String name;
-	protected final int id;
+	protected final String id;
 	protected final String faculty;
 	protected final int points;
 	protected final LocalDateTime aTerm;
@@ -38,7 +38,7 @@ public class Course {
 		
 	}*/
 	
-	protected Course(String name1, int id1, String faculty1, List<StuffMember> st, int acPoints,
+	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
 																		LocalDateTime aT, LocalDateTime bT) {
 		/*
 		if((name1==null) || (faculty1==null))
@@ -74,7 +74,7 @@ public class Course {
 		return this.name;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 	
@@ -148,7 +148,7 @@ public class Course {
 	public static class CourseBuilder {
 		
 		protected String name = "";
-		protected int id = 0;
+		protected String id = "";
 		protected String faculty = "";
 		protected int points = 0;
 		protected LocalDateTime aTerm;
@@ -162,7 +162,7 @@ public class Course {
 			return this;
 		}
 		
-		public CourseBuilder setId(int ¢) {
+		public CourseBuilder setId(String ¢) {
 			this.id =¢;
 			return this;
 		}
