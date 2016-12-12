@@ -27,6 +27,7 @@ import model.Model;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class MainWinView extends JFrame {
@@ -52,14 +53,14 @@ public class MainWinView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWinView(@SuppressWarnings("unused") Model __ ) {
+	public MainWinView(Model m ) {
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		initComponents();
+		initComponents(m.getCoursesNames());
 		createEvents();
 
 	}
@@ -67,18 +68,18 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components
 	///////////////////////////////////////////////////////////////////////////
-	private void initComponents() {
+	private void initComponents(List<String> courseNames) {
 		setWindowPreferences();
 
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
-		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+//		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
 		// String[] data = { "a", "b" };
 
 		courseModel = new DefaultListModel<>();
-		for (String val : data)
+		for (String val : courseNames)
 			courseModel.addElement(val);
 		lstCourseList = new JList<>(courseModel);
 
