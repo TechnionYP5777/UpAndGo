@@ -29,4 +29,6 @@ public abstract class CourseLoader {
 	public abstract HashMap<String, Course> loadAllCourses();
 	
 	public abstract List<String> loadAllCourseNames();
+	
+	public abstract void saveChosenCourseNames(List<String> names);
 }
