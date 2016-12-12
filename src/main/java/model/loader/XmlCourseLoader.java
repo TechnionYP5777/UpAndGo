@@ -10,7 +10,7 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	public XmlCourseLoader(String path) {
 		super(path);
-		List<Course> coursesList = xmlParser.getCourses();
+		coursesList = xmlParser.getCourses();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,12 +40,11 @@ public class XmlCourseLoader extends CourseLoader {
 
 	@Override
 	public HashMap<String, Course> loadAllCourses() {
-		HashMap<String, Course> res = new HashMap<>();
-		for(Course c : coursesList){
-			res.put(c.getName(), c);
-		}
-		// TODO Auto-generated method stub
-		return res;
+		HashMap<String, Course> $ = new HashMap<>();
+		for(Course ¢ : coursesList)
+			$.put(¢.getId(), ¢);
+
+		return $;
 	}
 	
 	

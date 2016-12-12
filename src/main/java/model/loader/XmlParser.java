@@ -30,7 +30,7 @@ class xmlParser {
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					$.add(cb.setId(Integer.parseInt(((Element) p).getAttribute("id")))
+					$.add(cb.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
 
