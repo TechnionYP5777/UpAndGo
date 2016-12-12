@@ -61,7 +61,7 @@ public class MainWinView extends JFrame {
 			e.printStackTrace();
 		}
 		initComponents(m.getCoursesNames());
-		createEvents();
+		createEvents(m);
 
 	}
 
@@ -73,10 +73,6 @@ public class MainWinView extends JFrame {
 
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
-
-//		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-
-		// String[] data = { "a", "b" };
 
 		courseModel = new DefaultListModel<>();
 		for (String val : courseNames)
@@ -135,6 +131,10 @@ public class MainWinView extends JFrame {
 
 	private static void setCourseDescriptionArea(JScrollPane scpCourseDescription) {
 		txtCourseDescription = new JTextArea();
+		txtCourseDescription.setDisabledTextColor(Color.GRAY);
+		txtCourseDescription.setSelectedTextColor(Color.BLUE);
+		txtCourseDescription.setSelectionColor(Color.LIGHT_GRAY);
+		txtCourseDescription.setForeground(Color.BLACK);
 		txtCourseDescription.setWrapStyleWord(true);
 		txtCourseDescription.setLineWrap(true);
 		scpCourseDescription.setForeground(Color.BLACK);
@@ -157,7 +157,7 @@ public class MainWinView extends JFrame {
 		lstChosenCourses = new JList<>(ChosenCourseModel);
 		scpChosenCourses.setPreferredSize(new Dimension(70, 22));
 		scpChosenCourses.setMinimumSize(new Dimension(70, 22));
-		scpChosenCourses.setBorder(new TitledBorder(null, "Chosen Courses", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
+		scpChosenCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		scpChosenCourses.setViewportBorder(null);
 		lstChosenCourses.setBorder(null);
 		lstChosenCourses.setBackground(UIManager.getColor("inactiveCaption"));
@@ -232,14 +232,15 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
 	///////////////////////////////////////////////////////////////////////////
-	private static void createEvents() {
+	private static void createEvents(Model m) {
 
 		lstCourseList.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
 				txtCourseDescription.setText(lstCourseList.getSelectedIndex() == -1 ? " Choose course to add "
-						: "Course " + lstCourseList.getSelectedValue() + " Description Here ...");
+						: "Course " + lstCourseList.getSelectedValue()+"\n" + m.getCourseByName(lstCourseList.getSelectedValue()).getName());
+				txtCourseDescription.setDisabledTextColor(Color.BLUE);
 				txtCourseDescription.setVisible(true);
 				btnAddCourse.setVisible(true);
 				btnAddCourse.setEnabled(true);
@@ -280,6 +281,19 @@ public class MainWinView extends JFrame {
 
 				if (ChosenCourseModel.isEmpty())
 					btnRemoveCourse.setEnabled(false);
+			}
+		});
+		lstChosenCourses.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
+				txtCourseDescription.setText(lstChosenCourses.getSelectedIndex() == -1 ? " Choose course to add "
+						: "Course " + lstChosenCourses.getSelectedValue()+"\n" + m.getCourseByName(lstChosenCourses.getSelectedValue()).getName());
+				txtCourseDescription.setDisabledTextColor(new Color(0,204,51));
+				txtCourseDescription.setVisible(true);
+				btnAddCourse.setVisible(true);
+				btnAddCourse.setEnabled(true);
+
 			}
 		});
 	}
