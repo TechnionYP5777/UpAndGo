@@ -28,24 +28,15 @@ public class Course {
 	
 	protected final List<CourseListener> listeners;
 	
-	//TODO: create interface LessonGroup as mediator between Lessons and Course?
+	//TODO: create interface LessonGroup as mediator between Lessons and Course
 	
-	/*public Course(Integer id, String name){
-		this.id = id;
-		this.name = name;
-		this.faculty = "";
-		this.points = 0;
-		
-	}*/
-	
-	protected Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
+	public Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints,
 																		LocalDateTime aT, LocalDateTime bT) {
-		/*
+		
 		if((name1==null) || (faculty1==null))
 			throw new NullPointerException();
-		if((name1.isEmpty()) || (faculty1.isEmpty()) || (st.isEmpty()))
+		if(name1.isEmpty() || faculty1.isEmpty())
 			throw new RuntimeException("The empty field was found!\n"); //$NON-NLS-1$
-		*/
 		
 		this.name = name1;
 		this.id = id1;
@@ -60,10 +51,7 @@ public class Course {
 		this.listeners = new ArrayList<>();
 
 		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
-	}
-	
-	
-	
+	}	
 	
 	protected void addLesson(Lesson ¢) {
 		this.lessons.add(¢);
@@ -123,8 +111,23 @@ public class Course {
 		return this.laboratoryHours+this.lectureHours+this.projectHours+this.tutorialHours;
 	}
 	
-	protected void addHours(@SuppressWarnings("unused") Lesson ¢) {
-		//TODO: add number of hours in course with respect to the lesson type
+	protected void addHours(Lesson ¢) {
+		switch(¢.type) {
+		case LABORATORY:
+			this.laboratoryHours += ¢.duration;
+			break;
+		case LECTURE:
+			this.lectureHours += ¢.duration;
+			break;
+		case PROJECT:
+			this.projectHours += ¢.duration;
+			break;
+		case TUTORIAL:
+			this.tutorialHours += ¢.duration;
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
@@ -139,7 +142,6 @@ public class Course {
 		this.listeners.remove(¢);
 	}
 	
-	// TODO: how someone can change Course without braking incapsulation?
 	public void updateListeners() {
 		for(CourseListener ¢: this.listeners)
 			¢.getUpdate(this);
