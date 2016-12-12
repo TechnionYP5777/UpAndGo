@@ -30,9 +30,8 @@ public abstract class Model extends Observable {
 		this.loader = loader;
 	}
 	
-	@SuppressWarnings("sync-override") //no idea what this is
 	@Override
-	public void addObserver(Observer ¢) {
+	public synchronized void addObserver(Observer ¢) {
 		if (¢ == null)
 			throw new NullPointerException();
 		this.listenersList.add(¢);
