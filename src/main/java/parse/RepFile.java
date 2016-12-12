@@ -68,8 +68,6 @@ public class RepFile {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-
 	}
 	
 	public static void printRepFile(){

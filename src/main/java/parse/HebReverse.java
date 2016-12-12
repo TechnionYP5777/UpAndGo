@@ -13,9 +13,9 @@ public class HebReverse {
 	public static String reverseTextNotNumbers(String line){
 		
 	    String $ = reverseLine(line);
-	    for (Matcher Â¢ = Pattern.compile("\\d+[\\/\\.\\d]*\\d+").matcher($); Â¢.find();)
-			$ = $.substring(0, Â¢.start()) + (new StringBuilder(Â¢.group()).reverse() + "")
-					+ $.substring(Â¢.end(), $.length());
+	    for (Matcher ¢ = Pattern.compile("\\d+[\\/\\.\\d]*\\d+").matcher($); ¢.find();)
+			$ = $.substring(0,¢.start()) + (new StringBuilder(¢.group()).reverse() + "")
+					+ $.substring(¢.end(), $.length());
 	    return $;
 	}
 
