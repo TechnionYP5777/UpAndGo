@@ -1,6 +1,5 @@
 package model.loader;
 
-import java.util.List;
 
 import org.junit.Test;
 
@@ -11,10 +10,8 @@ public class xmlParserTest {
 
 	@Test
 	public void test() {
-		List<Course> res = xmlParser.getCourses();
-		//assert(!res.isEmpty());
-		for(Course ¢ : res)
-			System.out.println(¢.getName());
+		for (Course ¢ : xmlParser.getCourses())
+			System.out.println(¢.getName() + " " + ¢.getId());
 	}
 
 }
