@@ -63,7 +63,6 @@ public class MainWinView extends JFrame {
 		createEvents();
 
 	}
-	public MainWinView() {}
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components

@@ -10,7 +10,7 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	public XmlCourseLoader(String path) {
 		super(path);
-		List<Course> coursesList = xmlParser.getCourses();
+		coursesList = xmlParser.getCourses();
 		// TODO Auto-generated constructor stub
 	}
 
