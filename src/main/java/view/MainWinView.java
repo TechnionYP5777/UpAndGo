@@ -21,6 +21,9 @@ import javax.swing.JList;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
+
+import model.Model;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
@@ -49,7 +52,7 @@ public class MainWinView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWinView() {
+	public MainWinView(@SuppressWarnings("unused") Model __ ) {
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -60,6 +63,7 @@ public class MainWinView extends JFrame {
 		createEvents();
 
 	}
+	public MainWinView() {}
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components

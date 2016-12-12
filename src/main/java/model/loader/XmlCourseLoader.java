@@ -6,9 +6,11 @@ import java.util.List;
 import model.course.Course;
 
 public class XmlCourseLoader extends CourseLoader {
-
+	List<Course> coursesList;
+	
 	public XmlCourseLoader(String path) {
 		super(path);
+		List<Course> coursesList = xmlParser.getCourses();
 		// TODO Auto-generated constructor stub
 	}
 
