@@ -31,13 +31,22 @@ public class Course {
 	
 	//TODO: create interface LessonGroup as mediator between Lessons and Course?
 	
-	public Course(String name1, int id1, String faculty1, List<StuffMember> st, int acPoints,
-																		LocalDateTime aT, LocalDateTime bT) {
+	/*public Course(Integer id, String name){
+		this.id = id;
+		this.name = name;
+		this.faculty = "";
+		this.points = 0;
 		
+	}*/
+	
+	protected Course(String name1, int id1, String faculty1, List<StuffMember> st, int acPoints,
+																		LocalDateTime aT, LocalDateTime bT) {
+		/*
 		if((name1==null) || (faculty1==null))
 			throw new NullPointerException();
 		if((name1.isEmpty()) || (faculty1.isEmpty()) || (st.isEmpty()))
 			throw new RuntimeException("The empty field was found!\n"); //$NON-NLS-1$
+		*/
 		
 		this.name = name1;
 		this.id = id1;
@@ -56,9 +65,10 @@ public class Course {
 	
 	
 	
-	protected void addLesson(Lesson ¢) {
-		this.lessons.add(¢);
-		addHours(¢);
+	
+	protected void addLesson(Lesson Â¢) {
+		this.lessons.add(Â¢);
+		addHours(Â¢);
 	}
 	
 	public String getName() {
@@ -138,10 +148,10 @@ public class Course {
 	
 	public static class CourseBuilder {
 		
-		protected String name;
-		protected int id;
-		protected String faculty;
-		protected int points;
+		protected String name = "";
+		protected int id = 0;
+		protected String faculty = "";
+		protected int points = 0;
 		protected LocalDateTime aTerm;
 		protected LocalDateTime bTerm;
 		

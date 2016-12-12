@@ -1,0 +1,3657 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Courses>
+<Course id="014003">
+<name>סטטיסטיקה</name>
+</Course>
+<Course id="014004">
+<name>נתוח מערכות</name>
+</Course>
+<Course id="014005">
+<name>מעבדה הנדסית</name>
+</Course>
+<Course id="014006">
+<name>מבוא לשיטות נומריות</name>
+</Course>
+<Course id="014008">
+<name>מידע גרפי הנדסי</name>
+</Course>
+<Course id="014009">
+<name>מב. להנ. אזרחית-הכרת המקצוע</name>
+</Course>
+<Course id="014101">
+<name>פרויקט בקונסטרוקציות</name>
+</Course>
+<Course id="014103">
+<name>מבוא למכניקה הנדסית</name>
+</Course>
+<Course id="014104">
+<name>תורת החוזק 1</name>
+</Course>
+<Course id="014108">
+<name>סטטיקת מבנים</name>
+</Course>
+<Course id="014123">
+<name>מבני בטון 1</name>
+</Course>
+<Course id="014131">
+<name>פרויקט מורחב במבנים-חלק א'</name>
+</Course>
+<Course id="014132">
+<name>פרויקט מורחב במבנים-חלק ב'</name>
+</Course>
+<Course id="014147">
+<name>בניית המהנדס 1</name>
+</Course>
+<Course id="014148">
+<name>עקרי תכן מבנים</name>
+</Course>
+<Course id="014150">
+<name>מבני פלדה 1</name>
+</Course>
+<Course id="014213">
+<name>מבוא להידרוליקה והידרולוגיה</name>
+</Course>
+<Course id="014214">
+<name>יסודות מכניקת הזורמים</name>
+</Course>
+<Course id="014301">
+<name>פרויקט בהנדסה סביבתית</name>
+</Course>
+<Course id="014309">
+<name>טכנולוגיות מים ושפכים</name>
+</Course>
+<Course id="014316">
+<name>מבוא להנדסת הסביבה</name>
+</Course>
+<Course id="014319">
+<name>מעבדה בכימיה של מים</name>
+</Course>
+<Course id="014320">
+<name>כימיה של המים</name>
+</Course>
+<Course id="014327">
+<name>כימיה של המים</name>
+</Course>
+<Course id="014405">
+<name>גיאולוגיה הנדסית</name>
+</Course>
+<Course id="014411">
+<name>הנדסת קרקע</name>
+</Course>
+<Course id="014501">
+<name>פרויקט בחומרים ותפקוד</name>
+</Course>
+<Course id="014503">
+<name>פרויקט מעבדתי בחומרי בניה )1(</name>
+</Course>
+<Course id="014505">
+<name>חומרי בנייה</name>
+</Course>
+<Course id="014506">
+<name>טכנולוגיה מתקדמת של בטון</name>
+</Course>
+<Course id="014508">
+<name>תפקוד פיסי של בנינים</name>
+</Course>
+<Course id="014601">
+<name>פרויקט בניהול הבנייה</name>
+</Course>
+<Course id="014603">
+<name>כלכלה הנדסית</name>
+</Course>
+<Course id="014605">
+<name>בניה מתועשת</name>
+</Course>
+<Course id="014606">
+<name>מבוא לניהול הבנייה</name>
+</Course>
+<Course id="014609">
+<name>מיכון בבנייה</name>
+</Course>
+<Course id="014610">
+<name>שיטות ביצוע בבנייה</name>
+</Course>
+<Course id="014613">
+<name>ניהול משאבי אנוש בבנייה</name>
+</Course>
+<Course id="014615">
+<name>מבוא לניהול פיננסי בבנייה</name>
+</Course>
+<Course id="014617">
+<name>תכנון ובקרה של פרוייקטי בנייה</name>
+</Course>
+<Course id="014701">
+<name>פרויקט בתחבורה</name>
+</Course>
+<Course id="014703">
+<name>מבוא לתכנון תחבורה</name>
+</Course>
+<Course id="014708">
+<name>תכן ותפעול דרכים</name>
+</Course>
+<Course id="014709">
+<name>מעבדת דרכים</name>
+</Course>
+<Course id="014713">
+<name>מעבדה בתכנון תחבורה</name>
+</Course>
+<Course id="014714">
+<name>תכן מתקני תעבורה</name>
+</Course>
+<Course id="014719">
+<name>פרויקט מורחב בתחבורה - חלק א'</name>
+</Course>
+<Course id="014721">
+<name>פרויקט בתכנון תחבורה</name>
+</Course>
+<Course id="014722">
+<name>פרויקט בהנדסת תעבורה</name>
+</Course>
+<Course id="014723">
+<name>פרויקט בתכן גיאומטרי של דרכים</name>
+</Course>
+<Course id="014724">
+<name>פרויקט במבנה דרכים</name>
+</Course>
+<Course id="014725">
+<name>מבוא לתחבורה מסילתית</name>
+</Course>
+<Course id="014728">
+<name>תכנון תשתיות תחבורה</name>
+</Course>
+<Course id="014730">
+<name>מבוא להנדסת תחבורה</name>
+</Course>
+<Course id="014731">
+<name>מבוא לתכן מסעות</name>
+</Course>
+<Course id="014814">
+<name>חשבון תאום 1</name>
+</Course>
+<Course id="014841">
+<name>יסודות המיפוי והמדידה 1</name>
+</Course>
+<Course id="014842">
+<name>יסודות המיפוי והמדידה 2</name>
+</Course>
+<Course id="014845">
+<name>מבוא למיפוי ממוחשב</name>
+</Course>
+<Course id="014848">
+<name>מבוא לגיאודזיה</name>
+</Course>
+<Course id="014849">
+<name>גיאודזיה מתמטית</name>
+</Course>
+<Course id="014852">
+<name>מדידות ג'.פ.ס.</name>
+</Course>
+<Course id="014853">
+<name>מדידות הנדסיות מיוחדות</name>
+</Course>
+<Course id="014856">
+<name>מודלים ספרתיים של פני השטח</name>
+</Course>
+<Course id="014857">
+<name>מערכות מידע גיאוגרפי 1</name>
+</Course>
+<Course id="014858">
+<name>פוטוגרמטריה 2</name>
+</Course>
+<Course id="014859">
+<name>מיפוי ימי</name>
+</Course>
+<Course id="014867">
+<name>פרויקט בגיאודזיה ומדידות 1</name>
+</Course>
+<Course id="014869">
+<name>פרויקט במיפוי ספרתי 1</name>
+</Course>
+<Course id="014874">
+<name>מבוא לחישה מרחוק</name>
+</Course>
+<Course id="014877">
+<name>כרטוגרפיה ומבוא לממ"ג</name>
+</Course>
+<Course id="014878">
+<name>מיפוי ממוחשב</name>
+</Course>
+<Course id="014879">
+<name>מיפוי נושאי</name>
+</Course>
+<Course id="014880">
+<name>סדנה בתיעוד אתרי מורשת</name>
+</Course>
+<Course id="014881">
+<name>יסודות המיפוי והמדידה 1ג'</name>
+</Course>
+<Course id="014883">
+<name>מעבדה בקדסטר</name>
+</Course>
+<Course id="014884">
+<name>קדסטר 1</name>
+</Course>
+<Course id="014927">
+<name>מבוא לבקרה 2</name>
+</Course>
+<Course id="014933">
+<name>סמינריון מתקדם בהנדסה חקלאית</name>
+</Course>
+<Course id="014937">
+<name>פרויקט תכן הנדסי 2</name>
+</Course>
+<Course id="014941">
+<name>הנדסת ניקוז עילי ותת קרקעי</name>
+</Course>
+<Course id="014942">
+<name>הנדסה הידרולית ומאגרים</name>
+</Course>
+<Course id="014943">
+<name>מעבדה לבקרה</name>
+</Course>
+<Course id="014954">
+<name>מבוא לפיסיקה של אטמוספירה</name>
+</Course>
+<Course id="014956">
+<name>מבוא לכימיה של הקרקע</name>
+</Course>
+<Course id="014972">
+<name>משאבות ומערכות שאיבה</name>
+</Course>
+<Course id="015001">
+<name>סביבה וצמחים</name>
+</Course>
+<Course id="015007">
+<name>מכניקה יישומית 1</name>
+</Course>
+<Course id="015017">
+<name>ציוד מערכות ושיטות בעבודות עפר</name>
+</Course>
+<Course id="016111">
+<name>בטון דרוך</name>
+</Course>
+<Course id="016124">
+<name>מבנים מרחביים</name>
+</Course>
+<Course id="016144">
+<name>מבוא לאלמנטים סופיים</name>
+</Course>
+<Course id="016203">
+<name>הנדסת מערכות משאבי מים 1</name>
+</Course>
+<Course id="016204">
+<name>תהליכי הסעת מזהמים</name>
+</Course>
+<Course id="016208">
+<name>הנדסה ימית</name>
+</Course>
+<Course id="016211">
+<name>הידרולוגיה של נגר על קרקעי</name>
+</Course>
+<Course id="016214">
+<name>מכניקת זורמים חישובית סביבתית</name>
+</Course>
+<Course id="016302">
+<name>זיהום אויר</name>
+</Course>
+<Course id="016303">
+<name>מעבדה לאיכות האויר</name>
+</Course>
+<Course id="016501">
+<name>יסודות קלימטולוגית הבנייה</name>
+</Course>
+<Course id="016503">
+<name>קיים של חומרי בנייה ומבנים</name>
+</Course>
+<Course id="016514">
+<name>מיחזור בבניה</name>
+</Course>
+<Course id="016620">
+<name>מערכות מכניות וחשמליות בבניינים</name>
+</Course>
+<Course id="016803">
+<name>מערכות מידע גיאוגרפי</name>
+</Course>
+<Course id="016815">
+<name>פוטוגרמטריה ספרתית</name>
+</Course>
+<Course id="016816">
+<name>גיאודזיה פיסיקלית 1</name>
+</Course>
+<Course id="016818">
+<name>היבטים בקדסטר מודרני</name>
+</Course>
+<Course id="016826">
+<name>מיפוי ומדידה</name>
+</Course>
+<Course id="016827">
+<name>מיסוי מקרקעין</name>
+</Course>
+<Course id="016828">
+<name>עקרונות בהערכת שווי מקרקעין</name>
+</Course>
+<Course id="016829">
+<name>סדנה בהערכת שווי מקרקעין</name>
+</Course>
+<Course id="017003">
+<name>מערכות ובקרה</name>
+</Course>
+<Course id="017005">
+<name>חישת מיקרוגלים במערכות טבעיות</name>
+</Course>
+<Course id="017010">
+<name>נושאים נבחרים בדינמיקה של רכב</name>
+</Course>
+<Course id="018130">
+<name>סמינר מתקדם בהנדסת מבנים</name>
+</Course>
+<Course id="018310">
+<name>סמינר מתקדם בהנדסת סביבה ומים</name>
+</Course>
+<Course id="018315">
+<name>ביופילמים ביו-זיהום וביו-שיתוך</name>
+</Course>
+<Course id="018420">
+<name>מכניקת הקרקע מתקדמת</name>
+</Course>
+<Course id="018423">
+<name>סמינר מתקדם בגיאוטכניקה</name>
+</Course>
+<Course id="018504">
+<name>טכנולוגיה של בניה מבטון טרום</name>
+</Course>
+<Course id="018507">
+<name>סמינר מתקדם במדעי הבנייה</name>
+</Course>
+<Course id="018601">
+<name>ניהול חברת בנייה</name>
+</Course>
+<Course id="018603">
+<name>ניהול פיננסי בחברת בניה</name>
+</Course>
+<Course id="018604">
+<name>ניהול איכות וערך בבניה</name>
+</Course>
+<Course id="018611">
+<name>כלכלה הנדסית בבניה</name>
+</Course>
+<Course id="018622">
+<name>ייזום והפעלת פרוייקטים</name>
+</Course>
+<Course id="018623">
+<name>סמינר מתקדם בניהול הבנייה</name>
+</Course>
+<Course id="018704">
+<name>מערכות מתקדמות בתחבורה ציבורית</name>
+</Course>
+<Course id="018706">
+<name>תכנון תחבורה מבוסס פעילויות</name>
+</Course>
+<Course id="018708">
+<name>מודלים מתקדמים לניתוח ביקושים</name>
+</Course>
+<Course id="018819">
+<name>חישה מרחוק רב מימדית</name>
+</Course>
+<Course id="018826">
+<name>סמינר מתקדם בלימודי מקרקעין</name>
+</Course>
+<Course id="019001">
+<name>יסודות מתמטיים למהנדסים</name>
+</Course>
+<Course id="019004">
+<name>מבוא למכניקת הרצף</name>
+</Course>
+<Course id="019007">
+<name>פרקים נבחרים בסטטיסטיקה</name>
+</Course>
+<Course id="019052">
+<name>טרקטורים ועבירות כלי רכב</name>
+</Course>
+<Course id="019136">
+<name>תכן אופטימלי של מבנים</name>
+</Course>
+<Course id="019140">
+<name>אלמנטים סופיים באנליזה של מבנים</name>
+</Course>
+<Course id="019145">
+<name>נושאים נבחרים בבטון מזויין</name>
+</Course>
+<Course id="019150">
+<name>הנדסת גשרים מתקדמת</name>
+</Course>
+<Course id="019310">
+<name>טיפול במים ושפכים 2</name>
+</Course>
+<Course id="019315">
+<name>סמינר באיכות הסביבה</name>
+</Course>
+<Course id="019319">
+<name>מיקרוביולוגיה של הסביבה</name>
+</Course>
+<Course id="019324">
+<name>עקרונות התברואה של מים ושפכים</name>
+</Course>
+<Course id="019340">
+<name>נושאים מתקדמים בהנדסת הסביבה</name>
+</Course>
+<Course id="019704">
+<name>מעבדה לחמרי מבנה דרכים 1</name>
+</Course>
+<Course id="019718">
+<name>בקרת תנועה</name>
+</Course>
+<Course id="034010">
+<name>דינמיקה</name>
+</Course>
+<Course id="034011">
+<name>תורת הרטט</name>
+</Course>
+<Course id="034013">
+<name>תורת הזרימה 1</name>
+</Course>
+<Course id="034014">
+<name>מעבר חום</name>
+</Course>
+<Course id="034015">
+<name>תכן מכני 1</name>
+</Course>
+<Course id="034016">
+<name>תכן מכני 2</name>
+</Course>
+<Course id="034018">
+<name>פרוייקט תכן מכני 2</name>
+</Course>
+<Course id="034022">
+<name>מבוא למכטרוניקה</name>
+</Course>
+<Course id="034028">
+<name>מכניקת מוצקים 1</name>
+</Course>
+<Course id="034029">
+<name>מכניקת מוצקים 2</name>
+</Course>
+<Course id="034030">
+<name>תהליכי יצור</name>
+</Course>
+<Course id="034032">
+<name>מערכות ליניאריות מ'</name>
+</Course>
+<Course id="034033">
+<name>אנליזה נומרית מ'</name>
+</Course>
+<Course id="034034">
+<name>הנע חשמלי</name>
+</Course>
+<Course id="034035">
+<name>תרמודינמיקה 1</name>
+</Course>
+<Course id="034039">
+<name>מעבדה בשיטות ניסוי</name>
+</Course>
+<Course id="034040">
+<name>מבוא לבקרה</name>
+</Course>
+<Course id="034041">
+<name>מעבר חום</name>
+</Course>
+<Course id="034042">
+<name>מבוא לשרטוט הנדסי</name>
+</Course>
+<Course id="034043">
+<name>שרטוט הנדסי ממוחשב</name>
+</Course>
+<Course id="034044">
+<name>מבוא לשיטות ניסוי</name>
+</Course>
+<Course id="034045">
+<name>מבוא להחלטות כלכליות למהנדסים</name>
+</Course>
+<Course id="034310">
+<name>פרויקט בטורבו מכונות 2</name>
+</Course>
+<Course id="034311">
+<name>פרויקט</name>
+</Course>
+<Course id="034312">
+<name>פרויקט</name>
+</Course>
+<Course id="034316">
+<name>פרויקט מתקני כח וחם 2</name>
+</Course>
+<Course id="034319">
+<name>פרויקט מנועי בוכנה 1</name>
+</Course>
+<Course id="034320">
+<name>פרויקט מנועי בוכנה 2</name>
+</Course>
+<Course id="034325">
+<name>פרויקט מיוחד בהנדסת מכונות 1</name>
+</Course>
+<Course id="034326">
+<name>פרויקט מיוחד בהנדסת מכונות 2</name>
+</Course>
+<Course id="034337">
+<name>פרויקט תיב"ם 1</name>
+</Course>
+<Course id="034338">
+<name>פרויקט תיב"ם 2</name>
+</Course>
+<Course id="034339">
+<name>פרויקט ברובוטיקה 1</name>
+</Course>
+<Course id="034340">
+<name>פרויקט ברובוטיקה 2</name>
+</Course>
+<Course id="034349">
+<name>פרויקט במכטרוניקה 1</name>
+</Course>
+<Course id="034350">
+<name>פרויקט במכטרוניקה 2</name>
+</Course>
+<Course id="034354">
+<name>פרויקט תכן מוצר חדש 2</name>
+</Course>
+<Course id="034355">
+<name>פרויקט מחקרי בהנדסת מכונות 1</name>
+</Course>
+<Course id="034356">
+<name>פרויקט מחקרי בהנדסת מכונות 2</name>
+</Course>
+<Course id="034361">
+<name>פרויקט בבקרה 1</name>
+</Course>
+<Course id="034362">
+<name>פרויקט בבקרה 2</name>
+</Course>
+<Course id="034363">
+<name>פרויקט במכניקה 1</name>
+</Course>
+<Course id="034364">
+<name>פרויקט במכניקה 2</name>
+</Course>
+<Course id="034371">
+<name>פרויקט תכן לייצור</name>
+</Course>
+<Course id="034373">
+<name>פרויקט בהנדסה אופטית 1</name>
+</Course>
+<Course id="034374">
+<name>פרויקט בהנדסה אופטית 2</name>
+</Course>
+<Course id="034375">
+<name>פרויקט בביומכניקה 1</name>
+</Course>
+<Course id="034376">
+<name>פרויקט בביומכניקה 2</name>
+</Course>
+<Course id="034401">
+<name>מעבדה מתקדמת לרובוטים</name>
+</Course>
+<Course id="034404">
+<name>מעבדה מתקדמת בתיב"ם</name>
+</Course>
+<Course id="034406">
+<name>מעבדה מתקדמת לבקרה ואוטומציה</name>
+</Course>
+<Course id="034413">
+<name>מעבדה לתכן וייצור</name>
+</Course>
+<Course id="034420">
+<name>מעבדה מתקדמת באנרגיה מתחדשת</name>
+</Course>
+<Course id="034421">
+<name>מעבדה באופטיקה</name>
+</Course>
+<Course id="035003">
+<name>מערכות תיב"מ 1</name>
+</Course>
+<Course id="035008">
+<name>אוטומציה תעשייתית</name>
+</Course>
+<Course id="035010">
+<name>קינמטיקה של מכניזמים</name>
+</Course>
+<Course id="035013">
+<name>שיטות מספריות בהנדסת מכונות 1</name>
+</Course>
+<Course id="035016">
+<name>מערכת רכב 1</name>
+</Course>
+<Course id="035017">
+<name>מערכת רכב 2</name>
+</Course>
+<Course id="035018">
+<name>מבוא לאמינות של מערכות מכניות</name>
+</Course>
+<Course id="035022">
+<name>אלמנטים סופיים לאנליזה הנדסית</name>
+</Course>
+<Course id="035024">
+<name>טריבולוגיה שימושית</name>
+</Course>
+<Course id="035033">
+<name>מבוא למערכות משולבות חיישנים</name>
+</Course>
+<Course id="035034">
+<name>כשל חמרים</name>
+</Course>
+<Course id="035036">
+<name>תכן מערכות בקרה</name>
+</Course>
+<Course id="035051">
+<name>תכן אופטומכני</name>
+</Course>
+<Course id="035052">
+<name>אופטיקה לינארית ויישומים 1</name>
+</Course>
+<Course id="035061">
+<name>הידרודינמיקה של אוניות</name>
+</Course>
+<Course id="035063">
+<name>אדריכלות ימית 1</name>
+</Course>
+<Course id="035091">
+<name>תרמודינמיקה</name>
+</Course>
+<Course id="035141">
+<name>מתקני כח וחם</name>
+</Course>
+<Course id="035147">
+<name>סמינר מיוחד בהנדסת מכונות 1</name>
+</Course>
+<Course id="035188">
+<name>תורת הבקרה</name>
+</Course>
+<Course id="035189">
+<name>שימוש המחשב בתורת הזרימה</name>
+</Course>
+<Course id="036001">
+<name>שיטות אנליטיות בהנדסת מכונות 1</name>
+</Course>
+<Course id="036002">
+<name>שיטות אנליטיות בהנדסת מכונות 2</name>
+</Course>
+<Course id="036003">
+<name>מבוא למכניקת הרצף</name>
+</Course>
+<Course id="036004">
+<name>מכניקת השבירה</name>
+</Course>
+<Course id="036009">
+<name>מעבר חום ומסה</name>
+</Course>
+<Course id="036010">
+<name>תורת הסיכה ההידרודינמית</name>
+</Course>
+<Course id="036027">
+<name>דינמיקה של מבנים ימיים</name>
+</Course>
+<Course id="036041">
+<name>תכן הנדסי מתקדם 1</name>
+</Course>
+<Course id="036053">
+<name>אמינות ובדיקות</name>
+</Course>
+<Course id="036058">
+<name>מיקרומכניקה של מוצקים 1</name>
+</Course>
+<Course id="036064">
+<name>נושאים מתקדמים בהנדסת מכונות 4</name>
+</Course>
+<Course id="036072">
+<name>קינמטיקה בביומכניקה ורובוטיקה</name>
+</Course>
+<Course id="036073">
+<name>נושאים מתקדמים בהנדסת מכונות 8</name>
+</Course>
+<Course id="036074">
+<name>בקרה אקטיבית ופסיבית של זרימה</name>
+</Course>
+<Course id="036075">
+<name>נושאים מתקדמים בהנדסת מכונות 9</name>
+</Course>
+<Course id="036076">
+<name>אלקטרוקינטיקה בננו-ומיקרו-זרימה</name>
+</Course>
+<Course id="036079">
+<name>בקרת פליטות מזהמים מכלי רכב</name>
+</Course>
+<Course id="036080">
+<name>מערכות הנעת רכב מתקדמות</name>
+</Course>
+<Course id="036082">
+<name>עקרונות מנועי שריפה פנימית</name>
+</Course>
+<Course id="036087">
+<name>דינמיקה היברידית במערכות מכניות</name>
+</Course>
+<Course id="036088">
+<name>ננומכניקה חישובית של מוצקים</name>
+</Course>
+<Course id="036090">
+<name>חישה מכנית ע"י תאים ביולוגיים</name>
+</Course>
+<Course id="038504">
+<name>זרימה צמיגה</name>
+</Course>
+<Course id="038717">
+<name>מעבר חום - הסעה</name>
+</Course>
+<Course id="038727">
+<name>שיטות נומריות בהנדסת מכונות</name>
+</Course>
+<Course id="038742">
+<name>פלסטיות</name>
+</Course>
+<Course id="038796">
+<name>תכן הנדסי מתקדם 2</name>
+</Course>
+<Course id="038797">
+<name>נושאים מתקדמים בהנדסת מכונות 2</name>
+</Course>
+<Course id="038798">
+<name>נושאים מתקדמים בהנדסת מכונות</name>
+</Course>
+<Course id="044000">
+<name>פרויקט מחקרי לסטודנטים מצטיינים</name>
+</Course>
+<Course id="044099">
+<name>מעבדה בהנדסת חשמל</name>
+</Course>
+<Course id="044101">
+<name>מבוא למערכות תכנה</name>
+</Course>
+<Course id="044102">
+<name>בטיחות במעבדות חשמל</name>
+</Course>
+<Course id="044105">
+<name>תורת המעגלים החשמליים</name>
+</Course>
+<Course id="044109">
+<name>מבוא להנדסת חשמל</name>
+</Course>
+<Course id="044114">
+<name>מתמטיקה דיסקרטית ח'</name>
+</Course>
+<Course id="044125">
+<name>יסודות התקני מוליכים למחצה מ'</name>
+</Course>
+<Course id="044130">
+<name>אותות ומערכות</name>
+</Course>
+<Course id="044139">
+<name>ממירי מתח ממותגים</name>
+</Course>
+<Course id="044140">
+<name>שדות אלקטרומגנטיים</name>
+</Course>
+<Course id="044142">
+<name>מעגלים אלקטרוניים לינאריים</name>
+</Course>
+<Course id="044145">
+<name>מערכות ספרתיות</name>
+</Course>
+<Course id="044147">
+<name>מעגלי מיתוג אלקטרוניים</name>
+</Course>
+<Course id="044148">
+<name>גלים ומערכות מפולגות</name>
+</Course>
+<Course id="044151">
+<name>מעבדה להנדסת חשמל 1ח'</name>
+</Course>
+<Course id="044160">
+<name>מעבדה בהנדסת חשמל 1</name>
+</Course>
+<Course id="044165">
+<name>מעבדה בהנדסת חשמל 2</name>
+</Course>
+<Course id="044166">
+<name>מעבדה בהנדסת חשמל 3</name>
+</Course>
+<Course id="044167">
+<name>פרוייקט א'</name>
+</Course>
+<Course id="044169">
+<name>פרויקט</name>
+</Course>
+<Course id="044170">
+<name>פרויקט</name>
+</Course>
+<Course id="044173">
+<name>פרויקט בתעשיה</name>
+</Course>
+<Course id="044180">
+<name>נושא אישי למצטיינים</name>
+</Course>
+<Course id="044184">
+<name>נושאים מתקדמים למצטיינים</name>
+</Course>
+<Course id="044185">
+<name>נושא מיוחד למצטיינים</name>
+</Course>
+<Course id="044191">
+<name>מערכות בקרה 1</name>
+</Course>
+<Course id="044192">
+<name>מערכות בקרה 2</name>
+</Course>
+<Course id="044193">
+<name>מעבדה לבקרה לינארית</name>
+</Course>
+<Course id="044195">
+<name>מבוא למערכות הספק ורשת חכמה</name>
+</Course>
+<Course id="044198">
+<name>מבוא לעבוד ספרתי של אותות</name>
+</Course>
+<Course id="044202">
+<name>אותות אקראיים</name>
+</Course>
+<Course id="044239">
+<name>תהליכים במיקרואלקטרוניקה</name>
+</Course>
+<Course id="044262">
+<name>תכן לוגי ומבוא למחשבים</name>
+</Course>
+<Course id="044268">
+<name>מבוא למבני נתונים ואלגוריתמים</name>
+</Course>
+<Course id="044294">
+<name>מכשור אלקטרוני</name>
+</Course>
+<Course id="044334">
+<name>רשתות מחשבים ואינטרנט 1</name>
+</Course>
+<Course id="044339">
+<name>אלקטרואופטיקה 1</name>
+</Course>
+<Course id="045001">
+<name>פרויקט מבוא בהנדסת חשמל</name>
+</Course>
+<Course id="046002">
+<name>תכן וניתוח אלגוריתמים</name>
+</Course>
+<Course id="046005">
+<name>רשתות מחשבים ואינטרנט 2</name>
+</Course>
+<Course id="046006">
+<name>נושאים מתקדמים 3</name>
+</Course>
+<Course id="046041">
+<name>רשתות עצביות ביולוגיות-חישוביות</name>
+</Course>
+<Course id="046189">
+<name>תכן מסננים אקטיביים</name>
+</Course>
+<Course id="046194">
+<name>למידה ותכנון במערכות דינאמיות</name>
+</Course>
+<Course id="046195">
+<name>מערכות לומדות</name>
+</Course>
+<Course id="046197">
+<name>שיטות חישוביות באופטימיזציה</name>
+</Course>
+<Course id="046200">
+<name>עבוד ונתוח תמונות</name>
+</Course>
+<Course id="046201">
+<name>מבוא לעיבוד אותות אקראיים</name>
+</Course>
+<Course id="046204">
+<name>תקשורת אנלוגית</name>
+</Course>
+<Course id="046206">
+<name>מבוא לתקשורת ספרתית</name>
+</Course>
+<Course id="046209">
+<name>מבנה מערכות הפעלה</name>
+</Course>
+<Course id="046210">
+<name>מעבדה במערכות הפעלה</name>
+</Course>
+<Course id="046216">
+<name>מיקרוגלים</name>
+</Course>
+<Course id="046225">
+<name>עקרונות פיזיקליים של התקני מל"מ</name>
+</Course>
+<Course id="046232">
+<name>פרקים בננו-אלקטרוניקה</name>
+</Course>
+<Course id="046235">
+<name>התקני הספק משולבים</name>
+</Course>
+<Course id="046239">
+<name>מעבדה בננו-אלקטרוניקה</name>
+</Course>
+<Course id="046242">
+<name>פיסיקה סטטיסטית,תנודות ורעש</name>
+</Course>
+<Course id="046244">
+<name>תופעות גלים</name>
+</Course>
+<Course id="046267">
+<name>מבנה מחשבים</name>
+</Course>
+<Course id="046273">
+<name>תכנות פונקציונאלי מבוזר</name>
+</Course>
+<Course id="046274">
+<name>נושאים נבחרים בהנדסת מחשבים</name>
+</Course>
+<Course id="046332">
+<name>מערכות ראיה ושמיעה</name>
+</Course>
+<Course id="046336">
+<name>מעבדי רשת מהירים</name>
+</Course>
+<Course id="046733">
+<name>תורת האינפורמציה</name>
+</Course>
+<Course id="046743">
+<name>עיבוד אותות מרחבי</name>
+</Course>
+<Course id="046746">
+<name>אלג' ויישומים בראייה ממוחשבת</name>
+</Course>
+<Course id="046831">
+<name>מבוא לדימות רפואי</name>
+</Course>
+<Course id="046851">
+<name>לייזרים של מוליכים למחצה</name>
+</Course>
+<Course id="046868">
+<name>יסודות תהליכים אקראיים</name>
+</Course>
+<Course id="046880">
+<name>תכן בעזרת מחשב של וי.אל.אס.אי</name>
+</Course>
+<Course id="046903">
+<name>מעגלים משולבים בתדר רדיו</name>
+</Course>
+<Course id="048712">
+<name>מעבדה באלקטרואופטיקה 2</name>
+</Course>
+<Course id="048747">
+<name>מעבדה באותות ומערכות ביולוגיים</name>
+</Course>
+<Course id="048816">
+<name>מעבדה לעבוד אותות</name>
+</Course>
+<Course id="048823">
+<name>שיטות אנליטיות בתורת הגלים 1</name>
+</Course>
+<Course id="048825">
+<name>שערוך וזיהוי במערכות דינמיות</name>
+</Course>
+<Course id="048852">
+<name>מעבדה בהמרת אנרגיה</name>
+</Course>
+<Course id="048860">
+<name>עבוד תמונות</name>
+</Course>
+<Course id="048870">
+<name>פיתוח נושאים בהנדסת חשמל 1</name>
+</Course>
+<Course id="048874">
+<name>ארכיטקטורות מחשבים מקביליים</name>
+</Course>
+<Course id="048877">
+<name>מעבדה לתכנה וחומרה</name>
+</Course>
+<Course id="048926">
+<name>נושאים מתקדמים בעבוד תמונות</name>
+</Course>
+<Course id="048933">
+<name>מעבדה לתקשורת</name>
+</Course>
+<Course id="048934">
+<name>תקשורת מקודדת</name>
+</Course>
+<Course id="048966">
+<name>מעבדה במיקרואלקטרוניקה</name>
+</Course>
+<Course id="048967">
+<name>מעבדה לרשתות מחשבים</name>
+</Course>
+<Course id="048976">
+<name>מעבדה במערכות מקביליות</name>
+</Course>
+<Course id="048996">
+<name>גלים במבנים מחזוריים</name>
+</Course>
+<Course id="049005">
+<name>מעבדה בנושאי בקרה</name>
+</Course>
+<Course id="049006">
+<name>מעבדה לגלים אלקטרומגנטיים</name>
+</Course>
+<Course id="049011">
+<name>נושאים מתקדמים במחשוב 2</name>
+</Course>
+<Course id="049017">
+<name>נושאים מתקדמים במחשוב 3</name>
+</Course>
+<Course id="049018">
+<name>נושאים מתקדמים בתכנון מחשבים 3</name>
+</Course>
+<Course id="049026">
+<name>ידע ומשחקים במערכות מבוזרות</name>
+</Course>
+<Course id="049027">
+<name>מערכות מרובות משתמשים</name>
+</Course>
+<Course id="049030">
+<name>נושאים במערכות אחסון</name>
+</Course>
+<Course id="049053">
+<name>מעבדה בלמידה חישובית</name>
+</Course>
+<Course id="049055">
+<name>ננו-פוטוניקה</name>
+</Course>
+<Course id="049058">
+<name>למידה ממוחשבת לבעיות מורכבות</name>
+</Course>
+<Course id="049061">
+<name>צפני קיטוב</name>
+</Course>
+<Course id="049062">
+<name>דימות ושחזור תלת-מימדי</name>
+</Course>
+<Course id="049063">
+<name>מידע בהתקני איחסון</name>
+</Course>
+<Course id="054131">
+<name>מבוא להנדסה כימית וביוכימית</name>
+</Course>
+<Course id="054132">
+<name>מיני-פרויקט בהנדסה כימית</name>
+</Course>
+<Course id="054203">
+<name>עקרונות הנדסה כימית 1 מ'</name>
+</Course>
+<Course id="054215">
+<name>תרמודינמיקה א'</name>
+</Course>
+<Course id="054251">
+<name>עבודה בתעשיה</name>
+</Course>
+<Course id="054305">
+<name>תהליכי הפרדה 2</name>
+</Course>
+<Course id="054308">
+<name>תהליכי הפרדה 2 להנדסה ביוכימית</name>
+</Course>
+<Course id="054310">
+<name>מעבדה להנדסה כימית 1</name>
+</Course>
+<Course id="054330">
+<name>מעבדה לסימולציה בהנדסת תהליכים</name>
+</Course>
+<Course id="054351">
+<name>פולימרים 2</name>
+</Course>
+<Course id="054364">
+<name>עבודה בתעשיה 2</name>
+</Course>
+<Course id="054367">
+<name>פרויקט מחקר 1</name>
+</Course>
+<Course id="054368">
+<name>פרויקט מחקר 2</name>
+</Course>
+<Course id="054407">
+<name>מחקר גמר 2</name>
+</Course>
+<Course id="054409">
+<name>עקרונות תכן ריאקטורים</name>
+</Course>
+<Course id="054410">
+<name>תיכון מפעלים מ'</name>
+</Course>
+<Course id="054411">
+<name>פרויקט בהנדסה כימית# אנרגיה</name>
+</Course>
+<Course id="054415">
+<name>הנדסת תהליכים בתעשיה הפטרוכימית</name>
+</Course>
+<Course id="056146">
+<name>נושאים הנדסיים נבחרים</name>
+</Course>
+<Course id="056166">
+<name>תופעות שטח</name>
+</Course>
+<Course id="056379">
+<name>מעבדה לתהליכי ממברנות</name>
+</Course>
+<Course id="056391">
+<name>חיישנים מבוססי ננו-)ביו( חומרים</name>
+</Course>
+<Course id="056393">
+<name>חדשנות פתוחה בהנדסה כימית</name>
+</Course>
+<Course id="056395">
+<name>תכן למערכות בקרת תהליכים</name>
+</Course>
+<Course id="058143">
+<name>תופעת מעבר - חום וחומר</name>
+</Course>
+<Course id="058183">
+<name>פולימרים בביוטכנולוגיה 2</name>
+</Course>
+<Course id="064001">
+<name>עבודת גמר</name>
+</Course>
+<Course id="064002">
+<name>עבודת גמר 2</name>
+</Course>
+<Course id="064003">
+<name>עבודה מעשית בתעשית מזון</name>
+</Course>
+<Course id="064005">
+<name>פרויקט מיוחד</name>
+</Course>
+<Course id="064115">
+<name>מכניקה של זורמים</name>
+</Course>
+<Course id="064118">
+<name>תופעות מעבר חומר</name>
+</Course>
+<Course id="064119">
+<name>תכן מפעלי מזון</name>
+</Course>
+<Course id="064322">
+<name>כימיה של מזון</name>
+</Course>
+<Course id="064325">
+<name>מעבדה בביוכימיה וכימיה של מזון</name>
+</Course>
+<Course id="064330">
+<name>בקרת ואבטחת איכות במזון ותרופות</name>
+</Course>
+<Course id="064413">
+<name>מעבדה במיקרוביולוגיה</name>
+</Course>
+<Course id="064419">
+<name>מיקרוביולוגיה כללית</name>
+</Course>
+<Course id="064508">
+<name>מעבדה בביוטכנולוגיה</name>
+</Course>
+<Course id="066011">
+<name>פרויקט איג'ם</name>
+</Course>
+<Course id="066230">
+<name>הערכת מזון באמצעות החושים</name>
+</Course>
+<Course id="066237">
+<name>הערכת חיי מדף של מזון ותרופות</name>
+</Course>
+<Course id="066246">
+<name>איכות הסביבה ותעשיית המזון</name>
+</Course>
+<Course id="066248">
+<name>ריאולוגיה-עקרונות ויישומים</name>
+</Course>
+<Course id="066513">
+<name>ביוטכנולוגיה של תאים אנימליים</name>
+</Course>
+<Course id="066516">
+<name>מעבדה בביוטכנולוגיה מולקולרית</name>
+</Course>
+<Course id="066517">
+<name>טכנולוגיות גנטיות מתקדמות</name>
+</Course>
+<Course id="066524">
+<name>ביוטכנולוגיה של פפטידים</name>
+</Course>
+<Course id="066605">
+<name>תזונה מונעת, היבטים בריאותיים</name>
+</Course>
+<Course id="084142">
+<name>הנדסת מערכות אויר-חלל</name>
+</Course>
+<Course id="084155">
+<name>שרטוט הנדסי ממוחשב</name>
+</Course>
+<Course id="084213">
+<name>תרמודינמיקה</name>
+</Course>
+<Course id="084220">
+<name>מכניקת הטיס 1</name>
+</Course>
+<Course id="084221">
+<name>מכניקת הטיס 2</name>
+</Course>
+<Course id="084311">
+<name>אוירודינמיקה בלתי דחיסה</name>
+</Course>
+<Course id="084312">
+<name>אוירודינמיקה דחיסה</name>
+</Course>
+<Course id="084314">
+<name>זרימה צמיגה ומעבר חום</name>
+</Course>
+<Course id="084401">
+<name>אמצעי הנעה - מנועי סילון</name>
+</Course>
+<Course id="084402">
+<name>הנעה רקטית</name>
+</Course>
+<Course id="084505">
+<name>מכניקת המוצקים</name>
+</Course>
+<Course id="084513">
+<name>יסודות המבנה האוירונוטי</name>
+</Course>
+<Course id="084636">
+<name>פרויקט בתכן מכני של רכיבים</name>
+</Course>
+<Course id="084661">
+<name>פרויקט תכן 61</name>
+</Course>
+<Course id="084662">
+<name>פרויקט תכן 62</name>
+</Course>
+<Course id="084663">
+<name>פרויקט תכן 63</name>
+</Course>
+<Course id="084664">
+<name>פרויקט תכן 64</name>
+</Course>
+<Course id="084665">
+<name>פרויקט תכן 65</name>
+</Course>
+<Course id="084666">
+<name>פרויקט תכן 66</name>
+</Course>
+<Course id="084668">
+<name>פרויקט תכן 68</name>
+</Course>
+<Course id="084670">
+<name>פרויקט תכן 70</name>
+</Course>
+<Course id="084737">
+<name>מערכות דינמיות</name>
+</Course>
+<Course id="084738">
+<name>תורת הבקרה</name>
+</Course>
+<Course id="084913">
+<name>יסודות הנדסת חלל</name>
+</Course>
+<Course id="085101">
+<name>תעופה ספורטיבית 1</name>
+</Course>
+<Course id="085102">
+<name>תעופה ספורטיבית 2</name>
+</Course>
+<Course id="085103">
+<name>תעופה ספורטיבית 3</name>
+</Course>
+<Course id="085104">
+<name>תעופה ספורטיבית 4</name>
+</Course>
+<Course id="085156">
+<name>פרויקט ניסוי</name>
+</Course>
+<Course id="085220">
+<name>מעבדה במכניקת הטיס</name>
+</Course>
+<Course id="085305">
+<name>מעבדה באוירודינמיקה</name>
+</Course>
+<Course id="085326">
+<name>סדנא לאוירודינמיקה חישובית</name>
+</Course>
+<Course id="085405">
+<name>מעבדה בהנעה ושריפה</name>
+</Course>
+<Course id="085505">
+<name>מעבדה במבנים אוירונוטיים</name>
+</Course>
+<Course id="085640">
+<name>תמיכה כוללת במוצר למע. אויר חלל</name>
+</Course>
+<Course id="085681">
+<name>פרויקט תכן מיוחד 1</name>
+</Course>
+<Course id="085682">
+<name>פרויקט תכן מיוחד 2</name>
+</Course>
+<Course id="085735">
+<name>מערכות מדידים ביישומי אוויר-חלל</name>
+</Course>
+<Course id="085804">
+<name>סמינריון בנושא בקרה</name>
+</Course>
+<Course id="085852">
+<name>פרויקט מחקר 2</name>
+</Course>
+<Course id="086172">
+<name>שיטות נומריות בהנדסה אוירונוטית</name>
+</Course>
+<Course id="086290">
+<name>בקרת מסלולי לוויינים</name>
+</Course>
+<Course id="086312">
+<name>בקרה לא לינארית</name>
+</Course>
+<Course id="086376">
+<name>אוירודינמיקה חישובית</name>
+</Course>
+<Course id="086389">
+<name>אוירודינמיקה של גופים וכנפיים</name>
+</Course>
+<Course id="086390">
+<name>מבוא לאוירואקוסטיקה</name>
+</Course>
+<Course id="086478">
+<name>תהליכי שריפה</name>
+</Course>
+<Course id="086535">
+<name>מכניקת השבר במבנים תעופתיים</name>
+</Course>
+<Course id="086759">
+<name>מערכות נווט והנחיה</name>
+</Course>
+<Course id="086761">
+<name>ניווט נעזר ראיה ממוחשבת</name>
+</Course>
+<Course id="086777">
+<name>יסודות בתורת השערוך</name>
+</Course>
+<Course id="088209">
+<name>אינטגרציה של מערכות</name>
+</Course>
+<Course id="088221">
+<name>סמינר בהנדסת אוירונוטיקה וחלל 1</name>
+</Course>
+<Course id="088222">
+<name>סמינר בהנדסת אוירונוטיקה וחלל 2</name>
+</Course>
+<Course id="088477">
+<name>הנעה בהודף במצב ג'ל</name>
+</Course>
+<Course id="088792">
+<name>בקרה איתנה</name>
+</Course>
+<Course id="088794">
+<name>יסודות בהנדסת מערכות</name>
+</Course>
+<Course id="088795">
+<name>בקרה למהנדסי מערכות</name>
+</Course>
+<Course id="088796">
+<name>פרויקט סיום בהנדסת מערכות</name>
+</Course>
+<Course id="088900">
+<name>מערכות חלל מבוזרות</name>
+</Course>
+<Course id="094101">
+<name>מבוא להנדסת תעשיה ושילוב מערכות</name>
+</Course>
+<Course id="094110">
+<name>קורס העשרה בהנדסת תעשיה</name>
+</Course>
+<Course id="094134">
+<name>מדדים ותגובות</name>
+</Course>
+<Course id="094141">
+<name>תכן המוצר ומערכות ייצור ושירות</name>
+</Course>
+<Course id="094142">
+<name>תפעול מער' ייצור ושרות</name>
+</Course>
+<Course id="094187">
+<name>מיני-פרויקט בהנדסת תעשיה וניהול</name>
+</Course>
+<Course id="094189">
+<name>קדם פרויקט תכן</name>
+</Course>
+<Course id="094195">
+<name>פרויקט תכן 1</name>
+</Course>
+<Course id="094196">
+<name>פרויקט תכן 2</name>
+</Course>
+<Course id="094197">
+<name>פרויקט מחקר סמסטריאלי</name>
+</Course>
+<Course id="094198">
+<name>אירועים בהנדסת תעשיה</name>
+</Course>
+<Course id="094199">
+<name>פרויקט סמסטריאלי 2</name>
+</Course>
+<Course id="094201">
+<name>מבוא להנדסת נתונים ומידע</name>
+</Course>
+<Course id="094210">
+<name>מבוא לטכנולוגיות מחשב</name>
+</Course>
+<Course id="094219">
+<name>הנדסת תוכנה</name>
+</Course>
+<Course id="094222">
+<name>אפיון וניתוח מערכות מידע</name>
+</Course>
+<Course id="094240">
+<name>ניהול מסדי נתונים</name>
+</Course>
+<Course id="094313">
+<name>מודלים דטרמיניסטים בחקר ביצועים</name>
+</Course>
+<Course id="094314">
+<name>מודלים סטוכסטיים בחקר בצועים</name>
+</Course>
+<Course id="094323">
+<name>מודלים דינמיים בחקר ביצועים</name>
+</Course>
+<Course id="094334">
+<name>סימולציה ספרתית</name>
+</Course>
+<Course id="094344">
+<name>מתמטיקה דיסקרטית ת'</name>
+</Course>
+<Course id="094411">
+<name>הסתברות ת'</name>
+</Course>
+<Course id="094412">
+<name>הסתברות מ</name>
+</Course>
+<Course id="094423">
+<name>מבוא לסטטיסטיקה</name>
+</Course>
+<Course id="094481">
+<name>מבוא להסתברות וסטטיסטיקה</name>
+</Course>
+<Course id="094503">
+<name>מיקרו כלכלה1</name>
+</Course>
+<Course id="094515">
+<name>כלכלת ישראל</name>
+</Course>
+<Course id="094564">
+<name>מבוא לניהול פיננסי</name>
+</Course>
+<Course id="094569">
+<name>שוק ההון וההשקעות</name>
+</Course>
+<Course id="094578">
+<name>נושאים נבחרים בכלכלה 2</name>
+</Course>
+<Course id="094591">
+<name>מבוא לכלכלה</name>
+</Course>
+<Course id="094594">
+<name>עקרונות הכלכלה למהנדסים</name>
+</Course>
+<Course id="094815">
+<name>הכנת תכנית עסקית מלאה למסחור</name>
+</Course>
+<Course id="094816">
+<name>שיווק למיזמים טכנולוגיים</name>
+</Course>
+<Course id="094821">
+<name>חשבונאות פיננסית וניהולית</name>
+</Course>
+<Course id="094825">
+<name>בקרת עלויות</name>
+</Course>
+<Course id="094851">
+<name>משחק מנהלים</name>
+</Course>
+<Course id="095111">
+<name>הנדסת מערכות ייצור</name>
+</Course>
+<Course id="095112">
+<name>מדידת ביצועים ושיפור שיטות</name>
+</Course>
+<Course id="095113">
+<name>איכות פריון ותחזוקה</name>
+</Course>
+<Course id="095140">
+<name>תכנון פרויקטים וניהולם</name>
+</Course>
+<Course id="095141">
+<name>מבוא לניהול פרויקטים</name>
+</Course>
+<Course id="095605">
+<name>מבוא לפסיכולוגיה</name>
+</Course>
+<Course id="096121">
+<name>הנדסת אמינות</name>
+</Course>
+<Course id="096124">
+<name>תיכון לייצוריות ולהרכבה</name>
+</Course>
+<Course id="096211">
+<name>מודלים למסחר אלקטרוני</name>
+</Course>
+<Course id="096250">
+<name>מערכות מידע מבוזרות</name>
+</Course>
+<Course id="096260">
+<name>נושאים מתקדמים במערכות מידע</name>
+</Course>
+<Course id="096261">
+<name>נושאים נבחרים במערכות מידע</name>
+</Course>
+<Course id="096324">
+<name>הנדסת מערכות שירות</name>
+</Course>
+<Course id="096327">
+<name>מודלים לא לינאריים בחקר ביצועים</name>
+</Course>
+<Course id="096411">
+<name>שיטות לכריית נתונים ובינה עסקית</name>
+</Course>
+<Course id="096450">
+<name>השוואות מרובות</name>
+</Course>
+<Course id="096475">
+<name>תכנון ניסויים וניתוחם</name>
+</Course>
+<Course id="096520">
+<name>תאוריה מיקרו כלכלית 1</name>
+</Course>
+<Course id="096530">
+<name>תאוריה מיקרו כלכלית 2</name>
+</Course>
+<Course id="096553">
+<name>כלכלת סביבה</name>
+</Course>
+<Course id="096555">
+<name>כלכלת סקטור ציבורי</name>
+</Course>
+<Course id="096570">
+<name>תורת המשחקים והתנהגות כלכלית</name>
+</Course>
+<Course id="096572">
+<name>נושאים מתקדמים בתורת המשחקים</name>
+</Course>
+<Course id="096577">
+<name>תולדות המחשבה הכלכלית</name>
+</Course>
+<Course id="096581">
+<name>נושאים נבחרים בכלכלה</name>
+</Course>
+<Course id="096582">
+<name>נושאים מתקדמים בכלכלה</name>
+</Course>
+<Course id="096589">
+<name>אקונומטריקה למתקדמים</name>
+</Course>
+<Course id="096600">
+<name>התנהגות ארגונית</name>
+</Course>
+<Course id="096602">
+<name>נושאים נבחרים במדעי ההתנהגות</name>
+</Course>
+<Course id="096617">
+<name>חשיבה וקבלת החלטות</name>
+</Course>
+<Course id="096620">
+<name>הנדסת גורמי אנוש</name>
+</Course>
+<Course id="096690">
+<name>כלכלה התנהגותית# למידה וארגונים</name>
+</Course>
+<Course id="096700">
+<name>התנסות מעשית בארגון</name>
+</Course>
+<Course id="096807">
+<name>יזמות חברתית</name>
+</Course>
+<Course id="096808">
+<name>נושאים נבחרים בניהול</name>
+</Course>
+<Course id="096809">
+<name>נושאים מתקדמים בניהול</name>
+</Course>
+<Course id="096815">
+<name>יזמות וקנין רוחני</name>
+</Course>
+<Course id="096817">
+<name>ניהול וייזום חדשנות בארגונים</name>
+</Course>
+<Course id="096820">
+<name>מערכות ניהול קשרי לקוחות</name>
+</Course>
+<Course id="096912">
+<name>מבוא לניהול סיכונים תפעוליים</name>
+</Course>
+<Course id="097120">
+<name>נושאים נבחרים בהנדסת תעשיה</name>
+</Course>
+<Course id="097140">
+<name>שיטות מתקדמות בניהול פרויקטים</name>
+</Course>
+<Course id="097211">
+<name>פרוטוקולי רשת עמידים בתקלות</name>
+</Course>
+<Course id="097230">
+<name>מתודולוגיות לפיתוח מערכות מידע</name>
+</Course>
+<Course id="097280">
+<name>אלגוריתמים בתרחישי אי-וודאות</name>
+</Course>
+<Course id="097317">
+<name>תורת המשחקים השיתופיים</name>
+</Course>
+<Course id="097324">
+<name>שיטות אופטימיזציה</name>
+</Course>
+<Course id="097328">
+<name>נושאים מתקדמים בחקר ביצועים</name>
+</Course>
+<Course id="097334">
+<name>שיטות אלגבריות לתכנות בשלמים</name>
+</Course>
+<Course id="097510">
+<name>מודלים של זמן רציף במימון</name>
+</Course>
+<Course id="097616">
+<name>בחירת עובדים והשמתם</name>
+</Course>
+<Course id="097657">
+<name>אירגונים ויזמות</name>
+</Course>
+<Course id="097800">
+<name>עקרונות השיווק</name>
+</Course>
+<Course id="098123">
+<name>ניהול פרויקטים להנדסת מערכות</name>
+</Course>
+<Course id="098148">
+<name>הגורם האנושי במערכות הנדסיות</name>
+</Course>
+<Course id="098310">
+<name>חקר ביצועים ואופטימיזציה</name>
+</Course>
+<Course id="098312">
+<name>אופטמיזציה 2</name>
+</Course>
+<Course id="098343">
+<name>סמינר באופטימיזציה</name>
+</Course>
+<Course id="098409">
+<name>סמינר משתלמים 1</name>
+</Course>
+<Course id="098413">
+<name>תהליכים סטוכסטיים</name>
+</Course>
+<Course id="098414">
+<name>תיאוריה סטטיסטית</name>
+</Course>
+<Course id="098610">
+<name>הגורם האנושי במערכות טכנולוגיות</name>
+</Course>
+<Course id="098660">
+<name>רגשות בארגונים</name>
+</Course>
+<Course id="098694">
+<name>מטה קוגניציה</name>
+</Course>
+<Course id="098783">
+<name>ניהול השיווק</name>
+</Course>
+<Course id="099601">
+<name>סמינר מתקדם במחקר פסיכולוגי</name>
+</Course>
+<Course id="099624">
+<name>סמינר מחקר אישי</name>
+</Course>
+<Course id="099635">
+<name>סמינר שטח במדעי ההתנהגות</name>
+</Course>
+<Course id="099760">
+<name>ניהול משא ומתן</name>
+</Course>
+<Course id="099797">
+<name>נושאים נבחרים במנהל עסקים 1</name>
+</Course>
+<Course id="099859">
+<name>נושאים נבחרים בשיווק</name>
+</Course>
+<Course id="100011">
+<name>מתמטיקה למכינה</name>
+</Course>
+<Course id="103015">
+<name>השלמות מתמטיקה</name>
+</Course>
+<Course id="104003">
+<name>חשבון דיפרנציאלי ואינטגרלי 1</name>
+</Course>
+<Course id="104004">
+<name>חשבון דיפרנציאלי ואינטגרלי 2</name>
+</Course>
+<Course id="104013">
+<name>חשבון דיפרנציאלי ואינטגרלי 2ת'</name>
+</Course>
+<Course id="104016">
+<name>אלגברה 1/מורחב</name>
+</Course>
+<Course id="104017">
+<name>חשבון דיפרנציאלי ואינטגרלי 1נ'</name>
+</Course>
+<Course id="104018">
+<name>חשבון דיפרנציאלי ואינטגרלי 1מ'</name>
+</Course>
+<Course id="104019">
+<name>אלגברה ליניארית מ'</name>
+</Course>
+<Course id="104020">
+<name>חשבון דיפרנציאלי ואינטגרלי 2נ'</name>
+</Course>
+<Course id="104022">
+<name>חשבון דיפרנציאלי ואינטגרלי 2מ'</name>
+</Course>
+<Course id="104031">
+<name>חשבון אינפיניטסימלי 1מ'</name>
+</Course>
+<Course id="104032">
+<name>חשבון אינפיניטסימלי 2מ'</name>
+</Course>
+<Course id="104033">
+<name>אנליזה וקטורית</name>
+</Course>
+<Course id="104034">
+<name>מבוא להסתברות ח'</name>
+</Course>
+<Course id="104035">
+<name>משוואות דיפ' רגילות ואינפי 2ח'</name>
+</Course>
+<Course id="104114">
+<name>יסודות הגאומטריה</name>
+</Course>
+<Course id="104122">
+<name>תורת הפונקציות 1</name>
+</Course>
+<Course id="104131">
+<name>משואות דיפרנציאליות רגילות/ח</name>
+</Course>
+<Course id="104134">
+<name>אלגברה מודרנית ח</name>
+</Course>
+<Course id="104135">
+<name>משוואות דפרנציאליות רגילות ת'</name>
+</Course>
+<Course id="104142">
+<name>מבוא למרחבים מטריים וטופולוגיים</name>
+</Course>
+<Course id="104144">
+<name>טופולוגיה</name>
+</Course>
+<Course id="104166">
+<name>אלגברה א'</name>
+</Course>
+<Course id="104172">
+<name>מבוא לחבורות</name>
+</Course>
+<Course id="104173">
+<name>אלגברה ליניארית ב'</name>
+</Course>
+<Course id="104182">
+<name>סמינר באנליזה להסמכה 2</name>
+</Course>
+<Course id="104183">
+<name>סמינר באלגברה להסמכה 1</name>
+</Course>
+<Course id="104192">
+<name>מבוא למתמטיקה שמושית</name>
+</Course>
+<Course id="104193">
+<name>תורת האופטימיזציה</name>
+</Course>
+<Course id="104195">
+<name>חשבון אינפיניטסימלי 1</name>
+</Course>
+<Course id="104218">
+<name>משוואות דיפרנציאליות חלקיות ח'</name>
+</Course>
+<Course id="104222">
+<name>תורת ההסתברות</name>
+</Course>
+<Course id="104223">
+<name>מד"ח וטורי פוריה</name>
+</Course>
+<Course id="104228">
+<name>משוואות דיפרנציאליות חלקיות מ'</name>
+</Course>
+<Course id="104274">
+<name>תורת השדות</name>
+</Course>
+<Course id="104276">
+<name>מבוא לאנליזה פונקציונלית</name>
+</Course>
+<Course id="104279">
+<name>מבוא לחוגים ושדות</name>
+</Course>
+<Course id="104281">
+<name>חשבון אינפי 2</name>
+</Course>
+<Course id="104282">
+<name>חשבון אינפי 3</name>
+</Course>
+<Course id="104285">
+<name>משוואות דיפרנציאליות רגילות א'</name>
+</Course>
+<Course id="104286">
+<name>קומבינטוריקה</name>
+</Course>
+<Course id="104290">
+<name>תורת הקבוצות</name>
+</Course>
+<Course id="106156">
+<name>לוגיקה מתמטית</name>
+</Course>
+<Course id="106306">
+<name>אלגבראות לי</name>
+</Course>
+<Course id="106347">
+<name>מספרים אלגבריים</name>
+</Course>
+<Course id="106350">
+<name>גיאומטריה רימנית</name>
+</Course>
+<Course id="106395">
+<name>תורת הפונקציות 2</name>
+</Course>
+<Course id="106416">
+<name>שיטות נומריות במד"ח</name>
+</Course>
+<Course id="106429">
+<name>תהליכים סטוכסטיים</name>
+</Course>
+<Course id="106433">
+<name>נושאים באנליזה פונקציונלית</name>
+</Course>
+<Course id="106435">
+<name>נושאים בתורת האופרטורים</name>
+</Course>
+<Course id="106800">
+<name>נושאים בתורה הארגודית</name>
+</Course>
+<Course id="106925">
+<name>נושאים נבחרים בחבורות אלגבריות</name>
+</Course>
+<Course id="106928">
+<name>נושאים נבחרים בקומבינטוריקה 2</name>
+</Course>
+<Course id="106929">
+<name>נושאים נבחרים באנליזה 2</name>
+</Course>
+<Course id="108327">
+<name>אנליזה פונקציונלית להנדסת חשמל</name>
+</Course>
+<Course id="108709">
+<name>פרקים נבחרים בתורת המטריצות</name>
+</Course>
+<Course id="108911">
+<name>נושאים נבחרים בטופולוגיה</name>
+</Course>
+<Course id="198002">
+<name>שיטות אסימפטוטיות 2</name>
+</Course>
+<Course id="113013">
+<name>השלמות פיסיקה 1-סווג חלק א'</name>
+</Course>
+<Course id="114010">
+<name>תגליות מדעיות 1</name>
+</Course>
+<Course id="114011">
+<name>תגליות מדעיות 2</name>
+</Course>
+<Course id="114014">
+<name>מכניקה וגלים</name>
+</Course>
+<Course id="114020">
+<name>מעבדה לפיסיקה 1מ'</name>
+</Course>
+<Course id="114021">
+<name>מעבדה לפיסיקה</name>
+</Course>
+<Course id="114027">
+<name>מעבדה לפיסיקה 5</name>
+</Course>
+<Course id="114028">
+<name>מעבדה לפיסיקה 6</name>
+</Course>
+<Course id="114030">
+<name>מעבדה לפיסיקה 2 מח'</name>
+</Course>
+<Course id="114032">
+<name>מעבדה לפיסיקה 1ח'</name>
+</Course>
+<Course id="114033">
+<name>מעבדה לפיסיקה 2ח'</name>
+</Course>
+<Course id="114034">
+<name>מעבדה לפיסיקה 2מפ'</name>
+</Course>
+<Course id="114035">
+<name>מעבדה לפיסיקה 3 - גלים</name>
+</Course>
+<Course id="114036">
+<name>פיסיקה סטטיסטית ותרמית</name>
+</Course>
+<Course id="114037">
+<name>מעבדה לפיסיקה 4מח'</name>
+</Course>
+<Course id="114051">
+<name>פיסיקה 1</name>
+</Course>
+<Course id="114052">
+<name>פיסיקה 2</name>
+</Course>
+<Course id="114054">
+<name>פיסיקה 3</name>
+</Course>
+<Course id="114071">
+<name>פיסיקה 1מ</name>
+</Course>
+<Course id="114073">
+<name>פיסיקה 3ח'</name>
+</Course>
+<Course id="114075">
+<name>פיסיקה 2ממ</name>
+</Course>
+<Course id="114076">
+<name>פיסיקה 2פ'</name>
+</Course>
+<Course id="114077">
+<name>פיסיקה 1ל</name>
+</Course>
+<Course id="114078">
+<name>פיסיקה 2ל</name>
+</Course>
+<Course id="114081">
+<name>מעבדה לפיסיקה 1</name>
+</Course>
+<Course id="114082">
+<name>מעבדה לפיסיקה 2</name>
+</Course>
+<Course id="114208">
+<name>מעבדה במדידות אופטיות</name>
+</Course>
+<Course id="114210">
+<name>אופטיקה</name>
+</Course>
+<Course id="114226">
+<name>דו"ח סגל מחקר סתיו</name>
+</Course>
+<Course id="114227">
+<name>דו"ח סגל מחקר אביב</name>
+</Course>
+<Course id="114229">
+<name>פרויקט</name>
+</Course>
+<Course id="114246">
+<name>אלקטרומגנטיות ואלקטרודינמיקה</name>
+</Course>
+<Course id="114249">
+<name>פיסיקה 2 ר</name>
+</Course>
+<Course id="114250">
+<name>מעבדה לפיסיקה 5ת</name>
+</Course>
+<Course id="114251">
+<name>מעבדה לפיסיקה 6ת</name>
+</Course>
+<Course id="114252">
+<name>פרויקט ת</name>
+</Course>
+<Course id="115203">
+<name>פיסיקה קוונטית 1</name>
+</Course>
+<Course id="115249">
+<name>פיסיקה 2רל</name>
+</Course>
+<Course id="116027">
+<name>פיסיקה של זורמים</name>
+</Course>
+<Course id="116354">
+<name>אסטרופיסיקה וקוסמולוגיה</name>
+</Course>
+<Course id="117004">
+<name>שיטות ניסיוניות במצב מוצק 2</name>
+</Course>
+<Course id="117018">
+<name>פיסיקה של מוליכים למחצה</name>
+</Course>
+<Course id="117021">
+<name>על-מוליכות ועל-נוזליות</name>
+</Course>
+<Course id="117140">
+<name>תורת החבורות בפיסיקה</name>
+</Course>
+<Course id="118076">
+<name>מעבדה מתקדמת</name>
+</Course>
+<Course id="118085">
+<name>פיסיקה גלקטית 1</name>
+</Course>
+<Course id="118107">
+<name>נושאים נבחרים בתורת השדות</name>
+</Course>
+<Course id="118112">
+<name>נושאים נבחרים במצב מוצק</name>
+</Course>
+<Course id="118114">
+<name>נושאים נבחרים בפיסיקה עיונית</name>
+</Course>
+<Course id="118123">
+<name>מבוא לפיסיקת החלקיקים</name>
+</Course>
+<Course id="118130">
+<name>מבוא ליחסות כללית</name>
+</Course>
+<Course id="118132">
+<name>תורת השדות הקוונטית 1</name>
+</Course>
+<Course id="118136">
+<name>אופטיקה אולטרה מהירה</name>
+</Course>
+<Course id="118138">
+<name>מצב מוצק למוסמכים</name>
+</Course>
+<Course id="123015">
+<name>השלמות כימיה</name>
+</Course>
+<Course id="124118">
+<name>יסודות הכימיה ב'</name>
+</Course>
+<Course id="124122">
+<name>מעבדה ביסודות הכימיה</name>
+</Course>
+<Course id="124212">
+<name>מעבדה בכימיה אנליטית 1 מורחב</name>
+</Course>
+<Course id="124213">
+<name>כימיה אנליטית 2 )מורחב(</name>
+</Course>
+<Course id="124214">
+<name>מעבדה בכימיה אנליטית 2 מורחב</name>
+</Course>
+<Course id="124220">
+<name>כימיה אנליטית 1 )מורחב(</name>
+</Course>
+<Course id="124353">
+<name>פרויקט מחקר בכימיה</name>
+</Course>
+<Course id="124355">
+<name>פרוייקט מחקר מיוחד בכימיה</name>
+</Course>
+<Course id="124356">
+<name>מבוא למחקר בכימיה</name>
+</Course>
+<Course id="124413">
+<name>תרמודינמיקה סטטיסטית</name>
+</Course>
+<Course id="124414">
+<name>כימיה פיסיקלית-קינטיקה כימית</name>
+</Course>
+<Course id="124510">
+<name>כימיה פיסיקלית</name>
+</Course>
+<Course id="124601">
+<name>מעבדה בכימיה פיסיקלית 1</name>
+</Course>
+<Course id="124605">
+<name>מע. בכימיה פיסיקלית 2 לכימאים</name>
+</Course>
+<Course id="124608">
+<name>מע. בכימיה פיסיקלית להנ. חומרים</name>
+</Course>
+<Course id="124609">
+<name>מעבדה כימית פיסיקלית ב"מ</name>
+</Course>
+<Course id="124610">
+<name>מעבדה כימיה פיסיקלית 1</name>
+</Course>
+<Course id="124708">
+<name>כימיה אורגנית מורחב 1</name>
+</Course>
+<Course id="124711">
+<name>כימיה אורגנית 2מ'</name>
+</Course>
+<Course id="124801">
+<name>כימיה אורגנית 1ב</name>
+</Course>
+<Course id="124911">
+<name>מעבדה כימיה אורגנית 1</name>
+</Course>
+<Course id="125001">
+<name>כימיה כללית</name>
+</Course>
+<Course id="125013">
+<name>מעבדה בכימיה כללית</name>
+</Course>
+<Course id="125101">
+<name>כימיה אנליטית 1 למהנדסים</name>
+</Course>
+<Course id="125801">
+<name>כימיה אורגנית</name>
+</Course>
+<Course id="125802">
+<name>כימיה אורגנית רב"מ</name>
+</Course>
+<Course id="126200">
+<name>כימיה אי אורגנית מתקדמת 2</name>
+</Course>
+<Course id="126600">
+<name>מעבדה מתקדמת בכימיה פיסיקלית</name>
+</Course>
+<Course id="126601">
+<name>כימיה פיסיקלית עיונית מתקדמת</name>
+</Course>
+<Course id="126700">
+<name>כימיה אורגנית מתקדמת</name>
+</Course>
+<Course id="126901">
+<name>מעבדה מתקדמת בכימיה אורגנית</name>
+</Course>
+<Course id="126902">
+<name>מעבדה בכימיה אורגנית ופיסיקלית</name>
+</Course>
+<Course id="127100">
+<name>קניין רוחני ובפרט פטנטים בכימיה</name>
+</Course>
+<Course id="127403">
+<name>כימיה פיסיקלית של השטח</name>
+</Course>
+<Course id="127436">
+<name>תרמודינמיקה של מערכות קטנות</name>
+</Course>
+<Course id="127438">
+<name>סימטריה ושימושיה בכימיה</name>
+</Course>
+<Course id="127441">
+<name>פוטוכימיה ביולוגית</name>
+</Course>
+<Course id="127442">
+<name>כימיה ופיסיקה במערכות קטנות</name>
+</Course>
+<Course id="128719">
+<name>הכימיה בפיתוח תרופות</name>
+</Course>
+<Course id="134015">
+<name>הכרת החי והצומח ב'</name>
+</Course>
+<Course id="134019">
+<name>מבוא לביוכימיה ואנזימולוגיה</name>
+</Course>
+<Course id="134020">
+<name>גנטיקה כללית</name>
+</Course>
+<Course id="134036">
+<name>פרקים בביולוגיה למהנדסים</name>
+</Course>
+<Course id="134039">
+<name>וירולוגיה מולקולרית</name>
+</Course>
+<Course id="134040">
+<name>פיזיולוגיה מוליקולרית של הצמח</name>
+</Course>
+<Course id="134049">
+<name>פרויקט מחקר בביולוגיה</name>
+</Course>
+<Course id="134058">
+<name>ביולוגיה 1</name>
+</Course>
+<Course id="134117">
+<name>פיזיולוגיה</name>
+</Course>
+<Course id="134119">
+<name>בקרת הביטוי הגנטי</name>
+</Course>
+<Course id="134121">
+<name>מיקרוביולוגיה ווירולוגיה</name>
+</Course>
+<Course id="134122">
+<name>מעבדה בהנדסה גנטית</name>
+</Course>
+<Course id="134123">
+<name>סמינר בביולוגיה 1</name>
+</Course>
+<Course id="134124">
+<name>סמינר ביולוגיה 2</name>
+</Course>
+<Course id="134125">
+<name>סמינר בביולוגיה 3</name>
+</Course>
+<Course id="134126">
+<name>סמינר בביולוגיה 4</name>
+</Course>
+<Course id="134128">
+<name>ביולוגיה של התא</name>
+</Course>
+<Course id="134136">
+<name>ביופיסיקה מולקולרית</name>
+</Course>
+<Course id="134140">
+<name>יוביקוויטין ומחזור חלבונים</name>
+</Course>
+<Course id="134141">
+<name>גישות חישוביות במדעי החיים</name>
+</Course>
+<Course id="134143">
+<name>מעבדה בביוכימיה ומטבוליזם</name>
+</Course>
+<Course id="134144">
+<name>מעבדה בפיזיולוגיה של הצמח</name>
+</Course>
+<Course id="134150">
+<name>פרויקט מחקר למסלול מצטיינים</name>
+</Course>
+<Course id="134151">
+<name>העולם המודרני של הרנ"א</name>
+</Course>
+<Course id="134152">
+<name>מבוא לנוירוביולוגיה</name>
+</Course>
+<Course id="136007">
+<name>אקולוגיה</name>
+</Course>
+<Course id="136014">
+<name>פיתוח תרופות ביולוגיות חדשניות</name>
+</Course>
+<Course id="138001">
+<name>סקס חיים והתפתחות</name>
+</Course>
+<Course id="138005">
+<name>כלים בביואינפורמטיקה מבנית</name>
+</Course>
+<Course id="138018">
+<name>פרוטיאומיקה</name>
+</Course>
+<Course id="138035">
+<name>קריסטלוגרפיה של מקרומולקולות</name>
+</Course>
+<Course id="138038">
+<name>גישות ניסוייות בחומצות גרעין</name>
+</Course>
+<Course id="138041">
+<name>ביולוגיה של התא למתקדמים</name>
+</Course>
+<Course id="138042">
+<name>מודלים בביולוגיה</name>
+</Course>
+<Course id="138043">
+<name>סטטיסטיקת אוכלוסיות</name>
+</Course>
+<Course id="138044">
+<name>תאי גזע</name>
+</Course>
+<Course id="204002">
+<name>נוף וסביבה</name>
+</Course>
+<Course id="204091">
+<name>תולדות אדריכלות נוף 2</name>
+</Course>
+<Course id="204150">
+<name>מבוא לאקולוגיה של הנוף</name>
+</Course>
+<Course id="204203">
+<name>צמחיה בנוף 1#צמחיה כשפת תכנון</name>
+</Course>
+<Course id="204400">
+<name>מבנה ופרטי גנים 1</name>
+</Course>
+<Course id="204401">
+<name>מבנה ופרטי גנים 2</name>
+</Course>
+<Course id="204620">
+<name>תכנון נוף 10</name>
+</Course>
+<Course id="204622">
+<name>תכנון נוף 30</name>
+</Course>
+<Course id="204624">
+<name>תכנון נוף 50</name>
+</Course>
+<Course id="204627">
+<name>תכנון נוף 70 ב'</name>
+</Course>
+<Course id="204654">
+<name>מערכות עירוניות# תשתיות ונוף</name>
+</Course>
+<Course id="204655">
+<name>נושאים נבחרים באדריכלות נוף 1</name>
+</Course>
+<Course id="205004">
+<name>סטודיו 5-עיצוב עירוני א'</name>
+</Course>
+<Course id="205010">
+<name>עריכה אדריכלית</name>
+</Course>
+<Course id="205071">
+<name>מורפולוגיה 1</name>
+</Course>
+<Course id="205152">
+<name>סוגיות בסוציולוגיה אורבנית</name>
+</Course>
+<Course id="205252">
+<name>מבוא לבינוי ערים</name>
+</Course>
+<Course id="205257">
+<name>מבוא לעיצוב עירוני</name>
+</Course>
+<Course id="205404">
+<name>מבנה ופרטי בנין 4</name>
+</Course>
+<Course id="205410">
+<name>חומרים 1</name>
+</Course>
+<Course id="205421">
+<name>מבנה ופרטי בניין 1</name>
+</Course>
+<Course id="205422">
+<name>מבנה ופרטי בניין 2</name>
+</Course>
+<Course id="205430">
+<name>סדנה טכנולוגית הנדסית 1א'</name>
+</Course>
+<Course id="205455">
+<name>תכן מבנים כולל</name>
+</Course>
+<Course id="205485">
+<name>בקרת הסביב מאור-תכנון</name>
+</Course>
+<Course id="205506">
+<name>מיזוג אוויר - מבוא</name>
+</Course>
+<Course id="205507">
+<name>אקוסטיקה - מבוא</name>
+</Course>
+<Course id="205571">
+<name>כלכלת המרחב והבנייה</name>
+</Course>
+<Course id="205623">
+<name>פרויקט מיוחד 4א'</name>
+</Course>
+<Course id="205624">
+<name>פרויקט מיוחד 4ב'</name>
+</Course>
+<Course id="205635">
+<name>תכנון בנינים סולרים ביואקלימים</name>
+</Course>
+<Course id="205655">
+<name>תכנון כולל 3</name>
+</Course>
+<Course id="205657">
+<name>תכנון כולל 5</name>
+</Course>
+<Course id="205658">
+<name>תכנון כולל 6</name>
+</Course>
+<Course id="205660">
+<name>תכנון כולל 8</name>
+</Course>
+<Course id="205662">
+<name>נושאים מיוחדים בארכיטקטורה</name>
+</Course>
+<Course id="205666">
+<name>סטודיו 2</name>
+</Course>
+<Course id="205688">
+<name>נושאים מיוחדים בארכיטקטורה</name>
+</Course>
+<Course id="205690">
+<name>נושאים מיוחדים בארכי' 1א'</name>
+</Course>
+<Course id="205693">
+<name>נושאים מיוחדים בארכי' 2א'</name>
+</Course>
+<Course id="205700">
+<name>נושאים בתכנון כולל</name>
+</Course>
+<Course id="205702">
+<name>נושאים בתכנון כולל</name>
+</Course>
+<Course id="205708">
+<name>נושאים בהיסטוריה ותיאוריה בארכ'</name>
+</Course>
+<Course id="205721">
+<name>נושאים מיוחדים בארכיטקטורה 3ד'</name>
+</Course>
+<Course id="205813">
+<name>הבעה גרפית</name>
+</Course>
+<Course id="205817">
+<name>סדנאות מדיה 1א'</name>
+</Course>
+<Course id="205818">
+<name>סדנאות מדיה 1ב'</name>
+</Course>
+<Course id="205819">
+<name>סדנאות מדיה 1ג'</name>
+</Course>
+<Course id="205820">
+<name>סדנאות מדיה 1ד'</name>
+</Course>
+<Course id="205821">
+<name>סדנאות מדיה 1ה'</name>
+</Course>
+<Course id="205822">
+<name>סדנאות מדיה 1 ו'</name>
+</Course>
+<Course id="205824">
+<name>סדנאות מדיה 2 א'</name>
+</Course>
+<Course id="205825">
+<name>סדנאות מדיה 2 ב'</name>
+</Course>
+<Course id="205826">
+<name>סדנאות מדיה 2 ג'</name>
+</Course>
+<Course id="205873">
+<name>עיצוב בסיסי 4</name>
+</Course>
+<Course id="205874">
+<name>אומנות ניסויית 1</name>
+</Course>
+<Course id="205875">
+<name>אומנות ניסויית 2</name>
+</Course>
+<Course id="205877">
+<name>עיצוב בסיסי 5</name>
+</Course>
+<Course id="205884">
+<name>עיצוב בסיסי 2</name>
+</Course>
+<Course id="205923">
+<name>התבוננות, דיגום ויצוג 2</name>
+</Course>
+<Course id="205980">
+<name>נושאים נבחרים</name>
+</Course>
+<Course id="206041">
+<name>סמינר בהערכת סביבות</name>
+</Course>
+<Course id="206101">
+<name>אדריכלות חוקרת</name>
+</Course>
+<Course id="206171">
+<name>סטודיו נושאי ראשון</name>
+</Course>
+<Course id="206815">
+<name>עיצוב תעשייתי ברפואה</name>
+</Course>
+<Course id="206816">
+<name>נושאים נבחרים בעיצוב תעשייתי</name>
+</Course>
+<Course id="206821">
+<name>נושאים נבחרים בעיצוב תעשייתי 2</name>
+</Course>
+<Course id="206822">
+<name>נושאים נבחרים בעיצוב תעשייתי 3</name>
+</Course>
+<Course id="206913">
+<name>נושאים נבחרים בארכיטקטורה 1</name>
+</Course>
+<Course id="206915">
+<name>נושאים נבחרים בארכיטקטורה 3</name>
+</Course>
+<Course id="206931">
+<name>נושאים נבחרים בעיצוב עירוני</name>
+</Course>
+<Course id="207002">
+<name>תכנון חברתי</name>
+</Course>
+<Course id="207005">
+<name>מבוא לתכנון ערים ואזורים</name>
+</Course>
+<Course id="207045">
+<name>הכנה לתהליך מחקר</name>
+</Course>
+<Course id="207050">
+<name>מימון נדל"ן</name>
+</Course>
+<Course id="207406">
+<name>מדיניות קרקעית</name>
+</Course>
+<Course id="207407">
+<name>מדיניות סביבתית</name>
+</Course>
+<Course id="207462">
+<name>נושאים נבחרים באדריכלות נוף 1</name>
+</Course>
+<Course id="207465">
+<name>נושאים נבחרים באדריכלות נוף 4</name>
+</Course>
+<Course id="207469">
+<name>עיצוב אינטראקטיבי</name>
+</Course>
+<Course id="207601">
+<name>סמינר בתכנון התשתית העירונית</name>
+</Course>
+<Course id="207630">
+<name>כלכלה עירונית</name>
+</Course>
+<Course id="207800">
+<name>חשיבה כמותית וסטטיסטיקה בתכנון</name>
+</Course>
+<Course id="207804">
+<name>חשיבה כלכלית למתכננים</name>
+</Course>
+<Course id="207901">
+<name>נושאים מתקדמים בתכנון ערים 2</name>
+</Course>
+<Course id="207915">
+<name>נושאים בתכנון ערים ואזורים 3</name>
+</Course>
+<Course id="207945">
+<name>תכנון וקיימות</name>
+</Course>
+<Course id="208353">
+<name>פרוייקט גמר בעיצוב תעשייתי</name>
+</Course>
+<Course id="208720">
+<name>נושאים נבחרים בארכיטקטורה ובנוי</name>
+</Course>
+<Course id="208800">
+<name>סמינר בארכיטקטורה ובינוי ערים</name>
+</Course>
+<Course id="209050">
+<name>כלכלה עירונית</name>
+</Course>
+<Course id="209150">
+<name>דיני שלטון מקומי למתכננים</name>
+</Course>
+<Course id="209200">
+<name>היבטים פסיכולוגיים</name>
+</Course>
+<Course id="209300">
+<name>סמינר מתקדם בתכנון ערים ואזורים</name>
+</Course>
+<Course id="209450">
+<name>סמינר מתקדם בתכנון ערים 2</name>
+</Course>
+<Course id="209700">
+<name>אולפן 4</name>
+</Course>
+<Course id="209970">
+<name>סמינר מחקר אישי</name>
+</Course>
+<Course id="214095">
+<name>קליניקה חינוכית-מדעית 2</name>
+</Course>
+<Course id="214097">
+<name>מבוא לפסיכולוגיה חברתית</name>
+</Course>
+<Course id="214098">
+<name>מבוא לפסיכולוגיה קוגניטיבית</name>
+</Course>
+<Course id="214103">
+<name>מיומנויות ושיטות הוראה</name>
+</Course>
+<Course id="214114">
+<name>שלוב חינוך לערכים בהוראת המדעים</name>
+</Course>
+<Course id="214122">
+<name>סדנת רפלקציה על התנסות בהוראה</name>
+</Course>
+<Course id="214200">
+<name>בעיות נבחרות במתמטיקה א'</name>
+</Course>
+<Course id="214207">
+<name>הוראת הגיאומטריה בחטה"ב )ז-ט(</name>
+</Course>
+<Course id="214233">
+<name>התנסות בהוראת מתמטיקה בחט"ב ז-ט</name>
+</Course>
+<Course id="214301">
+<name>דרכי הוראת הפיזיקה 1</name>
+</Course>
+<Course id="214302">
+<name>דרכי הוראת הפיזיקה 2</name>
+</Course>
+<Course id="214400">
+<name>מבוא לחינוך סביבתי</name>
+</Course>
+<Course id="214401">
+<name>דרכי הוראת כימיה 1</name>
+</Course>
+<Course id="214502">
+<name>דרכי הוראת ביולוגיה 2</name>
+</Course>
+<Course id="214609">
+<name>הבטים טכנולוגיים בהוראת מו"ט</name>
+</Course>
+<Course id="214704">
+<name>בעיות נבחרות במכניקה הנדסית</name>
+</Course>
+<Course id="214706">
+<name>פרויקט אינדיבידואלי</name>
+</Course>
+<Course id="214708">
+<name>בעיות נבחרות בהנדסת חשמל</name>
+</Course>
+<Course id="216101">
+<name>הרשת כסביבה לימודית</name>
+</Course>
+<Course id="216128">
+<name>שיטות הערכה בהוראת המדע</name>
+</Course>
+<Course id="216143">
+<name>סוגיות באתנומתמטיקה</name>
+</Course>
+<Course id="216150">
+<name>פרויקט אישי במחקר חינוכי</name>
+</Course>
+<Course id="216320">
+<name>התפתחויות בהוראת הכימיה</name>
+</Course>
+<Course id="218003">
+<name>רגשות, זהות והוגנות בלמידה</name>
+</Course>
+<Course id="218101">
+<name>סמינר מחקר חינוך מדע 1</name>
+</Course>
+<Course id="218123">
+<name>סמינר במחקר חינוכי 2</name>
+</Course>
+<Course id="218124">
+<name>תורת המבחנים והמדידה בחינוך</name>
+</Course>
+<Course id="218131">
+<name>פרויקט פיתוח תו"ל במתמטיקה</name>
+</Course>
+<Course id="218132">
+<name>פרויקט פיתוח תו"ל בפיסיקה</name>
+</Course>
+<Course id="218143">
+<name>נושאים נבחרים בהערכת לומדים</name>
+</Course>
+<Course id="218145">
+<name>סמינר מתקדם בחינוך חוץ כיתתי 1</name>
+</Course>
+<Course id="218150">
+<name>שיטות מחקר כמותיות בחינוך</name>
+</Course>
+<Course id="218151">
+<name>פרוייקט פיתוח ת"ל בטכנולוגיה</name>
+</Course>
+<Course id="218326">
+<name>מהות המדע בבית הספר העל יסודי</name>
+</Course>
+<Course id="234107">
+<name>אנליזה נומרית 1</name>
+</Course>
+<Course id="234111">
+<name>מבוא למדעי המחשב</name>
+</Course>
+<Course id="234112">
+<name>מבוא למחשב - שפת סי</name>
+</Course>
+<Course id="234114">
+<name>מבוא למדעי המחשב מ'</name>
+</Course>
+<Course id="234117">
+<name>מבוא למדעי המחשב ח'</name>
+</Course>
+<Course id="234118">
+<name>ארגון ותכנות המחשב</name>
+</Course>
+<Course id="234122">
+<name>מבוא לתכנות מערכות</name>
+</Course>
+<Course id="234123">
+<name>מערכות הפעלה</name>
+</Course>
+<Course id="234141">
+<name>קומבינטוריקה למדעי המחשב</name>
+</Course>
+<Course id="234218">
+<name>מבני נתונים 1</name>
+</Course>
+<Course id="234230">
+<name>השתלמות עצמית 1</name>
+</Course>
+<Course id="234247">
+<name>אלגוריתמים 1</name>
+</Course>
+<Course id="234262">
+<name>תכן לוגי</name>
+</Course>
+<Course id="234267">
+<name>מבנה מחשבים ספרתיים</name>
+</Course>
+<Course id="234291">
+<name>פרויקט 2 במדעי המחשב</name>
+</Course>
+<Course id="234312">
+<name>פרויקט שנתי בהנדסת תוכנה-שלב ב'</name>
+</Course>
+<Course id="234313">
+<name>פרויקט תעשייתי</name>
+</Course>
+<Course id="234319">
+<name>שפות תכנות</name>
+</Course>
+<Course id="234322">
+<name>מערכות אחסון מידע</name>
+</Course>
+<Course id="234325">
+<name>גרפיקה ממוחשבת 1</name>
+</Course>
+<Course id="234326">
+<name>פרויקט בגרפיקה ממוחשבת ה'</name>
+</Course>
+<Course id="234329">
+<name>פרויקט בעיבוד וניתוח תמונות</name>
+</Course>
+<Course id="234900">
+<name>סדנה בתכנות תחרותי</name>
+</Course>
+<Course id="236303">
+<name>פרויקט בעיבוד שפות טבעיות</name>
+</Course>
+<Course id="236304">
+<name>לוגיקה למדעי המחשב 2</name>
+</Course>
+<Course id="236313">
+<name>תורת הסיבוכיות</name>
+</Course>
+<Course id="236323">
+<name>פרויקט בעיבוד נתונים מ'</name>
+</Course>
+<Course id="236327">
+<name>עיבוד תמונות ואותות במחשב</name>
+</Course>
+<Course id="236330">
+<name>מבוא לאופטימיזציה</name>
+</Course>
+<Course id="236334">
+<name>מבוא לרשתות מחשבים</name>
+</Course>
+<Course id="236340">
+<name>פרויקט בתקשורת מחשבים</name>
+</Course>
+<Course id="236343">
+<name>תורת החישוביות</name>
+</Course>
+<Course id="236348">
+<name>מבוא לממשקי אדם-מחשב</name>
+</Course>
+<Course id="236349">
+<name>פרויקט באבטחת מידע</name>
+</Course>
+<Course id="236350">
+<name>הגנה במערכות מתוכנתות</name>
+</Course>
+<Course id="236353">
+<name>אוטומטים ושפות פורמליות</name>
+</Course>
+<Course id="236359">
+<name>אלגוריתמים 2</name>
+</Course>
+<Course id="236360">
+<name>תורת הקומפילציה</name>
+</Course>
+<Course id="236363">
+<name>מערכות מסד נתונים</name>
+</Course>
+<Course id="236366">
+<name>פרויקט במערכות הפעלה מ'</name>
+</Course>
+<Course id="236368">
+<name>מפרטים פורמליים למערכות מורכבות</name>
+</Course>
+<Course id="236371">
+<name>פרויקט בתכנות מקבילי ומבוזר</name>
+</Course>
+<Course id="236376">
+<name>הנדסת מערכות הפעלה</name>
+</Course>
+<Course id="236381">
+<name>פרויקט ב- וי.אל.אס.אי. ב'</name>
+</Course>
+<Course id="236500">
+<name>קריפטאנליזה</name>
+</Course>
+<Course id="236502">
+<name>פרויקט בבינה מלאכותית</name>
+</Course>
+<Course id="236504">
+<name>פרויקט בתוכנה</name>
+</Course>
+<Course id="236510">
+<name>ממוש מערכות מסדי נתונים</name>
+</Course>
+<Course id="236520">
+<name>קידוד במערכות אחסון-מידע</name>
+</Course>
+<Course id="236522">
+<name>אלגוריתמים בביולוגיה חישובית</name>
+</Course>
+<Course id="236524">
+<name>פרוייקט בביואינפורמטיקה</name>
+</Course>
+<Course id="236601">
+<name>נושאים מתקדמים במדעי המחשב 1</name>
+</Course>
+<Course id="236602">
+<name>נושאים מתקדמים במדעי המחשב 2</name>
+</Course>
+<Course id="236603">
+<name>נושאים מתקדמים במדעי המחשב 3</name>
+</Course>
+<Course id="236604">
+<name>נושאים מתקדמים במדעי המחשב 4</name>
+</Course>
+<Course id="236605">
+<name>נושאים מתקדמים במדעי המחשב 5</name>
+</Course>
+<Course id="236610">
+<name>נושאים מתקדמים במדעי המחשב 10</name>
+</Course>
+<Course id="236611">
+<name>נושאים מתקדמים במדעי המחשב 11</name>
+</Course>
+<Course id="236613">
+<name>נושאים מתקדמים בקריפטולוגיה ה'</name>
+</Course>
+<Course id="236620">
+<name>נושאים מתקדמים באלגוריתמים ה'</name>
+</Course>
+<Course id="236628">
+<name>נושאים מתקדמים בגרפיקה ממוחשבת</name>
+</Course>
+<Course id="236650">
+<name>נושאים מתקדמים בהנדסת תוכנה ה'</name>
+</Course>
+<Course id="236698">
+<name>הבטחת איכות תוכנה</name>
+</Course>
+<Course id="236700">
+<name>תיכון תוכנה</name>
+</Course>
+<Course id="236703">
+<name>תכנות מונחה עצמים</name>
+</Course>
+<Course id="236716">
+<name>מודלים גאומטריים במערכות תיב"מ</name>
+</Course>
+<Course id="236754">
+<name>פרויקט במערכות נבונות</name>
+</Course>
+<Course id="236756">
+<name>מבוא למערכות לומדות</name>
+</Course>
+<Course id="236757">
+<name>פרויקט במערכות לומדות</name>
+</Course>
+<Course id="236780">
+<name>אלגוריתמים לניהול זיכרון דינמי</name>
+</Course>
+<Course id="236801">
+<name>סמינר במדעי המחשב 1</name>
+</Course>
+<Course id="236802">
+<name>סמינר במדעי המחשב 2</name>
+</Course>
+<Course id="236803">
+<name>סמינר במדעי המחשב 3</name>
+</Course>
+<Course id="236804">
+<name>סמינר במדעי המחשב 4</name>
+</Course>
+<Course id="236813">
+<name>סמינר באלגוריתמים</name>
+</Course>
+<Course id="236815">
+<name>סמינר בראיה ממוחשבת</name>
+</Course>
+<Course id="236816">
+<name>סמינר בגרפיקה ממוחשבת</name>
+</Course>
+<Course id="236828">
+<name>פרויקט במערכות מחשבים</name>
+</Course>
+<Course id="238739">
+<name>גאומטריה אלגוריתמית דיסקרטית</name>
+</Course>
+<Course id="274010">
+<name>מבוא לגנטיקה לרפ"ע</name>
+</Course>
+<Course id="274024">
+<name>נוירולוגיה ונוירופתולוגיה לרפ"ע</name>
+</Course>
+<Course id="274071">
+<name>היסטולוגיה )רפואה מעבדתית(</name>
+</Course>
+<Course id="274072">
+<name>רפואה מעבדתית</name>
+</Course>
+<Course id="274119">
+<name>החייאה בסיסית ת"א</name>
+</Course>
+<Course id="274135">
+<name>אנטומיה ואמבריולוגיה ת"א</name>
+</Course>
+<Course id="274165">
+<name>גנטיקה כללית לרפואנים</name>
+</Course>
+<Course id="274170">
+<name>אנטומיה ואמבריולוגיה</name>
+</Course>
+<Course id="274172">
+<name>אנטומיה ואמבריולוגיה 2 ת"א</name>
+</Course>
+<Course id="274177">
+<name>מבוא לקליניקה ת"א</name>
+</Course>
+<Course id="274219">
+<name>ביוסטטיסטיקה</name>
+</Course>
+<Course id="274229">
+<name>אנדוקרינולוגיה ת"א</name>
+</Course>
+<Course id="274245">
+<name>בקטריולוגיה כללית</name>
+</Course>
+<Course id="274246">
+<name>הבסיס המולקולרי של מחלת הסרטן</name>
+</Course>
+<Course id="274247">
+<name>וירולוגיה</name>
+</Course>
+<Course id="274248">
+<name>פיזיולוגיה תאית</name>
+</Course>
+<Course id="274249">
+<name>אימונולוגיה בסיסית</name>
+</Course>
+<Course id="274250">
+<name>ביולוגיה התפתחותית</name>
+</Course>
+<Course id="274251">
+<name>אבולוציה</name>
+</Course>
+<Course id="274252">
+<name>פתוגנים אאוקריוטים</name>
+</Course>
+<Course id="274300">
+<name>תורשת האדם ת"א</name>
+</Course>
+<Course id="274303">
+<name>ביוכימיה כללית וקלינית 2 ת"א</name>
+</Course>
+<Course id="274314">
+<name>פרזיטולוגיה ת"א</name>
+</Course>
+<Course id="274332">
+<name>וירולוגיה לרפואנים</name>
+</Course>
+<Course id="274349">
+<name>פתולוגיה כללית</name>
+</Course>
+<Course id="274350">
+<name>מיקולוגיה</name>
+</Course>
+<Course id="274351">
+<name>פרמקולוגיה בסיסית</name>
+</Course>
+<Course id="274352">
+<name>מבוא לתזונה קלינית</name>
+</Course>
+<Course id="274503">
+<name>רפואה פנימית 1ת</name>
+</Course>
+<Course id="274514">
+<name>קרדיולוגיה קלינית</name>
+</Course>
+<Course id="274526">
+<name>כירורגיה 1ח'</name>
+</Course>
+<Course id="274530">
+<name>נוירולוגיה</name>
+</Course>
+<Course id="274531">
+<name>פסיכיאטריה</name>
+</Course>
+<Course id="274532">
+<name>רפואת נשים ומילדות</name>
+</Course>
+<Course id="274533">
+<name>רפואת ילדים 1ח'</name>
+</Course>
+<Course id="274536">
+<name>רפואת ילדים ת"א</name>
+</Course>
+<Course id="274602">
+<name>פסיכיאטריה ת"א</name>
+</Course>
+<Course id="274604">
+<name>רפואת המשפחה והקהילה</name>
+</Course>
+<Course id="274606">
+<name>החייאה מתקדמת בילדים</name>
+</Course>
+<Course id="274617">
+<name>טראומה</name>
+</Course>
+<Course id="274621">
+<name>רפואת פנימית 2 ת"א</name>
+</Course>
+<Course id="274622">
+<name>רפואת ילדים 2 )ת"א(</name>
+</Course>
+<Course id="274623">
+<name>כירורגיה 2 )ת"א(</name>
+</Course>
+<Course id="274631">
+<name>יסודות במינהל רפואי</name>
+</Course>
+<Course id="274634">
+<name>גריאטריה</name>
+</Course>
+<Course id="274636">
+<name>רפואה פנימית 2 ת"א</name>
+</Course>
+<Course id="274637">
+<name>רפואת ילדים 2 ת"א</name>
+</Course>
+<Course id="274638">
+<name>רפואת כירורגיה 2 ת"א</name>
+</Course>
+<Course id="274640">
+<name>קורס מיני-סטאז'נשים 2 ת"א</name>
+</Course>
+<Course id="274641">
+<name>קורס מיני-סטאז'נשים 1 ת"א</name>
+</Course>
+<Course id="274644">
+<name>על כירורגיה בחירה 1 ת"א</name>
+</Course>
+<Course id="274645">
+<name>על כירורגיה 2 ת"א</name>
+</Course>
+<Course id="274646">
+<name>על פנימית בחירה 1 ת"א</name>
+</Course>
+<Course id="274647">
+<name>על פנימית בחירה 2 ת"א</name>
+</Course>
+<Course id="274704">
+<name>בחינת גמר ברפואה פנימית-בעל פה</name>
+</Course>
+<Course id="274725">
+<name>פסיכיאטריה-מבחן גמר</name>
+</Course>
+<Course id="274726">
+<name>בחינת גמר בכירוגיה-בכתב</name>
+</Course>
+<Course id="274727">
+<name>בחינת גמר בעל-פה בכירורגיה</name>
+</Course>
+<Course id="274728">
+<name>רפואת נשים ומילדות-מבחן גמר</name>
+</Course>
+<Course id="274729">
+<name>בחינת גמר ברפואת ילדים-בכתב</name>
+</Course>
+<Course id="274730">
+<name>בחינת גמר בעל-פה ברפואת ילדים</name>
+</Course>
+<Course id="274731">
+<name>בחינת גמר ברפואה פנימית-בכתב</name>
+</Course>
+<Course id="275310">
+<name>אודיולוגיה 1</name>
+</Course>
+<Course id="275316">
+<name>שואה ורפואה-לימוד השואה ולקחיה</name>
+</Course>
+<Course id="275500">
+<name>הדמיה רפואית</name>
+</Course>
+<Course id="275501">
+<name>אונקולוגיה</name>
+</Course>
+<Course id="275502">
+<name>אימונולוגיה קלינית ואלרגיה</name>
+</Course>
+<Course id="275503">
+<name>ראומטולוגיה</name>
+</Course>
+<Course id="275504">
+<name>מחלות זיהומיות</name>
+</Course>
+<Course id="275505">
+<name>מחלות ריאה</name>
+</Course>
+<Course id="275506">
+<name>גסטרואנטרולוגיה</name>
+</Course>
+<Course id="275507">
+<name>המטולוגיה קלינית</name>
+</Course>
+<Course id="275508">
+<name>נפרולוגיה</name>
+</Course>
+<Course id="275509">
+<name>אנדוקרינולוגיה</name>
+</Course>
+<Course id="275510">
+<name>מחלות עור ומין</name>
+</Course>
+<Course id="275522">
+<name>ניהול הטיפול בכאב כרוני</name>
+</Course>
+<Course id="275523">
+<name>רפואה דחופה</name>
+</Course>
+<Course id="275524">
+<name>בחירה חופשית קלינית 1</name>
+</Course>
+<Course id="275525">
+<name>בחירה חופשית קלינית 2</name>
+</Course>
+<Course id="275526">
+<name>בחירה חופשית קלינית 3</name>
+</Course>
+<Course id="275527">
+<name>פתולוגיה כירורגית</name>
+</Course>
+<Course id="275528">
+<name>בחירה חופשית קלינית 4</name>
+</Course>
+<Course id="275529">
+<name>רפואה תומכת ופליאטיבית</name>
+</Course>
+<Course id="275603">
+<name>רפואת עיניים</name>
+</Course>
+<Course id="275604">
+<name>אורטופדיה וטראומטולוגיה</name>
+</Course>
+<Course id="275605">
+<name>כירורגית חזה ולב</name>
+</Course>
+<Course id="275606">
+<name>אורולוגיה</name>
+</Course>
+<Course id="275607">
+<name>כירורגיה פלסטית</name>
+</Course>
+<Course id="275609">
+<name>כירורגית ילדים</name>
+</Course>
+<Course id="275611">
+<name>כירורגית כלי דם</name>
+</Course>
+<Course id="275620">
+<name>נוירוכירורגיה</name>
+</Course>
+<Course id="275621">
+<name>מחלות א.א.ג, צואר, פה ולסתות</name>
+</Course>
+<Course id="275622">
+<name>הרדמה, כאב וטפול נמרץ</name>
+</Course>
+<Course id="276004">
+<name>יזמות ופיתוח טכנולוגיות רפואיות</name>
+</Course>
+<Course id="276310">
+<name>ביוכימיה קלינית</name>
+</Course>
+<Course id="277301">
+<name>מנגנוני עיבד כאב כמודל למחקר</name>
+</Course>
+<Course id="278300">
+<name>עבודה סמינריונית בביופיסיקה</name>
+</Course>
+<Course id="278301">
+<name>עבודה סמינריונית בפיסיולוגיה</name>
+</Course>
+<Course id="278490">
+<name>עקרונות באבולוציית המוח</name>
+</Course>
+<Course id="314011">
+<name>מבנה ותכונות של חומרים הנדסיים</name>
+</Course>
+<Course id="314200">
+<name>מבוא להנ.חומרים לתעופה וחלל</name>
+</Course>
+<Course id="314311">
+<name>חומרים קרמיים ורפרקטורים</name>
+</Course>
+<Course id="314312">
+<name>מבוא לחומרים פולימריים</name>
+</Course>
+<Course id="314533">
+<name>מבוא להנדסת חומרים מ'1</name>
+</Course>
+<Course id="314535">
+<name>מבוא להנדסת חומרים</name>
+</Course>
+<Course id="315002">
+<name>מעבדת חומרים מתקדמת 2ח'</name>
+</Course>
+<Course id="315003">
+<name>תרמודינמיקה של חומרים</name>
+</Course>
+<Course id="315008">
+<name>התנהגות מכנית של חומרים</name>
+</Course>
+<Course id="315014">
+<name>פרויקט מתקדם בחומרים</name>
+</Course>
+<Course id="315017">
+<name>תהליכי גימור וציפויים</name>
+</Course>
+<Course id="315018">
+<name>חומרים בהנדסה ביורפואית</name>
+</Course>
+<Course id="315025">
+<name>פרויקט מתקדם בחומרים 2</name>
+</Course>
+<Course id="315027">
+<name>אמינות התקני מיקרואלקטרוניקה</name>
+</Course>
+<Course id="315030">
+<name>תכונות חומרים אלקטרונים</name>
+</Course>
+<Course id="315031">
+<name>חומרים אלקטרוניים קרמיים</name>
+</Course>
+<Course id="315035">
+<name>פרויקט בחירה בהנדסת חומרים</name>
+</Course>
+<Course id="315051">
+<name>דיפוזיה במוצקים</name>
+</Course>
+<Course id="315052">
+<name>קינטיקת טרנספורמציות בחומרים</name>
+</Course>
+<Course id="315053">
+<name>הנדסה של פולימרים ביו-רפואיים</name>
+</Course>
+<Course id="315056">
+<name>גידול גבישים</name>
+</Course>
+<Course id="315057">
+<name>מבוא למדע חישובי של חומרים</name>
+</Course>
+<Course id="315242">
+<name>הנדסת חומרים מרוכבים</name>
+</Course>
+<Course id="318124">
+<name>נושאים מתקדמים בהנדסת חומרים</name>
+</Course>
+<Course id="318221">
+<name>מבנה והרכב פני שטח מוצקים</name>
+</Course>
+<Course id="318235">
+<name>תורת דפורמציה פלסטית</name>
+</Course>
+<Course id="318337">
+<name>דיפוזיה ומעבר מסה במוצקים</name>
+</Course>
+<Course id="318525">
+<name>מיקרוסקופית אלקטרונים חודרת</name>
+</Course>
+<Course id="320000">
+<name>חופשת לימודים</name>
+</Course>
+<Course id="320003">
+<name>חנוך גופני 1</name>
+</Course>
+<Course id="320006">
+<name>בחירה חופשית-משוחררי חשמל</name>
+</Course>
+<Course id="320033">
+<name>נקודות בחירה פקולטית</name>
+</Course>
+<Course id="320034">
+<name>בחירה פקולטית</name>
+</Course>
+<Course id="320043">
+<name>בחירה פקולטית</name>
+</Course>
+<Course id="320060">
+<name>סיווג ארכיטקטורה</name>
+</Course>
+<Course id="320096">
+<name>חוק ומידול פיסיקלי 2</name>
+</Course>
+<Course id="320099">
+<name>חילופי סטודנטים</name>
+</Course>
+<Course id="320101">
+<name>פעילות חברתית 1</name>
+</Course>
+<Course id="320200">
+<name>מעבדת מחקר כללית</name>
+</Course>
+<Course id="324031">
+<name>אנגלית בסיסית</name>
+</Course>
+<Course id="324032">
+<name>אנגלית למתקדמים א'</name>
+</Course>
+<Course id="324033">
+<name>אנגלית טכנית-מתקדמים ב'</name>
+</Course>
+<Course id="324052">
+<name>עברית 2</name>
+</Course>
+<Course id="324053">
+<name>עברית 3</name>
+</Course>
+<Course id="324055">
+<name>פרקים נבחרים בתולדות ישראל</name>
+</Course>
+<Course id="324063">
+<name>עברית לרפואה - רמה בינונית 3</name>
+</Course>
+<Course id="324064">
+<name>עברית לרפואה מתקדמים 4</name>
+</Course>
+<Course id="324070">
+<name>עברית לביה"ס הבינלאומי 44</name>
+</Course>
+<Course id="324290">
+<name>היסטוריה של רפואה וחומרי מרפא</name>
+</Course>
+<Course id="324292">
+<name>משפט, שוויון וצדק חברתי</name>
+</Course>
+<Course id="324295">
+<name>הגות יהודית בימי הביניים</name>
+</Course>
+<Course id="324296">
+<name>יסודות באמנות ותרבות סין</name>
+</Course>
+<Course id="324297">
+<name>אישים בתנ"ך לאור זמננו</name>
+</Course>
+<Course id="324385">
+<name>תקשורת בעל-פה ובכתב באנגלית</name>
+</Course>
+<Course id="324390">
+<name>נגינה בהרכב קאמרי</name>
+</Course>
+<Course id="324424">
+<name>הספרות היהודית בשלהי העת העתיקה</name>
+</Course>
+<Course id="324428">
+<name>מנהיגות יהודית וזהות</name>
+</Course>
+<Course id="324433">
+<name>השואה בראי הקולנוע</name>
+</Course>
+<Course id="324435">
+<name>מבוא לפילוסופיה הסינית</name>
+</Course>
+<Course id="324437">
+<name>מבוא היסטורי למוסיקה 2</name>
+</Course>
+<Course id="324438">
+<name>היסטוריה ותרבות סין</name>
+</Course>
+<Course id="324440">
+<name>יסודות המוסיקה</name>
+</Course>
+<Course id="324442">
+<name>משפט העבודה בישראל</name>
+</Course>
+<Course id="324445">
+<name>הסתגלות למצבי לחץ</name>
+</Course>
+<Course id="324446">
+<name>מבוא להיסטוריה של מוזיקת הג'ז</name>
+</Course>
+<Course id="324448">
+<name>סמלים ורעיונות באמנות היהודית</name>
+</Course>
+<Course id="324450">
+<name>סוגיות יסוד בספרות חז"ל</name>
+</Course>
+<Course id="324452">
+<name>מעקב#טכנולוגיה, תיאוריה ואתיקה</name>
+</Course>
+<Course id="324454">
+<name>מבוא לפילוסופיה של המדע</name>
+</Course>
+<Course id="324481">
+<name>רישום למתחילים</name>
+</Course>
+<Course id="324483">
+<name>ציור למתחילים</name>
+</Course>
+<Course id="324497">
+<name>אנסמבל ווקלי קאמרי 1</name>
+</Course>
+<Course id="324567">
+<name>סדנת צילום# שפה וכלים</name>
+</Course>
+<Course id="324600">
+<name>גרמנית 1</name>
+</Course>
+<Course id="324602">
+<name>יפנית למתחילים</name>
+</Course>
+<Course id="324603">
+<name>גרמנית 2</name>
+</Course>
+<Course id="324605">
+<name>גרמנית 4</name>
+</Course>
+<Course id="324609">
+<name>צרפתית 11</name>
+</Course>
+<Course id="324621">
+<name>רוסית למתחילים 1</name>
+</Course>
+<Course id="324626">
+<name>ערבית )כשפה זרה( 1</name>
+</Course>
+<Course id="324630">
+<name>איטלקית למתחילים 1</name>
+</Course>
+<Course id="324675">
+<name>ספרדית למתחילים</name>
+</Course>
+<Course id="324679">
+<name>ספרדית ברמה בינונית</name>
+</Course>
+<Course id="324692">
+<name>סינית למתחילים</name>
+</Course>
+<Course id="324694">
+<name>סינית למתקדמים</name>
+</Course>
+<Course id="324879">
+<name>סוגיות נבחרות בחברה הישראלית</name>
+</Course>
+<Course id="324880">
+<name>ארץ ישראל בראי הארכיאולוגיה</name>
+</Course>
+<Course id="324881">
+<name>פרקים נבחרים בתולדות ישראל</name>
+</Course>
+<Course id="324917">
+<name>ארץ הקודש בראי האמנות</name>
+</Course>
+<Course id="324936">
+<name>לשונות המזרח התיכון</name>
+</Course>
+<Course id="324943">
+<name>מרחב, גבולות וקדושה בארץ ישראל</name>
+</Course>
+<Course id="324944">
+<name>התקשורת בעידן המידע</name>
+</Course>
+<Course id="324945">
+<name>הסכסוך הסוני - שיעי באסלאם</name>
+</Course>
+<Course id="324953">
+<name>יהדות ופמיניזם-הילכו שניהם יחד</name>
+</Course>
+<Course id="324957">
+<name>מערכת פוליטית ישראלית</name>
+</Course>
+<Course id="324959">
+<name>פרט ומשפחה בראי חברתי</name>
+</Course>
+<Course id="324961">
+<name>מדע ונצרות# קונפליקט או דו-קיום</name>
+</Course>
+<Course id="324966">
+<name>התבוננות בחוויה המוסיקלית</name>
+</Course>
+<Course id="324967">
+<name>התחייה האסלאמית</name>
+</Course>
+<Course id="324968">
+<name>השם הפרטי# מפגש לשון, פרט וחברה</name>
+</Course>
+<Course id="324969">
+<name>נשים במזה"ת#תהליכי שינוי</name>
+</Course>
+<Course id="324970">
+<name>סוגיות יסוד בחברה הישראלית</name>
+</Course>
+<Course id="328004">
+<name>עברית למתחילים</name>
+</Course>
+<Course id="328011">
+<name>אנגלית מורחבת</name>
+</Course>
+<Course id="394580">
+<name>פיתוח קול</name>
+</Course>
+<Course id="394582">
+<name>תזמורת</name>
+</Course>
+<Course id="394587">
+<name>מקהלה 3</name>
+</Course>
+<Course id="334020">
+<name>מעבדה מתקדמת בהנ. ביורפואית 2</name>
+</Course>
+<Course id="334221">
+<name>יסודות של חומרים רפואיים</name>
+</Course>
+<Course id="334222">
+<name>יסודות הביומכניקה</name>
+</Course>
+<Course id="334331">
+<name>מפגשים עם התעשיה הביורפואית</name>
+</Course>
+<Course id="335001">
+<name>מעבדה בהנדסה ביורפואית 1</name>
+</Course>
+<Course id="335002">
+<name>מעבדה בהנדסה ביורפואית 2</name>
+</Course>
+<Course id="335003">
+<name>מעבדה בהנדסה ביורפואית 3</name>
+</Course>
+<Course id="335009">
+<name>מכניקת זורמים ביולוגיים</name>
+</Course>
+<Course id="335010">
+<name>תכן ביומכני בסיסי</name>
+</Course>
+<Course id="335015">
+<name>פרויקט בהנדסה ביורפואית 2</name>
+</Course>
+<Course id="335016">
+<name>פרויקט קליני-הנדסי</name>
+</Course>
+<Course id="336020">
+<name>תופעות ביו-חשמליות</name>
+</Course>
+<Course id="336022">
+<name>מתא לרקמה</name>
+</Course>
+<Course id="336023">
+<name>יישומי אופטיקה בביורפואה</name>
+</Course>
+<Course id="336403">
+<name>תופעות מעבר במערכות פיסיולוגיות</name>
+</Course>
+<Course id="336517">
+<name>ביו הנדסה של התא</name>
+</Course>
+<Course id="336520">
+<name>שתלים אורתופדיים ותחליפי רקמה</name>
+</Course>
+<Course id="336521">
+<name>עקרונות הנדסיים של המערכת</name>
+</Course>
+<Course id="336529">
+<name>הנדסת רקמות ותחליפים ביולוגיים</name>
+</Course>
+<Course id="336535">
+<name>אולטראסאונד טיפולי</name>
+</Course>
+<Course id="336537">
+<name>ביופיסיקה ונוירופיסיולוגיה</name>
+</Course>
+<Course id="336539">
+<name>זרימה במערכת הנשימה ומתן תרופות</name>
+</Course>
+<Course id="336541">
+<name>זרימה במערכת הקרדיווסקולרית</name>
+</Course>
+<Course id="336543">
+<name>יזמות בהנדסה ביורפואית</name>
+</Course>
+<Course id="338319">
+<name>פרוייקט מתקדם בהנדסה רפואית</name>
+</Course>
+<Course id="338328">
+<name>שיטות מתקדמות של אולטראסאונד</name>
+</Course>
+<Course id="648006">
+<name>מעבדה בננומדעים וננוטכנולוגיה</name>
+</Course>
+<Course id="648012">
+<name>תרמודינמיקה סטטיסטית לננומדעים</name>
+</Course>
+<Course id="648013">
+<name>תופעות מעבר ננו מטריות</name>
+</Course>
+<Course id="394800">
+<name>חינוך גופני-כושר בנים</name>
+</Course>
+<Course id="394801">
+<name>חינוך גופני - התעמלות כללית בנות</name>
+</Course>
+<Course id="394802">
+<name>חינוך גופני - שחיה</name>
+</Course>
+<Course id="394803">
+<name>חינוך גופני - משחקי כדור</name>
+</Course>
+<Course id="394804">
+<name>חינוך גופני - משחקי מחבט</name>
+</Course>
+<Course id="394805">
+<name>חינוך גופני - אתלטיקה קלה</name>
+</Course>
+<Course id="394806">
+<name>חינוך גופני - הגנה עצמית</name>
+</Course>
+<Course id="394808">
+<name>חינוך גופני-מיועד לסטודנטים חדשים</name>
+</Course>
+<Course id="394820">
+<name>חינוך גופני - תנועה ומחול</name>
+</Course>
+<Course id="394902">
+<name>נבחרות ספורט</name>
+</Course>
+</Courses>
