@@ -1,99 +1,69 @@
-package model.loader;
+package model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import java.time.LocalDateTime;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import org.xml.sax.SAXException;
+import java.util.Optional;
 
 import model.course.Course;
-import model.course.StuffMember;
-import parse.RepFile;
+import model.loader.CourseLoader;
 
 /**
- * Abstract class for loading courses data from outside.
- * It can be implemented as e.g.: XmlCourseLoader, UrlCourseLoader, JsonLoader etc...
+ * Interface for storing data inside the program.
+ * The data typically should come from loader.
  * */
-public abstract class CourseLoader {
-	//TODO: I'm not sure, whether it should be a List or HashMap
-	// apparently it's a hashMap with mapping (courseName -> course)
-	protected final Course.CourseBuilder cb;
-	protected final String path;
+public abstract class Model {
+	// TODO: implement
+	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
+	// smth like:
+	// addObservers(), notifyObservers()
 	
-	public CourseLoader(String path) {
-		this.cb = Course.giveCourseBuilderTo(this);
-		this.path = path;
+	protected List<Course> courseList;
+	protected List<ActionListener> listenersList;
+	protected CourseLoader loader;
+	
+	public Model(CourseLoader loader){
+		this.courseList = new ArrayList<>();
+		this.listenersList = new ArrayList<>();
+		this.loader = loader;
 	}
 	
-	public abstract HashMap<String, Course> loadCourses(List<String> names);
+	public void addListener(ActionListener ¢) {
+		if (¢ == null)
+			throw new NullPointerException();
+		this.listenersList.add(¢);
+	}
 	
-	public abstract void updateCourse(Course c);
-	
-	/*the function gets course name and converting the course from the db to java
-	 * return null if the course doesn't exists
-	 */
-	@SuppressWarnings({ "resource", "null" })
-	public static Course loadCourse(String name) {
+	public void pickCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		File f = new File("REPFILE/REP.XML");
-		//check if rep.xml already exists
-		if ((!f.exists()) || (f.isDirectory()))
-			RepFile.getCoursesFromRepFile();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		try {
-		    builder = factory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-		    e.printStackTrace();  
-		}
-		org.w3c.dom.Document document = null;
-		try {
-		document = builder.parse(new FileInputStream("REPFILE/REP.XML"));
-		} catch (SAXException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		XPath xPath =  XPathFactory.newInstance().newXPath();
-		
-		String exp1 = "//Course[name =\""+ name +"\"]/name";
-		String exp2 = "//Course[name =\""+ name +"\"]/@id";
-				
-		String courseName = null;
-		int courseNum = 0;
-		try {
-			courseName = xPath.compile(exp1).evaluate(document);
-			if (courseName.isEmpty())
-				return null;
-			courseNum = Integer.parseInt(xPath.compile(exp2).evaluate(document));
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(exp1);
-		
-		/*fictional!!! only for the prototype - remove after rep file contains more details*/
-		List<StuffMember> st = new ArrayList<>();
-		List<LocalDateTime> ot = new ArrayList<>();
-		LocalDateTime temp = LocalDateTime.now();
-		st.add(new StuffMember("aviv", "tsensor", "prof", "fake@fake", "taub 201",
-				ot));
-		return new Course(courseName, courseNum, "cs", st , 4, temp, temp);
+		this.courseList.add(loader.loadCourse(name));
 	}
 	
-	public abstract HashMap<String, Course> loadAllCourses();
+	public List<String> getCoursesNames() {
+		List<String> $ = new ArrayList<>();
+		for(Course it:courseList)
+			$.add(it.getName());
+		return $;
+	}
 	
-	public abstract List<String> loadAllCourseNames();
+	public void dropCourse(String name) {
+		if (name == null)
+			throw new NullPointerException();
+		for(Course it:courseList)
+			if (it.getName().equals(name)) {
+				this.courseList.remove(it);
+				return;
+			}
+		return;
+	}
+	
+	public Course getCourseByName(String name) {
+		if (name == null)
+			throw new NullPointerException();
+		for(Course $:courseList)
+			if ($.getName().equals(name))
+				return $;
+		return null;
+	}
 }
