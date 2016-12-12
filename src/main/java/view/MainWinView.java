@@ -27,6 +27,7 @@ import model.Model;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class MainWinView extends JFrame {
@@ -52,33 +53,29 @@ public class MainWinView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWinView(@SuppressWarnings("unused") Model __ ) {
+	public MainWinView(Model m ) {
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		initComponents();
-		createEvents();
+		initComponents(m.getCoursesNames());
+		createEvents(m);
 
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components
 	///////////////////////////////////////////////////////////////////////////
-	private void initComponents() {
+	private void initComponents(List<String> courseNames) {
 		setWindowPreferences();
 
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
-		String[] data = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-
-		// String[] data = { "a", "b" };
-
 		courseModel = new DefaultListModel<>();
-		for (String val : data)
+		for (String val : courseNames)
 			courseModel.addElement(val);
 		lstCourseList = new JList<>(courseModel);
 
@@ -134,6 +131,10 @@ public class MainWinView extends JFrame {
 
 	private static void setCourseDescriptionArea(JScrollPane scpCourseDescription) {
 		txtCourseDescription = new JTextArea();
+		txtCourseDescription.setDisabledTextColor(Color.GRAY);
+		txtCourseDescription.setSelectedTextColor(Color.BLUE);
+		txtCourseDescription.setSelectionColor(Color.LIGHT_GRAY);
+		txtCourseDescription.setForeground(Color.BLACK);
 		txtCourseDescription.setWrapStyleWord(true);
 		txtCourseDescription.setLineWrap(true);
 		scpCourseDescription.setForeground(Color.BLACK);
@@ -156,10 +157,9 @@ public class MainWinView extends JFrame {
 		lstChosenCourses = new JList<>(ChosenCourseModel);
 		scpChosenCourses.setPreferredSize(new Dimension(70, 22));
 		scpChosenCourses.setMinimumSize(new Dimension(70, 22));
-		scpChosenCourses.setBorder(null);
+		scpChosenCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		scpChosenCourses.setViewportBorder(null);
-		lstChosenCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
-				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(51, 153, 51)));
+		lstChosenCourses.setBorder(null);
 		lstChosenCourses.setBackground(UIManager.getColor("inactiveCaption"));
 		scpChosenCourses.setViewportView(lstChosenCourses);
 		lstChosenCourses.setVisible(false);
@@ -182,51 +182,49 @@ public class MainWinView extends JFrame {
 			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(158)
-										.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addGap(106))
-								.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE)
-												.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE)
-												.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 164,
-														Short.MAX_VALUE)
-												.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 164,
-														Short.MAX_VALUE))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
-						.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap()
-				.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(158)
+							.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(106))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+								.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+								.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
-								.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(scpChosenCourses, GroupLayout.PREFERRED_SIZE, 157,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-										.addComponent(btnRemoveCourse)))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnSaveChoice))))
-				.addContainerGap()));
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnRemoveCourse)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSaveChoice))))
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 		return;
 	}
@@ -234,14 +232,15 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
 	///////////////////////////////////////////////////////////////////////////
-	private static void createEvents() {
+	private static void createEvents(Model m) {
 
 		lstCourseList.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
 				txtCourseDescription.setText(lstCourseList.getSelectedIndex() == -1 ? " Choose course to add "
-						: "Course " + lstCourseList.getSelectedValue() + " Description Here ...");
+						: "Course " + lstCourseList.getSelectedValue()+"\n" + m.getCourseByName(lstCourseList.getSelectedValue()).getName());
+				txtCourseDescription.setDisabledTextColor(Color.BLUE);
 				txtCourseDescription.setVisible(true);
 				btnAddCourse.setVisible(true);
 				btnAddCourse.setEnabled(true);
@@ -282,6 +281,19 @@ public class MainWinView extends JFrame {
 
 				if (ChosenCourseModel.isEmpty())
 					btnRemoveCourse.setEnabled(false);
+			}
+		});
+		lstChosenCourses.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
+				txtCourseDescription.setText(lstChosenCourses.getSelectedIndex() == -1 ? " Choose course to add "
+						: "Course " + lstChosenCourses.getSelectedValue()+"\n" + m.getCourseByName(lstChosenCourses.getSelectedValue()).getName());
+				txtCourseDescription.setDisabledTextColor(new Color(0,204,51));
+				txtCourseDescription.setVisible(true);
+				btnAddCourse.setVisible(true);
+				btnAddCourse.setEnabled(true);
+
 			}
 		});
 	}
