@@ -15,9 +15,9 @@ public abstract class View extends Observable implements Observer {
 	public abstract void update(Observable obj, Object arg);
 	
 	@Override
-	public synchronized void addObserver(Observer ¢) {
-		if (¢ == null)
+	public synchronized void addObserver(Observer o) {
+		if (o == null)
 			throw new NullPointerException();
-		this.listenersList.add(¢);
+		this.listenersList.add(o);
 	}
 }
