@@ -46,4 +46,31 @@ class xmlParser {
 		}
 		return $;
 	}
+	
+	public static List<String> getChosenCourseNames(String filepath) {
+		List<String> $ = new LinkedList<>();
+		// resList.add
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(filepath);
+			NodeList chosenList = doc.getElementsByTagName("Chosen");
+			for (int i = 0; i < chosenList.getLength(); ++i) {
+				Node p = chosenList.item(i);
+				if (p.getNodeType() == Node.ELEMENT_NODE)
+					$.add(((Element) p).getNodeValue());
+			}
+
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return $;
+	}
 }

@@ -89,6 +89,11 @@ public class XmlCourseLoader extends CourseLoader {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public List<String> loadChosenCourseNames(String filepath) {
+		return xmlParser.getChosenCourseNames(filepath);		
+	}
 	
 
 }

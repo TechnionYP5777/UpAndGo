@@ -31,4 +31,6 @@ public abstract class CourseLoader {
 	public abstract List<String> loadAllCourseNames();
 	
 	public abstract void saveChosenCourseNames(List<String> names);
+	
+	public abstract List<String> loadChosenCourseNames(String filepath);
 }
