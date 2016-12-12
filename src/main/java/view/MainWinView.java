@@ -157,10 +157,9 @@ public class MainWinView extends JFrame {
 		lstChosenCourses = new JList<>(ChosenCourseModel);
 		scpChosenCourses.setPreferredSize(new Dimension(70, 22));
 		scpChosenCourses.setMinimumSize(new Dimension(70, 22));
-		scpChosenCourses.setBorder(null);
+		scpChosenCourses.setBorder(new TitledBorder(null, "Chosen Courses", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		scpChosenCourses.setViewportBorder(null);
-		lstChosenCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
-				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(51, 153, 51)));
+		lstChosenCourses.setBorder(null);
 		lstChosenCourses.setBackground(UIManager.getColor("inactiveCaption"));
 		scpChosenCourses.setViewportView(lstChosenCourses);
 		lstChosenCourses.setVisible(false);
@@ -183,51 +182,49 @@ public class MainWinView extends JFrame {
 			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(158)
-										.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addGap(106))
-								.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE)
-												.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE)
-												.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 132,
-														Short.MAX_VALUE))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 164,
-														Short.MAX_VALUE)
-												.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 164,
-														Short.MAX_VALUE))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)))
-						.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap()
-				.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(158)
+							.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(106))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+								.addComponent(btnSaveChoice, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+								.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
-								.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(scpChosenCourses, GroupLayout.PREFERRED_SIZE, 157,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-										.addComponent(btnRemoveCourse)))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnSaveChoice))))
-				.addContainerGap()));
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnRemoveCourse)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSaveChoice))))
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 		return;
 	}
