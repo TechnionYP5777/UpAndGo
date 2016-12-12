@@ -14,6 +14,7 @@ public class CourseSelectionController extends Controller {
 
 	@Override
 	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
+		// TODO
 		// enforce logic of model
 		// e.g.:
 //		if(view.wasPicked())
