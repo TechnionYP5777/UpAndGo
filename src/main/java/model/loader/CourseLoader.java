@@ -1,69 +1,32 @@
-package model;
+package model.loader;
 
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import model.course.Course;
-import model.loader.CourseLoader;
 
 /**
- * Interface for storing data inside the program.
- * The data typically should come from loader.
+ * Abstract class for loading courses data from outside.
+ * It can be implemented as e.g.: XmlCourseLoader, UrlCourseLoader, JsonLoader etc...
  * */
-public abstract class Model {
-	// TODO: implement
-	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
-	// smth like:
-	// addObservers(), notifyObservers()
+public abstract class CourseLoader {
+	//TODO: I'm not sure, whether it should be a List or HashMap
+	// apparently it's a hashMap with mapping (courseName -> course)
+	protected final Course.CourseBuilder cb;
+	protected final String path;
 	
-	protected List<Course> courseList;
-	protected List<ActionListener> listenersList;
-	protected CourseLoader loader;
-	
-	public Model(CourseLoader loader){
-		this.courseList = new ArrayList<>();
-		this.listenersList = new ArrayList<>();
-		this.loader = loader;
+	public CourseLoader(String path) {
+		this.cb = Course.giveCourseBuilderTo(this);
+		this.path = path;
 	}
 	
-	public void addListener(ActionListener ¢) {
-		if (¢ == null)
-			throw new NullPointerException();
-		this.listenersList.add(¢);
-	}
+	public abstract HashMap<String, Course> loadCourses(List<String> names);
 	
-	public void pickCourse(String name) {
-		if (name == null)
-			throw new NullPointerException();
-		this.courseList.add(loader.loadCourse(name));
-	}
+	public abstract void updateCourse(Course c);
 	
-	public List<String> getCoursesNames() {
-		List<String> $ = new ArrayList<>();
-		for(Course it:courseList)
-			$.add(it.getName());
-		return $;
-	}
+	public abstract Course loadCourse(String name);
 	
-	public void dropCourse(String name) {
-		if (name == null)
-			throw new NullPointerException();
-		for(Course it:courseList)
-			if (it.getName().equals(name)) {
-				this.courseList.remove(it);
-				return;
-			}
-		return;
-	}
+	public abstract HashMap<String, Course> loadAllCourses();
 	
-	public Course getCourseByName(String name) {
-		if (name == null)
-			throw new NullPointerException();
-		for(Course $:courseList)
-			if ($.getName().equals(name))
-				return $;
-		return null;
-	}
+	public abstract List<String> loadAllCourseNames();
 }
