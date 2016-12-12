@@ -123,26 +123,26 @@ public class Course {
 		return this.laboratoryHours+this.lectureHours+this.projectHours+this.tutorialHours;
 	}
 	
-	protected void addHours(@SuppressWarnings("unused") Lesson ¢) {
+	protected void addHours(@SuppressWarnings("unused") Lesson Â¢) {
 		//TODO: add number of hours in course with respect to the lesson type
 	}
 	
-	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
+	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader Â¢) {
 		return new CourseBuilder();
 	}
 	
-	public void addListener(CourseListener ¢) {
-		this.listeners.add(¢);
+	public void addListener(CourseListener Â¢) {
+		this.listeners.add(Â¢);
 	}
 	
-	public void removeListener(CourseListener ¢) {
-		this.listeners.remove(¢);
+	public void removeListener(CourseListener Â¢) {
+		this.listeners.remove(Â¢);
 	}
 	
 	// TODO: how someone can change Course without braking incapsulation?
 	public void updateListeners() {
-		for(CourseListener ¢: this.listeners)
-			¢.getUpdate(this);
+		for(CourseListener Â¢: this.listeners)
+			Â¢.getUpdate(this);
 	}
 	
 	public static class CourseBuilder {
@@ -157,52 +157,52 @@ public class Course {
 		protected final List<StuffMember> stuff = new ArrayList<>();
 		protected final List<Lesson> lessons = new ArrayList<>();
 
-		public CourseBuilder setName(String ¢) {
-			this.name = ¢;
+		public CourseBuilder setName(String Â¢) {
+			this.name = Â¢;
 			return this;
 		}
 		
-		public CourseBuilder setId(int ¢) {
-			this.id =¢;
+		public CourseBuilder setId(int Â¢) {
+			this.id =Â¢;
 			return this;
 		}
 		
-		public CourseBuilder setFaculty(String ¢) {
-			this.faculty =¢;
+		public CourseBuilder setFaculty(String Â¢) {
+			this.faculty =Â¢;
 			return this;
 		}
 		
-		public CourseBuilder setPoints(int ¢) {
-			this.points = ¢;
+		public CourseBuilder setPoints(int Â¢) {
+			this.points = Â¢;
 			return this;
 		}
 		
-		public CourseBuilder setATerm(LocalDateTime ¢) {
-			this.aTerm = ¢;
+		public CourseBuilder setATerm(LocalDateTime Â¢) {
+			this.aTerm = Â¢;
 			return this;
 		}
 		
-		public CourseBuilder setBTerm(LocalDateTime ¢) {
-			this.bTerm = ¢;
+		public CourseBuilder setBTerm(LocalDateTime Â¢) {
+			this.bTerm = Â¢;
 			return this;
 		}
 		
-		public CourseBuilder addStuffMember(StuffMember ¢) {
-			if(!this.stuff.contains(¢))
-				this.stuff.add(¢);
+		public CourseBuilder addStuffMember(StuffMember Â¢) {
+			if(!this.stuff.contains(Â¢))
+				this.stuff.add(Â¢);
 			return this;
 		}
-		public CourseBuilder addLesson(Lesson ¢) {
-			this.lessons.add(¢);
-			if(!this.stuff.contains(¢.representer))
-				this.stuff.add(¢.representer);
+		public CourseBuilder addLesson(Lesson Â¢) {
+			this.lessons.add(Â¢);
+			if(!this.stuff.contains(Â¢.representer))
+				this.stuff.add(Â¢.representer);
 			return this;
 		}
 		
 		public Course build() {
 			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm);
-			for(Lesson ¢: this.lessons)
-				$.addLesson(¢);
+			for(Lesson Â¢: this.lessons)
+				$.addLesson(Â¢);
 			return $;
 		}
 	}
