@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,16 +19,16 @@ public abstract class Model extends Observable {
 	// smth like:
 	// addObservers(), notifyObservers()
 	
-	protected List<Course> courseList;
+	protected HashMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
 	protected List<Observer> listenersList;
 	protected CourseLoader loader;
 	
 	public Model(CourseLoader loader){
-		this.courseList = new ArrayList<>();
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersList = new ArrayList<>();
 		this.loader = loader;
+		this.courseList = loader.loadAllCourses();
 	}
 	
 	@Override
@@ -52,17 +53,13 @@ public abstract class Model extends Observable {
 		if (name == null)
 			throw new NullPointerException();
 		Course newCourse = loader.loadCourse(name);
-		if (!this.courseList.contains(newCourse))
-			this.courseList.add(newCourse);
+		this.courseList.put(name, newCourse);
 		setChanged();
 		notifyObservers();
 	}
 	
 	public List<String> getCoursesNames() {
-		List<String> $ = new ArrayList<>();
-		for(Course it:courseList)
-			$.add(it.getName());
-		return $;
+		return new ArrayList<>(this.courseList.keySet());
 	}
 	
 	// not sure what is more efficient- loading course from loadCourse and then use remove
@@ -70,22 +67,16 @@ public abstract class Model extends Observable {
 	public void dropCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Course it:courseList)			
-			if (it.getName().equals(name)) {
-				this.courseList.remove(it);
-				setChanged();
-				notifyObservers();
-				return;
-			}
+		if(this.courseList.remove(name) != null) {
+			setChanged();
+			notifyObservers();
+		}
 		return;
 	}
 	
 	public Course getCourseByName(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Course $:courseList)
-			if ($.getName().equals(name))
-				return $;
-		return null;
+		return this.courseList.get(name);
 	}
 }
