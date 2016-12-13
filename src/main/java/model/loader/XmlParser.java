@@ -63,7 +63,7 @@ class xmlParser {
 			doc.appendChild(rootElement);
 			
 			names.forEach(name->{
-				Element course = doc.createElement("ChosenCourse");
+				Element course = doc.createElement("Course");
 				course.appendChild(doc.createTextNode(name));
 				rootElement.appendChild(course);
 			});
