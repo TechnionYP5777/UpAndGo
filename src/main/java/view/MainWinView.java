@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -35,7 +36,7 @@ import java.awt.event.ActionEvent;
 
 public class MainWinView extends JFrame {
 
-	private static final String FINISH_MSG = "     Your choise has been saved!\n          Up&Go will close now!";
+	private static final String FINISH_MSG = "Your choise has been saved!\n   Up&Go will close now!";
 	/**
 	 * 
 	 */
@@ -316,7 +317,9 @@ public class MainWinView extends JFrame {
 				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
 				m.choseCourses(names);
-				Message.infoBox(FINISH_MSG, "Finish");
+				ImageIcon im= new ImageIcon("data/cat-laptop-icon.png");
+				
+				Message.infoBox(FINISH_MSG, "Finish",im);
 				close();
 
 			}
@@ -338,9 +341,9 @@ public class MainWinView extends JFrame {
 
 	public static class Message {
 
-		public static void infoBox(String infoMessage, String titleBar) {
+		public static void infoBox(String infoMessage, String titleBar , ImageIcon i ) {
 
-			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
 			
 		}
 	}
