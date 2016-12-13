@@ -152,7 +152,7 @@ public class Course {
 		protected String name = "";
 		protected String id = "";
 		protected String faculty = "";
-		protected int points = 0;
+		protected int points;
 		protected LocalDateTime aTerm;
 		protected LocalDateTime bTerm;
 		
