@@ -62,32 +62,8 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	@Override
 	public void saveChosenCourseNames(List<String> names){
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.newDocument();
-			Element rootElement = doc.createElement("ChosenCourses");
-			doc.appendChild(rootElement);
-			
-			names.forEach(name->{
-				Element course = doc.createElement("Course");
-				Element courseName = doc.createElement("name");
-				courseName.appendChild(doc.createTextNode(name));
-				course.appendChild(courseName);
-				rootElement.appendChild(course);
-			});
-			
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			File dataDir = new File("data");
-			if (!dataDir.exists() || !dataDir.isDirectory())
-				dataDir.mkdir();
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("data/ChosenCourses.xml"))));
+		xmlParser.setChosenCouseNames(names, "data/ChosenCourses.xml");
 
-		} catch (ParserConfigurationException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
