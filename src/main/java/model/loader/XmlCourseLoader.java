@@ -2,6 +2,8 @@ package model.loader;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import model.course.Course;
 
@@ -38,11 +40,11 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public HashMap<String, Course> loadAllCourses() {
-		HashMap<String, Course> $ = new HashMap<>();
+	public TreeMap<String, Course> loadAllCourses() {
+		TreeMap<String, Course> $ = new TreeMap<>();
 		for(Course ¢ : coursesList)
 			$.put(¢.getId(), ¢);
-
+		
 		return $;
 	}
 	
