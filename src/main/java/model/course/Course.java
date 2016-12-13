@@ -35,7 +35,7 @@ public class Course {
 		
 		if((name1==null) || (faculty1==null))
 			throw new NullPointerException();
-		if(name1.isEmpty() || faculty1.isEmpty())
+		if(name1.isEmpty())
 			throw new RuntimeException("The empty field was found!\n"); //$NON-NLS-1$
 		
 		this.name = name1;
