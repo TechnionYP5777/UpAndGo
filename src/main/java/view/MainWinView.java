@@ -335,7 +335,7 @@ public class MainWinView extends JFrame {
 				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
 				m.choseCourses(names);
-				ImageIcon im= new ImageIcon("data/cat-laptop-icon.png");
+				ImageIcon im= new ImageIcon("../resources/cat-laptop-icon.png");
 				
 				Message.infoBox(FINISH_MSG, "Finish",im);
 				close();
