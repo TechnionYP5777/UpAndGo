@@ -88,11 +88,11 @@ class xmlParser {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(filepath);
-			NodeList chosenList = doc.getElementsByTagName("Chosen");
+			NodeList chosenList = doc.getElementsByTagName("Course");
 			for (int i = 0; i < chosenList.getLength(); ++i) {
 				Node p = chosenList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					$.add(((Element) p).getNodeValue());
+					$.add(((Element) p).getTextContent());
 			}
 
 		} catch (ParserConfigurationException e) {

@@ -38,5 +38,19 @@ public class XmlCourseLoaderTest {
 		cr.saveChosenCourseNames(names);
 		assertTrue((new File("data/ChosenCourses.xml")).exists());
 	}
+	
+	@Test
+	public void testLoadChosenCourseNames() {
+		List<String> names = new LinkedList<>();
+		names.add("מבוא לחתולים ביוטיוב");
+		names.add("תכנות אנכי ומרוכז");
+		names.add("תורת התורתיות");
+		cr.saveChosenCourseNames(names);
+		assertTrue((new File("data/ChosenCourses.xml")).exists());
+		cr.loadChosenCourseNames("data/ChosenCourses.xml").forEach(name -> {
+			System.out.println(name);
+		});
+		assertTrue(cr.loadChosenCourseNames("data/ChosenCourses.xml").size() == 3);
+	}
 
 }
