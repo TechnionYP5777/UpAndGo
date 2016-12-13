@@ -3,7 +3,6 @@ package model.loader;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 import model.course.Course;

@@ -1,7 +1,8 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -84,7 +85,8 @@ public abstract class Model extends Observable {
 	}
 	
 	public List<String> getChosenCourseNames() {
-		return this.loader.loadChosenCourseNames(chosenCoursesPath);
+		return !new File(chosenCoursesPath).exists() ? Collections.emptyList()
+				: this.loader.loadChosenCourseNames(chosenCoursesPath);
 	}
 	
 	public void choseCourses(List<String> names) {

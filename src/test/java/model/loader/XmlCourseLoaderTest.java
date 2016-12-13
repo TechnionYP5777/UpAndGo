@@ -3,7 +3,6 @@ package model.loader;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
@@ -20,7 +19,7 @@ public class XmlCourseLoaderTest {
 	
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("REPFILE\\REP.XML");
+		cr = new XmlCourseLoader("REPFILE/REP.XML");
 	}
 
 	@Test
@@ -55,6 +54,7 @@ public class XmlCourseLoaderTest {
 		assertTrue(cr.loadChosenCourseNames("data/ChosenCourses.xml").size() == 3);
 	}
 	
+	@SuppressWarnings("static-method")
 	@After
 	public void deleteXml() {
 		new File("data/ChosenCourses.xml").delete();
