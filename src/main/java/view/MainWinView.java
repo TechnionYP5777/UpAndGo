@@ -65,7 +65,7 @@ public class MainWinView extends JFrame {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		initComponents(m.getCoursesNames());
+		initComponents(m);
 		createEvents(m);
 
 	}
@@ -77,15 +77,21 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components
 	///////////////////////////////////////////////////////////////////////////
-	private void initComponents(List<String> courseNames) {
+	private void initComponents(Model m) {
 		setWindowPreferences();
 
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
 		courseModel = new DefaultListModel<>();
-		for (String val : courseNames)
+		ChosenCourseModel = new DefaultListModel<>();
+
+		for (String val : m.getCoursesNames())
 			courseModel.addElement(val);
+		for (String val : m.getChosenCourseNames()){
+			courseModel.removeElement(val);
+			ChosenCourseModel.addElement(val);
+		}
 		lstCourseList = new JList<>(courseModel);
 
 		scpCourseList = new JScrollPane();
@@ -94,7 +100,6 @@ public class MainWinView extends JFrame {
 		scpCourseDescription = new JScrollPane();
 		scpCourseDescription.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		setCourseDescriptionArea(scpCourseDescription);
-		ChosenCourseModel = new DefaultListModel<>();
 		scpChosenCourses = new JScrollPane();
 		setChosenCoursesArea(scpChosenCourses);
 
@@ -121,9 +126,15 @@ public class MainWinView extends JFrame {
 		btnAddCourse.setMinimumSize(new Dimension(130, 25));
 		btnAddCourse.setVisible(false);
 		btnFinish.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnFinish.setVisible(false);
 		btnRemoveCourse.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnRemoveCourse.setVisible(false);
+		if (!ChosenCourseModel.isEmpty()) {
+			btnRemoveCourse.setVisible(true);
+			btnFinish.setVisible(true);
+		} else {
+			btnRemoveCourse.setVisible(false);
+			btnFinish.setVisible(false);
+		}
+
 	}
 
 	private static void setCourseListArea(JScrollPane scpCourseList) {
@@ -172,6 +183,7 @@ public class MainWinView extends JFrame {
 		lstChosenCourses.setBorder(null);
 		lstChosenCourses.setBackground(UIManager.getColor("inactiveCaption"));
 		scpChosenCourses.setViewportView(lstChosenCourses);
+		if (ChosenCourseModel.isEmpty())
 		lstChosenCourses.setVisible(false);
 		return;
 	}
