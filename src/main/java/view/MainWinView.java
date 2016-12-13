@@ -41,6 +41,7 @@ public class MainWinView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	Model m;
 	private JPanel contentPane;
 	static JList<String> lstCourseList;
 	static JTextArea txtCourseDescription;
@@ -65,8 +66,9 @@ public class MainWinView extends JFrame {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		initComponents(m);
-		createEvents(m);
+		this.m= m;
+		initComponents();
+		createEvents();
 
 	}
 
@@ -77,21 +79,13 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating and initializing components
 	///////////////////////////////////////////////////////////////////////////
-	private void initComponents(Model m) {
+	private void initComponents() {
 		setWindowPreferences();
 
 		lblTitle = new JLabel("Choose Your Courses!!!");
 		setTitleLbl(lblTitle);
 
-		courseModel = new DefaultListModel<>();
-		ChosenCourseModel = new DefaultListModel<>();
-
-		for (String val : m.getCoursesNames())
-			courseModel.addElement(val);
-		for (String val : m.getChosenCourseNames()){
-			courseModel.removeElement(val);
-			ChosenCourseModel.addElement(val);
-		}
+		setCoursesListsModels();
 		lstCourseList = new JList<>(courseModel);
 
 		scpCourseList = new JScrollPane();
@@ -109,6 +103,18 @@ public class MainWinView extends JFrame {
 		setButtonsPreferences();
 
 		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnFinish);
+	}
+
+	private void setCoursesListsModels() {
+		courseModel = new DefaultListModel<>();
+		ChosenCourseModel = new DefaultListModel<>();
+
+		for (String val : m.getCoursesNames())
+			courseModel.addElement(val);
+		for (String val : m.getChosenCourseNames()){
+			courseModel.removeElement(val);
+			ChosenCourseModel.addElement(val);
+		}
 	}
 
 	private static void setTitleLbl(JLabel lblTitle) {
@@ -255,7 +261,7 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
 	///////////////////////////////////////////////////////////////////////////
-	private void createEvents(Model m) {
+	private void createEvents() {
 
 		lstCourseList.addListSelectionListener(new ListSelectionListener() {
 
