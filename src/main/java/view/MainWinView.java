@@ -30,12 +30,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class MainWinView extends JFrame {
 
+	private static final String FINISH_MSG = "     Your choise has been saved!\n          Up&Go will close now!";
 	/**
 	 * 
 	 */
@@ -67,6 +67,10 @@ public class MainWinView extends JFrame {
 		initComponents(m.getCoursesNames());
 		createEvents(m);
 
+	}
+
+	void close() {
+		this.dispose();
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -238,7 +242,7 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
 	///////////////////////////////////////////////////////////////////////////
-	private static void createEvents(Model m) {
+	private void createEvents(Model m) {
 
 		lstCourseList.addListSelectionListener(new ListSelectionListener() {
 
@@ -306,17 +310,21 @@ public class MainWinView extends JFrame {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				List<String> names = new ArrayList<String>() {
-					private static final long serialVersionUID = 1L;};
-				for(int ¢=0; ¢< lstChosenCourses.getModel().getSize(); ++¢)
+					@SuppressWarnings("hiding")
+					static final long serialVersionUID = 1L;
+				};
+				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
 				m.choseCourses(names);
-				Message.infoBox("Your choise has been saved!", "Finish");
+				Message.infoBox(FINISH_MSG, "Finish");
+				close();
+
 			}
 		});
 
 	}
 
-	 static void setListColor(JList<String> lst, Model m) {
+	static void setListColor(JList<String> lst, Model m) {
 
 		if (lst.getSelectedIndex() != -1)
 			txtCourseDescription.setText(
@@ -327,12 +335,13 @@ public class MainWinView extends JFrame {
 		}
 
 	}
-	 public static class Message
-	 {
 
-	     public static void infoBox(String infoMessage, String titleBar)
-	     {
-	         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
-	     }
-	 }
+	public static class Message {
+
+		public static void infoBox(String infoMessage, String titleBar) {
+
+			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE);
+			
+		}
+	}
 }
