@@ -24,6 +24,8 @@ public abstract class Model extends Observable {
 	protected List<Observer> listenersList;
 	protected CourseLoader loader;
 	
+	protected String chosenCoursesPath = "data/ChosenCourses.xml";
+	
 	public Model(CourseLoader loader){
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersList = new ArrayList<>();
@@ -78,5 +80,13 @@ public abstract class Model extends Observable {
 		if (name == null)
 			throw new NullPointerException();
 		return this.courseList.get(name);
+	}
+	
+	public List<String> getChosenCourseNames() {
+		return this.loader.loadChosenCourseNames(chosenCoursesPath);
+	}
+	
+	public void choseCourses(List<String> names) {
+		this.loader.saveChosenCourseNames(names);
 	}
 }
