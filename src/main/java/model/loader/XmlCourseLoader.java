@@ -1,18 +1,25 @@
 package model.loader;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import model.course.Course;
+import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
 	List<Course> coursesList;
 	
 	public XmlCourseLoader(String path) {
 		super(path);
-		coursesList = xmlParser.getCourses();
+		File xmlPath = new File(path);
+		if (!xmlPath.exists()){
+			RepFile.initialize();
+			RepFile.getCoursesFromRepFile();
+		}
+		coursesList = xmlParser.getCourses(path);
 	}
 
 	@Override

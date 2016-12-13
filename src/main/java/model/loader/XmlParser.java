@@ -24,14 +24,14 @@ import org.xml.sax.SAXException;
 import model.course.Course;
 
 class xmlParser {
-	public static List<Course> getCourses() {
+	public static List<Course> getCourses(String filepath) {
 		Course.CourseBuilder cb = new Course.CourseBuilder();
 		List<Course> $ = new LinkedList<>();
 		// resList.add
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse("REPFILE/REP.XML");
+			Document doc = builder.parse(filepath);
 			NodeList coursesList = doc.getElementsByTagName("Course");
 			
 			for (int i = 0; i < coursesList.getLength(); ++i) {

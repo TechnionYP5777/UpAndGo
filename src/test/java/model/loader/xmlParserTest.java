@@ -10,7 +10,7 @@ public class xmlParserTest {
 
 	@Test
 	public void test() {
-		for (Course ¢ : xmlParser.getCourses())
+		for (Course ¢ : xmlParser.getCourses("REPFILE/REP.XML"))
 			System.out.println(¢.getName() + " " + ¢.getId());
 	}
 
