@@ -2,6 +2,7 @@ package model.loader;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import model.course.Course;
 
@@ -26,7 +27,7 @@ public abstract class CourseLoader {
 	
 	public abstract Course loadCourse(String name);
 	
-	public abstract HashMap<String, Course> loadAllCourses();
+	public abstract TreeMap<String, Course> loadAllCourses();
 	
 	public abstract List<String> loadAllCourseNames();
 	

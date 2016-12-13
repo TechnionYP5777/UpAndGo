@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.TreeMap;
 
 import model.course.Course;
 import model.loader.CourseLoader;
@@ -19,7 +20,7 @@ public abstract class Model extends Observable {
 	// smth like:
 	// addObservers(), notifyObservers()
 	
-	protected HashMap<String, Course> courseList;
+	protected TreeMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
 	protected List<Observer> listenersList;
 	protected CourseLoader loader;
