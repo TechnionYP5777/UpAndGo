@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
@@ -27,6 +29,8 @@ import model.Model;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -40,7 +44,7 @@ public class MainWinView extends JFrame {
 	static JList<String> lstCourseList;
 	static JTextArea txtCourseDescription;
 	static JButton btnAddCourse;
-	static JButton btnSaveChoice;
+	static JButton btnFinish;
 	static JList<String> lstChosenCourses;
 	static DefaultListModel<String> courseModel;
 	static DefaultListModel<String> ChosenCourseModel;
@@ -91,10 +95,10 @@ public class MainWinView extends JFrame {
 
 		btnAddCourse = new JButton("Add Course");
 		btnRemoveCourse = new JButton("Remove Course");
-		btnSaveChoice = new JButton("Save");
+		btnFinish = new JButton("Finish");
 		setButtonsPreferences();
 
-		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnSaveChoice);
+		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnFinish);
 	}
 
 	private static void setTitleLbl(JLabel lblTitle) {
@@ -111,8 +115,8 @@ public class MainWinView extends JFrame {
 		btnAddCourse.setPreferredSize(new Dimension(130, 25));
 		btnAddCourse.setMinimumSize(new Dimension(130, 25));
 		btnAddCourse.setVisible(false);
-		btnSaveChoice.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnSaveChoice.setVisible(false);
+		btnFinish.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnFinish.setVisible(false);
 		btnRemoveCourse.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnRemoveCourse.setVisible(false);
 	}
@@ -173,6 +177,7 @@ public class MainWinView extends JFrame {
 		setTitle("Schedual Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setMinimumSize(new Dimension(450, 300));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -270,7 +275,7 @@ public class MainWinView extends JFrame {
 				ChosenCourseModel.addElement(lstCourseList.getSelectedValue());
 				courseModel.remove(lstCourseList.getSelectedIndex());
 				lstChosenCourses.setVisible(true);
-				btnSaveChoice.setVisible(true);
+				btnFinish.setVisible(true);
 				btnRemoveCourse.setVisible(true);
 				btnRemoveCourse.setEnabled(true);
 				if (!courseModel.isEmpty())
@@ -296,18 +301,38 @@ public class MainWinView extends JFrame {
 					btnRemoveCourse.setEnabled(false);
 			}
 		});
+		btnFinish.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				List<String> names = new ArrayList<String>() {
+					private static final long serialVersionUID = 1L;};
+				for(int ¢=0; ¢< lstChosenCourses.getModel().getSize(); ++¢)
+					names.add(lstChosenCourses.getModel().getElementAt(¢));
+				m.choseCourses(names);
+				Message.infoBox("Your choise has been saved!", "Finish");
+			}
+		});
 
 	}
 
-	static void setListColor(JList<String> lst, Model m) {
+	 static void setListColor(JList<String> lst, Model m) {
 
-		if (lst.getSelectedIndex() == -1) {
+		if (lst.getSelectedIndex() != -1)
+			txtCourseDescription.setText(
+					"Course " + lst.getSelectedValue() + "\n" + m.getCourseByName(lst.getSelectedValue()).getName());
+		else {
 			txtCourseDescription.setText(" Choose course to add ");
 			txtCourseDescription.setDisabledTextColor(Color.GRAY);
-			return;
 		}
-		txtCourseDescription.setText(
-				"Course " + lst.getSelectedValue() + "\n" + m.getCourseByName(lst.getSelectedValue()).getName());
 
 	}
+	 public static class Message
+	 {
+
+	     public static void infoBox(String infoMessage, String titleBar)
+	     {
+	         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	     }
+	 }
 }
