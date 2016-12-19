@@ -1,8 +1,6 @@
 package model;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,9 +23,7 @@ public abstract class Model extends Observable {
 	protected List<Course> pickedCourseList;
 	protected List<Observer> listenersList;
 	protected CourseLoader loader;
-	
-	protected String chosenCoursesPath = "data/ChosenCourses.xml";
-	
+		
 	public Model(CourseLoader loader){
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersList = new ArrayList<>();
@@ -85,8 +81,7 @@ public abstract class Model extends Observable {
 	}
 	
 	public List<String> getChosenCourseNames() {
-		return !new File(chosenCoursesPath).exists() ? Collections.emptyList()
-				: this.loader.loadChosenCourseNames(chosenCoursesPath);
+		return this.loader.loadChosenCourseNames();
 	}
 	
 	public void choseCourses(List<String> names) {

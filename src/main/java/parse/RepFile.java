@@ -31,49 +31,36 @@ import org.w3c.dom.Element;
 
 public class RepFile {
 	
-	private static URL repFileUrl;
-	private static File repFileLocal;
-	
-	public static void initialize(){
+	private static final String REP_FILE_URL = "http://ug3.technion.ac.il/rep/REPFILE.zip";
+	private static final String REP_FILE_ZIP = "REPFILE.zip";
+	private static final String REP_FILE_DIR = "REPFILE";
+	private static final String REP_FILE_DOS = "REPFILE/REPY";
+	private static final String REP_FILE_HEBREW = "REPFILE/REPHEB";
+	private static final String REP_FILE_XML = "REPFILE/REP.XML";
+
+
+	public static void downloadData(){
 		try {
-			repFileUrl = new URL("http://ug3.technion.ac.il/rep/REPFILE.zip");
+			URL repFileUrl = new URL(REP_FILE_URL);
+			File repFileLocal = new File(REP_FILE_ZIP);
+			FileUtils.copyURLToFile(repFileUrl, repFileLocal);
+			if(repFileLocal.exists() && !repFileLocal.isDirectory())
+				UnzipUtility.unzip((repFileLocal + ""), REP_FILE_DIR);
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		repFileLocal = new File("REPFILE.zip");
-	}
-	
-	public static void downloadData(){
-		downloadRepFile();
-		unZipRepFile();
-		//printRepFile();
-		processRepFile();
-	}
-	
-	public static void downloadRepFile(){
-		try {
-			FileUtils.copyURLToFile(repFileUrl, repFileLocal);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		processRepFile();
+	}
 
-	}
-	
-	public static void unZipRepFile(){
-		if(repFileLocal != null && repFileLocal.exists() && !repFileLocal.isDirectory())
-			try {
-				UnzipUtility.unzip((repFileLocal + ""), "REPFILE");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
 	
 	public static void printRepFile(){
 		Charset ibm862charset = Charset.forName("IBM862");
 
-		File repy = new File("REPFILE/REPY");
+		File repy = new File(REP_FILE_DOS);
 		if (repy.exists())
 			try(
 				FileInputStream fis = new FileInputStream(repy);
@@ -93,8 +80,8 @@ public class RepFile {
 	public static void processRepFile(){
 		Charset ibm862charset = Charset.forName("IBM862");
 
-		File repyIn = new File("REPFILE/REPY");
-		File repyOut = new File("REPFILE/REPHEB");
+		File repyIn = new File(REP_FILE_DOS);
+		File repyOut = new File(REP_FILE_HEBREW);
 		if (repyIn.exists())
 			try(
 				FileInputStream fis = new FileInputStream(repyIn);
@@ -139,7 +126,7 @@ public class RepFile {
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/REP.XML"))));
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File(REP_FILE_XML))));
 
 		} catch (ParserConfigurationException | TransformerException e) {
 			// TODO Auto-generated catch block
@@ -150,13 +137,13 @@ public class RepFile {
 	}
 	
 	private static String getRepFileAsString(){
-		File repFile = new File("REPFILE/REPHEB");
+		File repFile = new File(REP_FILE_HEBREW);
 		if(!repFile.exists())
 			downloadData(); 
 
 		String $ = null;
 		try (
-			BufferedReader repFileReader = new BufferedReader(new FileReader("REPFILE/REPHEB"));)
+			BufferedReader repFileReader = new BufferedReader(new FileReader(REP_FILE_HEBREW));)
 		{	
 			StringBuilder sb = new StringBuilder();
 			for (String line = repFileReader.readLine(); line != null; line = repFileReader.readLine())

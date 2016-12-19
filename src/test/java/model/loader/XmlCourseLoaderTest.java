@@ -19,7 +19,7 @@ public class XmlCourseLoaderTest {
 	
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("REPFILE/REP.XML");
+		cr = new XmlCourseLoader();
 	}
 
 	@Test
@@ -48,10 +48,10 @@ public class XmlCourseLoaderTest {
 		names.add("תורת התורתיות");
 		cr.saveChosenCourseNames(names);
 		assertTrue((new File("data/ChosenCourses.xml")).exists());
-		cr.loadChosenCourseNames("data/ChosenCourses.xml").forEach(name -> {
+		cr.loadChosenCourseNames().forEach(name -> {
 			System.out.println(name);
 		});
-		assertTrue(cr.loadChosenCourseNames("data/ChosenCourses.xml").size() == 3);
+		assertTrue(cr.loadChosenCourseNames().size() == 3);
 	}
 	
 	@SuppressWarnings("static-method")

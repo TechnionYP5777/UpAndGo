@@ -33,5 +33,5 @@ public abstract class CourseLoader {
 	
 	public abstract void saveChosenCourseNames(List<String> names);
 	
-	public abstract List<String> loadChosenCourseNames(String filepath);
+	public abstract List<String> loadChosenCourseNames();
 }
