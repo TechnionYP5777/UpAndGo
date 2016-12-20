@@ -29,11 +29,12 @@ public class Course {
 	protected final List<CourseListener> listeners;
 
 	protected final List<Course> prerequisites;
+	protected final List<Course> corequisites;
 
 	// TODO: create interface LessonGroup as mediator between Lessons and Course
 
 	public Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints, LocalDateTime aT,
-			LocalDateTime bT, List<Course> prerequisiteList) {
+			LocalDateTime bT, List<Course> prerequisitesList, List<Course> corequisitesList) {
 
 		if ((name1 == null) || (faculty1 == null))
 			throw new NullPointerException();
@@ -54,7 +55,9 @@ public class Course {
 
 		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
 
-		this.prerequisites = new ArrayList<>(prerequisiteList);
+		this.prerequisites = new ArrayList<>(prerequisitesList);
+		this.corequisites = new ArrayList<>(corequisitesList);
+
 	}
 
 	protected void addLesson(Lesson ¢) {
@@ -161,8 +164,9 @@ public class Course {
 
 		protected final List<StuffMember> stuff = new ArrayList<>();
 		protected final List<Lesson> lessons = new ArrayList<>();
-		
-		protected final List<Course> prerequisites  = new ArrayList<>();
+
+		protected final List<Course> prerequisites = new ArrayList<>();
+		protected final List<Course> corequisites = new ArrayList<>();
 
 		public CourseBuilder setName(String ¢) {
 			this.name = ¢;
@@ -206,9 +210,22 @@ public class Course {
 				this.stuff.add(¢.representer);
 			return this;
 		}
-
+		
+		public CourseBuilder addPrerequisitesCourse(Course ¢) {
+			if (!this.prerequisites.contains(¢))
+				this.prerequisites.add(¢);
+			return this;
+		}
+		
+		public CourseBuilder addCorequisitesCourse(Course ¢) {
+			if (!this.corequisites.contains(¢))
+				this.corequisites.add(¢);
+			return this;
+		}
+		
 		public Course build() {
-			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm, this.prerequisites);
+			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm,
+					this.prerequisites, this.corequisites);
 			for (Lesson ¢ : this.lessons)
 				$.addLesson(¢);
 			return $;
