@@ -20,4 +20,11 @@ public class RepFileTest {
 		assertTrue(true);
 	}
 	
+	@SuppressWarnings("static-method")
+	@Test
+	public void testGetCoursesSummeryFromRepFile() {
+		RepFile.getCoursesSummeryFromRepFile();
+		assertTrue(true);
+	}
+	
 }

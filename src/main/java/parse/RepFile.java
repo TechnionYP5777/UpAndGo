@@ -113,7 +113,7 @@ public class RepFile {
 			doc.appendChild(rootElement);
 			
 			for (Matcher regexMatcher = Pattern
-					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s{2}))", Pattern.MULTILINE)
+					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
 					.matcher(getRepFileAsString()); regexMatcher.find();){
 				//System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
 				Element course = doc.createElement("Course");
@@ -134,6 +134,13 @@ public class RepFile {
 		}
 
 
+	}
+	
+	public static void getCoursesSummeryFromRepFile(){
+		for (Matcher regexMatcher = Pattern
+				.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseSummery>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
+				.matcher(getRepFileAsString()); regexMatcher.find();)
+			System.out.println(regexMatcher.group("CourseSummery") + " " + regexMatcher.group("CourseName"));
 	}
 	
 	private static String getRepFileAsString(){
