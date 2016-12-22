@@ -38,6 +38,11 @@ public class RepFile {
 	private static final String REP_FILE_HEBREW = "REPFILE/REPHEB";
 	private static final String REP_FILE_XML = "REPFILE/REP.XML";
 
+	
+	private static final String SEPARATING_LINE = "^\\+\\-+\\+\\n";
+	private static final String COURSE_SUMMERY = "(?<CourseSummery>.+?\\n.+?\\n)";
+	private static final String COURSE_INFO = "(?<CourseInfo>(.+?\\n)+?(?="+SEPARATING_LINE+"))";
+
 
 	public static void downloadData(){
 		try {
@@ -136,11 +141,21 @@ public class RepFile {
 
 	}
 	
-	public static void getCoursesSummeryFromRepFile(){
-		for (Matcher regexMatcher = Pattern
-				.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseSummery>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
-				.matcher(getRepFileAsString()); regexMatcher.find();)
-			System.out.println(regexMatcher.group("CourseSummery") + " " + regexMatcher.group("CourseName"));
+	public static void getCoursesInfoFromRepFile(){
+		int count = 0;
+		for (Matcher courseMatcher = Pattern
+				.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO, Pattern.MULTILINE)
+				.matcher(getRepFileAsString()); courseMatcher.find();){
+			System.out.println(++count);
+			//System.out.println(courseMatcher.group("CourseSummery") + courseMatcher.group("CourseInfo"));
+			Matcher CourseSummeryMatcher = Pattern
+					.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
+					.matcher(courseMatcher.group("CourseSummery"));
+			if (CourseSummeryMatcher.find())
+				System.out.println(
+						CourseSummeryMatcher.group("CourseID") + " " + CourseSummeryMatcher.group("CourseName"));
+		}
+			
 	}
 	
 	private static String getRepFileAsString(){
