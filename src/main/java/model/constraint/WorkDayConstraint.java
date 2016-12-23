@@ -1,5 +1,7 @@
 package model.constraint;
 
+import java.util.List;
+
 /**
  * @author kobybs
  * @since 22-12-16
@@ -7,6 +9,7 @@ package model.constraint;
 
 import model.course.Course;
 import model.course.Lesson;
+import model.course.LessonGroup;
 
 public class WorkDayConstraint extends Constraint {
 	private int workDay;
@@ -21,5 +24,12 @@ public class WorkDayConstraint extends Constraint {
 				return false;
 		return true;
 	}
+	@Override
+	public List<LessonGroup> groupsMeetsConstraint(Course __) {
+		// TODO Cannot be done until someone will finish the lessonGroup job
+		return null;
+	}
+	
+	
 
 }
