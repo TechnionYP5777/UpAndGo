@@ -2,6 +2,7 @@ package model.schedule;
 
 import java.util.List;
 
+import model.constraint.Constraint;
 import model.course.Course;
 
 

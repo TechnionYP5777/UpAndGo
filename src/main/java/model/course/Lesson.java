@@ -14,6 +14,7 @@ public class Lesson implements Event {
 	protected final String place;
 	protected final Type type;
 	protected final int group;
+	protected int day;	
 	protected final Course course;
 	
 	public Lesson(StuffMember repr, LocalDateTime theStartTime, int dur, String place1, Type t, int g, Course c) {
@@ -51,6 +52,10 @@ public class Lesson implements Event {
 	
 	public Type getType() {
 		return this.type;
+	}
+	
+	public int getDay(){
+		return this.day;
 	}
 	
 	
