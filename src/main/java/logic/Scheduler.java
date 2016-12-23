@@ -21,9 +21,15 @@ public class Scheduler {
 		return;
 	}
 	
-	public static boolean canMeetConstraints(List<Course> lcourse, List<Constraint> lconstraint){
-		//for(Constraint c : lconstraint)
-			//if(c.canMeetConstraint())
+	/**
+	 * @param c
+	 * @param lconstraint
+	 * @return false if course c cannot meet the given list of constraints
+	 */
+	public static boolean canMeetConstraints(Course c, List<Constraint> lconstraint){
+		for(Constraint ¢ : lconstraint)
+			if(!¢.canMeetConstraint(c))
+				return false;
 		return true;
 	}
 }
