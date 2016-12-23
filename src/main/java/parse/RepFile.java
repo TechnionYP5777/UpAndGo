@@ -26,6 +26,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -41,7 +42,7 @@ public class RepFile {
 	
 	private static final String SEPARATING_LINE = "^\\+\\-+\\+\\n";
 	private static final String COURSE_SUMMERY = "(?<CourseSummery>.+?\\n.+?\\n)";
-	private static final String COURSE_INFO = "(?<CourseInfo>(.+?\\n)+?(?="+SEPARATING_LINE+"))";
+	private static final String COURSE_INFO_AND_LESSONS = "(?<CourseInfoAndLessons>(.+?\\n)+?(?="+SEPARATING_LINE+"))";
 
 
 	public static void downloadData(){
@@ -144,16 +145,28 @@ public class RepFile {
 	public static void getCoursesInfoFromRepFile(){
 		int count = 0;
 		for (Matcher courseMatcher = Pattern
-				.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO, Pattern.MULTILINE)
+				.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO_AND_LESSONS, Pattern.MULTILINE)
 				.matcher(getRepFileAsString()); courseMatcher.find();){
 			System.out.println(++count);
 			//System.out.println(courseMatcher.group("CourseSummery") + courseMatcher.group("CourseInfo"));
-			Matcher CourseSummeryMatcher = Pattern
+			Matcher courseSummeryMatcher = Pattern
 					.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
 					.matcher(courseMatcher.group("CourseSummery"));
-			if (CourseSummeryMatcher.find())
+			if (courseSummeryMatcher.find())
 				System.out.println(
-						CourseSummeryMatcher.group("CourseID") + " " + CourseSummeryMatcher.group("CourseName"));
+						courseSummeryMatcher.group("CourseID") + " " + courseSummeryMatcher.group("CourseName"));
+			String[] CourseInfoAndLessons = Pattern.compile("^\\|(רישום\\s+|\\s+)\\|\\n", Pattern.MULTILINE)
+					.split(courseMatcher.group("CourseInfoAndLessons"));
+			String CourseInfo = CourseInfoAndLessons[0];
+			String[] CourseLessons = ArrayUtils.remove(CourseInfoAndLessons, 0);
+/*			if (CourseInfoMatcher.find()){
+				System.out.println(CourseInfoMatcher.group("CourseLesson"));
+			}*/
+	        System.out.println("CourseLessons.length = " + CourseLessons.length);
+		    for(String a:CourseLessons)
+				System.out.println(a);
+	        
+	        //System.out.println(CourseInfo);
 		}
 			
 	}

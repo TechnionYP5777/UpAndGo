@@ -28,5 +28,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.5.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Internet-Browser-Plugin/lib/commons-lang3-3.5-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
