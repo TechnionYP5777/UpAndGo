@@ -12,7 +12,6 @@ import model.course.Course;
  */
 
 public class Scheduler {
-	//TODO: implement
 	/**
 	 * gets a list of courses and a list of constraints and return a possible 
 	 * schedule of them which doesnt break the constraints
@@ -29,6 +28,19 @@ public class Scheduler {
 	public static boolean canMeetConstraints(Course c, List<Constraint> lconstraint){
 		for(Constraint ¢ : lconstraint)
 			if(!¢.canMeetConstraint(c))
+				return false;
+		return true;
+	}
+	
+	/**
+	 * @param c
+	 * @param lconstraint
+	 * @return false if list of courses cannot meet the given list of constraints
+	 * 			this is a shallow check one by one, and doesnt mean all courses can be placed together.
+	 */
+	public static boolean canMeetConstraints(List<Course> lcourse, List<Constraint> lconstraint){
+		for(Course ¢ : lcourse)
+			if (!canMeetConstraints(¢, lconstraint))
 				return false;
 		return true;
 	}
