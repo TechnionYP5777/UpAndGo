@@ -144,63 +144,53 @@ public class RepFile {
 						courseSummeryMatcher.group("CourseID") + " " + courseSummeryMatcher.group("CourseName"));
 			String[] courseInfoAndLessons = Pattern.compile("^\\|(רישום\\s+|\\s+)\\|\\n", Pattern.MULTILINE)
 					.split(courseMatcher.group("CourseInfoAndLessons"));
+			@SuppressWarnings("unused")
 			String courseInfo = courseInfoAndLessons[0];
 			String[] courseLessons = ArrayUtils.remove(courseInfoAndLessons, 0);
 	        System.out.println("CourseLessons.length = " + courseLessons.length);
 	        //System.out.println(CourseInfo);
 	        //Check if the course isn't a sports (as they will require separate parsing)
-	        if (Integer.parseInt(courseSummeryMatcher.group("CourseID")) < 394000){
-			    for(String courseLesson :courseLessons){
-			    	String lesson[] = courseLesson.split("[\\r\\n]+");
-			    	System.out.println("lesson.length: " + lesson.length);
-			    	for (String lessonLine : lesson){
-				    	if (lessonLine.contains("הרצאה")){
-				    		System.out.println("Lacture");
-				    		System.out.println("day: "+lessonLine.charAt(14));
-				    		String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+","");
-				    		System.out.println(lessonTimeText);
-				    		String lessonTime[] = lessonTimeText.replaceAll("\\.",":").split("\\-");
-				    		if (lessonTime.length==2){
-							    System.out.println("start at: "+ lessonTime[1]);
-							    System.out.println("ends at: "+ lessonTime[0]);
-				    		}
-				    		System.out.println("room number: "+ lessonLine.substring(28, 32).replaceAll("\\s+",""));
-				    		System.out.println("building: "+ lessonLine.substring(33, 43).replaceAll("\\s+$",""));
-				    	} else if (lessonLine.contains("מרצה")){
-				    		System.out.println("title: "+ lessonLine.substring(14, 20).replaceAll("\\s+$",""));
-				    		System.out.println("name: "+ lessonLine.substring(21, 40).replaceAll("\\s+$",""));
-				    	} else if (lessonLine.contains("תרגיל")){
-				    		System.out.println("Tutorial");
-				    		//TODO continue parsing
-				    	} else if (lessonLine.contains("מתרגל")){
-				    		System.out.println("Asistant");
-				    		//TODO continue parsing
-				    	} else if (lessonLine.contains("מעבדה")){
-				    		System.out.println("Lab");
-				    		//TODO continue parsing
-				    	} else if (lessonLine.contains("מדריך")){
-				    		System.out.println("Guide");
-				    		//TODO continue parsing
-				    	} else if (StringUtils.isBlank(lessonLine.substring(7,14))){
-				    		System.out.println("day: "+lessonLine.charAt(14));
-				    		String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+","");
-				    		System.out.println(lessonTimeText);
-				    		String lessonTime[] = lessonTimeText.replaceAll("\\.",":").split("\\-");
-				    		if (lessonTime.length==2){
-							    System.out.println("start at: "+ lessonTime[1]);
-							    System.out.println("ends at: "+ lessonTime[0]);
-				    		}
-				    		System.out.println("room number: "+ lessonLine.substring(28, 32).replaceAll("\\s+",""));
-				    		System.out.println("building: "+ lessonLine.substring(33, 43).replaceAll("\\s+$",""));
-
-				    	}
-			    	}
-
-			    }
-	        }
-
-				
-	        
+	        if (Integer.parseInt(courseSummeryMatcher.group("CourseID")) < 394000)
+				for (String courseLesson : courseLessons) {
+					String lesson[] = courseLesson.split("[\\r\\n]+");
+					System.out.println("lesson.length: " + lesson.length);
+					for (String lessonLine : lesson)
+						if (lessonLine.contains("הרצאה")) {
+							System.out.println("Lacture");
+							System.out.println("day: " + lessonLine.charAt(14));
+							String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+", "");
+							System.out.println(lessonTimeText);
+							String lessonTime[] = lessonTimeText.replaceAll("\\.", ":").split("\\-");
+							if (lessonTime.length == 2) {
+								System.out.println("start at: " + lessonTime[1]);
+								System.out.println("ends at: " + lessonTime[0]);
+							}
+							System.out.println("room number: " + lessonLine.substring(28, 32).replaceAll("\\s+", ""));
+							System.out.println("building: " + lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+						} else if (lessonLine.contains("מרצה")) {
+							System.out.println("title: " + lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
+							System.out.println("name: " + lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
+						} else if (lessonLine.contains("תרגיל"))
+							System.out.println("Tutorial");
+						else if (lessonLine.contains("מתרגל"))
+							System.out.println("Asistant");
+						else if (lessonLine.contains("מעבדה"))
+							System.out.println("Lab");
+						else if (lessonLine.contains("מדריך"))
+							System.out.println("Guide");
+						else if (StringUtils.isBlank(lessonLine.substring(7, 14))) {
+							System.out.println("day: " + lessonLine.charAt(14));
+							String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+", "");
+							System.out.println(lessonTimeText);
+							String lessonTime[] = lessonTimeText.replaceAll("\\.", ":").split("\\-");
+							if (lessonTime.length == 2) {
+								System.out.println("start at: " + lessonTime[1]);
+								System.out.println("ends at: " + lessonTime[0]);
+							}
+							System.out.println("room number: " + lessonLine.substring(28, 32).replaceAll("\\s+", ""));
+							System.out.println("building: " + lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+						}
+				}        
 		}
 			
 	}
