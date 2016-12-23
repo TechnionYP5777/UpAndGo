@@ -25,6 +25,9 @@ public class Course {
 	protected int tutorialHours;
 	protected int laboratoryHours;
 	protected int projectHours;
+	
+	protected LessonGroup lecture;
+	protected LessonGroup tutorial;
 
 	protected final List<CourseListener> listeners;
 
