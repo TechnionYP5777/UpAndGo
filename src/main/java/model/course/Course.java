@@ -132,7 +132,6 @@ public class Course {
 			this.tutorialHours += ¢.duration;
 			break;
 		default:
-			break;
 		}
 	}
 

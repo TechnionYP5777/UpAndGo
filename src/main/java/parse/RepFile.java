@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -53,11 +51,9 @@ public class RepFile {
 			if(repFileLocal.exists() && !repFileLocal.isDirectory())
 				UnzipUtility.unzip((repFileLocal + ""), REP_FILE_DIR);
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException ¢) {
+			¢.printStackTrace();
 		}
 		processRepFile();
 	}
@@ -68,18 +64,14 @@ public class RepFile {
 
 		File repy = new File(REP_FILE_DOS);
 		if (repy.exists())
-			try(
-				FileInputStream fis = new FileInputStream(repy);
-				InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
-				BufferedReader buffReader = new BufferedReader(reader))
-			{
+			try (FileInputStream fis = new FileInputStream(repy);
+					InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
+					BufferedReader buffReader = new BufferedReader(reader)) {
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
 					System.out.println(line);
-				buffReader.close();					
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				buffReader.close();
+			} catch (IOException ¢) {
+				¢.printStackTrace();
 			} 
 	}
 	
@@ -89,23 +81,19 @@ public class RepFile {
 		File repyIn = new File(REP_FILE_DOS);
 		File repyOut = new File(REP_FILE_HEBREW);
 		if (repyIn.exists())
-			try(
-				FileInputStream fis = new FileInputStream(repyIn);
-				InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
-				BufferedReader buffReader = new BufferedReader(reader);
-				FileWriter fr = new FileWriter(repyOut);
-				BufferedWriter buffWriter = new BufferedWriter(fr))
-			{
+			try (FileInputStream fis = new FileInputStream(repyIn);
+					InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
+					BufferedReader buffReader = new BufferedReader(reader);
+					FileWriter fr = new FileWriter(repyOut);
+					BufferedWriter buffWriter = new BufferedWriter(fr)) {
 				if (!repyOut.exists())
 					repyOut.createNewFile();
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
 					buffWriter.write(HebReverse.reverseTextNotNumbers(line) + "\n");
 				buffReader.close();
 				buffWriter.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ¢) {
+				¢.printStackTrace();
 			} 
 	}
 	
@@ -113,8 +101,7 @@ public class RepFile {
 	public static void getCoursesFromRepFile(){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.newDocument();
+			Document doc = factory.newDocumentBuilder().newDocument();
 			Element rootElement = doc.createElement("Courses");
 			doc.appendChild(rootElement);
 			
@@ -134,9 +121,8 @@ public class RepFile {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
 			transformer.transform((new DOMSource(doc)), (new StreamResult(new File(REP_FILE_XML))));
 
-		} catch (ParserConfigurationException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException ¢) {
+			¢.printStackTrace();
 		}
 
 
@@ -163,36 +149,27 @@ public class RepFile {
 				System.out.println(CourseInfoMatcher.group("CourseLesson"));
 			}*/
 	        System.out.println("CourseLessons.length = " + CourseLessons.length);
+	        System.out.println(CourseInfo);
 		    for(String a:CourseLessons)
 				System.out.println(a);
 	        
-	        //System.out.println(CourseInfo);
 		}
 			
 	}
 	
 	private static String getRepFileAsString(){
-		File repFile = new File(REP_FILE_HEBREW);
-		if(!repFile.exists())
+		if(!new File(REP_FILE_HEBREW).exists())
 			downloadData(); 
 
 		String $ = null;
-		try (
-			BufferedReader repFileReader = new BufferedReader(new FileReader(REP_FILE_HEBREW));)
-		{	
+		try (BufferedReader repFileReader = new BufferedReader(new FileReader(REP_FILE_HEBREW))) {
 			StringBuilder sb = new StringBuilder();
 			for (String line = repFileReader.readLine(); line != null; line = repFileReader.readLine())
 				sb.append(line).append("\n");
-
 			$ = sb + "";
-			
 			repFileReader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException ¢) {
+			¢.printStackTrace();
 		}
 		return $;
 	}

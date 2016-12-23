@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -39,9 +38,7 @@ public class XmlCourseLoader extends CourseLoader {
 	public XmlCourseLoader() {
 		super(REP_XML_PATH);
 		
-		//Download the REP XML file if it does not exists
-		File xmlPath = new File(path);
-		if (!xmlPath.exists())
+		if (!new File(path).exists())
 			RepFile.getCoursesFromRepFile();
 		
 		//Create a data dir for saving changes if it does not exists
@@ -86,10 +83,8 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	@Override
 	public void saveChosenCourseNames(List<String> names){
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.newDocument();
+    		Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			Element rootElement = doc.createElement("ChosenCourses");
 			doc.appendChild(rootElement);
 			
@@ -104,9 +99,8 @@ public class XmlCourseLoader extends CourseLoader {
 
 			transformer.transform((new DOMSource(doc)), (new StreamResult(new File(CHOSEN_COURSES_PATH))));
 
-		} catch (ParserConfigurationException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException ¢) {
+			¢.printStackTrace();
 		}
 
 	}
@@ -116,53 +110,32 @@ public class XmlCourseLoader extends CourseLoader {
 		if (!(new File(CHOSEN_COURSES_PATH).exists()))
 			return Collections.emptyList();
 		List<String> $ = new LinkedList<>();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(CHOSEN_COURSES_PATH);
-			NodeList chosenList = doc.getElementsByTagName("Course");
+			NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(CHOSEN_COURSES_PATH).getElementsByTagName("Course");
 			for (int i = 0; i < chosenList.getLength(); ++i) {
 				Node p = chosenList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					$.add(((Element) p).getTextContent());
 			}
-
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | SAXException | ParserConfigurationException ¢) {
+			¢.printStackTrace();
 		}
 		return $;
 	}
 	
 	private void getCourses() {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(REP_XML_PATH);
-			NodeList coursesList = doc.getElementsByTagName("Course");
-			
+			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH)
+					.getElementsByTagName("Course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					courses.put(((Element) p).getAttribute("id"),cb.setId(((Element) p).getAttribute("id"))
+					courses.put(((Element) p).getAttribute("id"), cb.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
-
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | SAXException | ParserConfigurationException ¢) {
+			¢.printStackTrace();
 		}
 	}
 	

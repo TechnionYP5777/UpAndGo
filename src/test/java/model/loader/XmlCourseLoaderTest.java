@@ -1,7 +1,5 @@
 package model.loader;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,8 +24,8 @@ public class XmlCourseLoaderTest {
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
-		assertTrue("648013".equals(coursesMap.get("648013").getId()));
-		assertTrue("תופעות מעבר ננו מטריות".equals(coursesMap.get("648013").getName()));
+		assert "648013".equals(coursesMap.get("648013").getId());
+		assert "תופעות מעבר ננו מטריות".equals(coursesMap.get("648013").getName());
 	}
 	
 	@Test
@@ -37,7 +35,7 @@ public class XmlCourseLoaderTest {
 		names.add("תכנות אנכי ומרוכז");
 		names.add("תורת התורתיות");
 		cr.saveChosenCourseNames(names);
-		assertTrue((new File("data/ChosenCourses.xml")).exists());
+		assert (new File("data/ChosenCourses.xml")).exists();
 	}
 	
 	@Test
@@ -47,15 +45,13 @@ public class XmlCourseLoaderTest {
 		names.add("תכנות אנכי ומרוכז");
 		names.add("תורת התורתיות");
 		cr.saveChosenCourseNames(names);
-		assertTrue((new File("data/ChosenCourses.xml")).exists());
-		cr.loadChosenCourseNames().forEach(name -> {
-			System.out.println(name);
-		});
-		assertTrue(cr.loadChosenCourseNames().size() == 3);
+		assert (new File("data/ChosenCourses.xml")).exists();
+		cr.loadChosenCourseNames().forEach(name -> System.out.println(name));
+		assert cr.loadChosenCourseNames().size() == 3;
 	}
 	
-	@SuppressWarnings("static-method")
 	@After
+	@SuppressWarnings("static-method")
 	public void deleteXml() {
 		new File("data/ChosenCourses.xml").delete();
 	}

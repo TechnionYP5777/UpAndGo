@@ -21,10 +21,9 @@ public class Launcher {
 			@Override
 			public void run() {
 				try {
-					MainWinView frame = new MainWinView(new ConcreteModel (new XmlCourseLoader()));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+					new MainWinView(new ConcreteModel(new XmlCourseLoader())).setVisible(true);
+				} catch (Exception ¢) {
+					¢.printStackTrace();
 				}
 			}
 		});

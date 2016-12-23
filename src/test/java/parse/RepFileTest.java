@@ -1,30 +1,28 @@
 package parse;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class RepFileTest {
 
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testGetData() {
 		RepFile.downloadData();
-		assertTrue(true);
+		assert true;
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testGetCoursesFromRepFile() {
 		RepFile.getCoursesFromRepFile();
-		assertTrue(true);
+		assert true;
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testGetCoursesInfoFromRepFile() {
 		RepFile.getCoursesInfoFromRepFile();
-		assertTrue(true);
+		assert true;
 	}
 	
 }

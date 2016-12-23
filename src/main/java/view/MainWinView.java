@@ -63,8 +63,8 @@ public class MainWinView extends JFrame {
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
+		} catch (Throwable ¢) {
+			¢.printStackTrace();
 		}
 		this.m= m;
 		initComponents();
@@ -144,7 +144,6 @@ public class MainWinView extends JFrame {
 	}
 
 	private static void setCourseListArea(JScrollPane scpCourseList) {
-
 		lstCourseList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scpCourseList.setPreferredSize(new Dimension(70, 22));
 		scpCourseList.setMinimumSize(new Dimension(70, 22));
@@ -152,7 +151,6 @@ public class MainWinView extends JFrame {
 				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 		lstCourseList.setBackground(UIManager.getColor("inactiveCaption"));
 		scpCourseList.setViewportView(lstCourseList);
-		return;
 	}
 
 	private static void setCourseDescriptionArea(JScrollPane scpCourseDescription) {
@@ -176,7 +174,6 @@ public class MainWinView extends JFrame {
 		txtCourseDescription.setBackground(UIManager.getColor("inactiveCaption"));
 		scpCourseDescription.setViewportView(txtCourseDescription);
 		txtCourseDescription.setVisible(false);
-		return;
 	}
 
 	private static void setChosenCoursesArea(JScrollPane scpChosenCourses) {
@@ -190,8 +187,7 @@ public class MainWinView extends JFrame {
 		lstChosenCourses.setBackground(UIManager.getColor("inactiveCaption"));
 		scpChosenCourses.setViewportView(lstChosenCourses);
 		if (ChosenCourseModel.isEmpty())
-		lstChosenCourses.setVisible(false);
-		return;
+			lstChosenCourses.setVisible(false);
 	}
 
 	private void setWindowPreferences() {
@@ -209,7 +205,6 @@ public class MainWinView extends JFrame {
 
 	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
 			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
-
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -255,7 +250,6 @@ public class MainWinView extends JFrame {
 										.addComponent(btnSaveChoice))))
 				.addContainerGap()));
 		contentPane.setLayout(gl_contentPane);
-		return;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -335,9 +329,7 @@ public class MainWinView extends JFrame {
 				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
 				m.choseCourses(names);
-				ImageIcon im= new ImageIcon("resources/cat-laptop-icon.png");
-				
-				Message.infoBox(FINISH_MSG, "Finish",im);
+				Message.infoBox(FINISH_MSG, "Finish",new ImageIcon("resources/cat-laptop-icon.png"));
 				close();
 
 			}

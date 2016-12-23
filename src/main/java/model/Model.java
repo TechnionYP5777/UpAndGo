@@ -52,8 +52,7 @@ public abstract class Model extends Observable {
 	public void addCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course newCourse = loader.loadCourse(name);
-		this.courseList.put(name, newCourse);
+		this.courseList.put(name, loader.loadCourse(name));
 		setChanged();
 		notifyObservers();
 	}
@@ -62,16 +61,13 @@ public abstract class Model extends Observable {
 		return new ArrayList<>(this.courseList.keySet());
 	}
 	
-	// not sure what is more efficient- loading course from loadCourse and then use remove
-	// or iterating all over course list and then remove
 	public void dropCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		if(this.courseList.remove(name) != null) {
-			setChanged();
-			notifyObservers();
-		}
-		return;
+		if (this.courseList.remove(name) == null)
+			return;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Course getCourseByName(String name) {
