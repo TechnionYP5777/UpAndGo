@@ -1,5 +1,6 @@
 package model.constraint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.course.Course;
@@ -28,15 +29,17 @@ public class TimeConstraint extends Constraint {
 
 	@Override
 	public List<LessonGroup> groupsMeetsConstraint(Course c) {
-		// TODO Auto-generated method stub
-		return null;
+		List<LessonGroup> $ = new ArrayList<>();
+		for(LessonGroup ¢ : c.getLectures())
+			if (!clashWithLessonGroup(¢))
+				$.add(¢);
+		return $;
 	}
 	
-	private boolean clashWithLessonGroup(LessonGroup lg){
-		for(Lesson l : lg.getLessons()){
-			if(clashWithLesson(l))
+	private boolean clashWithLessonGroup(LessonGroup g){
+		for(Lesson ¢ : g.getLessons())
+			if (clashWithLesson(¢))
 				return false;
-		}
 		return true;
 	}
 	
