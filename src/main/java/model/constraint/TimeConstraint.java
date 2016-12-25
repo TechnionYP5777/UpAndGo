@@ -1,5 +1,8 @@
 package model.constraint;
-
+/**
+ * @author kobybs
+ * @since 25-12-16
+ */
 import java.util.ArrayList;
 import java.util.List;
 

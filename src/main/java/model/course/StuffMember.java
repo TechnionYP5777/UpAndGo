@@ -12,6 +12,13 @@ public class StuffMember {
 	public String office;
 	public final List<LocalDateTime> officeHours;
 	
+	public StuffMember(String fName1, String lName1) {
+		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
+		this.fName = fName1;
+		this.lName = lName1;
+		officeHours = null;
+	}
+	
 	public StuffMember(String fName1, String lName1, String ttl, String eml, String office1,
 																			List<LocalDateTime> ofHours) {
 		this.fName = fName1;

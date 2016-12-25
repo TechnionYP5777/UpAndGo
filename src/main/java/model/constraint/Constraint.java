@@ -1,5 +1,8 @@
 package model.constraint;
-
+/**
+ * @author kobybs
+ * @since 20-12-16
+ */
 import java.util.List;
  /**
   * @author kobybs

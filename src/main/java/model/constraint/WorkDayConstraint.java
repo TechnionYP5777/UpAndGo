@@ -1,5 +1,8 @@
 package model.constraint;
 
+
+// *** JUST A DEMO CLASS, PROBABLY WON'T BE USED IN OUR PROJECT.
+
 import java.util.List;
 
 /**
