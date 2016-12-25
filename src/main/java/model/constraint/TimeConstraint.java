@@ -46,6 +46,7 @@ public class TimeConstraint extends Constraint {
 		return true;
 	}
 	
+	// DO NOT SPARTANIZE
 	private boolean clashWithLesson(Lesson l){
 		if(  (startTime.compareTo(l.getStartTime()) == 0 ||
 				startTime.compareTo(l.getStartTime()) == 1) 
