@@ -3,7 +3,6 @@ package model.course;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.course.Lesson.Type;
 
 
 public class LessonGroup {

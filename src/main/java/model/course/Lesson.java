@@ -1,6 +1,5 @@
 package model.course;
 
-import java.time.LocalDateTime;
 
 import logic.Event;
 import model.course.StuffMember;

@@ -1,6 +1,5 @@
 package model.constraint;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import model.course.Course;
@@ -21,7 +20,6 @@ public class TimeConstraint extends Constraint {
 	
 	@Override
 	public boolean canMeetConstraint(Course c) {
-		//LocalDateTime courseStartTime = c.getLectures();
 		for(LessonGroup ¢ : c.getLectures())
 			if (!clashWithLessonGroup(¢))
 				return true;
