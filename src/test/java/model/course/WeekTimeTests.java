@@ -1,4 +1,8 @@
 package model.course;
+/**
+ * @author kobybs
+ * @since 25-12-16
+ */
 
 import static org.junit.Assert.*;
 
