@@ -1,6 +1,10 @@
 package model.constraint;
 
 import java.util.List;
+ /**
+  * @author kobybs
+  * @since 25-12-16
+  */
 
 import logic.Event;
 import model.course.Course;

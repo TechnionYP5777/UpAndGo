@@ -1,5 +1,9 @@
 package model.course;
-
+/**
+ * @author nikita
+ * @author kobybs (made changes)
+ * @since 25-12-16
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +24,15 @@ public class Course {
 
 	protected final List<StuffMember> stuff;
 	protected final List<Lesson> lessons;
+	
+	// TODO: this should replace List lessons
+	protected  List<LessonGroup> lectures;
+	protected  List<LessonGroup> tutorials;
 
 	protected int lectureHours;
 	protected int tutorialHours;
 	protected int laboratoryHours;
 	protected int projectHours;
-	
-	protected LessonGroup lecture;
-	protected LessonGroup tutorial;
 
 	protected final List<CourseListener> listeners;
 
@@ -66,6 +71,13 @@ public class Course {
 	protected void addLesson(Lesson ¢) {
 		this.lessons.add(¢);
 		addHours(¢);
+	}
+	
+	public List<LessonGroup> getLectures(){
+		return this.lectures;
+	}
+	public List<LessonGroup> getTutorials(){
+		return this.tutorials;
 	}
 
 	public String getName() {
