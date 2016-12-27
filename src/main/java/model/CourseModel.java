@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import model.course.Course;
@@ -23,7 +24,7 @@ public class CourseModel implements Model  {
 	
 	protected TreeMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
-	protected HashMap<String, PropertyChangeListener> listenersMap;
+	protected HashMap<String, List<PropertyChangeListener>> listenersMap;
 	protected CourseLoader loader;
 		
 	public CourseModel(CourseLoader loader){
@@ -32,13 +33,6 @@ public class CourseModel implements Model  {
 		this.loader = loader;
 		this.courseList = loader.loadAllCourses();
 	}
-	
-//	@Override
-//	public synchronized void addObserver(Observer ¢) {
-//		if (¢ == null)
-//			throw new NullPointerException();
-//		this.listenersList.add(¢);
-//	}
 	
 	public void pickCourse(String name) {
 		if (name == null)
@@ -88,4 +82,33 @@ public class CourseModel implements Model  {
 	public void loadQuery(String query) {
 		// TODO: implement
 	}
+
+	@Override
+	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
+		if(property == null || l == null)
+			throw new NullPointerException();
+		if(!this.listenersMap.containsKey(property))
+			this.listenersMap.put(property, new ArrayList<PropertyChangeListener>());
+		this.listenersMap.get(property).add(l);
+	}
+
+	@Override
+	public void removePropertyChangeListener(String property, PropertyChangeListener l) {
+		if (property != null && l != null && this.listenersMap.containsKey(property))
+			Optional.ofNullable(this.listenersMap.get(property)).ifPresent((x) -> x.remove(l));
+		
+	}
+	
+	
+	
+//	@Override
+//	public synchronized void addObserver(Observer ¢) {
+//		if (¢ == null)
+//			throw new NullPointerException();
+//		this.listenersList.add(¢);
+//	}
+	
+	
+	
+	
 }
