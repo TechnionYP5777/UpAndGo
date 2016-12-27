@@ -1,8 +1,10 @@
 package controller;
 
+import java.awt.event.ActionEvent;
 import java.util.Observable;
 
 import model.Model;
+import view.CourseListView;
 import view.View;
 
 /*
@@ -11,19 +13,25 @@ import view.View;
  */
 public class CourseListController extends Controller{
 
-	public CourseListController(Model model, View view) {
+	public CourseListController(Model model, CourseListView view) {
 		super(model, view);
 	}
 
+//	@Override
+//	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
+//		// TODO
+//		// enforce logic of model
+//		// e.g.:
+////		if(view.wasPicked())
+////			model.pickCourse(view.getHighlightedCourseName());
+////		else
+////			model.dropCousre(view.getHighlightedCourseName());
+//	}
+
 	@Override
-	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
-		// TODO
-		// enforce logic of model
-		// e.g.:
-//		if(view.wasPicked())
-//			model.pickCourse(view.getHighlightedCourseName());
-//		else
-//			model.dropCousre(view.getHighlightedCourseName());
+	public void actionPerformed(ActionEvent e) {
+//		model.loadQuery(view.getQuery());
+		
 	}
 	
 }

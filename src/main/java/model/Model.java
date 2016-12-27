@@ -83,4 +83,8 @@ public abstract class Model extends Observable {
 	public void choseCourses(List<String> names) {
 		this.loader.saveChosenCourseNames(names);
 	}
+	
+	public void loadQuery(String query) {
+		// TODO: implement
+	}
 }
