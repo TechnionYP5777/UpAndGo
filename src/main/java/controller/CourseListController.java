@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import command.CourseCommand;
 import model.CourseModel;
+import property.CourseProperty;
 import view.CourseListView;
 
 /*
@@ -18,6 +19,11 @@ public class CourseListController implements Controller{
 	public CourseListController(CourseModel model, CourseListView view) {
 		this.model = model;
 		this.view = view;
+		
+		this.model.addPropertyChangeListener(CourseProperty.COURSE_LIST, this.view);
+		this.model.addPropertyChangeListener(CourseProperty.DETAILS, this.view);
+		
+		this.view.addActionListener(this);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import command.CourseCommand;
 import model.CourseModel;
+import property.CourseProperty;
 import view.CourseSelectionView;
 
 public class CourseSelectionController implements Controller {
@@ -14,6 +15,10 @@ public class CourseSelectionController implements Controller {
 	public CourseSelectionController(CourseModel model, CourseSelectionView view) {
 		this.model = model;
 		this.view = view;
+		
+		this.model.addPropertyChangeListener(CourseProperty.CHOSEN_LIST, this.view);
+		
+		this.view.addActionListener(this);
 	}
 
 	@Override
