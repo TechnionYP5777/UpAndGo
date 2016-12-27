@@ -1,6 +1,8 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,7 +15,7 @@ import model.loader.CourseLoader;
  * Interface for storing data inside the program.
  * The data typically should come from loader.
  * */
-public class CourseModel extends Observable implements Model  {
+public class CourseModel implements Model  {
 	// TODO: implement
 	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
 	// smth like:
@@ -21,23 +23,22 @@ public class CourseModel extends Observable implements Model  {
 	
 	protected TreeMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
-	protected List<Observer> listenersList;
+	protected HashMap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
 		
 	public CourseModel(CourseLoader loader){
 		this.pickedCourseList = new ArrayList<>();
-		this.listenersList = new ArrayList<>();
+		this.listenersMap = new HashMap<>();
 		this.loader = loader;
 		this.courseList = loader.loadAllCourses();
 	}
 	
-	@Override
-
-	public synchronized void addObserver(Observer ¢) {
-		if (¢ == null)
-			throw new NullPointerException();
-		this.listenersList.add(¢);
-	}
+//	@Override
+//	public synchronized void addObserver(Observer ¢) {
+//		if (¢ == null)
+//			throw new NullPointerException();
+//		this.listenersList.add(¢);
+//	}
 	
 	public void pickCourse(String name) {
 		if (name == null)
@@ -45,16 +46,16 @@ public class CourseModel extends Observable implements Model  {
 		Course pickedCourse = loader.loadCourse(name);
 		if (!this.pickedCourseList.contains(pickedCourse))
 			this.pickedCourseList.add(pickedCourse);
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 	
 	public void addCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
 		this.courseList.put(name, loader.loadCourse(name));
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 	
 	public List<String> getCoursesNames() {
@@ -66,8 +67,8 @@ public class CourseModel extends Observable implements Model  {
 			throw new NullPointerException();
 		if (this.courseList.remove(name) == null)
 			return;
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 	
 	public Course getCourseByName(String name) {
