@@ -4,12 +4,14 @@ import java.beans.PropertyChangeListener;
 
 public interface Model {
 	/*
-	 * Adds a PropertyChangeListener to the listener list for a specific property
+	 * adds a PropertyChangeListener to the listener list for a specific property.
+	 * here listeners are views.
 	 */
 	void addPropertyChangeListener(String property, PropertyChangeListener l);
 	
 	/* 
-	 * Removes a PropertyChangeListener from the listener list for a specific property
+	 * removes a PropertyChangeListener from the listener list for a specific property.
+	 * here listeners are views.
 	 */
 	void removePropertyChangeListener(String property, PropertyChangeListener l);
 }
