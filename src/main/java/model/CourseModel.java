@@ -2,10 +2,11 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
+
+import com.google.common.collect.HashMultimap;
 
 import model.course.Course;
 import model.loader.CourseLoader;
@@ -18,12 +19,12 @@ public class CourseModel implements Model  {
 	
 	protected TreeMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
-	protected HashMap<String, List<PropertyChangeListener>> listenersMap;
+	protected HashMultimap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
 		
 	public CourseModel(CourseLoader loader){
 		this.pickedCourseList = new ArrayList<>();
-		this.listenersMap = new HashMap<>();
+		this.listenersMap = HashMultimap.create();
 		this.loader = loader;
 		this.courseList = loader.loadAllCourses();
 	}
@@ -87,20 +88,13 @@ public class CourseModel implements Model  {
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if(property == null || l == null)
 			throw new NullPointerException();
-		if(!this.listenersMap.containsKey(property))
-			this.listenersMap.put(property, new ArrayList<PropertyChangeListener>());
-		this.listenersMap.get(property).add(l);
+		this.listenersMap.put(property, l);
 	}
 
 	@Override
 	public void removePropertyChangeListener(String property, PropertyChangeListener l) {
-		if (property == null || l == null || !this.listenersMap.containsKey(property))
-			return;
-		List<PropertyChangeListener> listeners = this.listenersMap.get(property);
-		if (listeners.size() != 1)
-			listeners.remove(l);
-		else
-			this.listenersMap.remove(property);
+		if (property != null && l != null && this.listenersMap.containsKey(property))
+			this.listenersMap.remove(property, l);
 		
 	}
 }
