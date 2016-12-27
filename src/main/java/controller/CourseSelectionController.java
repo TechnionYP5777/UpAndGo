@@ -6,13 +6,13 @@ import java.util.Observable;
 import model.CourseModel;
 import view.View;
 
-public class CourseSelectionController extends Controller {
+public class CourseSelectionController implements Controller {
 
-	public CourseSelectionController(CourseModel model, View view) {
-		super(model, view);
-		// TODO Auto-generated constructor stub
-	}
-
+//	public CourseSelectionController(CourseModel model, View view) {
+//		super(model, view);
+//		// TODO Auto-generated constructor stub
+//	}
+//
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

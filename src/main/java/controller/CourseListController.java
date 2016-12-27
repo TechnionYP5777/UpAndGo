@@ -20,31 +20,15 @@ public class CourseListController implements Controller{
 		this.view = view;
 	}
 
-//	@Override
-//	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
-//		// TODO
-//		// enforce logic of model
-//		// e.g.:
-////		if(view.wasPicked())
-////			model.pickCourse(view.getHighlightedCourseName());
-////		else
-////			model.dropCousre(view.getHighlightedCourseName());
-//	}
-
 	@Override
-	public void actionPerformed(@SuppressWarnings("unused") ActionEvent ae) {
-//		switch (ae.getActionCommand()) {
-//		case CourseCommand.PICK.cmd():
-//			
-//			break;
-//		case CourseCommand.DROP.cmd():
-//			
-//			break;
-//		case CourseCommand.PICK.cmd():
-//			
-//			break;
-//		}
-		model.loadQuery(view.getQuery());
+	public void actionPerformed(ActionEvent ¢) {
+		if (¢.getActionCommand().equals(CourseCommand.DETAILS))
+			model.getCourseByName(view.getHighlightedCourse());
+		else {
+			if (!¢.getActionCommand().equals(CourseCommand.GET_QUERY))
+				throw new IllegalArgumentException();
+			model.loadQuery(view.getQuery());
+		}
 	}
 	
 }

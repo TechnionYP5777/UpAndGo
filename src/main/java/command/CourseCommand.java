@@ -5,4 +5,5 @@ public class CourseCommand {
 	public static String DROP = "drop_course";
 	public static String GET_QUERY = "get_query";
 	public static String BAD_CMD = "bad_command";
+	public static String DETAILS = "details";
 }
