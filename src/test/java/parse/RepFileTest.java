@@ -14,7 +14,7 @@ public class RepFileTest {
 	@Test
 	@SuppressWarnings("static-method")
 	public void testGetCoursesFromRepFile() {
-		RepFile.getCoursesFromRepFile();
+		RepFile.getCoursesNamesAndIds();
 		assert true;
 	}
 	

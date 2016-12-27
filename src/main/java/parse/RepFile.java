@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +26,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -99,7 +100,7 @@ public class RepFile {
 	}
 	
 
-	public static void getCoursesFromRepFile(){
+	public static void getCoursesNamesAndIds(){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
 			Document doc = factory.newDocumentBuilder().newDocument();
@@ -129,71 +130,45 @@ public class RepFile {
 
 	}
 	
+
+		
 	public static void getCoursesInfoFromRepFile(){
-		int count = 0;
-		for (Matcher courseMatcher = Pattern
-				.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO_AND_LESSONS, Pattern.MULTILINE)
-				.matcher(getRepFileAsString()); courseMatcher.find();){
-			System.out.println(++count);
-			//System.out.println(courseMatcher.group("CourseSummery") + courseMatcher.group("CourseInfo"));
-			Matcher courseSummeryMatcher = Pattern
-					.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
-					.matcher(courseMatcher.group("CourseSummery"));
-			if (courseSummeryMatcher.find())
-				System.out.println(
-						courseSummeryMatcher.group("CourseID") + " " + courseSummeryMatcher.group("CourseName"));
-			String[] courseInfoAndLessons = Pattern.compile("^\\|(רישום\\s+|\\s+)\\|\\n", Pattern.MULTILINE)
-					.split(courseMatcher.group("CourseInfoAndLessons"));
-			@SuppressWarnings("unused")
-			String courseInfo = courseInfoAndLessons[0];
-			String[] courseLessons = ArrayUtils.remove(courseInfoAndLessons, 0);
-	        System.out.println("CourseLessons.length = " + courseLessons.length);
-	        //System.out.println(CourseInfo);
-	        //Check if the course isn't a sports (as they will require separate parsing)
-	        if (Integer.parseInt(courseSummeryMatcher.group("CourseID")) < 394000)
-				for (String courseLesson : courseLessons) {
-					String lesson[] = courseLesson.split("[\\r\\n]+");
-					System.out.println("lesson.length: " + lesson.length);
-					for (String lessonLine : lesson)
-						if (lessonLine.contains("הרצאה")) {
-							System.out.println("Lacture");
-							System.out.println("day: " + lessonLine.charAt(14));
-							String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+", "");
-							System.out.println(lessonTimeText);
-							String lessonTime[] = lessonTimeText.replaceAll("\\.", ":").split("\\-");
-							if (lessonTime.length == 2) {
-								System.out.println("start at: " + lessonTime[1]);
-								System.out.println("ends at: " + lessonTime[0]);
-							}
-							System.out.println("room number: " + lessonLine.substring(28, 32).replaceAll("\\s+", ""));
-							System.out.println("building: " + lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
-						} else if (lessonLine.contains("מרצה")) {
-							System.out.println("title: " + lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
-							System.out.println("name: " + lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
-						} else if (lessonLine.contains("תרגיל"))
-							System.out.println("Tutorial");
-						else if (lessonLine.contains("מתרגל"))
-							System.out.println("Asistant");
-						else if (lessonLine.contains("מעבדה"))
-							System.out.println("Lab");
-						else if (lessonLine.contains("מדריך"))
-							System.out.println("Guide");
-						else if (StringUtils.isBlank(lessonLine.substring(7, 14))) {
-							System.out.println("day: " + lessonLine.charAt(14));
-							String lessonTimeText = lessonLine.substring(16, 27).replaceAll("\\s+", "");
-							System.out.println(lessonTimeText);
-							String lessonTime[] = lessonTimeText.replaceAll("\\.", ":").split("\\-");
-							if (lessonTime.length == 2) {
-								System.out.println("start at: " + lessonTime[1]);
-								System.out.println("ends at: " + lessonTime[0]);
-							}
-							System.out.println("room number: " + lessonLine.substring(28, 32).replaceAll("\\s+", ""));
-							System.out.println("building: " + lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
-						}
-				}        
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			Document doc = factory.newDocumentBuilder().newDocument();
+			Element rootElement = doc.createElement("Courses");
+			doc.appendChild(rootElement);
+			
+			for (Matcher courseMatcher = Pattern
+					.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO_AND_LESSONS, Pattern.MULTILINE)
+					.matcher(getRepFileAsString()); courseMatcher.find();){
+				
+				Element course = createCourseElement(doc, courseMatcher.group("CourseSummery"));
+				
+				ArrayList<String> courseInfoAndLessons = new ArrayList<>(Arrays.asList(
+						Pattern.compile("^\\|(רישום\\s+|מס.+|\\s+)\\|\\n", Pattern.MULTILINE)
+						.split(courseMatcher.group("CourseInfoAndLessons"))));
+				
+				@SuppressWarnings("unused")
+				String courseInfo = courseInfoAndLessons.get(0);
+				courseInfoAndLessons.remove(0);
+				courseInfoAndLessons.removeAll(Arrays.asList("", null));
+				addLessonsToCourse(doc, course, courseInfoAndLessons);
+				
+				rootElement.appendChild(course);	
+			}
+			
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test.XML"))));
+
+
+		} catch (ParserConfigurationException | TransformerException ¢) {
+			¢.printStackTrace();
 		}
 			
 	}
+	
 	
 	private static String getRepFileAsString(){
 		if(!new File(REP_FILE_HEBREW).exists())
@@ -212,5 +187,72 @@ public class RepFile {
 		return $;
 	}
 	
+	private static Element createCourseElement(Document d, String courseSummery){
+		Element $ = d.createElement("Course");
+		
+		Matcher courseSummeryMatcher = Pattern
+				.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
+				.matcher(courseSummery);
+		if (courseSummeryMatcher.find())
+			$.setAttribute("id", courseSummeryMatcher.group("CourseID"));
+			$.setAttribute("name", courseSummeryMatcher.group("CourseName"));
 
+		return $;
+	}
+	
+	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
+		
+		if (Integer.parseInt(course.getAttribute("id")) < 394000)
+			for (String courseLesson : courseLessons) {
+				String lesson[] = courseLesson.split("[\\r\\n]+");
+				//System.out.println("lesson.length: " + lesson.length);
+				Element lessonGroupElement = null;
+				for (String lessonLine : lesson){
+					System.out.println(lessonLine);
+					if (lessonLine.contains("הרצאה")) {
+						lessonGroupElement = d.createElement("Lecture");
+						course.appendChild(lessonGroupElement);
+						Element lessonElement = d.createElement("Lesson");
+						lessonElement.setAttribute("Day", lessonLine.substring(14,15));
+						String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+						if (lessonTime.length == 2) {
+							lessonElement.setAttribute("TimeStart", lessonTime[1]);
+							lessonElement.setAttribute("TimeEnd", lessonTime[0]);
+						}
+						lessonElement.setAttribute("RoomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
+						lessonElement.setAttribute("Building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+						lessonGroupElement.appendChild(lessonElement);
+					} else if (lessonLine.contains("מרצה")) {
+						Element lecturerElement = d.createElement("Lecturer");
+						lecturerElement.setAttribute("Title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
+						lecturerElement.setAttribute("Name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
+						if (lessonGroupElement!=null)
+							lessonGroupElement.appendChild(lecturerElement);
+					} else if (lessonLine.contains("תרגיל"))
+						System.out.println("Tutorial");
+					else if (lessonLine.contains("מתרגל"))
+						System.out.println("Asistant");
+					else if (lessonLine.contains("מעבדה"))
+						System.out.println("Lab");
+					else if (lessonLine.contains("מדריך"))
+						System.out.println("Guide");
+					else if (StringUtils.isBlank(lessonLine.substring(7, 14))) {
+						Element lessonElement = d.createElement("Lesson");
+						lessonElement.setAttribute("Day", lessonLine.substring(14,15));
+						String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+						if (lessonTime.length == 2) {
+							lessonElement.setAttribute("TimeStart", lessonTime[1]);
+							lessonElement.setAttribute("TimeEnd", lessonTime[0]);
+						}
+						lessonElement.setAttribute("RoomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
+						lessonElement.setAttribute("Building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+						if (lessonGroupElement!=null)
+							lessonGroupElement.appendChild(lessonElement);
+					}
+				}
+
+			}        
+	}
+
+	
 }
