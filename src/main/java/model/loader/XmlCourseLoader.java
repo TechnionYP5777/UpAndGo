@@ -39,7 +39,7 @@ public class XmlCourseLoader extends CourseLoader {
 		super(REP_XML_PATH);
 		
 		if (!new File(path).exists())
-			RepFile.getCoursesFromRepFile();
+			RepFile.getCoursesNamesAndIds();
 		
 		//Create a data dir for saving changes if it does not exists
 		File dataDir = new File(DATA_DIR_PATH);
