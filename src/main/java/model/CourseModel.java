@@ -13,7 +13,7 @@ import model.loader.CourseLoader;
  * Interface for storing data inside the program.
  * The data typically should come from loader.
  * */
-public class CourseModel extends Observable {
+public class CourseModel extends Observable implements Model  {
 	// TODO: implement
 	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
 	// smth like:
