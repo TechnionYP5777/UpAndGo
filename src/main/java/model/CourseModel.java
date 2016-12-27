@@ -4,8 +4,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Optional;
 import java.util.TreeMap;
 
@@ -17,10 +15,6 @@ import model.loader.CourseLoader;
  * The data typically should come from loader.
  * */
 public class CourseModel implements Model  {
-	// TODO: implement
-	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
-	// smth like:
-	// addObservers(), notifyObservers()
 	
 	protected TreeMap<String, Course> courseList;
 	protected List<Course> pickedCourseList;
@@ -98,17 +92,4 @@ public class CourseModel implements Model  {
 			Optional.ofNullable(this.listenersMap.get(property)).ifPresent((x) -> x.remove(l));
 		
 	}
-	
-	
-	
-//	@Override
-//	public synchronized void addObserver(Observer ¢) {
-//		if (¢ == null)
-//			throw new NullPointerException();
-//		this.listenersList.add(¢);
-//	}
-	
-	
-	
-	
 }
