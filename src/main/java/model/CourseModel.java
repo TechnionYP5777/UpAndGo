@@ -34,6 +34,7 @@ public class CourseModel implements Model  {
 		Course pickedCourse = loader.loadCourse(name);
 		if (!this.pickedCourseList.contains(pickedCourse))
 			this.pickedCourseList.add(pickedCourse);
+		// TODO: implement
 //		setChanged();
 //		notifyObservers();
 	}
@@ -42,6 +43,7 @@ public class CourseModel implements Model  {
 		if (name == null)
 			throw new NullPointerException();
 		this.courseList.put(name, loader.loadCourse(name));
+		// TODO: implement
 //		setChanged();
 //		notifyObservers();
 	}
@@ -55,6 +57,7 @@ public class CourseModel implements Model  {
 			throw new NullPointerException();
 		if (this.courseList.remove(name) == null)
 			return;
+		// TODO: implement
 //		setChanged();
 //		notifyObservers();
 	}
@@ -73,6 +76,9 @@ public class CourseModel implements Model  {
 		this.loader.saveChosenCourseNames(names);
 	}
 	
+	/*
+	 * load need courses (by name/subname) from DB
+	 */
 	public void loadQuery(String query) {
 		// TODO: implement
 	}
