@@ -3,12 +3,12 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 
-import model.Model;
+import model.CourseModel;
 import view.View;
 
 public class CourseSelectionController extends Controller {
 
-	public CourseSelectionController(Model model, View view) {
+	public CourseSelectionController(CourseModel model, View view) {
 		super(model, view);
 		// TODO Auto-generated constructor stub
 	}

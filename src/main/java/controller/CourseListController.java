@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 
-import model.Model;
+import model.CourseModel;
 import view.CourseListView;
 import view.View;
 
@@ -13,7 +13,7 @@ import view.View;
  */
 public class CourseListController extends Controller{
 
-	public CourseListController(Model model, CourseListView view) {
+	public CourseListController(CourseModel model, CourseListView view) {
 		super(model, view);
 	}
 

@@ -25,7 +25,7 @@ import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
-import model.Model;
+import model.CourseModel;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
@@ -41,7 +41,7 @@ public class MainWinView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Model m;
+	CourseModel m;
 	private JPanel contentPane;
 	static JList<String> lstCourseList;
 	static JTextArea txtCourseDescription;
@@ -59,7 +59,7 @@ public class MainWinView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWinView(Model m) {
+	public MainWinView(CourseModel m) {
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -337,7 +337,7 @@ public class MainWinView extends JFrame {
 
 	}
 
-	static void setListColor(JList<String> lst, Model m) {
+	static void setListColor(JList<String> lst, CourseModel m) {
 
 		if (lst.getSelectedIndex() != -1)
 			txtCourseDescription.setText(

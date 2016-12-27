@@ -13,7 +13,7 @@ import model.loader.CourseLoader;
  * Interface for storing data inside the program.
  * The data typically should come from loader.
  * */
-public abstract class Model extends Observable {
+public class CourseModel extends Observable {
 	// TODO: implement
 	// Maybe it will be good to use Observer pattern to notify views when the Model changes.
 	// smth like:
@@ -24,7 +24,7 @@ public abstract class Model extends Observable {
 	protected List<Observer> listenersList;
 	protected CourseLoader loader;
 		
-	public Model(CourseLoader loader){
+	public CourseModel(CourseLoader loader){
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersList = new ArrayList<>();
 		this.loader = loader;

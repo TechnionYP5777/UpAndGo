@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionListener;
 import java.util.Observer;
 
-import model.Model;
+import model.CourseModel;
 import view.View;
 
 /**
@@ -17,10 +17,10 @@ import view.View;
  * the data model and the view.
  * */
 public abstract class Controller implements ActionListener {
-	protected Model model;
+	protected CourseModel model;
 	protected View view;
 	
-	public Controller(Model model, View view) {
+	public Controller(CourseModel model, View view) {
 		this.model = model;
 		this.view = view;
 

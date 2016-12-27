@@ -2,7 +2,7 @@ package model;
 
 import model.loader.CourseLoader;
 
-public class ConcreteModel extends Model{
+public class ConcreteModel extends CourseModel{
 
 	public ConcreteModel(CourseLoader loader) {
 		super(loader);
