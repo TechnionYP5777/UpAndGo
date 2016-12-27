@@ -8,10 +8,10 @@ public interface View extends PropertyChangeListener {
 	/*
 	 * add controller as listener
 	 */
-	void addPropertyChangeListener(ActionListener l);
+	void addActionListener(ActionListener l);
 	
 	/*
 	 * unsubscribe from controller
 	 */
-	void removePropertyChangeListener(String property, ActionListener l);
+	void removeActionListener(String property, ActionListener l);
 }
