@@ -77,7 +77,7 @@ public class CourseModel implements Model  {
 	}
 	
 	/*
-	 * load need courses (by name/subname) from DB
+	 * load needed courses (by name/subname) from DB
 	 */
 	public void loadQuery(String query) {
 		// TODO: implement
