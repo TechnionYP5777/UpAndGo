@@ -3,7 +3,6 @@ package model;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.TreeMap;
 
 import com.google.common.collect.HashMultimap;
