@@ -88,8 +88,13 @@ public class CourseModel implements Model  {
 
 	@Override
 	public void removePropertyChangeListener(String property, PropertyChangeListener l) {
-		if (property != null && l != null && this.listenersMap.containsKey(property))
-			Optional.ofNullable(this.listenersMap.get(property)).ifPresent((x) -> x.remove(l));
+		if (property == null || l == null || !this.listenersMap.containsKey(property))
+			return;
+		List<PropertyChangeListener> listeners = this.listenersMap.get(property);
+		if (listeners.size() != 1)
+			listeners.remove(l);
+		else
+			this.listenersMap.remove(property);
 		
 	}
 }
