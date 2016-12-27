@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
+import command.CourseCommand;
 import model.CourseModel;
 import view.CourseListView;
 
@@ -31,7 +32,18 @@ public class CourseListController implements Controller{
 //	}
 
 	@Override
-	public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+	public void actionPerformed(@SuppressWarnings("unused") ActionEvent ae) {
+//		switch (ae.getActionCommand()) {
+//		case CourseCommand.PICK.cmd():
+//			
+//			break;
+//		case CourseCommand.DROP.cmd():
+//			
+//			break;
+//		case CourseCommand.PICK.cmd():
+//			
+//			break;
+//		}
 		model.loadQuery(view.getQuery());
 	}
 	
