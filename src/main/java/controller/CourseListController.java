@@ -30,5 +30,4 @@ public class CourseListController implements Controller{
 			model.loadQuery(view.getQuery());
 		}
 	}
-	
 }

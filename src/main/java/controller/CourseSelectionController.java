@@ -1,32 +1,31 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.Observable;
 
+import command.CourseCommand;
 import model.CourseModel;
-import view.View;
+import view.CourseSelectionView;
 
 public class CourseSelectionController implements Controller {
 
-//	public CourseSelectionController(CourseModel model, View view) {
-//		super(model, view);
-//		// TODO Auto-generated constructor stub
-//	}
-//
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	protected CourseModel model;
+	protected CourseSelectionView view;
+	
+	public CourseSelectionController(CourseModel model, CourseSelectionView view) {
+		this.model = model;
+		this.view = view;
 	}
 
-//	@Override
-//	public void update(@SuppressWarnings("unused") Observable __, @SuppressWarnings("unused") Object arg) {
-//		// TODO
-//		// enforce logic of model
-//		// e.g.:
-////		if(view.wasPicked())
-////			model.pickCourse(view.getHighlightedCourseName());
-////		else
-////			model.dropCousre(view.getHighlightedCourseName());
-//	}
+	@Override
+	public void actionPerformed(ActionEvent ¢) {
+		if (¢.getActionCommand().equals(CourseCommand.PICK))
+			model.pickCourse(view.getLastPickedCourse());
+		else if (¢.getActionCommand().equals(CourseCommand.DROP))
+			model.dropCourse(view.getLastDropedCourse());
+		else {
+			if (!¢.getActionCommand().equals(CourseCommand.GET_QUERY))
+				throw new IllegalArgumentException();
+			model.getChosenCourseNames();
+		}
+	}
 }
