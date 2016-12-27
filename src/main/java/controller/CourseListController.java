@@ -1,20 +1,22 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.Observable;
 
 import model.CourseModel;
 import view.CourseListView;
-import view.View;
 
 /*
  * Corresponds to the View that shows list of available courses, lets to pick/drop them and peep inside them.
  * 
  */
-public class CourseListController extends Controller{
+public class CourseListController implements Controller{
 
+	protected CourseModel model;
+	protected CourseListView view;
+	
 	public CourseListController(CourseModel model, CourseListView view) {
-		super(model, view);
+		this.model = model;
+		this.view = view;
 	}
 
 //	@Override
@@ -29,9 +31,8 @@ public class CourseListController extends Controller{
 //	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-//		model.loadQuery(view.getQuery());
-		
+	public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+		model.loadQuery(view.getQuery());
 	}
 	
 }

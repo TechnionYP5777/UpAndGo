@@ -16,16 +16,8 @@ import view.View;
  * In many frameworks, the controller appears as a collection of methods and listeners built into both
  * the data model and the view.
  * */
-public abstract class Controller implements ActionListener {
-	protected CourseModel model;
-	protected View view;
-	
-	public Controller(CourseModel model, View view) {
-		this.model = model;
-		this.view = view;
-
-//		this.model.addObserver(view);	//TODO: implement
-		
-//		this.view.addObserver(this);	//TODO: implement
-	}	
+public interface Controller extends ActionListener {
+	/*
+	 * mark class
+	 */
 }
