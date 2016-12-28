@@ -204,6 +204,8 @@ public class RepFile {
 		if (Integer.parseInt(course.getAttribute("id")) >= 394000)
 			return;
 		System.out.println(course.getAttribute("id"));
+		Element examsElement = d.createElement("exams");
+		course.appendChild(examsElement);
 		for (String infoLine : courseInfo.split("[\\r\\n]+")) {
 			System.out.println(infoLine);
 			if (infoLine.contains("מורה")) {
@@ -211,8 +213,23 @@ public class RepFile {
 				teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
 				teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
 				course.appendChild(teacherInChargeElement);
+			} else if (infoLine.contains("ראשון")){
+				Element examElement = d.createElement("moedA");
+				addTimeToExam(examElement, infoLine);
+				examsElement.appendChild(examElement);
+			} else if (infoLine.contains("שני")){
+				Element examElement = d.createElement("moedB");
+				addTimeToExam(examElement, infoLine);
+				examsElement.appendChild(examElement);				
 			}
 		}
+	}
+	
+	private static void addTimeToExam(Element exam, String infoLine){
+		exam.setAttribute("day", infoLine.substring(22, 24));
+		exam.setAttribute("month", infoLine.substring(25, 27));
+		exam.setAttribute("year", infoLine.substring(28, 30));
+		exam.setAttribute("time", infoLine.substring(36, 42).replaceAll("\\s+", "").replaceAll("\\.", ":"));
 
 	}
 	
