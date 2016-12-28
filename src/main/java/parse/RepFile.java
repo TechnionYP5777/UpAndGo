@@ -136,7 +136,7 @@ public class RepFile {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			Document doc = factory.newDocumentBuilder().newDocument();
-			Element rootElement = doc.createElement("Courses");
+			Element rootElement = doc.createElement("courses");
 			doc.appendChild(rootElement);
 			
 			for (Matcher courseMatcher = Pattern
@@ -188,7 +188,7 @@ public class RepFile {
 	}
 	
 	private static Element createCourseElement(Document d, String courseSummery){
-		Element $ = d.createElement("Course");
+		Element $ = d.createElement("course");
 		
 		Matcher courseSummeryMatcher = Pattern
 				.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
@@ -200,34 +200,29 @@ public class RepFile {
 		return $;
 	}
 	
+	private enum InfoType {
+		UNKNOWN, LECTURE, LECTURER, TUTORIAL
+	}
+	
 	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
 		
 		if (Integer.parseInt(course.getAttribute("id")) < 394000)
 			for (String courseLesson : courseLessons) {
 				String lesson[] = courseLesson.split("[\\r\\n]+");
 				//System.out.println("lesson.length: " + lesson.length);
-				Element lessonGroupElement = null;
+				Element lectureGroupElement = null;
+				InfoType infoType = InfoType.UNKNOWN;
 				for (String lessonLine : lesson){
 					System.out.println(lessonLine);
 					if (lessonLine.contains("הרצאה")) {
-						lessonGroupElement = d.createElement("Lecture");
-						course.appendChild(lessonGroupElement);
-						Element lessonElement = d.createElement("Lesson");
-						lessonElement.setAttribute("Day", lessonLine.substring(14,15));
-						String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
-						if (lessonTime.length == 2) {
-							lessonElement.setAttribute("TimeStart", lessonTime[1]);
-							lessonElement.setAttribute("TimeEnd", lessonTime[0]);
-						}
-						lessonElement.setAttribute("RoomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
-						lessonElement.setAttribute("Building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
-						lessonGroupElement.appendChild(lessonElement);
+						infoType = InfoType.LECTURE;
+						lectureGroupElement = d.createElement("lecture");
+						course.appendChild(lectureGroupElement);
+						lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
 					} else if (lessonLine.contains("מרצה")) {
-						Element lecturerElement = d.createElement("Lecturer");
-						lecturerElement.setAttribute("Title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
-						lecturerElement.setAttribute("Name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
-						if (lessonGroupElement!=null)
-							lessonGroupElement.appendChild(lecturerElement);
+						infoType = InfoType.LECTURER;
+						if (lectureGroupElement!=null)
+							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
 					} else if (lessonLine.contains("תרגיל"))
 						System.out.println("Tutorial");
 					else if (lessonLine.contains("מתרגל"))
@@ -236,23 +231,41 @@ public class RepFile {
 						System.out.println("Lab");
 					else if (lessonLine.contains("מדריך"))
 						System.out.println("Guide");
-					else if (StringUtils.isBlank(lessonLine.substring(7, 14))) {
-						Element lessonElement = d.createElement("Lesson");
-						lessonElement.setAttribute("Day", lessonLine.substring(14,15));
-						String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
-						if (lessonTime.length == 2) {
-							lessonElement.setAttribute("TimeStart", lessonTime[1]);
-							lessonElement.setAttribute("TimeEnd", lessonTime[0]);
+					else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13)))
+							&& lectureGroupElement != null)
+						switch (infoType) {
+						case LECTURE:
+							lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
+							break;
+						case LECTURER:
+							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+							break;
+						default:
 						}
-						lessonElement.setAttribute("RoomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
-						lessonElement.setAttribute("Building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
-						if (lessonGroupElement!=null)
-							lessonGroupElement.appendChild(lessonElement);
-					}
 				}
 
 			}        
 	}
-
+	
+	private static Element getLessonElement(Document d, String lessonLine){
+		Element $ = d.createElement("lesson");
+		$.setAttribute("day", lessonLine.substring(14,15));
+		String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+		if (lessonTime.length == 2) {
+			$.setAttribute("timeStart", lessonTime[1]);
+			$.setAttribute("timeEnd", lessonTime[0]);
+		}
+		$.setAttribute("roomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
+		$.setAttribute("building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+		return $;
+	}
+	
+	private static Element getLecturerElement(Document d, String lessonLine){
+		Element $ = d.createElement("lecturer");
+		$.setAttribute("title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
+		$.setAttribute("name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
+		return $;
+	}
+		
 	
 }
