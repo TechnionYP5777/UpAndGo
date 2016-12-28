@@ -201,7 +201,7 @@ public class RepFile {
 	}
 	
 	private enum InfoType {
-		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT
+		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT, LAB, GUIDE
 	}
 	
 	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
@@ -244,21 +244,35 @@ public class RepFile {
 					infoType = InfoType.ASSISTANT;
 					if (tutorialGroupElement != null)
 						tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
-				} else if (lessonLine.contains("מעבדה"))
+				} else if (lessonLine.contains("מעבדה")){
+					infoType = InfoType.LAB;
 					System.out.println("Lab");
+				}
 				else if (lessonLine.contains("מדריך"))
 					System.out.println("Guide");
-				else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13)))
-						&& lectureGroupElement != null)
+				else if (lessonLine.contains("קבוצה"))
+					System.out.println("Group");
+				else if (lessonLine.contains("מנחה"))
+					System.out.println("Moderator");
+
+				else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13))))
 					switch (infoType) {
 					case LECTURE:
-						lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
+						if (lectureGroupElement != null)
+							lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					case LECTURER:
-						lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+						if (lectureGroupElement != null)
+							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+						break;
+					case TUTORIAL:
+						System.out.println("multiple tutorials");
+						if (tutorialGroupElement != null)
+							tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					case ASSISTANT:
-						lectureGroupElement.appendChild(getAssistantElement(d, lessonLine));
+						if (tutorialGroupElement != null)
+							tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
 						break;
 					default:
 					}
