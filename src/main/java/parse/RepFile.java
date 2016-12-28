@@ -149,10 +149,10 @@ public class RepFile {
 						Pattern.compile("^\\|(רישום\\s+|מס.+|\\s+)\\|\\n", Pattern.MULTILINE)
 						.split(courseMatcher.group("CourseInfoAndLessons"))));
 				
-				@SuppressWarnings("unused")
 				String courseInfo = courseInfoAndLessons.get(0);
 				courseInfoAndLessons.remove(0);
 				courseInfoAndLessons.removeAll(Arrays.asList("", null));
+				addInfoToCourse(doc, course, courseInfo);
 				addLessonsToCourse(doc, course, courseInfoAndLessons);
 				
 				rootElement.appendChild(course);	
@@ -200,6 +200,22 @@ public class RepFile {
 		return $;
 	}
 	
+	private static void addInfoToCourse(Document d, Element course, String courseInfo){
+		if (Integer.parseInt(course.getAttribute("id")) >= 394000)
+			return;
+		System.out.println(course.getAttribute("id"));
+		for (String infoLine : courseInfo.split("[\\r\\n]+")) {
+			System.out.println(infoLine);
+			if (infoLine.contains("מורה")) {
+				Element teacherInChargeElement = d.createElement("teacherInCharge");
+				teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
+				teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
+				course.appendChild(teacherInChargeElement);
+			}
+		}
+
+	}
+	
 	private enum InfoType {
 		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT, LAB, GUIDE
 	}
@@ -212,10 +228,9 @@ public class RepFile {
 		Element lectureGroupElement = null;
 		Element tutorialsGroupElement = null;
 		for (String courseLesson : courseLessons) {
-			String lesson[] = courseLesson.split("[\\r\\n]+");
 			Element tutorialGroupElement = null;
 			InfoType infoType = InfoType.UNKNOWN;
-			for (String lessonLine : lesson) {
+			for (String lessonLine : courseLesson.split("[\\r\\n]+")) {
 				System.out.println(lessonLine);
 				if (lessonLine.contains("הרצאה")) {
 					infoType = InfoType.LECTURE;
@@ -266,7 +281,6 @@ public class RepFile {
 							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
 						break;
 					case TUTORIAL:
-						System.out.println("multiple tutorials");
 						if (tutorialGroupElement != null)
 							tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
 						break;
