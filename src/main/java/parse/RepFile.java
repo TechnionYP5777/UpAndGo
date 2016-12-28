@@ -201,16 +201,19 @@ public class RepFile {
 	}
 	
 	private enum InfoType {
-		UNKNOWN, LECTURE, LECTURER, TUTORIAL
+		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT
 	}
 	
 	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
 		
-		if (Integer.parseInt(course.getAttribute("id")) < 394000)
+		if (Integer.parseInt(course.getAttribute("id")) < 394000){
+			System.out.println(course.getAttribute("id"));
+			Element lectureGroupElement = null;
+			Element tutorialsGroupElement = null;
 			for (String courseLesson : courseLessons) {
 				String lesson[] = courseLesson.split("[\\r\\n]+");
 				//System.out.println("lesson.length: " + lesson.length);
-				Element lectureGroupElement = null;
+				Element tutorialGroupElement = null;
 				InfoType infoType = InfoType.UNKNOWN;
 				for (String lessonLine : lesson){
 					System.out.println(lessonLine);
@@ -219,14 +222,31 @@ public class RepFile {
 						lectureGroupElement = d.createElement("lecture");
 						course.appendChild(lectureGroupElement);
 						lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
+						tutorialsGroupElement = null;
 					} else if (lessonLine.contains("מרצה")) {
 						infoType = InfoType.LECTURER;
 						if (lectureGroupElement!=null)
 							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
-					} else if (lessonLine.contains("תרגיל"))
-						System.out.println("Tutorial");
-					else if (lessonLine.contains("מתרגל"))
+					} else if (lessonLine.contains("תרגיל")){
+						infoType = InfoType.TUTORIAL;
+						if (lectureGroupElement != null && tutorialsGroupElement == null){
+							tutorialsGroupElement = d.createElement("tutorials");
+							lectureGroupElement.appendChild(tutorialsGroupElement);
+						}
+						if (tutorialsGroupElement != null){
+							tutorialGroupElement = d.createElement("tutorial");
+							tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
+							tutorialsGroupElement.appendChild(tutorialGroupElement);
+							tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
+						}
+						//TODO: make it work for tutorials with no lectures
+					}
+					else if (lessonLine.contains("מתרגל")){
+
+							
 						System.out.println("Asistant");
+					}
+						
 					else if (lessonLine.contains("מעבדה"))
 						System.out.println("Lab");
 					else if (lessonLine.contains("מדריך"))
@@ -245,6 +265,8 @@ public class RepFile {
 				}
 
 			}        
+
+		}
 	}
 	
 	private static Element getLessonElement(Document d, String lessonLine){
