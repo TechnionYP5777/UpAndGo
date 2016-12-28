@@ -239,6 +239,7 @@ public class RepFile {
 						tutorialsGroupElement.appendChild(tutorialGroupElement);
 						tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
 					}
+					//TODO: make it work for tutorials with no lectures
 				} else if (lessonLine.contains("מתרגל")) {
 					infoType = InfoType.ASSISTANT;
 					if (tutorialGroupElement != null)
@@ -255,6 +256,9 @@ public class RepFile {
 						break;
 					case LECTURER:
 						lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+						break;
+					case ASSISTANT:
+						lectureGroupElement.appendChild(getAssistantElement(d, lessonLine));
 						break;
 					default:
 					}
