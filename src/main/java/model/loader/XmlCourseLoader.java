@@ -2,6 +2,8 @@ package model.loader;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -135,6 +137,30 @@ public class XmlCourseLoader extends CourseLoader {
 							.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getAttribute("name"))
 							.setPoints(Double.parseDouble(((Element) p).getAttribute("points")))
+							.setATerm(LocalDateTime.parse(
+									((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+											.getNamedItem("year").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("month").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("day").getNodeValue()
+											+ " " + ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("time").getNodeValue(), 
+									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+							.setBTerm(LocalDateTime.parse(
+									((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+											.getNamedItem("year").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("month").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("day").getNodeValue()
+											+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("time").getNodeValue(), 
+									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
 							.build());
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
