@@ -40,12 +40,12 @@ public class XmlCourseLoaderTest {
 		
 		assert "234107".equals(coursesMap.get("234107").getId());
 		assert "אנליזה נמרית".equals(coursesMap.get("234107").getName());
-		
-		for (StuffMember i : coursesMap.get("123456").getStuff()) {
+		/*
+		for (StuffMember i : coursesMap.get("678910").getStuff()) {
 			System.out.println(i.getFirstName());
 			System.out.println(i.getLastName());
 			System.out.println(i.getTitle());
-		}
+		}*/
 		
 	}
 	/*
