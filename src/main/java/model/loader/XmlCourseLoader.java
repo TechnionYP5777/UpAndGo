@@ -133,35 +133,34 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					courses.put(((Element) p).getAttribute("id"), cb
-							.setId(((Element) p).getAttribute("id"))
-							.setName(((Element) p).getAttribute("name"))
-							.setPoints(Double.parseDouble(((Element) p).getAttribute("points")))
-							.setATerm(LocalDateTime.parse(
-									((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-											.getNamedItem("year").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("month").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("day").getNodeValue()
-											+ " " + ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("time").getNodeValue(), 
-									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
-							.setBTerm(LocalDateTime.parse(
-									((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-											.getNamedItem("year").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("month").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("day").getNodeValue()
-											+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("time").getNodeValue(), 
-									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
-							.build());
+					cb.setId(((Element) p).getAttribute("id"));
+					cb.setName(((Element) p).getAttribute("name"));
+					cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
+					cb.setATerm(LocalDateTime.parse(
+							((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+							.getNamedItem("year").getNodeValue()
+							+ "-"
+							+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+									.getNamedItem("month").getNodeValue()
+							+ "-"
+							+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+									.getNamedItem("day").getNodeValue()
+							+ " " + ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+									.getNamedItem("time").getNodeValue(), 
+							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+					cb.setBTerm(LocalDateTime.parse(
+							((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+							.getNamedItem("year").getNodeValue()
+							+ "-"
+							+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+									.getNamedItem("month").getNodeValue()
+							+ "-"
+							+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+									.getNamedItem("day").getNodeValue()
+							+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+									.getNamedItem("time").getNodeValue(), 
+							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+					courses.put(((Element) p).getAttribute("id"), cb.build());
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();

@@ -29,6 +29,15 @@ public class XmlCourseLoaderTest {
 		assert "3.0".equals(String.valueOf(coursesMap.get("123456").getPoints()));
 		assert "2016-06-29T09:00".equals((coursesMap.get("123456").getaTerm() + ""));
 		assert "2016-09-12T09:00".equals((coursesMap.get("123456").getbTerm() + ""));
+		
+		assert "014536".equals(coursesMap.get("014536").getId());
+		assert "טורי חתולים ופוררריה".equals(coursesMap.get("014536").getName());
+		
+		assert "678910".equals(coursesMap.get("678910").getId());
+		assert "'אלרגיות למתקדמים ת".equals(coursesMap.get("678910").getName());
+		
+		assert "234107".equals(coursesMap.get("234107").getId());
+		assert "אנליזה נמרית".equals(coursesMap.get("234107").getName());
 	}
 	/*
 	@Test
