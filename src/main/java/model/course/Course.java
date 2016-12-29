@@ -18,7 +18,7 @@ public class Course {
 	protected final String name;
 	protected final String id;
 	protected final String faculty;
-	protected final int points;
+	protected final double points;
 	protected final LocalDateTime aTerm;
 	protected final LocalDateTime bTerm;
 
@@ -41,7 +41,7 @@ public class Course {
 
 	// TODO: create interface LessonGroup as mediator between Lessons and Course
 
-	public Course(String name1, String id1, String faculty1, List<StuffMember> st, int acPoints, LocalDateTime aT,
+	public Course(String name1, String id1, String faculty1, List<StuffMember> st, double acPoints, LocalDateTime aT,
 			LocalDateTime bT, List<Course> prerequisitesList, List<Course> corequisitesList) {
 
 		if ((name1 == null) || (faculty1 == null))
@@ -92,7 +92,7 @@ public class Course {
 		return this.faculty;
 	}
 
-	public int getPoints() {
+	public double getPoints() {
 		return this.points;
 	}
 
@@ -172,7 +172,7 @@ public class Course {
 		protected String name = "";
 		protected String id = "";
 		protected String faculty = "";
-		protected int points;
+		protected double points;
 		protected LocalDateTime aTerm;
 		protected LocalDateTime bTerm;
 
@@ -197,7 +197,7 @@ public class Course {
 			return this;
 		}
 
-		public CourseBuilder setPoints(int ¢) {
+		public CourseBuilder setPoints(double ¢) {
 			this.points = ¢;
 			return this;
 		}
