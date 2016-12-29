@@ -1,9 +1,11 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.constraint.Constraint;
 import model.course.Course;
+import model.course.LessonGroup;
 
 /**
  * 
@@ -43,5 +45,18 @@ public class Scheduler {
 			if (!canMeetConstraints(¢, lconstraint))
 				return false;
 		return true;
+	}
+	
+	public void allPossibleCombinations(List<Course> lcourse){
+		ArrayList< List<LessonGroup> > mainArray = new ArrayList<>();
+		for(Course c : lcourse){
+			mainArray.add(c.getLectures());
+			mainArray.add(c.getTutorials());
+		}
+		
+		// EXP iterations:
+		int lastList = mainArray.size()-1;
+		//mainArray.get(lastList).
+		
 	}
 }
