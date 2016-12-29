@@ -6,6 +6,7 @@ package model.logic;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -21,9 +22,25 @@ public class AllCombinationsTest {
 		main.add(0); max.add(2);
 		main.add(0); max.add(3);
 		main.add(0); max.add(4);
+		main.add(0); max.add(3);
+		main.add(0); max.add(2);
+		main.add(0); max.add(3);
+		main.add(0); max.add(4);
+		main.add(0); max.add(3);
+		main.add(0); max.add(2);
+		main.add(0); max.add(3);
+		main.add(0); max.add(4);
+		
+		Random rand = new Random();
+
+		int  n = rand.nextInt(50);
 		
 		for (int last = main.size() - 1, msb;;) {
-			System.out.println(main);
+			//if()
+			n = rand.nextInt(170);
+			if(n == 0 )
+				System.out.println(main);
+			
 			main.set(last, main.get(last) + 1);
 			if (main.get(last) > max.get(last)) {
 				msb = last - 1;

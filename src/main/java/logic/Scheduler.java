@@ -13,6 +13,7 @@ import model.course.LessonGroup;
  * @since 22-12-16
  */
 
+@SuppressWarnings("boxing")
 public class Scheduler {
 	/**
 	 * gets a list of courses and a list of constraints and return a possible 
@@ -47,16 +48,60 @@ public class Scheduler {
 		return true;
 	}
 	
-	public void allPossibleCombinations(List<Course> lcourse){
-		ArrayList< List<LessonGroup> > mainArray = new ArrayList<>();
-		for(Course c : lcourse){
-			mainArray.add(c.getLectures());
-			mainArray.add(c.getTutorials());
+	private ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
+		ArrayList< List<LessonGroup> > $ = new ArrayList<>();
+		for(Course ¢ : lcourse){
+			$.add(¢.getLectures());
+			$.add(¢.getTutorials());
 		}
+		return $;
+	}
+	
+	private ArrayList<Integer> initIndexes(int size){
+		ArrayList<Integer> $ = new ArrayList<>();
+		for(int ¢ = 0; ¢<size; ++¢)
+			$.add(0);
+		return $;
+			
+	}
+	
+	
+	private ArrayList<Integer> initMax(ArrayList< List<LessonGroup> > lessonsGroupArray){
+		ArrayList<Integer> $ = new ArrayList<>();
+		for(List<LessonGroup> ¢ : lessonsGroupArray )
+			$.add(¢.size()-1);
+		return $;
+			
+	}
+	
+	
+	
+	public void expo(List<Course> lcourse){
+		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
-		// EXP iterations:
-		int lastList = mainArray.size()-1;
-		//mainArray.get(lastList).
+		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
+		ArrayList<Integer> max = initMax(lessonsGroupArray);
+		
+		for (int last = indexes.size() - 1, msb;;) {
+			//List<LessonGroup> schedule = getScheduleByIndexes(indexes);
+			//verifySchedule(schedule);
+			System.out.println(indexes);
+			indexes.set(last, indexes.get(last) + 1);
+			if (indexes.get(last) > max.get(last)) {
+				msb = last - 1;
+				// find lowest index which is not yet maxed
+				for (; msb >= 0; --msb)
+					if (indexes.get(msb) < max.get(msb))
+						break;
+				// if every index is max than we made all combinations
+				if (msb < 0)
+					break;
+				// increase msb and zero everything to its right
+				indexes.set(msb, indexes.get(msb) + 1);
+				for (int ¢ = msb + 1; ¢ <= last; ++¢)
+					indexes.set(¢, 0);
+			}
+		}
 		
 	}
 }
