@@ -24,10 +24,11 @@ public class XmlCourseLoaderTest {
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
-		assert "648013".equals(coursesMap.get("648013").getId());
-		assert "תופעות מעבר ננו מטריות".equals(coursesMap.get("648013").getName());
+		assert "123456".equals(coursesMap.get("123456").getId());
+		assert "מבוא לחתולים".equals(coursesMap.get("123456").getName());
+		assert "3.0".equals(String.valueOf(coursesMap.get("123456").getPoints()));
 	}
-	
+	/*
 	@Test
 	public void testSaveChosenCourseNames() {
 		List<String> names = new LinkedList<>();
@@ -55,6 +56,6 @@ public class XmlCourseLoaderTest {
 	public void deleteXml() {
 		new File("data/ChosenCourses.xml").delete();
 	}
-
+*/
 
 }

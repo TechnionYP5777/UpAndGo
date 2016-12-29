@@ -127,13 +127,13 @@ public class XmlCourseLoader extends CourseLoader {
 	private void getCourses() {
 		try {
 			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH)
-					.getElementsByTagName("Course");
+					.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					courses.put(((Element) p).getAttribute("id"), cb
 							.setId(((Element) p).getAttribute("id"))
-							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent())
+							.setName(((Element) p).getAttribute("name"))
 							.setPoints(Double.parseDouble(((Element) p).getAttribute("points")))
 							.build());
 			}
