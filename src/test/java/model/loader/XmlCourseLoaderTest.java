@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.course.Course;
+import model.course.StuffMember;
 
 public class XmlCourseLoaderTest {
 	
@@ -35,9 +36,17 @@ public class XmlCourseLoaderTest {
 		
 		assert "678910".equals(coursesMap.get("678910").getId());
 		assert "'אלרגיות למתקדמים ת".equals(coursesMap.get("678910").getName());
+		assert "2016-12-11T13:00".equals((coursesMap.get("678910").getaTerm() + ""));
 		
 		assert "234107".equals(coursesMap.get("234107").getId());
 		assert "אנליזה נמרית".equals(coursesMap.get("234107").getName());
+		
+		for (StuffMember i : coursesMap.get("123456").getStuff()) {
+			System.out.println(i.getFirstName());
+			System.out.println(i.getLastName());
+			System.out.println(i.getTitle());
+		}
+		
 	}
 	/*
 	@Test

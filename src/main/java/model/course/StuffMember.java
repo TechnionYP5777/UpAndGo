@@ -19,6 +19,27 @@ public class StuffMember {
 		officeHours = null;
 	}
 	
+	public StuffMember(String fName1, String lName1, String title) {
+		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
+		this.fName = fName1;
+		this.lName = lName1;
+		this.title = title;
+		this.office = this.email = "";
+		officeHours = null;
+	}
+	
+	public String getFirstName () {
+		return this.fName;
+	}
+	
+	public String getLastName () {
+		return this.lName;
+	}
+	
+	public String getTitle () {
+		return this.title;
+	}
+	
 	public StuffMember(String fName1, String lName1, String ttl, String eml, String office1,
 																			List<LocalDateTime> ofHours) {
 		this.fName = fName1;

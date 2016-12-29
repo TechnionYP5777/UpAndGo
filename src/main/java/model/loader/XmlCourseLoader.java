@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,6 +27,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import model.course.Course;
+import model.course.StuffMember;
 import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
@@ -126,6 +128,25 @@ public class XmlCourseLoader extends CourseLoader {
 		return $;
 	}
 	
+	private static void setStaffList (Course.CourseBuilder cb ,Node p, String s) {
+		NodeList TicList = ((Element) p).getElementsByTagName(s);
+		for (int k = 0; k < TicList.getLength(); ++k) {
+			Node n = TicList.item(k);
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				String firstName = "";
+				String[] splited = (((Element) n).getAttributes()
+						.getNamedItem("name").getNodeValue()).split(" ");
+				for (int j=0; j < splited.length -1 ; ++j) {
+					firstName += splited[j];
+					if (j+1 != splited.length)
+						firstName += " ";
+				}
+				cb.addStuffMember(new StuffMember(firstName, splited[splited.length - 1],
+						((Element) n).getAttributes().getNamedItem("title").getNodeValue()));
+			}	
+		}
+	}
+	
 	private void getCourses() {
 		try {
 			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH)
@@ -133,9 +154,13 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
+					//get course id
 					cb.setId(((Element) p).getAttribute("id"));
+					//get course name
 					cb.setName(((Element) p).getAttribute("name"));
+					//get course points
 					cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
+					//get course exam's A date and time
 					cb.setATerm(LocalDateTime.parse(
 							((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 							.getNamedItem("year").getNodeValue()
@@ -148,6 +173,7 @@ public class XmlCourseLoader extends CourseLoader {
 							+ " " + ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 									.getNamedItem("time").getNodeValue(), 
 							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+					//get course exam's B date and time
 					cb.setBTerm(LocalDateTime.parse(
 							((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
 							.getNamedItem("year").getNodeValue()
@@ -160,7 +186,14 @@ public class XmlCourseLoader extends CourseLoader {
 							+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
 									.getNamedItem("time").getNodeValue(), 
 							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+					//get course staff 
+					setStaffList (cb, p,"teacherInCharge");
+					setStaffList (cb, p,"lecturer");
+					setStaffList (cb, p,"assistant");
+					
+					
 					courses.put(((Element) p).getAttribute("id"), cb.build());
+					cb.clearStaffMembers();
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();

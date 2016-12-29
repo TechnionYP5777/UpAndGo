@@ -217,7 +217,11 @@ public class Course {
 				this.stuff.add(¢);
 			return this;
 		}
-
+		
+		public void clearStaffMembers() {
+			this.stuff.clear();
+		}
+		
 		public CourseBuilder addLesson(Lesson ¢) {
 			this.lessons.add(¢);
 			if (!this.stuff.contains(¢.representer))
