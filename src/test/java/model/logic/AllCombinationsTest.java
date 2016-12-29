@@ -3,7 +3,6 @@ package model.logic;
  * @author kobybs
  * @since 29-12-16
  */
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -66,12 +66,21 @@ public class Scheduler {
 	}
 	
 	
-	private ArrayList<Integer> initMax(ArrayList< List<LessonGroup> > lessonsGroupArray){
+	private static ArrayList<Integer> initMax(ArrayList< List<LessonGroup> > lessonsGroupArray){
 		ArrayList<Integer> $ = new ArrayList<>();
 		for(List<LessonGroup> ¢ : lessonsGroupArray )
 			$.add(¢.size()-1);
 		return $;
 			
+	}
+	
+	private static List<LessonGroup> getScheduleByIndexes(ArrayList< List<LessonGroup> > lessonsGroupArray, ArrayList<Integer> indexes){
+		List<LessonGroup> $ = new ArrayList<>();
+		for(int ¢ = 0; ¢ < indexes.size(); ++¢)
+			$.add(lessonsGroupArray.get(¢).get(indexes.get(¢)));
+		
+		return $;
+		
 	}
 	
 	
@@ -83,8 +92,17 @@ public class Scheduler {
 		ArrayList<Integer> max = initMax(lessonsGroupArray);
 		
 		for (int last = indexes.size() - 1, msb;;) {
-			//List<LessonGroup> schedule = getScheduleByIndexes(indexes);
-			//verifySchedule(schedule);
+			List<LessonGroup> schedule = getScheduleByIndexes(lessonsGroupArray, indexes);
+			// TO BE DONE AFTER danabra complete Schedule
+			/* verifySchedule(schedule);
+			if(Schedule.verify(schedule)){
+				return schedule;
+			}
+			
+			*/
+			
+			
+			
 			System.out.println(indexes);
 			indexes.set(last, indexes.get(last) + 1);
 			if (indexes.get(last) > max.get(last)) {
@@ -103,5 +121,6 @@ public class Scheduler {
 			}
 		}
 		
+		return; //return null;
 	}
 }
