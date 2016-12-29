@@ -131,8 +131,11 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					courses.put(((Element) p).getAttribute("id"), cb.setId(((Element) p).getAttribute("id"))
-							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
+					courses.put(((Element) p).getAttribute("id"), cb
+							.setId(((Element) p).getAttribute("id"))
+							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent())
+							.setPoints(Double.parseDouble(((Element) p).getAttribute("points")))
+							.build());
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
