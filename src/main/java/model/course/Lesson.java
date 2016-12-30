@@ -63,5 +63,10 @@ public class Lesson implements Event {
 		return this.day;
 	}
 	
-	
+	public boolean IsClashWith(Lesson ¢){
+		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) != 1
+				|| startTime.compareTo(¢.getEndTime()) != -1)
+				&& (endTime.compareTo(¢.getStartTime()) != 1 || endTime.compareTo(¢.getEndTime()) != -1)
+				&& endTime.compareTo(¢.getEndTime()) != 0;
+	}
 }
