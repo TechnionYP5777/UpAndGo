@@ -8,7 +8,7 @@ import model.course.LessonGroup;
 /**
  * 
  * this class holds a list of LessonGroup that do not clash between them
- * hence they form a legel Schedule
+ * hence they form a legal Schedule
  *
  */
 public class Timetable {
