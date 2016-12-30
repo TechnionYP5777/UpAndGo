@@ -4,6 +4,7 @@ package model.course;
 import java.time.DayOfWeek;
 
 import logic.Event;
+import model.constraint.TimeConstraint;
 import model.course.StuffMember;
 
 public class Lesson implements Event {
@@ -60,5 +61,16 @@ public class Lesson implements Event {
 		return this.day;
 	}
 	
-	
+	public boolean IsClashWith(Lesson ¢){
+		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
+				|| startTime.compareTo(¢.getEndTime()) >= 0)
+				&& (endTime.compareTo(¢.getStartTime()) <= 0 || endTime.compareTo(¢.getEndTime()) >= 0)
+				&& endTime.compareTo(¢.getEndTime()) != 0;
+	}
+	public boolean IsClashWith(TimeConstraint ¢){
+		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
+				|| startTime.compareTo(¢.getEndTime()) >= 0)
+				&& (endTime.compareTo(¢.getStartTime()) <= 0 || endTime.compareTo(¢.getEndTime()) >= 0)
+				&& endTime.compareTo(¢.getEndTime()) != 0;
+	}
 }

@@ -1,11 +1,14 @@
 package logic;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import model.constraint.Constraint;
+import model.constraint.TimeConstraint;
 import model.course.Course;
 import model.course.LessonGroup;
+import model.schedule.Schedule;
 
 /**
  * 
@@ -17,10 +20,38 @@ import model.course.LessonGroup;
 public class Scheduler {
 	/**
 	 * gets a list of courses and a list of constraints and return a possible 
-	 * schedule of them which doesnt break the constraints
+	 * schedule of them which doesnt break the constraints.
+	 * it works for TimeConstraints for now.
 	 */
-	public static void Schedule(List<Course> lcourse, List<Constraint> lconstraint){
-		return;
+	public Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
+		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
+		
+		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
+		ArrayList<Integer> max = initMax(lessonsGroupArray);
+		
+		for (int last = indexes.size() - 1, msb;;) {
+			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
+			Schedule $ = new Schedule(lessons,cs);
+			if($.isLegalSchedule())
+				return $;
+			System.out.println(indexes);
+			indexes.set(last, indexes.get(last) + 1);
+			if (indexes.get(last) > max.get(last)) {
+				msb = last - 1;
+				// find lowest index which is not yet maxed
+				for (; msb >= 0; --msb)
+					if (indexes.get(msb) < max.get(msb))
+						break;
+				// if every index is max than we made all combinations
+				if (msb < 0)
+					break;
+				// increase msb and zero everything to its right
+				indexes.set(msb, indexes.get(msb) + 1);
+				for (int ¢ = msb + 1; ¢ <= last; ++¢)
+					indexes.set(¢, 0);
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -48,6 +79,7 @@ public class Scheduler {
 		return true;
 	}
 	
+	@SuppressWarnings("static-method")
 	private ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
 		ArrayList< List<LessonGroup> > $ = new ArrayList<>();
 		for(Course ¢ : lcourse){
@@ -57,6 +89,7 @@ public class Scheduler {
 		return $;
 	}
 	
+	@SuppressWarnings("static-method")
 	private ArrayList<Integer> initIndexes(int size){
 		ArrayList<Integer> $ = new ArrayList<>();
 		for(int ¢ = 0; ¢<size; ++¢)
@@ -85,42 +118,5 @@ public class Scheduler {
 	
 	
 	
-	public void expo(List<Course> lcourse){
-		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
-		
-		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
-		ArrayList<Integer> max = initMax(lessonsGroupArray);
-		
-		for (int last = indexes.size() - 1, msb;;) {
-			List<LessonGroup> schedule = getScheduleByIndexes(lessonsGroupArray, indexes);
-			// TO BE DONE AFTER danabra complete Schedule
-			/* verifySchedule(schedule);
-			if(Schedule.verify(schedule)){
-				return schedule;
-			}
-			
-			*/
-			
-			
-			
-			System.out.println(indexes);
-			indexes.set(last, indexes.get(last) + 1);
-			if (indexes.get(last) > max.get(last)) {
-				msb = last - 1;
-				// find lowest index which is not yet maxed
-				for (; msb >= 0; --msb)
-					if (indexes.get(msb) < max.get(msb))
-						break;
-				// if every index is max than we made all combinations
-				if (msb < 0)
-					break;
-				// increase msb and zero everything to its right
-				indexes.set(msb, indexes.get(msb) + 1);
-				for (int ¢ = msb + 1; ¢ <= last; ++¢)
-					indexes.set(¢, 0);
-			}
-		}
-		
-		return; //return null;
-	}
+
 }

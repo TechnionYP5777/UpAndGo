@@ -1,64 +1,78 @@
 package model.schedule;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import model.constraint.Constraint;
-import model.course.Course;
+import model.constraint.TimeConstraint;
+import model.course.LessonGroup;
 
 
 public class Schedule {
+	private List<LessonGroup> lessons;
+	private List<TimeConstraint> constraints;
+	
 	public Schedule(){
-		//TODO: implement
+		lessons = new ArrayList<>();
+		constraints = new ArrayList<>();
+	}
+	public Schedule(List<LessonGroup> lessons,List<TimeConstraint> constraints){
+		this.lessons = new ArrayList<>(lessons);
+		this.constraints = new ArrayList<>(constraints);
+	}
+	public void addLesson(LessonGroup ¢) {
+		if(!lessons.contains(¢)) // add equals to lessonsgroup
+			lessons.add(¢);
 	}
 	
-	public void addCourse(@SuppressWarnings("unused") Course __) {
-		//TODO: implement
+	public void removeLesson(LessonGroup ¢) {
+		lessons.remove(¢);
 	}
 	
-	public void removeCourse(@SuppressWarnings("unused") Course __) {
-		//TODO: implement
+	public void addConstraint(TimeConstraint ¢) {
+		if(!constraints.contains(¢))
+			constraints.add(¢);
 	}
 	
-	public void removeCourse(@SuppressWarnings("unused") String courseName) {
-		//TODO: implement
-	}
-	
-	public void addConstraint(@SuppressWarnings("unused") Constraint __) {
-		//TODO: implement
-	}
-	
-	public void removeConstraint(@SuppressWarnings("unused") Constraint __) {
-		//TODO: implement
-	}
-	
-	@SuppressWarnings("static-method")
-	public List<Constraint> getConstraints() {
-		//TODO: implement
-		return null;
+	public void removeConstraint(TimeConstraint ¢) {
+		constraints.remove(¢);
 	}
 	
 	
-	@SuppressWarnings("static-method")
-	public List<Course> getCourses() {
-		//TODO: implement
-		return null;
+	public List<TimeConstraint> getConstraints() {
+		return constraints;
 	}
 	
-	@SuppressWarnings("static-method")
+	
+	public List<LessonGroup> getLessons() {
+		return lessons;
+	}
+	
 	public Timetable getTimetable() {
-		//TODO: implement
-		return null;
+		if (!isLegalSchedule())
+			return null;
+		Timetable $ = new Timetable();
+		$.addLessons(lessons);
+		return $;
+			
 	}
 	
-	@SuppressWarnings("static-method")
-	public boolean hasCourse(@SuppressWarnings("unused") String name) {
-		//TODO: implement
-		return true;
+	public boolean hasLesson(LessonGroup ¢) {
+		return lessons.contains(¢);
 	}
 	
-	@SuppressWarnings("static-method")
-	public boolean hasConstraint(@SuppressWarnings("unused") Constraint __) {
-		//TODO: implement
+	public boolean hasConstraint(TimeConstraint ¢) {
+		return constraints.contains(¢);
+	}
+	
+	public boolean isLegalSchedule(){
+		for(int i=0; i < lessons.size(); ++i){
+			for(int j=i+1; j < lessons.size(); ++j)
+				if (!lessons.get(i).isCLashWIth(lessons.get(j)))
+					return false;
+			for(TimeConstraint ¢ : constraints)
+				if (!lessons.get(i).isCLashWIth(¢))
+					return false;
+		}
 		return true;
 	}
 }
