@@ -35,6 +35,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWinView extends JFrame {
 
@@ -57,7 +59,7 @@ public class MainWinView extends JFrame {
 	private JScrollPane scpCourseDescription;
 	private JScrollPane scpCourseList;
 	static JButton btnRemoveCourse;
-	private JTextField courseNum;
+	JTextField courseNum;
 
 	/**
 	 * Create the frame.
@@ -109,8 +111,8 @@ public class MainWinView extends JFrame {
 		btnRemoveCourse.setMinimumSize(new Dimension(76, 25));
 		btnFinish = new JButton("Finish");
 		setButtonsPreferences();
-
-		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnFinish);
+		setSearchTextBox();
+		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, scpChosenCourses);
 	}
 
 	private void setCoursesListsModels() {
@@ -212,14 +214,16 @@ public class MainWinView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	}
-
-	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
-			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
-		
+	private void setSearchTextBox() {
 		courseNum = new JTextField();
 		courseNum.setText("Enter course number");
 		courseNum.setBackground(SystemColor.controlHighlight);
 		courseNum.setColumns(10);
+	}
+	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
+			 JScrollPane scpChosenCourses ) {
+		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -271,6 +275,8 @@ public class MainWinView extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+
+
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
@@ -352,6 +358,12 @@ public class MainWinView extends JFrame {
 				Message.infoBox(FINISH_MSG, "Finish",new ImageIcon("resources/cat-laptop-icon.png"));
 				close();
 
+			}
+		});
+		courseNum.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
+				courseNum.setText("");
 			}
 		});
 
