@@ -3,7 +3,6 @@ package model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -121,8 +120,9 @@ public class CourseModel implements Model  {
 	
 	/*
 	 * load needed courses (by name/subname) from DB
+	 * if empty, load all of them
 	 */
-	public void loadQuery(String query) {
+	public void loadQuery(@SuppressWarnings("unused") String query) {
 		// TODO: implement
 	}
 

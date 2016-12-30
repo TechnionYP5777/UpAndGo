@@ -1,10 +1,6 @@
 package controller;
 
 import java.awt.event.ActionListener;
-import java.util.Observer;
-
-import model.CourseModel;
-import view.View;
 
 /**
  * It's the main class that speaks with View-part of the program.
