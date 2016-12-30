@@ -57,4 +57,16 @@ public class LessonGroup {
 				return false;
 		return true;
 	}
+	
+	@Override
+	public boolean equals(Object other){
+		return other != null && (other == this || (other instanceof LessonGroup && ((LessonGroup) other).groupNum == this.groupNum));
+	}
+
+	@Override
+	public int hashCode() {
+		@SuppressWarnings("boxing")
+		Integer i = groupNum;
+		return i.hashCode();
+	}
 }
