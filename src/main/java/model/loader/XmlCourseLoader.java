@@ -2,7 +2,9 @@ package model.loader;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,14 +29,16 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import model.course.Course;
+import model.course.Lesson;
 import model.course.StuffMember;
+import model.course.WeekTime;
 import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
 	private static final String REP_XML_PATH = "REPFILE/REP.XML";
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
-
+	
 	
 	//List<Course> coursesList;
 	TreeMap<String, Course> courses;
@@ -190,13 +194,67 @@ public class XmlCourseLoader extends CourseLoader {
 					setStaffList (cb, p,"teacherInCharge");
 					setStaffList (cb, p,"lecturer");
 					setStaffList (cb, p,"assistant");
-					
+					//get lectures group Lessons
+					NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
+					for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
+						++groupNum;
+						Node n = lectureList.item(k);
+						if (n.getNodeType() == Node.ELEMENT_NODE) {
+							NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
+							for (int g = 0; g < lessonList.getLength(); ++g) {
+								Node m = lessonList.item(g);
+								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName()))) {
+									String place = ((Element) m).getAttribute("building");
+									if (!((Element) m).getAttribute("roomNumber").isEmpty())
+										place += " " + ((Element) m).getAttribute("roomNumber");
+									DayOfWeek lectureDay = convertStrToDay(((Element) m).getAttribute("day"));
+									cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
+											(new Lesson(
+													findStaffByName(cb,
+															(((Element) n).getElementsByTagName("lecturer").item(0).getAttributes().getNamedItem("name")
+																	.getNodeValue()).split(" ")),
+													new WeekTime(lectureDay,
+															LocalTime.parse(((Element) m).getAttribute("timeStart"))),
+													new WeekTime(lectureDay,
+															LocalTime.parse(((Element) m).getAttribute("timeEnd"))),
+													place, Lesson.Type.LECTURE, groupNum,
+													((Element) p).getAttribute("id"))));
+								}
+							}
+						}
+					}
 					
 					courses.put(((Element) p).getAttribute("id"), cb.build());
 					cb.clearStaffMembers();
+					cb.clearlecturesGroups();
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
+		}
+	}
+
+	private static StuffMember findStaffByName(Course.CourseBuilder cb, String[] splited) {
+		String firstName = "";
+		for (int j=0; j < splited.length -1 ; ++j) {
+			firstName += splited[j];
+			if (j+1 != splited.length)
+				firstName += " ";
+		}
+		for (StuffMember $ : cb.getStaffList())
+			if ($.getFirstName().equals(firstName) && $.getLastName().equals(splited[splited.length - 1]))
+				return $;
+		return null;
+	}
+
+	private static DayOfWeek convertStrToDay(String ¢) {
+		switch (¢) {
+		  case "א":  return DayOfWeek.valueOf("SUNDAY");
+		  case "ב":  return DayOfWeek.valueOf("MONDAY");
+		  case "ג":  return DayOfWeek.valueOf("TUESDAY");
+		  case "ד":  return DayOfWeek.valueOf("WEDNESDAY");
+		  case "ה":  return DayOfWeek.valueOf("THURSDAY");
+		  case "ו":  return DayOfWeek.valueOf("FRIDAY");
+		  default: return DayOfWeek.valueOf("SATURDAY");
 		}
 	}
 	

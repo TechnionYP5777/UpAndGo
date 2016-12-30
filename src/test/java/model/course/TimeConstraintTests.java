@@ -14,17 +14,11 @@ public class TimeConstraintTests {
 
 	@Test
 	public void test_a() {
-		Course.CourseBuilder cb = new CourseBuilder();
-		// Create some lesson:
-		StuffMember sm = new StuffMember("koby", "bs");
-		WeekTime startTime = new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30));
-		WeekTime endTime = new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30));
-		int dur = 2;
-		String place1 = "Taub";
-		Type t = Type.LECTURE;
-		int group = 21;
-		Lesson l = new Lesson(sm, startTime, endTime, dur, place1, t, group, null);
-		Course c = cb.setId("1234").setName("first").addLesson(l).build();
+		Course c = (new CourseBuilder()).setId("1234").setName("first")
+				.addLesson((new Lesson(new StuffMember("koby", "bs"),
+						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)),
+						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234")))
+				.build();
 		
 		//TreeMap<String, Course> coursesMap = cr.loadAllCourses();
 		//assert "648013".equals(coursesMap.get("648013").getId());

@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.course.Course;
+import model.course.Lesson;
+import model.course.LessonGroup;
 import model.course.StuffMember;
 
 public class XmlCourseLoaderTest {
@@ -45,6 +47,19 @@ public class XmlCourseLoaderTest {
 			System.out.println(i.getFirstName());
 			System.out.println(i.getLastName());
 			System.out.println(i.getTitle());
+		}
+		
+		for (LessonGroup i : coursesMap.get("014536").getLecturesLG()) {
+			System.out.println(i.getGroupNum());
+			System.out.println("**********");
+			for (Lesson j : i.getLessons()) {
+				System.out.println(j.getDay());
+				System.out.println(j.getPlace());
+				System.out.println((j.getType() + ""));
+				System.out.println((j.getRepresenter().getFirstName()));
+				System.out.println((j.getRepresenter().getLastName()));
+			}
+			System.out.println("**********");
 		}*/
 		
 	}

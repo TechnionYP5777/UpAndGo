@@ -58,7 +58,10 @@ public class Course {
 
 		this.stuff = new ArrayList<>(st);
 		this.lessons = new ArrayList<>();
-
+		
+		this.lectures = new ArrayList<>();
+		this.tutorials = new ArrayList<>();
+		
 		this.listeners = new ArrayList<>();
 
 		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
@@ -70,12 +73,20 @@ public class Course {
 
 	protected void addLesson(Lesson ¢) {
 		this.lessons.add(¢);
-		addHours(¢);
+	}
+	
+	protected void addLecturesLessonGroup(LessonGroup ¢) {
+		this.lectures.add(¢);
+	}
+	
+	protected void addTutorialLessonGroup(LessonGroup ¢) {
+		this.tutorials.add(¢);
 	}
 	
 	public List<LessonGroup> getLectures(){
 		return this.lectures;
 	}
+	
 	public List<LessonGroup> getTutorials(){
 		return this.tutorials;
 	}
@@ -107,7 +118,15 @@ public class Course {
 	public List<StuffMember> getStuff() {
 		return new ArrayList<>(this.stuff);
 	}
-
+	
+	public List<LessonGroup> getLecturesLG() {
+		return new ArrayList<>(this.lectures);
+	}
+	
+	public List<LessonGroup> getTutorialsLG() {
+		return new ArrayList<>(this.tutorials);
+	}
+	
 	public List<Lesson> getLessons() {
 		return new ArrayList<>(this.lessons);
 	}
@@ -130,24 +149,6 @@ public class Course {
 
 	public int getTotalHours() {
 		return this.laboratoryHours + this.lectureHours + this.projectHours + this.tutorialHours;
-	}
-
-	protected void addHours(Lesson ¢) {
-		switch (¢.type) {
-		case LABORATORY:
-			this.laboratoryHours += ¢.duration;
-			break;
-		case LECTURE:
-			this.lectureHours += ¢.duration;
-			break;
-		case PROJECT:
-			this.projectHours += ¢.duration;
-			break;
-		case TUTORIAL:
-			this.tutorialHours += ¢.duration;
-			break;
-		default:
-		}
 	}
 
 	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
@@ -178,6 +179,9 @@ public class Course {
 
 		protected final List<StuffMember> stuff = new ArrayList<>();
 		protected final List<Lesson> lessons = new ArrayList<>();
+		
+		protected  List<LessonGroup> lectures = new ArrayList<>();
+		protected  List<LessonGroup> tutorials = new ArrayList<>();
 
 		protected final List<Course> prerequisites = new ArrayList<>();
 		protected final List<Course> corequisites = new ArrayList<>();
@@ -211,6 +215,39 @@ public class Course {
 			this.bTerm = ¢;
 			return this;
 		}
+		
+		public CourseBuilder addLectureGroup(int ¢) {
+			for (LessonGroup i : this.lectures)
+				if (i.getGroupNum() == ¢)
+					return this;
+			this.lectures.add(new LessonGroup(¢));
+			return this;
+		}
+		
+		public CourseBuilder addTutorialGroup(int ¢) {
+			for (LessonGroup i : this.tutorials)
+				if (i.getGroupNum() == ¢)
+					return this;
+			this.tutorials.add(new LessonGroup(¢));
+			return this;
+		}
+		
+		public CourseBuilder addLessonToGroup(int ¢, Lesson l) {
+			if (l.getType() == Lesson.Type.LECTURE) {
+				for (LessonGroup i : this.lectures)
+					if ((i.getGroupNum() == ¢) && (!i.getLessons().contains(l))) {
+						i.addLesson(l);
+						return this;
+					}
+				return this;
+			}
+			for (LessonGroup i : this.tutorials)
+				if ((i.getGroupNum() == ¢) && (!i.getLessons().contains(l))) {
+					i.addLesson(l);
+					return this;
+				}
+			return this;
+		}
 
 		public CourseBuilder addStuffMember(StuffMember ¢) {
 			if (!this.stuff.contains(¢))
@@ -221,6 +258,20 @@ public class Course {
 		public void clearStaffMembers() {
 			this.stuff.clear();
 		}
+		
+		public void clearlecturesGroups() {
+			this.lectures.clear();
+		}
+		
+		public void cleartutorialGroup() {
+			this.tutorials.clear();
+		}
+		
+		public List<StuffMember> getStaffList() {
+			return this.stuff;
+		}
+		
+		
 		
 		public CourseBuilder addLesson(Lesson ¢) {
 			this.lessons.add(¢);
@@ -246,6 +297,10 @@ public class Course {
 					this.prerequisites, this.corequisites);
 			for (Lesson ¢ : this.lessons)
 				$.addLesson(¢);
+			for (LessonGroup ¢ : this.lectures)
+				$.addLecturesLessonGroup(¢);
+			for (LessonGroup ¢ : this.tutorials)
+				$.addTutorialLessonGroup(¢);
 			return $;
 		}
 	}

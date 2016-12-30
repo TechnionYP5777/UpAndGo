@@ -1,6 +1,8 @@
 package model.course;
 
 
+import java.time.DayOfWeek;
+
 import logic.Event;
 import model.course.StuffMember;
 
@@ -10,28 +12,27 @@ public class Lesson implements Event {
 	protected final StuffMember representer;
 	protected final WeekTime startTime;
 	protected final WeekTime endTime;
-	protected final int duration;
 	protected final String place;
 	protected final Type type;
 	protected final int group;
 	protected int day;	
-	protected final Course course;
+	protected final String course;
 	
-	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, int dur, String place1, Type t, int g, Course c) {
+	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c) {
 		if((repr==null) || (theStartTime==null) || (place1==null))
 			throw new NullPointerException();
 		
 		this.representer = repr;
 		this.startTime = theStartTime;
 		this.endTime = endTime;
-		this.duration = dur;
 		this.place = place1;
 		this.type = t;
 		this.group = g;
+		this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		this.course = c;
 	}
 	
-	public Course getCourse() {
+	public String getCourse() {
 		return this.course;
 	}
 
@@ -47,10 +48,6 @@ public class Lesson implements Event {
 		return this.endTime;
 	}
 
-	public int getDuration() {
-		return this.duration;
-	}
-	
 	public String getPlace() {
 		return this.place;
 	}
