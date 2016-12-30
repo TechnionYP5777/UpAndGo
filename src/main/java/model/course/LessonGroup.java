@@ -3,6 +3,8 @@ package model.course;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.constraint.TimeConstraint;
+
 
 
 public class LessonGroup {
@@ -40,15 +42,19 @@ public class LessonGroup {
 		this.lessons.add(¢);
 	}
 	
-	public boolean isCLashWIth(LessonGroup l){
-		if(l==this)
+	public boolean isCLashWIth(LessonGroup g){
+		if(g==this)
 			return false;
-		for(Lesson ls1 : lessons){
-			for(Lesson ls2 : l.getLessons()){
-				if(!ls1.IsClashWith(ls2))
+		for(Lesson ls1 : lessons)
+			for (Lesson ls2 : g.getLessons())
+				if (!ls1.IsClashWith(ls2))
 					return false;
-			}
-		}
+		return true;
+	}
+	public boolean isCLashWIth(TimeConstraint g){
+		for(Lesson ls1 : lessons)
+			if (!ls1.IsClashWith(g))
+				return false;
 		return true;
 	}
 }

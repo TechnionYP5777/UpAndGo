@@ -2,6 +2,7 @@ package model.course;
 
 
 import logic.Event;
+import model.constraint.TimeConstraint;
 import model.course.StuffMember;
 
 public class Lesson implements Event {
@@ -64,6 +65,12 @@ public class Lesson implements Event {
 	}
 	
 	public boolean IsClashWith(Lesson ¢){
+		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) != 1
+				|| startTime.compareTo(¢.getEndTime()) != -1)
+				&& (endTime.compareTo(¢.getStartTime()) != 1 || endTime.compareTo(¢.getEndTime()) != -1)
+				&& endTime.compareTo(¢.getEndTime()) != 0;
+	}
+	public boolean IsClashWith(TimeConstraint ¢){
 		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) != 1
 				|| startTime.compareTo(¢.getEndTime()) != -1)
 				&& (endTime.compareTo(¢.getStartTime()) != 1 || endTime.compareTo(¢.getEndTime()) != -1)
