@@ -39,4 +39,16 @@ public class LessonGroup {
 			throw new IllegalArgumentException();
 		this.lessons.add(¢);
 	}
+	
+	public boolean isCLashWIth(LessonGroup l){
+		if(l==this)
+			return false;
+		for(Lesson ls1 : lessons){
+			for(Lesson ls2 : l.getLessons()){
+				if(!ls1.IsClashWith(ls2))
+					return false;
+			}
+		}
+		return true;
+	}
 }
