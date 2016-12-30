@@ -1,7 +1,9 @@
 package model;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -9,6 +11,7 @@ import com.google.common.collect.HashMultimap;
 
 import model.course.Course;
 import model.loader.CourseLoader;
+import property.CourseProperty;
 
 /**
  * Interface for storing data inside the program.
@@ -31,21 +34,36 @@ public class CourseModel implements Model  {
 	public void pickCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course pickedCourse = loader.loadCourse(name);
-		if (!this.pickedCourseList.contains(pickedCourse))
-			this.pickedCourseList.add(pickedCourse);
-		// TODO: implement
-//		setChanged();
-//		notifyObservers();
+		Course pickedCourse = this.getCourseByName(name);
+		if (this.pickedCourseList.contains(pickedCourse))
+			return;
+		
+		// save picking in DB
+		List<String> prevPickedList = new ArrayList<>();
+		for(Course ¢: this.pickedCourseList)
+			prevPickedList.add(¢.getName());
+		List<String> curPickedList = new ArrayList<>(prevPickedList);
+		curPickedList.add(name);
+		this.pickedCourseList.add(pickedCourse);
+		this.loader.saveChosenCourseNames(curPickedList);
+		
+		// notify listeners
+		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, prevPickedList, curPickedList))));
 	}
 	
 	public void addCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
+		List<String> prevCourseList = this.getCoursesNames();
 		this.courseList.put(name, loader.loadCourse(name));
-		// TODO: implement
-//		setChanged();
-//		notifyObservers();
+		
+		List<String> curCourseList = new ArrayList<>(prevCourseList);
+		curCourseList.remove(name);
+		
+		// notify listeners
+		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList))));
 	}
 	
 	public List<String> getCoursesNames() {
@@ -55,17 +73,42 @@ public class CourseModel implements Model  {
 	public void dropCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		if (this.courseList.remove(name) == null)
+		Course droppedCourse = this.getCourseByName(name);
+		if (!this.pickedCourseList.contains(droppedCourse))
 			return;
-		// TODO: implement
-//		setChanged();
-//		notifyObservers();
+		
+		// save dropping in DB
+		List<String> prevPickedList = new ArrayList<>();
+		for(Course ¢: this.pickedCourseList)
+			prevPickedList.add(¢.getName());
+		List<String> curPickedList = new ArrayList<>(prevPickedList);
+		curPickedList.remove(name);
+		this.pickedCourseList.remove(droppedCourse);
+		this.loader.saveChosenCourseNames(curPickedList);
+		
+		// notify listeners
+		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, prevPickedList, curPickedList))));
+	}
+	
+	/* 
+	 * expose course to listeners for "course_list" property
+	 */
+	public void exposeCourse(String name) {
+		if (name == null)
+			throw new NullPointerException();
+		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, this.getCourseByName(name)))));
 	}
 	
 	public Course getCourseByName(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		return this.courseList.get(name);
+		if(this.courseList.containsKey(name))
+			return this.courseList.get(name);
+		Course $ = loader.loadCourse(name);
+		this.courseList.put(name, $);
+		return $;
 	}
 	
 	public List<String> getChosenCourseNames() {

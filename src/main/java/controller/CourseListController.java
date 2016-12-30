@@ -29,7 +29,7 @@ public class CourseListController implements Controller{
 	@Override
 	public void actionPerformed(ActionEvent ¢) {
 		if (¢.getActionCommand().equals(CourseCommand.DETAILS))
-			model.getCourseByName(view.getHighlightedCourse());
+			model.exposeCourse(view.getHighlightedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
 				model.loadQuery(view.getQuery());
 	}
