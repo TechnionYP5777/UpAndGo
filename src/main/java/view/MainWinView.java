@@ -37,17 +37,12 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class MainWinView extends JFrame {
 
-	private static final String FINISH_MSG = "Your choise has been saved!\n   Up&Go will close now!";
+	
 	/**
 	 * 
 	 */
@@ -60,7 +55,6 @@ public class MainWinView extends JFrame {
 	static JButton btnFinish;
 	static JList<String> lstChosenCourses;
 	static DefaultListModel<String> courseModel;
-	static DefaultListModel<String> searchCourseModel;
 	static DefaultListModel<String> ChosenCourseModel;
 	private JLabel lblTitle;
 	private JScrollPane scpChosenCourses;
@@ -69,6 +63,11 @@ public class MainWinView extends JFrame {
 	static JButton btnRemoveCourse;
 	JTextField courseNum;
 
+	private static final String DEFAULT_COURSE_NUM_TEXT ="Enter course number";
+	private static final String EMPTY_DESCRIPTION=" Choose course to add ";
+	private static final String NO_COURSES_LEFT=	" No Courses Left ";
+	private static final String FINISH_MSG = "Your choise has been saved!\n   Up&Go will close now!";
+	
 	/**
 	 * Create the frame.
 	 */
@@ -225,7 +224,7 @@ public class MainWinView extends JFrame {
 
 	private void setSearchTextBox() {
 		courseNum = new JTextField();
-		courseNum.setText("Enter course number");
+		courseNum.setText(DEFAULT_COURSE_NUM_TEXT);
 		courseNum.setBackground(SystemColor.controlHighlight);
 		courseNum.setColumns(10);
 	}
@@ -329,7 +328,7 @@ public class MainWinView extends JFrame {
 				btnRemoveCourse.setEnabled(true);
 				if (!courseModel.isEmpty())
 					return;
-				txtCourseDescription.setText(" No Courses Left ");
+				txtCourseDescription.setText(NO_COURSES_LEFT);
 				btnAddCourse.setEnabled(false);
 			}
 		});
@@ -340,7 +339,7 @@ public class MainWinView extends JFrame {
 				if (lstChosenCourses.getSelectedValue() == null)
 					return;
 				if (courseModel.isEmpty()) {
-					txtCourseDescription.setText(" Choose course to add ");
+					txtCourseDescription.setText(EMPTY_DESCRIPTION);
 					btnAddCourse.setEnabled(false);
 				}
 				courseModel.addElement(lstChosenCourses.getSelectedValue());
@@ -381,8 +380,7 @@ public class MainWinView extends JFrame {
 		courseNum.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
-				if ("".equals(courseNum.getText()))
-					courseNum.setText("Enter course number");
+				courseNum.setText(DEFAULT_COURSE_NUM_TEXT);
 			}
 		});
 
@@ -394,7 +392,7 @@ public class MainWinView extends JFrame {
 			txtCourseDescription.setText(
 					"Course " + lst.getSelectedValue() + "\n" + m.getCourseByName(lst.getSelectedValue()).getName());
 		else {
-			txtCourseDescription.setText(" Choose course to add ");
+			txtCourseDescription.setText(EMPTY_DESCRIPTION);
 			txtCourseDescription.setDisabledTextColor(Color.GRAY);
 		}
 
