@@ -42,6 +42,8 @@ import java.beans.PropertyChangeEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class MainWinView extends JFrame {
 
@@ -374,6 +376,13 @@ public class MainWinView extends JFrame {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				lstCourseList.setSelectedValue(courseNum.getText(), true);
+			}
+		});
+		courseNum.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+				if ("".equals(courseNum.getText()))
+					courseNum.setText("Enter course number");
 			}
 		});
 
