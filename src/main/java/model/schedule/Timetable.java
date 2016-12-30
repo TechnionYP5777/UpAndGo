@@ -34,7 +34,6 @@ public class Timetable {
 		if(!isNoClash())
 			this.lessons.removeAll(lessons);
 	}
-	
 	public void removeLesson(LessonGroup ¢) {
 		lessons.remove(¢);
 	}
