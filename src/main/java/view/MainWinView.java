@@ -37,6 +37,11 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class MainWinView extends JFrame {
 
@@ -53,6 +58,7 @@ public class MainWinView extends JFrame {
 	static JButton btnFinish;
 	static JList<String> lstChosenCourses;
 	static DefaultListModel<String> courseModel;
+	static DefaultListModel<String> searchCourseModel;
 	static DefaultListModel<String> ChosenCourseModel;
 	private JLabel lblTitle;
 	private JScrollPane scpChosenCourses;
@@ -72,7 +78,7 @@ public class MainWinView extends JFrame {
 		} catch (Throwable ¢) {
 			¢.printStackTrace();
 		}
-		this.m= m;
+		this.m = m;
 		initComponents();
 		createEvents();
 
@@ -121,7 +127,7 @@ public class MainWinView extends JFrame {
 
 		for (String val : m.getCoursesNames())
 			courseModel.addElement(val);
-		for (String val : m.getChosenCourseNames()){
+		for (String val : m.getChosenCourseNames()) {
 			courseModel.removeElement(val);
 			ChosenCourseModel.addElement(val);
 		}
@@ -214,69 +220,67 @@ public class MainWinView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	}
+
 	private void setSearchTextBox() {
 		courseNum = new JTextField();
 		courseNum.setText("Enter course number");
 		courseNum.setBackground(SystemColor.controlHighlight);
 		courseNum.setColumns(10);
 	}
+
 	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
-			 JScrollPane scpChosenCourses ) {
-		
+			JScrollPane scpChosenCourses) {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(158)
-							.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-							.addGap(106))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-								.addComponent(btnFinish, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-								.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-								.addComponent(courseNum, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnRemoveCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnFinish)))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(courseNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+				.createSequentialGroup()
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(158)
+								.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE).addGap(106))
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+										.addComponent(btnFinish, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+										.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 152,
+												Short.MAX_VALUE)
+										.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+										.addComponent(courseNum, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
+				.addContainerGap()));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane
+										.createSequentialGroup().addGroup(gl_contentPane
+												.createParallelGroup(Alignment.TRAILING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(scpChosenCourses, GroupLayout.DEFAULT_SIZE, 159,
+																Short.MAX_VALUE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(btnRemoveCourse, GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addComponent(scpCourseDescription, GroupLayout.DEFAULT_SIZE, 190,
+														Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+												.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnFinish)))
+								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+										.addComponent(courseNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(scpCourseList, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
+						.addContainerGap()));
 		contentPane.setLayout(gl_contentPane);
 	}
-
-
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
@@ -355,7 +359,7 @@ public class MainWinView extends JFrame {
 				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
 				m.choseCourses(names);
-				Message.infoBox(FINISH_MSG, "Finish",new ImageIcon("resources/cat-laptop-icon.png"));
+				Message.infoBox(FINISH_MSG, "Finish", new ImageIcon("resources/cat-laptop-icon.png"));
 				close();
 
 			}
@@ -364,6 +368,12 @@ public class MainWinView extends JFrame {
 			@Override
 			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
 				courseNum.setText("");
+			}
+		});
+		courseNum.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				lstCourseList.setSelectedValue(courseNum.getText(), true);
 			}
 		});
 
@@ -383,10 +393,10 @@ public class MainWinView extends JFrame {
 
 	public static class Message {
 
-		public static void infoBox(String infoMessage, String titleBar , ImageIcon i ) {
+		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
 
 			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
-			
+
 		}
 	}
 }
