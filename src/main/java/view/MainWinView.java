@@ -110,7 +110,7 @@ public class MainWinView extends JFrame {
 		btnFinish = new JButton("Finish");
 		setButtonsPreferences();
 
-		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, btnAddCourse, scpChosenCourses, btnFinish);
+		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, scpChosenCourses);
 	}
 
 	private void setCoursesListsModels() {
@@ -214,7 +214,7 @@ public class MainWinView extends JFrame {
 	}
 
 	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
-			JButton btnAddCourse, JScrollPane scpChosenCourses, JButton btnSaveChoice) {
+			 JScrollPane scpChosenCourses ) {
 		
 		courseNum = new JTextField();
 		courseNum.setText("Enter course number");
