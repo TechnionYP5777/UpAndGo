@@ -109,7 +109,7 @@ public class MainWinView extends JFrame {
 		btnRemoveCourse.setMinimumSize(new Dimension(76, 25));
 		btnFinish = new JButton("Finish");
 		setButtonsPreferences();
-
+		setSearchTextBox();
 		setGroupLayout(lblTitle, scpCourseDescription, scpCourseList, scpChosenCourses);
 	}
 
@@ -212,14 +212,16 @@ public class MainWinView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	}
-
-	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
-			 JScrollPane scpChosenCourses ) {
-		
+	private void setSearchTextBox() {
 		courseNum = new JTextField();
 		courseNum.setText("Enter course number");
 		courseNum.setBackground(SystemColor.controlHighlight);
 		courseNum.setColumns(10);
+	}
+	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
+			 JScrollPane scpChosenCourses ) {
+		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -271,6 +273,8 @@ public class MainWinView extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+
+
 
 	///////////////////////////////////////////////////////////////////////////
 	/// This method is creating events
