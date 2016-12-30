@@ -30,10 +30,7 @@ public class CourseListController implements Controller{
 	public void actionPerformed(ActionEvent ¢) {
 		if (¢.getActionCommand().equals(CourseCommand.DETAILS))
 			model.getCourseByName(view.getHighlightedCourse());
-		else {
-			if (!¢.getActionCommand().equals(CourseCommand.GET_QUERY))
-				throw new IllegalArgumentException();
-			model.loadQuery(view.getQuery());
-		}
+		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
+				model.loadQuery(view.getQuery());
 	}
 }

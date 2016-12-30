@@ -27,10 +27,7 @@ public class CourseSelectionController implements Controller {
 			model.pickCourse(view.getLastPickedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.DROP))
 			model.dropCourse(view.getLastDropedCourse());
-		else {
-			if (!¢.getActionCommand().equals(CourseCommand.GET_QUERY))
-				throw new IllegalArgumentException();
-			model.getChosenCourseNames();
-		}
+		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
+				model.getChosenCourseNames();
 	}
 }
