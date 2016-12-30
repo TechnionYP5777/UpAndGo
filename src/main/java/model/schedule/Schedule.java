@@ -47,7 +47,6 @@ public class Schedule {
 		return lessons;
 	}
 	
-	@SuppressWarnings("static-method")
 	public Timetable getTimetable() {
 		if (!isLegalSchedule())
 			return null;
