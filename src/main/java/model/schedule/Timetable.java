@@ -29,10 +29,10 @@ public class Timetable {
 		if(!isNoClash())
 			lessons.remove(¢);
 	}
-	public void addLessons(List<LessonGroup> lessons){
-		this.lessons.addAll(lessons);
+	public void addLessons(List<LessonGroup> ¢){
+		this.lessons.addAll(¢);
 		if(!isNoClash())
-			this.lessons.removeAll(lessons);
+			this.lessons.removeAll(¢);
 	}
 	public void removeLesson(LessonGroup ¢) {
 		lessons.remove(¢);
@@ -43,11 +43,10 @@ public class Timetable {
 	}
 	
 	private boolean isNoClash(){
-		for(int i=0; i < lessons.size(); ++i){
-			for(int j=i+1; j < lessons.size(); ++j)
+		for(int i=0; i < lessons.size(); ++i)
+			for (int j = i + 1; j < lessons.size(); ++j)
 				if (!lessons.get(i).isCLashWIth(lessons.get(j)))
 					return false;
-		}
 		return true;
 	}
 	
