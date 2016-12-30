@@ -35,6 +35,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWinView extends JFrame {
 
@@ -57,7 +59,7 @@ public class MainWinView extends JFrame {
 	private JScrollPane scpCourseDescription;
 	private JScrollPane scpCourseList;
 	static JButton btnRemoveCourse;
-	private JTextField courseNum;
+	JTextField courseNum;
 
 	/**
 	 * Create the frame.
@@ -356,6 +358,12 @@ public class MainWinView extends JFrame {
 				Message.infoBox(FINISH_MSG, "Finish",new ImageIcon("resources/cat-laptop-icon.png"));
 				close();
 
+			}
+		});
+		courseNum.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
+				courseNum.setText("");
 			}
 		});
 
