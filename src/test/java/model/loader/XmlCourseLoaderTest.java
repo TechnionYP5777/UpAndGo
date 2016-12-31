@@ -49,7 +49,7 @@ public class XmlCourseLoaderTest {
 			System.out.println(i.getTitle());
 		}
 		
-		for (LessonGroup i : coursesMap.get("014536").getLecturesLG()) {
+		for (LessonGroup i : coursesMap.get("123456").getLecturesLG()) {
 			System.out.println(i.getGroupNum());
 			System.out.println("**********");
 			for (Lesson j : i.getLessons()) {
@@ -62,7 +62,7 @@ public class XmlCourseLoaderTest {
 			System.out.println("**********");
 		}
 		
-		for (LessonGroup i : coursesMap.get("234107").getTutorialsLG()) {
+		for (LessonGroup i : coursesMap.get("123456").getTutorialsLG()) {
 			System.out.println(i.getGroupNum());
 			System.out.println("**********");
 			for (Lesson j : i.getLessons()) {

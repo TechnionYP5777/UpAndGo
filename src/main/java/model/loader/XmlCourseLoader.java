@@ -194,38 +194,10 @@ public class XmlCourseLoader extends CourseLoader {
 					setStaffList (cb, p,"teacherInCharge");
 					setStaffList (cb, p,"lecturer");
 					setStaffList (cb, p,"assistant");
-					//get lectures group Lessons
+					//get lectures and tutorial group Lessons
 					NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 					for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
 						++groupNum;
-						Node n = lectureList.item(k);
-						if (n.getNodeType() == Node.ELEMENT_NODE) {
-							NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
-							for (int g = 0; g < lessonList.getLength(); ++g) {
-								Node m = lessonList.item(g);
-								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName()))) {
-									String place = ((Element) m).getAttribute("building");
-									if (!((Element) m).getAttribute("roomNumber").isEmpty())
-										place += " " + ((Element) m).getAttribute("roomNumber");
-									DayOfWeek lectureDay = convertStrToDay(((Element) m).getAttribute("day"));
-									cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
-											(new Lesson(
-													findStaffByName(cb,
-															(((Element) n).getElementsByTagName("lecturer").item(0).getAttributes().getNamedItem("name")
-																	.getNodeValue()).split(" ")),
-													new WeekTime(lectureDay,
-															LocalTime.parse(((Element) m).getAttribute("timeStart"))),
-													new WeekTime(lectureDay,
-															LocalTime.parse(((Element) m).getAttribute("timeEnd"))),
-													place, Lesson.Type.LECTURE, groupNum,
-													((Element) p).getAttribute("id"))));
-								}
-							}
-						}
-					}
-					// get tutorial lesson groups
-					lectureList = ((Element) p).getElementsByTagName("lecture");
-					for (int k = 0; k < lectureList.getLength(); ++k) {
 						Node n = lectureList.item(k);
 						if (n.getNodeType() == Node.ELEMENT_NODE) {
 							NodeList tutorialList = ((Element) n).getElementsByTagName("tutorial");
@@ -241,26 +213,30 @@ public class XmlCourseLoader extends CourseLoader {
 											String place = ((Element) h).getAttribute("building");
 											if (!((Element) h).getAttribute("roomNumber").isEmpty())
 												place += " " + ((Element) h).getAttribute("roomNumber");
-											DayOfWeek lectureDay = convertStrToDay(((Element) h).getAttribute("day"));
 											cb.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
-													(new Lesson(
-															findStaffByName(cb,
-																	(((Element) n).getElementsByTagName("assistant").item(g).getAttributes().getNamedItem("name")
-																			.getNodeValue()).split(" ")),
-															new WeekTime(lectureDay,
-																	LocalTime.parse(((Element) h).getAttribute("timeStart"))),
-															new WeekTime(lectureDay,
-																	LocalTime.parse(((Element) h).getAttribute("timeEnd"))),
-															place, Lesson.Type.TUTORIAL, tutorialGroupNum,
-															((Element) p).getAttribute("id"))));
+													createLesson(n, h, p, g,
+															convertStrToDay(((Element) h).getAttribute("day")),
+															tutorialGroupNum, place, Lesson.Type.TUTORIAL,
+															"assistant"));
 										}
 									}
+								}	
+							}
+							NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
+							for (int g = 0; g < lessonList.getLength(); ++g) {
+								Node m = lessonList.item(g);
+								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName()))) {
+									String place = ((Element) m).getAttribute("building");
+									if (!((Element) m).getAttribute("roomNumber").isEmpty())
+										place += " " + ((Element) m).getAttribute("roomNumber");
+									cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
+											createLesson(n, m, p, 0, convertStrToDay(((Element) m).getAttribute("day")),
+													groupNum, place, Lesson.Type.LECTURE, "lecturer"));
 								}
 							}
 						}
 					}
-					
-					
+										
 					courses.put(((Element) p).getAttribute("id"), cb.build());
 					cb.clearStaffMembers();
 					cb.clearlecturesGroups();
@@ -284,6 +260,20 @@ public class XmlCourseLoader extends CourseLoader {
 		return null;
 	}
 
+	private Lesson createLesson(Node n, Node h, Node p, int index, DayOfWeek lectureDay, int groupNum, String place, Lesson.Type t, String staff) {
+		return
+			(new Lesson(
+				findStaffByName(cb,
+						(((Element) n).getElementsByTagName(staff).item(index).getAttributes().getNamedItem("name")
+								.getNodeValue()).split(" ")),
+				new WeekTime(lectureDay,
+						LocalTime.parse(((Element) h).getAttribute("timeStart"))),
+				new WeekTime(lectureDay,
+						LocalTime.parse(((Element) h).getAttribute("timeEnd"))),
+				place, t, groupNum,
+				((Element) p).getAttribute("id")));
+	}
+	
 	private static DayOfWeek convertStrToDay(String ¢) {
 		switch (¢) {
 		  case "א":  return DayOfWeek.valueOf("SUNDAY");
