@@ -28,6 +28,13 @@ public class StuffMember {
 		officeHours = null;
 	}
 	
+	@Override
+	public boolean equals(Object ¢){
+		return ¢ != null && (¢ == this || ¢ instanceof StuffMember && ((this.fName).equals(((StuffMember) ¢).getFirstName()))
+				&& ((this.lName).equals(((StuffMember) ¢).getLastName()))
+				&& ((this.title).equals(((StuffMember) ¢).getTitle())));
+	}
+	
 	public String getFirstName () {
 		return this.fName;
 	}

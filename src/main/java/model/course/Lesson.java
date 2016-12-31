@@ -36,6 +36,10 @@ public class Lesson implements Event {
 	public String getCourse() {
 		return this.course;
 	}
+	
+	public int getGroup() {
+		return this.group;
+	}
 
 	public StuffMember getRepresenter() {
 		return this.representer;
@@ -61,12 +65,25 @@ public class Lesson implements Event {
 		return this.day;
 	}
 	
+	@Override
+	public boolean equals(Object l){
+		if (l == null) return false;
+	    if (l == this) return true;
+	    if (!(l instanceof Lesson))return false;
+	    Lesson lesson = (Lesson)l;
+	    return (((this.place).equals(lesson.getPlace())) && ((this.type) == lesson.getType())
+	    		&& (((this.group) == lesson.getGroup())) && ((this.day) == lesson.getDay())
+	    		&&  ((this.course).equals(lesson.getCourse())) && ((this.representer).equals(lesson.getRepresenter())) &&
+	    		((this.startTime).equals(lesson.getStartTime())) &&
+	    				((this.endTime).equals(lesson.getEndTime())));
+	}
 	public boolean IsClashWith(Lesson ¢){
 		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
 				|| startTime.compareTo(¢.getEndTime()) >= 0)
 				&& (endTime.compareTo(¢.getStartTime()) <= 0 || endTime.compareTo(¢.getEndTime()) >= 0)
 				&& endTime.compareTo(¢.getEndTime()) != 0;
 	}
+	
 	public boolean IsClashWith(TimeConstraint ¢){
 		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
 				|| startTime.compareTo(¢.getEndTime()) >= 0)

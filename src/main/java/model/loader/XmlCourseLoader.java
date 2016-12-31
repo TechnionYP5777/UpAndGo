@@ -223,10 +223,48 @@ public class XmlCourseLoader extends CourseLoader {
 							}
 						}
 					}
+					// get tutorial lesson groups
+					lectureList = ((Element) p).getElementsByTagName("lecture");
+					for (int k = 0; k < lectureList.getLength(); ++k) {
+						Node n = lectureList.item(k);
+						if (n.getNodeType() == Node.ELEMENT_NODE) {
+							NodeList tutorialList = ((Element) n).getElementsByTagName("tutorial");
+							for (int g = 0; g < tutorialList.getLength(); ++g) {
+								Node m = tutorialList.item(g);
+								if (m.getNodeType() == Node.ELEMENT_NODE) {
+									int tutorialGroupNum = Integer.parseInt(((Element) m).getAttribute("group"));
+									//
+									NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
+									for (int f = 0; f < lessonList.getLength(); ++f) {
+										Node h = lessonList.item(f);
+										if ((h.getNodeType() == Node.ELEMENT_NODE) && ("tutorial".equals(((Element) h).getParentNode().getNodeName())) && (Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group")) ==  tutorialGroupNum)) {
+											String place = ((Element) h).getAttribute("building");
+											if (!((Element) h).getAttribute("roomNumber").isEmpty())
+												place += " " + ((Element) h).getAttribute("roomNumber");
+											DayOfWeek lectureDay = convertStrToDay(((Element) h).getAttribute("day"));
+											cb.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
+													(new Lesson(
+															findStaffByName(cb,
+																	(((Element) n).getElementsByTagName("assistant").item(g).getAttributes().getNamedItem("name")
+																			.getNodeValue()).split(" ")),
+															new WeekTime(lectureDay,
+																	LocalTime.parse(((Element) h).getAttribute("timeStart"))),
+															new WeekTime(lectureDay,
+																	LocalTime.parse(((Element) h).getAttribute("timeEnd"))),
+															place, Lesson.Type.TUTORIAL, tutorialGroupNum,
+															((Element) p).getAttribute("id"))));
+										}
+									}
+								}
+							}
+						}
+					}
+					
 					
 					courses.put(((Element) p).getAttribute("id"), cb.build());
 					cb.clearStaffMembers();
 					cb.clearlecturesGroups();
+					cb.cleartutorialGroup();
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();

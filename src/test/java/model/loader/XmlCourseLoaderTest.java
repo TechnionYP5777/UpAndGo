@@ -60,6 +60,19 @@ public class XmlCourseLoaderTest {
 				System.out.println((j.getRepresenter().getLastName()));
 			}
 			System.out.println("**********");
+		}
+		
+		for (LessonGroup i : coursesMap.get("234107").getTutorialsLG()) {
+			System.out.println(i.getGroupNum());
+			System.out.println("**********");
+			for (Lesson j : i.getLessons()) {
+				System.out.println(j.getDay());
+				System.out.println(j.getPlace());
+				System.out.println((j.getType() + ""));
+				System.out.println((j.getRepresenter().getFirstName()));
+				System.out.println((j.getRepresenter().getLastName()));
+			}
+			System.out.println("**********");
 		}*/
 		
 	}

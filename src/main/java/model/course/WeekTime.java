@@ -23,6 +23,12 @@ public class WeekTime {
 		return time;
 	}
 	
+	@Override
+	public boolean equals(Object d){
+		return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
+				&& ((this.time).equals(((WeekTime) d).getTime())));
+	}
+	
 	public static int compareTo(WeekTime a, WeekTime b){
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())
 				: a.getTime().compareTo(b.getTime());
