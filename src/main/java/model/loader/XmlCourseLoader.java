@@ -142,7 +142,7 @@ public class XmlCourseLoader extends CourseLoader {
 						.getNamedItem("name").getNodeValue()).split(" ");
 				for (int j=0; j < splited.length -1 ; ++j) {
 					firstName += splited[j];
-					if (j+1 != splited.length)
+					if (j+1 != splited.length -1)
 						firstName += " ";
 				}
 				cb.addStuffMember(new StuffMember(firstName, splited[splited.length - 1],
@@ -251,7 +251,7 @@ public class XmlCourseLoader extends CourseLoader {
 		String firstName = "";
 		for (int j=0; j < splited.length -1 ; ++j) {
 			firstName += splited[j];
-			if (j+1 != splited.length)
+			if (j+1 != splited.length -1)
 				firstName += " ";
 		}
 		for (StuffMember $ : cb.getStaffList())

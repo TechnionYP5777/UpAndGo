@@ -42,47 +42,35 @@ public class XmlCourseLoaderTest {
 		
 		assert "234107".equals(coursesMap.get("234107").getId());
 		assert "אנליזה נמרית".equals(coursesMap.get("234107").getName());
-		/*
-		for (StuffMember i : coursesMap.get("678910").getStuff()) {
-			System.out.println(i.getFirstName());
-			System.out.println(i.getLastName());
-			System.out.println(i.getTitle());
-		}
 		
-		for (LessonGroup i : coursesMap.get("123456").getLecturesLG()) {
-			System.out.println(i.getGroupNum());
-			System.out.println("**********");
-			for (Lesson j : i.getLessons()) {
-				System.out.println(j.getDay());
-				System.out.println(j.getPlace());
-				System.out.println((j.getType() + ""));
-				System.out.println((j.getRepresenter().getFirstName()));
-				System.out.println((j.getRepresenter().getLastName()));
-			}
-			System.out.println("**********");
-		}
+		assert ((coursesMap.get("123456").getStuff()).size() == 7);
+		assert ((coursesMap.get("014536").getStuff()).size() == 5);
+		assert ((coursesMap.get("678910").getStuff()).size() == 3);
+		assert ((coursesMap.get("234107").getStuff()).size() == 6);
 		
-		for (LessonGroup i : coursesMap.get("123456").getTutorialsLG()) {
-			System.out.println(i.getGroupNum());
-			System.out.println("**********");
-			for (Lesson j : i.getLessons()) {
-				System.out.println(j.getDay());
-				System.out.println(j.getPlace());
-				System.out.println((j.getType() + ""));
-				System.out.println((j.getRepresenter().getFirstName()));
-				System.out.println((j.getRepresenter().getLastName()));
-			}
-			System.out.println("**********");
-		}*/
+		assert ((coursesMap.get("123456").getStuff()).get(2)).equals((new StuffMember("תומס", "אומאלי", "דר")));
+		assert ((coursesMap.get("014536").getStuff()).get(0)).equals((new StuffMember("מיאו", "דזה-דונג", "פרופ")));
+		assert ((coursesMap.get("678910").getStuff()).get(2)).equals((new StuffMember("", "א.ב.יהושוע", "מר")));
+		
+		assert ((coursesMap.get("123456").getLecturesLG().size() == 2));
+		for (int ¢ = 0; ¢ < (coursesMap.get("123456").getLecturesLG().size()); ++¢)
+			assert ((coursesMap.get("123456").getLecturesLG().get(¢).getGroupNum() == ¢ + 1));
+		
+		for (int ¢ = 0; ¢ < (coursesMap.get("234107").getLecturesLG().size()); ++¢)
+			assert ((coursesMap.get("234107").getLecturesLG().get(¢).getGroupNum() == ¢ + 1));
+		
+		assert ((coursesMap.get("014536").getTutorialsLG().size() == 2));
+		assert ((coursesMap.get("014536").getTutorialsLG().get(0).getGroupNum() == 10));
+		assert ((coursesMap.get("014536").getTutorialsLG().get(1).getGroupNum() == 12));
 		
 	}
-	/*
+	
 	@Test
 	public void testSaveChosenCourseNames() {
 		List<String> names = new LinkedList<>();
-		names.add("מבוא לחתולים ביוטיוב");
-		names.add("תכנות אנכי ומרוכז");
-		names.add("תורת התורתיות");
+		names.add("מבוא לחתולים");
+		names.add("טורי חתולים ופוררריה");
+		names.add("'אלרגיות למתקדמים ת");
 		cr.saveChosenCourseNames(names);
 		assert (new File("data/ChosenCourses.xml")).exists();
 	}
@@ -90,12 +78,12 @@ public class XmlCourseLoaderTest {
 	@Test
 	public void testLoadChosenCourseNames() {
 		List<String> names = new LinkedList<>();
-		names.add("מבוא לחתולים ביוטיוב");
-		names.add("תכנות אנכי ומרוכז");
-		names.add("תורת התורתיות");
+		names.add("מבוא לחתולים");
+		names.add("טורי חתולים ופוררריה");
+		names.add("'אלרגיות למתקדמים ת");
 		cr.saveChosenCourseNames(names);
 		assert (new File("data/ChosenCourses.xml")).exists();
-		cr.loadChosenCourseNames().forEach(name -> System.out.println(name));
+		//cr.loadChosenCourseNames().forEach(name -> System.out.println(name));
 		assert cr.loadChosenCourseNames().size() == 3;
 	}
 	
@@ -104,6 +92,6 @@ public class XmlCourseLoaderTest {
 	public void deleteXml() {
 		new File("data/ChosenCourses.xml").delete();
 	}
-*/
+
 
 }
