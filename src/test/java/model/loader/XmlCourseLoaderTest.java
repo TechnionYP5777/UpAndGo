@@ -1,6 +1,8 @@
 package model.loader;
 
 import java.io.File;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
@@ -12,6 +14,7 @@ import org.junit.Test;
 import model.course.Course;
 
 import model.course.StuffMember;
+import model.course.WeekTime;
 
 public class XmlCourseLoaderTest {
 	
@@ -65,14 +68,21 @@ public class XmlCourseLoaderTest {
 		
 	}
 	
-	/*@Test
-	public void testLesson() {
+	@Test
+	public void testLoadedLessons() {
 		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
 		System.out.println("lectures: " + coursesMap.get("123456").getLecturesLG() );
-		//assert "123456".equals(coursesMap.get("123456").getId());
+		System.out.println( coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).getRepresenter().getLastName() );
 		
-		assert ((coursesMap.get("123456").getLecturesLG().size() == 2));
-	}*/
+		assert "טולוז".equals(
+				coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).getRepresenter().getLastName());
+		
+		assert coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(12, 30)));
+		assert coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).getEndTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 30)));
+		
+		assert coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(1).getStartTime().equals(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(12, 30)));
+		assert coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(1).getEndTime().equals(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(14, 30)));
+	}
 	
 	@Test
 	public void testSaveChosenCourseNames() {

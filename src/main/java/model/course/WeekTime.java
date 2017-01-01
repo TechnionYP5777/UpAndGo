@@ -25,8 +25,9 @@ public class WeekTime {
 	
 	@Override
 	public boolean equals(Object d){
-		return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
-				&& ((this.time).equals(((WeekTime) d).getTime())));
+		return d instanceof WeekTime && compareTo((WeekTime) d) == 0;
+		/*return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
+				&& ((this.time).equals(((WeekTime) d).getTime())));*/
 	}
 	
 	public static int compareTo(WeekTime a, WeekTime b){
