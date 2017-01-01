@@ -11,7 +11,6 @@ import java.util.List;
  */
 
 import model.course.Course;
-import model.course.Lesson;
 import model.course.LessonGroup;
 
 public class WorkDayConstraint extends Constraint {

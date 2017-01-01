@@ -10,8 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.course.Course;
-import model.course.Lesson;
-import model.course.LessonGroup;
+
 import model.course.StuffMember;
 
 public class XmlCourseLoaderTest {
@@ -37,7 +36,7 @@ public class XmlCourseLoaderTest {
 		assert "טורי חתולים ופוררריה".equals(coursesMap.get("014536").getName());
 		
 		assert "678910".equals(coursesMap.get("678910").getId());
-		assert "'אלרגיות למתקדמים ת".equals(coursesMap.get("678910").getName());
+		assert "אלרגיות למתקדמים ת'".equals(coursesMap.get("678910").getName());
 		assert "2016-12-11T13:00".equals((coursesMap.get("678910").getaTerm() + ""));
 		
 		assert "234107".equals(coursesMap.get("234107").getId());
@@ -63,6 +62,15 @@ public class XmlCourseLoaderTest {
 		assert ((coursesMap.get("014536").getTutorialsLG().get(0).getGroupNum() == 10));
 		assert ((coursesMap.get("014536").getTutorialsLG().get(1).getGroupNum() == 12));
 		
+	}
+	
+	@Test
+	public void test_b() {
+		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
+		System.out.println("lectures: " + coursesMap.get("123456").getLecturesLG() );
+		//assert "123456".equals(coursesMap.get("123456").getId());
+		
+		assert ((coursesMap.get("123456").getLecturesLG().size() == 2));
 	}
 	
 	@Test

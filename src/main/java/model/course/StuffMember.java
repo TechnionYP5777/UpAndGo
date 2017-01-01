@@ -58,4 +58,9 @@ public class StuffMember {
 		this.officeHours = new ArrayList<>(ofHours);
 	}
 	
+	@Override
+	public String toString(){
+		return fName + " " + lName;
+	}
+	
 }

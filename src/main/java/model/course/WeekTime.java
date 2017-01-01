@@ -38,4 +38,9 @@ public class WeekTime {
 		return this.getDay().compareTo(b.getDay()) != 0 ? this.getDay().compareTo(b.getDay())
 				: this.getTime().compareTo(b.getTime());
 	}
+	
+	@Override
+	public String toString(){
+		return day + " " + time;
+	}
 }

@@ -69,4 +69,16 @@ public class LessonGroup {
 		Integer i = groupNum;
 		return i.hashCode();
 	}
+	
+	@Override
+	public String toString(){
+		//return "group number: " + groupNum + " lessons: " + lessons;
+		String ret = "group number: " + groupNum + " lessons: ";
+		//ret.concat("ok");
+		//ret += "ok";
+		for(Lesson l : lessons)
+			ret = ret.concat("\n"+l);
+		ret = ret.concat("\n");
+		return ret;
+	}
 }

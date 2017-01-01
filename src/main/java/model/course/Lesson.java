@@ -1,7 +1,6 @@
 package model.course;
 
 
-import java.time.DayOfWeek;
 
 import logic.Event;
 import model.constraint.TimeConstraint;
@@ -89,5 +88,11 @@ public class Lesson implements Event {
 				|| startTime.compareTo(¢.getEndTime()) >= 0)
 				&& (endTime.compareTo(¢.getStartTime()) <= 0 || endTime.compareTo(¢.getEndTime()) >= 0)
 				&& endTime.compareTo(¢.getEndTime()) != 0;
+	}
+	
+	@Override
+	public String toString(){
+		String ret = "representer: " + representer + " start time: " + startTime + " end time: " + endTime; 
+		return ret;
 	}
 }
