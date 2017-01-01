@@ -19,7 +19,8 @@ public class XmlCourseLoaderTest {
 	
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader();
+		//cr = new XmlCourseLoader("REPFILE/REP.XML");
+		cr = new XmlCourseLoader("resources/testXML/REP.XML");
 	}
 
 	@Test
@@ -64,14 +65,14 @@ public class XmlCourseLoaderTest {
 		
 	}
 	
-	@Test
-	public void test_b() {
+	/*@Test
+	public void testLesson() {
 		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
 		System.out.println("lectures: " + coursesMap.get("123456").getLecturesLG() );
 		//assert "123456".equals(coursesMap.get("123456").getId());
 		
 		assert ((coursesMap.get("123456").getLecturesLG().size() == 2));
-	}
+	}*/
 	
 	@Test
 	public void testSaveChosenCourseNames() {

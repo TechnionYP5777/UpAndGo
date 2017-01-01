@@ -21,7 +21,7 @@ public class Launcher {
 			@Override
 			public void run() {
 				try {
-					new MainWinView(new ConcreteModel(new XmlCourseLoader())).setVisible(true);
+					new MainWinView(new ConcreteModel(new XmlCourseLoader("REPFILE/REP.XML"))).setVisible(true);
 				} catch (Exception ¢) {
 					¢.printStackTrace();
 				}

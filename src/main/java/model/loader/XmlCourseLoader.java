@@ -34,7 +34,7 @@ import model.course.WeekTime;
 import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
-	private static final String REP_XML_PATH = "REPFILE/REP.XML";
+	private String REP_XML_PATH;	//  = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
 	
@@ -42,8 +42,9 @@ public class XmlCourseLoader extends CourseLoader {
 	//List<Course> coursesList;
 	TreeMap<String, Course> courses;
 	
-	public XmlCourseLoader() {
+	public XmlCourseLoader(String REP_XML_PATH) {
 		super(REP_XML_PATH);
+		this.REP_XML_PATH = REP_XML_PATH;
 		
 		if (!new File(path).exists())
 			RepFile.getCoursesNamesAndIds();
