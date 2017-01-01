@@ -23,8 +23,7 @@ public class Course {
 	protected final LocalDateTime bTerm;
 
 	protected final List<StuffMember> stuff;
-	protected final List<Lesson> lessons;
-	
+		
 	// TODO: this should replace List lessons
 	protected  List<LessonGroup> lectures;
 	protected  List<LessonGroup> tutorials;
@@ -57,8 +56,7 @@ public class Course {
 		this.bTerm = bT;
 
 		this.stuff = new ArrayList<>(st);
-		this.lessons = new ArrayList<>();
-		
+				
 		this.lectures = new ArrayList<>();
 		this.tutorials = new ArrayList<>();
 		
@@ -71,10 +69,6 @@ public class Course {
 
 	}
 
-	protected void addLesson(Lesson ¢) {
-		this.lessons.add(¢);
-	}
-	
 	protected void addLecturesLessonGroup(LessonGroup ¢) {
 		this.lectures.add(¢);
 	}
@@ -127,10 +121,6 @@ public class Course {
 		return new ArrayList<>(this.tutorials);
 	}
 	
-	public List<Lesson> getLessons() {
-		return new ArrayList<>(this.lessons);
-	}
-
 	public int getLectureHours() {
 		return this.lectureHours;
 	}
@@ -295,8 +285,6 @@ public class Course {
 		public Course build() {
 			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm,
 					this.prerequisites, this.corequisites);
-			for (Lesson ¢ : this.lessons)
-				$.addLesson(¢);
 			for (LessonGroup ¢ : this.lectures)
 				$.addLecturesLessonGroup(¢);
 			for (LessonGroup ¢ : this.tutorials)

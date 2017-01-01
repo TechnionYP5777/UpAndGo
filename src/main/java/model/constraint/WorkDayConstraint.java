@@ -22,9 +22,9 @@ public class WorkDayConstraint extends Constraint {
 	@Override
 	public boolean canMeetConstraint(Course c) {
 		// need to be changes after the implementaion of lessonGroup
-		for(Lesson ¢ : c.getLessons())
-			if (¢.getDay() == workDay)
-				return false;
+		//for(Lesson ¢ : c.getLessons())
+		//	if (¢.getDay() == workDay)
+		//		return false;
 		return true;
 	}
 	@SuppressWarnings("unused")
