@@ -1,4 +1,8 @@
 package model.logic;
+/**
+ * @author kobybs
+ * @since 2-1-17
+ */
 
 import static org.junit.Assert.*;
 
