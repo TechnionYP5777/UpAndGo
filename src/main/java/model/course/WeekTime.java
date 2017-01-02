@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
  * @since 25-12-16
  */
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class WeekTime {
 	private DayOfWeek day;
@@ -23,12 +24,7 @@ public class WeekTime {
 		return time;
 	}
 	
-	@Override
-	public boolean equals(Object d){
-		return d instanceof WeekTime && compareTo((WeekTime) d) == 0;
-		/*return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
-				&& ((this.time).equals(((WeekTime) d).getTime())));*/
-	}
+	
 	
 	public static int compareTo(WeekTime a, WeekTime b){
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())
@@ -41,7 +37,19 @@ public class WeekTime {
 	}
 	
 	@Override
+	public boolean equals(Object d){
+		return d instanceof WeekTime && compareTo((WeekTime) d) == 0;
+		/*return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
+				&& ((this.time).equals(((WeekTime) d).getTime())));*/
+	}
+	
+	@Override
 	public String toString(){
 		return day + " " + time;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return Objects.hash(day, time);
 	}
 }
