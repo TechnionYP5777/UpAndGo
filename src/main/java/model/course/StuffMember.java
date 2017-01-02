@@ -3,6 +3,7 @@ package model.course;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class StuffMember {
 	public String fName;
@@ -28,13 +29,7 @@ public class StuffMember {
 		officeHours = null;
 	}
 	
-	@Override
-	public boolean equals(Object ¢){
-		return ¢ != null && (¢ == this || ¢ instanceof StuffMember 
-				&& ((this.fName).equals(((StuffMember) ¢).getFirstName()))
-				&& ((this.lName).equals(((StuffMember) ¢).getLastName()))
-				&& ((this.title).equals(((StuffMember) ¢).getTitle())));
-	}
+	
 	
 	public String getFirstName () {
 		return this.fName;
@@ -59,8 +54,21 @@ public class StuffMember {
 	}
 	
 	@Override
+	public boolean equals(Object ¢){
+		return ¢ != null && (¢ == this || ¢ instanceof StuffMember 
+				&& ((this.fName).equals(((StuffMember) ¢).getFirstName()))
+				&& ((this.lName).equals(((StuffMember) ¢).getLastName()))
+				&& ((this.title).equals(((StuffMember) ¢).getTitle())));
+	}
+	
+	@Override
 	public String toString(){
 		return fName + " " + lName;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return Objects.hash(fName, lName, title);
 	}
 	
 }
