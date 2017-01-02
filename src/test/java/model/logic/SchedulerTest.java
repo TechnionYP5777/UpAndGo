@@ -6,6 +6,9 @@ package model.logic;
 
 import static org.junit.Assert.*;
 
+import java.sql.Time;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import org.junit.Test;
 import logic.Scheduler;
 import model.constraint.TimeConstraint;
 import model.course.Course;
+import model.course.WeekTime;
 import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
@@ -25,7 +29,10 @@ CourseLoader cr;
 	
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("resources/testXML/REP.XML");
+		//cr = new XmlCourseLoader("resources/testXML/REP.XML");
+		//schedulerTest
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		
 	}
 	
 	@Test
@@ -35,6 +42,12 @@ CourseLoader cr;
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
+		
+		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
+		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
+		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
+		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
+		
 	}
 
 }

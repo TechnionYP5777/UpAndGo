@@ -30,12 +30,13 @@ public class Scheduler {
 		ArrayList<Integer> max = initMax(lessonsGroupArray);
 		
 		for (int last = indexes.size() - 1, msb;;) {
+			System.out.println(indexes);
 			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			Schedule $ = new Schedule(lessons,cs);
 			if($.isLegalSchedule()){
 				return $;
 			}
-			System.out.println(indexes);
+			
 			indexes.set(last, indexes.get(last) + 1);
 			if (indexes.get(last) > max.get(last)) {
 				msb = last - 1;

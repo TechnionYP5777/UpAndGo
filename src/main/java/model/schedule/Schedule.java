@@ -43,7 +43,7 @@ public class Schedule {
 	}
 	
 	
-	public List<LessonGroup> getLessons() {
+	public List<LessonGroup> getLessonGroups() {
 		return lessons;
 	}
 	
