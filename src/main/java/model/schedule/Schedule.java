@@ -75,4 +75,9 @@ public class Schedule {
 		}
 		return true;
 	}
+	
+	@Override
+	public String toString(){
+		return lessons.toString();
+	}
 }

@@ -20,7 +20,7 @@ import model.schedule.Schedule;
 public class Scheduler {
 	/**
 	 * gets a list of courses and a list of constraints and return a possible 
-	 * schedule of them which doesnt break the constraints.
+	 * schedule of them which doesn't break the constraints.
 	 * it works for TimeConstraints for now.
 	 */
 	public static Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
@@ -32,8 +32,9 @@ public class Scheduler {
 		for (int last = indexes.size() - 1, msb;;) {
 			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			Schedule $ = new Schedule(lessons,cs);
-			if($.isLegalSchedule())
+			if($.isLegalSchedule()){
 				return $;
+			}
 			System.out.println(indexes);
 			indexes.set(last, indexes.get(last) + 1);
 			if (indexes.get(last) > max.get(last)) {

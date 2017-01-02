@@ -17,6 +17,7 @@ import model.constraint.TimeConstraint;
 import model.course.Course;
 import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
+import model.schedule.Schedule;
 
 public class SchedulerTest {
 
@@ -32,8 +33,8 @@ CourseLoader cr;
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
 		System.out.println(courses);
 		
-		Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
-		
+		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		System.out.println(s);
 	}
 
 }
