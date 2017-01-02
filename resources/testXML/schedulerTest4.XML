@@ -16,7 +16,7 @@
 			</tutorials>
 		</lecture>
 		<lecture>
-			<lesson building="ריק" day="א" roomNumber="3" timeEnd="16:00" timeStart="14:00"/>
+			<lesson building="ריק" day="א" roomNumber="3" timeEnd="16:00" timeStart="13:59"/>
 			<lecturer name="ריק" title="ריק"/>
 			<tutorials></tutorials>
 		</lecture>

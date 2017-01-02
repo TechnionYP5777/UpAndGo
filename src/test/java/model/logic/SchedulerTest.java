@@ -37,7 +37,6 @@ CourseLoader cr;
 	}
 	
 	@Test
-	@Ignore
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
@@ -94,9 +93,7 @@ CourseLoader cr;
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
-		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 00)));
-		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(12, 00)));
-		
+		assertNull(s);
 	}
 
 }
