@@ -2,6 +2,8 @@ package model.course;
 
 
 
+import java.util.Objects;
+
 import logic.Event;
 import model.constraint.TimeConstraint;
 import model.course.StuffMember;
@@ -15,7 +17,7 @@ public class Lesson implements Event {
 	protected final String place;
 	protected final Type type;
 	protected final int group;
-	protected int day;	
+	//protected int day;	
 	protected final String course;
 	
 	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c) {
@@ -28,7 +30,7 @@ public class Lesson implements Event {
 		this.place = place1;
 		this.type = t;
 		this.group = g;
-		this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
+		//this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		this.course = c;
 	}
 	
@@ -61,7 +63,8 @@ public class Lesson implements Event {
 	}
 	
 	public int getDay(){
-		return this.day;
+		//return this.day;
+		return startTime.getDay().getValue()-1;
 	}
 	
 	@Override
@@ -71,11 +74,13 @@ public class Lesson implements Event {
 	    if (!(l instanceof Lesson))return false;
 	    Lesson lesson = (Lesson)l;
 	    return (((this.place).equals(lesson.getPlace())) && ((this.type) == lesson.getType())
-	    		&& (((this.group) == lesson.getGroup())) && ((this.day) == lesson.getDay())
+	    		&& (((this.group) == lesson.getGroup()))
 	    		&&  ((this.course).equals(lesson.getCourse())) && ((this.representer).equals(lesson.getRepresenter())) &&
 	    		((this.startTime).equals(lesson.getStartTime())) &&
 	    				((this.endTime).equals(lesson.getEndTime())));
 	}
+	
+	
 	public boolean IsClashWith(Lesson ¢){
 		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
 				|| startTime.compareTo(¢.getEndTime()) >= 0)
@@ -92,7 +97,11 @@ public class Lesson implements Event {
 	
 	@Override
 	public String toString(){
-		String ret = "representer: " + representer + " start time: " + startTime + " end time: " + endTime; 
-		return ret;
+		return "representer: " + representer + " start time: " + startTime + " end time: " + endTime;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return Objects.hash(place, type, course, startTime, endTime);
 	}
 }

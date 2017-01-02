@@ -14,9 +14,9 @@ import model.course.Course;
 import model.course.LessonGroup;
 
 public class WorkDayConstraint extends Constraint {
-	private int workDay;
+	//private int workDay;
 	public WorkDayConstraint(int d) {
-		workDay = d;
+		//workDay = d;
 	}
 	@Override
 	public boolean canMeetConstraint(Course c) {

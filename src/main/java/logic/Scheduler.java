@@ -79,7 +79,6 @@ public class Scheduler {
 		return true;
 	}
 	
-	@SuppressWarnings("static-method")
 	private static ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
 		ArrayList< List<LessonGroup> > $ = new ArrayList<>();
 		for(Course ¢ : lcourse){
@@ -89,7 +88,6 @@ public class Scheduler {
 		return $;
 	}
 	
-	@SuppressWarnings("static-method")
 	private static ArrayList<Integer> initIndexes(int size){
 		ArrayList<Integer> $ = new ArrayList<>();
 		for(int ¢ = 0; ¢<size; ++¢)
