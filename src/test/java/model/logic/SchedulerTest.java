@@ -31,12 +31,14 @@ CourseLoader cr;
 	public void initialize() {
 		//cr = new XmlCourseLoader("resources/testXML/REP.XML");
 		//schedulerTest
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		//cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
 	}
 	
 	@Test
-	public void test() {
+	public void test_a() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
 		System.out.println(courses);
 		
