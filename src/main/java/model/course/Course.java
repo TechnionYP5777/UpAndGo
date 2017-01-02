@@ -157,6 +157,11 @@ public class Course {
 		for (CourseListener ¢ : this.listeners)
 			¢.getUpdate(this);
 	}
+	
+	@Override
+	public String toString(){
+		return name + " " + id;
+	}
 
 	public static class CourseBuilder {
 

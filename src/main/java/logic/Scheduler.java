@@ -23,7 +23,7 @@ public class Scheduler {
 	 * schedule of them which doesnt break the constraints.
 	 * it works for TimeConstraints for now.
 	 */
-	public Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
+	public static Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
 		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
 		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
@@ -80,7 +80,7 @@ public class Scheduler {
 	}
 	
 	@SuppressWarnings("static-method")
-	private ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
+	private static ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
 		ArrayList< List<LessonGroup> > $ = new ArrayList<>();
 		for(Course ¢ : lcourse){
 			$.add(¢.getLectures());
@@ -90,7 +90,7 @@ public class Scheduler {
 	}
 	
 	@SuppressWarnings("static-method")
-	private ArrayList<Integer> initIndexes(int size){
+	private static ArrayList<Integer> initIndexes(int size){
 		ArrayList<Integer> $ = new ArrayList<>();
 		for(int ¢ = 0; ¢<size; ++¢)
 			$.add(0);
