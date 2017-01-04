@@ -44,18 +44,18 @@ public class LessonGroup {
 	
 	public boolean isCLashWIth(LessonGroup g){
 		if(g==this)
-			return false;
+			return true;
 		for(Lesson ls1 : lessons)
 			for (Lesson ls2 : g.getLessons())
-				if (!ls1.IsClashWith(ls2))
-					return false;
-		return true;
+				if (ls1.IsClashWith(ls2))
+					return true;
+		return false;
 	}
 	public boolean isCLashWIth(TimeConstraint g){
 		for(Lesson ls1 : lessons)
-			if (!ls1.IsClashWith(g))
-				return false;
-		return true;
+			if (ls1.IsClashWith(g))
+				return true;
+		return false;
 	}
 	
 	@Override

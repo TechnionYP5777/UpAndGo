@@ -42,27 +42,14 @@ public class TimeConstraint extends Constraint {
 	private boolean clashWithLessonGroup(LessonGroup g){
 		for(Lesson ¢ : g.getLessons())
 			if (clashWithLesson(¢))
-				return false;
-		return true;
+				return true;
+		return false;
 	}
 	
 	// DO NOT SPARTANIZE
-	private boolean clashWithLesson(Lesson l){
-		if(  (startTime.compareTo(l.getStartTime()) == 0 ||
-				startTime.compareTo(l.getStartTime()) == 1) 
-			&& 
-			startTime.compareTo(l.getEndTime()) == -1)
-			return false;
-		
-		if(  (
-				endTime.compareTo(l.getStartTime()) == 1) 
-			&& 
-			endTime.compareTo(l.getEndTime()) == -1 ||
-			endTime.compareTo(l.getEndTime()) == 0)
-			return false;
-		
-		return true;
-
+	private boolean clashWithLesson(Lesson ¢){
+		return (startTime.compareTo(¢.getStartTime()) >= 0) && startTime.compareTo(¢.getEndTime()) < 0
+				|| (endTime.compareTo(¢.getStartTime()) > 0) && endTime.compareTo(¢.getEndTime()) <= 0;
 	}
 
 	public WeekTime getStartTime() {

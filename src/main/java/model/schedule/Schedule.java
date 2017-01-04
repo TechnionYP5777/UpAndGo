@@ -19,9 +19,14 @@ public class Schedule {
 		this.lessons = new ArrayList<>(lessons);
 		this.constraints = new ArrayList<>(constraints);
 	}
-	public void addLesson(LessonGroup ¢) {
-		if(!lessons.contains(¢)) // add equals to lessonsgroup
+	public boolean addLesson(LessonGroup ¢) {
+		/*if(!lessons.contains(¢)) // add equals to lessonsgroup
+			lessons.add(¢);*/
+		if(lessons.isEmpty()){
 			lessons.add(¢);
+			return true;
+		}
+		return true;
 	}
 	
 	public void removeLesson(LessonGroup ¢) {
@@ -67,10 +72,10 @@ public class Schedule {
 	public boolean isLegalSchedule(){
 		for(int i=0; i < lessons.size(); ++i){
 			for(int j=i+1; j < lessons.size(); ++j)
-				if (!lessons.get(i).isCLashWIth(lessons.get(j)))
+				if (lessons.get(i).isCLashWIth(lessons.get(j)))
 					return false;
 			for(TimeConstraint ¢ : constraints)
-				if (!lessons.get(i).isCLashWIth(¢))
+				if (lessons.get(i).isCLashWIth(¢))
 					return false;
 		}
 		return true;

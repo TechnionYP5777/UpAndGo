@@ -32,6 +32,8 @@ public class Scheduler {
 		for (int last = indexes.size() - 1, msb;;) {
 			System.out.println(indexes);
 			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
+			//Schedule $ = new Schedule();
+			
 			Schedule $ = new Schedule(lessons,cs);
 			if($.isLegalSchedule()){
 				return $;
