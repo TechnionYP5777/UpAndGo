@@ -32,12 +32,20 @@ public class Scheduler {
 		for (int last = indexes.size() - 1, msb;;) {
 			System.out.println(indexes);
 			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
-			//Schedule $ = new Schedule();
+			Schedule $ = new Schedule();
 			
-			Schedule $ = new Schedule(lessons,cs);
-			if($.isLegalSchedule()){
+			boolean b = false;
+			for(LessonGroup l : lessons){
+				b = $.addLesson(l);
+				if(!b) break;
+			}
+			if(b){
 				return $;
 			}
+			/*Schedule $ = new Schedule(lessons,cs);
+			if($.isLegalSchedule()){
+				return $;
+			}*/
 			
 			indexes.set(last, indexes.get(last) + 1);
 			if (indexes.get(last) > max.get(last)) {

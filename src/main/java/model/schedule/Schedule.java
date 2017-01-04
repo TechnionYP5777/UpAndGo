@@ -19,6 +19,12 @@ public class Schedule {
 		this.lessons = new ArrayList<>(lessons);
 		this.constraints = new ArrayList<>(constraints);
 	}
+	
+	/**
+	 * 
+	 * @param ¢
+	 * @return true if lessonGroup can be added to lessond without causing a collision
+	 */
 	public boolean addLesson(LessonGroup ¢) {
 		/*if(!lessons.contains(¢)) // add equals to lessonsgroup
 			lessons.add(¢);*/
@@ -26,6 +32,10 @@ public class Schedule {
 			lessons.add(¢);
 			return true;
 		}
+		for(LessonGroup l : lessons)
+			if (l.isCLashWIth(¢))
+				return false;
+		lessons.add(¢);
 		return true;
 	}
 	
