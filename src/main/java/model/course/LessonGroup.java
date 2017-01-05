@@ -73,12 +73,11 @@ public class LessonGroup {
 	@Override
 	public String toString(){
 		//return "group number: " + groupNum + " lessons: " + lessons;
-		String ret = "group number: " + groupNum + " lessons: ";
+		String $ = "group number: " + groupNum + " lessons: ";
 		//ret.concat("ok");
 		//ret += "ok";
-		for(Lesson l : lessons)
-			ret = ret.concat("\n"+l);
-		ret = ret.concat("\n");
-		return ret;
+		for(Lesson ¢ : lessons)
+			$ = $.concat("\n"+¢);
+		return $ = $.concat("\n");
 	}
 }

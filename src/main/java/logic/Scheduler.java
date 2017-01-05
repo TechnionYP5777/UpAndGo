@@ -38,31 +38,18 @@ public class Scheduler {
 			int lastAdded = 0;
 			for(lastAdded = 0; lastAdded < lessons.size(); ++lastAdded){
 				b = $.addLesson( lessons.get(lastAdded) );
+				// if you can't add that lesson than all combination including him are not valid
+				// therefore there is no use to check the rest of them - increase bit of found lesson
+				//indexes.set(¢, indexes.get(¢)+1);
+				// if found index was maxed, than find msb that wasn't maxed and max it
+				//if (indexes.get(¢) > max.get(¢)) {
 				if(!b)
-				{
-					// if you can't add that lesson than all combination including him are not valid
-					// therefore there is no use to check the rest of them - increase bit of found lesson
-					//indexes.set(¢, indexes.get(¢)+1);
-					// if found index was maxed, than find msb that wasn't maxed and max it
-					//if (indexes.get(¢) > max.get(¢)) {
 					break;
-				}
+				
 			}
-			if(b){
+			if(b)
 				return $;
-			}
-			/*for(LessonGroup l : lessons){
-				b = $.addLesson(l);
-				if(!b) break;
-			}
-			if(b){
-				return $;
-			}*/
 			
-			/*Schedule $ = new Schedule(lessons,cs);
-			if($.isLegalSchedule()){
-				return $;
-			}*/
 			if(!b){
 				indexes.set(lastAdded, indexes.get(lastAdded)+1);
 				if (indexes.get(lastAdded) > max.get(lastAdded)) {

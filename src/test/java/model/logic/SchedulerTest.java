@@ -6,14 +6,11 @@ package model.logic;
 
 import static org.junit.Assert.*;
 
-import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import logic.Scheduler;

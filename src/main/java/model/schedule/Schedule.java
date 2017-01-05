@@ -93,6 +93,6 @@ public class Schedule {
 	
 	@Override
 	public String toString(){
-		return lessons.toString();
+		return lessons + "";
 	}
 }
