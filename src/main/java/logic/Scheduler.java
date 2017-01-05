@@ -35,13 +35,16 @@ public class Scheduler {
 			Schedule $ = new Schedule();
 			
 			boolean b = false;
-			for(int ¢ = 0; ¢ < lessons.size(); ++¢){
-				b = $.addLesson( lessons.get(¢) );
+			int lastAdded = 0;
+			for(lastAdded = 0; lastAdded < lessons.size(); ++lastAdded){
+				b = $.addLesson( lessons.get(lastAdded) );
 				if(!b)
 				{
 					// if you can't add that lesson than all combination including him are not valid
 					// therefore there is no use to check the rest of them - increase bit of found lesson
-					indexes.set(¢, indexes.get(¢)+1);
+					//indexes.set(¢, indexes.get(¢)+1);
+					// if found index was maxed, than find msb that wasn't maxed and max it
+					//if (indexes.get(¢) > max.get(¢)) {
 					break;
 				}
 			}
@@ -60,6 +63,24 @@ public class Scheduler {
 			if($.isLegalSchedule()){
 				return $;
 			}*/
+			if(!b){
+				indexes.set(lastAdded, indexes.get(lastAdded)+1);
+				if (indexes.get(lastAdded) > max.get(lastAdded)) {
+					msb = lastAdded - 1;
+					// find lowest index which is not yet maxed
+					for (; msb >= 0; --msb)
+						if (indexes.get(msb) < max.get(msb))
+							break;
+					// if every index is max than we made all combinations
+					if (msb < 0)
+						break;
+					// increase msb and zero everything to its right
+					indexes.set(msb, indexes.get(msb) + 1);
+					for (int ¢ = msb + 1; ¢ <= last; ++¢)
+						indexes.set(¢, 0);
+				}
+				continue;
+			}
 			
 			// increase last index by 1;
 			indexes.set(last, indexes.get(last) + 1);
