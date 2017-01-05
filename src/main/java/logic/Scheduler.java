@@ -35,19 +35,35 @@ public class Scheduler {
 			Schedule $ = new Schedule();
 			
 			boolean b = false;
-			for(LessonGroup l : lessons){
+			for(int ¢ = 0; ¢ < lessons.size(); ++¢){
+				b = $.addLesson( lessons.get(¢) );
+				if(!b)
+				{
+					// if you can't add that lesson than all combination including him are not valid
+					// therefore there is no use to check the rest of them - increase bit of found lesson
+					indexes.set(¢, indexes.get(¢)+1);
+					break;
+				}
+			}
+			if(b){
+				return $;
+			}
+			/*for(LessonGroup l : lessons){
 				b = $.addLesson(l);
 				if(!b) break;
 			}
 			if(b){
 				return $;
-			}
+			}*/
+			
 			/*Schedule $ = new Schedule(lessons,cs);
 			if($.isLegalSchedule()){
 				return $;
 			}*/
 			
+			// increase last index by 1;
 			indexes.set(last, indexes.get(last) + 1);
+			
 			if (indexes.get(last) > max.get(last)) {
 				msb = last - 1;
 				// find lowest index which is not yet maxed

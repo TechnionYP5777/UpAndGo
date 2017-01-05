@@ -28,13 +28,6 @@ public class SchedulerTest {
 
 CourseLoader cr;
 	
-	@Before
-	public void initialize() {
-		//cr = new XmlCourseLoader("resources/testXML/REP.XML");
-		//schedulerTest
-		//cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
-		
-	}
 	
 	@Test
 	public void test_a() {
