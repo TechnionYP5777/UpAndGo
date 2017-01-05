@@ -8,19 +8,17 @@ import model.course.Lesson;
 import model.course.LessonGroup;
 
 /**
- * 
- * this class holds a list of LessonGroup that do not clash between them
- * hence they form a legal Schedule
- *
+ * /**
+ * @author kobybs
+ * @since 5-1-17
+ * notice that this file discarded the TimeTable previously written by danabra
  */
+
 public class Timetable {
 	private int rankDaysoff;
 	private int rankBlankSpace;
 	private List<LessonGroup> lessonGroups;
 	
-	/*public Timetable(){
-		lessons=new ArrayList<>();
-	}*/
 	
 	public Timetable(List<LessonGroup> lessons){
 		this.lessonGroups = new ArrayList<>(lessons);
@@ -52,20 +50,5 @@ public class Timetable {
 	public int getRankOfBlankSpace(){
 		return rankBlankSpace;
 	}
-
-	/*public void addLesson(LessonGroup ¢){
-		if(lessons.contains(¢)) // add equals to lessonsgroup
-			return;
-		lessons.add(¢);
-		if(!isNoClash())
-			lessons.remove(¢);
-	}
-	
-	public void addLessons(List<LessonGroup> ¢){
-		this.lessons.addAll(¢);
-		if(!isNoClash())
-			this.lessons.removeAll(¢);
-	}
-	*/
 	
 }
