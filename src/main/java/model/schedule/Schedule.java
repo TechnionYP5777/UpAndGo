@@ -63,11 +63,7 @@ public class Schedule {
 	}
 	
 	public Timetable getTimetable() {
-		if (!isLegalSchedule())
-			return null;
-		Timetable $ = new Timetable();
-		$.addLessons(lessons);
-		return $;
+		return new Timetable(lessons);
 			
 	}
 	

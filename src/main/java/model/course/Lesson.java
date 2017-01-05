@@ -62,6 +62,7 @@ public class Lesson implements Event {
 		return this.type;
 	}
 	
+	// return value between 0 to 6.
 	public int getDay(){
 		//return this.day;
 		return startTime.getDay().getValue()-1;
