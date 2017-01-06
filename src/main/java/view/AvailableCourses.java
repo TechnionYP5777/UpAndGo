@@ -3,6 +3,7 @@
 ///
 package view;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.time.DayOfWeek;
@@ -15,6 +16,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -32,6 +34,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 
@@ -55,6 +58,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setAddButton();
 		setListViewArea();
 		setGroupLayout();
+		createEvents();
 	}
 
 	// **************** AUX methods for creating the view design ***********//
@@ -179,5 +183,32 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public String getHighlightedCourse() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	private static void createEvents() {
+		btnAddCourse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (lstAvailableCourses.getSelectedValue() == null)
+					return;
+				courseModel.remove(lstAvailableCourses.getSelectedIndex());
+				if (courseModel.isEmpty())
+					btnAddCourse.setEnabled(false);
+				else
+					Message.infoBox("add pressed", "ADD", null);
+			}
+		});
+	}
+
+	///
+	// This class is a massage box class
+	///
+	public static class Message {
+
+		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
+
+			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
+
+		}
 	}
 }
