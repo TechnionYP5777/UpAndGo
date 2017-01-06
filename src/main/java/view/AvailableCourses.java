@@ -45,7 +45,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		setMaximumSize(new Dimension(10000, 32767));
 		setMinimumSize(new Dimension(210, 300));
-		setPreferredSize(new Dimension(210, 300));
+		setPreferredSize(new Dimension(222, 300));
 		
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(200, 20));
@@ -93,7 +93,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setCoursesListsModels();
 		JList<String> lstAvailableCourses = new JList<String>(courseModel);
 		
-		lstAvailableCourses.setPreferredSize(new Dimension(180, 100));
+		lstAvailableCourses.setPreferredSize(new Dimension(180, 22));
 		lstAvailableCourses.setMaximumSize(new Dimension(10000, 10000));
 		lstAvailableCourses.setMinimumSize(new Dimension(180, 22));
 		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
