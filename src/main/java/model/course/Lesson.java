@@ -2,6 +2,7 @@ package model.course;
 
 
 
+import java.time.DayOfWeek;
 import java.util.Objects;
 
 import logic.Event;
@@ -64,8 +65,7 @@ public class Lesson implements Event {
 	
 	// return value between 0 to 6.
 	public int getDay(){
-		//return this.day;
-		return startTime.getDay().getValue()-1;
+		return startTime.getDay() == DayOfWeek.SUNDAY ? 0 : startTime.getDay().getValue();
 	}
 	
 	@Override
