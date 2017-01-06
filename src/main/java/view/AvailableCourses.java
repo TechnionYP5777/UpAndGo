@@ -5,6 +5,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,8 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import model.course.Course;
 import model.loader.XmlCourseLoader;
@@ -34,12 +40,16 @@ import javax.swing.ListSelectionModel;
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField searchField;
+	static JTextField searchField;
 	private JScrollPane scrollPane;
 	static JList<String> lstAvailableCourses;
 	static JButton btnAddCourse;
 	static DefaultListModel<String> courseModel;
-
+	static List<Course> clist ;
+	
+	private static final String DEFAULT_COURSE_NUM_TEXT ="Enter course number or name";
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -126,12 +136,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	// Sets the search field preferences
 	//
-	private void setTextField() {
+	private static void setTextField() {
 		searchField = new JTextField();
 		searchField.setPreferredSize(new Dimension(200, 20));
 		searchField.setMaximumSize(new Dimension(100000, 2147483647));
 		searchField.setMinimumSize(new Dimension(200, 20));
-		searchField.setText("Enter course number");
+		searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 		searchField.setBackground(SystemColor.controlHighlight);
 	}
 
@@ -140,16 +150,34 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setCoursesListsModels() {
 		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
-		List<Course> clist = new ArrayList<>(cr.loadAllCourses().values());
+		clist = new ArrayList<>(cr.loadAllCourses().values());
 		courseModel = new DefaultListModel<>();
 		for (Course val : clist)
-			courseModel.addElement(val.getName() + " " + val.getId());
+			courseModel.addElement(getNameToDisplay(val));
 
 	}
-
+	//
+	// Create the string that will be displayed in the list view
+	//
+	private static String getNameToDisplay(Course val) {
+		return val.getName() + " " + val.getId();
+	}
+	//
+	// Searches the courses list for the name or the id of the course 
+	//			typed in the search field.
+	//			if found returns the string that will be displayed in the list 
+	//			else returns "".
+	//
+	static String findCourse() {
+		String searched= searchField.getText();
+		for (Course ¢ : clist)
+			if (¢.getId().equals(searched) || ¢.getName().equals(searched))
+				return getNameToDisplay(¢);
+		return "";
+}
 	// *************************** actions and events **********************//
 	@Override
-	public void addActionListener(@SuppressWarnings("unused") ActionListener l) {
+	public void addActionListener(@SuppressWarnings("unused") ActionListener __) {
 		// TODO Auto-generated method stub
 
 	}
@@ -179,6 +207,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	private static void createEvents() {
+
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
@@ -187,6 +216,32 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						btnAddCourse.setEnabled(false);
 					else
 						Message.infoBox("add pressed", "ADD", null);
+			}
+		});
+		searchField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
+				searchField.setText("");
+			}
+		});
+		searchField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				String searched = findCourse();
+				if (!"".equals(searched))
+					lstAvailableCourses.setSelectedValue(searched, true);
+				else {
+					searchField.setText("");
+					lstAvailableCourses.setSelectedIndex(0);
+				}
+			}
+
+
+		});
+		searchField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 			}
 		});
 	}
