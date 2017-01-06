@@ -232,7 +232,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					lstAvailableCourses.setSelectedValue(searched, true);
 				else {
 					searchField.setText("");
-					lstAvailableCourses.setSelectedIndex(0);
+					lstAvailableCourses.clearSelection();
 				}
 			}
 
