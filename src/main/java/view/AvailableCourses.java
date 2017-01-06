@@ -84,7 +84,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setAvailableCoursesList() {
 		lstAvailableCourses = new JList<>(courseModel);
-		lstAvailableCourses.setToolTipText("\"\"");
+		lstAvailableCourses.setToolTipText("");
 		lstAvailableCourses.setPreferredSize(new Dimension(180, 22));
 		lstAvailableCourses.setMaximumSize(new Dimension(10000, 10000));
 		lstAvailableCourses.setMinimumSize(new Dimension(180, 22));
