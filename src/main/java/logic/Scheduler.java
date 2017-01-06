@@ -1,7 +1,9 @@
 package logic;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import model.constraint.Constraint;
@@ -235,7 +237,33 @@ public class Scheduler {
 		
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param orig
+	 * @param byDaysoff
+	 * @param byBlankSpace
+	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
+	 */
+	public Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace){
+		List<Timetable> res = new ArrayList<>(orig);
+		Collections.sort(res, new Comparator<Timetable>() {
+			@Override
+			public int compare(Timetable t1, Timetable t2) {
+				Integer rank1 = 0;
+				Integer rank2 = 0;
+				if(byDaysoff){
+					rank1 += t1.getRankOfDaysoff();
+					rank2 += t2.getRankOfDaysoff();
+				}
+				if(byBlankSpace){
+					rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();
+				}
+				
+				return rank1.compareTo(rank2);
+			}
+		});
+		return res.iterator();
+	}
 
 }

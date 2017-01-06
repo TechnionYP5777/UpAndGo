@@ -62,4 +62,6 @@ public class Timetable {
 		return lessonGroups + "\n";
 	}
 	
+	
+	
 }
