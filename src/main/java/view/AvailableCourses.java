@@ -6,8 +6,11 @@ package view;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.DefaultListModel;
@@ -19,9 +22,11 @@ import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+import model.course.Course;
 import model.course.Lesson;
 import model.course.StuffMember;
 import model.course.WeekTime;
+import model.loader.XmlCourseLoader;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,15 +49,15 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 */
 	public AvailableCourses() {
 		setMaximumSize(new Dimension(10000, 32767));
-		setMinimumSize(new Dimension(210, 300));
-		setPreferredSize(new Dimension(222, 300));
+		setMinimumSize(new Dimension(210, 200));
+		setPreferredSize(new Dimension(238, 397));
 		setTextField();
 		setAddButton();
 		setListViewArea();
 		setGroupLayout();
 	}
 
-	// ****************  AUX methods for creating the view design ***********//
+	// **************** AUX methods for creating the view design ***********//
 
 	//
 	// Sets the scroll pane with the list of available courses
@@ -63,8 +68,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setAvailableCoursesList();
 		scrollPane.setViewportView(lstAvailableCourses);
 	}
+
 	//
-	// Sets the list of available courses with the relevant model 
+	// Sets the list of available courses with the relevant model
 	//
 	private static void setAvailableCoursesList() {
 		lstAvailableCourses = new JList<>(courseModel);
@@ -74,6 +80,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lstAvailableCourses.setBackground(UIManager.getColor("Button.background"));
 	}
+
 	//
 	// Sets the overall group layout
 	//
@@ -96,6 +103,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 		setLayout(groupLayout);
 	}
+
 	//
 	// Sets the button preferences
 	//
@@ -104,6 +112,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
+
 	//
 	// Sets the scroll pane for the list of courses preferences
 	//
@@ -114,8 +123,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		scrollPane.setMinimumSize(new Dimension(200, 22));
 		scrollPane.setBorder(
 				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
-		return ;
+		return;
 	}
+
 	//
 	// Sets the search field preferences
 	//
@@ -127,35 +137,20 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		searchField.setText("Enter course number");
 		searchField.setBackground(SystemColor.controlHighlight);
 	}
+
 	//
 	// Sets the List model of the courses available
 	//
 	private static void setCoursesListsModels() {
-		ArrayList<Lesson> list = new ArrayList<>();
-		// list.add(new Lesson(new StuffMember("A", "a"),new
-		// WeekTime(DayOfWeek.MONDAY, LocalTime.of(8, 30)), new WeekTime(
-		// DayOfWeek.MONDAY ,LocalTime.of(10, 30)),"Taub 3",
-		// Lesson.Type.LECTURE,12,"MATAM"));
-		// list.add(new Lesson(new StuffMember("B", "b"),new
-		// WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(8, 30)), new WeekTime(
-		// DayOfWeek.WEDNESDAY ,LocalTime.of(10, 30)),"Taub 3",
-		// Lesson.Type.LECTURE,12,"MATAM"));
-		// list.add(new Lesson(new StuffMember("C", "c"),new
-		// WeekTime(DayOfWeek.MONDAY, LocalTime.of(12, 30)), new WeekTime(
-		// DayOfWeek.MONDAY ,LocalTime.of(14, 30)),"Taub 3",
-		// Lesson.Type.TUTORIAL,12,"MATAM"));
-		list.add(new Lesson(new StuffMember("D", "d"), new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(10, 30)),
-				new WeekTime(DayOfWeek.MONDAY, LocalTime.of(11, 30)), "Taub 3", Lesson.Type.LECTURE, 12, "MATAM"));
-
+		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		List<Course> clist = new ArrayList<>(cr.loadAllCourses().values());
 		courseModel = new DefaultListModel<>();
-
-		for (Lesson val : list)
-			courseModel.addElement(val.getCourse());
+		for (Course val : clist)
+			courseModel.addElement(val.getName() + " " + val.getId());
 
 	}
 
-	
-	// ***************************  actions and events **********************//
+	// *************************** actions and events **********************//
 	@Override
 	public void addActionListener(ActionListener l) {
 		// TODO Auto-generated method stub
