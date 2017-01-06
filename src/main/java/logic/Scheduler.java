@@ -91,7 +91,7 @@ public class Scheduler {
 					indexes.set(¢, 0);
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	

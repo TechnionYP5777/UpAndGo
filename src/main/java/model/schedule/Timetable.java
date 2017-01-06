@@ -27,6 +27,10 @@ public class Timetable {
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
 	}
+	
+	public List<LessonGroup> getLessonGroups(){
+		return lessonGroups;
+	}
 
 	private int rankBlankSpace() {
 		// TODO Auto-generated method stub
