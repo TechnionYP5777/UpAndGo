@@ -114,6 +114,7 @@ public class scheduleView extends JFrame {
 				WeekTime s = l.getStartTime();
 				WeekTime e = l.getEndTime();
 				int row = s.getTime().getHour() - 8;
+				@SuppressWarnings("unused")
 				int hours = e.getTime().getHour() - s.getTime().getHour();
 				table.getModel().setValueAt(getDescriptionString(l), row, col);
 			}

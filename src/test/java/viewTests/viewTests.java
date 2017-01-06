@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import view.AvailableCourses;
@@ -12,7 +11,7 @@ import view.AvailableCourses;
 public class viewTests {
 	public viewTests() {
 		design();
-	}// end Test()
+	}
 
 	public static void design() {
 		JFrame f = new JFrame();
@@ -25,10 +24,11 @@ public class viewTests {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("unused")
 			@Override
 			public void run() {
 				try {
-					viewTests viewTests = new viewTests();
+					new viewTests();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

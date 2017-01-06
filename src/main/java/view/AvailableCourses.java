@@ -19,15 +19,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import model.course.Course;
 import model.loader.XmlCourseLoader;
 
@@ -39,7 +35,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
-import javax.swing.ToolTipManager;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -194,7 +189,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	static Course getCoursebyString(String txt  ) {
 		for (Course $ : clist)
-			if (("" + $).equals(txt) )
+			if (($ + "").equals(txt) )
 				return $;
 		return null;
 	}
@@ -207,7 +202,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	@Override
 	public void removeActionListener(@SuppressWarnings("unused") String property,
-			@SuppressWarnings("unused") ActionListener l) {
+			@SuppressWarnings("unused") ActionListener __) {
 		// TODO Auto-generated method stub
 
 	}
