@@ -142,7 +142,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the List model of the courses available
 	//
 	private static void setCoursesListsModels() {
-		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
 		List<Course> clist = new ArrayList<>(cr.loadAllCourses().values());
 		courseModel = new DefaultListModel<>();
 		for (Course val : clist)
