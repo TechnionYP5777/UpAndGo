@@ -57,4 +57,9 @@ public class Timetable {
 		return rankBlankSpace;
 	}
 	
+	@Override
+	public String toString(){
+		return lessonGroups + "\n";
+	}
+	
 }
