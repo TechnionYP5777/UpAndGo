@@ -6,10 +6,6 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import model.course.Course;
-import model.course.Lesson;
-import model.course.StuffMember;
-import model.course.WeekTime;
 import model.loader.XmlCourseLoader;
 
 import java.awt.Color;
@@ -156,19 +149,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	// *************************** actions and events **********************//
 	@Override
-	public void addActionListener(ActionListener l) {
+	public void addActionListener(@SuppressWarnings("unused") ActionListener l) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void removeActionListener(String property, ActionListener l) {
+	public void removeActionListener(@SuppressWarnings("unused") String property, @SuppressWarnings("unused") ActionListener l) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(@SuppressWarnings("unused") PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
 
 	}
@@ -189,13 +182,11 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				if (lstAvailableCourses.getSelectedValue() == null)
-					return;
-				courseModel.remove(lstAvailableCourses.getSelectedIndex());
-				if (courseModel.isEmpty())
-					btnAddCourse.setEnabled(false);
-				else
-					Message.infoBox("add pressed", "ADD", null);
+				if (lstAvailableCourses.getSelectedValue() != null)
+					if (courseModel.isEmpty())
+						btnAddCourse.setEnabled(false);
+					else
+						Message.infoBox("add pressed", "ADD", null);
 			}
 		});
 	}
