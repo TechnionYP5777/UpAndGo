@@ -244,7 +244,7 @@ public class Scheduler {
 	 * @param byBlankSpace
 	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
 	 */
-	public Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace){
+	public static Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace){
 		List<Timetable> res = new ArrayList<>(orig);
 		Collections.sort(res, new Comparator<Timetable>() {
 			@Override
