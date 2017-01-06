@@ -9,6 +9,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
@@ -32,10 +34,12 @@ import model.loader.XmlCourseLoader;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
+import javax.swing.ToolTipManager;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -45,11 +49,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static JList<String> lstAvailableCourses;
 	static JButton btnAddCourse;
 	static DefaultListModel<String> courseModel;
-	static List<Course> clist ;
-	
-	private static final String DEFAULT_COURSE_NUM_TEXT ="Enter course number or name";
-	
-	
+	static List<Course> clist;
+
+	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
+
 	/**
 	 * Create the panel.
 	 */
@@ -81,6 +84,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setAvailableCoursesList() {
 		lstAvailableCourses = new JList<>(courseModel);
+		lstAvailableCourses.setToolTipText("\"\"");
 		lstAvailableCourses.setPreferredSize(new Dimension(180, 22));
 		lstAvailableCourses.setMaximumSize(new Dimension(10000, 10000));
 		lstAvailableCourses.setMinimumSize(new Dimension(180, 22));
@@ -156,6 +160,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			courseModel.addElement(getNameToDisplay(val));
 
 	}
+
 	//
 	// Create the string that will be displayed in the list view
 	//
@@ -163,18 +168,36 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		return val.getName() + " " + val.getId();
 	}
 	//
-	// Searches the courses list for the name or the id of the course 
-	//			typed in the search field.
-	//			if found returns the string that will be displayed in the list 
-	//			else returns "".
+	// Create the string that will be displayed by the tool tip
 	//
-	static String findCourse() {
-		String searched= searchField.getText();
+	static String getDescription(Course val) {
+		return val.getName() + " " + val.getId()+ "\n" + val.getFaculty()+" " +val.getPoints();
+	}
+	//
+	// Searches the courses list for the name or the id of the course
+	// typed in the search field.
+	// if found returns the string that will be displayed in the list
+	// else returns "".
+	//
+	static String findCourse(  ) {
+		String searched =  searchField.getText();
 		for (Course ¢ : clist)
 			if (¢.getId().equals(searched) || ¢.getName().equals(searched))
 				return getNameToDisplay(¢);
 		return "";
-}
+	}
+	//
+	// Searches the courses list for the name and id of the course 
+	// as returned by getNameToDisplay().
+	// if found returns the course
+	// else returns null.
+	//
+	static Course getCoursebyString(String txt  ) {
+		for (Course $ : clist)
+			if (("" + $).equals(txt) )
+				return $;
+		return null;
+	}
 	// *************************** actions and events **********************//
 	@Override
 	public void addActionListener(@SuppressWarnings("unused") ActionListener __) {
@@ -183,7 +206,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	@Override
-	public void removeActionListener(@SuppressWarnings("unused") String property, @SuppressWarnings("unused") ActionListener l) {
+	public void removeActionListener(@SuppressWarnings("unused") String property,
+			@SuppressWarnings("unused") ActionListener l) {
 		// TODO Auto-generated method stub
 
 	}
@@ -207,7 +231,22 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	private static void createEvents() {
-
+		lstAvailableCourses.addMouseMotionListener( new MouseMotionAdapter() {
+			
+			@Override
+			public void mouseMoved( MouseEvent e) {
+				JList<?> theList = (JList<?>) e.getSource();
+				ListModel<?> model = theList.getModel();
+				int index = theList.locationToIndex(e.getPoint());
+				if (index <= -1)
+					return;
+				theList.setToolTipText("");
+				String text = (String) model.getElementAt(index);
+				Course c = getCoursebyString(text);
+				theList.setToolTipText(getDescription(c));
+			}
+		});
+		
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
@@ -235,7 +274,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					lstAvailableCourses.clearSelection();
 				}
 			}
-
 
 		});
 		searchField.addFocusListener(new FocusAdapter() {
