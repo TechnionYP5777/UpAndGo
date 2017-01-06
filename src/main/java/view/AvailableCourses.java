@@ -1,3 +1,6 @@
+///
+// Author : Lidia P.  Alex.V
+///
 package view;
 
 import java.awt.event.ActionListener;
@@ -14,7 +17,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import model.course.Lesson;
@@ -25,20 +27,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
-import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	static JList<String> lstCourseList;
+	private JTextField searchField;
+	private JScrollPane scrollPane;
+	static JList<String> lstAvailableCourses;
 	static JButton btnAddCourse;
 	static DefaultListModel<String> courseModel;
+
 	/**
 	 * Create the panel.
 	 */
@@ -46,62 +46,90 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setMaximumSize(new Dimension(10000, 32767));
 		setMinimumSize(new Dimension(210, 300));
 		setPreferredSize(new Dimension(222, 300));
-		
-		textField = new JTextField();
-		textField.setPreferredSize(new Dimension(200, 20));
-		textField.setMaximumSize(new Dimension(100000, 2147483647));
-		textField.setMinimumSize(new Dimension(200, 20));
-		textField.setText("Enter course number");
-		textField.setBackground(SystemColor.controlHighlight);
-		
+		setTextField();
+		setAddButton();
+		setListViewArea();
+		setGroupLayout();
+	}
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportBorder(null);
-		scrollPane.setPreferredSize(new Dimension(200, 22));
-		scrollPane.setMinimumSize(new Dimension(200, 22));
-		scrollPane.setBorder(new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
-		
-		JButton btnAddCourse = new JButton("Add Course");
-		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
-		btnAddCourse.setMinimumSize(new Dimension(200, 25));
-		
-		
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddCourse)
-					.addGap(4))
-		);
+	// ****************  AUX methods for creating the view design ***********//
 
-		setLayout(groupLayout);
+	//
+	// Sets the scroll pane with the list of available courses
+	//
+	private void setListViewArea() {
+		setScrollPane();
 		setCoursesListsModels();
-		JList<String> lstAvailableCourses = new JList<String>(courseModel);
-		
+		setAvailableCoursesList();
+		scrollPane.setViewportView(lstAvailableCourses);
+	}
+	//
+	// Sets the list of available courses with the relevant model 
+	//
+	private static void setAvailableCoursesList() {
+		lstAvailableCourses = new JList<>(courseModel);
 		lstAvailableCourses.setPreferredSize(new Dimension(180, 22));
 		lstAvailableCourses.setMaximumSize(new Dimension(10000, 10000));
 		lstAvailableCourses.setMinimumSize(new Dimension(180, 22));
 		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lstAvailableCourses.setBackground(UIManager.getColor("Button.background"));
-		scrollPane.setViewportView(lstAvailableCourses);
-
-		
 	}
+	//
+	// Sets the overall group layout
+	//
+	private void setGroupLayout() {
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+						.addComponent(searchField, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+				.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse).addGap(4)));
+
+		setLayout(groupLayout);
+	}
+	//
+	// Sets the button preferences
+	//
+	private static void setAddButton() {
+		btnAddCourse = new JButton("Add Course");
+		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
+		btnAddCourse.setMinimumSize(new Dimension(200, 25));
+	}
+	//
+	// Sets the scroll pane for the list of courses preferences
+	//
+	private void setScrollPane() {
+		scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(null);
+		scrollPane.setPreferredSize(new Dimension(200, 22));
+		scrollPane.setMinimumSize(new Dimension(200, 22));
+		scrollPane.setBorder(
+				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
+		return ;
+	}
+	//
+	// Sets the search field preferences
+	//
+	private void setTextField() {
+		searchField = new JTextField();
+		searchField.setPreferredSize(new Dimension(200, 20));
+		searchField.setMaximumSize(new Dimension(100000, 2147483647));
+		searchField.setMinimumSize(new Dimension(200, 20));
+		searchField.setText("Enter course number");
+		searchField.setBackground(SystemColor.controlHighlight);
+	}
+	//
+	// Sets the List model of the courses available
+	//
 	private static void setCoursesListsModels() {
 		ArrayList<Lesson> list = new ArrayList<>();
 		// list.add(new Lesson(new StuffMember("A", "a"),new
@@ -125,22 +153,25 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			courseModel.addElement(val.getCourse());
 
 	}
+
+	
+	// ***************************  actions and events **********************//
 	@Override
 	public void addActionListener(ActionListener l) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeActionListener(String property, ActionListener l) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
