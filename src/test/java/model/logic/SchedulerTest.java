@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 
 import logic.Scheduler;
@@ -22,10 +23,16 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
 import model.schedule.Timetable;
 
+@SuppressWarnings("static-method")
 public class SchedulerTest {
 
 CourseLoader cr;
 	
+	
+	@After
+	public void after(){
+		System.out.println("***");
+	}
 	
 	@Test
 	public void test_a() {
@@ -179,6 +186,25 @@ CourseLoader cr;
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 00)));
 		
 		//assertNull(s);
+	}
+	
+	@Test
+	public void test_scheduleTimetable1() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		
+		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		System.out.println(courses);
+		
+		
+		List<Timetable> tl = Scheduler.getTimetablesList(courses);
+		System.out.println(tl);
+		/*Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		
+		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
+		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
+		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
+		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
+		*/
 	}
 
 }

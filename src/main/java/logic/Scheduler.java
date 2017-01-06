@@ -51,8 +51,10 @@ public class Scheduler {
 					break;
 				
 			}
-			if(b)
+			if(b){
+				System.out.println("^found");
 				result.add($.getTimetable()); //return $;
+			}
 			
 			if(!b){
 				indexes.set(lastAdded, indexes.get(lastAdded)+1);

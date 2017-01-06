@@ -3,7 +3,6 @@ package model.schedule;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.constraint.TimeConstraint;
 import model.course.Lesson;
 import model.course.LessonGroup;
 
@@ -42,10 +41,8 @@ public class Timetable {
 		int[] histogram = new int[DAYS_IN_WEEK];
 
 		for(LessonGroup lg : lessonGroups)
-			for (Lesson ¢ : lg.getLessons()){
-				System.out.println("set day " + ¢.getDay());
+			for (Lesson ¢ : lg.getLessons())
 				histogram[¢.getDay()] = 1;
-			}
 		// don't give any value for free friday or saturday since it's usual case
 		for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];

@@ -1,9 +1,5 @@
 package model.logic;
 
-import static org.junit.Assert.*;
-
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +8,6 @@ import org.junit.Test;
 import logic.Scheduler;
 import model.constraint.TimeConstraint;
 import model.course.Course;
-import model.course.WeekTime;
 import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
@@ -49,5 +44,8 @@ public class TimetableTest {
 		
 		assert (Scheduler.schedule(courses, new ArrayList<TimeConstraint>()).getTimetable().getRankOfDaysoff() == 4);
 	}
+	
+	
+	
 
 }
