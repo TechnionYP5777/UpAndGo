@@ -61,6 +61,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
+		//setToolTipText("\"\"");
 		setMaximumSize(new Dimension(10000, 32767));
 		setMinimumSize(new Dimension(210, 200));
 		setPreferredSize(new Dimension(324, 467));
@@ -199,9 +200,11 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String getDescription(Course val) {
 		return val.getName() + " " + val.getId() + "\n" + val.getFaculty() + " " + val.getPoints();
 	}
+
 	static String getIdFromDescription(String val) {
-		return val.split(" ")[1];
+		return val.split(" ")[1]; // 0= name , 1 = id
 	}
+
 	//
 	// Searches the courses list for the name or the id of the course
 	// typed in the search field.
@@ -244,9 +247,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
 		// i need to check what the hell is changed and act according
-		switch (evt.getPropertyName()){
+		switch (evt.getPropertyName()) {
 		case CourseProperty.DETAILS:
-			}
+			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -254,27 +261,30 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	static String highlighted= "";
+
+	static String highlighted = "";
+
 	@Override
 	public String getHighlightedCourse() {
 		return highlighted;
 	}
-	
+
 	private static void createEvents() {
 		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				
 				JList<?> theList = (JList<?>) e.getSource();
+				
 				ListModel<?> model = theList.getModel();
 				int index = theList.locationToIndex(e.getPoint());
 				if (index <= -1)
 					return;
-				theList.setToolTipText("");
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
-				Course c = getCoursebyString(highlighted);
-				// listeners.forEach(x-> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
-				theList.setToolTipText(getDescription(c));
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
+				
 			}
 		});
 
