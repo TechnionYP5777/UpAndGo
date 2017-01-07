@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 import command.CourseCommand;
 import model.course.Course;
 import model.loader.XmlCourseLoader;
+import property.CourseProperty;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -240,10 +241,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	@Override
-	public void propertyChange(@SuppressWarnings("unused") PropertyChangeEvent evt) {
+	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
 		// i need to check what the hell is changed and act according
-
+		switch (evt.getPropertyName()){
+		case CourseProperty.DETAILS:
+			}
 	}
 
 	@Override
@@ -268,9 +271,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				if (index <= -1)
 					return;
 				theList.setToolTipText("");
-				highlighted = (String) model.getElementAt(index);
+				highlighted = getIdFromDescription((String) model.getElementAt(index));
 				Course c = getCoursebyString(highlighted);
-			//	listeners.forEach(x-> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
+				// listeners.forEach(x-> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
 				theList.setToolTipText(getDescription(c));
 			}
 		});
