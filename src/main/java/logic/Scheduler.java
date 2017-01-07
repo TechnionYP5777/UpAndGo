@@ -1,7 +1,9 @@
 package logic;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import model.constraint.Constraint;
@@ -9,6 +11,7 @@ import model.constraint.TimeConstraint;
 import model.course.Course;
 import model.course.LessonGroup;
 import model.schedule.Schedule;
+import model.schedule.Timetable;
 
 /**
  * 
@@ -18,6 +21,85 @@ import model.schedule.Schedule;
 
 @SuppressWarnings("boxing")
 public class Scheduler {
+	
+	
+	/**
+	 * gets a list of courses and a list of constraints and return a possible 
+	 * schedule of them which doesn't break the constraints.
+	 * it works for TimeConstraints for now.
+	 */
+	public static List<Timetable> getTimetablesList(List<Course> lcourse){
+		List<Timetable> result = new ArrayList<>();
+		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
+		
+		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
+		ArrayList<Integer> max = initMax(lessonsGroupArray);
+		
+		for (int last = indexes.size() - 1, msb;;) {
+			System.out.println(indexes);
+			List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
+			Schedule $ = new Schedule();
+			
+			boolean b = false;
+			int lastAdded = 0;
+			for(lastAdded = 0; lastAdded < lessons.size(); ++lastAdded){
+				b = $.addLesson( lessons.get(lastAdded) );
+				// if you can't add that lesson than all combination including him are not valid
+				// therefore there is no use to check the rest of them - increase bit of found lesson
+				//indexes.set(¢, indexes.get(¢)+1);
+				// if found index was maxed, than find msb that wasn't maxed and max it
+				//if (indexes.get(¢) > max.get(¢)) {
+				if(!b)
+					break;
+				
+			}
+			if(b){
+				System.out.println("^found");
+				result.add($.getTimetable()); //return $;
+			}
+			
+			if(!b){
+				indexes.set(lastAdded, indexes.get(lastAdded)+1);
+				if (indexes.get(lastAdded) > max.get(lastAdded)) {
+					msb = lastAdded - 1;
+					// find lowest index which is not yet maxed
+					for (; msb >= 0; --msb)
+						if (indexes.get(msb) < max.get(msb))
+							break;
+					// if every index is max than we made all combinations
+					if (msb < 0)
+						break;
+					// increase msb and zero everything to its right
+					indexes.set(msb, indexes.get(msb) + 1);
+					for (int ¢ = msb + 1; ¢ <= last; ++¢)
+						indexes.set(¢, 0);
+				}
+				continue;
+			}
+			
+			// increase last index by 1;
+			indexes.set(last, indexes.get(last) + 1);
+			
+			if (indexes.get(last) > max.get(last)) {
+				msb = last - 1;
+				// find lowest index which is not yet maxed
+				for (; msb >= 0; --msb)
+					if (indexes.get(msb) < max.get(msb))
+						break;
+				// if every index is max than we made all combinations
+				if (msb < 0)
+					break;
+				// increase msb and zero everything to its right
+				indexes.set(msb, indexes.get(msb) + 1);
+				for (int ¢ = msb + 1; ¢ <= last; ++¢)
+					indexes.set(¢, 0);
+			}
+		}
+		return result;
+	}
+	
+	
+	
 	/**
 	 * gets a list of courses and a list of constraints and return a possible 
 	 * schedule of them which doesn't break the constraints.
@@ -90,6 +172,11 @@ public class Scheduler {
 		return null;
 	}
 	
+	
+	
+	
+	
+	
 	/**
 	 * @param c
 	 * @param lconstraint
@@ -150,7 +237,33 @@ public class Scheduler {
 		
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param orig
+	 * @param byDaysoff
+	 * @param byBlankSpace
+	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
+	 */
+	public static Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace){
+		List<Timetable> res = new ArrayList<>(orig);
+		Collections.sort(res, new Comparator<Timetable>() {
+			@Override
+			public int compare(Timetable t1, Timetable t2) {
+				Integer rank1 = 0;
+				Integer rank2 = 0;
+				if(byDaysoff){
+					rank1 += t1.getRankOfDaysoff();
+					rank2 += t2.getRankOfDaysoff();
+				}
+				if(byBlankSpace){
+					rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();
+				}
+				
+				return rank1.compareTo(rank2);
+			}
+		});
+		return res.iterator();
+	}
 
 }

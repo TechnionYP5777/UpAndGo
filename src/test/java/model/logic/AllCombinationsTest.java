@@ -7,8 +7,10 @@ package model.logic;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 @SuppressWarnings({"boxing","static-method"})
 public class AllCombinationsTest {
 	@Test
