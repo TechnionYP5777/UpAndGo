@@ -13,5 +13,5 @@ public interface View extends PropertyChangeListener {
 	/*
 	 * unsubscribe from controller
 	 */
-	void removeActionListener(String property, ActionListener l);
+	void removeActionListener( ActionListener l);
 }

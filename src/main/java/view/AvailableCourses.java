@@ -52,6 +52,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private JCheckBox chckbxFaculty;
 	private JCheckBox chckbxTaken;
 	private JCheckBox chckbxCats;
+	private List<ActionListener> listeners;
 
 	/**
 	 * Create the panel.
@@ -65,6 +66,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setListViewArea();
 		setGroupLayout();
 		createEvents();
+		listeners = new ArrayList<>();
 	}
 
 	// **************** AUX methods for creating the view design ***********//
@@ -101,43 +103,36 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-						.addComponent(searchField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(chckbxTaken)
-								.addComponent(chckbxFaculty))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(chckbxKdamim)
-								.addComponent(chckbxCats))))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxFaculty)
-						.addComponent(chckbxKdamim))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxTaken)
-						.addComponent(chckbxCats))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(13))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+								.addComponent(searchField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 258,
+										Short.MAX_VALUE)
+								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE,
+										258, Short.MAX_VALUE)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(chckbxTaken).addComponent(chckbxFaculty))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(chckbxKdamim).addComponent(chckbxCats))))
+						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
+								.addComponent(chckbxKdamim))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
+								.addComponent(chckbxCats))
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(13)));
 
 		setLayout(groupLayout);
 	}
@@ -194,49 +189,50 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private static String getNameToDisplay(Course val) {
 		return val.getName() + " " + val.getId();
 	}
+
 	//
 	// Create the string that will be displayed by the tool tip
 	//
 	static String getDescription(Course val) {
-		return val.getName() + " " + val.getId()+ "\n" + val.getFaculty()+" " +val.getPoints();
+		return val.getName() + " " + val.getId() + "\n" + val.getFaculty() + " " + val.getPoints();
 	}
+
 	//
 	// Searches the courses list for the name or the id of the course
 	// typed in the search field.
 	// if found returns the string that will be displayed in the list
 	// else returns "".
 	//
-	static String findCourse(  ) {
-		String searched =  searchField.getText();
+	static String findCourse() {
+		String searched = searchField.getText();
 		for (Course ¢ : clist)
 			if (¢.getId().equals(searched) || ¢.getName().equals(searched))
 				return getNameToDisplay(¢);
 		return "";
 	}
+
 	//
-	// Searches the courses list for the name and id of the course 
+	// Searches the courses list for the name and id of the course
 	// as returned by getNameToDisplay().
 	// if found returns the course
 	// else returns null.
 	//
-	static Course getCoursebyString(String txt  ) {
+	static Course getCoursebyString(String txt) {
 		for (Course $ : clist)
-			if (($ + "").equals(txt) )
+			if (($ + "").equals(txt))
 				return $;
 		return null;
 	}
+
 	// *************************** actions and events **********************//
 	@Override
-	public void addActionListener(@SuppressWarnings("unused") ActionListener __) {
-		// TODO Auto-generated method stub
-
+	public void addActionListener(ActionListener ¢) {
+		listeners.add(¢);
 	}
 
 	@Override
-	public void removeActionListener(@SuppressWarnings("unused") String property,
-			@SuppressWarnings("unused") ActionListener __) {
-		// TODO Auto-generated method stub
-
+	public void removeActionListener(ActionListener l) {
+		listeners.remove(l);
 	}
 
 	@Override
@@ -258,10 +254,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	private static void createEvents() {
-		lstAvailableCourses.addMouseMotionListener( new MouseMotionAdapter() {
-			
+		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
+
 			@Override
-			public void mouseMoved( MouseEvent e) {
+			public void mouseMoved(MouseEvent e) {
 				JList<?> theList = (JList<?>) e.getSource();
 				ListModel<?> model = theList.getModel();
 				int index = theList.locationToIndex(e.getPoint());
@@ -273,7 +269,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				theList.setToolTipText(getDescription(c));
 			}
 		});
-		
+
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
@@ -293,6 +289,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		searchField.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+
 				String searched = findCourse();
 				if (!"".equals(searched))
 					lstAvailableCourses.setSelectedValue(searched, true);
