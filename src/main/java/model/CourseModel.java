@@ -123,10 +123,8 @@ public class CourseModel implements Model  {
 	 * if empty, load all of them
 	 */
 	public void loadQuery(@SuppressWarnings("unused") String query) {
-		// TODO: implement
-		List<String> l = this.getCoursesNames();
 		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, l))));
+				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, this.getCoursesNames()))));
 	}
 
 	@Override

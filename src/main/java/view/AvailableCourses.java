@@ -245,6 +245,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		listeners.remove(l);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
