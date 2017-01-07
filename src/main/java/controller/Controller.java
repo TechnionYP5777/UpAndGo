@@ -16,4 +16,5 @@ public interface Controller extends ActionListener {
 	/*
 	 * mark class
 	 */
+	public void init();
 }

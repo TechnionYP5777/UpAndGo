@@ -27,6 +27,7 @@ public class viewTests {
 		f.setVisible(true);
 		AvailableCourses  avl= new AvailableCourses();
 		cntr= new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/viewTest.XML")), avl);
+		cntr.init();
 		f.getContentPane().add(avl);
 	}
 

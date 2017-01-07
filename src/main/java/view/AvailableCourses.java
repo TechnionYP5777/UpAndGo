@@ -61,7 +61,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
-		//setToolTipText("\"\"");
+		listeners = new ArrayList<>();
+
 		setMaximumSize(new Dimension(10000, 32767));
 		setMinimumSize(new Dimension(210, 200));
 		setPreferredSize(new Dimension(324, 467));
@@ -70,7 +71,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setListViewArea();
 		setGroupLayout();
 		createEvents();
-		listeners = new ArrayList<>();
 	}
 
 	// **************** AUX methods for creating the view design ***********//
@@ -178,12 +178,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	// Sets the List model of the courses available
 	//
-	private static void setCoursesListsModels() {
+	private  void setCoursesListsModels() {
 		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
 		clist = new ArrayList<>(cr.loadAllCourses().values());
+		listeners.forEach(x -> x
+				.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
-		for (Course val : clist)
-			courseModel.addElement(getNameToDisplay(val));
+//		for (Course val : clist)
+//			courseModel.addElement(getNameToDisplay(val));
 
 	}
 
@@ -202,7 +204,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	static String getIdFromDescription(String val) {
-		return val.split(" ")[1]; // 0= name , 1 = id
+		return val.split(" ")[0]; // 0= name , 1 = id
 	}
 
 	//
@@ -251,6 +253,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		case CourseProperty.DETAILS:
 			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
 			break;
+		case CourseProperty.COURSE_LIST:
+			courseModel = new DefaultListModel<>();
+			for (String val : (List<String>)evt.getNewValue())
+				courseModel.addElement(val);
+			lstAvailableCourses.setModel(courseModel);
+			break;
 		default:
 			break;
 		}
@@ -259,7 +267,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@Override
 	public String getQuery() {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	static String highlighted = "";
@@ -274,9 +282,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				
+
 				JList<?> theList = (JList<?>) e.getSource();
-				
+
 				ListModel<?> model = theList.getModel();
 				int index = theList.locationToIndex(e.getPoint());
 				if (index <= -1)
@@ -284,7 +292,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
-				
+
 			}
 		});
 

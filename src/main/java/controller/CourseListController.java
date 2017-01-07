@@ -33,4 +33,9 @@ public class CourseListController implements Controller{
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
 				model.loadQuery(view.getQuery());
 	}
+	
+	@Override
+	public void init(){
+		model.loadQuery("");
+	}
 }

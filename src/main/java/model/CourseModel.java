@@ -96,7 +96,7 @@ public class CourseModel implements Model  {
 	public void exposeCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+		this.listenersMap.get(CourseProperty.DETAILS).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, this.getCourseByName(name)))));
 	}
 	
@@ -124,6 +124,9 @@ public class CourseModel implements Model  {
 	 */
 	public void loadQuery(@SuppressWarnings("unused") String query) {
 		// TODO: implement
+		List<String> l = this.getCoursesNames();
+		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, l))));
 	}
 
 	@Override
