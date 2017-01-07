@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+
+import command.CourseCommand;
 import model.course.Course;
 import model.loader.XmlCourseLoader;
 
@@ -52,7 +54,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private JCheckBox chckbxFaculty;
 	private JCheckBox chckbxTaken;
 	private JCheckBox chckbxCats;
-	private List<ActionListener> listeners;
+	static List<ActionListener> listeners;
 
 	/**
 	 * Create the panel.
@@ -196,7 +198,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String getDescription(Course val) {
 		return val.getName() + " " + val.getId() + "\n" + val.getFaculty() + " " + val.getPoints();
 	}
-
+	static String getIdFromDescription(String val) {
+		return val.split(" ")[1];
+	}
 	//
 	// Searches the courses list for the name or the id of the course
 	// typed in the search field.
@@ -238,6 +242,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@Override
 	public void propertyChange(@SuppressWarnings("unused") PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
+		// i need to check what the hell is changed and act according
 
 	}
 
@@ -246,13 +251,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	static String highlighted= "";
 	@Override
 	public String getHighlightedCourse() {
-		// TODO Auto-generated method stub
-		return null;
+		return highlighted;
 	}
-
+	
 	private static void createEvents() {
 		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
 
@@ -264,8 +268,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				if (index <= -1)
 					return;
 				theList.setToolTipText("");
-				String text = (String) model.getElementAt(index);
-				Course c = getCoursebyString(text);
+				highlighted = (String) model.getElementAt(index);
+				Course c = getCoursebyString(highlighted);
+			//	listeners.forEach(x-> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
 				theList.setToolTipText(getDescription(c));
 			}
 		});
