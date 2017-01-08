@@ -2,9 +2,9 @@ package property;
 
 public class CourseProperty {
 
-	public static String COURSE_LIST = "course_list";
-	public static String CHOSEN_LIST = "chosen_list";
-	public static String BAD_PROPERTY = "bad_property";
-	public static String DETAILS = "details";
+	public static final String COURSE_LIST = "course_list";
+	public static final String CHOSEN_LIST = "chosen_list";
+	public static final String BAD_PROPERTY = "bad_property";
+	public static final String DETAILS = "details";
 
 }

@@ -30,4 +30,9 @@ public class CourseSelectionController implements Controller {
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
 				model.getChosenCourseNames();
 	}
+
+	@Override
+	public void init() {
+		model.getChosenCourseNames();
+	}
 }

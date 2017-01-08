@@ -96,8 +96,8 @@ public class CourseModel implements Model  {
 	public void exposeCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, this.getCourseByName(name)))));
+		this.listenersMap.get(CourseProperty.DETAILS).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, this.getCourseByName(name)))));
 	}
 	
 	public Course getCourseByName(String name) {
@@ -123,7 +123,8 @@ public class CourseModel implements Model  {
 	 * if empty, load all of them
 	 */
 	public void loadQuery(@SuppressWarnings("unused") String query) {
-		// TODO: implement
+		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, this.getCoursesNames()))));
 	}
 
 	@Override
