@@ -9,8 +9,9 @@ public class UgParserTest {
 	@Test
 	@SuppressWarnings("static-method")
 	public void test() {
-		for(Faculty ¢ : UgParser.getFaculties())
-			System.out.println(¢.getId() + " " + ¢.getName());
+		//for(Faculty ¢ : UgParser.getFaculties())
+			//System.out.println(¢.getId() + " " + ¢.getName());
+		UgParser.getCoursesNamesAndID();
 	}
 
 }
