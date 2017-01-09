@@ -22,6 +22,7 @@ public class CourseListController implements Controller{
 		
 		this.model.addPropertyChangeListener(CourseProperty.COURSE_LIST, this.view);
 		this.model.addPropertyChangeListener(CourseProperty.DETAILS, this.view);
+		this.model.addPropertyChangeListener(CourseProperty.CHOSEN_LIST, this.view);
 		
 		this.view.addActionListener(this);
 	}
@@ -32,10 +33,17 @@ public class CourseListController implements Controller{
 			model.exposeCourse(view.getHighlightedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
 				model.loadQuery(view.getQuery());
+		else if (¢.getActionCommand().equals(CourseCommand.PICK))
+			model.pickCourse(view.getLastPickedCourse());
+		else if (¢.getActionCommand().equals(CourseCommand.DROP))
+			model.dropCourse(view.getLastDropedCourse());
+		else if (¢.getActionCommand().equals(CourseCommand.GET_CHOSEN))
+				model.getChosenCourseNames();
 	}
 	
 	@Override
 	public void init(){
 		model.loadQuery("");
+		model.getChosenCourseNames();
 	}
 }
