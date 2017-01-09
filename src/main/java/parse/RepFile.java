@@ -167,7 +167,7 @@ public class RepFile {
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test.XML"))));
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test2.XML"))));
 
 
 		} catch (ParserConfigurationException | TransformerException ¢) {
@@ -264,16 +264,18 @@ public class RepFile {
 						lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
 				} else if (lessonLine.contains("תרגיל")) {
 					infoType = InfoType.TUTORIAL;
-					if (lectureGroupElement != null && tutorialsGroupElement == null) {
+					if (lectureGroupElement == null){
+						lectureGroupElement = d.createElement("lecture");
+						course.appendChild(lectureGroupElement);
+					}
+					if (tutorialsGroupElement == null) {
 						tutorialsGroupElement = d.createElement("tutorials");
 						lectureGroupElement.appendChild(tutorialsGroupElement);
 					}
-					if (tutorialsGroupElement != null) {
-						tutorialGroupElement = d.createElement("tutorial");
-						tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
-						tutorialsGroupElement.appendChild(tutorialGroupElement);
-						tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
-					}
+					tutorialGroupElement = d.createElement("tutorial");
+					tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
+					tutorialsGroupElement.appendChild(tutorialGroupElement);
+					tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
 				} else if (lessonLine.contains("מתרגל")) {
 					infoType = InfoType.ASSISTANT;
 					if (tutorialGroupElement != null)
