@@ -346,4 +346,16 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 		}
 	}
+
+	@Override
+	public String getLastPickedCourse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLastDropedCourse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
