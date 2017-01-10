@@ -40,10 +40,11 @@ public class RepFile {
 	private static final String REP_FILE_XML = "REPFILE/REP.XML";
 
 	
-	private static final String SEPARATING_LINE = "^\\+\\-+\\+\\n";
+	private static final String SEPARATING_LINE = "^\\+\\-+\\+(\\n|\\Z)";
 	private static final String SEPARATING_DOUBLE_LINE = "^\\+\\=+\\+\\n";
 	private static final String FACULTY_NAME = "(?<FacultyName>.+?)";
-	private static final String FACULTY_COURSES = "(?<FacultyCourses>.+?(?=^\\+\\=+\\+\\n))";
+	//private static final String FACULTY_COURSES = "(?<FacultyCourses>.+?(?=^\\+\\=+\\+\\n))";
+	private static final String FACULTY_COURSES = "(?<FacultyCourses>.+?(?=(^\\s*$)|\\Z))";
 	private static final String COURSE_SUMMERY = "(?<CourseSummery>.+?\\n.+?\\n)";
 	private static final String COURSE_INFO_AND_LESSONS = "(?<CourseInfoAndLessons>(.+?\\n)+?(?="+SEPARATING_LINE+"))";
 
@@ -144,7 +145,8 @@ public class RepFile {
 			
 			for (Matcher facultyMatcher = Pattern
 					.compile(SEPARATING_DOUBLE_LINE+FACULTY_NAME+SEPARATING_DOUBLE_LINE+FACULTY_COURSES, Pattern.MULTILINE+Pattern.DOTALL)
-					.matcher(getRepFileAsString()); facultyMatcher.find();)
+					.matcher(getRepFileAsString()); facultyMatcher.find();){
+				System.out.println(facultyMatcher.group("FacultyName"));
 				for (Matcher courseMatcher = Pattern
 						.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO_AND_LESSONS, Pattern.MULTILINE)
 						.matcher(facultyMatcher.group("FacultyCourses")); courseMatcher.find();){
@@ -155,6 +157,7 @@ public class RepFile {
 					ArrayList<String> courseInfoAndLessons = new ArrayList<>(Arrays.asList(
 							Pattern.compile("^\\|(רישום\\s+|מס.+|\\s+)\\|\\n", Pattern.MULTILINE)
 							.split(courseMatcher.group("CourseInfoAndLessons"))));
+										
 					
 					String courseInfo = courseInfoAndLessons.get(0);
 					courseInfoAndLessons.remove(0);
@@ -164,6 +167,8 @@ public class RepFile {
 					
 					rootElement.appendChild(course);	
 				}
+			}
+
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
@@ -174,6 +179,10 @@ public class RepFile {
 			¢.printStackTrace();
 		}
 			
+	}
+	
+	private static boolean isSportCourse(String id){
+		return "3948".equals(id.substring(0, 4)) || "3949".equals(id.substring(0, 4));
 	}
 	
 	
@@ -208,26 +217,37 @@ public class RepFile {
 	}
 	
 	private static void addInfoToCourse(Document d, Element course, String courseInfo){
-		if (Integer.parseInt(course.getAttribute("id").substring(0, 2)) == 39)
-			return;
-		System.out.println(course.getAttribute("id"));
-		Element examsElement = d.createElement("exams");
-		course.appendChild(examsElement);
-		for (String infoLine : courseInfo.split("[\\r\\n]+"))
-			if (infoLine.contains("מורה")) {
-				Element teacherInChargeElement = d.createElement("teacherInCharge");
-				teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
-				teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
-				course.appendChild(teacherInChargeElement);
-			} else if (infoLine.contains("ראשון")) {
-				Element examElement = d.createElement("moedA");
-				addTimeToExam(examElement, infoLine);
-				examsElement.appendChild(examElement);
-			} else if (infoLine.contains("שני")) {
-				Element examElement = d.createElement("moedB");
-				addTimeToExam(examElement, infoLine);
-				examsElement.appendChild(examElement);
-			}
+
+		if (isSportCourse(course.getAttribute("id"))){  
+			System.out.println(course.getAttribute("id"));
+			course.setAttribute("faculty", "מקצועות ספורט");
+			for (String infoLine : courseInfo.split("[\\r\\n]+"))
+				if (infoLine.contains("מורה")) {
+					Element teacherInChargeElement = d.createElement("teacherInCharge");
+					teacherInChargeElement.setAttribute("title", infoLine.substring(22, 26).replaceAll("\\s+$", ""));
+					teacherInChargeElement.setAttribute("name", infoLine.substring(29, 45).replaceAll("\\s+$", ""));
+					course.appendChild(teacherInChargeElement);
+				}
+		} else {
+			Element examsElement = d.createElement("exams");
+			course.appendChild(examsElement);
+			for (String infoLine : courseInfo.split("[\\r\\n]+"))
+				if (infoLine.contains("מורה")) {
+					Element teacherInChargeElement = d.createElement("teacherInCharge");
+					teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
+					teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
+					course.appendChild(teacherInChargeElement);
+				} else if (infoLine.contains("ראשון")) {
+					Element examElement = d.createElement("moedA");
+					addTimeToExam(examElement, infoLine);
+					examsElement.appendChild(examElement);
+				} else if (infoLine.contains("שני")) {
+					Element examElement = d.createElement("moedB");
+					addTimeToExam(examElement, infoLine);
+					examsElement.appendChild(examElement);
+				}
+		}
+
 	}
 	
 	private static void addTimeToExam(Element exam, String infoLine){
@@ -243,9 +263,26 @@ public class RepFile {
 	
 	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
 		
-		if (Integer.parseInt(course.getAttribute("id").substring(0, 2)) == 39)
+		if (isSportCourse(course.getAttribute("id"))){
+			
+			for (String courseLesson : courseLessons){
+				Element sportElement = null;
+				for (String lessonLine : courseLesson.split("[\\r\\n]+"))
+					if (sportElement != null)
+						sportElement.appendChild(getSportLessonElement(d, lessonLine));
+					else {
+						sportElement = d.createElement("sport");
+						sportElement.setAttribute("group", lessonLine.substring(9, 11));
+						sportElement.setAttribute("name", lessonLine.substring(12, 28).replaceAll("\\s+", ""));
+						sportElement.appendChild(getSportLessonElement(d, lessonLine));
+						course.appendChild(sportElement);
+					}
+
+			}
 			return;
-		System.out.println(course.getAttribute("id"));
+		}
+			
+		//System.out.println(course.getAttribute("id"));
 		Element lectureElement = null;
 		Element tutorialsElement = null;
 		for (String courseLesson : courseLessons) {
@@ -394,6 +431,18 @@ public class RepFile {
 		String building = lessonLine.substring(33, 43).replaceAll("\\s+$", "");
 		if (!StringUtils.isBlank(building))
 			$.setAttribute("building", building);
+		return $;
+	}
+	
+	private static Element getSportLessonElement(Document d, String lessonLine){
+		Element $ = d.createElement("lesson");
+		$.setAttribute("day", lessonLine.substring(29,30));
+		String lessonTime[] = lessonLine.substring(31, 42).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+		if (lessonTime.length == 2) {
+			$.setAttribute("timeStart", StringUtils.leftPad(lessonTime[1],5,'0'));
+			$.setAttribute("timeEnd", StringUtils.leftPad(lessonTime[0],5,'0'));
+		}
+		$.setAttribute("building", lessonLine.substring(43, 53).replaceAll("\\s+$", ""));
 		return $;
 	}
 	
