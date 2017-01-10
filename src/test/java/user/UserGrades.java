@@ -66,7 +66,7 @@ public class UserGrades extends JFrame {
 					try {
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
 						User user = new User(result,
-								new SoftwareEngineering(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+								new SoftwareEngineering( new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>(), new ArrayList<>()));
 					} catch (UnsupportedFlavorException | IOException ¢) {
 						System.out.println(¢);
 						¢.printStackTrace();

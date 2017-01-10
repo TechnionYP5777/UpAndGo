@@ -7,10 +7,10 @@ import model.CourseModel;
 import model.course.Course;
 
 public abstract class Catalog {
-	protected final List<Course> obligatory, freeChoice;	
+	protected final List<Course> obligatory, freeChoice;
 	int REQ_OBLIGATORY_POINTS;
 	int REQ_FREE_CHOICE_POINTS;
-	
+
 	public Catalog(List<Course> obligatoryList, List<Course> freeChoiceList, int reqObligatory, int reqFreeChoice) {
 		if (obligatoryList == null || freeChoiceList == null)
 			throw new NullPointerException();
