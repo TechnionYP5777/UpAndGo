@@ -287,23 +287,23 @@ public class RepFile {
 						tutorialElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
 				} else if (lessonLine.contains("מעבדה")) {
 					infoType = InfoType.LAB;
+					labElement = d.createElement("lab");
+					labElement.appendChild(getLessonElement(d, lessonLine));
 					if (lectureElement == null){
 						lectureElement = d.createElement("lecture");
 						course.appendChild(lectureElement);
 					}
 					if (tutorialsElement == null) {
-						tutorialsElement = d.createElement("tutorials");
+						tutorialsElement = d.createElement("labs");
 						lectureElement.appendChild(tutorialsElement);
 					}
-					if (tutorialElement == null) {
-						tutorialElement = d.createElement("tutorial");
+					if (tutorialElement != null)
+						tutorialElement.appendChild(labElement);
+					else {
 						if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
-							tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
-						tutorialsElement.appendChild(tutorialElement);
+							labElement.setAttribute("group", lessonLine.substring(3, 5));
+						tutorialsElement.appendChild(labElement);
 					}
-					labElement = d.createElement("lab");
-					tutorialElement.appendChild(labElement);
-					labElement.appendChild(getLessonElement(d, lessonLine));
 				} else if (lessonLine.contains("מדריך")){
 					infoType = InfoType.GUIDE;
 					if (labElement != null)
@@ -314,7 +314,7 @@ public class RepFile {
 					groupElement = d.createElement("group");
 					if (!StringUtils.isBlank(lessonLine.substring(3, 5))){
 						groupElement.setAttribute("group", lessonLine.substring(3, 5));
-						course.appendChild(groupElement);
+						(lectureElement == null ? course : lectureElement).appendChild(groupElement);
 					} else {
 						if (lectureElement == null){
 							lectureElement = d.createElement("lecture");
@@ -334,8 +334,11 @@ public class RepFile {
 					}
 					groupElement.appendChild(getLessonElement(d, lessonLine));
 				}
-				else if (lessonLine.contains("מנחה"))
+				else if (lessonLine.contains("מנחה")){
 					infoType = InfoType.MODERATOR;
+					if (groupElement != null)
+						groupElement.appendChild(getPersonElement(d, lessonLine, "moderator"));
+				}
 				else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13))))
 					switch (infoType) {
 					case LECTURE:
@@ -365,6 +368,10 @@ public class RepFile {
 					case GROUP:
 						if (groupElement != null)
 							groupElement.appendChild(getLessonElement(d, lessonLine));
+						break;
+					case MODERATOR:
+						if (groupElement != null)
+							groupElement.appendChild(getPersonElement(d, lessonLine, "moderator"));
 						break;
 					default:
 					}
