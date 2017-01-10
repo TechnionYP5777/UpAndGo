@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Catalog>
+    <CourseList name="שרשרת מדעית">
+        <Course number="114075">
+            <name>פיסיקה 2ממ</name>
+            <points>5.0</points>
+        </Course>
+        <Course number="134058">
+            <name>ביולוגיה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="125801">
+            <name>כימיה אורגנית</name>
+            <points>5.0</points>
+        </Course>
+        <Course number="134020">
+            <name>גנטיקה כללית</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="125001">
+            <name>כימיה כללית</name>
+            <points>3.0</points>
+        </Course>
+        <neededPoints>8.0</neededPoints>
+        <OverflowTo>רשימה ב'</OverflowTo>
+    </CourseList>
+    <CourseList name="רשימה א'">
+        <Course number="234313">
+            <name>פרויקט תעשייתי</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236518">
+            <name>סיבוכיות תקשורת</name>
+            <points>2.0</points>
+        </Course>
+        <Course number="236381">
+            <name>פרויקט ב- וי.אל.אס.אי. ב'</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="236757">
+            <name>פרויקט במערכות לומדות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236345">
+            <name>אימות אוטומטי של מער' תכנה וחומרה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236520">
+            <name>קידוד במערכות אחסון-מידע</name>
+            <points>2.0</points>
+        </Course>
+        <Course number="234326">
+            <name>פרויקט בגרפיקה ממוחשבת ה'</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236716">
+            <name>מודלים גאומטריים במערכות תיב&quot;מ</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234329">
+            <name>פרויקט בעיבוד וניתוח תמונות</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="236754">
+            <name>פרויקט במערכות נבונות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234900">
+            <name>סדנה בתכנות תחרותי</name>
+            <points>2.0</points>
+        </Course>
+        <Course number="236369">
+            <name>ניהול מידע ברשת האינטרנט</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236349">
+            <name>פרויקט באבטחת מידע</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236755">
+            <name>אלגוריתמים מבוזרים ב'</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236524">
+            <name>פרוייקט בביואינפורמטיקה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236304">
+            <name>לוגיקה למדעי המחשב</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236359">
+            <name>אלגוריתמים 2</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236329">
+            <name>עיבוד ספרתי של גאומטריה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236366">
+            <name>פרויקט במערכות הפעלה מ'</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236340">
+            <name>פרויקט בתקשורת מחשבים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236299">
+            <name>מבוא לעיבוד שפות טבעיות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236502">
+            <name>פרויקט בבינה מלאכותית</name>
+            <points>3.0</points>
+        </Course>
+        <neededPoints>15.0</neededPoints>
+        <OverflowTo>רשימה ב'</OverflowTo>
+    </CourseList>
+    <CourseList name="בחירה חופשית">
+        <neededPoints>10.0</neededPoints>
+    </CourseList>
+    <CourseList name="מקצועות חובה">
+        <Course number="234123">
+            <name>מערכות הפעלה</name>
+            <points>4.5</points>
+        </Course>
+        <Course number="234122">
+            <name>מבוא לתכנות מערכות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234118">
+            <name>ארגון ותכנות המחשב</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236360">
+            <name>תורת הקומפילציה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104012">
+            <name>חשבון דיפרנציאלי ואינטגרלי 1ת'</name>
+            <points>5.5</points>
+        </Course>
+        <Course number="234267">
+            <name>מבנה מחשבים ספרתיים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="094412">
+            <name>הסתברות מ</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="236353">
+            <name>אוטומטים ושפות פורמליות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234114">
+            <name>מבוא למדעי המחשב מ'</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="234218">
+            <name>מבני נתונים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234247">
+            <name>אלגוריתמים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234107">
+            <name>אנליזה נומרית</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="234293">
+            <name>לוגיקה ותורת הקבוצות למדעי המחשב</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="234145">
+            <name>מערכות ספרתיות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104014">
+            <name>חדו&quot;א 2 ת'</name>
+            <points>5.0</points>
+        </Course>
+        <Course number="236343">
+            <name>תורת החישוביות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234322">
+            <name>מערכות קבצים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236368">
+            <name>מפרטים פורמליים למערכות מורכבות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236342">
+            <name>מבוא לאימות תוכנה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="114071">
+            <name>פיסיקה 1מ</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="236703">
+            <name>תכנות מונחה עצמים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236334">
+            <name>מבוא לרשתות מחשבים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236321">
+            <name>שיטות בהנדסת תוכנה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234311">
+            <name>פרויקט שנתי בהנדסת תוכנה-שלב א'</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104134">
+            <name>אלגברה מודרנית ח</name>
+            <points>2.5</points>
+        </Course>
+        <Course number="236370">
+            <name>תכנות מקבילי ומבוזר</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="324012">
+            <name>אנגלית טכנית</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="234312">
+            <name>פרויקט שנתי בהנדסת תוכנה-שלב ב'</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="234319">
+            <name>שפות תכנות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="394901">
+            <name>חינוך גופני</name>
+            <points>2.0</points>
+        </Course>
+        <Course number="234262">
+            <name>תכן לוגי</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104167">
+            <name>אלגברה  א</name>
+            <points>5.0</points>
+        </Course>
+        <Course number="234141">
+            <name>קומבינטוריקה למדעי המחשב</name>
+            <points>3.0</points>
+        </Course>
+        <neededPoints>110.5</neededPoints>
+    </CourseList>
+    <CourseList name="רשימה ב'">
+        <Course number="094323">
+            <name>מערכות דינמיות לינאריות</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="096600">
+            <name>התנהגות ארגונית</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="094423">
+            <name>מבוא לסטטיסטיקה</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="104215">
+            <name>פונקציות מרוכבות א'</name>
+            <points>2.5</points>
+        </Course>
+        <Course number="094591">
+            <name>מבוא לכלכלה</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="044130">
+            <name>אותות ומערכות</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="044202">
+            <name>אותות אקראיים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="094314">
+            <name>מודלים סטוכסטיים בחקר בצועים</name>
+            <points>3.5</points>   
+        </Course>
+        <Course number="044169">
+            <name>פרויקט  ב</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="044167">
+            <name>פרוייקט א'</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="046206">
+            <name>מבוא לתקשורת ספרתית</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="044151">
+            <name>מעבדה להנדסת חשמל 1ח'</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104172">
+            <name>מבוא לחבורות</name>
+            <points>2.5</points>
+        </Course>
+        <Course number="094564">
+            <name>מבוא לניהול פיננסי</name>
+            <points>2.5</points>
+        </Course>
+        <Course number="094313">
+            <name>מודלים דטרמיניסטים בחקר ביצועים</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="104279">
+            <name>מבוא לחוגים ושדות</name>
+            <points>2.5</points>
+        </Course>
+        <Course number="096250">
+            <name>מערכות מידע מבוזרות</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="044125">
+            <name>יסודות התקני מוליכים למחצה מ'</name>
+            <points>4.5</points>
+        </Course>
+        <Course number="044105">
+            <name>תורת המעגלים החשמליים</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="104142">
+            <name>מבוא למרחבים מטריים וטופולוגיים</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="046332">
+            <name>מערכות ראיה ושמיעה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="044265">
+            <name>פרויקט במערכות תכנה</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="036044">
+            <name>תכן תנו' רובו' וניווט ע&quot;י חיישנים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="044142">
+            <name>מעגלים אלקטרוניים לינאריים</name>
+            <points>4.0</points>
+            
+        </Course>
+        <Course number="044147">
+            <name>מעגלי מיתוג אלקטרוניים</name>
+            <points>4.0</points>
+        </Course>
+        <Course number="104154">
+            <name>מבוא לתורת המספרים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104192">
+            <name>מבוא למתמטיקה שמושית</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="104122">
+            <name>תורת הפונקציות</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="094334">
+            <name>סימולציה ספרתית</name>
+            <points>3.0</points>
+        </Course>
+        <neededPoints>10.5</neededPoints>
+        <OverflowTo>בחירה חופשית</OverflowTo>
+    </CourseList>
+    <CourseList name="מקצועות ליבה">
+        <Course number="236501">
+            <name>מבוא לבינה מלאכותית</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236350">
+            <name>הגנה במערכות מתוכנתות</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="236363">
+            <name>מערכות מסד נתונים</name>
+            <points>3.0</points>
+        </Course>
+        <Course number="095140">
+            <name>תכנון פרויקטים וניהולם</name>
+            <points>3.5</points>
+        </Course>
+        <Course number="236700">
+            <name>תיכון תוכנה</name>
+            <points>3.0</points>
+        </Course>
+        <neededPoints>6.0</neededPoints>
+        <OverflowTo>רשימה א'</OverflowTo>
+    </CourseList>
+</Catalog>

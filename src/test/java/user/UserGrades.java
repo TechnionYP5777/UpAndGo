@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import catalog.CSCatalog;
+import catalog.SoftwareEngineering;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -66,9 +66,7 @@ public class UserGrades extends JFrame {
 					try {
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
 						User user = new User(result,
-								new CSCatalog(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
-										new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
-										new ArrayList<>()));
+								new SoftwareEngineering(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 					} catch (UnsupportedFlavorException | IOException ¢) {
 						System.out.println(¢);
 						¢.printStackTrace();

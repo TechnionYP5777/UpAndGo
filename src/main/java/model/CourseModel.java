@@ -109,7 +109,6 @@ public class CourseModel implements Model  {
 		this.courseList.put(name, $);
 		return $;
 	}
-	
 	public List<String> getChosenCourseNames() {
 		return this.loader.loadChosenCourseNames();
 	}
