@@ -50,7 +50,10 @@ public class Timetable {
 				histogram.get(¢.getDay()).add(¢.getStartTime());
 				histogram.get(¢.getDay()).add(¢.getEndTime());
 			}
+		
 		System.out.println("hist: " + histogram);
+		sumBlank(histogram.get(0));
+		System.out.println("histover");
 				//histogram[¢.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual case
 		/*for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
@@ -59,14 +62,17 @@ public class Timetable {
 		return 0;
 	}
 	
-	private void sumBlank(ArrayList<WeekTime> daySchedule){
-		int numOfLessons = daySchedule.size()/2;
+	private int sumBlank(ArrayList<WeekTime> daySchedule){
+		int sum = 0;
+		//int numOfLessons = daySchedule.size()/2;
 		/*for(int i = 0; i<numOfLessons-1; i++){
 			(2*(i+1)+1)-(2*(i)+1)
 		}*/
 		for(int i = daySchedule.size()-2; i>0; i-=2){
-			//System.out.println(daySchedule.get(i).getTime()-daySchedule.get(i-1).getTime());
+			sum += WeekTime.difference(daySchedule.get(i), daySchedule.get(i-1));
+			System.out.println(WeekTime.difference(daySchedule.get(i), daySchedule.get(i-1)));
 		}
+		return sum;
 	}
 
 	/**
