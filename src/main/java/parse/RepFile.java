@@ -13,6 +13,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -164,7 +166,7 @@ public class RepFile {
 					courseInfoAndLessons.removeAll(Arrays.asList("", null));
 					addInfoToCourse(doc, course, courseInfo);
 					addLessonsToCourse(doc, course, courseInfoAndLessons);
-					
+					addNotesToCourse(doc, course, courseInfo);
 					rootElement.appendChild(course);	
 				}
 			}
@@ -247,6 +249,29 @@ public class RepFile {
 					examsElement.appendChild(examElement);
 				}
 		}
+
+	}
+	
+	private static void addNotesToCourse(Document d, Element course, String courseInfo){
+
+		int notePoint = isSportCourse(course.getAttribute("id")) ? 9 : 3;
+		LinkedList<String> notes = new LinkedList();
+		for (String infoLine : courseInfo.split("[\\r\\n]+"))
+			if (StringUtils.substring(infoLine, notePoint, notePoint+1).equals("."))
+				notes.add(infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
+			else if (!notes.isEmpty())
+				notes.add(notes.removeLast() + " " + infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
+		if (notes.isEmpty())
+			return;
+		Element notesElement = d.createElement("notes");
+		course.appendChild(notesElement);
+		for (String note : notes) {
+			Element noteElement = d.createElement("note");
+			noteElement.appendChild(d.createTextNode(note));
+			notesElement.appendChild(noteElement);
+		}
+
+		
 
 	}
 	
