@@ -68,10 +68,11 @@ CourseLoader cr;
 		System.out.println(courses);
 		
 		
-		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
+		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, true); it
 				.hasNext();) {
 			Timetable currentTable = it.next();
 			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
+			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
 			System.out.println("time table: " + currentTable);
 		}
 		

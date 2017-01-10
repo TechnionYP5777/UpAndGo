@@ -17,7 +17,7 @@ import model.course.WeekTime;
 public class Timetable {
 	private final int DAYS_IN_WEEK = 7;
 	private final double MAX_BLANKSPACE_RANK = 2;
-	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.2;
+	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.25;
 	
 	private int rankDaysoff;
 	private double rankBlankSpace;
@@ -51,22 +51,29 @@ public class Timetable {
 				histogram.get(¢.getDay()).add(¢.getEndTime());
 			}
 		
+		int blankMinutesSum = 0;
+		for(ArrayList<WeekTime> daySchedule : histogram)
+			blankMinutesSum += sumBlank(daySchedule);
+		
+		double penalty = 1. * BLANKSPACE_PENALTY_PER_HOUR * blankMinutesSum / 60;
+		
 		System.out.println("hist: " + histogram);
-		sumBlank(histogram.get(0));
-		System.out.println("histover");
+		System.out.println("sum: " + blankMinutesSum);
+		System.out.println("penalty: " + penalty);
+		//System.out.println("histover");
 				//histogram[¢.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual case
 		/*for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];(*/
 		//return $;
-		return 0;
+		return MAX_BLANKSPACE_RANK-penalty;
 	}
 	
 	private int sumBlank(ArrayList<WeekTime> daySchedule){
 		int $ = 0;
 		for(int ¢ = daySchedule.size()-2; ¢>0; ¢-=2){
 			$ += WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢-1));
-			System.out.println(WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢-1)));
+			//System.out.println(WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢-1)));
 		}
 		return $;
 	}
