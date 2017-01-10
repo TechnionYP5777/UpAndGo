@@ -260,7 +260,7 @@ public class Scheduler {
 					rank2 += t2.getRankOfBlankSpace();
 				}
 				
-				return rank1.compareTo(rank2);
+				return -rank1.compareTo(rank2);
 			}
 		});
 		return res.iterator();
