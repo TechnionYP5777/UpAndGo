@@ -167,7 +167,7 @@ public class RepFile {
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test2.XML"))));
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test.XML"))));
 
 
 		} catch (ParserConfigurationException | TransformerException ¢) {
@@ -250,6 +250,7 @@ public class RepFile {
 		Element tutorialsGroupElement = null;
 		for (String courseLesson : courseLessons) {
 			Element tutorialGroupElement = null;
+			Element labGroupElement = null;
 			InfoType infoType = InfoType.UNKNOWN;
 			for (String lessonLine : courseLesson.split("[\\r\\n]+"))
 				if (lessonLine.contains("הרצאה")) {
@@ -282,6 +283,22 @@ public class RepFile {
 						tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
 				} else if (lessonLine.contains("מעבדה")) {
 					infoType = InfoType.LAB;
+					if (lectureGroupElement == null){
+						lectureGroupElement = d.createElement("lecture");
+						course.appendChild(lectureGroupElement);
+					}
+					if (tutorialsGroupElement == null) {
+						tutorialsGroupElement = d.createElement("tutorials");
+						lectureGroupElement.appendChild(tutorialsGroupElement);
+					}
+					if (tutorialGroupElement == null) {
+						tutorialGroupElement = d.createElement("tutorial");
+						tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
+						tutorialsGroupElement.appendChild(tutorialGroupElement);
+					}
+					labGroupElement = d.createElement("lab");
+					tutorialGroupElement.appendChild(labGroupElement);
+					labGroupElement.appendChild(getLessonElement(d, lessonLine));
 					System.out.println("Lab");
 				} else if (lessonLine.contains("מדריך"))
 					System.out.println("Guide");
@@ -306,6 +323,10 @@ public class RepFile {
 					case ASSISTANT:
 						if (tutorialGroupElement != null)
 							tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
+						break;
+					case LAB:
+						if (labGroupElement != null)
+							labGroupElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					default:
 					}
