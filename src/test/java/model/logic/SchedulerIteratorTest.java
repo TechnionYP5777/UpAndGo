@@ -31,7 +31,6 @@ CourseLoader cr;
 	}
 	
 	
-	@Ignore
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
