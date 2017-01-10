@@ -249,8 +249,8 @@ public class Scheduler {
 		Collections.sort(res, new Comparator<Timetable>() {
 			@Override
 			public int compare(Timetable t1, Timetable t2) {
-				Integer rank1 = 0;
-				Integer rank2 = 0;
+				Double rank1 = 0.0;
+				Double rank2 = 0.0;
 				if(byDaysoff){
 					rank1 += t1.getRankOfDaysoff();
 					rank2 += t2.getRankOfDaysoff();
