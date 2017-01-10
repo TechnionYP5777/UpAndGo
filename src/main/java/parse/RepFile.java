@@ -238,7 +238,7 @@ public class RepFile {
 	}
 	
 	private enum InfoType {
-		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT, LAB, GUIDE
+		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT, LAB, GUIDE, GROUP, MODERATOR
 	}
 	
 	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
@@ -246,93 +246,125 @@ public class RepFile {
 		if (Integer.parseInt(course.getAttribute("id").substring(0, 2)) == 39)
 			return;
 		System.out.println(course.getAttribute("id"));
-		Element lectureGroupElement = null;
-		Element tutorialsGroupElement = null;
+		Element lectureElement = null;
+		Element tutorialsElement = null;
 		for (String courseLesson : courseLessons) {
-			Element tutorialGroupElement = null;
-			Element labGroupElement = null;
+			Element tutorialElement = null;
+			Element labElement = null;
+			Element groupElement = null;
 			InfoType infoType = InfoType.UNKNOWN;
 			for (String lessonLine : courseLesson.split("[\\r\\n]+"))
 				if (lessonLine.contains("הרצאה")) {
 					infoType = InfoType.LECTURE;
-					lectureGroupElement = d.createElement("lecture");
-					course.appendChild(lectureGroupElement);
-					lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
-					tutorialsGroupElement = null;
+					lectureElement = d.createElement("lecture");
+					if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
+						lectureElement.setAttribute("group", lessonLine.substring(3, 5));
+					course.appendChild(lectureElement);
+					lectureElement.appendChild(getLessonElement(d, lessonLine));
+					tutorialsElement = null;
 				} else if (lessonLine.contains("מרצה")) {
 					infoType = InfoType.LECTURER;
-					if (lectureGroupElement != null)
-						lectureGroupElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
+					if (lectureElement != null)
+						lectureElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
 				} else if (lessonLine.contains("תרגיל")) {
 					infoType = InfoType.TUTORIAL;
-					if (lectureGroupElement == null){
-						lectureGroupElement = d.createElement("lecture");
-						course.appendChild(lectureGroupElement);
+					if (lectureElement == null){
+						lectureElement = d.createElement("lecture");
+						course.appendChild(lectureElement);
 					}
-					if (tutorialsGroupElement == null) {
-						tutorialsGroupElement = d.createElement("tutorials");
-						lectureGroupElement.appendChild(tutorialsGroupElement);
+					if (tutorialsElement == null) {
+						tutorialsElement = d.createElement("tutorials");
+						lectureElement.appendChild(tutorialsElement);
 					}
-					tutorialGroupElement = d.createElement("tutorial");
-					tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
-					tutorialsGroupElement.appendChild(tutorialGroupElement);
-					tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
+					tutorialElement = d.createElement("tutorial");
+					if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
+						tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
+					tutorialsElement.appendChild(tutorialElement);
+					tutorialElement.appendChild(getLessonElement(d, lessonLine));
 				} else if (lessonLine.contains("מתרגל")) {
 					infoType = InfoType.ASSISTANT;
-					if (tutorialGroupElement != null)
-						tutorialGroupElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
+					if (tutorialElement != null)
+						tutorialElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
 				} else if (lessonLine.contains("מעבדה")) {
 					infoType = InfoType.LAB;
-					if (lectureGroupElement == null){
-						lectureGroupElement = d.createElement("lecture");
-						course.appendChild(lectureGroupElement);
+					if (lectureElement == null){
+						lectureElement = d.createElement("lecture");
+						course.appendChild(lectureElement);
 					}
-					if (tutorialsGroupElement == null) {
-						tutorialsGroupElement = d.createElement("tutorials");
-						lectureGroupElement.appendChild(tutorialsGroupElement);
+					if (tutorialsElement == null) {
+						tutorialsElement = d.createElement("tutorials");
+						lectureElement.appendChild(tutorialsElement);
 					}
-					if (tutorialGroupElement == null) {
-						tutorialGroupElement = d.createElement("tutorial");
-						tutorialGroupElement.setAttribute("group", lessonLine.substring(3, 5));
-						tutorialsGroupElement.appendChild(tutorialGroupElement);
+					if (tutorialElement == null) {
+						tutorialElement = d.createElement("tutorial");
+						if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
+							tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
+						tutorialsElement.appendChild(tutorialElement);
 					}
-					labGroupElement = d.createElement("lab");
-					tutorialGroupElement.appendChild(labGroupElement);
-					labGroupElement.appendChild(getLessonElement(d, lessonLine));
+					labElement = d.createElement("lab");
+					tutorialElement.appendChild(labElement);
+					labElement.appendChild(getLessonElement(d, lessonLine));
 				} else if (lessonLine.contains("מדריך")){
 					infoType = InfoType.GUIDE;
-					if (labGroupElement != null)
-						labGroupElement.appendChild(getPersonElement(d, lessonLine, "guide"));
+					if (labElement != null)
+						labElement.appendChild(getPersonElement(d, lessonLine, "guide"));
 				}
-				else if (lessonLine.contains("קבוצה"))
-					System.out.println("Group");
+				else if (lessonLine.contains("קבוצה")){
+					infoType = InfoType.GROUP;
+					groupElement = d.createElement("group");
+					if (!StringUtils.isBlank(lessonLine.substring(3, 5))){
+						groupElement.setAttribute("group", lessonLine.substring(3, 5));
+						course.appendChild(groupElement);
+					} else {
+						if (lectureElement == null){
+							lectureElement = d.createElement("lecture");
+							course.appendChild(lectureElement);
+						}
+						if (tutorialsElement == null) {
+							tutorialsElement = d.createElement("tutorials");
+							lectureElement.appendChild(tutorialsElement);
+						}
+						if (tutorialElement == null) {
+							tutorialElement = d.createElement("tutorial");
+							if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
+								tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
+							tutorialsElement.appendChild(tutorialElement);
+						}
+						tutorialElement.appendChild(groupElement);
+					}
+					groupElement.appendChild(getLessonElement(d, lessonLine));
+				}
 				else if (lessonLine.contains("מנחה"))
-					System.out.println("Moderator");
+					infoType = InfoType.MODERATOR;
 				else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13))))
 					switch (infoType) {
 					case LECTURE:
-						if (lectureGroupElement != null)
-							lectureGroupElement.appendChild(getLessonElement(d, lessonLine));
+						if (lectureElement != null)
+							lectureElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					case LECTURER:
-						if (lectureGroupElement != null)
-							lectureGroupElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
+						if (lectureElement != null)
+							lectureElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
 						break;
 					case TUTORIAL:
-						if (tutorialGroupElement != null)
-							tutorialGroupElement.appendChild(getLessonElement(d, lessonLine));
+						if (tutorialElement != null)
+							tutorialElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					case ASSISTANT:
-						if (tutorialGroupElement != null)
-							tutorialGroupElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
+						if (tutorialElement != null)
+							tutorialElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
 						break;
 					case LAB:
-						if (labGroupElement != null)
-							labGroupElement.appendChild(getLessonElement(d, lessonLine));
+						if (labElement != null)
+							labElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					case GUIDE:
-						if (labGroupElement != null)
-							labGroupElement.appendChild(getPersonElement(d, lessonLine, "guide"));
+						if (labElement != null)
+							labElement.appendChild(getPersonElement(d, lessonLine, "guide"));
+						break;
+					case GROUP:
+						if (groupElement != null)
+							groupElement.appendChild(getLessonElement(d, lessonLine));
 						break;
 					default:
 					}
@@ -341,14 +373,20 @@ public class RepFile {
 	
 	private static Element getLessonElement(Document d, String lessonLine){
 		Element $ = d.createElement("lesson");
-		$.setAttribute("day", lessonLine.substring(14,15));
+		String day = lessonLine.substring(14,15);
+		if (!StringUtils.isBlank(day))
+			$.setAttribute("day", day);
 		String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
 		if (lessonTime.length == 2) {
 			$.setAttribute("timeStart", StringUtils.leftPad(lessonTime[1],5,'0'));
 			$.setAttribute("timeEnd", StringUtils.leftPad(lessonTime[0],5,'0'));
 		}
-		$.setAttribute("roomNumber", lessonLine.substring(28, 32).replaceAll("\\s+", ""));
-		$.setAttribute("building", lessonLine.substring(33, 43).replaceAll("\\s+$", ""));
+		String roomNumber = lessonLine.substring(28, 32).replaceAll("\\s+", "");
+		if (!StringUtils.isBlank(roomNumber))
+			$.setAttribute("roomNumber", roomNumber);
+		String building = lessonLine.substring(33, 43).replaceAll("\\s+$", "");
+		if (!StringUtils.isBlank(building))
+			$.setAttribute("building", building);
 		return $;
 	}
 	
