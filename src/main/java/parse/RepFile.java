@@ -262,7 +262,7 @@ public class RepFile {
 				} else if (lessonLine.contains("מרצה")) {
 					infoType = InfoType.LECTURER;
 					if (lectureGroupElement != null)
-						lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+						lectureGroupElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
 				} else if (lessonLine.contains("תרגיל")) {
 					infoType = InfoType.TUTORIAL;
 					if (lectureGroupElement == null){
@@ -280,7 +280,7 @@ public class RepFile {
 				} else if (lessonLine.contains("מתרגל")) {
 					infoType = InfoType.ASSISTANT;
 					if (tutorialGroupElement != null)
-						tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
+						tutorialGroupElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
 				} else if (lessonLine.contains("מעבדה")) {
 					infoType = InfoType.LAB;
 					if (lectureGroupElement == null){
@@ -299,9 +299,11 @@ public class RepFile {
 					labGroupElement = d.createElement("lab");
 					tutorialGroupElement.appendChild(labGroupElement);
 					labGroupElement.appendChild(getLessonElement(d, lessonLine));
-					System.out.println("Lab");
-				} else if (lessonLine.contains("מדריך"))
-					System.out.println("Guide");
+				} else if (lessonLine.contains("מדריך")){
+					infoType = InfoType.GUIDE;
+					if (labGroupElement != null)
+						labGroupElement.appendChild(getPersonElement(d, lessonLine, "guide"));
+				}
 				else if (lessonLine.contains("קבוצה"))
 					System.out.println("Group");
 				else if (lessonLine.contains("מנחה"))
@@ -314,7 +316,7 @@ public class RepFile {
 						break;
 					case LECTURER:
 						if (lectureGroupElement != null)
-							lectureGroupElement.appendChild(getLecturerElement(d, lessonLine));
+							lectureGroupElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
 						break;
 					case TUTORIAL:
 						if (tutorialGroupElement != null)
@@ -322,11 +324,15 @@ public class RepFile {
 						break;
 					case ASSISTANT:
 						if (tutorialGroupElement != null)
-							tutorialGroupElement.appendChild(getAssistantElement(d, lessonLine));
+							tutorialGroupElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
 						break;
 					case LAB:
 						if (labGroupElement != null)
 							labGroupElement.appendChild(getLessonElement(d, lessonLine));
+						break;
+					case GUIDE:
+						if (labGroupElement != null)
+							labGroupElement.appendChild(getPersonElement(d, lessonLine, "guide"));
 						break;
 					default:
 					}
@@ -346,15 +352,9 @@ public class RepFile {
 		return $;
 	}
 	
-	private static Element getLecturerElement(Document d, String lessonLine){
-		Element $ = d.createElement("lecturer");
-		$.setAttribute("title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
-		$.setAttribute("name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
-		return $;
-	}
 	
-	private static Element getAssistantElement(Document d, String lessonLine){
-		Element $ = d.createElement("assistant");
+	private static Element getPersonElement(Document d, String lessonLine, String role){
+		Element $ = d.createElement(role);
 		$.setAttribute("title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
 		$.setAttribute("name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
 		return $;
