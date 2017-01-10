@@ -24,7 +24,15 @@ public class WeekTime {
 		return time;
 	}
 	
-	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return the amount of minutes between b to a (like a-b)
+	 */
+	public static int difference(WeekTime a, WeekTime b){
+		return a.getTime().getMinute() + 60 * (a.getTime().getHour() - b.getTime().getHour())-b.getTime().getMinute();
+	}
 	
 	public static int compareTo(WeekTime a, WeekTime b){
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())
