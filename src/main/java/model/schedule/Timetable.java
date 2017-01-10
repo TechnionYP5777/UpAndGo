@@ -41,20 +41,32 @@ public class Timetable {
 	private double rankBlankSpace() {
 		int $ = 0;
 		//List<WeekTime>[] histogram = new List[DAYS_IN_WEEK];
-		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>(DAYS_IN_WEEK);
+		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>();
+		for(int i = 0; i<DAYS_IN_WEEK; i++)
+			histogram.add(new ArrayList<>());
+		//System.out.println("hist: " + histogram);
+		for(LessonGroup lg : lessonGroups)
+			for (Lesson ¢ : lg.getLessons()){
+				histogram.get(¢.getDay()).add(¢.getStartTime());
+				histogram.get(¢.getDay()).add(¢.getEndTime());
+			}
 		System.out.println("hist: " + histogram);
-		for(ArrayList<WeekTime> arr : histogram){
-			System.out.println("ok");
-		}
-		/*for(LessonGroup lg : lessonGroups)
-			for (Lesson ¢ : lg.getLessons())
-				histogram.get(¢.getDay()).add
 				//histogram[¢.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual case
-		for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
+		/*for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];(*/
 		//return $;
 		return 0;
+	}
+	
+	private void sumBlank(ArrayList<WeekTime> daySchedule){
+		int numOfLessons = daySchedule.size()/2;
+		/*for(int i = 0; i<numOfLessons-1; i++){
+			(2*(i+1)+1)-(2*(i)+1)
+		}*/
+		for(int i = daySchedule.size()-2; i>0; i-=2){
+			//System.out.println(daySchedule.get(i).getTime()-daySchedule.get(i-1).getTime());
+		}
 	}
 
 	/**
