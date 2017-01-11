@@ -5,6 +5,7 @@ package model.logic;
  */
 
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,7 +56,7 @@ CourseLoader cr;
 	*/
 	
 	@Test
-	public void test_b() {
+	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");
 		
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
@@ -65,31 +66,67 @@ CourseLoader cr;
 		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
 				.hasNext();) {
 			Timetable currentTable = it.next();
-			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
+			System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
 			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
+			System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.of(10, 00)));
 			System.out.println("time table: " + currentTable);
 		}
 		
 	}
 	
-	/*@Test
-	public void test_a() {
+	@Test
+	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
 		System.out.println(courses);
 		
 		List<Timetable> tablesList = Scheduler.getTimetablesList(courses);
-		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false);
-		assert it.next().getRankOfDaysoff() == 4;
-		assert it.next().getRankOfDaysoff() == 3;
+		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.of(10, 00), null);
+		Timetable currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 4;
+		assert currentTable.getRankOfBlankSpace() == 1.75;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
 		
-		it = Scheduler.sortedBy(tablesList, false, true);
+		currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 3;
+		assert currentTable.getRankOfBlankSpace() == 2.0;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		
+		
+		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.of(10, 00), null);
+	
+		currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 3;
+		assert currentTable.getRankOfBlankSpace() == 2.0;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		
+		currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 4;
+		assert currentTable.getRankOfBlankSpace() == 1.75;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
+		
+		
+		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.of(10, 00), null);
+		
+		currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 3;
+		assert currentTable.getRankOfBlankSpace() == 2.0;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		
+		currentTable = it.next();
+		assert currentTable.getRankOfDaysoff() == 4;
+		assert currentTable.getRankOfBlankSpace() == 1.75;
+		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
+		
+		
+		
+		/*it = Scheduler.sortedBy(tablesList, false, true);
 		assert it.next().getRankOfBlankSpace() == 2.0;
 		assert it.next().getRankOfBlankSpace() == 1.75;
+		*/
 		
-		
-	}*/
+	}
 	
 	
 	

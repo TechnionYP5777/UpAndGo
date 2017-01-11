@@ -24,7 +24,6 @@ public class Timetable {
 	
 	private int rankDaysoff;
 	private double rankBlankSpace;
-	private double rankStartTime;
 	private List<LessonGroup> lessonGroups;
 	
 	
@@ -32,15 +31,8 @@ public class Timetable {
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
-		rankStartTime = rankStartTime(null);
 	}
 	
-	public Timetable(List<LessonGroup> lessons, LocalTime startTime){
-		this.lessonGroups = new ArrayList<>(lessons);
-		rankDaysoff = rankDaysoff();
-		rankBlankSpace = rankBlankSpace();
-		rankStartTime = rankStartTime(startTime);
-	}
 	
 	
 
@@ -54,7 +46,7 @@ public class Timetable {
 	 * @param startTime
 	 * @return a rank built like that: each day which start after startTime get 0.5 points
 	 */
-	private double rankStartTime(LocalTime startTime) {
+	public double getRankOfStartTime(LocalTime startTime) {
 		if(startTime == null)
 			return 0.0;
 		double $ = 0.0;
@@ -79,6 +71,43 @@ public class Timetable {
 			});
 			// add 0.5 points if daySchedule start time is greater than wanted start time
 			if(!daySchedule.isEmpty() && daySchedule.get(0).getTime().compareTo(startTime) >= 0)
+				$ += 0.5;
+		}
+		
+		return $;
+	}
+	
+	
+	/**
+	 * 
+	 * @param startTime
+	 * @return a rank built like that: each day which start after startTime get 0.5 points
+	 */
+	public double getRankOfEndTime(LocalTime endTime) {
+		if(endTime == null)
+			return 0.0;
+		double $ = 0.0;
+		// create an histogram which holds a list of lessons times of each day
+		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>();
+		for(int ¢ = 0; ¢<DAYS_IN_WEEK; ++¢)
+			histogram.add(new ArrayList<>());
+		
+		for(LessonGroup lg : lessonGroups)
+			for (Lesson ¢ : lg.getLessons()) {
+				histogram.get(¢.getDay()).add(¢.getStartTime());
+				histogram.get(¢.getDay()).add(¢.getEndTime());
+			}
+		
+		for(ArrayList<WeekTime> daySchedule : histogram){
+			// sort them such that the first start time of each day will be first in the list too
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
+			// add 0.5 points if daySchedule start time is greater than wanted start time
+			if(!daySchedule.isEmpty() && daySchedule.get(daySchedule.size()-1).getTime().compareTo(endTime) <= 0)
 				$ += 0.5;
 		}
 		
