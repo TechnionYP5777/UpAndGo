@@ -159,4 +159,47 @@
 			</labs>
 		</lecture>
 	</course>
+	<course faculty="מקצועות ספורט" id="394820" name="חינוך גופני - תנועה ומחול" points="1.5">
+		<teacherInCharge name="ח.מרגלית" title="ד&quot;ר"/>
+		<sport group="11" name="בלט-מעורב">
+			<lesson building="אולם ב'" day="ג" timeEnd="11:00" timeStart="09:30"/>
+		</sport>
+		<sport group="12" name="מחולאירובי">
+			<lesson building="אולם ב'" day="ב" timeEnd="15:00" timeStart="13:30"/>
+		</sport>
+		<sport group="13" name="זומבה">
+			<lesson building="מק&quot;ק" day="ג" timeEnd="09:30" timeStart="08:00"/>
+		</sport>
+		<sport group="16" name="סלסה-מתחיל-בנות">
+			<lesson building="א.קולנוע" day="ב" timeEnd="14:30" timeStart="13:00"/>
+		</sport>
+		<sport group="17" name="סלסה-מתחיל-בנים">
+			<lesson building="א.קולנוע" day="ב" timeEnd="14:30" timeStart="13:00"/>
+		</sport>
+		<sport group="18" name="סלסה-מתחיל-בנות">
+			<lesson building="א.קולנוע" day="ב" timeEnd="16:00" timeStart="14:30"/>
+		</sport>
+		<sport group="19" name="סלסה-מתחיל-בנים">
+			<lesson building="א.קולנוע" day="ב" timeEnd="16:00" timeStart="14:30"/>
+		</sport>
+		<sport group="20" name="סלסה-מתקדמים-מעו">
+			<lesson building="א.קולנוע" day="ב" timeEnd="17:30" timeStart="16:00"/>
+		</sport>
+		<sport group="21" name="מחולג'אז-מעורב">
+			<lesson building="אולם ב'" day="ג" timeEnd="12:30" timeStart="11:00"/>
+		</sport>
+		<sport group="22" name="ג'אז-בנותבלבד">
+			<lesson building="אולם ב'" day="ג" timeEnd="09:30" timeStart="08:00"/>
+		</sport>
+		<sport group="23" name="מחולאירובי">
+			<lesson building="אולם ב'" day="ד" timeEnd="11:00" timeStart="09:30"/>
+		</sport>
+		<sport group="26" name="מחולאירובי">
+			<lesson building="אולם ב'" day="ד" timeEnd="12:30" timeStart="11:00"/>
+		</sport>
+		<notes>
+			<note>יש להגיע לשיעורים בבגדי ונעלי ספורט. קבוצות 16-20-מתקיימות באולם השקוף בבית הסטודנט. קבוצה 22 - לבנות בלבד.</note>
+			<note>קב' 24+25-לרפואנים בלבד-מתקיימות באולם השקוף בבית הסטודנט. הרישום לסלסה-מתקדמים-קב'20-ידנית אצל המאמן לאחר בחינה. קבוצה 13-מתקיימת באולם מק"ק.</note>
+		</notes>
+	</course>
 </courses>

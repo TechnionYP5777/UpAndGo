@@ -5,6 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.junit.After;
@@ -81,6 +82,11 @@ public class XmlCourseLoaderTest {
 		assert ((coursesMap.get("014536").getTutorialsLG().size() == 2));
 		assert ((coursesMap.get("014536").getTutorialsLG().get(0).getGroupNum() == 10));
 		assert ((coursesMap.get("014536").getTutorialsLG().get(1).getGroupNum() == 12));
+		
+		for(Entry<String, Course> entry : coursesMap.entrySet()) {
+			  String key = entry.getKey();
+			  System.out.println(key);
+			}
 		
 	}
 	
