@@ -70,6 +70,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
+		setPreferredSize(new Dimension(300, 700));
+		setSize(new Dimension(300, 700));
+		setMinimumSize(new Dimension(300, 700));
 		listeners = new ArrayList<>();
 		setTextField();
 		setAddButton();
@@ -124,15 +127,16 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setScrollPane() {
 		scrollPane = new JScrollPane();
+		scrollPane.setSize(new Dimension(200, 50));
 		scrollPane.setViewportBorder(null);
-		scrollPane.setPreferredSize(new Dimension(200, 22));
-		scrollPane.setMinimumSize(new Dimension(200, 22));
+		scrollPane.setPreferredSize(new Dimension(200, 80));
+		scrollPane.setMinimumSize(new Dimension(200, 80));
 		scrollPane.setBorder(
 				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 		scpChoseCourses = new JScrollPane();
 		scpChoseCourses.setViewportBorder(null);
-		scpChoseCourses.setPreferredSize(new Dimension(200, 22));
-		scpChoseCourses.setMinimumSize(new Dimension(200, 22));
+		scpChoseCourses.setPreferredSize(new Dimension(200, 100));
+		scpChoseCourses.setMinimumSize(new Dimension(200, 100));
 		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		return;
@@ -156,10 +160,11 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setAvailableCoursesList() {
 		lstAvailableCourses = new JList<>(courseModel);
+		lstAvailableCourses.setSize(new Dimension(200, 50));
 		lstAvailableCourses.setToolTipText("");
-		lstAvailableCourses.setPreferredSize(new Dimension(180, 22));
+		lstAvailableCourses.setPreferredSize(new Dimension(190, 50));
 		lstAvailableCourses.setMaximumSize(new Dimension(10000, 10000));
-		lstAvailableCourses.setMinimumSize(new Dimension(180, 22));
+		lstAvailableCourses.setMinimumSize(new Dimension(190, 50));
 		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lstAvailableCourses.setBackground(UIManager.getColor("Button.background"));
 	}
@@ -170,9 +175,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private static void setChosenCoursesList() {
 		lstChosenCourses = new JList<>(ChosenCourseModel);
 		lstChosenCourses.setToolTipText("");
-		lstChosenCourses.setPreferredSize(new Dimension(180, 22));
+		lstChosenCourses.setPreferredSize(new Dimension(190, 50));
 		lstChosenCourses.setMaximumSize(new Dimension(10000, 10000));
-		lstChosenCourses.setMinimumSize(new Dimension(180, 22));
+		lstChosenCourses.setMinimumSize(new Dimension(190, 50));
 		lstChosenCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lstChosenCourses.setBackground(UIManager.getColor("Button.background"));
 	}
