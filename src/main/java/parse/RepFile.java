@@ -255,9 +255,9 @@ public class RepFile {
 	private static void addNotesToCourse(Document d, Element course, String courseInfo){
 
 		int notePoint = isSportCourse(course.getAttribute("id")) ? 9 : 3;
-		LinkedList<String> notes = new LinkedList();
+		LinkedList<String> notes = new LinkedList<>();
 		for (String infoLine : courseInfo.split("[\\r\\n]+"))
-			if (StringUtils.substring(infoLine, notePoint, notePoint+1).equals("."))
+			if (".".equals(StringUtils.substring(infoLine, notePoint, notePoint + 1)))
 				notes.add(infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
 			else if (!notes.isEmpty())
 				notes.add(notes.removeLast() + " " + infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
@@ -279,7 +279,10 @@ public class RepFile {
 		exam.setAttribute("day", infoLine.substring(22, 24));
 		exam.setAttribute("month", infoLine.substring(25, 27));
 		exam.setAttribute("year", "20" + infoLine.substring(28, 30));
-		exam.setAttribute("time", StringUtils.leftPad(infoLine.substring(36, 42).replaceAll("\\s+", "").replaceAll("\\.", ":"),5,'0'));
+		exam.setAttribute("time",
+				StringUtils.isBlank(infoLine.substring(36, 42)) ? "00:00"
+						: StringUtils.leftPad(infoLine.substring(36, 42).replaceAll("\\s+", "").replaceAll("\\.", ":"),
+								5, '0'));
 	}
 	
 	private enum InfoType {
