@@ -43,9 +43,9 @@ import javax.swing.border.LineBorder;
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
-	static ArrayList<ImageIcon> catList; 
+	static ArrayList<ImageIcon> catList;
 	static int catIconNum;
-	
+
 	static JTextField searchField;
 
 	static JScrollPane scrollPane;
@@ -71,7 +71,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
-		catList= new ArrayList<>();
+		catList = new ArrayList<>();
 		setCatList();
 		setPreferredSize(new Dimension(300, 700));
 		setSize(new Dimension(300, 700));
@@ -90,13 +90,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	// **************** AUX methods for creating the view design ***********//
-	private static void setCatList(){
+	private static void setCatList() {
 		catList.add(new ImageIcon("resources/cat-fish-icon.png"));
 		catList.add(new ImageIcon("resources/cat-purr-icon.png"));
 		catList.add(new ImageIcon("resources/cat-drunk-icon.png"));
-		catIconNum =0;
+		catIconNum = 0;
 	}
-	
+
 	//
 	// Sets the search field preferences
 	//
@@ -302,7 +302,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
-//						Message.infoBox("add pressed", "ADD", null);
+						// Message.infoBox("add pressed", "ADD", null);
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
@@ -316,7 +316,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
 					else {
-//						Message.infoBox("remove pressed", "REMOVE", null);
+						// Message.infoBox("remove pressed", "REMOVE", null);
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
@@ -334,49 +334,56 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 
 				query = searchField.getText();
-				listeners.forEach(x -> x.actionPerformed(
-						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
-				
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+
 			}
 
 		});
 		searchField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+				if (!courseModel.isEmpty() && !"".equals(searchField.getText()))
+					return;
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
+				query = "";
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxCats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				Message.infoBox("","" , catList.get(catIconNum));
+				Message.infoBox("", "", catList.get(catIconNum));
 				chckbxCats.setSelected(false);
-				catIconNum = (catIconNum +1) % 3 ;
+				catIconNum = (catIconNum + 1) % 3;
 			}
 		});
 		chckbxKdamim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				String txt = searchField.getText();
-				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;				listeners.forEach(x -> x.actionPerformed(
-						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
-		chckbxFaculty .addActionListener(new ActionListener() {
+		chckbxFaculty.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				String txt = searchField.getText();
-				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;				listeners.forEach(x -> x.actionPerformed(
-						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxTaken.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				String txt = searchField.getText();
-				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;
-				listeners.forEach(x -> x.actionPerformed(
-						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 	}
@@ -446,17 +453,21 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public String getLastDropedCourse() {
 		return droped;
 	}
+
 	@Override
 	public boolean getIsKdamimChecked() {
 		return chckbxKdamim.isSelected();
 	}
+
 	@Override
 	public boolean getIsFacultyChecked() {
 		return chckbxFaculty.isSelected();
-	}	@Override
+	}
+
+	@Override
 	public boolean getIsTakenChecked() {
 		return chckbxTaken.isSelected();
-	}	
+	}
 
 	// *************************** message box class **********************//
 
