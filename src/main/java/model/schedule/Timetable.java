@@ -21,6 +21,7 @@ public class Timetable {
 	
 	private int rankDaysoff;
 	private double rankBlankSpace;
+	private double rankStartTime;
 	private List<LessonGroup> lessonGroups;
 	
 	
@@ -28,8 +29,14 @@ public class Timetable {
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
+		rankStartTime = rankStartTime(null);
 	}
 	
+	private double rankStartTime(WeekTime startTime) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public List<LessonGroup> getLessonGroups(){
 		return lessonGroups;
 	}
