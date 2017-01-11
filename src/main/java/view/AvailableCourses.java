@@ -29,7 +29,6 @@ import command.CourseCommand;
 import model.course.Course;
 import model.course.CourseId;
 import property.CourseProperty;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -44,6 +43,9 @@ import javax.swing.border.LineBorder;
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
+	static ArrayList<ImageIcon> catList; 
+	static int catIconNum=0;
+	
 	static JTextField searchField;
 
 	static JScrollPane scrollPane;
@@ -59,16 +61,18 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static List<Course> clist;
 
 	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
-	private JCheckBox chckbxKdamim;
-	private JCheckBox chckbxFaculty;
-	private JCheckBox chckbxTaken;
-	private JCheckBox chckbxCats;
+	static JCheckBox chckbxKdamim;
+	static JCheckBox chckbxFaculty;
+	static JCheckBox chckbxTaken;
+	static JCheckBox chckbxCats;
 	static List<ActionListener> listeners;
 
 	/**
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
+		catList= new ArrayList<>();
+		setCatList();
 		setPreferredSize(new Dimension(300, 700));
 		setSize(new Dimension(300, 700));
 		setMinimumSize(new Dimension(300, 700));
@@ -80,12 +84,18 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setCheckBoxes();
 		setGroupLayout();
 		createEvents();
-		btnAddCourse.setEnabled( !courseModel.isEmpty() );
-		btnRemoveCourse.setEnabled( !ChosenCourseModel.isEmpty() );
+		btnAddCourse.setEnabled(!courseModel.isEmpty());
+		btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
 
 	}
 
 	// **************** AUX methods for creating the view design ***********//
+	private static void setCatList(){
+		catList.add(new ImageIcon("resources/cat-fish-icon.png"));
+		catList.add(new ImageIcon("resources/cat-purr-icon.png"));
+		catList.add(new ImageIcon("resources/cat-drunk-icon.png"));
+	}
+	
 	//
 	// Sets the search field preferences
 	//
@@ -188,11 +198,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	// Sets the check boxes
 	//
-	private void setCheckBoxes() {
+	private static void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
 		chckbxFaculty = new JCheckBox("לפי פקולטה");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
+
 	}
 
 	//
@@ -242,13 +253,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// *************************** helper private methods
 	// **********************//
 
-
 	static String getIdFromDescription(String val) {
 		return val.split(" ")[0]; // 0= name , 1 = id
 	}
 
-
-	
 	// *************************** actions and events **********************//
 
 	private static void createEvents() {
@@ -337,6 +345,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 			}
 		});
+		chckbxCats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				Message.infoBox("","" , catList.get(catIconNum));
+				chckbxCats.setSelected(false);
+				catIconNum = (catIconNum +1) % 3 ;
+			}
+		});
 	}
 
 	// ******************* communication with controller ******************//
@@ -345,7 +361,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String picked = "";
 	static String droped = "";
 	static String query = "";
-
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -361,7 +376,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
-		
+
 		case CourseProperty.DETAILS:
 			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
 			lstChosenCourses.setToolTipText((evt.getNewValue() + ""));
