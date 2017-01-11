@@ -357,23 +357,24 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxKdamim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				query = searchField.getText();
-				listeners.forEach(x -> x.actionPerformed(
+				String txt = searchField.getText();
+				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxFaculty .addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				query = searchField.getText();
-				listeners.forEach(x -> x.actionPerformed(
+				String txt = searchField.getText();
+				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxTaken.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				query = searchField.getText();
+				String txt = searchField.getText();
+				query= (txt.equals(DEFAULT_COURSE_NUM_TEXT))?"":txt;
 				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
