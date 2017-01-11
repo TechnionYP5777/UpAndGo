@@ -28,9 +28,7 @@ import javax.swing.border.TitledBorder;
 import command.CourseCommand;
 import model.course.Course;
 import model.course.CourseId;
-import model.loader.XmlCourseLoader;
 import property.CourseProperty;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -45,6 +43,9 @@ import javax.swing.border.LineBorder;
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
+	static ArrayList<ImageIcon> catList; 
+	static int catIconNum=0;
+	
 	static JTextField searchField;
 
 	static JScrollPane scrollPane;
@@ -60,16 +61,18 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static List<Course> clist;
 
 	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
-	private JCheckBox chckbxKdamim;
-	private JCheckBox chckbxFaculty;
-	private JCheckBox chckbxTaken;
-	private JCheckBox chckbxCats;
+	static JCheckBox chckbxKdamim;
+	static JCheckBox chckbxFaculty;
+	static JCheckBox chckbxTaken;
+	static JCheckBox chckbxCats;
 	static List<ActionListener> listeners;
 
 	/**
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
+		catList= new ArrayList<>();
+		setCatList();
 		setPreferredSize(new Dimension(300, 700));
 		setSize(new Dimension(300, 700));
 		setMinimumSize(new Dimension(300, 700));
@@ -81,9 +84,18 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setCheckBoxes();
 		setGroupLayout();
 		createEvents();
+		btnAddCourse.setEnabled(!courseModel.isEmpty());
+		btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
+
 	}
 
 	// **************** AUX methods for creating the view design ***********//
+	private static void setCatList(){
+		catList.add(new ImageIcon("resources/cat-fish-icon.png"));
+		catList.add(new ImageIcon("resources/cat-purr-icon.png"));
+		catList.add(new ImageIcon("resources/cat-drunk-icon.png"));
+	}
+	
 	//
 	// Sets the search field preferences
 	//
@@ -149,15 +161,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the List model of the courses available
 	//
 	private void setCoursesListsModels() {
-		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
-		clist = new ArrayList<>(cr.loadAllCourses().values());
 		listeners.forEach(
 				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
 		ChosenCourseModel = new DefaultListModel<>();
-//		for (Course val : clist)
-//			ChosenCourseModel.addElement(getNameToDisplay(val));
-
 	}
 
 	//
@@ -191,11 +198,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	// Sets the check boxes
 	//
-	private void setCheckBoxes() {
+	private static void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
 		chckbxFaculty = new JCheckBox("לפי פקולטה");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
+
 	}
 
 	//
@@ -245,49 +253,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// *************************** helper private methods
 	// **********************//
 
-	//
-	// Create the string that will be displayed in the list view
-	//
-	private static String getNameToDisplay(Course val) {
-		return val.getId() + " " + val.getName();
-	}
-
-	//
-	// Create the string that will be displayed by the tool tip
-	//
-	static String getDescription(Course val) {
-		return val.getName() + " " + val.getId() + "\n" + val.getFaculty() + " " + val.getPoints();
-	}
-
 	static String getIdFromDescription(String val) {
 		return val.split(" ")[0]; // 0= name , 1 = id
-	}
-
-	//
-	// Searches the courses list for the name or the id of the course
-	// typed in the search field.
-	// if found returns the string that will be displayed in the list
-	// else returns "".
-	//
-	static String findCourse() {
-		String searched = searchField.getText();
-		for (Course ¢ : clist)
-			if (¢.getId().equals(searched) || ¢.getName().equals(searched))
-				return getNameToDisplay(¢);
-		return "";
-	}
-
-	//
-	// Searches the courses list for the name and id of the course
-	// as returned by getNameToDisplay().
-	// if found returns the course
-	// else returns null.
-	//
-	static Course getCoursebyString(String txt) {
-		for (Course $ : clist)
-			if (($ + "").equals(txt))
-				return $;
-		return null;
 	}
 
 	// *************************** actions and events **********************//
@@ -334,8 +301,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
-						Message.infoBox("add pressed", "ADD", null);
-
+//						Message.infoBox("add pressed", "ADD", null);
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
@@ -349,8 +315,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
 					else {
-						Message.infoBox("remove pressed", "REMOVE", null);
-
+//						Message.infoBox("remove pressed", "REMOVE", null);
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
@@ -367,13 +332,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 
-				String searched = findCourse();
-				if (!"".equals(searched))
-					lstAvailableCourses.setSelectedValue(searched, true);
-				else {
-					searchField.setText("");
-					lstAvailableCourses.clearSelection();
-				}
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				
 			}
 
 		});
@@ -383,6 +345,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 			}
 		});
+		chckbxCats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				Message.infoBox("","" , catList.get(catIconNum));
+				chckbxCats.setSelected(false);
+				catIconNum = (catIconNum +1) % 3 ;
+			}
+		});
 	}
 
 	// ******************* communication with controller ******************//
@@ -390,9 +360,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String highlighted = "";
 	static String picked = "";
 	static String droped = "";
-
-	// private JScrollPane ScpChosenCourse;
-	// private JList<String> lstChosenCourses;
+	static String query = "";
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -407,10 +375,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		// i need to check what the hell is changed and act according
 		switch (evt.getPropertyName()) {
-		
+
 		case CourseProperty.DETAILS:
 			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
 			lstChosenCourses.setToolTipText((evt.getNewValue() + ""));
@@ -420,12 +386,15 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (CourseId val : (List<CourseId>) evt.getNewValue())
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
+			btnAddCourse.setEnabled(!courseModel.isEmpty());
+
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
-			for (String val : (List<String>) evt.getNewValue())
-				ChosenCourseModel.addElement(val);
+			for (CourseId val : (List<CourseId>) evt.getNewValue())
+				ChosenCourseModel.addElement(val.number + " " + val.name);
 			lstChosenCourses.setModel(ChosenCourseModel);
+			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
 			break;
 		default:
 			break;
@@ -434,8 +403,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	@Override
 	public String getQuery() {
-		// TODO Auto-generated method stub
-		return "";
+		return query;
 	}
 
 	@Override
