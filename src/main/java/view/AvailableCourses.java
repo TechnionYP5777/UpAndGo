@@ -447,14 +447,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 	@Override
 	public boolean getIsKdamimChecked() {
-		return false;
+		return chckbxKdamim.isSelected();
 	}
 	@Override
 	public boolean getIsFacultyChecked() {
-		return false;
+		return chckbxFaculty.isSelected();
 	}	@Override
 	public boolean getIsTakenChecked() {
-		return false;
+		return chckbxTaken.isSelected();
 	}	
 
 	// *************************** message box class **********************//
