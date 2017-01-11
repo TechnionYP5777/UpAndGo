@@ -1,5 +1,6 @@
 package model.schedule;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,42 +35,73 @@ public class Timetable {
 		rankStartTime = rankStartTime(null);
 	}
 	
-	public Timetable(List<LessonGroup> lessons, WeekTime startTime){
+	public Timetable(List<LessonGroup> lessons, LocalTime startTime){
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
 		rankStartTime = rankStartTime(startTime);
 	}
 	
-	private double rankStartTime(WeekTime startTime) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	public List<LessonGroup> getLessonGroups(){
 		return lessonGroups;
 	}
-
+	
+	
 	/**
-	 * max bonus for 
-	 * @return
+	 * 
+	 * @param startTime
+	 * @return a rank built like that: each day which start after startTime get 0.5 points
 	 */
-	private double rankBlankSpace() {
-		int $ = 0;
-		//List<WeekTime>[] histogram = new List[DAYS_IN_WEEK];
+	private double rankStartTime(LocalTime startTime) {
+		if(startTime == null)
+			return 0.0;
+		double $ = 0.0;
+		// create an histogram which holds a list of lessons times of each day
 		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>();
 		for(int ¢ = 0; ¢<DAYS_IN_WEEK; ++¢)
 			histogram.add(new ArrayList<>());
-		//System.out.println("hist: " + histogram);
-		for(LessonGroup lg : lessonGroups){
-			for (Lesson ¢ : lg.getLessons()){
+		
+		for(LessonGroup lg : lessonGroups)
+			for (Lesson ¢ : lg.getLessons()) {
 				histogram.get(¢.getDay()).add(¢.getStartTime());
 				histogram.get(¢.getDay()).add(¢.getEndTime());
 			}
-			
+		
+		for(ArrayList<WeekTime> daySchedule : histogram){
+			// sort them such that the first start time of each day will be first in the list too
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
+			// add 0.5 points if daySchedule start time is greater than wanted start time
+			if(!daySchedule.isEmpty() && daySchedule.get(0).getTime().compareTo(startTime) >= 0)
+				$ += 0.5;
 		}
 		
-		//for()
+		return $;
+	}
+
+	/**
+	 * max bonus is 2 points. each blank hours costs a penalty of 0.25 points
+	 * @return
+	 */
+	private double rankBlankSpace() {
+		
+		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>();
+		for(int ¢ = 0; ¢<DAYS_IN_WEEK; ++¢)
+			histogram.add(new ArrayList<>());
+		
+		for(LessonGroup lg : lessonGroups)
+			for (Lesson ¢ : lg.getLessons()) {
+				histogram.get(¢.getDay()).add(¢.getStartTime());
+				histogram.get(¢.getDay()).add(¢.getEndTime());
+			}
+		
+		
 		
 		
 		int blankMinutesSum = 0;
@@ -99,10 +131,8 @@ public class Timetable {
 	
 	private int sumBlank(ArrayList<WeekTime> daySchedule){
 		int $ = 0;
-		for(int ¢ = daySchedule.size()-2; ¢>0; ¢-=2){
-			$ += WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢-1));
-			//System.out.println(WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢-1)));
-		}
+		for(int ¢ = daySchedule.size()-2; ¢>0; ¢-=2)
+			$ += WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢ - 1));
 		return $;
 	}
 
