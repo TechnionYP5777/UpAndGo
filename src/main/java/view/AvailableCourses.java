@@ -151,8 +151,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
 		ChosenCourseModel =  new DefaultListModel<>();
-		// for (Course val : clist)
-		// courseModel.addElement(getNameToDisplay(val));
+		 for (Course val : clist)
+			 ChosenCourseModel.addElement(getNameToDisplay(val));
 
 	}
 	//
@@ -304,7 +304,23 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 			}
 		});
+		lstChosenCourses.addMouseMotionListener(new MouseMotionAdapter() {
 
+			@Override
+			public void mouseMoved(MouseEvent e) {
+
+				JList<?> theList = (JList<?>) e.getSource();
+
+				ListModel<?> model = theList.getModel();
+				int index = theList.locationToIndex(e.getPoint());
+				if (index <= -1)
+					return;
+				highlighted = getIdFromDescription((String) model.getElementAt(index));
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
+
+			}
+		});
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
@@ -367,6 +383,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		switch (evt.getPropertyName()) {
 		case CourseProperty.DETAILS:
 			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
+			lstChosenCourses.setToolTipText((evt.getNewValue() + ""));
 			break;
 		case CourseProperty.COURSE_LIST:
 			courseModel = new DefaultListModel<>();
