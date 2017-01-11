@@ -22,13 +22,14 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.TextField;
+
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import command.CourseCommand;
 import model.course.Course;
 import model.course.CourseId;
-import model.loader.XmlCourseLoader;
 import property.CourseProperty;
 
 import java.awt.Color;
@@ -81,6 +82,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setCheckBoxes();
 		setGroupLayout();
 		createEvents();
+		btnAddCourse.setEnabled( !courseModel.isEmpty() );
+		btnRemoveCourse.setEnabled( !ChosenCourseModel.isEmpty() );
+
 	}
 
 	// **************** AUX methods for creating the view design ***********//
@@ -149,15 +153,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the List model of the courses available
 	//
 	private void setCoursesListsModels() {
-		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
-		clist = new ArrayList<>(cr.loadAllCourses().values());
 		listeners.forEach(
 				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
 		ChosenCourseModel = new DefaultListModel<>();
-//		for (Course val : clist)
-//			ChosenCourseModel.addElement(getNameToDisplay(val));
-
 	}
 
 	//
@@ -367,13 +366,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 
-				String searched = findCourse();
-				if (!"".equals(searched))
-					lstAvailableCourses.setSelectedValue(searched, true);
-				else {
-					searchField.setText("");
-					lstAvailableCourses.clearSelection();
-				}
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				
 			}
 
 		});
@@ -390,6 +386,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String highlighted = "";
 	static String picked = "";
 	static String droped = "";
+	static String query = "";
 
 	// private JScrollPane ScpChosenCourse;
 	// private JList<String> lstChosenCourses;
@@ -407,8 +404,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		// i need to check what the hell is changed and act according
 		switch (evt.getPropertyName()) {
 		
 		case CourseProperty.DETAILS:
@@ -420,12 +415,16 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (CourseId val : (List<CourseId>) evt.getNewValue())
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
+			btnAddCourse.setEnabled(!courseModel.isEmpty());
+
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
 			for (String val : (List<String>) evt.getNewValue())
 				ChosenCourseModel.addElement(val);
 			lstChosenCourses.setModel(ChosenCourseModel);
+			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
+
 			break;
 		default:
 			break;
@@ -434,8 +433,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	@Override
 	public String getQuery() {
-		// TODO Auto-generated method stub
-		return "";
+		return query;
 	}
 
 	@Override
