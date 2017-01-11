@@ -238,10 +238,12 @@ public class XmlCourseLoader extends CourseLoader {
 							}
 						}
 					}
-										
-					Course c = cb.build();
+						
+					courses.put(((Element) p).getAttribute("id"), cb.build());
+					/*Course c = cb.build();
 					courses.put(((Element) p).getAttribute("id"), c);
 					courses.put(((Element) p).getAttribute("name"), c);
+					*/
 					cb.clearStaffMembers();
 					cb.clearlecturesGroups();
 					cb.cleartutorialGroup();
