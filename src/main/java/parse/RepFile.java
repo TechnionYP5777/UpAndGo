@@ -114,7 +114,7 @@ public class RepFile {
 			doc.appendChild(rootElement);
 			
 			for (Matcher regexMatcher = Pattern
-					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>", Pattern.MULTILINE)
+					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>)", Pattern.MULTILINE)
 					.matcher(getRepFileAsString()); regexMatcher.find();){
 				//System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
 				Element course = doc.createElement("Course");

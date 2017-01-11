@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 
 import command.CourseCommand;
 import model.course.Course;
+import model.course.CourseId;
 import model.loader.XmlCourseLoader;
 import property.CourseProperty;
 
@@ -256,8 +257,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			break;
 		case CourseProperty.COURSE_LIST:
 			courseModel = new DefaultListModel<>();
-			for (String val : (List<String>)evt.getNewValue())
-				courseModel.addElement(val);
+			for (CourseId val : (List<CourseId>)evt.getNewValue())
+				courseModel.addElement(val.number+" "+val.name);
 			lstAvailableCourses.setModel(courseModel);
 			break;
 		default:
