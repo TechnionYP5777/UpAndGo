@@ -362,7 +362,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// ******************* communication with controller ******************//
 
 	static String highlighted = "";
-	private JScrollPane ScpChosenCourse;
+	//private JScrollPane ScpChosenCourse;
 	// private JList<String> lstChosenCourses;
 	
 	@Override
