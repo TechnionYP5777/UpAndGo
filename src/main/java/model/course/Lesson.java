@@ -10,7 +10,7 @@ import model.constraint.TimeConstraint;
 import model.course.StuffMember;
 
 public class Lesson implements Event {
-	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT}
+	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT}
 	
 	protected final StuffMember representer;
 	protected final WeekTime startTime;

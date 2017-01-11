@@ -1,26 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Catalog>
     <CourseList name="שרשרת מדעית">
-        <Course number="114075">
+    	<CourseList name="שרשרת פיסיקה">
+    		<Course number="114075">
             <name>פיסיקה 2ממ</name>
             <points>5.0</points>
-        </Course>
-        <Course number="134058">
+        	</Course>
+    	</CourseList>
+    	<CourseList name="שרשרת ביולוגיה">
+    	    <Course number="134058">
             <name>ביולוגיה</name>
             <points>3.0</points>
-        </Course>
-        <Course number="125801">
-            <name>כימיה אורגנית</name>
-            <points>5.0</points>
-        </Course>
-        <Course number="134020">
+        	</Course>
+            <Course number="134020">
             <name>גנטיקה כללית</name>
             <points>3.5</points>
-        </Course>
-        <Course number="125001">
+        	</Course>
+    	</CourseList>
+    	<CourseList name="שרשרת כימיה 1">
+    	    <Course number="125001">
             <name>כימיה כללית</name>
             <points>3.0</points>
-        </Course>
+       		</Course>
+			<Course number="125801">
+            <name>כימיה אורגנית</name>
+            <points>5.0</points>
+        	</Course>
+    	</CourseList>
+    	<CourseList name="שרשרת כימיה 2">
+    		<Course number="124510">
+    		<name>כימיה פיסיקלית</name>
+    		<points>4.0</points>
+    		</Course>
+    	</CourseList>
+    	<CourseList name="קורסים מדעיים נוספים">
+    		<Course number="114052">
+				<name>פיסיקה 2</name>
+            	<points>3.5</points>
+        	</Course>
+        	<Course number="114073">
+            	<name>פיסיקה 3 ח'</name>
+            	<points>3.5</points>
+            </Course>
+            <Course number="114101">
+            	<name>מכניקה אנליטית</name>
+            	<points>4.0</points>
+            </Course>
+            <Course number="114245">
+            	<name>תורה אלקטרומגנטית</name>
+            	<points>4.0</points>
+            </Course>
+            <Course number="124120">
+            	<name>יסודות הכימיה</name>
+            	<points>5.0</points>
+            </Course>
+            <Course number="125011">
+            	<name>כימיה כללית + מעבדה</name>
+            	<points>3.5</points>
+            </Course>
+    	</CourseList>
         <neededPoints>8.0</neededPoints>
         <OverflowTo>רשימה ב'</OverflowTo>
     </CourseList>
@@ -161,7 +199,7 @@
             <points>3.0</points>
         </Course>
         <Course number="234247">
-            <name>אלגוריתמים</name>
+            <name>אלגוריתמים 1</name>
             <points>3.0</points>
         </Course>
         <Course number="234107">
@@ -225,7 +263,7 @@
             <points>3.0</points>
         </Course>
         <Course number="324012">
-            <name>אנגלית טכנית</name>
+            <name>אנגלית טכנית - מתקדמים ב'</name>
             <points>3.0</points>
         </Course>
         <Course number="234312">
@@ -235,10 +273,6 @@
         <Course number="234319">
             <name>שפות תכנות</name>
             <points>3.0</points>
-        </Course>
-        <Course number="394901">
-            <name>חינוך גופני</name>
-            <points>2.0</points>
         </Course>
         <Course number="234262">
             <name>תכן לוגי</name>
@@ -259,17 +293,9 @@
             <name>מערכות דינמיות לינאריות</name>
             <points>3.5</points>
         </Course>
-        <Course number="096600">
-            <name>התנהגות ארגונית</name>
-            <points>3.5</points>
-        </Course>
         <Course number="094423">
             <name>מבוא לסטטיסטיקה</name>
             <points>3.5</points>
-        </Course>
-        <Course number="104215">
-            <name>פונקציות מרוכבות א'</name>
-            <points>2.5</points>
         </Course>
         <Course number="094591">
             <name>מבוא לכלכלה</name>
@@ -340,7 +366,7 @@
             <points>3.0</points>
         </Course>
         <Course number="044265">
-            <name>פרויקט במערכות תכנה</name>
+            <name>פרויקט במערכות תוכנה</name>
             <points>3.0</points>
         </Course>
         <Course number="036044">
@@ -365,13 +391,133 @@
             <points>3.0</points>
         </Course>
         <Course number="104122">
-            <name>תורת הפונקציות</name>
+            <name>תורת הפונקציות 1</name>
             <points>3.5</points>
         </Course>
         <Course number="094334">
             <name>סימולציה ספרתית</name>
             <points>3.0</points>
         </Course>
+        <Course number="09625">
+        	<name>מערכות מסדי נתונים מבוזרים</name>
+        	<points>2.5</points></Course>
+        <Course number="096262">
+        	<name>אחזור מידע</name>
+        	<points>3.5</points>
+        </Course>
+        <Course number="096326">
+        	<name>מבוא לתזמון</name>
+        	<points>2.5</points></Course>
+        <Course number="096411">
+        	<name>שיטות לכריית נתונים ובינה עסקית</name>
+        	<points>3.5</points></Course>
+        <Course number="094222">
+        	<name>אפיון וניתוח מערכות מידע</name>
+        	<points>3.5</points></Course>
+        <Course number="046001">
+        	<name>הנדסת מערכות תוכנה מבוזרות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="094325">
+        	<name>סמינר בחקר ביצועים</name>
+        	<points>3.5</points></Course>
+        <Course number="046201">
+        	<name>מבוא לעיבוד אותות אקראיים</name>
+        	<points>3.0</points></Course>
+        <Course number="046880">
+        	<name>תכן בעזרת מחשב של VLSI</name>
+        	<points>3.0</points></Course>
+        <Course number="046925">
+        	<name>כלים לניתוח מערכות מחשבים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="046993">
+        	<name>רשתות מהירות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="048878">
+        	<name>ארכיטקטורת VLSI</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="048921">
+        	<name>נושאים נבחרים בראיה, מבנה תמונות וראיה ממוחשבת</name>
+        	<points>2.0</points></Course>
+        <Course number="097317">
+        	<name>תורת המשחקים השיתופיים</name>
+        	<points>2.5</points></Course>
+        <Course number="104135">
+        	<name>משוואות דיפרנציאליות רגילות ת'</name>
+        	<points>2.5</points></Course>
+        <Course number="104165">
+        	<name>פונקציות ממשיות</name>
+        	<points>3.5</points></Course>
+        <Course number="104171">
+        	<name>אלגברה ליניארית ב'</name>
+        	<points>3.0</points></Course>
+        <Course number="104177">
+        	<name>גאומטריה דיפרנציאלית</name>
+        	<name>3.5</name></Course>
+        <Course number="104221">
+        	<name>פונקציות מרוכבות והתמרות אינטגרליות</name>
+        	<points>4.0</points></Course>
+        <Course number="104223">
+        	<name>משוואות דיפרנציאליות חלקיות וטורי פוריה</name>
+        	<points>4.0</points></Course>
+        <Course number="104276">
+        	<name>מבוא לאנליזה פונקציונלית</name>
+        	<points>3.5</points></Course>
+        <Course number="106378">
+        	<name>תורת המידה</name>
+        	<points>3.0</points></Course>
+        <Course number="106383">
+        	<name>טופולוגיה אלגברית</name>
+        	<points>3.0</points></Course>
+        <Course number="114101">
+        	<name>מכניקה אנליטית</name>
+        	<points>4.0</points></Course>
+        <Course number="114245">
+        	<name>תורה אלקטרומגנטית</name>
+        	<points>4.0</points></Course>
+        <Course number="115203">
+        	<name>פיסיקה קוונטית 1</name>
+        	<points>5.0</points></Course>
+        <Course number="115204">
+        	<name>פיסיקה קוונטית 2</name>
+        	<points>5.0</points></Course>
+        <Course number="115211">
+        	<name>פיסיקה סטטיסטית ותרמית</name>
+        	<points>4.0</points></Course>
+        <Course number="116217">
+        	<name>פיסיקה של מצב מוצק</name>
+        	<points>3.5</points></Course>
+        <Course number="116354">
+        	<name>אסטרופיסיקה וקוסמולוגיה</name>
+        	<points>3.5</points></Course>
+        <Course number="124503">
+        	<name>כימיה פיסיקלית 1ב'</name>
+        	<points>2.5</points>
+        </Course>
+        <Course number="124801">
+        	<name>כימיה אורגנית 1ב'</name></Course>
+        <Course number="134019">
+        	<name>מבוא לביוכימיה ואנזימולוגיה</name>
+        	<points>2.5</points></Course>
+        <Course number="134082">
+        	<name>ביולוגיה מולקולרית</name>
+        	<points>2.5</points></Course>
+        <Course number="134113">
+        	<name>מסלולים מטבוליים</name>
+        	<points>3.5</points></Course>
+        <Course number="134128">
+        	<name>ביולוגיה של התא</name>
+        	<points>3.5</points></Course>
+        <Course number="134119">
+        	<name>בקרת הביטוי הגנטי</name>
+        	<points>2.5</points>
+        </Course>
+        <Course number="134120">
+        	<name>מעבדה בגנטיקה מולקולרית</name>
+        	<points>2.0</points></Course>
         <neededPoints>10.5</neededPoints>
         <OverflowTo>בחירה חופשית</OverflowTo>
     </CourseList>
