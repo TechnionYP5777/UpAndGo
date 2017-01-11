@@ -22,7 +22,7 @@ public class Lesson implements Event {
 	protected final String course;
 	
 	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c) {
-		if((repr==null) || (theStartTime==null) || (place1==null))
+		if((theStartTime==null) || (place1==null))
 			throw new NullPointerException();
 		
 		this.representer = repr;

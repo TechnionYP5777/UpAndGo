@@ -2,7 +2,7 @@
     <course faculty="הנדסה אזרחית וסביבתית" id="123456" name="מבוא לחתולים" points="3">
         <teacherInCharge name="הלו קיטי" title="פרופ"/>
         <exams>
-            <moedA day="29" month="06" year="2016" time="09:00"/>
+		    <moedA day="29" month="06" year="2016" time="09:00"/>
             <moedB day="12" month="09" year="2016" time="09:00"/>
         </exams>
         <lecture>
@@ -131,4 +131,32 @@
             <note>קארמה רעה</note>
     </notes>
     </course>
+	<course faculty="הנדסה אזרחית וסביבתית" id="014005" name="מעבדה הנדסית" points="1.5">
+		<exams>
+			<moedB day="26" month="09" time="00:00" year="2017"/>
+		</exams>
+		<lecture>
+			<lesson/>
+			<labs>
+				<lab group="11">
+					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+				<lab group="12">
+					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+				<lab group="13">
+					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+				<lab group="14">
+					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+				<lab group="15">
+					<lesson day="ה" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+				<lab group="16">
+					<lesson day="ה" timeEnd="15:30" timeStart="12:30"/>
+				</lab>
+			</labs>
+		</lecture>
+	</course>
 </courses>

@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 
 import model.course.Course;
 import model.course.Lesson;
+import model.course.Lesson.Type;
 import model.course.StuffMember;
 import model.course.WeekTime;
 import parse.RepFile;
@@ -167,31 +168,34 @@ public class XmlCourseLoader extends CourseLoader {
 					//get course points
 					cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 					//get course exam's A date and time
-					cb.setATerm(LocalDateTime.parse(
-							((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-							.getNamedItem("year").getNodeValue()
-							+ "-"
-							+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-									.getNamedItem("month").getNodeValue()
-							+ "-"
-							+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-									.getNamedItem("day").getNodeValue()
-							+ " " + ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-									.getNamedItem("time").getNodeValue(), 
-							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-					//get course exam's B date and time
-					cb.setBTerm(LocalDateTime.parse(
-							((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-							.getNamedItem("year").getNodeValue()
-							+ "-"
-							+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-									.getNamedItem("month").getNodeValue()
-							+ "-"
-							+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-									.getNamedItem("day").getNodeValue()
-							+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-									.getNamedItem("time").getNodeValue(), 
-							DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+					cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
+							: LocalDateTime.parse(
+									((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+											.getNamedItem("year").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("month").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("day").getNodeValue()
+											+ " "
+											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+													.getNamedItem("time").getNodeValue(),
+									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+		 			//get course exam's B date and time
+					cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
+							: LocalDateTime.parse(
+									((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+												.getNamedItem("year").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+												.getNamedItem("month").getNodeValue()
+											+ "-"
+											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+												.getNamedItem("day").getNodeValue()
+											+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+												.getNamedItem("time").getNodeValue(), 
+									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 					//get course staff 
 					setStaffList (cb, p,"teacherInCharge");
 					setStaffList (cb, p,"lecturer");
@@ -202,32 +206,12 @@ public class XmlCourseLoader extends CourseLoader {
 						++groupNum;
 						Node n = lectureList.item(k);
 						if (n.getNodeType() == Node.ELEMENT_NODE) {
-							NodeList tutorialList = ((Element) n).getElementsByTagName("tutorial");
-							for (int g = 0; g < tutorialList.getLength(); ++g) {
-								Node m = tutorialList.item(g);
-								if (m.getNodeType() == Node.ELEMENT_NODE) {
-									int tutorialGroupNum = Integer.parseInt(((Element) m).getAttribute("group"));
-									//
-									NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
-									for (int f = 0; f < lessonList.getLength(); ++f) {
-										Node h = lessonList.item(f);
-										if ((h.getNodeType() == Node.ELEMENT_NODE) && ("tutorial".equals(((Element) h).getParentNode().getNodeName())) && (Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group")) ==  tutorialGroupNum)) {
-											String place = ((Element) h).getAttribute("building");
-											if (!((Element) h).getAttribute("roomNumber").isEmpty())
-												place += " " + ((Element) h).getAttribute("roomNumber");
-											cb.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
-													createLesson(n, h, p, g,
-															convertStrToDay(((Element) h).getAttribute("day")),
-															tutorialGroupNum, place, Lesson.Type.TUTORIAL,
-															"assistant"));
-										}
-									}
-								}	
-							}
+							createLessonGroup (n, p, "tutorial");
+							createLessonGroup (n, p, "lab");
 							NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 							for (int g = 0; g < lessonList.getLength(); ++g) {
 								Node m = lessonList.item(g);
-								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName()))) {
+								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName())) && (((Element) m).hasAttributes() == true)) {
 									String place = ((Element) m).getAttribute("building");
 									if (!((Element) m).getAttribute("roomNumber").isEmpty())
 										place += " " + ((Element) m).getAttribute("roomNumber");
@@ -253,6 +237,33 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
+	private void createLessonGroup(Node n, Node p, String s) {
+		Lesson.Type t = !"lab".equals(s) ? Type.TUTORIAL : Type.LABORATORY;
+		NodeList tutorialList = ((Element) n).getElementsByTagName(s);
+		for (int g = 0; g < tutorialList.getLength(); ++g) {
+			Node m = tutorialList.item(g);
+			if (m.getNodeType() == Node.ELEMENT_NODE) {
+				int tutorialGroupNum = Integer.parseInt(((Element) m).getAttribute("group"));
+				//
+				NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
+				for (int f = 0; f < lessonList.getLength(); ++f) {
+					Node h = lessonList.item(f);
+					if ((h.getNodeType() == Node.ELEMENT_NODE) && (s.equals(((Element) h).getParentNode().getNodeName())) && (Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group")) ==  tutorialGroupNum)) {
+						String place = ((Element) h).getAttribute("building");
+						if (!((Element) h).getAttribute("roomNumber").isEmpty())
+							place += " " + ((Element) h).getAttribute("roomNumber");
+						cb.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
+								createLesson(n, h, p, g,
+										convertStrToDay(((Element) h).getAttribute("day")),
+										tutorialGroupNum, place, t,
+										"assistant"));
+					}
+				}
+			}	
+		}
+		
+	}
+
 	private static StuffMember findStaffByName(Course.CourseBuilder cb, String[] splited) {
 		String firstName = "";
 		for (int j=0; j < splited.length -1 ; ++j) {
@@ -267,17 +278,14 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	private Lesson createLesson(Node n, Node h, Node p, int index, DayOfWeek lectureDay, int groupNum, String place, Lesson.Type t, String staff) {
-		return
-			(new Lesson(
-				findStaffByName(cb,
-						(((Element) n).getElementsByTagName(staff).item(index).getAttributes().getNamedItem("name")
-								.getNodeValue()).split(" ")),
-				new WeekTime(lectureDay,
-						LocalTime.parse(((Element) h).getAttribute("timeStart"))),
-				new WeekTime(lectureDay,
-						LocalTime.parse(((Element) h).getAttribute("timeEnd"))),
-				place, t, groupNum,
-				((Element) p).getAttribute("id")));
+		return new Lesson(
+				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
+						: findStaffByName(cb,
+								(((Element) n).getElementsByTagName(staff).item(index).getAttributes()
+										.getNamedItem("name").getNodeValue()).split(" ")),
+				new WeekTime(lectureDay, LocalTime.parse(((Element) h).getAttribute("timeStart"))),
+				new WeekTime(lectureDay, LocalTime.parse(((Element) h).getAttribute("timeEnd"))), place, t, groupNum,
+				((Element) p).getAttribute("id"));
 	}
 	
 	private static DayOfWeek convertStrToDay(String ¢) {

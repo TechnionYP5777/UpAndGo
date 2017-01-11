@@ -33,6 +33,7 @@ public class XmlCourseLoaderTest {
 		assert "123456".equals(coursesMap.get("123456").getId());
 		assert "מבוא לחתולים".equals(coursesMap.get("123456").getName());
 		assert "3.0".equals(String.valueOf(coursesMap.get("123456").getPoints()));
+				
 		assert "2016-06-29T09:00".equals((coursesMap.get("123456").getaTerm() + ""));
 		assert "2016-09-12T09:00".equals((coursesMap.get("123456").getbTerm() + ""));
 		
@@ -52,6 +53,19 @@ public class XmlCourseLoaderTest {
 		assert ((coursesMap.get("234107").getStuff()).size() == 6);
 		
 		assert "הנדסה אזרחית וסביבתית".equals((coursesMap.get("123456").getFaculty()));
+		
+		assert ((coursesMap.get("014005").getStuff().size()) == 0);
+		assert ((coursesMap.get("014005").getLecturesLG().size()) == 0);
+		assert ((coursesMap.get("014005").getTutorialsLG().size()) == 6);
+		
+		for (int ¢ = 0; ¢ < (coursesMap.get("014005").getTutorialsLG().size()); ++¢)
+			assert ((coursesMap.get("014005").getTutorialsLG().get(¢).getGroupNum() == ¢ + 11));
+		
+		assert (coursesMap.get("014005").getTutorialsLG().get(3).getGroupNum() == 14);
+		
+		System.out.println(coursesMap.get("014005").getTutorialsLG().get(4).getLessons().get(0).getStartTime());
+		System.out.println(coursesMap.get("014005").getTutorialsLG().get(4).getLessons().get(0).getEndTime());
+		assert (coursesMap.get("014005").getTutorialsLG().get(3).getLessons().get(0).getDay() == 0);
 		
 		assert ((coursesMap.get("123456").getStuff()).get(2)).equals((new StuffMember("תומס", "אומאלי", "דר")));
 		assert ((coursesMap.get("014536").getStuff()).get(0)).equals((new StuffMember("מיאו", "דזה-דונג", "פרופ")));
