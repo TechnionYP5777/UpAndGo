@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import logic.Scheduler;
@@ -28,6 +29,7 @@ public class scheduleTimetablesTest {
 		System.out.println("***");
 	}
 	
+	@Ignore
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
@@ -36,7 +38,7 @@ public class scheduleTimetablesTest {
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
-		System.out.println(s);
+		System.out.println("S: " + s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));

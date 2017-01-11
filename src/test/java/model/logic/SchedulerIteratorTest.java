@@ -67,7 +67,7 @@ CourseLoader cr;
 		System.out.println(courses);
 		
 		
-		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, true); it
+		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), false, false); it
 				.hasNext();) {
 			Timetable currentTable = it.next();
 			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());

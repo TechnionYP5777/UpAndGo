@@ -32,6 +32,13 @@ public class Timetable {
 		rankStartTime = rankStartTime(null);
 	}
 	
+	public Timetable(List<LessonGroup> lessons, WeekTime startTime){
+		this.lessonGroups = new ArrayList<>(lessons);
+		rankDaysoff = rankDaysoff();
+		rankBlankSpace = rankBlankSpace();
+		rankStartTime = rankStartTime(startTime);
+	}
+	
 	private double rankStartTime(WeekTime startTime) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -49,7 +56,7 @@ public class Timetable {
 		int $ = 0;
 		//List<WeekTime>[] histogram = new List[DAYS_IN_WEEK];
 		ArrayList< ArrayList<WeekTime> > histogram = new ArrayList<>();
-		for(int i = 0; i<DAYS_IN_WEEK; i++)
+		for(int ¢ = 0; ¢<DAYS_IN_WEEK; ++¢)
 			histogram.add(new ArrayList<>());
 		//System.out.println("hist: " + histogram);
 		for(LessonGroup lg : lessonGroups)
