@@ -40,17 +40,18 @@ public class CourseModel implements Model {
 			return;
 
 		// save picking in DB
-		List<String> prevPickedList = new ArrayList<>();
-		for (Course ¢ : this.pickedCourseList)
-			prevPickedList.add(¢.getId());
-		List<String> curPickedList = new ArrayList<>(prevPickedList);
-		curPickedList.add(name);
+		HashSet<CourseId> pickedList = new HashSet<>();
+		List<String> pickedIds = new ArrayList<>();
 		this.pickedCourseList.add(pickedCourse);
-		this.loader.saveChosenCourseNames(curPickedList);
-
+		this.pickedCourseList.forEach((course) -> {
+			pickedList.add(new CourseId(course.getId(), course.getName()));
+			pickedIds.add(course.getId());
+		});
+		this.loader.saveChosenCourseNames(pickedIds);
+		
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, prevPickedList, curPickedList))));
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
 	}
 
 	public void addCourse(String name) {
@@ -77,19 +78,20 @@ public class CourseModel implements Model {
 		Course droppedCourse = this.getCourseByName(name);
 		if (!this.pickedCourseList.contains(droppedCourse))
 			return;
-
-		// save dropping in DB
-		List<String> prevPickedList = new ArrayList<>();
-		for (Course ¢ : this.pickedCourseList)
-			prevPickedList.add(¢.getId());
-		List<String> curPickedList = new ArrayList<>(prevPickedList);
-		curPickedList.remove(name);
+		
+		// save picking in DB
+		HashSet<CourseId> pickedList = new HashSet<>();
+		List<String> pickedIds = new ArrayList<>();
 		this.pickedCourseList.remove(droppedCourse);
-		this.loader.saveChosenCourseNames(curPickedList);
-
+		this.pickedCourseList.forEach((course) -> {
+			pickedList.add(new CourseId(course.getId(), course.getName()));
+			pickedIds.add(course.getId());
+		});
+		this.loader.saveChosenCourseNames(pickedIds);
+		
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, prevPickedList, curPickedList))));
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
 	}
 
 	/*

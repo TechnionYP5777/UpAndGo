@@ -420,8 +420,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
-			for (String val : (List<String>) evt.getNewValue())
-				ChosenCourseModel.addElement(val);
+			for (CourseId val : (List<CourseId>) evt.getNewValue())
+				ChosenCourseModel.addElement(val.number + " " + val.name);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
 
