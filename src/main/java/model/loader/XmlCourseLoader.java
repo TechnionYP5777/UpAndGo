@@ -162,6 +162,8 @@ public class XmlCourseLoader extends CourseLoader {
 					cb.setId(((Element) p).getAttribute("id"));
 					//get course name
 					cb.setName(((Element) p).getAttribute("name"));
+					//get course faculty
+					cb.setFaculty(((Element) p).getAttribute("faculty"));
 					//get course points
 					cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 					//get course exam's A date and time
