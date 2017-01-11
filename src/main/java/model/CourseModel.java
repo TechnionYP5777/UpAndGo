@@ -125,10 +125,12 @@ public class CourseModel implements Model {
 	 */
 	public void loadQuery(String query) {
 		HashSet<CourseId> matchingIds = new HashSet<>();
-		this.courseList.forEach((key, course) -> {
-			if(key.toLowerCase().contains(query.toLowerCase()))
-				matchingIds.add(new CourseId(course.getId(),course.getName()));
-						});
+		this.courseList.forEach(query.isEmpty() ? (key, course) -> {
+			matchingIds.add(new CourseId(course.getId(), course.getName()));
+		} : (key, course) -> {
+			if (key.toLowerCase().contains(query.toLowerCase()))
+				matchingIds.add(new CourseId(course.getId(), course.getName()));
+		});
 		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
 	}
