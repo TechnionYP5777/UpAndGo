@@ -67,7 +67,7 @@ CourseLoader cr;
 		System.out.println(courses);
 		
 		
-		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), false, false); it
+		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
 				.hasNext();) {
 			Timetable currentTable = it.next();
 			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
@@ -75,15 +75,25 @@ CourseLoader cr;
 			System.out.println("time table: " + currentTable);
 		}
 		
-
-		//System.out.println(tl);
-		/*Timetable t = Scheduler.getTimetablesList(courses).get(0);
+	}
+	
+	@Test
+	public void test_c() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
-		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
-		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
-		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
-		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
-		*/
+		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		System.out.println(courses);
+		
+		List<Timetable> tablesList = Scheduler.getTimetablesList(courses);
+		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false);
+		assert it.next().getRankOfDaysoff() == 4;
+		assert it.next().getRankOfDaysoff() == 3;
+		
+		it = Scheduler.sortedBy(tablesList, false, true);
+		assert it.next().getRankOfBlankSpace() == 2.0;
+		assert it.next().getRankOfBlankSpace() == 1.75;
+		
+		
 	}
 
 }
