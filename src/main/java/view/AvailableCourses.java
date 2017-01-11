@@ -374,6 +374,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
 			break;
+		case CourseProperty.CHOSEN_LIST:
+			ChosenCourseModel = new DefaultListModel<>();
+			for (CourseId val : (List<CourseId>) evt.getNewValue())
+				ChosenCourseModel.addElement(val.number + " " + val.name);
+			lstChosenCourses.setModel(ChosenCourseModel);
+			break;
 		default:
 			break;
 		}
