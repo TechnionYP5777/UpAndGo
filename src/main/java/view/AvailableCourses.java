@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.TextField;
+
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
@@ -364,13 +366,18 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 
-				String searched = findCourse();
-				if (!"".equals(searched))
-					lstAvailableCourses.setSelectedValue(searched, true);
-				else {
-					searchField.setText("");
-					lstAvailableCourses.clearSelection();
-				}
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				
+				
+//				String searched = findCourse();
+//				if (!"".equals(searched))
+//					lstAvailableCourses.setSelectedValue(searched, true);
+//				else {
+//					searchField.setText("");
+//					lstAvailableCourses.clearSelection();
+//				}
 			}
 
 		});
@@ -387,6 +394,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String highlighted = "";
 	static String picked = "";
 	static String droped = "";
+	static String query = "";
 
 	// private JScrollPane ScpChosenCourse;
 	// private JList<String> lstChosenCourses;
@@ -417,7 +425,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (CourseId val : (List<CourseId>) evt.getNewValue())
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
-			btnAddCourse.setEnabled(courseModel.isEmpty() ? false : true);
+			btnAddCourse.setEnabled(!courseModel.isEmpty() && true);
 
 			break;
 		case CourseProperty.CHOSEN_LIST:
@@ -425,7 +433,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (String val : (List<String>) evt.getNewValue())
 				ChosenCourseModel.addElement(val);
 			lstChosenCourses.setModel(ChosenCourseModel);
-			btnRemoveCourse.setEnabled(ChosenCourseModel.isEmpty() ? false : true);
+			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty() && true);
 
 			break;
 		default:
@@ -435,8 +443,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	@Override
 	public String getQuery() {
-		// TODO Auto-generated method stub
-		return "";
+		return query;
 	}
 
 	@Override
