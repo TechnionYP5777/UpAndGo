@@ -293,8 +293,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
-						Message.infoBox("add pressed", "ADD", null);
-
+//						Message.infoBox("add pressed", "ADD", null);
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
@@ -308,8 +307,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
 					else {
-						Message.infoBox("remove pressed", "REMOVE", null);
-
+//						Message.infoBox("remove pressed", "REMOVE", null);
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
@@ -382,7 +380,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				ChosenCourseModel.addElement(val);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
-
 			break;
 		default:
 			break;
