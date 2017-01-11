@@ -31,15 +31,8 @@ public class Timetable {
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
-		//rankStartTime = rankStartTime(null);
 	}
 	
-	/*public Timetable(List<LessonGroup> lessons, LocalTime startTime){
-		this.lessonGroups = new ArrayList<>(lessons);
-		rankDaysoff = rankDaysoff();
-		rankBlankSpace = rankBlankSpace();
-		rankStartTime = rankStartTime(startTime);
-	}*/
 	
 	
 
