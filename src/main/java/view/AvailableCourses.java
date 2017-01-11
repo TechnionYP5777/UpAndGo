@@ -44,7 +44,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
 	static ArrayList<ImageIcon> catList; 
-	static int catIconNum=0;
+	static int catIconNum;
 	
 	static JTextField searchField;
 
@@ -94,6 +94,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		catList.add(new ImageIcon("resources/cat-fish-icon.png"));
 		catList.add(new ImageIcon("resources/cat-purr-icon.png"));
 		catList.add(new ImageIcon("resources/cat-drunk-icon.png"));
+		catIconNum =0;
 	}
 	
 	//
@@ -353,6 +354,30 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				catIconNum = (catIconNum +1) % 3 ;
 			}
 		});
+		chckbxKdamim.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+			}
+		});
+		chckbxFaculty .addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+			}
+		});
+		chckbxTaken.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				query = searchField.getText();
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+			}
+		});
 	}
 
 	// ******************* communication with controller ******************//
@@ -420,6 +445,17 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public String getLastDropedCourse() {
 		return droped;
 	}
+	@Override
+	public boolean getIsKdamimChecked() {
+		return false;
+	}
+	@Override
+	public boolean getIsFacultyChecked() {
+		return false;
+	}	@Override
+	public boolean getIsTakenChecked() {
+		return false;
+	}	
 
 	// *************************** message box class **********************//
 
