@@ -1,6 +1,8 @@
 package model.schedule;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import model.course.Lesson;
@@ -59,15 +61,27 @@ public class Timetable {
 		for(int ¢ = 0; ¢<DAYS_IN_WEEK; ++¢)
 			histogram.add(new ArrayList<>());
 		//System.out.println("hist: " + histogram);
-		for(LessonGroup lg : lessonGroups)
+		for(LessonGroup lg : lessonGroups){
 			for (Lesson ¢ : lg.getLessons()){
 				histogram.get(¢.getDay()).add(¢.getStartTime());
 				histogram.get(¢.getDay()).add(¢.getEndTime());
 			}
+			
+		}
+		
+		//for()
+		
 		
 		int blankMinutesSum = 0;
-		for(ArrayList<WeekTime> daySchedule : histogram)
+		for(ArrayList<WeekTime> daySchedule : histogram){
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
 			blankMinutesSum += sumBlank(daySchedule);
+		}
 		
 		double penalty = 1. * BLANKSPACE_PENALTY_PER_HOUR * blankMinutesSum / 60;
 		

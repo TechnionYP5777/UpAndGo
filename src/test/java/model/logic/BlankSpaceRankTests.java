@@ -20,7 +20,7 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Timetable;
 
 @SuppressWarnings("static-method")
-public class SchedulerIteratorTest {
+public class BlankSpaceRankTests {
 
 CourseLoader cr;
 	
@@ -30,7 +30,7 @@ CourseLoader cr;
 		System.out.println("***");
 	}
 	
-	
+	/*
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
@@ -49,19 +49,14 @@ CourseLoader cr;
 		
 
 		//System.out.println(tl);
-		/*Timetable t = Scheduler.getTimetablesList(courses).get(0);
 		
-		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
-		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
-		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
-		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
-		*/
 	}
 	
+	*/
 	
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");
 		
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
 		System.out.println(courses);
@@ -77,8 +72,8 @@ CourseLoader cr;
 		
 	}
 	
-	@Test
-	public void test_c() {
+	/*@Test
+	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
 		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
@@ -94,7 +89,7 @@ CourseLoader cr;
 		assert it.next().getRankOfBlankSpace() == 1.75;
 		
 		
-	}
+	}*/
 	
 	
 	
