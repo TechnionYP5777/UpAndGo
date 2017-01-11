@@ -51,6 +51,8 @@ public class XmlCourseLoaderTest {
 		assert ((coursesMap.get("678910").getStuff()).size() == 3);
 		assert ((coursesMap.get("234107").getStuff()).size() == 6);
 		
+		assert "הנדסה אזרחית וסביבתית".equals((coursesMap.get("123456").getFaculty()));
+		
 		assert ((coursesMap.get("123456").getStuff()).get(2)).equals((new StuffMember("תומס", "אומאלי", "דר")));
 		assert ((coursesMap.get("014536").getStuff()).get(0)).equals((new StuffMember("מיאו", "דזה-דונג", "פרופ")));
 		assert ((coursesMap.get("678910").getStuff()).get(2)).equals((new StuffMember("", "א.ב.יהושוע", "מר")));
