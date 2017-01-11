@@ -32,15 +32,15 @@ public class Timetable {
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
-		rankStartTime = rankStartTime(null);
+		//rankStartTime = rankStartTime(null);
 	}
 	
-	public Timetable(List<LessonGroup> lessons, LocalTime startTime){
+	/*public Timetable(List<LessonGroup> lessons, LocalTime startTime){
 		this.lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
 		rankStartTime = rankStartTime(startTime);
-	}
+	}*/
 	
 	
 
@@ -54,7 +54,7 @@ public class Timetable {
 	 * @param startTime
 	 * @return a rank built like that: each day which start after startTime get 0.5 points
 	 */
-	private double rankStartTime(LocalTime startTime) {
+	public double getRankOfStartTime(LocalTime startTime) {
 		if(startTime == null)
 			return 0.0;
 		double $ = 0.0;

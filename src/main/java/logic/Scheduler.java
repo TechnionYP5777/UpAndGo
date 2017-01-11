@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -237,6 +238,7 @@ public class Scheduler {
 		
 	}
 	
+	
 	/**
 	 * 
 	 * @param orig
@@ -244,6 +246,44 @@ public class Scheduler {
 	 * @param byBlankSpace
 	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
 	 */
+	public static Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace, LocalTime byStartTime, LocalTime byEndTime){
+		List<Timetable> res = new ArrayList<>(orig);
+		Collections.sort(res, new Comparator<Timetable>() {
+			@Override
+			public int compare(Timetable t1, Timetable t2) {
+				Double rank1 = 0.0;
+				Double rank2 = 0.0;
+				if(byDaysoff){
+					rank1 += t1.getRankOfDaysoff();
+					rank2 += t2.getRankOfDaysoff();
+				}
+				if(byBlankSpace){
+					rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();
+				}
+				if(byStartTime != null){
+					rank1 += t1.getRankOfStartTime(byStartTime);
+					rank2 += t2.getRankOfStartTime(byStartTime);
+				}
+				if(byEndTime != null){
+					/*rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();*/
+				}
+				
+				return -rank1.compareTo(rank2);
+			}
+		});
+		return res.iterator();
+	}
+	
+	/**
+	 * 
+	 * @param orig
+	 * @param byDaysoff
+	 * @param byBlankSpace
+	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
+	 */
+	@Deprecated
 	public static Iterator<Timetable> sortedBy(List<Timetable> orig, boolean byDaysoff, boolean byBlankSpace){
 		List<Timetable> res = new ArrayList<>(orig);
 		Collections.sort(res, new Comparator<Timetable>() {
