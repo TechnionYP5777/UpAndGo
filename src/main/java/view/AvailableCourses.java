@@ -46,10 +46,17 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
 	static JTextField searchField;
-	private JScrollPane scrollPane;
+
+	static JScrollPane scrollPane;
+	static DefaultListModel<String> courseModel;
 	static JList<String> lstAvailableCourses;
 	static JButton btnAddCourse;
-	static DefaultListModel<String> courseModel;
+
+	static JScrollPane scpChoseCourses;
+	static DefaultListModel<String> ChosenCourseModel;
+	static JList<String> lstChosenCourses;
+	static JButton btnRemoveCourse;
+
 	static List<Course> clist;
 
 	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
@@ -64,19 +71,40 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 */
 	public AvailableCourses() {
 		listeners = new ArrayList<>();
-
-		setMaximumSize(new Dimension(10000, 32767));
-		setMinimumSize(new Dimension(210, 200));
-		setPreferredSize(new Dimension(324, 467));
 		setTextField();
 		setAddButton();
+		setRemoveButton();
 		setListViewArea();
+		setCheckBoxes();
 		setGroupLayout();
 		createEvents();
 	}
 
 	// **************** AUX methods for creating the view design ***********//
-
+	//
+	// Sets the search field preferences
+	//
+	private static void setTextField() {
+		searchField = new JTextField();
+		searchField.setPreferredSize(new Dimension(200, 20));
+		searchField.setMaximumSize(new Dimension(100000, 2147483647));
+		searchField.setMinimumSize(new Dimension(200, 20));
+		searchField.setText(DEFAULT_COURSE_NUM_TEXT);
+		searchField.setBackground(SystemColor.controlHighlight);
+	}
+	//
+	// Sets the button preferences
+	//
+	private static void setAddButton() {
+		btnAddCourse = new JButton("Add Course");
+		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
+		btnAddCourse.setMinimumSize(new Dimension(200, 25));
+	}
+	private static void setRemoveButton() {
+		btnRemoveCourse = new JButton("Remove Course");
+		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
+		btnAddCourse.setMinimumSize(new Dimension(200, 25));
+	}
 	//
 	// Sets the scroll pane with the list of available courses
 	//
@@ -84,9 +112,45 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setScrollPane();
 		setCoursesListsModels();
 		setAvailableCoursesList();
+		setChosenCoursesList();
 		scrollPane.setViewportView(lstAvailableCourses);
-	}
+		scpChoseCourses.setViewportView(lstChosenCourses);
 
+	}
+	// @@@@@@@@@@@@@@@@@@@ setting list view areas @@@@@@@@@@@@@@@@@@@@//
+
+	//
+	// Sets the scroll pane for the list of courses preferences
+	//
+	private static void setScrollPane() {
+		scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(null);
+		scrollPane.setPreferredSize(new Dimension(200, 22));
+		scrollPane.setMinimumSize(new Dimension(200, 22));
+		scrollPane.setBorder(
+				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
+		scpChoseCourses = new JScrollPane();
+		scpChoseCourses.setViewportBorder(null);
+		scpChoseCourses.setPreferredSize(new Dimension(200, 22));
+		scpChoseCourses.setMinimumSize(new Dimension(200, 22));
+		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
+		return;
+	}
+	//
+	// Sets the List model of the courses available
+	//
+	private void setCoursesListsModels() {
+		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
+		clist = new ArrayList<>(cr.loadAllCourses().values());
+		listeners.forEach(
+				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+		courseModel = new DefaultListModel<>();
+		ChosenCourseModel =  new DefaultListModel<>();
+		// for (Course val : clist)
+		// courseModel.addElement(getNameToDisplay(val));
+
+	}
 	//
 	// Sets the list of available courses with the relevant model
 	//
@@ -101,111 +165,74 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	//
-	// Sets the overall group layout
+	// Sets the list of chosen courses with the relevant model
 	//
-	private void setGroupLayout() {
+	private static void setChosenCoursesList() {
+		lstChosenCourses = new JList<>(ChosenCourseModel);
+		lstChosenCourses.setToolTipText("");
+		lstChosenCourses.setPreferredSize(new Dimension(180, 22));
+		lstChosenCourses.setMaximumSize(new Dimension(10000, 10000));
+		lstChosenCourses.setMinimumSize(new Dimension(180, 22));
+		lstChosenCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		lstChosenCourses.setBackground(UIManager.getColor("Button.background"));
+	}
+
+	// @@@@@@@@@@@@@@@@@@@ end of setting list view areas @@@@@@@@@@@@@@@@@@@@//
+	//
+	// Sets the check boxes 
+	//
+	private void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
 		chckbxFaculty = new JCheckBox("לפי פקולטה");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setViewportBorder(null);
-		scrollPane_1.setPreferredSize(new Dimension(70, 22));
-		scrollPane_1.setMinimumSize(new Dimension(70, 22));
-		scrollPane_1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
-						TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
+	}
+	//
+	// Sets the overall group layout
+	//
+	private void setGroupLayout() {
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(chckbxTaken)
-								.addComponent(chckbxFaculty))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(chckbxKdamim)
-								.addComponent(chckbxCats)))
-						.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(searchField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxFaculty)
-						.addComponent(chckbxKdamim))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxTaken)
-						.addComponent(chckbxCats))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(13))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addGroup(
+								Alignment.LEADING, groupLayout
+										.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(chckbxTaken).addComponent(chckbxFaculty))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(chckbxKdamim).addComponent(chckbxCats)))
+						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300,
+								Short.MAX_VALUE)
+						.addComponent(searchField, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+				.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE).addGap(3)
+						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
+								.addComponent(chckbxKdamim))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
+								.addComponent(chckbxCats))
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(13)));
 
 		setLayout(groupLayout);
 	}
 
-	//
-	// Sets the button preferences
-	//
-	private static void setAddButton() {
-		btnAddCourse = new JButton("Add Course");
-		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
-		btnAddCourse.setMinimumSize(new Dimension(200, 25));
-	}
 
-	//
-	// Sets the scroll pane for the list of courses preferences
-	//
-	private void setScrollPane() {
-		scrollPane = new JScrollPane();
-		scrollPane.setViewportBorder(null);
-		scrollPane.setPreferredSize(new Dimension(200, 22));
-		scrollPane.setMinimumSize(new Dimension(200, 22));
-		scrollPane.setBorder(
-				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
-		return;
-	}
-
-	//
-	// Sets the search field preferences
-	//
-	private static void setTextField() {
-		searchField = new JTextField();
-		searchField.setPreferredSize(new Dimension(200, 20));
-		searchField.setMaximumSize(new Dimension(100000, 2147483647));
-		searchField.setMinimumSize(new Dimension(200, 20));
-		searchField.setText(DEFAULT_COURSE_NUM_TEXT);
-		searchField.setBackground(SystemColor.controlHighlight);
-	}
-
-	//
-	// Sets the List model of the courses available
-	//
-	private  void setCoursesListsModels() {
-		XmlCourseLoader cr = new XmlCourseLoader("resources/testXML/viewTest.XML");
-		clist = new ArrayList<>(cr.loadAllCourses().values());
-		listeners.forEach(x -> x
-				.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
-		courseModel = new DefaultListModel<>();
-//		for (Course val : clist)
-//			courseModel.addElement(getNameToDisplay(val));
-
-	}
+	// *************************** helper private methods **********************//
 
 	//
 	// Create the string that will be displayed in the list view
@@ -253,50 +280,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	// *************************** actions and events **********************//
-	@Override
-	public void addActionListener(ActionListener ¢) {
-		listeners.add(¢);
-	}
-
-	@Override
-	public void removeActionListener(ActionListener l) {
-		listeners.remove(l);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		// i need to check what the hell is changed and act according
-		switch (evt.getPropertyName()) {
-		case CourseProperty.DETAILS:
-			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
-			break;
-		case CourseProperty.COURSE_LIST:
-			courseModel = new DefaultListModel<>();
-			for (CourseId val : (List<CourseId>)evt.getNewValue())
-				courseModel.addElement(val.number+" "+val.name);
-			lstAvailableCourses.setModel(courseModel);
-			break;
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public String getQuery() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-
-	static String highlighted = "";
-	private JScrollPane scrollPane_1;
-
-	@Override
-	public String getHighlightedCourse() {
-		return highlighted;
-	}
-
+	
 	private static void createEvents() {
 		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
 
@@ -354,17 +338,55 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 	}
 
-	///
-	// This class is a massage box class
-	///
-	public static class Message {
+	// ******************* communication with controller ******************//
 
-		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
+	static String highlighted = "";
+	private JScrollPane ScpChosenCourse;
+	// private JList<String> lstChosenCourses;
+	
+	@Override
+	public void addActionListener(ActionListener ¢) {
+		listeners.add(¢);
+	}
 
-			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
+	@Override
+	public void removeActionListener(ActionListener ¢) {
+		listeners.remove(¢);
+	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
+		// i need to check what the hell is changed and act according
+		switch (evt.getPropertyName()) {
+		case CourseProperty.DETAILS:
+			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
+			break;
+		case CourseProperty.COURSE_LIST:
+			courseModel = new DefaultListModel<>();
+			for (CourseId val : (List<CourseId>) evt.getNewValue())
+				courseModel.addElement(val.number + " " + val.name);
+			lstAvailableCourses.setModel(courseModel);
+			break;
+		default:
+			break;
 		}
 	}
+
+	@Override
+	public String getQuery() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+
+	@Override
+	public String getHighlightedCourse() {
+		return highlighted;
+	}
+
+
 
 	@Override
 	public String getLastPickedCourse() {
@@ -376,5 +398,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public String getLastDropedCourse() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// *************************** message box class  **********************//
+
+	///
+	// This class is a massage box class
+	///
+	public static class Message {
+
+		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
+
+			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
+
+		}
 	}
 }
