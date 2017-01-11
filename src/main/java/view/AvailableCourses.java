@@ -39,6 +39,7 @@ import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -60,7 +61,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	static List<Course> clist;
 
-	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
+	private static final String DEFAULT_COURSE_NUM_TEXT = "הקש מספר קורס לחיפוש";
 	static JCheckBox chckbxKdamim;
 	static JCheckBox chckbxFaculty;
 	static JCheckBox chckbxTaken;
@@ -73,7 +74,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(300, 700));
+		setPreferredSize(new Dimension(335, 700));
 		setSize(new Dimension(300, 700));
 		setMinimumSize(new Dimension(300, 700));
 		listeners = new ArrayList<>();
@@ -102,6 +103,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setTextField() {
 		searchField = new JTextField();
+		searchField.setHorizontalAlignment(SwingConstants.CENTER);
 		searchField.setPreferredSize(new Dimension(200, 20));
 		searchField.setMaximumSize(new Dimension(100000, 2147483647));
 		searchField.setMinimumSize(new Dimension(200, 20));
@@ -113,13 +115,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the button preferences
 	//
 	private static void setAddButton() {
-		btnAddCourse = new JButton("Add Course");
+		btnAddCourse = new JButton("הוסף");
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
 
 	private static void setRemoveButton() {
-		btnRemoveCourse = new JButton("Remove Course");
+		btnRemoveCourse = new JButton("הסר");
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
@@ -148,12 +150,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		scrollPane.setPreferredSize(new Dimension(200, 80));
 		scrollPane.setMinimumSize(new Dimension(200, 80));
 		scrollPane.setBorder(
-				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
+				new TitledBorder(null, "רשימת קורסים", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 		scpChoseCourses = new JScrollPane();
 		scpChoseCourses.setViewportBorder(null);
 		scpChoseCourses.setPreferredSize(new Dimension(200, 100));
 		scpChoseCourses.setMinimumSize(new Dimension(200, 100));
-		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
+		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "הקורסים שנבחרו",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		return;
 	}
