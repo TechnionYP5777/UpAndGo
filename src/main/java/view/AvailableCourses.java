@@ -410,6 +410,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		// TODO Auto-generated method stub
 		// i need to check what the hell is changed and act according
 		switch (evt.getPropertyName()) {
+		
 		case CourseProperty.DETAILS:
 			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
 			lstChosenCourses.setToolTipText((evt.getNewValue() + ""));
