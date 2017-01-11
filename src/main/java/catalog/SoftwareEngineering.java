@@ -16,9 +16,9 @@ public class SoftwareEngineering extends CSCatalog {
 	static final double TOTAL_FACULTY_CHOICE_POINTS = 25.5;
 	static final int FREE_CHOICE_POINTS = 10;
 
-	public SoftwareEngineering(List<Course> obligatoryList, List<Course> freeChoiceList,
-			List<List<Course>> facultyChoiceList, List<Course> listAList, List<Course> listBList) {
-		super(obligatoryList, freeChoiceList, facultyChoiceList, listAList, listBList, OBLIGATORY_POINTS,
+	public SoftwareEngineering(List<Course> obligatoryList, List<Course> freeChoiceList, List<Course> listAList,
+			List<Course> listBList) {
+		super(obligatoryList, freeChoiceList, listAList, listBList, OBLIGATORY_POINTS,
 				FREE_CHOICE_POINTS, MIN_LISTA_POINTS);
 		// TODO Auto-generated constructor stub
 	}
