@@ -22,8 +22,6 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
-import java.awt.TextField;
-
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
@@ -244,51 +242,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// *************************** helper private methods
 	// **********************//
 
-	//
-	// Create the string that will be displayed in the list view
-	//
-	private static String getNameToDisplay(Course val) {
-		return val.getId() + " " + val.getName();
-	}
-
-	//
-	// Create the string that will be displayed by the tool tip
-	//
-	static String getDescription(Course val) {
-		return val.getName() + " " + val.getId() + "\n" + val.getFaculty() + " " + val.getPoints();
-	}
 
 	static String getIdFromDescription(String val) {
 		return val.split(" ")[0]; // 0= name , 1 = id
 	}
 
-	//
-	// Searches the courses list for the name or the id of the course
-	// typed in the search field.
-	// if found returns the string that will be displayed in the list
-	// else returns "".
-	//
-	static String findCourse() {
-		String searched = searchField.getText();
-		for (Course ¢ : clist)
-			if (¢.getId().equals(searched) || ¢.getName().equals(searched))
-				return getNameToDisplay(¢);
-		return "";
-	}
 
-	//
-	// Searches the courses list for the name and id of the course
-	// as returned by getNameToDisplay().
-	// if found returns the course
-	// else returns null.
-	//
-	static Course getCoursebyString(String txt) {
-		for (Course $ : clist)
-			if (($ + "").equals(txt))
-				return $;
-		return null;
-	}
-
+	
 	// *************************** actions and events **********************//
 
 	private static void createEvents() {
@@ -333,8 +293,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
-						Message.infoBox("add pressed", "ADD", null);
-
+//						Message.infoBox("add pressed", "ADD", null);
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
@@ -348,8 +307,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
 					else {
-						Message.infoBox("remove pressed", "REMOVE", null);
-
+//						Message.infoBox("remove pressed", "REMOVE", null);
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
@@ -388,8 +346,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String droped = "";
 	static String query = "";
 
-	// private JScrollPane ScpChosenCourse;
-	// private JList<String> lstChosenCourses;
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -424,7 +380,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				ChosenCourseModel.addElement(val.number + " " + val.name);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
-
 			break;
 		default:
 			break;

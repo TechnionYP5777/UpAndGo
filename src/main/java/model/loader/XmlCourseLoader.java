@@ -28,6 +28,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import model.course.Course;
+import model.course.Course.CourseBuilder;
 import model.course.Lesson;
 import model.course.Lesson.Type;
 import model.course.StuffMember;
@@ -159,70 +160,74 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					//get course id
-					cb.setId(((Element) p).getAttribute("id"));
-					//get course name
-					cb.setName(((Element) p).getAttribute("name"));
-					//get course faculty
-					cb.setFaculty(((Element) p).getAttribute("faculty"));
-					//get course points
-					cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
-					//get course exam's A date and time
-					cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
-							: LocalDateTime.parse(
-									((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-											.getNamedItem("year").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("month").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("day").getNodeValue()
-											+ " "
-											+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-													.getNamedItem("time").getNodeValue(),
-									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-		 			//get course exam's B date and time
-					cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
-							: LocalDateTime.parse(
-									((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+					if ("מקצועות ספורט".equals(((Element) p).getAttribute("faculty")))
+						sportParsing(cb, p);
+					else {
+						//get course id
+						cb.setId(((Element) p).getAttribute("id"));
+						//get course name
+						cb.setName(((Element) p).getAttribute("name"));
+						//get course faculty
+						cb.setFaculty(((Element) p).getAttribute("faculty"));
+						//get course points
+						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
+						//get course exam's A date and time
+						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
+								: LocalDateTime.parse(
+										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 												.getNamedItem("year").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-												.getNamedItem("month").getNodeValue()
-											+ "-"
-											+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-												.getNamedItem("day").getNodeValue()
-											+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-												.getNamedItem("time").getNodeValue(), 
-									DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-					//get course staff 
-					setStaffList (cb, p,"teacherInCharge");
-					setStaffList (cb, p,"lecturer");
-					setStaffList (cb, p,"assistant");
-					//get lectures and tutorial group Lessons
-					NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
-					for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
-						++groupNum;
-						Node n = lectureList.item(k);
-						if (n.getNodeType() == Node.ELEMENT_NODE) {
-							createLessonGroup (n, p, "tutorial");
-							createLessonGroup (n, p, "lab");
-							NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
-							for (int g = 0; g < lessonList.getLength(); ++g) {
-								Node m = lessonList.item(g);
-								if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName())) && (((Element) m).hasAttributes() == true)) {
-									String place = ((Element) m).getAttribute("building");
-									if (!((Element) m).getAttribute("roomNumber").isEmpty())
-										place += " " + ((Element) m).getAttribute("roomNumber");
-									cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
-											createLesson(n, m, p, 0, convertStrToDay(((Element) m).getAttribute("day")),
-													groupNum, place, Lesson.Type.LECTURE, "lecturer"));
+												+ "-"
+												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+														.getNamedItem("month").getNodeValue()
+												+ "-"
+												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+														.getNamedItem("day").getNodeValue()
+												+ " "
+												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
+														.getNamedItem("time").getNodeValue(),
+										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+			 			//get course exam's B date and time
+						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
+								: LocalDateTime.parse(
+										((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("year").getNodeValue()
+												+ "-"
+												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("month").getNodeValue()
+												+ "-"
+												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("day").getNodeValue()
+												+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+													.getNamedItem("time").getNodeValue(), 
+										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+						//get course staff 
+						setStaffList (cb, p,"teacherInCharge");
+						setStaffList (cb, p,"lecturer");
+						setStaffList (cb, p,"assistant");
+						//get lectures and tutorial group Lessons
+						NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
+						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
+							++groupNum;
+							Node n = lectureList.item(k);
+							if (n.getNodeType() == Node.ELEMENT_NODE) {
+								createLessonGroup (cb, n, p, "tutorial");
+								createLessonGroup (cb, n, p, "lab");
+								NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
+								for (int g = 0; g < lessonList.getLength(); ++g) {
+									Node m = lessonList.item(g);
+									if ((m.getNodeType() == Node.ELEMENT_NODE) && ("lecture".equals(((Element) m).getParentNode().getNodeName())) && (((Element) m).hasAttributes() == true)) {
+										String place = ((Element) m).getAttribute("building");
+										if (!((Element) m).getAttribute("roomNumber").isEmpty())
+											place += " " + ((Element) m).getAttribute("roomNumber");
+										cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
+												createLesson(n, m, p, 0, convertStrToDay(((Element) m).getAttribute("day")),
+														groupNum, place, Lesson.Type.LECTURE, "lecturer"));
+									}
 								}
 							}
-						}
+						}	
 					}
-						
+					
 					courses.put(((Element) p).getAttribute("id"), cb.build());
 					/*Course c = cb.build();
 					courses.put(((Element) p).getAttribute("id"), c);
@@ -237,8 +242,23 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private void createLessonGroup(Node n, Node p, String s) {
-		Lesson.Type t = !"lab".equals(s) ? Type.TUTORIAL : Type.LABORATORY;
+	private void sportParsing(CourseBuilder b, Node p) {
+		/*
+		b.setFaculty(((Element) p).getAttribute("faculty"));
+		b.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
+		String courseNum = ((Element) p).getAttribute("id");
+		setStaffList (b, p,"teacherInCharge");
+		NodeList sportsList = ((Element) p).getElementsByTagName("sport");
+		for (int i = 0; i < sportsList.getLength(); ++i) {
+			Node n = sportsList.item(i);
+			b.setName(((Element) n).getAttribute("name"));
+			b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
+			createLessonGroup(b, p, p, "sport");
+		}*/
+	}
+
+	private void createLessonGroup(CourseBuilder b, Node n, Node p, String s) {
+		Lesson.Type t = "lab".equals(s) ? Type.LABORATORY : "sport".equals(s) ? Type.SPORT : Type.TUTORIAL;
 		NodeList tutorialList = ((Element) n).getElementsByTagName(s);
 		for (int g = 0; g < tutorialList.getLength(); ++g) {
 			Node m = tutorialList.item(g);
@@ -252,7 +272,7 @@ public class XmlCourseLoader extends CourseLoader {
 						String place = ((Element) h).getAttribute("building");
 						if (!((Element) h).getAttribute("roomNumber").isEmpty())
 							place += " " + ((Element) h).getAttribute("roomNumber");
-						cb.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
+						b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
 								createLesson(n, h, p, g,
 										convertStrToDay(((Element) h).getAttribute("day")),
 										tutorialGroupNum, place, t,
