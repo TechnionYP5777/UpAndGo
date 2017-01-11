@@ -243,7 +243,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Create the string that will be displayed in the list view
 	//
 	private static String getNameToDisplay(Course val) {
-		return val.getName() + " " + val.getId();
+		return val.getId()+ " " + val.getName() ;
 	}
 
 	//
