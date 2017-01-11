@@ -40,6 +40,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -107,37 +108,53 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxFaculty = new JCheckBox("לפי פקולטה");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportBorder(null);
+		scrollPane_1.setPreferredSize(new Dimension(70, 22));
+		scrollPane_1.setMinimumSize(new Dimension(70, 22));
+		scrollPane_1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
+						TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-								.addComponent(searchField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 258,
-										Short.MAX_VALUE)
-								.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE,
-										258, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(chckbxTaken).addComponent(chckbxFaculty))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(chckbxKdamim).addComponent(chckbxCats))))
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
-								.addComponent(chckbxKdamim))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
-								.addComponent(chckbxCats))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(13)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(chckbxTaken)
+								.addComponent(chckbxFaculty))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(chckbxKdamim)
+								.addComponent(chckbxCats)))
+						.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(searchField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(chckbxFaculty)
+						.addComponent(chckbxKdamim))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(chckbxTaken)
+						.addComponent(chckbxCats))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(13))
+		);
 
 		setLayout(groupLayout);
 	}
@@ -273,6 +290,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	static String highlighted = "";
+	private JScrollPane scrollPane_1;
 
 	@Override
 	public String getHighlightedCourse() {
