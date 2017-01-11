@@ -81,7 +81,7 @@ public class CourseModel implements Model {
 		// save dropping in DB
 		List<String> prevPickedList = new ArrayList<>();
 		for (Course ¢ : this.pickedCourseList)
-			prevPickedList.add(¢.getName());
+			prevPickedList.add(¢.getId());
 		List<String> curPickedList = new ArrayList<>(prevPickedList);
 		curPickedList.remove(name);
 		this.pickedCourseList.remove(droppedCourse);
