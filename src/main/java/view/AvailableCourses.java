@@ -370,14 +370,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 				
-				
-//				String searched = findCourse();
-//				if (!"".equals(searched))
-//					lstAvailableCourses.setSelectedValue(searched, true);
-//				else {
-//					searchField.setText("");
-//					lstAvailableCourses.clearSelection();
-//				}
 			}
 
 		});
@@ -412,8 +404,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-		// i need to check what the hell is changed and act according
 		switch (evt.getPropertyName()) {
 		
 		case CourseProperty.DETAILS:
@@ -425,7 +415,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (CourseId val : (List<CourseId>) evt.getNewValue())
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
-			btnAddCourse.setEnabled(!courseModel.isEmpty() && true);
+			btnAddCourse.setEnabled(!courseModel.isEmpty());
 
 			break;
 		case CourseProperty.CHOSEN_LIST:
@@ -433,7 +423,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			for (String val : (List<String>) evt.getNewValue())
 				ChosenCourseModel.addElement(val);
 			lstChosenCourses.setModel(ChosenCourseModel);
-			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty() && true);
+			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
 
 			break;
 		default:
