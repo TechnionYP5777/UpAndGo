@@ -95,6 +95,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 		searchField.setBackground(SystemColor.controlHighlight);
 	}
+
 	//
 	// Sets the button preferences
 	//
@@ -103,11 +104,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
+
 	private static void setRemoveButton() {
 		btnRemoveCourse = new JButton("Remove Course");
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
+
 	//
 	// Sets the scroll pane with the list of available courses
 	//
@@ -141,6 +144,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		return;
 	}
+
 	//
 	// Sets the List model of the courses available
 	//
@@ -150,11 +154,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		listeners.forEach(
 				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
-		ChosenCourseModel =  new DefaultListModel<>();
-		 for (Course val : clist)
-			 ChosenCourseModel.addElement(getNameToDisplay(val));
+		ChosenCourseModel = new DefaultListModel<>();
+//		for (Course val : clist)
+//			ChosenCourseModel.addElement(getNameToDisplay(val));
 
 	}
+
 	//
 	// Sets the list of available courses with the relevant model
 	//
@@ -184,7 +189,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	// @@@@@@@@@@@@@@@@@@@ end of setting list view areas @@@@@@@@@@@@@@@@@@@@//
 	//
-	// Sets the check boxes 
+	// Sets the check boxes
 	//
 	private void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
@@ -192,6 +197,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
 	}
+
 	//
 	// Sets the overall group layout
 	//
@@ -236,14 +242,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setLayout(groupLayout);
 	}
 
-
-	// *************************** helper private methods **********************//
+	// *************************** helper private methods
+	// **********************//
 
 	//
 	// Create the string that will be displayed in the list view
 	//
 	private static String getNameToDisplay(Course val) {
-		return val.getId()+ " " + val.getName() ;
+		return val.getId() + " " + val.getName();
 	}
 
 	//
@@ -285,7 +291,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	// *************************** actions and events **********************//
-	
+
 	private static void createEvents() {
 		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
 
@@ -327,8 +333,28 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				if (lstAvailableCourses.getSelectedValue() != null)
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
-					else
+					else {
 						Message.infoBox("add pressed", "ADD", null);
+
+						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
+						listeners.forEach(x -> x.actionPerformed(
+								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
+					}
+			}
+		});
+		btnRemoveCourse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (lstChosenCourses.getSelectedValue() != null)
+					if (ChosenCourseModel.isEmpty())
+						btnRemoveCourse.setEnabled(false);
+					else {
+						Message.infoBox("remove pressed", "REMOVE", null);
+
+						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
+						listeners.forEach(x -> x.actionPerformed(
+								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
+					}
 			}
 		});
 		searchField.addMouseListener(new MouseAdapter() {
@@ -362,9 +388,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// ******************* communication with controller ******************//
 
 	static String highlighted = "";
-	//private JScrollPane ScpChosenCourse;
+	static String picked = "";
+	static String droped = "";
+
+	// private JScrollPane ScpChosenCourse;
 	// private JList<String> lstChosenCourses;
-	
+
 	@Override
 	public void addActionListener(ActionListener ¢) {
 		listeners.add(¢);
@@ -393,8 +422,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
-			for (CourseId val : (List<CourseId>) evt.getNewValue())
-				ChosenCourseModel.addElement(val.number + " " + val.name);
+			for (String val : (List<String>) evt.getNewValue())
+				ChosenCourseModel.addElement(val);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			break;
 		default:
@@ -408,27 +437,22 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		return "";
 	}
 
-
 	@Override
 	public String getHighlightedCourse() {
 		return highlighted;
 	}
 
-
-
 	@Override
 	public String getLastPickedCourse() {
-		// TODO Auto-generated method stub
-		return null;
+		return picked;
 	}
 
 	@Override
 	public String getLastDropedCourse() {
-		// TODO Auto-generated method stub
-		return null;
+		return droped;
 	}
-	
-	// *************************** message box class  **********************//
+
+	// *************************** message box class **********************//
 
 	///
 	// This class is a massage box class
