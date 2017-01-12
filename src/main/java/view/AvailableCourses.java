@@ -41,7 +41,6 @@ import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
-import java.beans.PropertyChangeListener;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 

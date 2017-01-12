@@ -40,6 +40,8 @@ public class CourseListController implements Controller{
 			model.dropCourse(view.getLastDropedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_CHOSEN))
 				model.getChosenCourseNames();
+//		else if (¢.getActionCommand().equals(CourseCommand.CHOSEN_FACULTY))
+//			model.getFacultyNames();
 	}
 	
 	@Override
