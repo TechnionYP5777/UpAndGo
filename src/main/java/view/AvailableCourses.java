@@ -411,7 +411,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	// ******************* communication with controller ******************//
 
-	static final String ALL_FACULTIES = "all faculties";
+	public static final String ALL_FACULTIES = "all faculties";
 	static String highlighted = "";
 	static String picked = "";
 	static String droped = "";
