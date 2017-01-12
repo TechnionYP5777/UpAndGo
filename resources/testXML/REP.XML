@@ -202,4 +202,17 @@
 			<note>קב' 24+25-לרפואנים בלבד-מתקיימות באולם השקוף בבית הסטודנט. הרישום לסלסה-מתקדמים-קב'20-ידנית אצל המאמן לאחר בחינה. קבוצה 13-מתקיימת באולם מק"ק.</note>
 		</notes>
 	</course>
+	<course faculty="מדעי המחשב" id="236349" name="פרויקט באבטחת מידע" points="1.5">
+		<exams/>
+		<lecture group="10">
+			<lesson/>
+			<tutorials>
+				<tutorial>
+					<group>
+						<lesson/>
+					</group>
+				</tutorial>
+			</tutorials>
+		</lecture>
+	</course>
 </courses>
