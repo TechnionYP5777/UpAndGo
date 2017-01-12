@@ -63,7 +63,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final String DEFAULT_COURSE_NUM_TEXT = "הקש מספר קורס לחיפוש";
 	static JCheckBox chckbxKdamim;
-	static JCheckBox chckbxFaculty;
 	static JCheckBox chckbxTaken;
 	static JCheckBox chckbxCats;
 	static List<ActionListener> listeners;
@@ -74,9 +73,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(250, 400));
+		setPreferredSize(new Dimension(250, 500));
 		setSize(new Dimension(300, 700));
-		setMinimumSize(new Dimension(250, 400));
+		setMinimumSize(new Dimension(250, 500));
 		listeners = new ArrayList<>();
 		setTextField();
 		setAddButton();
@@ -203,7 +202,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
-		chckbxFaculty = new JCheckBox("לפי פקולטה");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
 
@@ -214,41 +212,42 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private void setGroupLayout() {
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-						.addGroup(
-								Alignment.LEADING, groupLayout
-										.createSequentialGroup()
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(chckbxTaken).addComponent(chckbxFaculty))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(chckbxKdamim).addComponent(chckbxCats)))
-						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
-								Short.MAX_VALUE)
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE,GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE))
-				.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE).addGap(1)
-						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
-								.addComponent(chckbxKdamim))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
-								.addComponent(chckbxCats))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(5)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
+						.addComponent(chckbxKdamim, Alignment.LEADING)
+						.addComponent(chckbxTaken, Alignment.LEADING)
+						.addComponent(chckbxCats, Alignment.LEADING)
+						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
+						.addComponent(scpChoseCourses, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
+						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
+						.addComponent(searchField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, 136, Short.MAX_VALUE)
+					.addGap(1)
+					.addComponent(btnRemoveCourse)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chckbxKdamim)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chckbxTaken)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chckbxCats)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(5))
+		);
 
 		setLayout(groupLayout);
 	}
@@ -362,15 +361,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			}
 		});
 		chckbxKdamim.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				String txt = searchField.getText();
-				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
-				listeners.forEach(x -> x
-						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
-			}
-		});
-		chckbxFaculty.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				String txt = searchField.getText();
