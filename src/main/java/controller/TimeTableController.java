@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 
 import model.TimeTableModel;
 import property.TimeTableProperty;
-import view.TimeTableView;
+import view.ITimeTableView;
 
 public class TimeTableController implements Controller{
 
 	protected TimeTableModel model;
-	protected TimeTableView view;
+	protected ITimeTableView view;
 	
-	public TimeTableController(TimeTableModel model, TimeTableView view) {
+	public TimeTableController(TimeTableModel model, ITimeTableView view) {
 		this.model = model;
 		this.view = view;
 		
