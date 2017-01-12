@@ -7,17 +7,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.TextArea;
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.ComponentOrientation;
 
 import javax.swing.UIManager;
 import java.awt.Font;
-import java.awt.SystemColor;
 
+@SuppressWarnings("serial")
 public class TimetableVIew extends JPanel {
 	private JTable table;
 
@@ -25,7 +22,7 @@ public class TimetableVIew extends JPanel {
 	 * Create the panel.
 	 */
 	public TimetableVIew() {
-		setLayout(new GridLayout(2,1,3,3));
+		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -63,9 +60,14 @@ public class TimetableVIew extends JPanel {
 		));
 		table.getColumnModel().getColumn(5).setPreferredWidth(15);
 		
-		add(table);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridy=c.gridx = 0;
+		c.gridheight=3;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		add(table,c);
+		
 		JPanel otherComponentsPanel=new JPanel();
-		otherComponentsPanel.setLayout(new GridLayout(10,1,3,3));
+		otherComponentsPanel.setLayout(new GridLayout(9,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 		JPanel textbox=new JPanel();
@@ -118,8 +120,10 @@ public class TimetableVIew extends JPanel {
 		panelSchedButton.add(new JPanel());
 		otherComponentsPanel.add(panelSchedButton);
 		otherComponentsPanel.add(new JPanel());
-		otherComponentsPanel.add(new JPanel());
-		add(otherComponentsPanel);
+		
+		c.gridx=0;
+		c.gridy=3;
+		add(otherComponentsPanel,c);
 
 	}
 }
