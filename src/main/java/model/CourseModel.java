@@ -162,6 +162,23 @@ public class CourseModel implements Model {
 	}
 	
 	/*
+	 * load needed courses (by name / subname) from DB if empty, load all of
+	 * them
+	 */
+	public void loadQueryByFaculty(String query, String faculty) {
+		HashSet<CourseId> matchingIds = new HashSet<>();
+		this.courseList.forEach(query.isEmpty() ? (key, course) -> {
+			if(course.getFaculty().equals(faculty))
+				matchingIds.add(new CourseId(course.getId(), course.getName()));
+		} : (key, course) -> {
+			if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty))
+				matchingIds.add(new CourseId(course.getId(), course.getName()));
+		});
+		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
+	}
+	
+	/*
 	 * load faculty names
 	 */
 	public void loadFacultyNames() {

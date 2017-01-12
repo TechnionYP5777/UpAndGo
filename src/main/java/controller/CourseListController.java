@@ -33,7 +33,10 @@ public class CourseListController implements Controller{
 		if (¢.getActionCommand().equals(CourseCommand.DETAILS))
 			model.exposeCourse(view.getHighlightedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
+			if (view.getFaculty().equals(CourseListView.ALL_FACULTIES_STRING))
 				model.loadQuery(view.getQuery());
+			else
+				model.loadQueryByFaculty(view.getQuery(), view.getFaculty());
 		else if (¢.getActionCommand().equals(CourseCommand.PICK))
 			model.pickCourse(view.getLastPickedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.DROP))

@@ -17,4 +17,7 @@ public interface CourseListView extends View {
 
 	String getLastDropedCourse();
 	
+	
+
+	final String ALL_FACULTIES_STRING = "all faculties";
 }
