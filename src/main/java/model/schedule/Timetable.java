@@ -14,7 +14,6 @@ import model.course.WeekTime;
  * /**
  * @author kobybs
  * @since 5-1-17
- * notice that this file discarded the TimeTable previously written by danabra
  */
 
 public class Timetable {
