@@ -72,7 +72,7 @@
             <points>2.0</points>
         </Course>
         <Course number="236381">
-            <name>פרויקט ב- וי.אל.אס.אי. ב'</name>
+            <name>פרויקט ב-VLSI ב'</name>
             <points>4.0</points>
         </Course>
         <Course number="236757">
@@ -80,11 +80,11 @@
             <points>3.0</points>
         </Course>
         <Course number="236345">
-            <name>אימות אוטומטי של מער' תכנה וחומרה</name>
+            <name>אימות אוטומטי של מערכות תוכנה וחומרה</name>
             <points>3.0</points>
         </Course>
         <Course number="236520">
-            <name>קידוד במערכות אחסון-מידע</name>
+            <name>קידוד במערכות אחסון מידע</name>
             <points>2.0</points>
         </Course>
         <Course number="234326">
@@ -92,7 +92,7 @@
             <points>3.0</points>
         </Course>
         <Course number="236716">
-            <name>מודלים גאומטריים במערכות תיב&quot;מ</name>
+            <name>מודלים גאומטריים במערכות תיב&quot;ם</name>
             <points>3.0</points>
         </Course>
         <Course number="234329">
@@ -120,11 +120,11 @@
             <points>3.0</points>
         </Course>
         <Course number="236524">
-            <name>פרוייקט בביואינפורמטיקה</name>
+            <name>פרויקט בביואינפורמטיקה</name>
             <points>3.0</points>
         </Course>
         <Course number="236304">
-            <name>לוגיקה למדעי המחשב</name>
+            <name>לוגיקה למדעי המחשב 2</name>
             <points>3.0</points>
         </Course>
         <Course number="236359">
@@ -151,10 +151,500 @@
             <name>פרויקט בבינה מלאכותית</name>
             <points>3.0</points>
         </Course>
+        <Course number="234299">
+        	<name>שיטות מתמטיות לישומי מחשב</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234301">
+        	<name>פרויקט בעיבוד נתונים ה'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234302">
+        	<name>פרויקט בקומפילציה ה'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234303">
+        	<name>פרויקט במערכות הפעלה ה'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234304">
+        	<name>פרויקט בבינה מלאכותית ה'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234306">
+        	<name>פרויקט ב-VLSI א'</name>
+        	<points>4.0</points>
+        </Course>
+        <Course number="234325">
+        	<name>גרפיקה ממוחשבת 1</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="234525">
+        	
+        	<name>מבוא לביואינפורמטיקה</name><points>2.5</points>
+        </Course>
+        <Course number="236303">
+        	<name>פרויקט בעיבוד שפות טבעיות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236305">
+        	<name>פרויקט בתכן לוגי מ'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236307">
+        	<name>גרפים מרחיבים ושימושיהם</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236308">
+        	<name>אלגבר של תורת הגרפים ומבנים קומבינטוריים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236309">
+        	<name>מבוא לתורת הצפינה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236310">
+        	<name>תורת השפות הפורמליות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236311">
+        	<name>סיבוכיות של חישובים אלגבריים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236312">
+        	<name>מבני נתונים 2</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236313">
+        	<name>תורת הסיבוכיות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236315">
+        	<name>שיטות אלגבריות במדעי המחשב</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236320">
+        	<name>אלגברה לינארית נומרית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236323">
+        	<name>פרויקט בעיבוד נתונים מ'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236324">
+        	<name>גרפיקה ממוחשבת 2</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236327">
+        	<name>עיבוד תמונות ואותות במחשב</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236328">
+        	<name>פרויקט בגרפיקה ממוחשבת מ'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236330">
+        	<name>מבוא לאופטימיזציה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236331">
+        	<name>גדירות וחישוביות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236336">
+        	<name>פתרון נומרי של משוואות דיפ. חלקיות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236339">
+        	<name>החשת התכנסות של תהליכים איטרטיבים</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236341">
+        	<name>תקשורת באינטרנט</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236346">
+        	<name>פרויקט באימות תוכניות בעזרת מחשב</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236347">
+        	<name>ניתוח וסינטזה של תוכנה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236351">
+        	<name>מערכות מבוזרות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236354">
+        	<name>תכנון מעגלי VLSI</name>
+        	<points>4.0</points>
+        </Course>
+        <Course number="236356">
+        	<name>תאוריה של מערכות מסד נתונים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236357">
+        	<name>אלגוריתמים מבוזרים א'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236358">
+        	<name>נושאים מתקדמים באלגוריתמים מבוזרים</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236361">
+        	<name>פרויקט בקומפילציה מ'</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236372">
+        	<name>רשתות בייסיאניות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236373">
+        	<name>סינתזה של תמונות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236374">
+        	<name>שיטות הסתברותיות ואלגוריתמים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236375">
+        	<name>טכנולוגית מנועי חיפוש</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236376">
+        	<name>הנדסת מערכות הפעלה</name>
+        	<points>4.0</points>
+        </Course>
+        <Course number="236500">
+        	<name>קריפטאנליזה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236504">
+        	<name>פרויקט בתוכנה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236506">
+        	<name>קריפטולוגיה מודרנית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236508">
+        	<name>קריפטוגרפיה וסיבוכיות</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236509">
+        	<name>נושאים מתקדמים במבנה מחשבים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236510">
+        	<name>מימוש מערכות מסדי נתונים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236514">
+        	<name>סדרות ספרתיות בתקשורת ומערכות מחשב</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236515">
+        	<name>נושאים מתקדמים בתורת הצפינה</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236521">
+        	<name>אלגורתמי קירוב</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236522">
+        	<name>אלגוריתמים בביולוגיה חישובית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236523">
+        	<name>מבוא לביואינפורמטיקה</name>
+        	<points>2.5</points>
+        </Course>
+        <Course number="236612">
+        	<name>נושאים מתקדמים בקיפטולוגיה</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236698">
+        	<name>הבטחת איכות תוכנה</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236699">
+        	<name>אלגוריתמים מקבילים לרשתות קבועות-קשר</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236715">
+        	<name>שיטות בניתוח של אלגוריתמים</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236719">
+        	<name>גיאומטריה חישובית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236729">
+        	<name>פרויקט בגיאומטריה חישובית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236756">
+        	<name>מבוא למערכות לומדות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236760">
+        	<name>למידה חישובית</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236780">
+        	<name>אלגוריתמים לניהול זכרון דינמי</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236790">
+        	<name>שיטות רב-סריג</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236827">
+        	<name>סמינר במערכות מחשבים</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236860">
+        	<name>עיבוד תמונות דיגיטלי</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236861">
+        	<name>גאומטריה נומרית של תמונות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236862">
+        	<name>ייצוגים דלילים ויתירים ויישומיהם בעיבוד אותות ותמונות</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236873">
+        	<name>ראיה ממוחשבת</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236874">
+        	<name>פרויקט בראיה ממוחשבת</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236875">
+        	<name>זיהוי ראייתי</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236918">
+        	<name>אלגוריתמים לעריכת מעגלים משולבים</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236927">
+        	<name>מבוא לרובוטיקה</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236941">
+        	<name>מבוא לרשתות עצביות</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236950">
+        	<name>נושאים מתקדמים ברשתות עצביות</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236951">
+        	<name>סמינר ברשתות עצביות</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="236990">
+        	<name>מבוא לעיבוד אינפורמציה קוונטית</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="236991">
+        	<name>פרויקט בחישוב קוונטי בתמ"ג</name>
+        	<points>3.0</points>
+        </Course>
+        <Course number="238739">
+        	<name>גאומטריה אלגוריתמית דיסקרטית</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="238900">
+        	<name>סמינריון מחקר בתאוריה של חישובים</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="238901">
+        	<name>סמינריון מחקר בלוגיקה וקומניטוריקה</name>
+        	<points>2.0</points>
+        </Course>
+        <Course number="238902">
+        	<name>סמינריון מחקר בקומבינטוריקה ותורת הגרפים</name>
+        	<points>2.0</points>
+        </Course>
         <neededPoints>15.0</neededPoints>
         <OverflowTo>רשימה ב'</OverflowTo>
     </CourseList>
     <CourseList name="בחירה חופשית">
+    	<CourseList name="מלגים">
+    	<Course number="324228">
+    		<name>נגינה ואלתור בהרכב ג'אז – למתקדמים</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324235">
+    		<name>תקשורת בן-אישית באמצעי תיאטרון</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324290">
+    		<name>היסטוריה של הרפואה וחומרי מרפא</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324291">
+    		<name>חיי היהודים באגן ים התיכון בימה"ב</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324292">
+    		<name>משפט, שוויון וצדק חברתי</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324294">
+    		<name>יסודות ההגות היהודית בעת החדשה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324297">
+    		<name>אישים בתנ"ך לאור זמננו</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324424">
+    		<name>הספרות היהודית בשלהי העת העתיקה</name>
+    		<points>2.0</points>
+    	</Course>
+		<Course number="324433">
+    		<name>השואה בראי הקולנוע</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324435">
+    		<name>מבוא לפילוסופיה סינית</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324436">
+    		<name>עולמות מוזיקליים</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324437">
+    		<name>מבוא היסטורי למוסיקה 2</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324439">
+    		<name>יסודות באמנות ותרבות יפן</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324440">
+    		<name>יסודות המוסיקה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324442">
+    		<name>משפט העבודה בישראל</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324445">
+    		<name>הסתגלות למצבי לחץ</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324448">
+    		<name>סמלים ורעיונות באמנות היהודית והישראלית</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324451">
+    		<name>מחלוקת ופלמוס בספרות חז"ל</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324454">
+    		<name>מבוא לפילוסופיה של המדע</name>
+    		<points>2.0</points>
+    	</Course>
+		<Course number="324456">
+    		<name>חשיבה ביקורת ויצירה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324457">
+    		<name>מוזיאולוגיה וטכנולוגיה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324458">
+    		<name>קריאה ירוקה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324460">
+    		<name>המחשבה המדינית היהודית עד העת החדשה</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324461">
+    		<name>מודרניזם בתיאטרון</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324917">
+    		<name>ארץ הקודש בראי האמנות</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324928">
+    		<name>מבט על התלמוד והמדרש</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324934">
+    		<name>ממודרניות למרדנות-אמנות המאה ה- 16</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324936">
+    		<name>לשונות המזרח התיכון</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324944">
+    		<name>התקשורת בעידן המידע</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324945">
+    		<name>הסכסוך הסוני-שיעי באסלם</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324946">
+    		<name>הרנסנס באיטליה # מסע אמנותי ותרבותי</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324954">
+    		<name>דת ומדינה בישראל</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324956">
+    		<name>ה"קלאסיקות" של הזמר הישראלי</name>
+    		<points>2.0</points>
+    	</Course>    	
+    	<Course number="324958">
+    		<name>סוציולוגיה פוליטית #תהליכי התפתחות</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324959">
+    		<name>פרט ומשפחה בראי חברתי</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324963">
+    		<name>ארכיטקטורה של ביתני תערוכה נודעים</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324966">
+    		<name>התבוננות בחוויה המוסיקלית</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324969">
+    		<name>נשים במזה"ת #תהליכי שינוי</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324974">
+    		<name>מגה- חיים בעידן הסינגולרי</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324975">
+    		<name>מדיניות החוץ של ישראל</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324983">
+    		<name>הקומוניזם אידיאולוגיה ופרקטיקות</name>
+    		<points>2.0</points>
+    	</Course>
+    	<Course number="324984">
+    		<name>תרבות, חברה, מדינה בקוריאה בת זמננו</name>
+    		<points>2.0</points>
+    	</Course>
+    	</CourseList>
         <neededPoints>10.0</neededPoints>
     </CourseList>
     <CourseList name="מקצועות חובה">
@@ -534,9 +1024,9 @@
             <name>מערכות מסד נתונים</name>
             <points>3.0</points>
         </Course>
-        <Course number="095140">
-            <name>תכנון פרויקטים וניהולם</name>
-            <points>3.5</points>
+        <Course number="234270">
+            <name>ניהול פרויקטי תוכנה</name>
+            <points>3.0</points>
         </Course>
         <Course number="236700">
             <name>תיכון תוכנה</name>
