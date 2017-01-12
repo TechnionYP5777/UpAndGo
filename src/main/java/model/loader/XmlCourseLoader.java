@@ -225,17 +225,18 @@ public class XmlCourseLoader extends CourseLoader {
 									}
 								}
 							}
-						}	
+						}
+						courses.put(((Element) p).getAttribute("id"), cb.build());
+						cb.cleartutorialGroup();
 					}
 					
-					courses.put(((Element) p).getAttribute("id"), cb.build());
 					/*Course c = cb.build();
 					courses.put(((Element) p).getAttribute("id"), c);
 					courses.put(((Element) p).getAttribute("name"), c);
 					*/
 					cb.clearStaffMembers();
 					cb.clearlecturesGroups();
-					cb.cleartutorialGroup();
+					
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
@@ -243,7 +244,6 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	private void sportParsing(CourseBuilder b, Node p) {
-		/*
 		b.setFaculty(((Element) p).getAttribute("faculty"));
 		b.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 		String courseNum = ((Element) p).getAttribute("id");
@@ -254,7 +254,9 @@ public class XmlCourseLoader extends CourseLoader {
 			b.setName(((Element) n).getAttribute("name"));
 			b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
 			createLessonGroup(b, p, p, "sport");
-		}*/
+			courses.put(((Element) p).getAttribute("id")+ "-" + ((Element) n).getAttribute("group"), cb.build());
+			cb.cleartutorialGroup();
+		}
 	}
 
 	private void createLessonGroup(CourseBuilder b, Node n, Node p, String s) {

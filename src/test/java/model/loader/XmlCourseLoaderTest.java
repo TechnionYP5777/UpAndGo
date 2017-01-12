@@ -85,7 +85,8 @@ public class XmlCourseLoaderTest {
 		
 		for(Entry<String, Course> entry : coursesMap.entrySet()) {
 			  String key = entry.getKey();
-			  System.out.println(key);
+			   System.out.println(key + "---->" + (coursesMap.get(key).getTutorialsLG().size()));
+			   //assert ((coursesMap.get(key).getTutorialsLG().size() == 1));
 			}
 		
 	}
