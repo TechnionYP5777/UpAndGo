@@ -281,6 +281,8 @@ public class XmlCourseLoader extends CourseLoader {
 										"assistant"));
 					}
 				}
+				if ("sport".equals(s))
+					return;
 			}	
 		}
 		
