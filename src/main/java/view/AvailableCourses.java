@@ -40,6 +40,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -73,7 +74,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(250, 500));
+		setPreferredSize(new Dimension(280, 500));
 		setSize(new Dimension(300, 700));
 		setMinimumSize(new Dimension(250, 500));
 		listeners = new ArrayList<>();
@@ -115,12 +116,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setAddButton() {
 		btnAddCourse = new JButton("הוסף");
+		btnAddCourse.setPreferredSize(new Dimension(150, 25));
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
-		btnAddCourse.setMinimumSize(new Dimension(200, 25));
+		btnAddCourse.setMinimumSize(new Dimension(150, 25));
 	}
 
 	private static void setRemoveButton() {
 		btnRemoveCourse = new JButton("הסר");
+		btnRemoveCourse.setPreferredSize(new Dimension(200, 25));
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
@@ -211,42 +214,60 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the overall group layout
 	//
 	private void setGroupLayout() {
+		comboBox = new JComboBox();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
-						.addComponent(chckbxKdamim, Alignment.LEADING)
-						.addComponent(chckbxTaken, Alignment.LEADING)
-						.addComponent(chckbxCats, Alignment.LEADING)
-						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
-						.addComponent(scpChoseCourses, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
-						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE)
-						.addComponent(searchField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE))
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(chckbxCats, Alignment.LEADING)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addComponent(chckbxKdamim)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(chckbxTaken)))
+							.addContainerGap())
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+								.addContainerGap())
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(searchField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+									.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+									.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+								.addContainerGap())
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(comboBox, 0, 250, Short.MAX_VALUE)
+								.addContainerGap()))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, 136, Short.MAX_VALUE)
-					.addGap(1)
+					.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRemoveCourse)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(chckbxKdamim)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(chckbxTaken)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(chckbxKdamim)
+						.addComponent(chckbxTaken))
+					.addGap(3)
 					.addComponent(chckbxCats)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(5))
+					.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(10))
 		);
 
 		setLayout(groupLayout);
@@ -386,6 +407,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String picked = "";
 	static String droped = "";
 	static String query = "";
+	private JComboBox comboBox;
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -453,7 +475,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	@Override
 	public boolean getIsFacultyChecked() {
-		return chckbxFaculty.isSelected();
+		// return chckbxFaculty.isSelected();
+		return true;
 	}
 
 	@Override

@@ -21,8 +21,8 @@ public class viewTests {
 
 	public static void design() {
 		JFrame f = new JFrame();
-		f.setMinimumSize(new Dimension(250, 500));
-		f.setSize(300, 600);
+		f.setMinimumSize(new Dimension(280, 500));
+		f.setSize(280, 500);
 		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setVisible(true);
 		AvailableCourses  avl= new AvailableCourses();
