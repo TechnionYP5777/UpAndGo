@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -26,7 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import command.CourseCommand;
-import model.course.Course;
 import model.course.CourseId;
 import property.CourseProperty;
 import java.awt.Color;
@@ -60,7 +60,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static JList<String> lstChosenCourses;
 	static JButton btnRemoveCourse;
 
-	static List<Course> clist;
+	static DefaultComboBoxModel<String> facultiesModel;
+	static JComboBox<String> cmbFaculties;
 
 	private static final String DEFAULT_COURSE_NUM_TEXT = "הקש מספר קורס לחיפוש";
 	static JCheckBox chckbxKdamim;
@@ -74,7 +75,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(280, 500));
+		setPreferredSize(new Dimension(280, 474));
 		setSize(new Dimension(300, 700));
 		setMinimumSize(new Dimension(250, 500));
 		listeners = new ArrayList<>();
@@ -83,6 +84,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setRemoveButton();
 		setListViewArea();
 		setCheckBoxes();
+		setComboBox();
 		setGroupLayout();
 		createEvents();
 		btnAddCourse.setEnabled(!courseModel.isEmpty());
@@ -207,14 +209,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxKdamim = new JCheckBox("יש קדמים");
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
 		chckbxCats = new JCheckBox("חתולים");
+	}
+	//
+	// Sets the combo box list
+	//
+	private static void setComboBox() {
+		facultiesModel = new DefaultComboBoxModel<>();
+		cmbFaculties = new JComboBox<>(facultiesModel);
 
 	}
-
 	//
 	// Sets the overall group layout
 	//
 	private void setGroupLayout() {
-		comboBox = new JComboBox();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -240,7 +247,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 									.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
 								.addContainerGap())
 							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(comboBox, 0, 250, Short.MAX_VALUE)
+								.addComponent(cmbFaculties, 0, 250, Short.MAX_VALUE)
 								.addContainerGap()))
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
@@ -258,7 +265,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(cmbFaculties, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(chckbxKdamim)
@@ -407,7 +414,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String picked = "";
 	static String droped = "";
 	static String query = "";
-	private JComboBox comboBox;
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
