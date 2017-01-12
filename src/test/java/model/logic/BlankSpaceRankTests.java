@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import logic.Scheduler;
@@ -55,6 +54,7 @@ CourseLoader cr;
 	
 	*/
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");

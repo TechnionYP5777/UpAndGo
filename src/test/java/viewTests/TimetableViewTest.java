@@ -10,6 +10,7 @@ public class TimetableViewTest {
 	private JFrame frame = new JFrame("Testing");
 	private JPanel ttpanel = new TimetableVIew();
 	
+	@SuppressWarnings("static-access")
 	public TimetableViewTest(){
 		frame.add(ttpanel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -19,7 +20,7 @@ public class TimetableViewTest {
 	
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
-
+			@SuppressWarnings("unused")
 			@Override
 			public void run() {
 				new TimetableViewTest();		

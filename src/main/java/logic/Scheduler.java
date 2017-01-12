@@ -106,7 +106,7 @@ public class Scheduler {
 	 * schedule of them which doesn't break the constraints.
 	 * it works for TimeConstraints for now.
 	 */
-	public static Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
+	public static Schedule schedule(List<Course> lcourse, @SuppressWarnings("unused") List<TimeConstraint> __){
 		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
 		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
@@ -266,8 +266,8 @@ public class Scheduler {
 					rank2 += t2.getRankOfStartTime(byStartTime);
 				}
 				if(byEndTime != null){
-					/*rank1 += t1.getRankOfBlankSpace();
-					rank2 += t2.getRankOfBlankSpace();*/
+					rank1 += t1.getRankOfEndTime(byEndTime);
+					rank2 += t2.getRankOfEndTime(byEndTime);
 				}
 				
 				return -rank1.compareTo(rank2);

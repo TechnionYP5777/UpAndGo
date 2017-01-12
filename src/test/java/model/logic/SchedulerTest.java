@@ -196,15 +196,7 @@ CourseLoader cr;
 		System.out.println(courses);
 		
 		
-		List<Timetable> tl = Scheduler.getTimetablesList(courses);
-		System.out.println(tl);
-		/*Timetable t = Scheduler.getTimetablesList(courses).get(0);
-		
-		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
-		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
-		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
-		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
-		*/
+		System.out.println(Scheduler.getTimetablesList(courses));
 	}
 
 }

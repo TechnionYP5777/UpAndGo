@@ -39,13 +39,14 @@ import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;
-	static ArrayList<ImageIcon> catList; 
-	static int catIconNum=0;
-	
+	static ArrayList<ImageIcon> catList;
+	static int catIconNum;
+
 	static JTextField searchField;
 
 	static JScrollPane scrollPane;
@@ -60,7 +61,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	static List<Course> clist;
 
-	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number or name";
+	private static final String DEFAULT_COURSE_NUM_TEXT = "הקש מספר קורס לחיפוש";
 	static JCheckBox chckbxKdamim;
 	static JCheckBox chckbxFaculty;
 	static JCheckBox chckbxTaken;
@@ -71,11 +72,11 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	 * Create the panel.
 	 */
 	public AvailableCourses() {
-		catList= new ArrayList<>();
+		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(300, 700));
+		setPreferredSize(new Dimension(250, 400));
 		setSize(new Dimension(300, 700));
-		setMinimumSize(new Dimension(300, 700));
+		setMinimumSize(new Dimension(250, 400));
 		listeners = new ArrayList<>();
 		setTextField();
 		setAddButton();
@@ -90,17 +91,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	// **************** AUX methods for creating the view design ***********//
-	private static void setCatList(){
+	private static void setCatList() {
 		catList.add(new ImageIcon("resources/cat-fish-icon.png"));
 		catList.add(new ImageIcon("resources/cat-purr-icon.png"));
 		catList.add(new ImageIcon("resources/cat-drunk-icon.png"));
+		catIconNum = 0;
 	}
-	
+
 	//
 	// Sets the search field preferences
 	//
 	private static void setTextField() {
 		searchField = new JTextField();
+		searchField.setHorizontalAlignment(SwingConstants.CENTER);
 		searchField.setPreferredSize(new Dimension(200, 20));
 		searchField.setMaximumSize(new Dimension(100000, 2147483647));
 		searchField.setMinimumSize(new Dimension(200, 20));
@@ -112,13 +115,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the button preferences
 	//
 	private static void setAddButton() {
-		btnAddCourse = new JButton("Add Course");
+		btnAddCourse = new JButton("הוסף");
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
 
 	private static void setRemoveButton() {
-		btnRemoveCourse = new JButton("Remove Course");
+		btnRemoveCourse = new JButton("הסר");
 		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
 		btnAddCourse.setMinimumSize(new Dimension(200, 25));
 	}
@@ -147,12 +150,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		scrollPane.setPreferredSize(new Dimension(200, 80));
 		scrollPane.setMinimumSize(new Dimension(200, 80));
 		scrollPane.setBorder(
-				new TitledBorder(null, "Course List", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
+				new TitledBorder(null, "רשימת קורסים", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 		scpChoseCourses = new JScrollPane();
 		scpChoseCourses.setViewportBorder(null);
 		scpChoseCourses.setPreferredSize(new Dimension(200, 100));
 		scpChoseCourses.setMinimumSize(new Dimension(200, 100));
-		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Chosen Courses",
+		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "הקורסים שנבחרו",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
 		return;
 	}
@@ -214,8 +217,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
 				.createSequentialGroup().addContainerGap()
 				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 						.addGroup(
 								Alignment.LEADING, groupLayout
 										.createSequentialGroup()
@@ -224,19 +227,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 												.addComponent(chckbxKdamim).addComponent(chckbxCats)))
-						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300,
+						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
 								Short.MAX_VALUE)
-						.addComponent(searchField, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE,GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE))
 				.addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE).addGap(3)
-						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE).addGap(1)
+						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
 								.addComponent(chckbxKdamim))
@@ -244,8 +247,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
 								.addComponent(chckbxCats))
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(13)));
+								GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)));
 
 		setLayout(groupLayout);
 	}
@@ -301,7 +304,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
-//						Message.infoBox("add pressed", "ADD", null);
+						// Message.infoBox("add pressed", "ADD", null);
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
@@ -315,7 +318,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
 					else {
-//						Message.infoBox("remove pressed", "REMOVE", null);
+						// Message.infoBox("remove pressed", "REMOVE", null);
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
@@ -333,24 +336,56 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 
 				query = searchField.getText();
-				listeners.forEach(x -> x.actionPerformed(
-						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
-				
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+
 			}
 
 		});
 		searchField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+				if (!courseModel.isEmpty() && !"".equals(searchField.getText()))
+					return;
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
+				query = "";
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxCats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				Message.infoBox("","" , catList.get(catIconNum));
+				Message.infoBox("", "", catList.get(catIconNum));
 				chckbxCats.setSelected(false);
-				catIconNum = (catIconNum +1) % 3 ;
+				catIconNum = (catIconNum + 1) % 3;
+			}
+		});
+		chckbxKdamim.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				String txt = searchField.getText();
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+			}
+		});
+		chckbxFaculty.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				String txt = searchField.getText();
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+			}
+		});
+		chckbxTaken.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				String txt = searchField.getText();
+				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 	}
@@ -419,6 +454,21 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	@Override
 	public String getLastDropedCourse() {
 		return droped;
+	}
+
+	@Override
+	public boolean getIsKdamimChecked() {
+		return chckbxKdamim.isSelected();
+	}
+
+	@Override
+	public boolean getIsFacultyChecked() {
+		return chckbxFaculty.isSelected();
+	}
+
+	@Override
+	public boolean getIsTakenChecked() {
+		return chckbxTaken.isSelected();
 	}
 
 	// *************************** message box class **********************//

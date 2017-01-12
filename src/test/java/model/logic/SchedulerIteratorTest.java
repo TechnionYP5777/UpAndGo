@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import logic.Scheduler;
@@ -42,10 +41,9 @@ CourseLoader cr;
 		List<Timetable> tl = Scheduler.getTimetablesList(courses);
 		for(Timetable ¢ : tl)
 			System.out.println("rank: " + ¢.getRankOfDaysoff());
-		Iterator<Timetable> it = Scheduler.sortedBy(tl, false, false);
-		while (it.hasNext()) {
-			System.out.println(it.next().getRankOfDaysoff());
-		}
+		for (@SuppressWarnings("deprecation")
+		Iterator<Timetable> ¢ = Scheduler.sortedBy(tl, false, false); ¢.hasNext();)
+			System.out.println(¢.next().getRankOfDaysoff());
 		
 
 		//System.out.println(tl);
@@ -59,6 +57,7 @@ CourseLoader cr;
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
@@ -77,6 +76,7 @@ CourseLoader cr;
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_c() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");

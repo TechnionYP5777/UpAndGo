@@ -15,11 +15,11 @@ import model.course.LessonGroup;
 
 public class WorkDayConstraint extends Constraint {
 	//private int workDay;
-	public WorkDayConstraint(int d) {
+	public WorkDayConstraint(@SuppressWarnings("unused") int d) {
 		//workDay = d;
 	}
 	@Override
-	public boolean canMeetConstraint(Course c) {
+	public boolean canMeetConstraint(@SuppressWarnings("unused") Course __) {
 		// need to be changes after the implementaion of lessonGroup
 		//for(Lesson ¢ : c.getLessons())
 		//	if (¢.getDay() == workDay)

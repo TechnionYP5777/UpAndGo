@@ -21,11 +21,19 @@ public class Timetable {
 	private final int DAYS_IN_WEEK = 7;
 	private final double MAX_BLANKSPACE_RANK = 2;
 	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.25;
+	private final double TIME_START_BONUS_PER_DAY = 0.5;
+	private final double TIME_END_BONUS_PER_DAY = 0.5;
+	private final double EACH_FREE_DAY_RANK = 1.5;
 	
-	private int rankDaysoff;
-	private double rankBlankSpace;
 	private List<LessonGroup> lessonGroups;
 	
+	private double rankDaysoff;
+	private double rankBlankSpace;
+	private double rankFreeSunday;
+	private double rankFreeMonday;
+	private double rankFreeTuesday;
+	private double rankFreeWednesday;
+	private double rankFreeThursday;
 	
 	public Timetable(List<LessonGroup> lessons){
 		this.lessonGroups = new ArrayList<>(lessons);
@@ -71,7 +79,7 @@ public class Timetable {
 			});
 			// add 0.5 points if daySchedule start time is greater than wanted start time
 			if(!daySchedule.isEmpty() && daySchedule.get(0).getTime().compareTo(startTime) >= 0)
-				$ += 0.5;
+				$ += TIME_START_BONUS_PER_DAY;
 		}
 		
 		return $;
@@ -108,7 +116,7 @@ public class Timetable {
 			});
 			// add 0.5 points if daySchedule start time is greater than wanted start time
 			if(!daySchedule.isEmpty() && daySchedule.get(daySchedule.size()-1).getTime().compareTo(endTime) <= 0)
-				$ += 0.5;
+				$ += TIME_END_BONUS_PER_DAY;
 		}
 		
 		return $;
@@ -179,19 +187,48 @@ public class Timetable {
 		for(LessonGroup lg : lessonGroups)
 			for (Lesson ¢ : lg.getLessons())
 				histogram[¢.getDay()] = 1;
+		
+		rankFreeThursday = rankFreeWednesday = rankFreeTuesday = rankFreeMonday = rankFreeSunday = 0;
+		if(histogram[0] == 0)
+			rankFreeSunday += EACH_FREE_DAY_RANK;
+		if(histogram[1] == 0)
+			rankFreeMonday += EACH_FREE_DAY_RANK;
+		if(histogram[2] == 0)
+			rankFreeTuesday += EACH_FREE_DAY_RANK;
+		if(histogram[3] == 0)
+			rankFreeWednesday += EACH_FREE_DAY_RANK;
+		if(histogram[4] == 0)
+			rankFreeThursday += EACH_FREE_DAY_RANK;
+		
 		// don't give any value for free friday or saturday since it's usual case
 		for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];
 		return $;
 	}
 	
-	public int getRankOfDaysoff(){
-		
+	public double getRankOfDaysoff(){
 		return rankDaysoff;
 	}
 	
 	public double getRankOfBlankSpace(){
 		return rankBlankSpace;
+	}
+	
+	
+	public double getRankOfFreeSunday(){
+		return rankFreeSunday;
+	}
+	public double getRankOfFreeMonday(){
+		return rankFreeMonday;
+	}
+	public double getRankOfFreeTuesday(){
+		return rankFreeTuesday;
+	}
+	public double getRankOfFreeWednesday(){
+		return rankFreeWednesday;
+	}
+	public double getRankOfFreeThursday(){
+		return rankFreeThursday;
 	}
 	
 	@Override
