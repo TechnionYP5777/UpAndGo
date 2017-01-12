@@ -443,6 +443,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 			break;
 		case CourseProperty.CHOSEN_LIST:
+			facultiesModel = new DefaultComboBoxModel<>();
+			for (String val : (List<String>) evt.getNewValue())
+				facultiesModel.addElement(val);
+			cmbFaculties.setModel(facultiesModel);
+			break;
+		case CourseProperty.FACULTY_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
 			for (CourseId val : (List<CourseId>) evt.getNewValue())
 				ChosenCourseModel.addElement(val.number + " " + val.name);
