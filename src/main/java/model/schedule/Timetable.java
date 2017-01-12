@@ -28,6 +28,11 @@ public class Timetable {
 	
 	private double rankDaysoff;
 	private double rankBlankSpace;
+	private double rankFreeSunday;
+	private double rankFreeMonday;
+	private double rankFreeTuesday;
+	private double rankFreeWednesday;
+	private double rankFreeThursday;
 	
 	public Timetable(List<LessonGroup> lessons){
 		this.lessonGroups = new ArrayList<>(lessons);
@@ -181,6 +186,19 @@ public class Timetable {
 		for(LessonGroup lg : lessonGroups)
 			for (Lesson ¢ : lg.getLessons())
 				histogram[¢.getDay()] = 1;
+		
+		rankFreeThursday = rankFreeWednesday = rankFreeTuesday = rankFreeMonday = rankFreeSunday = 0;
+		if(histogram[0] == 0)
+			rankFreeSunday += 1;
+		if(histogram[1] == 0)
+			rankFreeMonday += 1;
+		if(histogram[2] == 0)
+			rankFreeTuesday += 1;
+		if(histogram[3] == 0)
+			rankFreeWednesday += 1;
+		if(histogram[4] == 0)
+			rankFreeThursday += 1;
+		
 		// don't give any value for free friday or saturday since it's usual case
 		for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];
