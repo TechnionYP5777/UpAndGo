@@ -6,11 +6,13 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -332,8 +334,13 @@ public class XmlCourseLoader extends CourseLoader {
 
 	@Override
 	public List<Faculty> loadFaculties() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Faculty> $ = new ArrayList<>();
+		for(Entry<String, Course> ¢ : courses.entrySet()) {
+			Faculty faculty = new Faculty(¢.getKey().substring(0, 2), ¢.getValue().getFaculty());
+			if (!$.contains(faculty))
+				$.add(faculty);
+		}
+		return $;		
 	}
 	
 

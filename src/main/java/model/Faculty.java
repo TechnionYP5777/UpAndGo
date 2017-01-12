@@ -23,6 +23,10 @@ public class Faculty {
 		this.name = name;
 	}
 	
+	@Override
+	public boolean equals(Object ¢){
+		return ¢ != null && (¢ == this || (¢ instanceof Faculty && (this.id.equals(((Faculty) ¢).getId())) && (this.name.equals(((Faculty) ¢).getName()))));
+	}
 	
 
 }

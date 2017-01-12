@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.CourseModel;
+import model.Faculty;
 import model.course.Course;
 
 import model.course.StuffMember;
@@ -126,11 +127,18 @@ public class XmlCourseLoaderTest {
 		assert cr.loadChosenCourseNames().size() == 3;
 	}
 	
+	@Test
+	public void testLoadFaculties() {
+		for (Faculty ¢ : cr.loadFaculties())
+			System.out.println(¢.getId() + "---" + ¢.getName());
+	}
+	
 	@After
 	@SuppressWarnings("static-method")
 	public void deleteXml() {
 		new File("data/ChosenCourses.xml").delete();
 	}
 
+	
 
 }
