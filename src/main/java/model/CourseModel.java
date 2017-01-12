@@ -38,7 +38,7 @@ public class CourseModel implements Model {
 	public void pickCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course pickedCourse = this.getCourseByName(name);
+		Course pickedCourse = this.getCourseById(name);
 		if (this.pickedCourseList.contains(pickedCourse))
 			return;
 
@@ -78,7 +78,7 @@ public class CourseModel implements Model {
 	public void dropCourse(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course droppedCourse = this.getCourseByName(name);
+		Course droppedCourse = this.getCourseById(name);
 		if (!this.pickedCourseList.contains(droppedCourse))
 			return;
 
@@ -112,6 +112,21 @@ public class CourseModel implements Model {
 			throw new NullPointerException();
 		for(Entry<String, Course> ¢ : courseList.entrySet())
 			if (name.equals(¢.getValue().getName()))
+				return ¢.getValue();
+		return null;
+		/*
+		if (this.courseList.containsKey(name))
+			return this.courseList.get(name);
+		Course $ = loader.loadCourse(name);
+		this.courseList.put(name, $);
+		return $;*/
+	}
+	
+	public Course getCourseById(String name) {
+		if (name == null)
+			throw new NullPointerException();
+		for(Entry<String, Course> ¢ : courseList.entrySet())
+			if (name.equals(¢.getValue().getId()))
 				return ¢.getValue();
 		return null;
 		/*
