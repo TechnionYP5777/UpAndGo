@@ -207,12 +207,28 @@ public class Timetable {
 	}
 	
 	public double getRankOfDaysoff(){
-		
 		return rankDaysoff;
 	}
 	
 	public double getRankOfBlankSpace(){
 		return rankBlankSpace;
+	}
+	
+	
+	public double getRankOfFreeSunday(){
+		return rankFreeSunday;
+	}
+	public double getRankOfFreeMonday(){
+		return rankFreeMonday;
+	}
+	public double getRankOfFreeTuesday(){
+		return rankFreeTuesday;
+	}
+	public double getRankOfFreeWednesday(){
+		return rankFreeWednesday;
+	}
+	public double getRankOfFreeThursday(){
+		return rankFreeThursday;
 	}
 	
 	@Override

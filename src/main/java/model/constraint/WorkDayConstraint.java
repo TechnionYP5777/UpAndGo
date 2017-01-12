@@ -15,7 +15,7 @@ import model.course.LessonGroup;
 
 public class WorkDayConstraint extends Constraint {
 	//private int workDay;
-	public WorkDayConstraint(int d) {
+	public WorkDayConstraint(@SuppressWarnings("unused") int d) {
 		//workDay = d;
 	}
 	@Override

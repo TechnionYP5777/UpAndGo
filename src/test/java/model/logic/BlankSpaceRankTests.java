@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import logic.Scheduler;
