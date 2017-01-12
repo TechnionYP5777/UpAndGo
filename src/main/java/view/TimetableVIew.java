@@ -7,18 +7,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.TextArea;
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 
 import javax.swing.UIManager;
 import java.awt.Font;
-import java.awt.SystemColor;
 
+@SuppressWarnings("serial")
 public class TimetableVIew extends JPanel {
 	private JTable table;
 
