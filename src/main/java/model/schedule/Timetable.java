@@ -21,6 +21,8 @@ public class Timetable {
 	private final int DAYS_IN_WEEK = 7;
 	private final double MAX_BLANKSPACE_RANK = 2;
 	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.25;
+	private final double TIME_START_BONUS_PER_DAY = 0.5;
+	private final double TIME_END_BONUS_PER_DAY = 0.5;
 	
 	private int rankDaysoff;
 	private double rankBlankSpace;
@@ -71,7 +73,7 @@ public class Timetable {
 			});
 			// add 0.5 points if daySchedule start time is greater than wanted start time
 			if(!daySchedule.isEmpty() && daySchedule.get(0).getTime().compareTo(startTime) >= 0)
-				$ += 0.5;
+				$ += TIME_START_BONUS_PER_DAY;
 		}
 		
 		return $;
@@ -108,7 +110,7 @@ public class Timetable {
 			});
 			// add 0.5 points if daySchedule start time is greater than wanted start time
 			if(!daySchedule.isEmpty() && daySchedule.get(daySchedule.size()-1).getTime().compareTo(endTime) <= 0)
-				$ += 0.5;
+				$ += TIME_END_BONUS_PER_DAY;
 		}
 		
 		return $;
