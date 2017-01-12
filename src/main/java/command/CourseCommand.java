@@ -8,6 +8,5 @@ public class CourseCommand {
 	public static final String DETAILS = "details";
 	public static final String GET_CHOSEN = "chosen";
 	public static final String CHOSEN_FACULTY= "chosen_faculty";
-	public static final String FACULTIES= "faculties_list";
 
 }

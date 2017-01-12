@@ -23,7 +23,8 @@ public class CourseListController implements Controller{
 		this.model.addPropertyChangeListener(CourseProperty.COURSE_LIST, this.view);
 		this.model.addPropertyChangeListener(CourseProperty.DETAILS, this.view);
 		this.model.addPropertyChangeListener(CourseProperty.CHOSEN_LIST, this.view);
-		
+		this.model.addPropertyChangeListener(CourseProperty.FACULTY_LIST, this.view);
+
 		this.view.addActionListener(this);
 	}
 

@@ -214,7 +214,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setComboBox() {
 		facultiesModel = new DefaultComboBoxModel<>();
+		facultiesModel.addElement("all faculties");
+		facultiesModel.addElement("Physics");
+		facultiesModel.addElement("Computers");
+		facultiesModel.addElement("Sports");
+		facultiesModel.addElement("EE");
 		cmbFaculties = new JComboBox<>(facultiesModel);
+
 	}
 	//
 	// Sets the overall group layout
@@ -310,12 +316,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 			}
 		});
-		cmbFaculties.addPropertyChangeListener(new PropertyChangeListener() {
+		cmbFaculties.addActionListener(new ActionListener() {
+			
 			@Override
-			public void propertyChange(@SuppressWarnings("unused") PropertyChangeEvent evt) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				chosenFaculty= cmbFaculties.getSelectedItem() + "";
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.CHOSEN_FACULTY)));
+		
 			}
 		});
 		btnAddCourse.addActionListener(new ActionListener() {
