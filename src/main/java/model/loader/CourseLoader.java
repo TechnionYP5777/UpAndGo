@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import model.course.Course;
+import model.Faculty;
 
 /**
  * Abstract class for loading courses data from outside.
@@ -34,4 +35,6 @@ public abstract class CourseLoader {
 	public abstract void saveChosenCourseNames(List<String> names);
 	
 	public abstract List<String> loadChosenCourseNames();
+	
+	public abstract List<Faculty> loadFaculties();
 }

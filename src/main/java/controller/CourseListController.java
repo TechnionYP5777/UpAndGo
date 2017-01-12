@@ -23,7 +23,8 @@ public class CourseListController implements Controller{
 		this.model.addPropertyChangeListener(CourseProperty.COURSE_LIST, this.view);
 		this.model.addPropertyChangeListener(CourseProperty.DETAILS, this.view);
 		this.model.addPropertyChangeListener(CourseProperty.CHOSEN_LIST, this.view);
-		
+		this.model.addPropertyChangeListener(CourseProperty.FACULTY_LIST, this.view);
+
 		this.view.addActionListener(this);
 	}
 
@@ -39,6 +40,8 @@ public class CourseListController implements Controller{
 			model.dropCourse(view.getLastDropedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_CHOSEN))
 				model.getChosenCourseNames();
+//		else if (¢.getActionCommand().equals(CourseCommand.CHOSEN_FACULTY))
+//			model.getFacultyNames();
 	}
 	
 	@Override

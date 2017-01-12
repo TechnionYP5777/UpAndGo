@@ -25,12 +25,14 @@ public class CourseModel implements Model {
 	protected List<Course> pickedCourseList;
 	protected HashMultimap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
+	protected List<Faculty> facultyList;
 
 	public CourseModel(CourseLoader loader) {
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersMap = HashMultimap.create();
 		this.loader = loader;
 		this.courseList = loader.loadAllCourses();
+		this.facultyList = loader.loadFaculties();
 	}
 
 	public void pickCourse(String name) {
@@ -49,7 +51,7 @@ public class CourseModel implements Model {
 			pickedIds.add(course.getId());
 		});
 		this.loader.saveChosenCourseNames(pickedIds);
-		
+
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
@@ -79,7 +81,7 @@ public class CourseModel implements Model {
 		Course droppedCourse = this.getCourseByName(name);
 		if (!this.pickedCourseList.contains(droppedCourse))
 			return;
-		
+
 		// save picking in DB
 		HashSet<CourseId> pickedList = new HashSet<>();
 		List<String> pickedIds = new ArrayList<>();
@@ -89,7 +91,7 @@ public class CourseModel implements Model {
 			pickedIds.add(course.getId());
 		});
 		this.loader.saveChosenCourseNames(pickedIds);
-		
+
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
@@ -129,7 +131,8 @@ public class CourseModel implements Model {
 	}
 
 	/*
-	 * load needed courses (by name/subname) from DB if empty, load all of them
+	 * load needed courses (by name / subname) from DB if empty, load all of
+	 * them
 	 */
 	public void loadQuery(String query) {
 		HashSet<CourseId> matchingIds = new HashSet<>();
@@ -143,6 +146,29 @@ public class CourseModel implements Model {
 				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
 	}
 
+	/*
+	 * load faculty Names
+	 */
+	public void getFacultyNames() {
+		List<String> facultynames = new ArrayList<>();
+		this.facultyList.forEach(x-> facultynames.add(x.getName()));
+		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, facultynames))));
+	}	
+	/*
+	 * load needed courses by faculty
+	 */
+	public void loadFacultyNames(String facultyName) {
+		HashSet<CourseId> matchingIds = new HashSet<>();
+		this.courseList.forEach(facultyName.isEmpty() ? (key, course) -> {
+			matchingIds.add(new CourseId(course.getId(), course.getName()));
+		} : (key, course) -> {
+			if (course.getFaculty().toLowerCase().contains(facultyName.toLowerCase()))
+				matchingIds.add(new CourseId(course.getId(), course.getName()));
+		});
+		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(matchingIds)))));
+	}
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)
