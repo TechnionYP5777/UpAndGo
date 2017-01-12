@@ -125,7 +125,7 @@ public class CourseModel implements Model {
 	}
 
 	/*
-	 * load needed courses (by name/subname) from DB if empty, load all of them
+	 * load needed courses (by name / subname) from DB if empty, load all of them
 	 */
 	public void loadQuery(String query) {
 		HashSet<CourseId> matchingIds = new HashSet<>();
