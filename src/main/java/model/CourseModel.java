@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.google.common.collect.HashMultimap;
@@ -107,11 +108,16 @@ public class CourseModel implements Model {
 	public Course getCourseByName(String name) {
 		if (name == null)
 			throw new NullPointerException();
+		for(Entry<String, Course> ¢ : courseList.entrySet())
+			if (name.equals(¢.getValue().getName()))
+				return ¢.getValue();
+		return null;
+		/*
 		if (this.courseList.containsKey(name))
 			return this.courseList.get(name);
 		Course $ = loader.loadCourse(name);
 		this.courseList.put(name, $);
-		return $;
+		return $;*/
 	}
 
 	public List<String> getChosenCourseNames() {
