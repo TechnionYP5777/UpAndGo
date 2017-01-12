@@ -74,9 +74,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(335, 700));
+		setPreferredSize(new Dimension(250, 400));
 		setSize(new Dimension(300, 700));
-		setMinimumSize(new Dimension(300, 700));
+		setMinimumSize(new Dimension(250, 400));
 		listeners = new ArrayList<>();
 		setTextField();
 		setAddButton();
@@ -217,8 +217,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
 				.createSequentialGroup().addContainerGap()
 				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+						.addComponent(btnAddCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 						.addGroup(
 								Alignment.LEADING, groupLayout
 										.createSequentialGroup()
@@ -227,19 +227,19 @@ public class AvailableCourses extends JPanel implements CourseListView {
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 												.addComponent(chckbxKdamim).addComponent(chckbxCats)))
-						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300,
+						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+						.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
 								Short.MAX_VALUE)
-						.addComponent(searchField, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE,GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE))
 				.addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE).addGap(3)
-						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(scpChoseCourses, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE).addGap(1)
+						.addComponent(btnRemoveCourse).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxFaculty)
 								.addComponent(chckbxKdamim))
@@ -247,8 +247,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
 								.addComponent(chckbxCats))
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAddCourse,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGap(13)));
+								GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)));
 
 		setLayout(groupLayout);
 	}
