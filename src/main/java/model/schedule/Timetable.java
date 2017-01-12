@@ -23,6 +23,7 @@ public class Timetable {
 	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.25;
 	private final double TIME_START_BONUS_PER_DAY = 0.5;
 	private final double TIME_END_BONUS_PER_DAY = 0.5;
+	private final double EACH_FREE_DAY_RANK = 1.5;
 	
 	private List<LessonGroup> lessonGroups;
 	
@@ -189,15 +190,15 @@ public class Timetable {
 		
 		rankFreeThursday = rankFreeWednesday = rankFreeTuesday = rankFreeMonday = rankFreeSunday = 0;
 		if(histogram[0] == 0)
-			rankFreeSunday += 1;
+			rankFreeSunday += EACH_FREE_DAY_RANK;
 		if(histogram[1] == 0)
-			rankFreeMonday += 1;
+			rankFreeMonday += EACH_FREE_DAY_RANK;
 		if(histogram[2] == 0)
-			rankFreeTuesday += 1;
+			rankFreeTuesday += EACH_FREE_DAY_RANK;
 		if(histogram[3] == 0)
-			rankFreeWednesday += 1;
+			rankFreeWednesday += EACH_FREE_DAY_RANK;
 		if(histogram[4] == 0)
-			rankFreeThursday += 1;
+			rankFreeThursday += EACH_FREE_DAY_RANK;
 		
 		// don't give any value for free friday or saturday since it's usual case
 		for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
