@@ -24,10 +24,10 @@ public class Timetable {
 	private final double TIME_START_BONUS_PER_DAY = 0.5;
 	private final double TIME_END_BONUS_PER_DAY = 0.5;
 	
-	private int rankDaysoff;
-	private double rankBlankSpace;
 	private List<LessonGroup> lessonGroups;
 	
+	private double rankDaysoff;
+	private double rankBlankSpace;
 	
 	public Timetable(List<LessonGroup> lessons){
 		this.lessonGroups = new ArrayList<>(lessons);
@@ -187,7 +187,7 @@ public class Timetable {
 		return $;
 	}
 	
-	public int getRankOfDaysoff(){
+	public double getRankOfDaysoff(){
 		
 		return rankDaysoff;
 	}
