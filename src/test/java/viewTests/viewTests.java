@@ -26,7 +26,7 @@ public class viewTests {
 		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setVisible(true);
 		AvailableCourses  avl= new AvailableCourses();
-		cntr= new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/viewTest.XML")), avl);
+		cntr= new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/REP.XML")), avl);
 		cntr.init();
 		f.getContentPane().add(avl);
 	}
