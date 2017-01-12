@@ -106,7 +106,7 @@ public class Scheduler {
 	 * schedule of them which doesn't break the constraints.
 	 * it works for TimeConstraints for now.
 	 */
-	public static Schedule schedule(List<Course> lcourse, List<TimeConstraint> cs){
+	public static Schedule schedule(List<Course> lcourse, @SuppressWarnings("unused") List<TimeConstraint> __){
 		ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
 		ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
