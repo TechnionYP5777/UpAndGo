@@ -14,7 +14,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -215,6 +214,25 @@ public class RepFile {
 			$.setAttribute("id", courseSummeryMatcher.group("CourseID"));
 			$.setAttribute("name", courseSummeryMatcher.group("CourseName"));
 
+		String[] courseSummeryLines = courseSummery.split("\\n");
+		if (courseSummeryLines.length == 2){
+			if (isSportCourse($.getAttribute("id"))){
+				$.setAttribute("points", courseSummeryLines[1].substring(46, 49));
+				$.setAttribute("hours", courseSummeryLines[1].substring(31, 32));
+			} else {
+				$.setAttribute("points", courseSummeryLines[1].substring(40, 43));
+				if (!" ".equals(courseSummeryLines[1].substring(21, 22)))
+					$.setAttribute("hoursLecture", courseSummeryLines[1].substring(21, 22));
+				if (!" ".equals(courseSummeryLines[1].substring(25, 26)))
+					$.setAttribute("hoursTutorial", courseSummeryLines[1].substring(25, 26));
+				if (!" ".equals(courseSummeryLines[1].substring(29, 30)))
+					$.setAttribute("hoursLab", courseSummeryLines[1].substring(29, 30));
+				if (!" ".equals(courseSummeryLines[1].substring(33, 34)))
+					$.setAttribute("hoursProject", courseSummeryLines[1].substring(33, 34));
+			}
+
+		}
+
 		return $;
 	}
 	
@@ -301,7 +319,7 @@ public class RepFile {
 					else {
 						sportElement = d.createElement("sport");
 						sportElement.setAttribute("group", lessonLine.substring(9, 11));
-						sportElement.setAttribute("name", lessonLine.substring(12, 28).replaceAll("\\s+", ""));
+						sportElement.setAttribute("name", lessonLine.substring(12, 28).replaceAll("\\s+$", ""));
 						sportElement.appendChild(getSportLessonElement(d, lessonLine));
 						course.appendChild(sportElement);
 					}
