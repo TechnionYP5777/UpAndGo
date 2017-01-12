@@ -6,11 +6,13 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,6 +29,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import model.Faculty;
 import model.course.Course;
 import model.course.Course.CourseBuilder;
 import model.course.Lesson;
@@ -327,6 +330,17 @@ public class XmlCourseLoader extends CourseLoader {
 		  case "ו":  return DayOfWeek.valueOf("FRIDAY");
 		  default: return DayOfWeek.valueOf("SATURDAY");
 		}
+	}
+
+	@Override
+	public List<Faculty> loadFaculties() {
+		List<Faculty> $ = new ArrayList<>();
+		for(Entry<String, Course> ¢ : courses.entrySet()) {
+			Faculty faculty = new Faculty(¢.getKey().substring(0, 2), ¢.getValue().getFaculty());
+			if (!$.contains(faculty))
+				$.add(faculty);
+		}
+		return $;		
 	}
 	
 
