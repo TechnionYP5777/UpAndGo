@@ -411,11 +411,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 
 	// ******************* communication with controller ******************//
 
+	static final String ALL_FACULTIES = "all faculties";
 	static String highlighted = "";
 	static String picked = "";
 	static String droped = "";
 	static String query = "";
-	static String chosenFaculty = "";
+	static String chosenFaculty = ALL_FACULTIES;
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -453,6 +454,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			break;
 		case CourseProperty.FACULTY_LIST:
 			facultiesModel = new DefaultComboBoxModel<>();
+			facultiesModel.addElement(ALL_FACULTIES);
 			for (String val : (List<String>) evt.getNewValue())
 				facultiesModel.addElement(val);
 			cmbFaculties.setModel(facultiesModel);
