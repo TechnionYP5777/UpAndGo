@@ -147,19 +147,15 @@ public class CourseModel implements Model {
 	}
 	
 	/*
-	 * load needed courses by faculty 
+	 * load faculty names
 	 */
-	public void loadFacultyNames(String facultyName) {
-		HashSet<CourseId> matchingIds = new HashSet<>();
-		this.courseList.forEach((facultyName.isEmpty() || "all faculties".equals(facultyName) ) ? (key, course) -> {
-			matchingIds.add(new CourseId(course.getId(), course.getName()));
-		} : (key, course) -> {
-			if (course.getFaculty().toLowerCase().contains(facultyName.toLowerCase()))
-				matchingIds.add(new CourseId(course.getId(), course.getName()));
-		});
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
+	public void loadFacultyNames() {
+		List<String> faculties = new ArrayList<>();
+		this.facultyList.forEach((x) -> faculties.add(x.getName()));
+		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, faculties))));
 	}
+	
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)
