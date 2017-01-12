@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.google.common.collect.HashMultimap;
@@ -109,11 +110,16 @@ public class CourseModel implements Model {
 	public Course getCourseByName(String name) {
 		if (name == null)
 			throw new NullPointerException();
+		for(Entry<String, Course> ¢ : courseList.entrySet())
+			if (name.equals(¢.getValue().getName()))
+				return ¢.getValue();
+		return null;
+		/*
 		if (this.courseList.containsKey(name))
 			return this.courseList.get(name);
 		Course $ = loader.loadCourse(name);
 		this.courseList.put(name, $);
-		return $;
+		return $;*/
 	}
 
 	public List<String> getChosenCourseNames() {
@@ -141,19 +147,15 @@ public class CourseModel implements Model {
 	}
 	
 	/*
-	 * load needed courses by faculty 
+	 * load faculty names
 	 */
-	public void loadFacultyNames(String facultyName) {
-		HashSet<CourseId> matchingIds = new HashSet<>();
-		this.courseList.forEach((facultyName.isEmpty() || "all faculties".equals(facultyName) ) ? (key, course) -> {
-			matchingIds.add(new CourseId(course.getId(), course.getName()));
-		} : (key, course) -> {
-			if (course.getFaculty().toLowerCase().contains(facultyName.toLowerCase()))
-				matchingIds.add(new CourseId(course.getId(), course.getName()));
-		});
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
+	public void loadFacultyNames() {
+		List<String> faculties = new ArrayList<>();
+		this.facultyList.forEach((x) -> faculties.add(x.getName()));
+		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, faculties))));
 	}
+	
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)
