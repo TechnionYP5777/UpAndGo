@@ -54,12 +54,15 @@ public class mainLuzerView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		setMainPageProperties();
+		setMenu();
+	}
 
+	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
 		mainLuzer.setMinimumSize(new Dimension(600, 500));
 		mainLuzer.setBounds(100, 100, 450, 300);
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMenu();
 	}
 
 	void setMenu() {
