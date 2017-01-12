@@ -83,11 +83,7 @@ public class XmlCourseLoaderTest {
 		assert ((coursesMap.get("014536").getTutorialsLG().get(0).getGroupNum() == 10));
 		assert ((coursesMap.get("014536").getTutorialsLG().get(1).getGroupNum() == 12));
 		
-		for(Entry<String, Course> entry : coursesMap.entrySet()) {
-			  String key = entry.getKey();
-			   System.out.println(key + "---->" + (coursesMap.get(key).getTutorialsLG().size()));
-			   //assert ((coursesMap.get(key).getTutorialsLG().size() == 1));
-			}
+		System.out.println(coursesMap.get("394820-11").getTutorialsLG().get(0).getLessons().get(0).getEndTime().toString());
 		
 	}
 	
