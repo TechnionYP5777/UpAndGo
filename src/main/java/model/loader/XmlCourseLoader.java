@@ -27,6 +27,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import model.Faculty;
 import model.course.Course;
 import model.course.Course.CourseBuilder;
 import model.course.Lesson;
@@ -327,6 +328,12 @@ public class XmlCourseLoader extends CourseLoader {
 		  case "ו":  return DayOfWeek.valueOf("FRIDAY");
 		  default: return DayOfWeek.valueOf("SATURDAY");
 		}
+	}
+
+	@Override
+	public List<Faculty> loadFaculties() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

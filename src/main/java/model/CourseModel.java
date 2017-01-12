@@ -24,12 +24,14 @@ public class CourseModel implements Model {
 	protected List<Course> pickedCourseList;
 	protected HashMultimap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
+	protected List<Faculty> facultyList; 
 
 	public CourseModel(CourseLoader loader) {
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersMap = HashMultimap.create();
 		this.loader = loader;
 		this.courseList = loader.loadAllCourses();
+		this.facultyList= loader.loadFaculties();
 	}
 
 	public void pickCourse(String name) {
