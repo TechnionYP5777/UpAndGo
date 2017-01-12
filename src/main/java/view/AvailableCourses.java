@@ -41,6 +41,7 @@ import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import java.beans.PropertyChangeListener;
 
 public class AvailableCourses extends JPanel implements CourseListView {
 
@@ -75,8 +76,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	public AvailableCourses() {
 		catList = new ArrayList<>();
 		setCatList();
-		setPreferredSize(new Dimension(280, 474));
-		setSize(new Dimension(300, 700));
+		setPreferredSize(new Dimension(280, 500));
 		setMinimumSize(new Dimension(250, 500));
 		listeners = new ArrayList<>();
 		setTextField();
@@ -149,7 +149,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setScrollPane() {
 		scrollPane = new JScrollPane();
-		scrollPane.setSize(new Dimension(200, 50));
 		scrollPane.setViewportBorder(null);
 		scrollPane.setPreferredSize(new Dimension(200, 80));
 		scrollPane.setMinimumSize(new Dimension(200, 80));
@@ -216,7 +215,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private static void setComboBox() {
 		facultiesModel = new DefaultComboBoxModel<>();
 		cmbFaculties = new JComboBox<>(facultiesModel);
-
 	}
 	//
 	// Sets the overall group layout
@@ -228,45 +226,33 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(chckbxCats)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(chckbxCats, Alignment.LEADING)
-								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-									.addComponent(chckbxKdamim)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(chckbxTaken)))
-							.addContainerGap())
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-								.addContainerGap())
-							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(searchField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-									.addComponent(btnRemoveCourse, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-									.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-								.addContainerGap())
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(cmbFaculties, 0, 250, Short.MAX_VALUE)
-								.addContainerGap()))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addComponent(chckbxKdamim)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(chckbxTaken))
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(searchField, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(btnRemoveCourse, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(scpChoseCourses, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(cmbFaculties, Alignment.TRAILING, 0, 256, Short.MAX_VALUE)
+						.addComponent(btnAddCourse, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+					.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnRemoveCourse)
+					.addComponent(btnRemoveCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cmbFaculties, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(8)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(chckbxKdamim)
 						.addComponent(chckbxTaken))
@@ -322,6 +308,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
 
+			}
+		});
+		cmbFaculties.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(@SuppressWarnings("unused") PropertyChangeEvent evt) {
+				chosenFaculty= cmbFaculties.getSelectedItem() + "";
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.CHOSEN_FACULTY)));
 			}
 		});
 		btnAddCourse.addActionListener(new ActionListener() {
@@ -414,6 +408,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String picked = "";
 	static String droped = "";
 	static String query = "";
+	static String chosenFaculty = "";
 
 	@Override
 	public void addActionListener(ActionListener ¢) {
@@ -486,9 +481,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	}
 
 	@Override
-	public boolean getIsFacultyChecked() {
-		// return chckbxFaculty.isSelected();
-		return true;
+	public String getFaculty() {
+		return chosenFaculty;
 	}
 
 	@Override

@@ -8,11 +8,13 @@ public interface CourseListView extends View {
 
 	boolean getIsKdamimChecked(); // is prerequirements check box is checked
 
-	boolean getIsFacultyChecked();  // is faculty courses check box is checked
+	String getFaculty();  // is faculty courses check box is checked
 
 	boolean getIsTakenChecked();  // is taken courses check box is checked
 
+	
 	String getLastPickedCourse();
 
 	String getLastDropedCourse();
+	
 }
