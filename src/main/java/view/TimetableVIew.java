@@ -16,6 +16,7 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.UIManager;
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class TimetableVIew extends JPanel {
 	private JTable table;
@@ -63,50 +64,62 @@ public class TimetableVIew extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(15);
 		
 		add(table);
-		JPanel panel1=new JPanel();
-		panel1.setLayout(new GridLayout(10,1,3,3));
-		JPanel panel2 =new JPanel();
-		panel2.setLayout(new GridLayout(1,7,3,3));
+		JPanel otherComponentsPanel=new JPanel();
+		otherComponentsPanel.setLayout(new GridLayout(10,1,3,3));
+		JPanel nextprevPannel =new JPanel();
+		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 		JPanel textbox=new JPanel();
 		JButton next = new JButton("הבא>");
 		JButton prev = new JButton("<הקודם");
-		panel2.add(new JPanel());
-		panel2.add(next);
-		panel2.add(new JPanel());
-		panel2.add(new JPanel());
-		panel2.add(new JPanel());
-		panel2.add(prev);
-		panel2.add(new JPanel());
-		panel1.add(panel2);
-		panel1.add(new JPanel());
+		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(next);
+		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(prev);
+		nextprevPannel.add(new JPanel());
+		otherComponentsPanel.add(nextprevPannel);
+		otherComponentsPanel.add(new JPanel());
 		JTextField textField = new JTextField("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setEditable(false);
 		textField.setBackground(UIManager.getColor("Button.background"));
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		panel1.add(textField);
+		otherComponentsPanel.add(textField);
 		JRadioButton b1 = new JRadioButton("ימי חופש");
 		b1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		panel1.add(b1);
+		otherComponentsPanel.add(b1);
 		JRadioButton b2= new JRadioButton("מספר מינימלי של חלונות");
 		b2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		panel1.add(b2);
+		otherComponentsPanel.add(b2);
 		textbox.setLayout(new GridLayout(1,12));
 		for(int ¢=0 ; ¢ < 10; ++¢)
 			textbox.add(new JPanel());
 		JTextField tf = new JTextField();
+		tf.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textbox.add(tf);
 		JTextField tf1 = new JTextField("שעת התחלה:");
 		tf1.setEditable(false);
 		tf1.setFont(new Font("Dialog", Font.BOLD, 12));
 		tf1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textbox.add(tf1);
-		panel1.add(textbox);
-		panel1.add(new JPanel());
-		panel1.add(new JPanel());
-		panel1.add(new JPanel());
-		panel1.add(new JPanel());
-		add(panel1);
+		otherComponentsPanel.add(textbox);
+		otherComponentsPanel.add(new JPanel());
+		JPanel panelSchedButton =new JPanel();
+		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
+		panelSchedButton.add(new JPanel());
+		panelSchedButton.add(new JPanel());
+		panelSchedButton.add(new JPanel());
+		JButton sched = new JButton("בנה מערכת");
+		sched.setBackground(UIManager.getColor("Button.darkShadow"));
+		panelSchedButton.add(sched);
+		panelSchedButton.add(new JPanel());
+		panelSchedButton.add(new JPanel());
+		panelSchedButton.add(new JPanel());
+		otherComponentsPanel.add(panelSchedButton);
+		otherComponentsPanel.add(new JPanel());
+		otherComponentsPanel.add(new JPanel());
+		add(otherComponentsPanel);
 
 	}
 }
