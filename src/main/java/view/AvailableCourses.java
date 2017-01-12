@@ -321,7 +321,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				chosenFaculty= cmbFaculties.getSelectedItem() + "";
 				listeners.forEach(x -> x
-						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_FACULTIES)));
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		
 			}
 		});
