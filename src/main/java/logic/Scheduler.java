@@ -266,8 +266,8 @@ public class Scheduler {
 					rank2 += t2.getRankOfStartTime(byStartTime);
 				}
 				if(byEndTime != null){
-					/*rank1 += t1.getRankOfBlankSpace();
-					rank2 += t2.getRankOfBlankSpace();*/
+					rank1 += t1.getRankOfEndTime(byEndTime);
+					rank2 += t2.getRankOfEndTime(byEndTime);
 				}
 				
 				return -rank1.compareTo(rank2);

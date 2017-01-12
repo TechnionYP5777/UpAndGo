@@ -55,6 +55,7 @@ CourseLoader cr;
 	
 	*/
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");
