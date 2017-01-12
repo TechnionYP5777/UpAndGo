@@ -204,6 +204,7 @@ public class XmlCourseLoader extends CourseLoader {
 						setStaffList (cb, p,"teacherInCharge");
 						setStaffList (cb, p,"lecturer");
 						setStaffList (cb, p,"assistant");
+						setStaffList (cb, p,"moderator");
 						//get lectures and tutorial group Lessons
 						NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
@@ -265,7 +266,11 @@ public class XmlCourseLoader extends CourseLoader {
 		for (int g = 0; g < tutorialList.getLength(); ++g) {
 			Node m = tutorialList.item(g);
 			if (m.getNodeType() == Node.ELEMENT_NODE) {
-				int tutorialGroupNum = Integer.parseInt(((Element) m).getAttribute("group"));
+				int tutorialGroupNum = 30;
+				if ("".equals(((Element) m).getAttribute("group")))
+					++tutorialGroupNum;
+				else
+					tutorialGroupNum = Integer.parseInt(((Element) m).getAttribute("group"));
 				//
 				NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 				for (int f = 0; f < lessonList.getLength(); ++f) {
