@@ -5,8 +5,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import command.CourseCommand;
+import command.TimeTableCommand;
+
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.ComponentOrientation;
@@ -17,7 +24,12 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel {
 	private JTable table;
-
+	private JButton nextBtn = new JButton("הבא>");
+	private JButton prevBtn = new JButton("<הקודם");
+	private JButton schedBtn = new JButton("בנה מערכת");
+	
+	static List<ActionListener> listeners;
+	static boolean scheduleWasRequested = false;
 	/**
 	 * Create the panel.
 	 */
@@ -71,14 +83,13 @@ public class TimetableVIew extends JPanel {
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 		JPanel textbox=new JPanel();
-		JButton next = new JButton("הבא>");
-		JButton prev = new JButton("<הקודם");
+
 		nextprevPannel.add(new JPanel());
-		nextprevPannel.add(next);
-		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(nextBtn);
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(new JPanel());
-		nextprevPannel.add(prev);
+		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
 		otherComponentsPanel.add(nextprevPannel);
 		otherComponentsPanel.add(new JPanel());
@@ -112,9 +123,8 @@ public class TimetableVIew extends JPanel {
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
-		JButton sched = new JButton("בנה מערכת");
-		sched.setBackground(UIManager.getColor("Button.darkShadow"));
-		panelSchedButton.add(sched);
+		schedBtn.setBackground(UIManager.getColor("Button.darkShadow"));
+		panelSchedButton.add(schedBtn);
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
@@ -124,6 +134,41 @@ public class TimetableVIew extends JPanel {
 		c.gridx=0;
 		c.gridy=3;
 		add(otherComponentsPanel,c);
+		setEvents();
 
+	}
+	
+	public void setEvents(){
+		
+		//next button has been pressed -> ask for the next schedule
+		nextBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (scheduleWasRequested)
+					listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_NEXT_GENERATED_SCHED)));
+			}
+		});
+		
+		//prev button has been pressed -> ask for the previous schedule
+		prevBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (scheduleWasRequested)
+					listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_PREV_GENERATED_SCHED)));
+			}
+		});
+		
+		//schedBtn button has been pressed -> ask for a schedule (list of lessonGroup)
+		prevBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				scheduleWasRequested = true;
+				listeners.forEach(x -> x.actionPerformed(
+					new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.RECALC_SCHED)));
+			}
+		});
+		
 	}
 }
