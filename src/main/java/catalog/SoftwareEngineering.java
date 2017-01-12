@@ -17,10 +17,12 @@ public class SoftwareEngineering extends CSCatalog {
 	static final int FREE_CHOICE_POINTS = 10;
 
 	public SoftwareEngineering(List<Course> obligatoryList, List<Course> freeChoiceList, List<Course> listAList,
-			List<Course> listBList) {
+			List<Course> listBList, List<Course> coreList, List<List<Course>> scientChainLists) {
 		super(obligatoryList, freeChoiceList, listAList, listBList, OBLIGATORY_POINTS,
 				FREE_CHOICE_POINTS, MIN_LISTA_POINTS);
-		// TODO Auto-generated constructor stub
+		if (coreList == null || scientChainLists == null)
+			throw new NullPointerException();
+		core = new ArrayList<>(coreList);
+		scientificChain = new ArrayList<>(scientChainLists);
 	}
-
 }

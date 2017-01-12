@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-
 public class UserGrades extends JFrame {
 
 	private JPanel contentPane;
@@ -32,6 +31,7 @@ public class UserGrades extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					new UserGrades().setVisible(true);
@@ -51,44 +51,33 @@ public class UserGrades extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			@Override
+			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
-			    String result = "";
-			    Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-			    boolean hasTransferableText =
-			      (contents != null) &&
-			      contents.isDataFlavorSupported(DataFlavor.stringFlavor)
-			    ;
-			    if (hasTransferableText)
+				String result = "";
+				Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+				boolean hasTransferableText = (contents != null)
+						&& contents.isDataFlavorSupported(DataFlavor.stringFlavor);
+				if (hasTransferableText)
 					try {
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
-						User user = new User(result,
-								new SoftwareEngineering( new ArrayList<>(), new ArrayList<>(),new ArrayList<>(), new ArrayList<>()));
+						User user = new User(result, new SoftwareEngineering(new ArrayList<>(), new ArrayList<>(),
+								new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 					} catch (UnsupportedFlavorException | IOException ¢) {
 						System.out.println(¢);
 						¢.printStackTrace();
 					}
-				
+
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(156)
-					.addComponent(btnDone)
-					.addContainerGap(179, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(111)
-					.addComponent(btnDone)
-					.addContainerGap(117, Short.MAX_VALUE))
-		);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(156).addComponent(btnDone).addContainerGap(179, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(111).addComponent(btnDone).addContainerGap(117, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }
