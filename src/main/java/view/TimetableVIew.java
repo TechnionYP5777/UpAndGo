@@ -6,7 +6,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import command.CourseCommand;
+
 import command.TimeTableCommand;
 
 import javax.swing.JTextField;
@@ -29,11 +29,12 @@ public class TimetableVIew extends JPanel {
 	private JButton schedBtn = new JButton("בנה מערכת");
 	
 	static List<ActionListener> listeners;
-	static boolean scheduleWasRequested = false;
+	static boolean scheduleWasRequested;
 	/**
 	 * Create the panel.
 	 */
 	public TimetableVIew() {
+		scheduleWasRequested = false;
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		table = new JTable();
