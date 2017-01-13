@@ -237,18 +237,18 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		final CellSpan cellAtt =(CellSpan)defaultTableModel.getCellAttribute();
 		int[] columns = new int[1];
 		int[] rows;
-		for(LessonGroup lg : schedule){
-			for(Lesson l : lg.getLessons()){
-				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue()%7 -2;
-				int startRow = (l.getStartTime().getTime().getHour()-7)*2 - (l.getStartTime().getTime().getMinute() > 0 ? 0 : 1);
-				int endRow = (l.getEndTime().getTime().getHour()-7)*2 - (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
-				rows = new int[endRow-startRow+1];
-				for(int ¢ = 0; ¢ < rows.length; ¢++){
-					rows[¢]=¢+startRow;
-				}
+		for(LessonGroup lg : schedule)
+			for (Lesson l : lg.getLessons()) {
+				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue() % 7 - 2;
+				int startRow = 2 * (l.getStartTime().getTime().getHour() - 7)
+						- (l.getStartTime().getTime().getMinute() > 0 ? 0 : 1);
+				int endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
+						- (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
+				rows = new int[endRow - startRow + 1];
+				for (int ¢ = 0; ¢ < rows.length; ++¢)
+					rows[¢] = ¢ + startRow;
 				cellAtt.combine(rows, columns);
 			}
-		}
 
 	}
 }
