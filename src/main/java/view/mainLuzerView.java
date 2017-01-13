@@ -128,7 +128,9 @@ public class mainLuzerView {
 	}
 
 	private static void setSplitPane(JPanel mainPane, JPanel panel1, JPanel panel2) {
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);	
+		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		splitPaneV.setResizeWeight(0.5);
+		splitPaneV.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		splitPaneV.setOneTouchExpandable(true);
 		splitPaneV.setAlignmentY(Component.CENTER_ALIGNMENT);
 		splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -136,6 +138,7 @@ public class mainLuzerView {
 
 		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panel2);
+		splitPaneH.setResizeWeight(1);
 		splitPaneH.setRightComponent(panel1);
 		splitPaneV.setLeftComponent(splitPaneH);
 	}
