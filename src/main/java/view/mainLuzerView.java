@@ -11,14 +11,11 @@ import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JMenu;
-
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
-
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
@@ -91,56 +88,77 @@ public class mainLuzerView {
 		menu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
 		// add menu items
-		mnItCatalog = new JMenuItem("טען קטלוג");
-		mnItCatalog.setPreferredSize(new Dimension(100, 20));
-		mnItCatalog.setHorizontalTextPosition(SwingConstants.RIGHT);
-		mnItCatalog.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
+		setCatalogItem();
+		setGilayonItem();
+		menu.add(mnItCatalog);
+		menu.add(mnItGilayon);
+		menuBar.add(menu);
+		mainLuzer.setJMenuBar(menuBar);
+	}
 
+	private void setGilayonItem() {
 		mnItGilayon = new JMenuItem("טען גיליון");
 		mnItGilayon.setPreferredSize(new Dimension(100, 20));
 		mnItGilayon.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mnItGilayon.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mnItGilayon.setHorizontalAlignment(SwingConstants.RIGHT);
+	}
 
-		menu.add(mnItCatalog);
-		menu.add(mnItGilayon);
-		menuBar.add(menu);
-
-		mainLuzer.setJMenuBar(menuBar);
+	private void setCatalogItem() {
+		mnItCatalog = new JMenuItem("טען קטלוג");
+		mnItCatalog.setPreferredSize(new Dimension(100, 20));
+		mnItCatalog.setHorizontalTextPosition(SwingConstants.RIGHT);
+		mnItCatalog.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
 	}
 
 	private void setAvailCoursesView() {
 		Container container = mainLuzer.getContentPane();
 		container.setLayout(new BorderLayout());
-		AvailableCourses avl = new AvailableCourses();
-		TimetableVIew timeTbl = new TimetableVIew();
-		
+		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
+
+	}
+
+	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		mainPane.setLayout( new BorderLayout() );
-		container.add( mainPane );
-		
-		JPanel panel1 = new JPanel();
-		panel1.setPreferredSize(new Dimension(280, 500));
-		panel1.setMinimumSize(new Dimension(280, 500));
-		panel1.setLayout(new BorderLayout());
-		panel1.add(avl, BorderLayout.CENTER);
-		JPanel panel2 = new JPanel();
-		panel2.setLayout(new BorderLayout());
-		panel2.add(timeTbl, BorderLayout.CENTER);
-	
-	    JSplitPane splitPaneV = new JSplitPane( JSplitPane.VERTICAL_SPLIT );
-	    splitPaneV.setOneTouchExpandable(true);
-	    splitPaneV.setAlignmentY(Component.CENTER_ALIGNMENT);
-	    splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
-	    mainPane.add( splitPaneV, BorderLayout.CENTER );
+		mainPane.setLayout(new BorderLayout());
+		c.add(mainPane);
+		JPanel panel1 = setCoursesPane(avl);
+		JPanel panel2 = setTablePane(timeTbl);
+		JSplitPane splitPaneV = setVerticalSplit();
+		mainPane.add(splitPaneV, BorderLayout.CENTER);
+		setHorizontalSplit(panel1, panel2, splitPaneV);
+	}
 
-	   JSplitPane splitPaneH = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
-	    splitPaneH.setLeftComponent( panel2 );
-	    splitPaneH.setRightComponent( panel1 );
-	    
-	    splitPaneV.setLeftComponent( splitPaneH );
+	private static void setHorizontalSplit(JPanel panel1, JPanel panel2, JSplitPane splitPaneV) {
+		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		splitPaneH.setLeftComponent(panel2);
+		splitPaneH.setRightComponent(panel1);
+		splitPaneV.setLeftComponent(splitPaneH);
+	}
 
+	private static JSplitPane setVerticalSplit() {
+		JSplitPane $ = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		$.setOneTouchExpandable(true);
+		$.setAlignmentY(Component.CENTER_ALIGNMENT);
+		$.setAlignmentX(Component.CENTER_ALIGNMENT);
+		return $;
+	}
+
+	private static JPanel setTablePane(TimetableVIew timeTbl) {
+		JPanel $ = new JPanel();
+		$.setLayout(new BorderLayout());
+		$.add(timeTbl, BorderLayout.CENTER);
+		return $;
+	}
+
+	private static JPanel setCoursesPane(AvailableCourses avl) {
+		JPanel $ = new JPanel();
+		$.setPreferredSize(new Dimension(280, 500));
+		$.setMinimumSize(new Dimension(280, 500));
+		$.setLayout(new BorderLayout());
+		$.add(avl, BorderLayout.CENTER);
+		return $;
 	}
 }
