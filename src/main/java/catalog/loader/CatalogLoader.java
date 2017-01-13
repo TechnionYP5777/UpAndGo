@@ -22,7 +22,7 @@ import model.course.Course;
  * @author sapir
  * @since 2017-01-12
  */
-public class CatalogLoader {
+public abstract class CatalogLoader {
 	protected List<Course> obligatory, malags;
 
 	CatalogLoader(String catalogXmlPath, CourseModel m) {
@@ -48,10 +48,9 @@ public class CatalogLoader {
 		} catch (SAXException | IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
-		System.out.println(obligatory + " " + malags);
 	}
 
-	private static void addCoursesToList(NodeList coursesList, List<Course> l, CourseModel m) {
+	protected static void addCoursesToList(NodeList coursesList, List<Course> l, CourseModel m) {
 		for (int i = 0; i < coursesList.getLength(); ++i) {
 			Node p = coursesList.item(i);
 			Course c = m.getCourseById(((Element) p).getAttribute("number"));
