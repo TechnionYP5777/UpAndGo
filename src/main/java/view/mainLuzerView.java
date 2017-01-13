@@ -5,21 +5,29 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import javax.swing.JMenu;
+
+import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.Container;
+
 import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 
 public class mainLuzerView {
 
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
 	private JMenuItem mnItGilayon;
+
 	/**
 	 * Launch the application.
 	 */
@@ -56,6 +64,7 @@ public class mainLuzerView {
 	private void initialize() {
 		setMainPageProperties();
 		setMenu();
+		setAvailCoursesView();
 	}
 
 	private void setMainPageProperties() {
@@ -91,12 +100,39 @@ public class mainLuzerView {
 		mnItGilayon.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mnItGilayon.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mnItGilayon.setHorizontalAlignment(SwingConstants.RIGHT);
-	
+
 		menu.add(mnItCatalog);
 		menu.add(mnItGilayon);
 		menuBar.add(menu);
-	
+
 		mainLuzer.setJMenuBar(menuBar);
 	}
 
+	private void setAvailCoursesView() {
+		Container container = mainLuzer.getContentPane();
+		container.setLayout(new BorderLayout());
+		AvailableCourses avl = new AvailableCourses();
+		TimetableVIew timeTbl = new TimetableVIew();
+		
+		JPanel mainPane = new JPanel();
+		mainPane.setLayout( new BorderLayout() );
+		container.add( mainPane );
+		
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new BorderLayout());
+		panel1.add(avl, BorderLayout.CENTER);
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new BorderLayout());
+		panel2.add(timeTbl, BorderLayout.CENTER);
+	
+	    JSplitPane splitPaneV = new JSplitPane( JSplitPane.VERTICAL_SPLIT );
+	    mainPane.add( splitPaneV, BorderLayout.CENTER );
+
+	   JSplitPane splitPaneH = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
+	    splitPaneH.setLeftComponent( panel2 );
+	    splitPaneH.setRightComponent( panel1 );
+	    
+	    splitPaneV.setLeftComponent( splitPaneH );
+
+	}
 }
