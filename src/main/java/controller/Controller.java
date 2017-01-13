@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 
 /**
  * It's the main class that speaks with View-part of the program.
@@ -13,8 +14,9 @@ import java.awt.event.ActionListener;
  * the data model and the view.
  * */
 public interface Controller extends ActionListener {
-	/*
-	 * mark class
-	 */
 	void init();
+	
+	void registerListenerToProperty(PropertyChangeListener l, String p);
+	
+	void unregisterListenerToProperty(PropertyChangeListener l, String p);
 }
