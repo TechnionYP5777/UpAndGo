@@ -5,11 +5,9 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,19 +22,23 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import java.awt.Rectangle;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class mainLuzerView {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
-
+	private static final String BYE_MSG ="Luzer says BYE";
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
 	private JMenuItem mnItGilayon;
+	static List<ActionListener> listeners;
 
 	/**
 	 * Launch the application.
@@ -72,10 +74,14 @@ public class mainLuzerView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		listeners = new ArrayList<>();
 		setMainPageProperties();
 		setMenu();
 		setAvailCoursesView();
+		createEvents();
 	}
+
+
 
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
@@ -87,7 +93,7 @@ public class mainLuzerView {
 				if ( userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
-					Message.infoBox("Luzer says BYE", "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					Message.infoBox(BYE_MSG, "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
 				}
 			}
@@ -185,6 +191,22 @@ public class mainLuzerView {
 		$.setLayout(new BorderLayout());
 		$.add(avl, BorderLayout.CENTER);
 		return $;
+	}
+	private void createEvents() {
+		mnItCatalog.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent __) {
+				//TODO: add impl.
+			}
+		});
+		mnItGilayon.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent __) {
+				//TODO: add impl.
+			}
+		});
 	}
 	
 }
