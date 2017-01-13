@@ -24,6 +24,11 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import java.awt.Rectangle;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 
 public class mainLuzerView {
 
@@ -142,6 +147,7 @@ public class mainLuzerView {
 
 	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
+		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainPane.setLayout(new BorderLayout());
 		c.add(mainPane);
@@ -162,6 +168,7 @@ public class mainLuzerView {
 		splitPaneH.setResizeWeight(1);
 		splitPaneH.setRightComponent(panel1);
 		splitPaneV.setLeftComponent(splitPaneH);
+
 	}
 
 	private static JPanel setTablePane(TimetableVIew timeTbl) {
@@ -180,8 +187,4 @@ public class mainLuzerView {
 		return $;
 	}
 	
-	
-	private static void createEvents() {
-		
-	}
 }
