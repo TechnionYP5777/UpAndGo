@@ -11,6 +11,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -130,10 +131,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		textField.setBackground(UIManager.getColor("Button.background"));
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(textField);
-		JRadioButton b1 = new JRadioButton("ימי חופש");
+		JCheckBox b1 = new JCheckBox("ימי חופש");
 		b1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(b1);
-		JRadioButton b2= new JRadioButton("מספר מינימלי של חלונות");
+		JCheckBox b2= new JCheckBox("מספר מינימלי של חלונות");
 		b2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(b2);
 		textbox.setLayout(new GridLayout(1,6));
