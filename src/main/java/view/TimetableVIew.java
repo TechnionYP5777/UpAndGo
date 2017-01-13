@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -8,11 +9,16 @@ import javax.swing.table.DefaultTableModel;
 
 
 import command.TimeTableCommand;
+import model.course.CourseId;
+import model.course.LessonGroup;
+import property.CourseProperty;
+import property.TimeTableProperty;
 
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.util.List;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,7 +28,7 @@ import javax.swing.UIManager;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
-public class TimetableVIew extends JPanel {
+public class TimetableVIew extends JPanel implements ITimeTableView {
 	private JTable table;
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
@@ -73,6 +79,7 @@ public class TimetableVIew extends JPanel {
 		));
 		table.getColumnModel().getColumn(5).setPreferredWidth(15);
 		
+		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
 		c.gridheight=3;
@@ -138,7 +145,7 @@ public class TimetableVIew extends JPanel {
 		setEvents();
 
 	}
-	
+	//setting events and actions
 	public void setEvents(){
 		
 		//next button has been pressed -> ask for the next schedule
@@ -171,5 +178,37 @@ public class TimetableVIew extends JPanel {
 			}
 		});
 		
+	}
+
+	//connection with model and controller
+	@Override
+	public void addActionListener(ActionListener ¢) {
+		listeners.add(¢);
+	}
+
+	@Override
+	public void removeActionListener(ActionListener ¢) {
+		listeners.remove(¢);
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+
+		case TimeTableProperty.SCHEDULE:
+			showSchedule((List<LessonGroup>) evt.getNewValue());
+			break;
+		default:
+			break;
+		
+		}
+	}
+	
+	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
+	private void showSchedule(@SuppressWarnings("unused") List<LessonGroup> schedule) {
+		// TODO Auto-generated method stub	
+
 	}
 }
