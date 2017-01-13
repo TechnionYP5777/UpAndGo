@@ -3,6 +3,7 @@
  */
 package catalog.loader;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import model.CourseModel;
@@ -38,7 +40,7 @@ public class SECatalogLoader extends CSCatalogLoader {
 		List<Course> chemistryChain2 = new ArrayList<>();
 		List<Course> otherScientCourses = new ArrayList<>();
 		try {
-			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(catalogXmlPath)
+			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new FileInputStream(catalogXmlPath)))
 					.getElementsByTagName("CourseList");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Element elem = (Element) coursesList.item(i);
@@ -73,6 +75,11 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(chemistryChain2);
 		scientificChain.add(otherScientCourses);
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
+		System.out.println("obligatory : " + obligatory );
+		System.out.println("malags: " + malags + "listA: " + listA);
+		System.out.println("listB: " + listB + "core: " + core);
+		System.out.println("scientificChain: " + scientificChain);
+
 	}
 
 	public Catalog getCatalog() {
