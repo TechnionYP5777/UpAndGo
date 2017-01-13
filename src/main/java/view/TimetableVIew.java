@@ -76,9 +76,15 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column", "New column"
 			}
-		));
+
+		){
+			    @Override
+			    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
+			       return false;
+			    }	
+		}
+		);
 		table.getColumnModel().getColumn(5).setPreferredWidth(15);
-		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
@@ -179,8 +185,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		});
 		
 	}
+	//-------------------------------------------------------------------------------------------------
 
 	//connection with model and controller
+	
 	@Override
 	public void addActionListener(ActionListener ¢) {
 		listeners.add(¢);
@@ -205,6 +213,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		}
 	}
+	//-----------------------------------------------------------------------------
+	
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	private void showSchedule(@SuppressWarnings("unused") List<LessonGroup> schedule) {
