@@ -16,15 +16,17 @@ import org.xml.sax.SAXException;
 
 import model.CourseModel;
 import model.course.Course;
+import catalog.*;
 
 /**
-* 
-* @author sapir
-* @since Jan 13, 2017
-*/
+ * 
+ * @author sapir
+ * @since Jan 13, 2017
+ */
 public class SECatalogLoader extends CSCatalogLoader {
 	List<Course> core;
 	List<List<Course>> scientificChain;
+	SoftwareEngineering theCatalog;
 
 	SECatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);
@@ -60,11 +62,21 @@ public class SECatalogLoader extends CSCatalogLoader {
 							addCoursesToList(elem.getElementsByTagName("Course"), otherScientCourses, m);
 					}
 				}
-					addCoursesToList(elem.getElementsByTagName("Course"), listB, m);
+				addCoursesToList(elem.getElementsByTagName("Course"), listB, m);
 			}
 		} catch (SAXException | IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
+		scientificChain.add(physicsChain);
+		scientificChain.add(biologyChain);
+		scientificChain.add(chemistryChain1);
+		scientificChain.add(chemistryChain2);
+		scientificChain.add(otherScientCourses);
+		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
+	}
+
+	public Catalog getCatalog() {
+		return theCatalog;
 	}
 
 }

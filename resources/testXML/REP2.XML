@@ -1,5 +1,5 @@
 <courses>
-    <course faculty="הנדסה אזרחית וסביבתית" id="234118" name="מבוא לחתולים" points="3">
+    <course faculty="הנדסה אזרחית וסביבתית" id="123456" name="מבוא לחתולים" points="3">
         <teacherInCharge name="הלו קיטי" title="פרופ"/>
         <exams>
 		    <moedA day="29" month="06" year="2016" time="09:00"/>
@@ -41,7 +41,7 @@
             <note>קב-81 עבור הבינלאומי בלבד</note>
         </notes>
     </course>
-    <course faculty="הנדסה אזרחית וסביבתית" id="236360" name="טורי חתולים ופוררריה" points="2.5">
+    <course faculty="הנדסה אזרחית וסביבתית" id="014536" name="טורי חתולים ופוררריה" points="2.5">
         <teacherInCharge name="מיאו דזה-דונג" title="פרופ"/>
         <exams>
             <moedA day="20" month="08" year="2016" time="09:00"/>
@@ -76,7 +76,7 @@
             <note>אף אחד לא קורא כאן</note>
         </notes>
     </course>
-    <course faculty="הנדסה אזרחית וסביבתית" id="234122" name="אלרגיות למתקדמים ת'" points="4.5">
+    <course faculty="הנדסה אזרחית וסביבתית" id="678910" name="אלרגיות למתקדמים ת'" points="4.5">
         <teacherInCharge name="אן שובי" title="דר"/>
         <exams>
             <moedA day="11" month="12" year="2016" time="13:00"/>
@@ -131,7 +131,7 @@
             <note>קארמה רעה</note>
     </notes>
     </course>
-	<course faculty="הנדסה אזרחית וסביבתית" id="234311" name="מעבדה הנדסית" points="1.5">
+	<course faculty="הנדסה אזרחית וסביבתית" id="014005" name="מעבדה הנדסית" points="1.5">
 		<exams>
 			<moedB day="26" month="09" time="00:00" year="2017"/>
 		</exams>
