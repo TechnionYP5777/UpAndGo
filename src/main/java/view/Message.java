@@ -1,3 +1,7 @@
+//
+//	Author Alex V.
+//
+
 package view;
 
 import javax.swing.ImageIcon;
