@@ -5,11 +5,9 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -25,10 +23,10 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import java.awt.Rectangle;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class mainLuzerView {
 
@@ -75,7 +73,10 @@ public class mainLuzerView {
 		setMainPageProperties();
 		setMenu();
 		setAvailCoursesView();
+		createEvents();
 	}
+
+
 
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
@@ -186,5 +187,20 @@ public class mainLuzerView {
 		$.add(avl, BorderLayout.CENTER);
 		return $;
 	}
-	
+	private void createEvents() {
+		mnItCatalog.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent __) {
+				//TODO: add impl.
+			}
+		});
+		mnItGilayon.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent __) {
+				//TODO: add impl.
+			}
+		});
+	}
 }
