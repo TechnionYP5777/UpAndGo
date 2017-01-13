@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -80,9 +81,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	    table = new MultiSpanCellTable(defaultTableModel);
-		
 		JScrollPane scroll = new JScrollPane(table);
-
+		scroll.setMinimumSize(new Dimension(500, 350));
 		//Aligning text in the table
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,7 +110,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		add(scroll,c);
 		
 		JPanel otherComponentsPanel=new JPanel();
-		otherComponentsPanel.setLayout(new GridLayout(9,1,3,3));
+		otherComponentsPanel.setLayout(new GridLayout(6,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 		JPanel textbox=new JPanel();
@@ -123,7 +123,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
 		otherComponentsPanel.add(nextprevPannel);
-		otherComponentsPanel.add(new JPanel());
 		JTextField textField = new JTextField("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setEditable(false);
@@ -148,7 +147,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		tf1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textbox.add(tf1);
 		otherComponentsPanel.add(textbox);
-		otherComponentsPanel.add(new JPanel());
 		JPanel panelSchedButton =new JPanel();
 		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
 		panelSchedButton.add(new JPanel());
@@ -160,7 +158,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
 		otherComponentsPanel.add(panelSchedButton);
-		otherComponentsPanel.add(new JPanel());
 		
 		c.gridx=0;
 		c.gridy=3;
@@ -235,7 +232,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	private void showSchedule(@SuppressWarnings("unused") List<LessonGroup> schedule) {
-		// TODO Auto-generated method stub	
+		for(LessonGroup lg : schedule){
+		}
 
 	}
 }
