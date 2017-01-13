@@ -136,8 +136,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		JRadioButton b2= new JRadioButton("מספר מינימלי של חלונות");
 		b2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(b2);
-		textbox.setLayout(new GridLayout(1,12));
-		for(int ¢=0 ; ¢ < 10; ++¢)
+		textbox.setLayout(new GridLayout(1,6));
+		for(int ¢=0 ; ¢ < 4; ++¢)
 			textbox.add(new JPanel());
 		JTextField tf = new JTextField();
 		tf.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
