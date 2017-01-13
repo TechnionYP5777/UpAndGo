@@ -239,7 +239,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			for (Lesson l : lg.getLessons()) {
 				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue() % 7 - 2;
 				int startRow = 2 * (l.getStartTime().getTime().getHour() - 7)
-						- (l.getStartTime().getTime().getMinute() > 0 ? 0 : 1);
+						- (l.getStartTime().getTime().getMinute() > 0 ? -1 : 0 );
 				int endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
 						- (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
 				rows = new int[endRow - startRow + 1];
