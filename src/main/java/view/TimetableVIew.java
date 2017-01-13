@@ -98,12 +98,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
 			table.getColumnModel().getColumn(¢).setResizable(false);
 		table.setRowHeight(30);
-		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
-		c.gridheight=3;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = c.weighty = 1.0;
+		c.fill = GridBagConstraints.BOTH;
+		
 		add(scroll,c);
 		
 		JPanel otherComponentsPanel=new JPanel();
@@ -158,6 +158,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		c.gridx=0;
 		c.gridy=3;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		add(otherComponentsPanel,c);
 		setEvents();
 
