@@ -6,7 +6,7 @@ import java.util.List;
 import model.course.Course;
 
 public abstract class Catalog {
-	protected final List<Course> obligatory, freeChoice;
+	List<Course> obligatory, freeChoice;
 	int REQ_OBLIGATORY_POINTS;
 	int REQ_FREE_CHOICE_POINTS;
 
