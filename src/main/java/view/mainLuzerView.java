@@ -69,7 +69,9 @@ public class mainLuzerView {
 
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
-		mainLuzer.setMinimumSize(new Dimension(600, 500));
+		mainLuzer.getContentPane().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		mainLuzer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		mainLuzer.setMinimumSize(new Dimension(1100, 600));
 		mainLuzer.setBounds(100, 100, 450, 300);
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -115,10 +117,13 @@ public class mainLuzerView {
 		TimetableVIew timeTbl = new TimetableVIew();
 		
 		JPanel mainPane = new JPanel();
+		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainPane.setLayout( new BorderLayout() );
 		container.add( mainPane );
 		
 		JPanel panel1 = new JPanel();
+		panel1.setPreferredSize(new Dimension(280, 500));
+		panel1.setMinimumSize(new Dimension(280, 500));
 		panel1.setLayout(new BorderLayout());
 		panel1.add(avl, BorderLayout.CENTER);
 		JPanel panel2 = new JPanel();
@@ -126,6 +131,9 @@ public class mainLuzerView {
 		panel2.add(timeTbl, BorderLayout.CENTER);
 	
 	    JSplitPane splitPaneV = new JSplitPane( JSplitPane.VERTICAL_SPLIT );
+	    splitPaneV.setOneTouchExpandable(true);
+	    splitPaneV.setAlignmentY(Component.CENTER_ALIGNMENT);
+	    splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    mainPane.add( splitPaneV, BorderLayout.CENTER );
 
 	   JSplitPane splitPaneH = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
