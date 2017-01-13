@@ -124,26 +124,20 @@ public class mainLuzerView {
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainPane.setLayout(new BorderLayout());
 		c.add(mainPane);
-		JPanel panel1 = setCoursesPane(avl);
-		JPanel panel2 = setTablePane(timeTbl);
-		JSplitPane splitPaneV = setVerticalSplit();
-		mainPane.add(splitPaneV, BorderLayout.CENTER);
-		setHorizontalSplit(panel1, panel2, splitPaneV);
+		setSplitPane(mainPane, setCoursesPane(avl), setTablePane(timeTbl));
 	}
 
-	private static void setHorizontalSplit(JPanel panel1, JPanel panel2, JSplitPane splitPaneV) {
+	private static void setSplitPane(JPanel mainPane, JPanel panel1, JPanel panel2) {
+		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);	
+		splitPaneV.setOneTouchExpandable(true);
+		splitPaneV.setAlignmentY(Component.CENTER_ALIGNMENT);
+		splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
+		mainPane.add(splitPaneV, BorderLayout.CENTER);
+
 		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panel2);
 		splitPaneH.setRightComponent(panel1);
 		splitPaneV.setLeftComponent(splitPaneH);
-	}
-
-	private static JSplitPane setVerticalSplit() {
-		JSplitPane $ = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		$.setOneTouchExpandable(true);
-		$.setAlignmentY(Component.CENTER_ALIGNMENT);
-		$.setAlignmentX(Component.CENTER_ALIGNMENT);
-		return $;
 	}
 
 	private static JPanel setTablePane(TimetableVIew timeTbl) {
