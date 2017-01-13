@@ -5,11 +5,17 @@
 package view;
 
 import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
+import view.AvailableCourses.Message;
+
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JMenu;
@@ -18,8 +24,12 @@ import java.awt.ComponentOrientation;
 import java.awt.Container;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class mainLuzerView {
+
+	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
@@ -66,11 +76,24 @@ public class mainLuzerView {
 
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
+		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainLuzer.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(@SuppressWarnings("unused") WindowEvent __) {
+				if (Message.yesNoBox(FINISH_MSG, "CLOSE",
+						new ImageIcon("resources/cat-laptop-icon.png")) != JOptionPane.YES_OPTION)
+					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+				else {
+					Message.infoBox("Luzer says BYE", "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					System.exit(0);
+				}
+			}
+		});
 		mainLuzer.getContentPane().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setMinimumSize(new Dimension(1100, 600));
 		mainLuzer.setBounds(100, 100, 450, 300);
-		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 	void setMenu() {
