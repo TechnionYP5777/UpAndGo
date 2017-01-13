@@ -5,8 +5,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableColumn;
 
 import command.TimeTableCommand;
 import model.course.CourseId;
@@ -15,6 +16,8 @@ import property.CourseProperty;
 import property.TimeTableProperty;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -78,13 +81,28 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			}
 
 		){
+			//we want to cells to be non-editable
 			    @Override
 			    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
 			       return false;
 			    }	
 		}
 		);
+		
+		//Aligning text in the table
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
 		table.getColumnModel().getColumn(5).setPreferredWidth(15);
+		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+		
+		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
