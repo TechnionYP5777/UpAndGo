@@ -4,7 +4,7 @@ import java.awt.Font;
 
 public interface CellFont {
 
-    public Font getFont(int row, int column);
-    public void setFont(Font font, int row, int column);
-    public void setFont(Font font, int[] rows, int[] columns);
+    Font getFont(int row, int column);
+    void setFont(Font f, int row, int column);
+    void setFont(Font f, int[] rows, int[] columns);
 }

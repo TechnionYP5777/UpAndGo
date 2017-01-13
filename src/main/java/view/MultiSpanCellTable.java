@@ -25,11 +25,10 @@ public class MultiSpanCellTable extends JTable {
 	  
 	  @Override
 	public Rectangle getCellRect(int row, int column, boolean includeSpacing) {
-	    Rectangle sRect = super.getCellRect(row,column,includeSpacing);
+	    Rectangle $ = super.getCellRect(row,column,includeSpacing);
 	    if ((row <0) || (column<0) ||
-	        (getRowCount() <= row) || (getColumnCount() <= column)) {
-	        return sRect;
-	    }
+	        (getRowCount() <= row) || (getColumnCount() <= column))
+			return $;
 	    CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 	    if (! cellAtt.isVisible(row,column)) {
 	      int temp_row    = row;
@@ -44,20 +43,18 @@ public class MultiSpanCellTable extends JTable {
 	    Rectangle cellFrame = new Rectangle();
 	    int aCellHeight = rowHeight + rowMargin;
 	    cellFrame.y = row * aCellHeight;
-	    cellFrame.height = n[CellSpan.ROW] * aCellHeight;
+	    cellFrame.height = aCellHeight * n[CellSpan.ROW];
 	    
 	    Enumeration eeration = getColumnModel().getColumns();
-	    while (eeration.hasMoreElements()) {
-	      TableColumn aColumn = (TableColumn)eeration.nextElement();
-	      cellFrame.width = aColumn.getWidth() + columnMargin-1;
-	      if (index == column) break;
-	      cellFrame.x += cellFrame.width;
-	      index++;
-	    }
-	    for (int i=0;i< n[CellSpan.COLUMN]-1;i++) {
-	      TableColumn aColumn = (TableColumn)eeration.nextElement();
-	      cellFrame.width += aColumn.getWidth() + columnMargin;
-	    }
+	    for (; eeration.hasMoreElements(); ++index) {
+			TableColumn aColumn = (TableColumn) eeration.nextElement();
+			cellFrame.width = columnMargin + aColumn.getWidth() - 1;
+			if (index == column)
+				break;
+			cellFrame.x += cellFrame.width;
+		}
+	    for (int ¢=0;¢< n[CellSpan.COLUMN]-1;++¢)
+			cellFrame.width += ((TableColumn) eeration.nextElement()).getWidth() + columnMargin;
 	    
 	    
 
@@ -72,38 +69,38 @@ public class MultiSpanCellTable extends JTable {
 	  }
 	  
 	  
-	  private int[] rowColumnAtPoint(Point point) {
-	    int[] retValue = {-1,-1};
-	    int row = point.y / (rowHeight + rowMargin);
-	    if ((row <0)||(getRowCount() <= row)) return retValue;
-	    int column = getColumnModel().getColumnIndexAtX(point.x);
+	  private int[] rowColumnAtPoint(Point p) {
+	    int[] $ = {-1,-1};
+	    int row = p.y / (rowHeight + rowMargin);
+	    if ((row <0)||(getRowCount() <= row)) return $;
+	    int column = getColumnModel().getColumnIndexAtX(p.x);
 
 	    CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 
 	    if (cellAtt.isVisible(row,column)) {
-	      retValue[CellSpan.COLUMN] = column;
-	      retValue[CellSpan.ROW   ] = row;
-	      return retValue;
+	      $[CellSpan.COLUMN] = column;
+	      $[CellSpan.ROW   ] = row;
+	      return $;
 	    }
-	    retValue[CellSpan.COLUMN] = column + cellAtt.getSpan(row,column)[CellSpan.COLUMN];
-	    retValue[CellSpan.ROW   ] = row + cellAtt.getSpan(row,column)[CellSpan.ROW];
-	    return retValue;
+	    $[CellSpan.COLUMN] = column + cellAtt.getSpan(row,column)[CellSpan.COLUMN];
+	    $[CellSpan.ROW   ] = row + cellAtt.getSpan(row,column)[CellSpan.ROW];
+	    return $;
 	  }
 
 	  
 	  @Override
-	public int rowAtPoint(Point point) {
-	    return rowColumnAtPoint(point)[CellSpan.ROW];
+	public int rowAtPoint(Point ¢) {
+	    return rowColumnAtPoint(¢)[CellSpan.ROW];
 	  }
 	  @Override
-	public int columnAtPoint(Point point) {
-	    return rowColumnAtPoint(point)[CellSpan.COLUMN];
+	public int columnAtPoint(Point ¢) {
+	    return rowColumnAtPoint(¢)[CellSpan.COLUMN];
 	  }
 	 
 
 	  
 	@Override
-	public void columnSelectionChanged(ListSelectionEvent e) {
+	public void columnSelectionChanged(ListSelectionEvent __) {
 	    repaint();
 	  }
 
@@ -111,19 +108,16 @@ public class MultiSpanCellTable extends JTable {
 	public void valueChanged(ListSelectionEvent e) {
 	    int firstIndex = e.getFirstIndex();
 	    int  lastIndex = e.getLastIndex();
-	    if (firstIndex == -1 && lastIndex == -1) { // Selection cleared.
-	      repaint();
-	    }
+	    if (firstIndex == -1 && lastIndex == -1)
+			repaint();
 	    Rectangle dirtyRegion = getCellRect(firstIndex, 0, false);
 	    int numCoumns = getColumnCount();
 	    int index = firstIndex;
-	    for (int i=0;i<numCoumns;i++) {
-	      dirtyRegion.add(getCellRect(index, i, false));
-	    }
+	    for (int ¢=0;¢<numCoumns;++¢)
+			dirtyRegion.add(getCellRect(index, ¢, false));
 	    index = lastIndex;
-	    for (int i=0;i<numCoumns;i++) {
-	      dirtyRegion.add(getCellRect(index, i, false));
-	    }
+	    for (int ¢=0;¢<numCoumns;++¢)
+			dirtyRegion.add(getCellRect(index, ¢, false));
 	    repaint(dirtyRegion.x, dirtyRegion.y, dirtyRegion.width, dirtyRegion.height);
 	  }
 	 

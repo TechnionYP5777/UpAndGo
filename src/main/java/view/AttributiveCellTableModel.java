@@ -69,16 +69,11 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	      throw new IllegalArgumentException("addColumn() - null parameter");
 	    columnIdentifiers.addElement(columnName);
 	    int index = 0;
-	    Enumeration eeration = dataVector.elements();
-	    while (eeration.hasMoreElements()) {
-	      Object value;
-	      if ((columnData != null) && (index < columnData.size()))
-	    value = columnData.elementAt(index);
-	      else
-	  value = null;
-	      ((Vector)eeration.nextElement()).addElement(value);
-	      index++;
-	    }
+	    for (Enumeration eeration = dataVector.elements(); eeration.hasMoreElements();) {
+			Object value = columnData == null || index >= columnData.size() ? null : columnData.elementAt(index);
+			((Vector) eeration.nextElement()).addElement(value);
+			++index;
+		}
 
 	    //
 	    cellAtt.addColumn();
@@ -90,12 +85,10 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	@Override
 	public void addRow(Vector rowData) {
 	    Vector newData = null;
-	    if (rowData == null) {
-	      newData = new Vector(getColumnCount());
-	    }
-	    else {
-	      rowData.setSize(getColumnCount());
-	    }
+	    if (rowData != null)
+			rowData.setSize(getColumnCount());
+		else
+			newData = new Vector(getColumnCount());
 	    dataVector.addElement(newData);
 
 	    //
@@ -108,12 +101,10 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	  @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insertRow(int row, Vector rowData) {
-	    if (rowData == null) {
-	      rowData = new Vector(getColumnCount());
-	    }
-	    else {
-	      rowData.setSize(getColumnCount());
-	    }
+	    if (rowData != null)
+			rowData.setSize(getColumnCount());
+		else
+			rowData = new Vector(getColumnCount());
 
 	    dataVector.insertElementAt(rowData, row);
 
@@ -132,22 +123,11 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	    int numColumns = getColumnCount();
 	    int numRows    = getRowCount();
 	    if ((newCellAtt.getSize().width  != numColumns) ||
-	        (newCellAtt.getSize().height != numRows)) {
-	      newCellAtt.setSize(new Dimension(numRows, numColumns));
-	    }
+	        (newCellAtt.getSize().height != numRows))
+			newCellAtt.setSize(new Dimension(numRows, numColumns));
 	    cellAtt = newCellAtt;
 	    fireTableDataChanged();
 	  }
-
-	  /*
-	  public void changeCellAttribute(int row, int column, Object command) {
-	    cellAtt.changeAttribute(row, column, command);
-	  }
-
-	  public void changeCellAttribute(int[] rows, int[] columns, Object command) {
-	    cellAtt.changeAttribute(rows, columns, command);
-	  }
-	  */
 	    
 	}
 

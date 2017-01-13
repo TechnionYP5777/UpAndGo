@@ -13,7 +13,7 @@ import javax.swing.table.TableCellRenderer;
 public class MultiSpanCellTableUI extends BasicTableUI {
 
 	  @Override
-	public void paint(Graphics g, JComponent c) {
+	public void paint(Graphics g, JComponent __) {
 	    Rectangle oldClipBounds = g.getClipBounds();
 	    Rectangle clipBounds    = new Rectangle(oldClipBounds);
 	    int tableWidth   = table.getColumnModel().getTotalColumnWidth();
@@ -27,12 +27,9 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 	      tableWidth, table.getRowHeight() + table.getRowMargin());
 	    rowRect.y = firstIndex*rowRect.height;
 
-	    for (int index = firstIndex; index <= lastIndex; index++) {
-	      if (rowRect.intersects(clipBounds)) {
-	        //System.out.println();                  // debug
-	        //System.out.print("" + index +": ");    // row
-	  paintRow(g, index);
-	      }
+	    for (int index = firstIndex; index <= lastIndex; ++index) {
+	      if (rowRect.intersects(clipBounds))
+			paintRow(g, index);
 	      rowRect.y += rowRect.height;
 	    }
 	    g.setClip(oldClipBounds);
@@ -44,27 +41,24 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 	    
 	    AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
 	    CellSpan cellAtt = (CellSpan)tableModel.getCellAttribute();
-	    int numColumns = table.getColumnCount();
-
-	    for (int column = 0; column < numColumns; column++) {
-	      Rectangle cellRect = table.getCellRect(row,column,true);
-	      int cellRow,cellColumn;
-	      if (cellAtt.isVisible(row,column)) {
-	  cellRow    = row;
-	  cellColumn = column;
-	    //  System.out.print("   "+column+" ");  // debug
-	      } else {
-	  cellRow    = row + cellAtt.getSpan(row,column)[CellSpan.ROW];
-	  cellColumn = column + cellAtt.getSpan(row,column)[CellSpan.COLUMN];
-	    //  System.out.print("  ("+column+")");  // debug
-	      }
-	      if (cellRect.intersects(rect)) {
-	  drawn = true;
-	  paintCell(g, cellRect, cellRow, cellColumn);
-	      } else {
-	  if (drawn) break;
-	      } 
-	    }
+	    for (int numColumns = table.getColumnCount(), column = 0; column < numColumns; ++column) {
+			Rectangle cellRect = table.getCellRect(row, column, true);
+			int cellRow, cellColumn;
+			if (cellAtt.isVisible(row, column)) {
+				cellRow = row;
+				cellColumn = column;
+			} else {
+				cellRow = row + cellAtt.getSpan(row, column)[CellSpan.ROW];
+				cellColumn = column + cellAtt.getSpan(row, column)[CellSpan.COLUMN];
+			}
+			if (!cellRect.intersects(rect)) {
+				if (drawn)
+					break;
+			} else {
+				drawn = true;
+				paintCell(g, cellRect, cellRow, cellColumn);
+			}
+		}
 
 	  }
 
@@ -90,9 +84,8 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 	      TableCellRenderer renderer = table.getCellRenderer(row, column);
 	      Component component = table.prepareRenderer(renderer, row, column);
 
-	      if (component.getParent() == null) {
-	  rendererPane.add(component);
-	      }
+	      if (component.getParent() == null)
+			rendererPane.add(component);
 	      rendererPane.paintComponent(g, component, table, cellRect.x, cellRect.y,
 	          cellRect.width, cellRect.height, true);
 	    }
