@@ -5,11 +5,15 @@
 package view;
 
 import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JMenu;
@@ -18,8 +22,17 @@ import java.awt.ComponentOrientation;
 import java.awt.Container;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import java.awt.Rectangle;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 
 public class mainLuzerView {
+
+	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
@@ -66,11 +79,24 @@ public class mainLuzerView {
 
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
+		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainLuzer.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(@SuppressWarnings("unused") WindowEvent __) {
+				int userChoise =Message.yesNoCancleBox(FINISH_MSG, "CLOSE",new ImageIcon("resources/cat-laptop-icon.png"));
+				if ( userChoise == JOptionPane.CANCEL_OPTION)
+					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+				else {
+					Message.infoBox("Luzer says BYE", "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					System.exit(0);
+				}
+			}
+		});
 		mainLuzer.getContentPane().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setMinimumSize(new Dimension(1100, 600));
 		mainLuzer.setBounds(100, 100, 450, 300);
-		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 	void setMenu() {
@@ -121,6 +147,7 @@ public class mainLuzerView {
 
 	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
+		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainPane.setLayout(new BorderLayout());
 		c.add(mainPane);
@@ -128,7 +155,9 @@ public class mainLuzerView {
 	}
 
 	private static void setSplitPane(JPanel mainPane, JPanel panel1, JPanel panel2) {
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);	
+		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		splitPaneV.setResizeWeight(0.5);
+		splitPaneV.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		splitPaneV.setOneTouchExpandable(true);
 		splitPaneV.setAlignmentY(Component.CENTER_ALIGNMENT);
 		splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -136,8 +165,10 @@ public class mainLuzerView {
 
 		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panel2);
+		splitPaneH.setResizeWeight(1);
 		splitPaneH.setRightComponent(panel1);
 		splitPaneV.setLeftComponent(splitPaneH);
+
 	}
 
 	private static JPanel setTablePane(TimetableVIew timeTbl) {
@@ -155,4 +186,5 @@ public class mainLuzerView {
 		$.add(avl, BorderLayout.CENTER);
 		return $;
 	}
+	
 }

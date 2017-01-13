@@ -32,7 +32,6 @@ import java.awt.Dimension;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListModel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 import javax.swing.JCheckBox;
@@ -474,15 +473,4 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		return chckbxTaken.isSelected();
 	}
 
-	// *************************** message box class **********************//
-
-	///
-	// This class is a massage box class
-	///
-	public static class Message {
-
-		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
-			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
-		}
-	}
 }
