@@ -18,4 +18,7 @@ public class Message {
 	public static int yesNoBox(String infoMessage, String titleBar, ImageIcon i) {
 		return JOptionPane.showConfirmDialog(null, infoMessage, titleBar,JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,i );
 	}
+	public static int yesNoCancleBox(String infoMessage, String titleBar, ImageIcon i) {
+		return JOptionPane.showConfirmDialog(null, infoMessage, titleBar,JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,i );
+	}
 }

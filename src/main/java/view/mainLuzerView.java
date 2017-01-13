@@ -78,8 +78,8 @@ public class mainLuzerView {
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(@SuppressWarnings("unused") WindowEvent __) {
-				if (Message.yesNoBox(FINISH_MSG, "CLOSE",
-						new ImageIcon("resources/cat-laptop-icon.png")) != JOptionPane.YES_OPTION)
+				int userChoise =Message.yesNoCancleBox(FINISH_MSG, "CLOSE",new ImageIcon("resources/cat-laptop-icon.png"));
+				if ( userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
 					Message.infoBox("Luzer says BYE", "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
@@ -178,5 +178,10 @@ public class mainLuzerView {
 		$.setLayout(new BorderLayout());
 		$.add(avl, BorderLayout.CENTER);
 		return $;
+	}
+	
+	
+	private static void createEvents() {
+		
 	}
 }
