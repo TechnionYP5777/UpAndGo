@@ -22,7 +22,7 @@ import model.course.Course;
 * @author sapir
 * @since Jan 13, 2017
 */
-public class CSCatalogLoader extends CatalogLoader {
+public abstract class CSCatalogLoader extends CatalogLoader {
 	protected List<Course> listA, listB;
 	CSCatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);

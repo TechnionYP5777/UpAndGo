@@ -16,6 +16,6 @@ public class CatalogLoaderTest {
 	@Test
 	@SuppressWarnings("static-method")
 	public void Test0() {
-		CatalogLoader cl = new CSCatalogLoader("resources\\testXML\\SoftwareEngineering.XML", new ConcreteModel(new XmlCourseLoader("resources\\testXML\\REP2.XML")));
+		CatalogLoader cl = new SECatalogLoader("resources\\testXML\\SoftwareEngineering.XML", new ConcreteModel(new XmlCourseLoader("resources\\testXML\\REP2.XML")));
 	}
 }
