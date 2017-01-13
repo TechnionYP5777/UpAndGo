@@ -85,23 +85,22 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		//Aligning text in the table
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableCellRenderer bottomRenderer = new DefaultTableCellRenderer();
+		bottomRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-		table.getColumnModel().getColumn(0).setPreferredWidth(90);
-		table.getColumnModel().getColumn(1).setPreferredWidth(90);
-		table.getColumnModel().getColumn(2).setPreferredWidth(90);
-		table.getColumnModel().getColumn(3).setPreferredWidth(90);
-		table.getColumnModel().getColumn(4).setPreferredWidth(90);
+		for(int i = 0; i<table.getColumnCount()-1; i++){
+			table.getColumnModel().getColumn(i).setPreferredWidth(90);
+		}
 		table.getColumnModel().getColumn(5).setPreferredWidth(10);
-		table.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-		
+		for(int i = 0; i<table.getColumnCount()-1; i++){
+			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+		}
+		table.getColumnModel().getColumn(5).setCellRenderer(bottomRenderer);
+		for(int i = 0; i<table.getColumnCount(); i++){
+			table.getColumnModel().getColumn(i).setResizable(false);
+		}
+		table.setRowHeight(30);
 		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
