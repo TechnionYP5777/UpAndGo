@@ -89,17 +89,14 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		bottomRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-		for(int i = 0; i<table.getColumnCount()-1; i++){
-			table.getColumnModel().getColumn(i).setPreferredWidth(90);
-		}
+		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+			table.getColumnModel().getColumn(¢).setPreferredWidth(90);
 		table.getColumnModel().getColumn(5).setPreferredWidth(10);
-		for(int i = 0; i<table.getColumnCount()-1; i++){
-			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-		}
+		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+			table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
 		table.getColumnModel().getColumn(5).setCellRenderer(bottomRenderer);
-		for(int i = 0; i<table.getColumnCount(); i++){
-			table.getColumnModel().getColumn(i).setResizable(false);
-		}
+		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
+			table.getColumnModel().getColumn(¢).setResizable(false);
 		table.setRowHeight(30);
 		
 		//arrange all the components in the pannel using GridBagLayout
