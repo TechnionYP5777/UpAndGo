@@ -1,10 +1,11 @@
 package user;
 
 import java.util.List;
-import catalog.Catalog;
 import model.course.Course;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
+
+import catalog.Catalog;
 
 public class User {
 	List<Course> courses;
