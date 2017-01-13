@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 
 import command.CourseCommand;
 import model.CourseModel;
@@ -26,6 +27,8 @@ public class CourseListController implements Controller{
 		this.model.addPropertyChangeListener(CourseProperty.FACULTY_LIST, this.view);
 
 		this.view.addActionListener(this);
+		
+		init();
 	}
 
 	@Override
@@ -52,5 +55,19 @@ public class CourseListController implements Controller{
 		model.loadQuery("");
 		model.getChosenCourseNames();
 		model.loadFacultyNames();
+	}
+
+	void loadChosenCoursesDetails() {
+		model.loadChosenCoursesDetails();
+	}
+	
+	@Override
+	public void registerListenerToProperty(PropertyChangeListener l, String p) {
+		model.addPropertyChangeListener(p, l);
+	}
+
+	@Override
+	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
+		model.removePropertyChangeListener(p, l);
 	}
 }

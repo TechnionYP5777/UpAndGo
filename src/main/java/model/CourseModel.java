@@ -188,6 +188,11 @@ public class CourseModel implements Model {
 				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, faculties))));
 	}
 	
+	public void loadChosenCoursesDetails() {
+		this.listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, this.pickedCourseList))));
+	}
+	
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)

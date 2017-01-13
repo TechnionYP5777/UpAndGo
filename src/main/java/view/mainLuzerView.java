@@ -22,6 +22,9 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
@@ -31,10 +34,11 @@ import java.awt.event.ActionEvent;
 public class mainLuzerView {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
-
+	private static final String BYE_MSG ="Luzer says BYE";
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
 	private JMenuItem mnItGilayon;
+	static List<ActionListener> listeners;
 
 	/**
 	 * Launch the application.
@@ -70,6 +74,7 @@ public class mainLuzerView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		listeners = new ArrayList<>();
 		setMainPageProperties();
 		setMenu();
 		setAvailCoursesView();
@@ -88,7 +93,7 @@ public class mainLuzerView {
 				if ( userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
-					Message.infoBox("Luzer says BYE", "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					Message.infoBox(BYE_MSG, "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
 				}
 			}
@@ -203,4 +208,5 @@ public class mainLuzerView {
 			}
 		});
 	}
+	
 }
