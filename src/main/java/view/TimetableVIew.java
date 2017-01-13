@@ -87,6 +87,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		//Aligning text in the table
 		DefaultTableCellRenderer bottomRenderer = new DefaultTableCellRenderer();
 		bottomRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
+		bottomRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
 		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
@@ -97,7 +98,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		table.getColumnModel().getColumn(5).setCellRenderer(bottomRenderer);
 		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
 			table.getColumnModel().getColumn(¢).setResizable(false);
-		table.setRowHeight(30);
+		table.setRowHeight(40);
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
