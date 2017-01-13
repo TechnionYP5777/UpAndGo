@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import model.CourseModel;
 import model.course.Course;
 import catalog.*;
+
 /**
  * 
  * @author sapir
@@ -26,7 +27,7 @@ public class SECatalogLoader extends CSCatalogLoader {
 	List<Course> core;
 	List<List<Course>> scientificChain;
 	SoftwareEngineering theCatalog;
-	
+
 	SECatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);
 		core = new ArrayList<>();
@@ -73,7 +74,7 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(otherScientCourses);
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
 	}
-	
+
 	public Catalog getCatalog() {
 		return theCatalog;
 	}

@@ -50,12 +50,12 @@ public abstract class CatalogLoader {
 		}
 	}
 
-	protected static void addCoursesToList(NodeList coursesList, List<Course> l, CourseModel m) {
+	protected static void addCoursesToList(NodeList coursesList, List<Course> cs, CourseModel m) {
 		for (int i = 0; i < coursesList.getLength(); ++i) {
 			Node p = coursesList.item(i);
 			Course c = m.getCourseById(((Element) p).getAttribute("number"));
 			if (c != null)
-				l.add(c);
+				cs.add(c);
 		}
 	}
 }
