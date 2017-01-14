@@ -48,7 +48,6 @@ public class Message {
 					+ "<br>"+ infoMessage+ "<br>" //
 						+ "<br>more cats here:<br> <a href=\"http://google.com/\">http://www.iconka.com</a>" //
 						+ "</body></html>");
-
 		// handle link events
 		ep.addHyperlinkListener(new HyperlinkListener() {
 			@Override
