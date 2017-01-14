@@ -313,14 +313,16 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	@Override
 	public LocalTime getMinStartTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return !startTimeChkBox.isSelected() ? null
+				: LocalTime.of(Integer.parseInt(hours[startTimeComBoxHours.getSelectedIndex()]),
+						Integer.parseInt(minutes[startTimeComBoxMins.getSelectedIndex()]));
 	}
 	
 	@Override
 	public LocalTime getMaxEndTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return !endTimeChkBox.isSelected() ? null
+				: LocalTime.of(Integer.parseInt(hours[endTimeComBoxHours.getSelectedIndex()]),
+						Integer.parseInt(minutes[endTimeComBoxMins.getSelectedIndex()]));
 	}
 	
 	@SuppressWarnings("unchecked")
