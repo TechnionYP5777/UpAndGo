@@ -5,7 +5,6 @@ package catalog.loader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +26,15 @@ import model.course.Course;
  */
 public abstract class CatalogLoader {
 	protected List<Course> obligatory, malags;
+	NodeList coursesList;
 
+	@SuppressWarnings("resource")
 	CatalogLoader(String catalogXmlPath, CourseModel m) {
 		obligatory = new ArrayList<>();
 		malags = new ArrayList<>();
 		try {
-			NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new FileInputStream(catalogXmlPath)))
-					.getElementsByTagName("CourseList");
+			coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(new InputSource(new FileInputStream(catalogXmlPath))).getElementsByTagName("CourseList");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Element elem = (Element) coursesList.item(i);
 				String listName = elem.getAttribute("name");
