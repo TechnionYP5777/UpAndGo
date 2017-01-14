@@ -21,6 +21,8 @@ public class MenuController implements Controller {
 		this.ttCtrl = ttc;
 		
 		this.view.addActionListener(this);
+		
+		init();
 	}
 
 	@Override

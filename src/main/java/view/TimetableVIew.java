@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -79,7 +80,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			       return false;
 			    }	
 		};
-	static List<ActionListener> listeners;
+	static List<ActionListener> listeners = new ArrayList<>();
 	static boolean scheduleWasRequested;
 	/**
 	 * Create the panel.
