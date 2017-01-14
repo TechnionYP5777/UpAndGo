@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import catalog.Catalog;
 import catalog.SoftwareEngineering;
 import catalog.loader.SECatalogLoader;
 import model.CourseModel;
@@ -65,7 +64,6 @@ public class UserGrades extends JFrame {
 			@Override
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
-				@SuppressWarnings("unused")
 				String result = "";
 				try {
 					Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
