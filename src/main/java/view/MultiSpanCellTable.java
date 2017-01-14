@@ -18,8 +18,8 @@ public class MultiSpanCellTable extends JTable {
 	    super(model);
 	    setUI(new MultiSpanCellTableUI());
 	    getTableHeader().setReorderingAllowed(false);
-	    setCellSelectionEnabled(true);
-	    setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	    setCellSelectionEnabled(false);
+	    //setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 	  }
 	  
 	  

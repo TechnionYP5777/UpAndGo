@@ -80,7 +80,8 @@ public class TimetableViewTest {
 			@SuppressWarnings("unused")
 			@Override
 			public void run() {
-				new TimetableViewTest();		
+				new TimetableViewTest();
+				
 			}
 			
 		});
