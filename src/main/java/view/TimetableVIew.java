@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -89,9 +90,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		//Aligning text in the table
-		DefaultTableCellRenderer bottomRenderer = new DefaultTableCellRenderer();
-		bottomRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
-		bottomRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
+		bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
+		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
 		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
@@ -99,7 +100,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		table.getColumnModel().getColumn(5).setPreferredWidth(10);
 		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
 			table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(5).setCellRenderer(bottomRenderer);
+		table.getColumnModel().getColumn(5).setCellRenderer(bottomCenterRenderer);
 		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
 			table.getColumnModel().getColumn(¢).setResizable(false);
 		table.setRowHeight(40);
@@ -252,7 +253,13 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				for (int ¢ = 0; ¢ < rows.length; ++¢)
 					rows[¢] = ¢ + startRow;
 				cellAtt.combine(rows, columns);
-				cellColor.setBackground(Color.MAGENTA, rows[0],columns[0]);
+				cellColor.setBackground(Color.lightGray, rows[0],columns[0]);
+				
+				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+				centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+				table.getColumnModel().getColumn(columns[0]).setCellRenderer(centerRenderer);
+				String newline = System.getProperty("line.separator");
+				table.setValueAt(l.getCourse() + " ב" + newline + l.getPlace(),rows[0],columns[0]);
 				
 			}
 
@@ -278,3 +285,4 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		return null;
 	}
 }
+

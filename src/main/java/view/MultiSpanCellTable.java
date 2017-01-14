@@ -1,12 +1,12 @@
 package view;
 
 import java.awt.Dimension;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Enumeration;
 
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
