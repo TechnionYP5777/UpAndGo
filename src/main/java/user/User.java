@@ -13,8 +13,8 @@ public class User {
 	
 	User(String grades, Catalog c) {
 		catalog = c;
-	    for (final Element ¢ : Parser.parse(grades, "http://techmvs.technion.ac.il").select(null))
-			System.out.println("#### " + ¢);
+	    //for (final Element ¢ : Parser.parse(grades, "http://techmvs.technion.ac.il").select(null))
+		//	System.out.println("#### " + ¢);
 
 	}
 }
