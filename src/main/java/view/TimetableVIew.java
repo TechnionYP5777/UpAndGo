@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -255,5 +256,25 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				
 			}
 
+	}
+	@Override
+	public boolean isDaysoffCount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isBlankSpaceCount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public LocalTime getMinStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public LocalTime getMaxEndTime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
