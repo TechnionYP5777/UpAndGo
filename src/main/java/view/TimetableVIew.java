@@ -13,8 +13,11 @@ import java.beans.PropertyChangeEvent;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.print.attribute.AttributeSet;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,23 +25,27 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import command.TimeTableCommand;
 import model.course.Lesson;
 import model.course.LessonGroup;
 import property.TimeTableProperty;
 
+
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel implements ITimeTableView {
 	private MultiSpanCellTable table;
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
-	private JButton schedBtn = new JButton("בנה מערכת");
+	static JButton schedBtn = new JButton("בנה מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
-	JTextField startTime;
-	JTextField endTime;
-	
+	JPanel startTime;
+	JPanel endTime;
+	final String[] hours = {"07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"};
+	final String[] minutes = {"00", "30"};
 	final AttributiveCellTableModel defaultTableModel = new AttributiveCellTableModel(
 			new Object[][] {
 				
@@ -158,8 +165,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		for(int ¢=0 ; ¢ < 7; ++¢)
 			startTimePanel.add(new JPanel());
 		
-		startTime = new JTextField();
-		startTime.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTime = new JPanel(new GridLayout(1,2));
+		startTime.add(new JComboBox<>(hours));
+		startTime.add(new JComboBox<>(minutes));
 		startTimePanel.add(startTime);
 		
 		JLabel label1 = new JLabel("שעת התחלה:");
@@ -175,8 +183,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		for(int ¢=0 ; ¢ < 7; ++¢)
 			endTimePannel.add(new JPanel());
 		
-		endTime = new JTextField();
-		endTime.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTime = new JPanel(new GridLayout(1,2));
+		endTime.add(new JComboBox<>(hours));
+		endTime.add(new JComboBox<>(minutes));
 		endTimePannel.add(endTime);
 		
 		JLabel label2 = new JLabel("שעת סיום:");
@@ -254,7 +263,28 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		listeners.remove(¢);
 	}
 
-
+	@Override
+	public boolean isDaysoffCount() {
+		return isDaysOff.isSelected();
+	}
+	
+	@Override
+	public boolean isBlankSpaceCount() {
+		return isMinWindows.isSelected();
+	}
+	
+	@Override
+	public LocalTime getMinStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public LocalTime getMaxEndTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -295,29 +325,11 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 				table.getColumnModel().getColumn(columns[0]).setCellRenderer(centerRenderer);
-				String newline = System.getProperty("line.separator");
-				table.setValueAt(l.getCourse() + " ב" + newline + l.getPlace(),rows[0],columns[0]);
+				table.setValueAt(l.getCourse() + " ב" +  l.getPlace(),rows[0],columns[0]);
 				
 			}
 
 	}
-	@Override
-	public boolean isDaysoffCount() {
-		return isDaysOff.isSelected();
-	}
-	@Override
-	public boolean isBlankSpaceCount() {
-		return isMinWindows.isSelected();
-	}
-	@Override
-	public LocalTime getMinStartTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public LocalTime getMaxEndTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
 
