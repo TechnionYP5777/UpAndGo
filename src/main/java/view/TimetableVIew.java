@@ -115,7 +115,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		otherComponentsPanel.setLayout(new GridLayout(6,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
-		JPanel textbox=new JPanel();
 
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(nextBtn);
@@ -124,31 +123,41 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
+		
 		otherComponentsPanel.add(nextprevPannel);
+		
 		JTextField textField = new JTextField("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setEditable(false);
 		textField.setBackground(UIManager.getColor("Button.background"));
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(textField);
-		JCheckBox b1 = new JCheckBox("ימי חופש");
-		b1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(b1);
-		JCheckBox b2= new JCheckBox("מספר מינימלי של חלונות");
-		b2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(b2);
-		textbox.setLayout(new GridLayout(1,6));
-		for(int ¢=0 ; ¢ < 4; ++¢)
-			textbox.add(new JPanel());
+		
+		JCheckBox isOffDays = new JCheckBox("ימי חופש");
+		isOffDays.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		otherComponentsPanel.add(isOffDays);
+		
+		JCheckBox isMinWindows= new JCheckBox("מספר מינימלי של חלונות");
+		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		otherComponentsPanel.add(isMinWindows);
+		
+		JPanel startEndTimetxtbox=new JPanel();
+		startEndTimetxtbox.setLayout(new GridLayout(1,9));
+		for(int ¢=0 ; ¢ < 7; ++¢)
+			startEndTimetxtbox.add(new JPanel());
+		
 		JTextField tf = new JTextField();
 		tf.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		textbox.add(tf);
+		startEndTimetxtbox.add(tf);
+		
 		JTextField tf1 = new JTextField("שעת התחלה:");
 		tf1.setEditable(false);
 		tf1.setFont(new Font("Dialog", Font.BOLD, 12));
 		tf1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		textbox.add(tf1);
-		otherComponentsPanel.add(textbox);
+		startEndTimetxtbox.add(tf1);
+		
+		otherComponentsPanel.add(startEndTimetxtbox);
+		
 		JPanel panelSchedButton =new JPanel();
 		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
 		panelSchedButton.add(new JPanel());
@@ -165,6 +174,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		c.gridy=3;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		add(otherComponentsPanel,c);
+		
 		setEvents();
 
 	}
