@@ -162,8 +162,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		otherComponentsPanel.add(isMinWindows);
 		
 		JPanel startTimePanel=new JPanel();
-		startTimePanel.setLayout(new GridLayout(1,9));
-		for(int ¢=0 ; ¢ < 7; ++¢)
+		startTimePanel.setLayout(new GridLayout(1,8));
+		for(int ¢=0 ; ¢ < 6; ++¢)
 			startTimePanel.add(new JPanel());
 		
 		startTime = new JPanel(new GridLayout(1,2));
@@ -171,17 +171,16 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		startTime.add(new JComboBox<>(minutes));
 		startTimePanel.add(startTime);
 		
-		JLabel label1 = new JLabel("שעת התחלה:");
-		label1.setBorder(null);
-		label1.setFont(new Font("Dialog", Font.BOLD, 12));
-		label1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startTimePanel.add(label1);
+		JCheckBox chkBox1 = new JCheckBox("שעת התחלה:");
+		chkBox1.setFont(new Font("Dialog", Font.BOLD, 12));
+		chkBox1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimePanel.add(chkBox1);
 		
 		otherComponentsPanel.add(startTimePanel);
 		
 		JPanel endTimePannel=new JPanel();
-		endTimePannel.setLayout(new GridLayout(1,9));
-		for(int ¢=0 ; ¢ < 7; ++¢)
+		endTimePannel.setLayout(new GridLayout(1,8));
+		for(int ¢=0 ; ¢ < 6; ++¢)
 			endTimePannel.add(new JPanel());
 		
 		endTime = new JPanel(new GridLayout(1,2));
@@ -189,10 +188,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		endTime.add(new JComboBox<>(minutes));
 		endTimePannel.add(endTime);
 		
-		JLabel label2 = new JLabel("שעת סיום:");
-		label2.setFont(new Font("Dialog", Font.BOLD, 12));
-		label2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		endTimePannel.add(label2);
+		JCheckBox chkBox2 = new JCheckBox("שעת סיום:");
+		chkBox2.setFont(new Font("Dialog", Font.BOLD, 12));
+		chkBox2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTimePannel.add(chkBox2);
 		
 		otherComponentsPanel.add(endTimePannel);
 		
