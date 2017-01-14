@@ -23,8 +23,9 @@ public class SECatalogLoader extends CSCatalogLoader {
 	List<List<Course>> scientificChain;
 	SoftwareEngineering theCatalog;
 
-	SECatalogLoader(String catalogXmlPath, CourseModel m) {
+	public SECatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);
+		System.out.println(m.getCoursesNames());
 		core = new ArrayList<>();
 		scientificChain = new ArrayList<>();
 		List<Course> physicsChain = new ArrayList<>();

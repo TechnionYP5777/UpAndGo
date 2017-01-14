@@ -92,7 +92,7 @@ public class mainLuzerView implements MenuView {
 				if (userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
-					Message.infoBox(BYE_MSG, "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					Message.hyperCatBox(BYE_MSG,"Bye Bye", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
 				}
 			}
