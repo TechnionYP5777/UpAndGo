@@ -5,6 +5,9 @@
 package view;
 
 import java.awt.EventQueue;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -22,19 +25,24 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+
+import model.course.CourseId;
+import property.CourseProperty;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class mainLuzerView {
+public class mainLuzerView implements View {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
-	private static final String BYE_MSG ="Luzer says BYE";
+	private static final String BYE_MSG = "Luzer says BYE";
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
 	private JMenuItem mnItGilayon;
@@ -81,16 +89,15 @@ public class mainLuzerView {
 		createEvents();
 	}
 
-
-
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(@SuppressWarnings("unused") WindowEvent __) {
-				int userChoise =Message.yesNoCancleBox(FINISH_MSG, "CLOSE",new ImageIcon("resources/cat-laptop-icon.png"));
-				if ( userChoise == JOptionPane.CANCEL_OPTION)
+				int userChoise = Message.yesNoCancleBox(FINISH_MSG, "CLOSE",
+						new ImageIcon("resources/cat-laptop-icon.png"));
+				if (userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
 					Message.infoBox(BYE_MSG, "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
@@ -153,7 +160,8 @@ public class mainLuzerView {
 
 	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
-		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
+		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+				new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainPane.setLayout(new BorderLayout());
 		c.add(mainPane);
@@ -192,21 +200,40 @@ public class mainLuzerView {
 		$.add(avl, BorderLayout.CENTER);
 		return $;
 	}
+
 	private void createEvents() {
 		mnItCatalog.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent __) {
-				//TODO: add impl.
+				// TODO: add impl.
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent __) {
-				//TODO: add impl.
+				// TODO: add impl.
 			}
 		});
 	}
-	
+
+
+	@Override
+	public void addActionListener(ActionListener ¢) {
+		listeners.add(¢);
+	}
+
+	@Override
+	public void removeActionListener(ActionListener ¢) {
+		listeners.remove(¢);
+	}
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		switch (evt.getPropertyName()) {
+		default:
+			break;
+		}
+	}
+
 }
