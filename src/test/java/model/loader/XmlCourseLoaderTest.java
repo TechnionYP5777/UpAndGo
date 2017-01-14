@@ -1,5 +1,7 @@
 package model.loader;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -59,6 +61,11 @@ public class XmlCourseLoaderTest {
 		assert "רפואה".equals(String.valueOf(coursesMap.get("274349").getFaculty()));
 		assert "הנדסת תעשיה וניהול".equals(String.valueOf(coursesMap.get("097120").getFaculty()));
 		
+		assert "2017-07-13T00:00".equals((coursesMap.get("134153").getaTerm() + ""));
+		assert "2017-07-18T00:00".equals((coursesMap.get("035022").getaTerm() + ""));
+		assertNull(coursesMap.get("205719").getaTerm());
+		assert "2017-07-09T00:00".equals((coursesMap.get("014852").getaTerm() + ""));
+		assert "2017-07-12T00:00".equals((coursesMap.get("236635").getaTerm() + ""));
 		
 		/*
 		for (LessonGroup lg : coursesMap.get("014146").getTutorialsLG()) {

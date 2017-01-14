@@ -361,7 +361,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxCats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				Message.infoBox("", "", catList.get(catIconNum));
+				Message.infoBox("more cats at:\nhttp://www.iconka.com", "", catList.get(catIconNum));
 				chckbxCats.setSelected(false);
 				catIconNum = (catIconNum + 1) % 3;
 			}

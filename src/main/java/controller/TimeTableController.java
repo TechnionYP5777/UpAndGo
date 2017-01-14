@@ -5,6 +5,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import command.TimeTableCommand;
 import model.TimeTableModel;
 import model.course.Course;
 import property.CourseProperty;
@@ -31,9 +32,13 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		init();
 	}
 	@Override
-	public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent ¢) {
+		if (¢.getActionCommand().equals(TimeTableCommand.GET_NEXT_GENERATED_SCHED))
+			model.loadNextSchedule();
+		else if (¢.getActionCommand().equals(TimeTableCommand.GET_PREV_GENERATED_SCHED))
+			model.loadPrevSchedule();
+		else if (¢.getActionCommand().equals(TimeTableCommand.RECALC_SCHED))
+			model.loadSchedule();
 	}
 
 	@Override
