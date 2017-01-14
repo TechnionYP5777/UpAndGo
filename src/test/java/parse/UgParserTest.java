@@ -10,7 +10,7 @@ public class UgParserTest {
 	public void test() {
 		//for(Faculty ¢ : UgParser.getFaculties())
 			//System.out.println(¢.getId() + " " + ¢.getName());
-		UgParser.getCoursePrerequisites("236522");
+		UgParser.createCoursePrerequisitesElement("236522");
 	}
 
 }

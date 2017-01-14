@@ -1,12 +1,22 @@
 package parse;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -89,7 +99,7 @@ public class UgParser {
 	}
 	
 	
-	public static void getCoursePrerequisites(String courseID){
+	public static void printCoursePrerequisites(String courseID){
 		try {
 			for (Element prerequisitesElement : Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
 					.getElementsContainingOwnText("מקצועות קדם")) {
@@ -100,6 +110,33 @@ public class UgParser {
 				System.out.println("}");
 			}
 		} catch (IOException ¢) {
+			¢.printStackTrace();
+		}
+	}
+	public static void createCoursePrerequisitesElement(String courseID){
+		try {
+			org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			org.w3c.dom.Element rootElement = doc.createElement("Prerequisites");
+			org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
+			doc.appendChild(rootElement);
+			for (Element prerequisitesElement : Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
+					.getElementsContainingOwnText("מקצועות קדם")) {
+				for (Element prerequisite : prerequisitesElement.parent().parent().parent().children()){
+					if ((prerequisite + "").contains("<td>או</td>")) {
+						rootElement.appendChild(prepOptionElement);
+						prepOptionElement = doc.createElement("PrerOption");
+					}
+					org.w3c.dom.Element courseElement = doc.createElement("PrepCourse");
+					courseElement.appendChild(doc.createTextNode(prerequisite.getElementsByTag("a").text()));
+					prepOptionElement.appendChild(courseElement);
+				}
+				rootElement.appendChild(prepOptionElement);
+			}
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform((new DOMSource(doc)),
+					(new StreamResult(new OutputStreamWriter(System.out, "UTF-8"))));
+		} catch (TransformerException | IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
 	}
