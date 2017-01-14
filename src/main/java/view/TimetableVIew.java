@@ -43,6 +43,15 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	static JButton schedBtn = new JButton("בנה מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
+	
+	JComboBox<String> startTimeComBoxHours;
+	JComboBox<String> startTimeComBoxMins;
+	JComboBox<String> endTimeComBoxHours;
+	JComboBox<String> endTimeComBoxMins;
+	
+	JCheckBox startTimeChkBox;
+	JCheckBox endTimeChkBox;
+	
 	JPanel startTime;
 	JPanel endTime;
 	final String[] hours = {"07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"};
@@ -167,14 +176,18 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			startTimePanel.add(new JPanel());
 		
 		startTime = new JPanel(new GridLayout(1,2));
-		startTime.add(new JComboBox<>(hours));
-		startTime.add(new JComboBox<>(minutes));
+		startTimeComBoxHours = new JComboBox<>(hours);
+		startTimeComBoxMins = new JComboBox<>(minutes);
+		startTimeComBoxHours.setEnabled(false);
+		startTimeComBoxMins.setEnabled(false);
+		startTime.add(startTimeComBoxHours);
+		startTime.add(startTimeComBoxMins);
 		startTimePanel.add(startTime);
 		
-		JCheckBox chkBox1 = new JCheckBox("שעת התחלה:");
-		chkBox1.setFont(new Font("Dialog", Font.BOLD, 12));
-		chkBox1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startTimePanel.add(chkBox1);
+		startTimeChkBox = new JCheckBox("שעת התחלה:");
+		startTimeChkBox.setFont(new Font("Dialog", Font.BOLD, 12));
+		startTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimePanel.add(startTimeChkBox);
 		
 		otherComponentsPanel.add(startTimePanel);
 		
@@ -184,14 +197,18 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			endTimePannel.add(new JPanel());
 		
 		endTime = new JPanel(new GridLayout(1,2));
-		endTime.add(new JComboBox<>(hours));
-		endTime.add(new JComboBox<>(minutes));
+		endTimeComBoxHours = new JComboBox<>(hours);
+		endTimeComBoxMins = new JComboBox<>(minutes);
+		endTimeComBoxHours.setEnabled(false);
+		endTimeComBoxMins.setEnabled(false);
+		endTime.add(endTimeComBoxHours);
+		endTime.add(endTimeComBoxMins);
 		endTimePannel.add(endTime);
 		
-		JCheckBox chkBox2 = new JCheckBox("שעת סיום:");
-		chkBox2.setFont(new Font("Dialog", Font.BOLD, 12));
-		chkBox2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		endTimePannel.add(chkBox2);
+		endTimeChkBox = new JCheckBox("שעת סיום:");
+		endTimeChkBox.setFont(new Font("Dialog", Font.BOLD, 12));
+		endTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTimePannel.add(endTimeChkBox);
 		
 		otherComponentsPanel.add(endTimePannel);
 		
@@ -217,6 +234,27 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	}
 	//setting events and actions
 	public void setEvents(){
+		
+		startTimeChkBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				startTimeComBoxHours.setEnabled(startTimeChkBox.isSelected());
+				startTimeComBoxMins.setEnabled(startTimeChkBox.isSelected());
+				
+			}
+		});
+		
+		endTimeChkBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+				endTimeComBoxHours.setEnabled(endTimeChkBox.isSelected());
+				endTimeComBoxMins.setEnabled(endTimeChkBox.isSelected());
+				
+			}
+		});
+		
+		
 		
 		//next button has been pressed -> ask for the next schedule
 		nextBtn.addActionListener(new ActionListener() {
