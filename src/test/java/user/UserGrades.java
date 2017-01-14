@@ -9,18 +9,22 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import catalog.SoftwareEngineering;
+import catalog.loader.SECatalogLoader;
+import model.ConcreteModel;
+import model.loader.XmlCourseLoader;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class UserGrades extends JFrame {
 
@@ -51,34 +55,53 @@ public class UserGrades extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"הנדסת תוכנה", "תלת שנתי", "ארבע שנתי", "הנדסת מחשבים"}));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			@Override
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("unused")
 				String result = "";
-				Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-				boolean hasTransferableText = (contents != null)
-						&& contents.isDataFlavorSupported(DataFlavor.stringFlavor);
-				if (hasTransferableText)
-					try {
+				try {
+					Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+					boolean hasTransferableText = (contents != null)
+							&& contents.isDataFlavorSupported(DataFlavor.stringFlavor);
+					if (hasTransferableText)
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
-						@SuppressWarnings("unused")
-						User user = new User(result, new SoftwareEngineering(new ArrayList<>(), new ArrayList<>(),
-								new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-					} catch (UnsupportedFlavorException | IOException ¢) {
-						System.out.println(¢);
-						¢.printStackTrace();
+					if("הנדסת תוכנה".equals(comboBox.getSelectedItem().toString())){
+						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new ConcreteModel(new XmlCourseLoader("REPFILE/REP.XML")));
+					}
+					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");
+					} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {
+						JOptionPane.showMessageDialog(null,"העתק מתוך UG את גיליון הציונים שלך");
 					}
 
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(156).addComponent(btnDone).addContainerGap(179, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(111).addComponent(btnDone).addContainerGap(117, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(156)
+							.addComponent(btnDone))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(51)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(213, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(56)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(31)
+					.addComponent(btnDone)
+					.addContainerGap(154, Short.MAX_VALUE))
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
