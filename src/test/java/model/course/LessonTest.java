@@ -23,7 +23,7 @@ CourseLoader cr;
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest5.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 
 		assert !courses.get(0).getLectures().get(0).getLessons().get(0)
 				.IsClashWith(courses.get(0).getTutorials().get(0).getLessons().get(0));
@@ -34,7 +34,7 @@ CourseLoader cr;
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest6.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 
 		assert courses.get(0).getLectures().get(0).getLessons().get(0)
 				.IsClashWith(courses.get(0).getTutorials().get(0).getLessons().get(0));

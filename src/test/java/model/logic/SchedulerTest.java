@@ -38,7 +38,7 @@ CourseLoader cr;
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -55,7 +55,7 @@ CourseLoader cr;
 	public void test_a2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
@@ -74,7 +74,7 @@ CourseLoader cr;
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -89,7 +89,7 @@ CourseLoader cr;
 	public void test_b2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Timetable t = Scheduler.getTimetablesList(courses).get(0);
@@ -103,7 +103,7 @@ CourseLoader cr;
 	public void test_c() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -118,7 +118,7 @@ CourseLoader cr;
 	public void test_c2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Timetable t = Scheduler.getTimetablesList(courses).get(0);
@@ -132,7 +132,7 @@ CourseLoader cr;
 	public void test_d() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -145,7 +145,7 @@ CourseLoader cr;
 	public void test_d2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		assert Scheduler.getTimetablesList(courses).isEmpty();
@@ -157,7 +157,7 @@ CourseLoader cr;
 	public void test_e() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -175,7 +175,7 @@ CourseLoader cr;
 	public void test_e2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Timetable t = Scheduler.getTimetablesList(courses).get(0);
@@ -192,7 +192,7 @@ CourseLoader cr;
 	public void test_scheduleTimetable1() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
