@@ -76,7 +76,7 @@ public class Lesson implements Event {
 	    Lesson lesson = (Lesson)l;
 	    return (((this.place).equals(lesson.getPlace())) && ((this.type) == lesson.getType())
 	    		&& (((this.group) == lesson.getGroup()))
-	    		&&  ((this.course).equals(lesson.getCourse())) && ((this.representer).equals(lesson.getRepresenter())) &&
+	    		&&  ((this.course).equals(lesson.getCourse())) &&
 	    		((this.startTime).equals(lesson.getStartTime())) &&
 	    				((this.endTime).equals(lesson.getEndTime())));
 	}

@@ -162,6 +162,7 @@ public class XmlCourseLoader extends CourseLoader {
 					.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
+				System.out.println(((Element) p).getAttribute("id"));
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					if ("מקצועות ספורט".equals(((Element) p).getAttribute("faculty")))
 						sportParsing(cb, p);
@@ -264,7 +265,6 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	private void createLessonGroup(CourseBuilder b, Node n, Node p, String s) {
-		Lesson.Type t = "lab".equals(s) ? Type.LABORATORY : "sport".equals(s) ? Type.SPORT : Type.TUTORIAL;
 		NodeList tutorialList = ((Element) n).getElementsByTagName(s);
 		for (int g = 0; g < tutorialList.getLength(); ++g) {
 			Node m = tutorialList.item(g);
@@ -277,16 +277,26 @@ public class XmlCourseLoader extends CourseLoader {
 				//
 				NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 				for (int f = 0; f < lessonList.getLength(); ++f) {
+					Lesson.Type t = "lab".equals(s) ? Type.LABORATORY : "sport".equals(s) ? Type.SPORT : Type.TUTORIAL;
 					Node h = lessonList.item(f);
-					if ((h.getNodeType() == Node.ELEMENT_NODE) && (s.equals(((Element) h).getParentNode().getNodeName())) && (Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group")) ==  tutorialGroupNum)) {
-						String place = ((Element) h).getAttribute("building");
-						if (!((Element) h).getAttribute("roomNumber").isEmpty())
-							place += " " + ((Element) h).getAttribute("roomNumber");
-						b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
-								createLesson(n, h, p, g,
-										convertStrToDay(((Element) h).getAttribute("day")),
-										tutorialGroupNum, place, t,
-										"assistant"));
+					Element parentNode = ((Element) ((Element) h).getParentNode());
+					if ("lab".equals(parentNode.getNodeName()))
+						t = Type.LABORATORY;
+					int parentGroup = parentNode.hasAttribute("group") ? 0
+							: !((Element) (parentNode.getParentNode())).hasAttribute("group") ? -1
+									: Integer.parseInt(((Element) (parentNode.getParentNode())).getAttribute("group"));
+					if (parentGroup != -1) {
+						if (parentGroup == 0)
+							parentGroup = Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group"));
+						if ((h.getNodeType() == Node.ELEMENT_NODE) && /*(s.equals(((Element) h).getParentNode().getNodeName())) &&*/ (parentGroup ==  tutorialGroupNum)) {
+							String place = ((Element) h).getAttribute("building");
+							if (!((Element) h).getAttribute("roomNumber").isEmpty())
+								place += " " + ((Element) h).getAttribute("roomNumber");
+							if (convertStrToDay(((Element) h).getAttribute("day")) != DayOfWeek.SATURDAY)
+								b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
+										createLesson(n, h, p, g, convertStrToDay(((Element) h).getAttribute("day")),
+												tutorialGroupNum, place, t, "assistant"));
+						}	
 					}
 				}
 				if ("sport".equals(s))
@@ -312,14 +322,26 @@ public class XmlCourseLoader extends CourseLoader {
 	private Lesson createLesson(Node n, Node h, Node p, int index, DayOfWeek lectureDay, int groupNum, String place, Lesson.Type t, String staff) {
 		return new Lesson(
 				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
-						: findStaffByName(cb,
-								(((Element) n).getElementsByTagName(staff).item(index).getAttributes()
-										.getNamedItem("name").getNodeValue()).split(" ")),
-				new WeekTime(lectureDay, LocalTime.parse(((Element) h).getAttribute("timeStart"))),
-				new WeekTime(lectureDay, LocalTime.parse(((Element) h).getAttribute("timeEnd"))), place, t, groupNum,
-				((Element) p).getAttribute("id"));
+						: findStaffByName(cb, findLGStaff(n, groupNum, staff).split(" ")),
+				new WeekTime(lectureDay, (LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+						: ((Element) h).getAttribute("timeStart")))),
+				new WeekTime(lectureDay, (LocalTime.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+						: ((Element) h).getAttribute("timeEnd")))),
+				place, t, groupNum, ((Element) p).getAttribute("id"));
 	}
 	
+	private String findLGStaff(Node n, int groupNum, String staff) {
+		for (int ¢ = 0; ¢ < (((Element) n).getElementsByTagName(staff).getLength()); ++¢) {
+			if (((Element)(((Element) n).getElementsByTagName(staff).item(¢).getParentNode())).hasAttribute("group")) {
+				if (Integer.parseInt(((Element)(((Element) n).getElementsByTagName(staff).item(¢).getParentNode())).getAttribute("group")) == groupNum) {
+					return (((Element) n).getElementsByTagName(staff).item(¢).getAttributes()
+							.getNamedItem("name").getNodeValue());
+				}
+			}
+		}
+		return "";
+	}
+
 	private static DayOfWeek convertStrToDay(String ¢) {
 		switch (¢) {
 		  case "א":  return DayOfWeek.valueOf("SUNDAY");
