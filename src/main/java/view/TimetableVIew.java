@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -112,7 +113,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		add(scroll,c);
 		
 		JPanel otherComponentsPanel=new JPanel();
-		otherComponentsPanel.setLayout(new GridLayout(6,1,3,3));
+		otherComponentsPanel.setLayout(new GridLayout(7,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
@@ -126,9 +127,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		otherComponentsPanel.add(nextprevPannel);
 		
-		JTextField textField = new JTextField("בחר/י את ההעדפות לבניית המערכת:");
+		JLabel textField = new JLabel("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
-		textField.setEditable(false);
 		textField.setBackground(UIManager.getColor("Button.background"));
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(textField);
@@ -141,22 +141,38 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(isMinWindows);
 		
-		JPanel startEndTimetxtbox=new JPanel();
-		startEndTimetxtbox.setLayout(new GridLayout(1,9));
+		JPanel startTimeTextbox=new JPanel();
+		startTimeTextbox.setLayout(new GridLayout(1,9));
 		for(int ¢=0 ; ¢ < 7; ++¢)
-			startEndTimetxtbox.add(new JPanel());
+			startTimeTextbox.add(new JPanel());
 		
-		JTextField tf = new JTextField();
-		tf.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startEndTimetxtbox.add(tf);
+		JTextField tf3 = new JTextField();
+		tf3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimeTextbox.add(tf3);
 		
-		JTextField tf1 = new JTextField("שעת התחלה:");
-		tf1.setEditable(false);
-		tf1.setFont(new Font("Dialog", Font.BOLD, 12));
+		JLabel tf4 = new JLabel("שעת התחלה:");
+		tf4.setBorder(null);
+		tf4.setFont(new Font("Dialog", Font.BOLD, 12));
+		tf4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimeTextbox.add(tf4);
+		
+		otherComponentsPanel.add(startTimeTextbox);
+		
+		JPanel endTimeTextbox=new JPanel();
+		endTimeTextbox.setLayout(new GridLayout(1,9));
+		for(int ¢=0 ; ¢ < 7; ++¢)
+			endTimeTextbox.add(new JPanel());
+		
+		JTextField tf1 = new JTextField();
 		tf1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startEndTimetxtbox.add(tf1);
+		endTimeTextbox.add(tf1);
 		
-		otherComponentsPanel.add(startEndTimetxtbox);
+		JLabel tf2 = new JLabel("שעת סיום:");
+		tf2.setFont(new Font("Dialog", Font.BOLD, 12));
+		tf2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTimeTextbox.add(tf2);
+		
+		otherComponentsPanel.add(endTimeTextbox);
 		
 		JPanel panelSchedButton =new JPanel();
 		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
