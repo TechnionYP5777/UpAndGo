@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import catalog.Catalog;
+import catalog.SoftwareEngineering;
 import catalog.loader.SECatalogLoader;
 import model.CourseModel;
 import model.loader.XmlCourseLoader;
@@ -72,7 +74,14 @@ public class UserGrades extends JFrame {
 					if (hasTransferableText)
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
 					if("הנדסת תוכנה".equals(comboBox.getSelectedItem().toString())){
+<<<<<<< HEAD
+						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new ConcreteModel(new XmlCourseLoader("REPFILE/REP.XML")));
+						SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
+						System.out.println(c);
+						User user = new User(result, c);
+=======
 						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
+>>>>>>> 809774a92bed9832166d6f4f56359aa1669fb0bc
 					}
 					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");
 					} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {

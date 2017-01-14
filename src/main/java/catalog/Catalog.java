@@ -6,15 +6,15 @@ import java.util.List;
 import model.course.Course;
 
 public abstract class Catalog {
-	List<Course> obligatory, freeChoice;
+	List<Course> obligatory, malags;
 	int REQ_OBLIGATORY_POINTS;
 	int REQ_FREE_CHOICE_POINTS;
 
-	public Catalog(List<Course> obligatoryList, List<Course> freeChoiceList, int reqObligatory, int reqFreeChoice) {
-		if (obligatoryList == null || freeChoiceList == null)
+	public Catalog(List<Course> obligatoryList, List<Course> malagsList, int reqObligatory, int reqFreeChoice) {
+		if (obligatoryList == null || malagsList == null)
 			throw new NullPointerException();
 		obligatory = new ArrayList<>(obligatoryList);
-		freeChoice = new ArrayList<>(freeChoiceList);
+		malags = new ArrayList<>(malagsList);
 		REQ_OBLIGATORY_POINTS = reqObligatory;
 		REQ_FREE_CHOICE_POINTS = reqFreeChoice;
 	}
