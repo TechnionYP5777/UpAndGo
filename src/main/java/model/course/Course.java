@@ -37,7 +37,8 @@ public class Course {
 
 	protected final List<Course> prerequisites;
 	protected final List<Course> corequisites;
-
+	protected boolean done;
+	
 	// TODO: create interface LessonGroup as mediator between Lessons and Course
 
 	public Course(String name1, String id1, String faculty1, List<StuffMember> st, double acPoints, LocalDateTime aT,
@@ -156,6 +157,13 @@ public class Course {
 	public void updateListeners() {
 		for (CourseListener ¢ : this.listeners)
 			¢.getUpdate(this);
+	}
+	
+	public boolean getDone() {
+		return done;
+	}
+	public void MarkDone() {
+		done = true;
 	}
 	
 	@Override
