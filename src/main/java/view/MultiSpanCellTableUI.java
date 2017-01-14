@@ -12,82 +12,96 @@ import javax.swing.table.TableCellRenderer;
 
 public class MultiSpanCellTableUI extends BasicTableUI {
 
-	  @Override
-	public void paint(Graphics g, JComponent __) {
-	    Rectangle oldClipBounds = g.getClipBounds();
-	    Rectangle clipBounds    = new Rectangle(oldClipBounds);
-	    int tableWidth   = table.getColumnModel().getTotalColumnWidth();
-	    clipBounds.width = Math.min(clipBounds.width, tableWidth);
-	    g.setClip(clipBounds);
+	@SuppressWarnings("unused")
+	@Override
+	public void paint(Graphics g, JComponent c) {
 
-	    int firstIndex = table.rowAtPoint(new Point(0, clipBounds.y));
-	    int  lastIndex = table.getRowCount()-1;
+		Rectangle oldClipBounds = g.getClipBounds();
+		Rectangle clipBounds    = new Rectangle(oldClipBounds);
+		int tableWidth   = table.getColumnModel().getTotalColumnWidth();
+		clipBounds.width = Math.min(clipBounds.width, tableWidth);
+		g.setClip(clipBounds);
 
-	    Rectangle rowRect = new Rectangle(0,0,
-	      tableWidth, table.getRowHeight() + table.getRowMargin());
-	    rowRect.y = firstIndex*rowRect.height;
+		int firstIndex = table.rowAtPoint(new Point(0, clipBounds.y));
+		int  lastIndex = table.getRowCount()-1;
 
-	    for (int index = firstIndex; index <= lastIndex; ++index) {
-	      if (rowRect.intersects(clipBounds))
-			paintRow(g, index);
-	      rowRect.y += rowRect.height;
-	    }
-	    g.setClip(oldClipBounds);
-	  }
+		Rectangle rowRect = new Rectangle(0,0,
+				tableWidth, table.getRowHeight() + table.getRowMargin());
+		rowRect.y = firstIndex*rowRect.height;
 
-	  private void paintRow(Graphics g, int row) {
-	    Rectangle rect = g.getClipBounds();
-	    boolean drawn  = false;
-	    
-	    AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
-	    CellSpan cellAtt = (CellSpan)tableModel.getCellAttribute();
-	    for (int numColumns = table.getColumnCount(), column = 0; column < numColumns; ++column) {
-			Rectangle cellRect = table.getCellRect(row, column, true);
-			int cellRow, cellColumn;
-			if (cellAtt.isVisible(row, column)) {
-				cellRow = row;
-				cellColumn = column;
-			} else {
-				cellRow = row + cellAtt.getSpan(row, column)[CellSpan.ROW];
-				cellColumn = column + cellAtt.getSpan(row, column)[CellSpan.COLUMN];
+		for (int index = firstIndex; index <= lastIndex; index++) {
+			if (rowRect.intersects(clipBounds)) {
+				//System.out.println();                  // debug
+				//System.out.print("" + index +": ");    // row
+				paintRow(g, index);
 			}
-			if (!cellRect.intersects(rect)) {
-				if (drawn)
-					break;
+			rowRect.y += rowRect.height;
+		}
+		g.setClip(oldClipBounds);
+	}
+
+	private void paintRow(Graphics g, int row) {
+		Rectangle rect = g.getClipBounds();
+		boolean drawn  = false;
+
+		AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
+		CellSpan cellAtt = (CellSpan)tableModel.getCellAttribute();
+		int numColumns = table.getColumnCount();
+
+		for (int column = 0; column < numColumns; column++) {
+			Rectangle cellRect = table.getCellRect(row,column,true);
+			int cellRow,cellColumn;
+			if (cellAtt.isVisible(row,column)) {
+				cellRow    = row;
+				cellColumn = column;
+				//  System.out.print("   "+column+" ");  // debug
 			} else {
+				cellRow    = row + cellAtt.getSpan(row,column)[CellSpan.ROW];
+				cellColumn = column + cellAtt.getSpan(row,column)[CellSpan.COLUMN];
+				//  System.out.print("  ("+column+")");  // debug
+			}
+			if (cellRect.intersects(rect)) {
 				drawn = true;
 				paintCell(g, cellRect, cellRow, cellColumn);
-			}
+			} else {
+				if (drawn) break;
+			} 
 		}
 
-	  }
-
-	  private void paintCell(Graphics g, Rectangle cellRect, int row, int column) {
-	    int spacingHeight = table.getRowMargin();
-	    int spacingWidth  = table.getColumnModel().getColumnMargin();
-
-	    Color c = g.getColor();
-	    g.setColor(table.getGridColor());
-	    g.drawRect(cellRect.x,cellRect.y,cellRect.width-1,cellRect.height-1);
-	    g.setColor(c);
-
-	    cellRect.setBounds(cellRect.x + spacingWidth/2, cellRect.y + spacingHeight/2,
-	           cellRect.width - spacingWidth, cellRect.height - spacingHeight);
-
-	    if (table.isEditing() && table.getEditingRow()==row &&
-	  table.getEditingColumn()==column) {
-	      Component component = table.getEditorComponent();
-	      component.setBounds(cellRect);
-	      component.validate();
-	    }
-	    else {
-	      TableCellRenderer renderer = table.getCellRenderer(row, column);
-	      Component component = table.prepareRenderer(renderer, row, column);
-
-	      if (component.getParent() == null)
-			rendererPane.add(component);
-	      rendererPane.paintComponent(g, component, table, cellRect.x, cellRect.y,
-	          cellRect.width, cellRect.height, true);
-	    }
-	  }    
 	}
+
+	private void paintCell(Graphics g, Rectangle cellRect, int row, int column) {
+		int spacingHeight = table.getRowMargin();
+		int spacingWidth  = table.getColumnModel().getColumnMargin();
+
+		AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
+		ColoredCell cellAtt = (ColoredCell)tableModel.getCellAttribute();
+		Color c = g.getColor();
+		g.setColor(table.getGridColor());
+		g.drawRect(cellRect.x,cellRect.y,cellRect.width-1,cellRect.height-1);
+		g.setColor(cellAtt.getBackground(row, column));
+		g.fillRect(cellRect.x,cellRect.y,cellRect.width-1,cellRect.height-1);
+		g.setColor(c);
+
+		cellRect.setBounds(cellRect.x + spacingWidth/2, cellRect.y + spacingHeight/2,
+				cellRect.width - spacingWidth, cellRect.height - spacingHeight);
+
+		if (table.isEditing() && table.getEditingRow()==row &&
+				table.getEditingColumn()==column) {
+			Component component = table.getEditorComponent();
+			component.setBounds(cellRect);
+			component.validate();
+		}
+		else {
+			TableCellRenderer renderer = table.getCellRenderer(row, column);
+			Component component = table.prepareRenderer(renderer, row, column);
+
+			if (component.getParent() == null) {
+				rendererPane.add(component);
+			}
+			rendererPane.paintComponent(g, component, table, cellRect.x, cellRect.y,
+					cellRect.width, cellRect.height, true);
+		}
+	}    
+}
+

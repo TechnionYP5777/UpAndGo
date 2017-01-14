@@ -1,5 +1,5 @@
 <courses>
-    <course faculty="הנדסה אזרחית וסביבתית" id="123456" name="מבוא לחתולים" points="3">
+    <course faculty="הנדסה אזרחית וסביבתית" id="234122" name="מתמ" points="3">
         <teacherInCharge name="הלו קיטי" title="פרופ"/>
         <exams>
 		    <moedA day="29" month="06" year="2016" time="09:00"/>
@@ -41,61 +41,6 @@
             <note>קב-81 עבור הבינלאומי בלבד</note>
         </notes>
     </course>
-    <course faculty="הנדסה אזרחית וסביבתית" id="014536" name="טורי חתולים ופוררריה" points="2.5">
-        <teacherInCharge name="מיאו דזה-דונג" title="פרופ"/>
-        <exams>
-            <moedA day="20" month="08" year="2016" time="09:00"/>
-            <moedB day="15" month="09" year="2016" time="09:00"/>
-        </exams>
-        <lecture>
-            <lesson building="פישבך" day="א" roomNumber="405" timeEnd="11:30" timeStart="10:30"/>
-            <lecturer name="אל דנטה" title="פרופ"/>
-            <tutorials>
-                <tutorial group="10">
-                    <lesson building="מאייר" day="ב" roomNumber="1" timeEnd="13:30" timeStart="12:30"/>
-                    <lesson building="אולמן" day="ה" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
-                    <assistant name="מוג'ו רוג'ו" title="מר"/>
-                </tutorial>
-                <tutorial group="12">
-                    <lesson building="רבין" day="א" roomNumber="400" timeEnd="10:30" timeStart="08:30"/>
-                    <assistant name="גרי תכסיסי" title="פרופ' חבר"/>
-                </tutorial>
-            </tutorials>
-        </lecture>
-        <lecture>
-            <lesson building="גן אקולוגי" day="ה" roomNumber="" timeEnd="14:30" timeStart="12:30"/>
-            <lecturer name="פולי אסתר" title="דר"/>
-            <tutorials>
-                <tutorial group="12">
-                    <lesson building="רבין" day="א" roomNumber="400" timeEnd="10:30" timeStart="08:30"/>
-                    <assistant name="גרי תכסיסי" title="פרופ' חבר"/>
-                </tutorial>
-            </tutorials>
-        </lecture>
-        <notes>
-            <note>אף אחד לא קורא כאן</note>
-        </notes>
-    </course>
-    <course faculty="הנדסה אזרחית וסביבתית" id="678910" name="אלרגיות למתקדמים ת'" points="4.5">
-        <teacherInCharge name="אן שובי" title="דר"/>
-        <exams>
-            <moedA day="11" month="12" year="2016" time="13:00"/>
-            <moedB day="25" month="12" year="2016" time="17:00"/>
-        </exams>
-        <lecture>
-            <lesson building="אולמן" day="ג" roomNumber="312" timeEnd="18:30" timeStart="12:30"/>
-            <lecturer name="ציפורע ליבני" title="גברת"/>
-            <tutorials>
-                <tutorial group="11">
-                    <lesson building="אולמן" day="ד" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
-                    <lesson building="אולמן" day="ה" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
-                    <assistant name="א.ב.יהושוע" title="מר"/>
-                </tutorial>
-            </tutorials>
-        </lecture>
-        <notes>
-        </notes>
-    </course>
     <course faculty="הנדסה אזרחית וסביבתית" id="234107" name="אנליזה נמרית" points="1.5">
         <teacherInCharge name="אסטבן חימנז" title="פרופ"/>
         <exams>
@@ -131,77 +76,6 @@
             <note>קארמה רעה</note>
     </notes>
     </course>
-	<course faculty="הנדסה אזרחית וסביבתית" id="014005" name="מעבדה הנדסית" points="1.5">
-		<exams>
-			<moedB day="26" month="09" time="00:00" year="2017"/>
-		</exams>
-		<lecture>
-			<lesson/>
-			<labs>
-				<lab group="11">
-					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-				<lab group="12">
-					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-				<lab group="13">
-					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-				<lab group="14">
-					<lesson day="א" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-				<lab group="15">
-					<lesson day="ה" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-				<lab group="16">
-					<lesson day="ה" timeEnd="15:30" timeStart="12:30"/>
-				</lab>
-			</labs>
-		</lecture>
-	</course>
-	<course faculty="מקצועות ספורט" id="394820" name="חינוך גופני - תנועה ומחול" points="1.5">
-		<teacherInCharge name="ח.מרגלית" title="ד&quot;ר"/>
-		<sport group="11" name="בלט-מעורב">
-			<lesson building="אולם ב'" day="ג" timeEnd="11:00" timeStart="09:30"/>
-		</sport>
-		<sport group="12" name="מחולאירובי">
-			<lesson building="אולם ב'" day="ב" timeEnd="15:00" timeStart="13:30"/>
-		</sport>
-		<sport group="13" name="זומבה">
-			<lesson building="מק&quot;ק" day="ג" timeEnd="09:30" timeStart="08:00"/>
-		</sport>
-		<sport group="16" name="סלסה-מתחיל-בנות">
-			<lesson building="א.קולנוע" day="ב" timeEnd="14:30" timeStart="13:00"/>
-		</sport>
-		<sport group="17" name="סלסה-מתחיל-בנים">
-			<lesson building="א.קולנוע" day="ב" timeEnd="14:30" timeStart="13:00"/>
-		</sport>
-		<sport group="18" name="סלסה-מתחיל-בנות">
-			<lesson building="א.קולנוע" day="ב" timeEnd="16:00" timeStart="14:30"/>
-		</sport>
-		<sport group="19" name="סלסה-מתחיל-בנים">
-			<lesson building="א.קולנוע" day="ב" timeEnd="16:00" timeStart="14:30"/>
-		</sport>
-		<sport group="20" name="סלסה-מתקדמים-מעו">
-			<lesson building="א.קולנוע" day="ב" timeEnd="17:30" timeStart="16:00"/>
-		</sport>
-		<sport group="21" name="מחולג'אז-מעורב">
-			<lesson building="אולם ב'" day="ג" timeEnd="12:30" timeStart="11:00"/>
-		</sport>
-		<sport group="22" name="ג'אז-בנותבלבד">
-			<lesson building="אולם ב'" day="ג" timeEnd="09:30" timeStart="08:00"/>
-		</sport>
-		<sport group="23" name="מחולאירובי">
-			<lesson building="אולם ב'" day="ד" timeEnd="11:00" timeStart="09:30"/>
-		</sport>
-		<sport group="26" name="מחולאירובי">
-			<lesson building="אולם ב'" day="ד" timeEnd="12:30" timeStart="11:00"/>
-		</sport>
-		<notes>
-			<note>יש להגיע לשיעורים בבגדי ונעלי ספורט. קבוצות 16-20-מתקיימות באולם השקוף בבית הסטודנט. קבוצה 22 - לבנות בלבד.</note>
-			<note>קב' 24+25-לרפואנים בלבד-מתקיימות באולם השקוף בבית הסטודנט. הרישום לסלסה-מתקדמים-קב'20-ידנית אצל המאמן לאחר בחינה. קבוצה 13-מתקיימת באולם מק"ק.</note>
-		</notes>
-	</course>
 	<course faculty="מדעי המחשב" id="236349" name="פרויקט באבטחת מידע" points="1.5">
 		<exams/>
 		<lecture group="10">
@@ -215,4 +89,88 @@
 			</tutorials>
 		</lecture>
 	</course>
+ 	<course faculty="הנדסה אזרחית וסביבתית" id="114075" name="פיזיקה 2ממ" points="3">
+        <teacherInCharge name="הלו קיטי" title="פרופ"/>
+        <exams>
+		    <moedA day="29" month="06" year="2016" time="09:00"/>
+            <moedB day="12" month="09" year="2016" time="09:00"/>
+        </exams>
+        <lecture>
+            <lesson building="בית הסטודנט" day="א" roomNumber="3" timeEnd="14:30" timeStart="12:30"/>
+            <lesson building="בית הסטודנט" day="ב" roomNumber="3" timeEnd="14:30" timeStart="12:30"/>
+            <lecturer name="טולוז" title="פרופ"/>
+            <tutorials>
+                <tutorial group="11">
+                    <lesson building="אולמן" day="ד" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
+                    <lesson building="אולמן" day="ה" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
+                    <assistant name="א.ב.יהושוע" title="מר"/>
+                </tutorial>
+                <tutorial group="12">
+                    <lesson building="טאוב" day="ד" roomNumber="4" timeEnd="13:30" timeStart="11:30"/>
+                    <assistant name="פלפלת" title="גב"/>
+                </tutorial>
+                <tutorial group="13">
+                    <lesson building="מאייר" day="א" roomNumber="4" timeEnd="17:30" timeStart="16:30"/>
+                    <assistant name="ג.יפית" title="גב"/>
+                </tutorial>
+            </tutorials>
+        </lecture>
+        <lecture>
+            <lesson building="גן אקולוגי" day="ג" roomNumber="" timeEnd="14:30" timeStart="10:30"/>
+            <lecturer name="תומס אומאלי" title="דר"/>
+            <tutorials>
+                <tutorial group="21">
+                    <lesson building="טאוב" day="ה" roomNumber="5" timeEnd="14:30" timeStart="12:30"/>
+                    <assistant name="קו" title="מר"/>
+                </tutorial>
+            </tutorials>
+        </lecture>
+        <notes>
+            <note>מיאו מיאו</note>
+            <note>בלה בלה בלה</note>
+            <note>קב-81 עבור הבינלאומי בלבד</note>
+        </notes>
+    </course>
+	<course faculty="הנדסה אזרחית וסביבתית" id="236350" name="הגנה" points="3">
+        <teacherInCharge name="הלו קיטי" title="פרופ"/>
+        <exams>
+		    <moedA day="29" month="06" year="2016" time="09:00"/>
+            <moedB day="12" month="09" year="2016" time="09:00"/>
+        </exams>
+        <lecture>
+            <lesson building="בית הסטודנט" day="א" roomNumber="3" timeEnd="14:30" timeStart="12:30"/>
+            <lesson building="בית הסטודנט" day="ב" roomNumber="3" timeEnd="14:30" timeStart="12:30"/>
+            <lecturer name="טולוז" title="פרופ"/>
+            <tutorials>
+                <tutorial group="11">
+                    <lesson building="אולמן" day="ד" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
+                    <lesson building="אולמן" day="ה" roomNumber="407" timeEnd="13:30" timeStart="12:30"/>
+                    <assistant name="א.ב.יהושוע" title="מר"/>
+                </tutorial>
+                <tutorial group="12">
+                    <lesson building="טאוב" day="ד" roomNumber="4" timeEnd="13:30" timeStart="11:30"/>
+                    <assistant name="פלפלת" title="גב"/>
+                </tutorial>
+                <tutorial group="13">
+                    <lesson building="מאייר" day="א" roomNumber="4" timeEnd="17:30" timeStart="16:30"/>
+                    <assistant name="ג.יפית" title="גב"/>
+                </tutorial>
+            </tutorials>
+        </lecture>
+        <lecture>
+            <lesson building="גן אקולוגי" day="ג" roomNumber="" timeEnd="14:30" timeStart="10:30"/>
+            <lecturer name="תומס אומאלי" title="דר"/>
+            <tutorials>
+                <tutorial group="21">
+                    <lesson building="טאוב" day="ה" roomNumber="5" timeEnd="14:30" timeStart="12:30"/>
+                    <assistant name="קו" title="מר"/>
+                </tutorial>
+            </tutorials>
+        </lecture>
+        <notes>
+            <note>מיאו מיאו</note>
+            <note>בלה בלה בלה</note>
+            <note>קב-81 עבור הבינלאומי בלבד</note>
+        </notes>
+    </course>
 </courses>

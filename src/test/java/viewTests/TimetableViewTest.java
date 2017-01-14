@@ -1,12 +1,12 @@
 package viewTests;
 
 import java.time.DayOfWeek;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import model.course.Lesson;
@@ -80,7 +80,8 @@ public class TimetableViewTest {
 			@SuppressWarnings("unused")
 			@Override
 			public void run() {
-				new TimetableViewTest();		
+				new TimetableViewTest();
+				
 			}
 			
 		});

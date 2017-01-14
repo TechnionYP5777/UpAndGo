@@ -250,22 +250,23 @@ public class RepFile {
 				}
 		} else {
 			Element examsElement = d.createElement("exams");
-			course.appendChild(examsElement);
 			for (String infoLine : courseInfo.split("[\\r\\n]+"))
 				if (infoLine.contains("מורה")) {
 					Element teacherInChargeElement = d.createElement("teacherInCharge");
 					teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
 					teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
 					course.appendChild(teacherInChargeElement);
-				} else if (infoLine.contains("ראשון")) {
+				} else if (infoLine.contains("מועד ראשון :")) {
 					Element examElement = d.createElement("moedA");
 					addTimeToExam(examElement, infoLine);
 					examsElement.appendChild(examElement);
-				} else if (infoLine.contains("שני")) {
+				} else if (infoLine.contains("מועד שני   :")) {
 					Element examElement = d.createElement("moedB");
 					addTimeToExam(examElement, infoLine);
 					examsElement.appendChild(examElement);
 				}
+			if (examsElement.hasChildNodes())
+				course.appendChild(examsElement);
 		}
 
 	}

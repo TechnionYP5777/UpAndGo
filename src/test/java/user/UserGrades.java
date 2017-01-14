@@ -64,6 +64,7 @@ public class UserGrades extends JFrame {
 				if (hasTransferableText)
 					try {
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
+						@SuppressWarnings("unused")
 						User user = new User(result, new SoftwareEngineering(new ArrayList<>(), new ArrayList<>(),
 								new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 					} catch (UnsupportedFlavorException | IOException ¢) {
