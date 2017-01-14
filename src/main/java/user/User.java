@@ -1,7 +1,10 @@
 package user;
 
 import java.util.List;
+
 import model.course.Course;
+
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
@@ -13,6 +16,8 @@ public class User {
 	
 	User(String grades, Catalog c) {
 		catalog = c;
+		Document d=Parser.parse(grades, "http://techmvs.technion.ac.il");
+		
 	    //for (final Element ¢ : Parser.parse(grades, "http://techmvs.technion.ac.il").select(null))
 		//	System.out.println("#### " + ¢);
 
