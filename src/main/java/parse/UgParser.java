@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -18,6 +17,10 @@ public class UgParser {
 
 	
 	private static final String UG_SEARCH_URL = "https://ug3.technion.ac.il/rishum/search";
+	//private static final String UG_COURSE_URL = "https://ug3.technion.ac.il/rishum/course/";
+	private static final String GRADUATE_SEARCH_URL = "http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=";
+
+
 	
 	public static List<Faculty> getFaculties(){
 		List<Faculty> $ = new ArrayList<>();
@@ -38,10 +41,9 @@ public class UgParser {
 	}
 	
 	public static void getCoursesNamesAndID(){
-		List<Faculty> faculties = getFaculties();
 		Document courses = null;
 
-		Map<String,String> dataMap = new HashMap();
+		Map<String,String> dataMap = new HashMap<>();
 		dataMap.put("CNM", "");
 		dataMap.put("CNO", "");
 		dataMap.put("PNT", "");
@@ -61,27 +63,45 @@ public class UgParser {
 		dataMap.put("SIL", "");
 		dataMap.put("OPTCAT", "on");
 		dataMap.put("OPTSEM", "on");
-		dataMap.put("OPTSTUD", "on");
+		dataMap.put("OPTSTUD", "");
 		dataMap.put("doSearch", "Y");
+		
+		int count = 0;
 		
 		for (Faculty faculty : getFaculties()){
 			try {
 				dataMap.put("FAC", faculty.getId());
 				courses = Scraper.getSearchResults(UG_SEARCH_URL,dataMap);			
-			} catch (IOException e) {
+			} catch (IOException ¢) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				¢.printStackTrace();
 			}
-			for (Element course : courses.getElementsByClass("result-row")){
-				System.out.println(course.childNode(1).childNode(1).childNode(0));
-				System.out.println(course.childNode(3).childNode(0).toString().replace("\n","").substring(1));
+			if (courses!=null)
+				for (Element course : courses.getElementsByClass("result-row")){
+					++count;
+					System.out.println(course.childNode(1).childNode(1).childNode(0));
+					System.out.println((course.childNode(3).childNode(0) + "").replace("\n","").substring(1));
 
 
 			}
 		}
-		
-
-		
-		
+		System.out.println("num of courses: " + count);		
 	}
+	
+	
+	public static void getCoursePrerequisites(String courseID){
+		try {
+			for (Element prerequisitesElement : Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
+					.getElementsContainingOwnText("מקצועות קדם")) {
+				for (Element prerequisite : prerequisitesElement.parent().parent().parent().children())
+					System.out.print(((prerequisite + "").contains("<td>ו -</td>") ? " AND "
+							: (!(prerequisite + "").contains("<td>או</td>") ? "" : "} OR ") + "{")
+							+ prerequisite.getElementsByTag("a").text());
+				System.out.println("}");
+			}
+		} catch (IOException ¢) {
+			¢.printStackTrace();
+		}
+	}
+	
 }

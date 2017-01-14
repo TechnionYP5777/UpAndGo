@@ -2,7 +2,6 @@ package parse;
 
 import org.junit.Test;
 
-import model.Faculty;
 
 public class UgParserTest {
 
@@ -11,7 +10,7 @@ public class UgParserTest {
 	public void test() {
 		//for(Faculty ¢ : UgParser.getFaculties())
 			//System.out.println(¢.getId() + " " + ¢.getName());
-		UgParser.getCoursesNamesAndID();
+		UgParser.getCoursePrerequisites("236522");
 	}
 
 }
