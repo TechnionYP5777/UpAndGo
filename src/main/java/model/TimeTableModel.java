@@ -37,6 +37,18 @@ public class TimeTableModel implements Model {
 		courses = new ArrayList<>(¢);
 	}
 	
+	public void setDaysoffFlag(boolean f) {
+		isDaysoffCount = f;
+	}
+	
+	public void setMinStartTime(LocalTime t) {
+		minStartTime = t;
+	}
+	
+	public void setMaxEndTime(LocalTime t) {
+		maxEndTime = t;
+	}
+	
 	public void loadSchedule() {
 		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
