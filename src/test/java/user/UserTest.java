@@ -65,10 +65,10 @@ public class UserTest extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String catalogName = comboBox.getSelectedItem().toString();
 				if ("הנדסת תוכנה".equals(catalogName)) {
-					SoftwareEngineering catalog = (SoftwareEngineering) (new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")))).getCatalog();
-					User user = new User(textPane.getText(), catalog);
+					SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML"))); 
+					User user = new User(textPane.getText(), catalogLoader);
+					catalogLoader.markDoneCourses(user.courses);
 					JOptionPane.showMessageDialog(null,"שלום " + user.getName() + ", הנתונים נטענו בהצלחה!");
-
 				}
 			}
 		});

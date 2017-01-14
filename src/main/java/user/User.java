@@ -3,14 +3,14 @@ package user;
 import java.util.HashSet;
 import java.util.Set;
 
-import catalog.Catalog;
+import catalog.loader.CatalogLoader;
 
 public class User {
 	Set<String> courses;
-	Catalog catalog;
+	CatalogLoader catalog;
 	String name;
 
-	public User(String grades, Catalog c) {
+	public User(String grades, CatalogLoader c) {
 		catalog = c;
 		courses = new HashSet<>();
 		int count = 0;

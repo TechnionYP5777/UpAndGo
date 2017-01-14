@@ -62,10 +62,6 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(chemistryChain2);
 		scientificChain.add(otherScientCourses);
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
-		System.out.println("obligatory : " + obligatory );
-		System.out.println("malags: " + malags + "listA: " + listA);
-		System.out.println("listB: " + listB + "core: " + core);
-		System.out.println("scientificChain: " + scientificChain);
 	}
 
 	public Catalog getCatalog() {
@@ -75,7 +71,9 @@ public class SECatalogLoader extends CSCatalogLoader {
 	public void markDoneCourses(Set<String> userCourses) {
 		for (String s: userCourses) {
 			String [] course = s.split(" ");
-			model.getCourseById(course[0]).MarkDone();
+			Course c = model.getCourseById(course[0]);
+			if (c != null)
+				c.MarkDone();
 		}
 		for (Course c: obligatory) {
 			System.out.println("c is done ?? " + c.getName() + " " + c.getDone());

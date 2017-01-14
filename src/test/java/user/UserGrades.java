@@ -75,7 +75,7 @@ public class UserGrades extends JFrame {
 						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 						SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
 						System.out.println(c);
-						User user = new User(result, c);
+						User user = new User(result, seCatalog);
 					}
 					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");
 					} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {
