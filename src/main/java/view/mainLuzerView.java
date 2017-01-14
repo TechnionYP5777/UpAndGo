@@ -32,7 +32,7 @@ import command.MenuCommand;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class mainLuzerView implements View {
+public class mainLuzerView implements MenuView {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
