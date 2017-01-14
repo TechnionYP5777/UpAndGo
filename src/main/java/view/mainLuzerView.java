@@ -195,17 +195,15 @@ public class mainLuzerView implements View {
 
 	private void createEvents() {
 		mnItCatalog.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
