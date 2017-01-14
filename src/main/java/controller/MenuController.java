@@ -8,10 +8,19 @@ import view.MenuView;
 
 public class MenuController implements Controller {
 
-	@SuppressWarnings("unused")
-	public MenuController(MenuModel __, MenuView view,
-			CourseListController clCtrl, TimeTableController ttCtrl) {
-		// TODO Auto-generated constructor stub
+	CourseListController clCtrl;
+	TimeTableController ttCtrl;
+	MenuModel model;
+	MenuView view;
+	
+	public MenuController(MenuModel m, MenuView v,
+			CourseListController clc, TimeTableController ttc) {
+		this.model = m;
+		this.view = v;
+		this.clCtrl = clc;
+		this.ttCtrl = ttc;
+		
+		this.view.addActionListener(this);
 	}
 
 	@Override
@@ -26,17 +35,15 @@ public class MenuController implements Controller {
 
 	}
 
-	@SuppressWarnings("unused")
 	@Override
-	public void registerListenerToProperty(PropertyChangeListener __, String p) {
-		// TODO Auto-generated method stub
+	public void registerListenerToProperty(PropertyChangeListener l, String p) {
+		model.addPropertyChangeListener(p, l);
 		
 	}
 
-	@SuppressWarnings("unused")
 	@Override
-	public void unregisterListenerToProperty(PropertyChangeListener __, String p) {
-		// TODO Auto-generated method stub
+	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
+		model.removePropertyChangeListener(p, l);
 		
 	}
 
