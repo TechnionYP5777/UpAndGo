@@ -34,6 +34,32 @@ public class XmlCourseLoaderTest {
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
+		
+		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
+		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
+		assert "פיסיקה 2ממ".equals(coursesMap.get("114075").getName());
+		assert "מעבר חום".equals(coursesMap.get("034041").getName());
+		assert "חשבון דיפרנציאלי ואינטגרלי 2מ'".equals(coursesMap.get("104022").getName());
+		
+		assert "205822".equals(coursesMap.get("205822").getId());
+		assert "014411".equals(coursesMap.get("014411").getId());
+		assert "315051".equals(coursesMap.get("315051").getId());
+		assert "394902-37".equals(coursesMap.get("394902-37").getId());
+		assert "234107".equals(coursesMap.get("234107").getId());
+		
+		assert "2.5".equals(String.valueOf(coursesMap.get("096808").getPoints()));
+		assert "4.5".equals(String.valueOf(coursesMap.get("234123").getPoints()));
+		assert "1.5".equals(String.valueOf(coursesMap.get("394902-11").getPoints()));
+		assert "2.0".equals(String.valueOf(coursesMap.get("066246").getPoints()));
+		assert "5.0".equals(String.valueOf(coursesMap.get("125802").getPoints()));
+		
+		assert "הנדסת מכונות".equals(String.valueOf(coursesMap.get("034044").getFaculty()));
+		assert "מקצועות ספורט".equals(String.valueOf(coursesMap.get("394902-33").getFaculty()));
+		assert "הנדסת חשמל".equals(String.valueOf(coursesMap.get("044202").getFaculty()));
+		assert "רפואה".equals(String.valueOf(coursesMap.get("274349").getFaculty()));
+		assert "הנדסת תעשיה וניהול".equals(String.valueOf(coursesMap.get("097120").getFaculty()));
+		
+		
 		/*
 		for (LessonGroup lg : coursesMap.get("014146").getTutorialsLG()) {
 		    System.out.println(lg.getGroupNum());
@@ -138,8 +164,8 @@ public class XmlCourseLoaderTest {
 	
 	@Test
 	public void testLoadFaculties() {
-		/*for (Faculty ¢ : cr.loadFaculties())
-			System.out.println(¢.getId() + "---" + ¢.getName());*/
+		for (Faculty ¢ : cr.loadFaculties())
+			System.out.println(¢.getId() + "---" + ¢.getName());
 	}
 	
 	@After

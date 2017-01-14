@@ -162,7 +162,6 @@ public class XmlCourseLoader extends CourseLoader {
 					.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				Node p = coursesList.item(i);
-				System.out.println(((Element) p).getAttribute("id"));
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					if ("מקצועות ספורט".equals(((Element) p).getAttribute("faculty")))
 						sportParsing(cb, p);
