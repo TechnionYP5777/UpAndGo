@@ -18,21 +18,21 @@ import javax.swing.event.HyperlinkListener;
 // This class is a massage box class
 ///
 public class Message {
-
+	// info message with ok button 
 	public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
 		JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
 	}
-
+	// option message yes/ no
 	public static int yesNoBox(String infoMessage, String titleBar, ImageIcon i) {
 		return JOptionPane.showConfirmDialog(null, infoMessage, titleBar, JOptionPane.YES_NO_OPTION,
 				JOptionPane.PLAIN_MESSAGE, i);
 	}
-
+	// option message yes/ no / cancel
 	public static int yesNoCancleBox(String infoMessage, String titleBar, ImageIcon i) {
 		return JOptionPane.showConfirmDialog(null, infoMessage, titleBar, JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE, i);
 	}
-
+	// info message with hyper link to the used icon (cat icon)
 	public static void hyperCatBox(String infoMessage , String title ,ImageIcon i ) {
 		JLabel label = new JLabel();
 		Font font = label.getFont();
