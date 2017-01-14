@@ -35,7 +35,7 @@ public class XmlCourseLoaderTest {
 	@Test
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
-		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
+		TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
 		
 		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
@@ -66,6 +66,22 @@ public class XmlCourseLoaderTest {
 		assertNull(coursesMap.get("205719").getaTerm());
 		assert "2017-07-09T00:00".equals((coursesMap.get("014852").getaTerm() + ""));
 		assert "2017-07-12T00:00".equals((coursesMap.get("236635").getaTerm() + ""));
+		
+		assert "2017-09-25T00:00".equals((coursesMap.get("044148").getbTerm() + ""));
+		assertNull(coursesMap.get("394820-12").getaTerm());
+		assert "2017-09-25T00:00".equals((coursesMap.get("014003").getbTerm() + ""));
+		assert "2017-10-17T00:00".equals((coursesMap.get("095113").getbTerm() + ""));
+		assert "2017-10-03T00:00".equals((coursesMap.get("236353").getbTerm() + ""));
+		
+		assert (coursesMap.get("236350").getStuff().size() == 1);
+		assert "ג.נקבלי".equals((coursesMap.get("236350").getStuff().get(0).getLastName()));
+		
+		assert (coursesMap.get("324975").getStuff().size() == 1);
+		assert "א.פסקוביץ".equals((coursesMap.get("324975").getStuff().get(0).getLastName()));
+		
+		assert (coursesMap.get("044191").getStuff().size() == 0);
+		
+		System.out.println((coursesMap.get("034039").getStuff().size()));
 		
 		/*
 		for (LessonGroup lg : coursesMap.get("014146").getTutorialsLG()) {

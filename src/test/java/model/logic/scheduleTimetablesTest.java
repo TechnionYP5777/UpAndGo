@@ -33,7 +33,7 @@ public class scheduleTimetablesTest {
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -50,7 +50,7 @@ public class scheduleTimetablesTest {
 	public void test_scheduleTimetable1() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		

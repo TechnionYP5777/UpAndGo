@@ -45,7 +45,8 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	
 	//List<Course> coursesList;
-	TreeMap<String, Course> courses;
+	TreeMap<String, Course> coursesById;
+	TreeMap<String, Course> coursesByName;
 	
 	public XmlCourseLoader(String REP_XML_PATH) {
 		super(REP_XML_PATH);
@@ -61,7 +62,8 @@ public class XmlCourseLoader extends CourseLoader {
 		
 		//coursesList = xmlParser.getCourses(path);
 		//Get data from REP XML file.
-		courses = new TreeMap<>();
+		coursesById = new TreeMap<>();
+		coursesByName = new TreeMap<>();
 		getCourses();
 	}
 
@@ -90,8 +92,13 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public TreeMap<String, Course> loadAllCourses() {
-		return courses;
+	public TreeMap<String, Course> loadAllCoursesById() {
+		return coursesById;
+	}
+	
+	@Override
+	public TreeMap<String, Course> loadAllCoursesByName() {
+		return coursesByName;
 	}
 	
 	@Override
@@ -208,6 +215,7 @@ public class XmlCourseLoader extends CourseLoader {
 						setStaffList (cb, p,"lecturer");
 						setStaffList (cb, p,"assistant");
 						setStaffList (cb, p,"moderator");
+						setStaffList (cb, p,"guide");
 						//get lectures and tutorial group Lessons
 						NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
@@ -230,14 +238,12 @@ public class XmlCourseLoader extends CourseLoader {
 								}
 							}
 						}
-						courses.put(((Element) p).getAttribute("id"), cb.build());
+						Course c = cb.build();
+						coursesById.put(c.getId(), c);
+						coursesByName.put(c.getName(), c);
 						cb.cleartutorialGroup();
 					}
 					
-					/*Course c = cb.build();
-					courses.put(((Element) p).getAttribute("id"), c);
-					courses.put(((Element) p).getAttribute("name"), c);
-					*/
 					cb.clearStaffMembers();
 					cb.clearlecturesGroups();
 					
@@ -258,7 +264,7 @@ public class XmlCourseLoader extends CourseLoader {
 			b.setName(((Element) n).getAttribute("name"));
 			b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
 			createLessonGroup(b, p, p, "sport");
-			courses.put(((Element) p).getAttribute("id")+ "-" + ((Element) n).getAttribute("group"), cb.build());
+			coursesById.put(((Element) p).getAttribute("id")+ "-" + ((Element) n).getAttribute("group"), cb.build());
 			cb.cleartutorialGroup();
 		}
 	}
@@ -356,7 +362,7 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public List<Faculty> loadFaculties() {
 		List<Faculty> $ = new ArrayList<>();
-		for(Entry<String, Course> ¢ : courses.entrySet()) {
+		for(Entry<String, Course> ¢ : coursesById.entrySet()) {
 			Faculty faculty = new Faculty(¢.getKey().substring(0, 2), ¢.getValue().getFaculty());
 			if (!$.contains(faculty))
 				$.add(faculty);
