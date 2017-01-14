@@ -1,27 +1,36 @@
 package model;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 
 import logic.Scheduler;
 import model.course.Course;
+import model.course.LessonGroup;
+import model.schedule.Timetable;
+import property.TimeTableProperty;
 
 public class TimeTableModel implements Model {
 
-	List<Course> courses;
+	protected List<Course> courses = new ArrayList<>();
 
-	boolean isDaysoffCount;
-	boolean isBlankSpaceCount;
+	protected boolean isDaysoffCount = false;
+	protected boolean isBlankSpaceCount = false;
+	protected LocalTime minStartTime = null;
+	protected LocalTime maxEndTime = null;
 	
-	protected HashMultimap<String, PropertyChangeListener> listenersMap;
+	protected List<List<LessonGroup>> lessonGroups = new ArrayList<>();
+	protected int sched_index = 0;
+	
+	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
 	
 	public TimeTableModel() {
-		this.courses = new ArrayList<>();
-		this.listenersMap = HashMultimap.create();
-		this.isBlankSpaceCount = this.isDaysoffCount = false;
+		// nothing to do here
 	}
 	
 	public void setCourses(List<Course> ¢) {
@@ -29,16 +38,29 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void loadSchedule() {
-//		Scheduler.sortedBy(Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount);
-		// TODO implement it
+		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
+				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+		lessonGroups.clear();
+		sched_index = 0;
+		tables.forEach((x) -> lessonGroups.add(x.getLessonGroups()));
+
+		notifySchedListeners();
 	}
 	
 	public void loadNextSchedule() {
-		// TODO implement it
+		++sched_index;
+		notifySchedListeners();
 	}
 
 	public void loadPrevSchedule() {
-		// TODO implement it
+		--sched_index;
+		notifySchedListeners();
+		
+	}
+	
+	private void notifySchedListeners() {
+		this.listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroups.get(sched_index)))));
 	}
 	
 	@Override
