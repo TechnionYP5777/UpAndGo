@@ -51,17 +51,17 @@ public class SECatalogLoader extends CSCatalogLoader {
 					NodeList scientChainsList = elem.getElementsByTagName("CourseList");
 					for (int j = 0; j < scientChainsList.getLength(); ++j) {
 						Element elem2 = (Element) scientChainsList.item(j);
-						String chainName = elem2.getAttribute("nama");
+						String chainName = elem2.getAttribute("name");
 						if ("שרשרת פיסיקה".equals(chainName))
-							addCoursesToList(elem.getElementsByTagName("Course"), physicsChain, m);
+							addCoursesToList(elem2.getElementsByTagName("Course"), physicsChain, m);
 						if ("שרשרת ביולוגיה".equals(chainName))
-							addCoursesToList(elem.getElementsByTagName("Course"), biologyChain, m);
+							addCoursesToList(elem2.getElementsByTagName("Course"), biologyChain, m);
 						if ("שרשרת כימיה 1".equals(chainName))
-							addCoursesToList(elem.getElementsByTagName("Course"), chemistryChain1, m);
+							addCoursesToList(elem2.getElementsByTagName("Course"), chemistryChain1, m);
 						if ("שרשרת כימיה 2".equals(chainName))
-							addCoursesToList(elem.getElementsByTagName("Course"), chemistryChain2, m);
+							addCoursesToList(elem2.getElementsByTagName("Course"), chemistryChain2, m);
 						if ("קורסים מדעיים נוספים".equals(chainName))
-							addCoursesToList(elem.getElementsByTagName("Course"), otherScientCourses, m);
+							addCoursesToList(elem2.getElementsByTagName("Course"), otherScientCourses, m);
 					}
 				}
 			}
