@@ -210,7 +210,6 @@ public class mainLuzerView implements MenuView {
 		});
 	}
 
-
 	@Override
 	public void addActionListener(ActionListener ¢) {
 		listeners.add(¢);
