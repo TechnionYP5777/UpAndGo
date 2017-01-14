@@ -67,6 +67,12 @@ public class XmlCourseLoaderTest {
 		assert "2017-07-09T00:00".equals((coursesMap.get("014852").getaTerm() + ""));
 		assert "2017-07-12T00:00".equals((coursesMap.get("236635").getaTerm() + ""));
 		
+		assert "2017-09-25T00:00".equals((coursesMap.get("044148").getbTerm() + ""));
+		assertNull(coursesMap.get("394820-12").getaTerm());
+		assert "2017-09-25T00:00".equals((coursesMap.get("014003").getbTerm() + ""));
+		assert "2017-10-17T00:00".equals((coursesMap.get("095113").getbTerm() + ""));
+		assert "2017-10-03T00:00".equals((coursesMap.get("236353").getbTerm() + ""));
+		
 		/*
 		for (LessonGroup lg : coursesMap.get("014146").getTutorialsLG()) {
 		    System.out.println(lg.getGroupNum());
