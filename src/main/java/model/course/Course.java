@@ -67,6 +67,7 @@ public class Course {
 
 		this.prerequisites = new ArrayList<>(prerequisitesList);
 		this.corequisites = new ArrayList<>(corequisitesList);
+		this.done = false;
 
 	}
 

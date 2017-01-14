@@ -5,6 +5,7 @@ package catalog.loader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -22,7 +23,6 @@ public class SECatalogLoader extends CSCatalogLoader {
 	List<Course> core;
 	List<List<Course>> scientificChain;
 	SoftwareEngineering theCatalog;
-
 	public SECatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);
 		System.out.println(m.getCoursesNames());
@@ -70,6 +70,16 @@ public class SECatalogLoader extends CSCatalogLoader {
 
 	public Catalog getCatalog() {
 		return theCatalog;
+	}
+	
+	public void markDoneCourses(Set<String> userCourses) {
+		for (String s: userCourses) {
+			String [] course = s.split(" ");
+			model.getCourseById(course[0]).MarkDone();
+		}
+		for (Course c: obligatory) {
+			System.out.println("c is done ?? " + c.getName() + " " + c.getDone());
+		}
 	}
 
 }
