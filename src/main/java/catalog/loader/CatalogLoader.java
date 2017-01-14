@@ -27,9 +27,10 @@ import model.course.Course;
 public abstract class CatalogLoader {
 	protected List<Course> obligatory, malags;
 	NodeList coursesList;
-
+	protected CourseModel model;
 	@SuppressWarnings("resource")
 	CatalogLoader(String catalogXmlPath, CourseModel m) {
+		model = m;
 		obligatory = new ArrayList<>();
 		malags = new ArrayList<>();
 		try {

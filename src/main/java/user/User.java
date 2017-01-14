@@ -1,46 +1,43 @@
 package user;
 
-import java.util.List;
-
-import model.course.Course;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
+import java.util.HashSet;
+import java.util.Set;
 
 import catalog.Catalog;
 
 public class User {
-	List<Course> courses;
+	Set<String> courses;
 	Catalog catalog;
 	String name;
-	
+
 	public User(String grades, Catalog c) {
 		catalog = c;
+		courses = new HashSet<>();
 		int count = 0;
-		Boolean flag = false;
+		boolean flag = false;
 		for (String ¢ : grades.split("\\r?\\n")) {
-			if(count++ == 7) {
+			if (count++ == 7) {
 				¢ = new StringBuffer(¢).reverse().toString();
 				name = ¢.substring(3, ¢.length());
 			}
 			if (flag) {
-				if(¢.contains("עצוממ") || ¢.equals("") || ¢.contains("רוטפ") || ¢.contains("-")) {
+				if (¢.contains("עצוממ") || ¢.equals("") || ¢.contains("רוטפ") || ¢.contains("-")) {
 					flag = false;
 					continue;
 				}
-				System.out.println(¢);
-				
-
+				String[] grade = ¢.split("\\t");
+				if (grade[0].contains("םילשה אל") || Integer.parseInt(grade[0]) < 55) {
+					if (!grade[0].contains("םילשה אל") && courses.contains(grade[2]))
+						courses.remove(grade[2]);
+					continue;
+				}
+				courses.add(grade[2]);
 			}
-			if (¢.contains("ןויצ")) {
+			if (¢.contains("ןויצ"))
 				flag = true;
-			}
 		}
-		
-
 	}
-	
+
 	public String getName() {
 		return name;
 	}
