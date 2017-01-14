@@ -5,9 +5,6 @@
 package view;
 
 import java.awt.EventQueue;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -28,16 +25,10 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
-
-import command.CourseCommand;
 import command.MenuCommand;
-import model.course.CourseId;
-import property.CourseProperty;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -74,7 +65,6 @@ public class mainLuzerView implements View {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			initialize();
-
 		} catch (Throwable ¢) {
 			¢.printStackTrace();
 		}
