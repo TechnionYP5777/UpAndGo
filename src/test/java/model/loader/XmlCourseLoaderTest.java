@@ -73,6 +73,16 @@ public class XmlCourseLoaderTest {
 		assert "2017-10-17T00:00".equals((coursesMap.get("095113").getbTerm() + ""));
 		assert "2017-10-03T00:00".equals((coursesMap.get("236353").getbTerm() + ""));
 		
+		assert (coursesMap.get("236350").getStuff().size() == 1);
+		assert "ג.נקבלי".equals((coursesMap.get("236350").getStuff().get(0).getLastName()));
+		
+		assert (coursesMap.get("324975").getStuff().size() == 1);
+		assert "א.פסקוביץ".equals((coursesMap.get("324975").getStuff().get(0).getLastName()));
+		
+		assert (coursesMap.get("044191").getStuff().size() == 0);
+		
+		System.out.println((coursesMap.get("034039").getStuff().size()));
+		
 		/*
 		for (LessonGroup lg : coursesMap.get("014146").getTutorialsLG()) {
 		    System.out.println(lg.getGroupNum());
