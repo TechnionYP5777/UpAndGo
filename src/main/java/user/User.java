@@ -13,13 +13,35 @@ import catalog.Catalog;
 public class User {
 	List<Course> courses;
 	Catalog catalog;
+	String name;
 	
-	User(String grades, Catalog c) {
+	public User(String grades, Catalog c) {
 		catalog = c;
-		Document d=Parser.parse(grades, "http://techmvs.technion.ac.il");
-		
-	    //for (final Element ¢ : Parser.parse(grades, "http://techmvs.technion.ac.il").select(null))
-		//	System.out.println("#### " + ¢);
+		int count = 0;
+		Boolean flag = false;
+		for (String ¢ : grades.split("\\r?\\n")) {
+			if(count++ == 7) {
+				¢ = new StringBuffer(¢).reverse().toString();
+				name = ¢.substring(3, ¢.length());
+			}
+			if (flag) {
+				if(¢.contains("עצוממ") || ¢.equals("") || ¢.contains("רוטפ") || ¢.contains("-")) {
+					flag = false;
+					continue;
+				}
+				System.out.println(¢);
+				
 
+			}
+			if (¢.contains("ןויצ")) {
+				flag = true;
+			}
+		}
+		
+
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
