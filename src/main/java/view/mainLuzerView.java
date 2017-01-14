@@ -32,7 +32,7 @@ import command.MenuCommand;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class mainLuzerView implements View {
+public class mainLuzerView implements MenuView {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
@@ -195,23 +195,20 @@ public class mainLuzerView implements View {
 
 	private void createEvents() {
 		mnItCatalog.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
 		});
 	}
-
 
 	@Override
 	public void addActionListener(ActionListener ¢) {

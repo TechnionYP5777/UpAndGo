@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -81,7 +82,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		scheduleWasRequested = false;
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
 	    table = new MultiSpanCellTable(defaultTableModel);
+		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		//Aligning text in the table
@@ -231,8 +234,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	public void displaySchedule(List<LessonGroup> schedule) {
-		table.setModel(defaultTableModel);
+		
+		final ColoredCell cellColor =(ColoredCell)defaultTableModel.getCellAttribute();
 		final CellSpan cellAtt =(CellSpan)defaultTableModel.getCellAttribute();
+		table.setModel(defaultTableModel);
 		int[] columns = new int[1];
 		int[] rows;
 		for(LessonGroup lg : schedule)
@@ -246,6 +251,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				for (int ¢ = 0; ¢ < rows.length; ++¢)
 					rows[¢] = ¢ + startRow;
 				cellAtt.combine(rows, columns);
+				cellColor.setBackground(Color.MAGENTA, rows[0],columns[0]);
+				
 			}
 
 	}
