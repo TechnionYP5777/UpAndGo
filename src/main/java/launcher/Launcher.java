@@ -5,12 +5,12 @@ package launcher;
 
 import java.awt.EventQueue;
 
-import model.ConcreteModel;
+import model.CourseModel;
 import model.loader.XmlCourseLoader;
 import view.MainWinView;
 
 /**
- * @author magellan
+ * @author nikitadizhur
  *
  * The main class that bootstraps the application (launch it)
  */
@@ -21,7 +21,7 @@ public class Launcher {
 			@Override
 			public void run() {
 				try {
-					new MainWinView(new ConcreteModel(new XmlCourseLoader("REPFILE/REP.XML"))).setVisible(true);
+					new MainWinView(new CourseModel(new XmlCourseLoader("REPFILE/REP.XML"))).setVisible(true);
 				} catch (Exception ¢) {
 					¢.printStackTrace();
 				}
