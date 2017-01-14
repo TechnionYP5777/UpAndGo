@@ -34,6 +34,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
 import command.CourseCommand;
+import command.MenuCommand;
 import model.course.CourseId;
 import property.CourseProperty;
 
@@ -208,14 +209,15 @@ public class mainLuzerView implements View {
 			@Override
 			public void actionPerformed(ActionEvent __) {
 				listeners.forEach(x -> x
-						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent __) {
-				// TODO: add impl.
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
 		});
 	}
