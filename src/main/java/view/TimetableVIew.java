@@ -34,6 +34,11 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
 	private JButton schedBtn = new JButton("בנה מערכת");
+	private JCheckBox isDaysOff;
+	private JCheckBox isMinWindows;
+	JTextField startTime;
+	JTextField endTime;
+	
 	final AttributiveCellTableModel defaultTableModel = new AttributiveCellTableModel(
 			new Object[][] {
 				
@@ -89,21 +94,28 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
+		
 		//Aligning text in the table
 		DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
 		bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
 		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		
 		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
 			table.getColumnModel().getColumn(¢).setPreferredWidth(90);
 		table.getColumnModel().getColumn(5).setPreferredWidth(10);
+		
 		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
 			table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
 		table.getColumnModel().getColumn(5).setCellRenderer(bottomCenterRenderer);
+		
 		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
 			table.getColumnModel().getColumn(¢).setResizable(false);
+		
 		table.setRowHeight(40);
+		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
@@ -133,46 +145,46 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(textField);
 		
-		JCheckBox isOffDays = new JCheckBox("ימי חופש");
-		isOffDays.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(isOffDays);
+		isDaysOff = new JCheckBox("ימי חופש");
+		isDaysOff.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		otherComponentsPanel.add(isDaysOff);
 		
-		JCheckBox isMinWindows= new JCheckBox("מספר מינימלי של חלונות");
+		isMinWindows= new JCheckBox("מספר מינימלי של חלונות");
 		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		otherComponentsPanel.add(isMinWindows);
 		
-		JPanel startTimeTextbox=new JPanel();
-		startTimeTextbox.setLayout(new GridLayout(1,9));
+		JPanel startTimePanel=new JPanel();
+		startTimePanel.setLayout(new GridLayout(1,9));
 		for(int ¢=0 ; ¢ < 7; ++¢)
-			startTimeTextbox.add(new JPanel());
+			startTimePanel.add(new JPanel());
 		
-		JTextField tf3 = new JTextField();
-		tf3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startTimeTextbox.add(tf3);
+		startTime = new JTextField();
+		startTime.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimePanel.add(startTime);
 		
-		JLabel tf4 = new JLabel("שעת התחלה:");
-		tf4.setBorder(null);
-		tf4.setFont(new Font("Dialog", Font.BOLD, 12));
-		tf4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		startTimeTextbox.add(tf4);
+		JLabel label1 = new JLabel("שעת התחלה:");
+		label1.setBorder(null);
+		label1.setFont(new Font("Dialog", Font.BOLD, 12));
+		label1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		startTimePanel.add(label1);
 		
-		otherComponentsPanel.add(startTimeTextbox);
+		otherComponentsPanel.add(startTimePanel);
 		
-		JPanel endTimeTextbox=new JPanel();
-		endTimeTextbox.setLayout(new GridLayout(1,9));
+		JPanel endTimePannel=new JPanel();
+		endTimePannel.setLayout(new GridLayout(1,9));
 		for(int ¢=0 ; ¢ < 7; ++¢)
-			endTimeTextbox.add(new JPanel());
+			endTimePannel.add(new JPanel());
 		
-		JTextField tf1 = new JTextField();
-		tf1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		endTimeTextbox.add(tf1);
+		endTime = new JTextField();
+		endTime.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTimePannel.add(endTime);
 		
-		JLabel tf2 = new JLabel("שעת סיום:");
-		tf2.setFont(new Font("Dialog", Font.BOLD, 12));
-		tf2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		endTimeTextbox.add(tf2);
+		JLabel label2 = new JLabel("שעת סיום:");
+		label2.setFont(new Font("Dialog", Font.BOLD, 12));
+		label2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		endTimePannel.add(label2);
 		
-		otherComponentsPanel.add(endTimeTextbox);
+		otherComponentsPanel.add(endTimePannel);
 		
 		JPanel panelSchedButton =new JPanel();
 		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
@@ -291,13 +303,11 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	}
 	@Override
 	public boolean isDaysoffCount() {
-		// TODO Auto-generated method stub
-		return false;
+		return isDaysOff.isSelected();
 	}
 	@Override
 	public boolean isBlankSpaceCount() {
-		// TODO Auto-generated method stub
-		return false;
+		return isMinWindows.isSelected();
 	}
 	@Override
 	public LocalTime getMinStartTime() {
