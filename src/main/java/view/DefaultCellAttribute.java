@@ -23,7 +23,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	}
 
 	public DefaultCellAttribute(int numRows, int numColumns) {
-		setSize(new Dimension(numColumns, numRows));
+		setSize(new Dimension(numColumns, numRows)); 
 	}
 
 	protected void initValue() {
@@ -188,6 +188,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 		foreground = new Color[rowSize][columnSize];
 		background = new Color[rowSize][columnSize];
 		font = new Font[rowSize][columnSize];
+		
 		initValue();
 	}
 
