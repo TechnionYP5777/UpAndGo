@@ -14,20 +14,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.print.attribute.AttributeSet;
-import javax.swing.ComboBoxModel;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 
 import command.TimeTableCommand;
 import model.course.Lesson;
