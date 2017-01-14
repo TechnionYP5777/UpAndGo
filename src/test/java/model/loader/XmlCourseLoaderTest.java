@@ -35,7 +35,7 @@ public class XmlCourseLoaderTest {
 	@Test
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
-		TreeMap<String, Course> coursesMap = cr.loadAllCourses();
+		TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
 		
 		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());

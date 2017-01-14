@@ -28,7 +28,9 @@ public abstract class CourseLoader {
 	
 	public abstract Course loadCourse(String name);
 	
-	public abstract TreeMap<String, Course> loadAllCourses();
+	public abstract TreeMap<String, Course> loadAllCoursesById();
+	
+	public abstract TreeMap<String, Course> loadAllCoursesByName();
 	
 	public abstract List<String> loadAllCourseNames();
 	
