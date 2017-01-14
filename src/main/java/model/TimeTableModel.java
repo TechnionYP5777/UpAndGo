@@ -41,6 +41,10 @@ public class TimeTableModel implements Model {
 		isDaysoffCount = f;
 	}
 	
+	public void setBlankSpaceFlag(boolean f) {
+		isDaysoffCount = f;
+	}
+	
 	public void setMinStartTime(LocalTime t) {
 		minStartTime = t;
 	}

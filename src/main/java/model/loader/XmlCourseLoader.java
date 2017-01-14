@@ -208,6 +208,7 @@ public class XmlCourseLoader extends CourseLoader {
 						setStaffList (cb, p,"lecturer");
 						setStaffList (cb, p,"assistant");
 						setStaffList (cb, p,"moderator");
+						setStaffList (cb, p,"guide");
 						//get lectures and tutorial group Lessons
 						NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {

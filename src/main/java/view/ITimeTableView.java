@@ -1,7 +1,15 @@
 package view;
 
+import java.time.LocalTime;
+
 public interface ITimeTableView extends View {
-/*
- * TODO: add methods
- */
+
+	boolean isDaysoffCount();
+	
+	boolean isBlankSpaceCount();
+	
+	LocalTime getMinStartTime();
+	
+	LocalTime getMaxEndTime();
+	
 }
