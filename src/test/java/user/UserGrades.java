@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import catalog.loader.SECatalogLoader;
-import model.ConcreteModel;
+import model.CourseModel;
 import model.loader.XmlCourseLoader;
 
 import javax.swing.GroupLayout;
@@ -72,7 +72,7 @@ public class UserGrades extends JFrame {
 					if (hasTransferableText)
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
 					if("הנדסת תוכנה".equals(comboBox.getSelectedItem().toString())){
-						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new ConcreteModel(new XmlCourseLoader("REPFILE/REP.XML")));
+						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 					}
 					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");
 					} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {
