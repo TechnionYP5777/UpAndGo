@@ -64,7 +64,6 @@ public class SECatalogLoader extends CSCatalogLoader {
 							addCoursesToList(elem.getElementsByTagName("Course"), otherScientCourses, m);
 					}
 				}
-				addCoursesToList(elem.getElementsByTagName("Course"), listB, m);
 			}
 		} catch (SAXException | IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
@@ -79,7 +78,6 @@ public class SECatalogLoader extends CSCatalogLoader {
 		System.out.println("malags: " + malags + "listA: " + listA);
 		System.out.println("listB: " + listB + "core: " + core);
 		System.out.println("scientificChain: " + scientificChain);
-
 	}
 
 	public Catalog getCatalog() {
