@@ -217,6 +217,7 @@ public void changeAttribute(int[] rows, int[] columns, Object command) {
 		return false;
 	}
 
+	@SuppressWarnings("static-method")
 	protected void setValues(Object[][] target, Object value,
 			int[] rows, int[] columns) {
 		for (int i=0;i<rows.length;++i)

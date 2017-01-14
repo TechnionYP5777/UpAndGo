@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -21,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 import command.TimeTableCommand;
 import model.course.Lesson;
@@ -86,11 +84,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
 	    table = new MultiSpanCellTable(defaultTableModel);
-	   
-	    //table.getColorModel().80
-	    //table.getColumnModel().getColumn(0).setCellRenderer(new ColorColumnCellRenderer());
-		//table.getModel().setValueAt("hello", 0, 0);
-		//table.getCellRenderer(0, 0).getTableCellRendererComponent(table, null, false, false,0,0);
 		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
@@ -246,7 +239,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		final CellSpan cellAtt =(CellSpan)defaultTableModel.getCellAttribute();
 		table.setModel(defaultTableModel);
 		int[] columns = new int[1];
-		int[] rows = null;
+		int[] rows;
 		for(LessonGroup lg : schedule)
 			for (Lesson l : lg.getLessons()) {
 				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue() % 7 - 2;
@@ -261,12 +254,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				cellColor.setBackground(Color.MAGENTA, rows[0],columns[0]);
 				
 			}
-		//table.setC
-	//	
-		//cellColor.setForeground(Color.BLACK, 2,2);
-//		table.clearSelection();
-	//	table.revalidate();
-		//table.getUI().
 
 	}
 }
