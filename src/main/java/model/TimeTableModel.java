@@ -54,8 +54,12 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void loadSchedule() {
-		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
-				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+	//	System.out.println(isDaysoffCount + " " + isBlankSpaceCount + " " + minStartTime + " " + maxEndTime);
+	//	List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
+	//			Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+		System.out.println("%$%$%$%%$%$%$%  \n"+ courses+ " ");
+				Scheduler.getTimetablesList(courses);
+		List<Timetable> tables = new ArrayList<>();
 		lessonGroups.clear();
 		sched_index = 0;
 		tables.forEach((x) -> lessonGroups.add(x.getLessonGroups()));
