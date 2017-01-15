@@ -72,7 +72,7 @@ public class scheduleView extends JFrame {
 		// DayOfWeek.MONDAY ,LocalTime.of(14, 30)),"Taub 3",
 		// Lesson.Type.TUTORIAL,12,"MATAM"));
 		list.add(new Lesson(new StuffMember("D", "d"), new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(10, 30)),
-				new WeekTime(DayOfWeek.MONDAY, LocalTime.of(11, 30)), "Taub 3", Lesson.Type.LECTURE, 12, "MATAM"));
+				new WeekTime(DayOfWeek.MONDAY, LocalTime.of(11, 30)), "Taub 3", Lesson.Type.LECTURE, 12, "234122", "MATAM"));
 
 		getContentPane().setMinimumSize(new Dimension(500, 300));
 		getContentPane().setLayout(new BorderLayout(0, 0));

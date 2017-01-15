@@ -21,7 +21,7 @@ public class Lesson implements Event {
 	protected final Type type;
 	protected final int group;
 	//protected int day;	
-	protected final String course;
+	protected final String courseId;
 	protected final String courseName;
 	
 	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c, String n) {
@@ -35,12 +35,12 @@ public class Lesson implements Event {
 		this.type = t;
 		this.group = g;
 		//this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
-		this.course = c;
+		this.courseId = c;
 		this.courseName = n;
 	}
 	
 	public String getCourse() {
-		return this.course;
+		return this.courseId;
 	}
 	
 	public String getCourseName() {
@@ -93,7 +93,7 @@ public class Lesson implements Event {
 	    Lesson lesson = (Lesson)l;
 	    return (((this.place).equals(lesson.getPlace())) && ((this.type) == lesson.getType())
 	    		&& (((this.group) == lesson.getGroup()))
-	    		&&  ((this.course).equals(lesson.getCourse())) &&
+	    		&&  ((this.courseId).equals(lesson.getCourse())) &&
 	    		((this.startTime).equals(lesson.getStartTime())) &&
 	    				((this.endTime).equals(lesson.getEndTime())));
 	}
@@ -127,6 +127,6 @@ public class Lesson implements Event {
 	
 	@Override
 	public int hashCode() {
-	    return Objects.hash(place, type, course, startTime, endTime);
+	    return Objects.hash(place, type, courseId, startTime, endTime);
 	}
 }

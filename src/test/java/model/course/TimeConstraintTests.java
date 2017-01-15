@@ -18,7 +18,7 @@ public class TimeConstraintTests {
 		Course c = (new CourseBuilder()).setId("1234").setName("first")
 				.addLesson((new Lesson(new StuffMember("koby", "bs"),
 						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)),
-						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234")))
+						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234", "first")))
 				.build();
 		
 		//TreeMap<String, Course> coursesMap = cr.loadAllCourses();
