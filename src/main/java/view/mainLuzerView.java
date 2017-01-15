@@ -95,7 +95,6 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mainLuzer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setMinimumSize(new Dimension(1100, 600));
 		mainLuzer.setBounds(100, 100, 450, 300);
-
 	}
 
 	void setMenu() {
