@@ -81,6 +81,8 @@ public class TimeTableModel implements Model {
 	private void notifySchedListeners() {
 		this.listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)))));
+		this.listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,(sched_index+1) + "/" + lessonGroupsList.size()))));
 	}
 	
 	@Override

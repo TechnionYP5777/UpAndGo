@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -41,6 +42,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	private JButton saveBtn = new JButton("שמור מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
+	JTextField schedIndex;
+	
 	private DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
 	private DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	
@@ -64,13 +67,17 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	public TimetableVIew() {
 		
 		bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
-		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
+		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);	
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		
 		scheduleWasRequested = false;
+		schedIndex= new JTextField();
+		schedIndex.setBackground(getBackground());
+		schedIndex.setHorizontalAlignment(SwingConstants.CENTER);
+		schedIndex.setFont(new Font("", Font.PLAIN, 14));
+		schedIndex.setBorder(null);
+		schedIndex.setVisible(false);
+		
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
@@ -94,7 +101,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
-		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(schedIndex);
 		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(cleanTble);
@@ -228,6 +235,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				scheduleWasRequested = true;
+				schedIndex.setVisible(true);
 				listeners.forEach(x -> x.actionPerformed(
 					new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.RECALC_SCHED)));
 			}
@@ -247,7 +255,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				scheduleWasRequested = false;
+				schedIndex.setVisible(false);
 				resetTable();
+				
 				
 			}
 		});
@@ -297,6 +307,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 
 		case TimeTableProperty.SCHEDULE:
 			displaySchedule((List<LessonGroup>) evt.getNewValue());
+			break;
+		case TimeTableProperty.SCHEDULE_INDEX:
+			schedIndex.setText("( " + (String)evt.getNewValue() + " )");
 			break;
 		default:
 			break;
