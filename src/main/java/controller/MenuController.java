@@ -32,7 +32,7 @@ public class MenuController implements Controller {
 			clCtrl.loadCatalogFrom(view.getCatalogPath());
 		else if (¢.getActionCommand().equals(MenuCommand.LOAD_GILAYON))
 			clCtrl.loadGilaionFrom(view.getGilayonPath());
-		else if (¢.getActionCommand().equals(MenuCommand.SAVE_ALL)) {
+		else if (¢.getActionCommand().equals(MenuCommand.SAVE)) {
 			clCtrl.saveChosenCourses();
 			clCtrl.saveCatalog();
 			clCtrl.saveGilaion();
