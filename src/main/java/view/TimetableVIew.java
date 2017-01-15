@@ -34,9 +34,10 @@ import property.TimeTableProperty;
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel implements ITimeTableView {
 	private MultiSpanCellTable table;
+	private JButton cleanTble = new JButton("נקה מערכת");
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
-	static JButton schedBtn = new JButton("בנה מערכת");
+	private JButton schedBtn = new JButton("בנה מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
 	
@@ -145,7 +146,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(nextBtn);
 		nextprevPannel.add(new JPanel());
-		nextprevPannel.add(new JPanel());
+		nextprevPannel.add(cleanTble);
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
@@ -243,7 +244,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		endTimeChkBox.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				endTimeComBoxHours.setEnabled(endTimeChkBox.isSelected());
 				endTimeComBoxMins.setEnabled(endTimeChkBox.isSelected());
 				
