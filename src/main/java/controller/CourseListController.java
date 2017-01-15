@@ -63,7 +63,7 @@ public class CourseListController implements Controller{
 	}
 	
 	public void saveChosenCourses() {
-		// TODO: implement it
+		model.saveChosenCourses(model.getChosenCourseNames());
 	}
 	
 	public void loadGilaionFrom(String path) {

@@ -35,6 +35,8 @@ public class CourseModel implements Model {
 		this.coursesById = loader.loadAllCoursesById();
 		this.coursesByName = loader.loadAllCoursesByName();
 		this.facultyList = loader.loadFaculties();
+		for(String id: this.loader.loadChosenCourseNames())
+			this.pickedCourseList.add(this.coursesById.get(id));
 	}
 
 	public void pickCourse(String name) {
@@ -52,7 +54,6 @@ public class CourseModel implements Model {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
 			pickedIds.add(course.getId());
 		});
-		this.loader.saveChosenCourseNames(pickedIds);
 
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
@@ -86,13 +87,10 @@ public class CourseModel implements Model {
 
 		// save picking in DB
 		HashSet<CourseId> pickedList = new HashSet<>();
-		List<String> pickedIds = new ArrayList<>();
 		this.pickedCourseList.remove(droppedCourse);
 		this.pickedCourseList.forEach((course) -> {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
-			pickedIds.add(course.getId());
 		});
-		this.loader.saveChosenCourseNames(pickedIds);
 
 		// notify listeners
 		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
@@ -128,10 +126,14 @@ public class CourseModel implements Model {
 	}
 
 	public List<String> getChosenCourseNames() {
-		return this.loader.loadChosenCourseNames();
+		List<String> $ = new ArrayList<>();
+		this.pickedCourseList.forEach((course) -> {
+			$.add(course.getId());
+		});
+		return $;
 	}
 
-	public void choseCourses(List<String> names) {
+	public void saveChosenCourses(List<String> names) {
 		this.loader.saveChosenCourseNames(names);
 	}
 
