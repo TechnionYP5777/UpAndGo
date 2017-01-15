@@ -31,6 +31,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		
 		init();
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent ¢) {
 		if (¢.getActionCommand().equals(TimeTableCommand.GET_NEXT_GENERATED_SCHED))
@@ -44,6 +45,10 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			model.setMinStartTime(view.getMinStartTime());
 			model.loadSchedule();
 		}
+	}
+	
+	public void saveSchedule() {
+		// TODO: implement it
 	}
 
 	@Override

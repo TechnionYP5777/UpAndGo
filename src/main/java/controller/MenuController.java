@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
+import command.MenuCommand;
 import model.MenuModel;
 import view.MenuView;
 
@@ -26,15 +27,22 @@ public class MenuController implements Controller {
 	}
 
 	@Override
-	public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-		// TODO Auto-generated method stub
-
+	public void actionPerformed(ActionEvent ¢) {
+		if (¢.getActionCommand().equals(MenuCommand.LOAD_CATALOG))
+			clCtrl.loadCatalogFrom(view.getCatalogPath());
+		else if (¢.getActionCommand().equals(MenuCommand.LOAD_GILAYON))
+			clCtrl.loadGilaionFrom(view.getGilayonPath());
+		else if (¢.getActionCommand().equals(MenuCommand.SAVE_ALL)) {
+			clCtrl.saveChosenCourses();
+			clCtrl.saveCatalog();
+			clCtrl.saveGilaion();
+			ttCtrl.saveSchedule();
+		}
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-
+		// nothing to do here
 	}
 
 	@Override

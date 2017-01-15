@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import command.CourseCommand;
 import model.CourseModel;
@@ -57,8 +58,20 @@ public class CourseListController implements Controller{
 		model.loadFacultyNames();
 	}
 
-	void loadChosenCoursesDetails() {
+	public void loadChosenCoursesDetails() {
 		model.loadChosenCoursesDetails();
+	}
+	
+	public void saveChosenCourses() {
+		// TODO: implement it
+	}
+	
+	public void loadGilaionFrom(String path) {
+		model.loadGilaionFrom(path);
+	}
+	
+	public void loadCatalogFrom(String path) {
+		model.loadCatalogFrom(path);
 	}
 	
 	@Override
@@ -69,5 +82,15 @@ public class CourseListController implements Controller{
 	@Override
 	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
 		model.removePropertyChangeListener(p, l);
+	}
+
+	public void saveCatalog() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void saveGilaion() {
+		// TODO Auto-generated method stub
+		
 	}
 }

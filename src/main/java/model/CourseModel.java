@@ -204,6 +204,14 @@ public class CourseModel implements Model {
 				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, this.pickedCourseList))));
 	}
 	
+	public void loadGilaionFrom(@SuppressWarnings("unused") String path) {
+		// TODO: implement it
+	}
+	
+	public void loadCatalogFrom(@SuppressWarnings("unused") String path) {
+		// TODO: implement it
+	}
+	
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)

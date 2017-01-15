@@ -21,5 +21,4 @@ public class MenuModel implements Model {
 		// TODO Auto-generated method stub
 
 	}
-
 }

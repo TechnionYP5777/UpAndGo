@@ -255,4 +255,16 @@ public class mainLuzerView extends JFrame implements MenuView {
 		}
 	}
 
+	@Override
+	public String getCatalogPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getGilayonPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
