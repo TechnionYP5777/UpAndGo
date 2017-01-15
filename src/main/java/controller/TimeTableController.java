@@ -39,16 +39,16 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			model.loadNextSchedule();
 		else if (¢.getActionCommand().equals(TimeTableCommand.GET_PREV_GENERATED_SCHED))
 			model.loadPrevSchedule();
-		else if (¢.getActionCommand().equals(TimeTableCommand.RECALC_SCHED)) {
+		else if (!¢.getActionCommand().equals(TimeTableCommand.RECALC_SCHED)) {
+			if (¢.getActionCommand().equals(TimeTableCommand.SAVE_SCHED))
+				saveSchedule();
+		} else {
 			model.setDaysoffFlag(view.isDaysoffCount());
 			model.setBlankSpaceFlag(view.isBlankSpaceCount());
 			model.setMaxEndTime(view.getMaxEndTime());
 			model.setMinStartTime(view.getMinStartTime());
 			clCtrl.loadChosenCoursesDetails();
 			model.loadSchedule();
-		}
-		else if (¢.getActionCommand().equals(TimeTableCommand.SAVE_SCHED)){
-			saveSchedule();
 		}
 	}
 	
