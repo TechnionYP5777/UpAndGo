@@ -34,7 +34,7 @@ CourseLoader cr;
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
@@ -62,7 +62,7 @@ CourseLoader cr;
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
@@ -81,7 +81,7 @@ CourseLoader cr;
 	public void test_c() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		List<Timetable> tablesList = Scheduler.getTimetablesList(courses);

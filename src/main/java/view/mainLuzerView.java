@@ -5,9 +5,6 @@
 package view;
 
 import java.awt.EventQueue;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -28,18 +25,14 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
-
-import model.course.CourseId;
-import property.CourseProperty;
-
+import command.MenuCommand;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class mainLuzerView implements View {
+public class mainLuzerView implements MenuView {
 
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
@@ -72,7 +65,6 @@ public class mainLuzerView implements View {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			initialize();
-
 		} catch (Throwable ¢) {
 			¢.printStackTrace();
 		}
@@ -100,7 +92,7 @@ public class mainLuzerView implements View {
 				if (userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
-					Message.infoBox(BYE_MSG, "BYE BYE", new ImageIcon("resources/cat-6-icon.png"));
+					Message.hyperCatBox(BYE_MSG,"Bye Bye", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
 				}
 			}
@@ -203,21 +195,20 @@ public class mainLuzerView implements View {
 
 	private void createEvents() {
 		mnItCatalog.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
-				// TODO: add impl.
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			@Override
-			public void actionPerformed(ActionEvent __) {
-				// TODO: add impl.
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				listeners.forEach(x -> x
+						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
 		});
 	}
-
 
 	@Override
 	public void addActionListener(ActionListener ¢) {

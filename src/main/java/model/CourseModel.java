@@ -21,7 +21,8 @@ import property.CourseProperty;
  */
 public class CourseModel implements Model {
 
-	protected TreeMap<String, Course> courseList;
+	protected TreeMap<String, Course> coursesById;
+	protected TreeMap<String, Course> coursesByName;
 	protected List<Course> pickedCourseList;
 	protected HashMultimap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
@@ -31,7 +32,8 @@ public class CourseModel implements Model {
 		this.pickedCourseList = new ArrayList<>();
 		this.listenersMap = HashMultimap.create();
 		this.loader = loader;
-		this.courseList = loader.loadAllCourses();
+		this.coursesById = loader.loadAllCoursesById();
+		this.coursesByName = loader.loadAllCoursesByName();
 		this.facultyList = loader.loadFaculties();
 	}
 
@@ -61,7 +63,7 @@ public class CourseModel implements Model {
 		if (name == null)
 			throw new NullPointerException();
 		List<String> prevCourseList = this.getCoursesNames();
-		this.courseList.put(name, loader.loadCourse(name));
+		this.coursesById.put(name, loader.loadCourse(name));
 
 		List<String> curCourseList = new ArrayList<>(prevCourseList);
 		curCourseList.remove(name);
@@ -72,7 +74,7 @@ public class CourseModel implements Model {
 	}
 
 	public List<String> getCoursesNames() {
-		return new ArrayList<>(this.courseList.keySet());
+		return new ArrayList<>(this.coursesById.keySet());
 	}
 
 	public void dropCourse(String name) {
@@ -110,7 +112,7 @@ public class CourseModel implements Model {
 	public Course getCourseByName(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Entry<String, Course> ¢ : courseList.entrySet())
+		for(Entry<String, Course> ¢ : coursesById.entrySet())
 			if (name.equals(¢.getValue().getName()))
 				return ¢.getValue();
 		return null;
@@ -125,7 +127,7 @@ public class CourseModel implements Model {
 	public Course getCourseById(String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Entry<String, Course> ¢ : courseList.entrySet())
+		for(Entry<String, Course> ¢ : coursesById.entrySet())
 			if (name.equals(¢.getValue().getId()))
 				return ¢.getValue();
 		return null;
@@ -151,12 +153,21 @@ public class CourseModel implements Model {
 	 */
 	public void loadQuery(String query) {
 		HashSet<CourseId> matchingIds = new HashSet<>();
-		this.courseList.forEach(query.isEmpty() ? (key, course) -> {
-			matchingIds.add(new CourseId(course.getId(), course.getName()));
-		} : (key, course) -> {
-			if (key.toLowerCase().contains(query.toLowerCase()))
+		if(query.isEmpty())
+			this.coursesById.forEach((key, course) -> {
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
-		});
+			});	
+		else {
+			this.coursesById.forEach((key, course) -> {
+				if (key.contains(query))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			});
+			this.coursesByName.forEach((key, course) -> {
+				if (key.toLowerCase().contains(query.toLowerCase()))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			});
+		}
+		
 		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
 	}
@@ -167,7 +178,7 @@ public class CourseModel implements Model {
 	 */
 	public void loadQueryByFaculty(String query, String faculty) {
 		HashSet<CourseId> matchingIds = new HashSet<>();
-		this.courseList.forEach(query.isEmpty() ? (key, course) -> {
+		this.coursesById.forEach(query.isEmpty() ? (key, course) -> {
 			if(course.getFaculty().equals(faculty))
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
 		} : (key, course) -> {

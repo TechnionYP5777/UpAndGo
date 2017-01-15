@@ -21,7 +21,7 @@ public class TimetableTest {
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
@@ -39,7 +39,7 @@ public class TimetableTest {
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
+		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		assert (Scheduler.schedule(courses, new ArrayList<TimeConstraint>()).getTimetable().getRankOfDaysoff() == 4);

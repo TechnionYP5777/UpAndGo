@@ -2,6 +2,7 @@ package catalog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import model.course.Course;
 
@@ -16,9 +17,9 @@ public class SoftwareEngineering extends CSCatalog {
 	static final double TOTAL_FACULTY_CHOICE_POINTS = 25.5;
 	static final int FREE_CHOICE_POINTS = 10;
 
-	public SoftwareEngineering(List<Course> obligatoryList, List<Course> freeChoiceList, List<Course> listAList,
+	public SoftwareEngineering(List<Course> obligatoryList, List<Course> malagsList, List<Course> listAList,
 			List<Course> listBList, List<Course> coreList, List<List<Course>> scientChainLists) {
-		super(obligatoryList, freeChoiceList, listAList, listBList, OBLIGATORY_POINTS,
+		super(obligatoryList, malagsList, listAList, listBList, OBLIGATORY_POINTS,
 				FREE_CHOICE_POINTS, MIN_LISTA_POINTS);
 		if (coreList == null || scientChainLists == null)
 			throw new NullPointerException();
