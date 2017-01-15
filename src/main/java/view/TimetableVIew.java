@@ -333,7 +333,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 				table.getColumnModel().getColumn(columns[0]).setCellRenderer(centerRenderer);
-				table.setValueAt(l.getCourse() + " ב" +  l.getPlace(),rows[0],columns[0]);
+				table.setValueAt(l.getCourse() + " ב" +  l.getPlace() + " " + l.getRoomNumber(),rows[0],columns[0]);
 				
 			}
 
