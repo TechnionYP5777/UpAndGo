@@ -51,6 +51,15 @@ public class Lesson implements Event {
 		return this.startTime;
 	}
 	
+	public String getRoomNumber() {
+		if (!this.place.isEmpty()) {
+			String[] spilt = this.place.split(" ");
+			if (spilt.length > 1)
+				return spilt[spilt.length - 1];
+		}
+		return "";
+	}
+	
 	public WeekTime getEndTime() {
 		return this.endTime;
 	}
