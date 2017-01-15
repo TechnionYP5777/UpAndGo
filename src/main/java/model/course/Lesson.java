@@ -8,6 +8,8 @@ import java.util.Objects;
 import logic.Event;
 import model.constraint.TimeConstraint;
 import model.course.StuffMember;
+import model.loader.CourseLoader;
+import model.loader.XmlCourseLoader;
 
 public class Lesson implements Event {
 	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT}
@@ -20,8 +22,9 @@ public class Lesson implements Event {
 	protected final int group;
 	//protected int day;	
 	protected final String course;
+	protected final String courseName;
 	
-	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c) {
+	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c, String n) {
 		if((theStartTime==null) || (place1==null))
 			throw new NullPointerException();
 		
@@ -33,10 +36,15 @@ public class Lesson implements Event {
 		this.group = g;
 		//this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		this.course = c;
+		this.courseName = n;
 	}
 	
 	public String getCourse() {
 		return this.course;
+	}
+	
+	public String getCourseName() {
+		return this.courseName;
 	}
 	
 	public int getGroup() {
