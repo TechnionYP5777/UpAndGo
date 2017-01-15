@@ -104,7 +104,7 @@ public class CourseModel implements Model {
 		if (name == null)
 			throw new NullPointerException();
 		this.listenersMap.get(CourseProperty.DETAILS).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, this.getCourseByName(name)))));
+				(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, this.getCourseById(name)))));
 	}
 
 	public Course getCourseByName(String name) {
