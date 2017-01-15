@@ -4,9 +4,6 @@
 package launcher;
 
 import java.awt.EventQueue;
-import java.awt.Window;
-
-import javax.swing.JFrame;
 
 import controller.CourseListController;
 import controller.MenuController;
@@ -16,7 +13,6 @@ import model.MenuModel;
 import model.TimeTableModel;
 import model.loader.XmlCourseLoader;
 import view.AvailableCourses;
-import view.MainWinView;
 import view.TimetableVIew;
 import view.mainLuzerView;
 
@@ -26,17 +22,17 @@ import view.mainLuzerView;
  *         The main class that bootstraps the application (launch it)
  */
 public class Launcher {
-	static protected CourseModel cModel;
-	static protected TimeTableModel ttModel;
-	static protected MenuModel mModel;
+	protected static CourseModel cModel;
+	protected static TimeTableModel ttModel;
+	protected static MenuModel mModel;
 
-	static protected AvailableCourses acView;
-	static protected TimetableVIew ttView;
-	static protected mainLuzerView mlView;
+	protected static AvailableCourses acView;
+	protected static TimetableVIew ttView;
+	protected static mainLuzerView mlView;
 
-	static protected CourseListController clCtrl;
-	static protected TimeTableController ttCtrl;
-	static protected MenuController mCtrl;
+	protected static CourseListController clCtrl;
+	protected static TimeTableController ttCtrl;
+	protected static MenuController mCtrl;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
