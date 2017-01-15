@@ -388,6 +388,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 					{null, null, null, null, null, null, "18:30"},
 					{null, null, null, null, null, null, "19:00"},
 					{null, null, null, null, null, null, "19:30"},
+					{null, null, null, null, null, null, "20:00"},
+					{null, null, null, null, null, null, "20:30"},
+					{null, null, null, null, null, null, "21:00"},
+					{null, null, null, null, null, null, "21:30"},
+					{null, null, null, null, null, null, "22:00"},
+					{null, null, null, null, null, null, "22:30"},
 				},
 				new String[] {
 						"\u05e9\u05d9\u05e9\u05d9", "\u05D7\u05DE\u05D9\u05E9\u05D9", "\u05E8\u05D1\u05D9\u05E2\u05D9", "\u05E9\u05DC\u05D9\u05E9\u05D9", "\u05E9\u05E0\u05D9 ", "\u05E8\u05D0\u05E9\u05D5\u05DF", ""
