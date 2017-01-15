@@ -44,7 +44,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	private DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
 	private DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	
-	
 	JComboBox<String> startTimeComBoxHours;
 	JComboBox<String> startTimeComBoxMins;
 	JComboBox<String> endTimeComBoxHours;
@@ -64,17 +63,24 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	 */
 	public TimetableVIew() {
 		
+		bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
+		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		
 		scheduleWasRequested = false;
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
-	    clearTable();
+	    table = new MultiSpanCellTable(null);
+	    resetTable();
 		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		
-		
-		
+
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
@@ -241,7 +247,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				scheduleWasRequested = false;
-				clearTable();
+				resetTable();
 				
 			}
 		});
@@ -302,7 +308,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	public void displaySchedule(List<LessonGroup> schedule) {
-		clearTable();
+		resetTable();
 		final ColoredCell cellColor =(ColoredCell)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		final CellSpan cellAtt =(CellSpan)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		
@@ -330,9 +336,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 
 	}
 	
-	@SuppressWarnings("static-method")
-	void clearTable(){
-		table = new MultiSpanCellTable(new AttributiveCellTableModel(
+	void resetTable(){
+		table.setModel(new AttributiveCellTableModel(
 				new Object[][] {
 					
 					{null, null, null, null, null, null, "7:30"},
@@ -371,28 +376,20 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
 				       return false;
 				    }	
-			});
-			
-			//Aligning text in the table
-			
-			bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
-			bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-			
-			
-			rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-			
-			for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
-				table.getColumnModel().getColumn(¢).setPreferredWidth(90);
-			table.getColumnModel().getColumn(6).setPreferredWidth(10);
-			
-			for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
-				table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
-			table.getColumnModel().getColumn(6).setCellRenderer(bottomCenterRenderer);
-			
-			for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
-				table.getColumnModel().getColumn(¢).setResizable(false);
-			
-			table.setRowHeight(40);
+		});
+		//Aligning text in the table
+		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+			table.getColumnModel().getColumn(¢).setPreferredWidth(90);
+		table.getColumnModel().getColumn(6).setPreferredWidth(10);
+		
+		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+			table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(6).setCellRenderer(bottomCenterRenderer);
+		
+		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
+			table.getColumnModel().getColumn(¢).setResizable(false);
+		
+		table.setRowHeight(40);
 	}
 
 }
