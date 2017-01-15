@@ -32,15 +32,20 @@ import command.MenuCommand;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class mainLuzerView implements MenuView {
+public class mainLuzerView extends JFrame implements MenuView {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
 	JFrame mainLuzer;
 	private JMenuItem mnItCatalog;
 	private JMenuItem mnItGilayon;
 	static List<ActionListener> listeners;
-
+	JPanel tblView;
+	JPanel courseView;
 	/**
 	 * Launch the application.
 	 */
@@ -65,11 +70,19 @@ public class mainLuzerView implements MenuView {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			initialize();
+		//	this.mainLuzer.setVisible(true);
 		} catch (Throwable ¢) {
 			¢.printStackTrace();
 		}
 	}
-
+	public mainLuzerView(TimetableVIew tb , AvailableCourses crs) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+			initialize( tb ,  crs);
+		} catch (Throwable ¢) {
+			¢.printStackTrace();
+		}
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -80,7 +93,13 @@ public class mainLuzerView implements MenuView {
 		setAvailCoursesView();
 		createEvents();
 	}
-
+	private void initialize(TimetableVIew tb , AvailableCourses crs) {
+		listeners = new ArrayList<>();
+		setMainPageProperties();
+		setMenu();
+		setAvailCoursesView( tb ,  crs);
+		createEvents();
+	}
 	private void setMainPageProperties() {
 		mainLuzer = new JFrame();
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +168,12 @@ public class mainLuzerView implements MenuView {
 		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
 
 	}
+	private void setAvailCoursesView(TimetableVIew tb , AvailableCourses crs) {
+		Container container = mainLuzer.getContentPane();
+		container.setLayout(new BorderLayout());
+		setMainPane(container,crs, tb);
 
+	}
 	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
 		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),

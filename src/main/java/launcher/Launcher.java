@@ -4,6 +4,9 @@
 package launcher;
 
 import java.awt.EventQueue;
+import java.awt.Window;
+
+import javax.swing.JFrame;
 
 import controller.CourseListController;
 import controller.MenuController;
@@ -46,13 +49,14 @@ public class Launcher {
 					
 					acView = new AvailableCourses();
 					ttView = new TimetableVIew();
-					mlView = new mainLuzerView();
+					
 					
 					clCtrl = new CourseListController(cModel, acView);
 					ttCtrl = new TimeTableController(ttModel, ttView, clCtrl);
-					mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
-					
-//					CourseModel cModel = new CourseModel(new XmlCourseLoader("REPFILE/REP.XML"));
+					mlView = new mainLuzerView(ttView,acView) ;
+					mCtrl = new MenuController(mModel,mlView, clCtrl, ttCtrl);
+					mlView.setVisible(true);
+					//					CourseModel cModel = new CourseModel(new XmlCourseLoader("REPFILE/REP.XML"));
 //					CourseListController clCtrl = new CourseListController(cModel, new AvailableCourses());
 //					TimeTableController ttCtrl = new TimeTableController(new TimeTableModel(), new TimetableVIew(), clCtrl);
 //					MenuController mCtrl = new MenuController(new MenuModel(), new mainLuzerView(), clCtrl, ttCtrl);
