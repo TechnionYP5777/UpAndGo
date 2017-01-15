@@ -80,12 +80,6 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public Course loadCourse(@SuppressWarnings("unused") String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<String> loadAllCourseNames() {
 		// TODO Auto-generated method stub
 		return null;
@@ -332,7 +326,7 @@ public class XmlCourseLoader extends CourseLoader {
 						: ((Element) h).getAttribute("timeStart")))),
 				new WeekTime(lectureDay, (LocalTime.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
 						: ((Element) h).getAttribute("timeEnd")))),
-				place, t, groupNum, ((Element) p).getAttribute("id"));
+				place, t, groupNum, ((Element) p).getAttribute("id"), ((Element) p).getAttribute("name"));
 	}
 	
 	private String findLGStaff(Node n, int groupNum, String staff) {
@@ -370,5 +364,8 @@ public class XmlCourseLoader extends CourseLoader {
 		return $;		
 	}
 	
-
+	@Override
+	public Course loadCourse(String name) {
+		return coursesById.containsKey(name) == false ? null : coursesById.get(name);
+	}
 }
