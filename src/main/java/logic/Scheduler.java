@@ -206,8 +206,10 @@ public class Scheduler {
 	private static ArrayList< List<LessonGroup> > initMainArr(List<Course> lcourse){
 		ArrayList< List<LessonGroup> > $ = new ArrayList<>();
 		for(Course ¢ : lcourse){
-			$.add(¢.getLectures());
-			$.add(¢.getTutorials());
+			if(!¢.getLectures().isEmpty())
+				$.add(¢.getLectures());
+			if(!¢.getTutorials().isEmpty())
+				$.add(¢.getTutorials());
 		}
 		return $;
 	}
