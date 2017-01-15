@@ -33,11 +33,12 @@ import property.TimeTableProperty;
 
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel implements ITimeTableView {
-	private MultiSpanCellTable table;
+	MultiSpanCellTable table;
 	private JButton cleanTble = new JButton("נקה מערכת");
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
 	private JButton schedBtn = new JButton("בנה מערכת");
+	private JButton saveBtn = new JButton("שמור מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
 	
@@ -53,46 +54,6 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	JPanel endTime;
 	final String[] hours = {"07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"};
 	final String[] minutes = {"00", "30"};
-	final AttributiveCellTableModel defaultTableModel = new AttributiveCellTableModel(
-			new Object[][] {
-				
-				{null, null, null, null, null, null, "7:30"},
-				{null, null, null, null, null, null, "8:00"},
-				{null, null, null, null, null, null, "8:30"},
-				{null, null, null, null, null, null, "9:00"},
-				{null, null, null, null, null, null, "9:30"},
-				{null, null, null, null, null, null, "10:00"},
-				{null, null, null, null, null, null, "10:30"},
-				{null, null, null, null, null, null, "11:00"},
-				{null, null, null, null, null, null, "11:30"},
-				{null, null, null, null, null, null, "12:00"},
-				{null, null, null, null, null, null, "12:30"},
-				{null, null, null, null, null, null, "13:00"},
-				{null, null, null, null, null, null, "13:30"},
-				{null, null, null, null, null, null, "14:00"},
-				{null, null, null, null, null, null, "14:30"},
-				{null, null, null, null, null, null, "15:00"},
-				{null, null, null, null, null, null, "15:30"},
-				{null, null, null, null, null, null, "16:00"},
-				{null, null, null, null, null, null, "16:30"},
-				{null, null, null, null, null, null, "17:00"},
-				{null, null, null, null, null, null, "17:30"},
-				{null, null, null, null, null, null, "18:00"},
-				{null, null, null, null, null, null, "18:30"},
-				{null, null, null, null, null, null, "19:00"},
-				{null, null, null, null, null, null, "19:30"},
-			},
-			new String[] {
-					"\u05e9\u05d9\u05e9\u05d9", "\u05D7\u05DE\u05D9\u05E9\u05D9", "\u05E8\u05D1\u05D9\u05E2\u05D9", "\u05E9\u05DC\u05D9\u05E9\u05D9", "\u05E9\u05E0\u05D9 ", "\u05E8\u05D0\u05E9\u05D5\u05DF", ""
-			}
-
-		){
-			//we want to cells to be non-editable
-			    @Override
-			    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
-			       return false;
-			    }	
-		};
 	static List<ActionListener> listeners = new ArrayList<>();
 	static boolean scheduleWasRequested;
 	/**
@@ -104,7 +65,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
-	    table = new MultiSpanCellTable(defaultTableModel);
+	    table = new MultiSpanCellTable(getCleanTableModel());
 		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
@@ -210,15 +171,14 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		otherComponentsPanel.add(endTimePannel);
 		
 		JPanel panelSchedButton =new JPanel();
-		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
+		panelSchedButton.setLayout(new GridLayout(1,6,3,3));
 		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
-		schedBtn.setBackground(UIManager.getColor("Button.darkShadow"));
+		panelSchedButton.add(new JPanel());	
+		panelSchedButton.add(saveBtn);
 		panelSchedButton.add(schedBtn);
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
+		
 		otherComponentsPanel.add(panelSchedButton);
 		
 		c.gridx=0;
@@ -283,6 +243,26 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			}
 		});
 		
+		saveBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (scheduleWasRequested)
+					listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.SAVE_SCHED)));
+			}
+		});
+		
+		cleanTble.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				scheduleWasRequested = false;
+				table.setModel(getCleanTableModel());
+				table.revalidate();
+				table.repaint();
+				
+			}
+		});
 	}
 	//-------------------------------------------------------------------------------------------------
 
@@ -340,10 +320,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	public void displaySchedule(List<LessonGroup> schedule) {
-		System.out.println("sffds");
-		final ColoredCell cellColor =(ColoredCell)defaultTableModel.getCellAttribute();
-		final CellSpan cellAtt =(CellSpan)defaultTableModel.getCellAttribute();
-		table.setModel(defaultTableModel);
+		table.setModel(getCleanTableModel());
+		final ColoredCell cellColor =(ColoredCell)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
+		final CellSpan cellAtt =(CellSpan)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
+		
 		int[] columns = new int[1];
 		int[] rows;
 		for(LessonGroup lg : schedule)
@@ -362,10 +342,54 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 				table.getColumnModel().getColumn(columns[0]).setCellRenderer(centerRenderer);
-				table.setValueAt(l.getCourse() + " ב" +  l.getPlace(),rows[0],columns[0]);
+				table.setValueAt(l.getCourse() + " ב" +  l.getPlace() + " " + l.getRoomNumber(),rows[0],columns[0]);
 				
 			}
 
+	}
+	
+	@SuppressWarnings("static-method")
+	AttributiveCellTableModel getCleanTableModel(){
+		return new AttributiveCellTableModel(
+				new Object[][] {
+					
+					{null, null, null, null, null, null, "7:30"},
+					{null, null, null, null, null, null, "8:00"},
+					{null, null, null, null, null, null, "8:30"},
+					{null, null, null, null, null, null, "9:00"},
+					{null, null, null, null, null, null, "9:30"},
+					{null, null, null, null, null, null, "10:00"},
+					{null, null, null, null, null, null, "10:30"},
+					{null, null, null, null, null, null, "11:00"},
+					{null, null, null, null, null, null, "11:30"},
+					{null, null, null, null, null, null, "12:00"},
+					{null, null, null, null, null, null, "12:30"},
+					{null, null, null, null, null, null, "13:00"},
+					{null, null, null, null, null, null, "13:30"},
+					{null, null, null, null, null, null, "14:00"},
+					{null, null, null, null, null, null, "14:30"},
+					{null, null, null, null, null, null, "15:00"},
+					{null, null, null, null, null, null, "15:30"},
+					{null, null, null, null, null, null, "16:00"},
+					{null, null, null, null, null, null, "16:30"},
+					{null, null, null, null, null, null, "17:00"},
+					{null, null, null, null, null, null, "17:30"},
+					{null, null, null, null, null, null, "18:00"},
+					{null, null, null, null, null, null, "18:30"},
+					{null, null, null, null, null, null, "19:00"},
+					{null, null, null, null, null, null, "19:30"},
+				},
+				new String[] {
+						"\u05e9\u05d9\u05e9\u05d9", "\u05D7\u05DE\u05D9\u05E9\u05D9", "\u05E8\u05D1\u05D9\u05E2\u05D9", "\u05E9\u05DC\u05D9\u05E9\u05D9", "\u05E9\u05E0\u05D9 ", "\u05E8\u05D0\u05E9\u05D5\u05DF", ""
+				}
+
+			){
+				//we want to cells to be non-editable
+				    @Override
+				    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
+				       return false;
+				    }	
+			};
 	}
 
 }

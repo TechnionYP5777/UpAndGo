@@ -19,13 +19,13 @@ public class TimeTableModel implements Model {
 
 	protected List<Course> courses = new ArrayList<>();
 
-	protected boolean isDaysoffCount = false;
-	protected boolean isBlankSpaceCount = false;
-	protected LocalTime minStartTime = null;
-	protected LocalTime maxEndTime = null;
+	protected boolean isDaysoffCount;
+	protected boolean isBlankSpaceCount;
+	protected LocalTime minStartTime;
+	protected LocalTime maxEndTime;
 	
 	protected List<List<LessonGroup>> lessonGroupsList = new ArrayList<>();
-	protected int sched_index = 0;
+	protected int sched_index;
 	
 	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
 	
@@ -45,12 +45,12 @@ public class TimeTableModel implements Model {
 		isBlankSpaceCount = f;
 	}
 	
-	public void setMinStartTime(LocalTime t) {
-		minStartTime = t;
+	public void setMinStartTime(LocalTime ¢) {
+		minStartTime = ¢;
 	}
 	
-	public void setMaxEndTime(LocalTime t) {
-		maxEndTime = t;
+	public void setMaxEndTime(LocalTime ¢) {
+		maxEndTime = ¢;
 	}
 	
 	public void loadSchedule() {
@@ -71,10 +71,10 @@ public class TimeTableModel implements Model {
 	}
 
 	public void loadPrevSchedule() {
-		if(0<sched_index) {
-			--sched_index;
-			notifySchedListeners();
-		}
+		if (sched_index <= 0)
+			return;
+		--sched_index;
+		notifySchedListeners();
 		
 	}
 	
