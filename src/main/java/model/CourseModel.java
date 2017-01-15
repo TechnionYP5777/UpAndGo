@@ -116,12 +116,6 @@ public class CourseModel implements Model {
 			if (name.equals(¢.getValue().getName()))
 				return ¢.getValue();
 		return null;
-		/*
-		if (this.courseList.containsKey(name))
-			return this.courseList.get(name);
-		Course $ = loader.loadCourse(name);
-		this.courseList.put(name, $);
-		return $;*/
 	}
 	
 	public Course getCourseById(String name) {
@@ -131,12 +125,6 @@ public class CourseModel implements Model {
 			if (name.equals(¢.getValue().getId()))
 				return ¢.getValue();
 		return null;
-		/*
-		if (this.courseList.containsKey(name))
-			return this.courseList.get(name);
-		Course $ = loader.loadCourse(name);
-		this.courseList.put(name, $);
-		return $;*/
 	}
 
 	public List<String> getChosenCourseNames() {
