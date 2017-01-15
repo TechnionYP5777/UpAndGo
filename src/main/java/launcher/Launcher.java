@@ -47,9 +47,9 @@ public class Launcher {
 					ttView = new TimetableVIew();
 
 					clCtrl = new CourseListController(cModel, acView);
-//					ttCtrl = new TimeTableController(ttModel, ttView, clCtrl);
+					ttCtrl = new TimeTableController(ttModel, ttView, clCtrl);
 					mlView = new mainLuzerView(ttView, acView);
-//					mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
+					mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
 					mlView.setVisible(true);
 				} catch (Exception ¢) {
 					¢.printStackTrace();
