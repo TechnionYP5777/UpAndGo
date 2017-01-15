@@ -251,7 +251,7 @@ public class RepFile {
 		} else {
 			Element examsElement = d.createElement("exams");
 			for (String infoLine : courseInfo.split("[\\r\\n]+"))
-				if (infoLine.contains("מורה")) {
+				if (infoLine.contains("מורה  אחראי")) {
 					Element teacherInChargeElement = d.createElement("teacherInCharge");
 					teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
 					teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));

@@ -50,9 +50,10 @@ public class UgParser {
 		
 	}
 	
-	public static void getCoursesNamesAndID(){
+	public static List<String> getCoursesNamesAndID(){
 		Document courses = null;
-
+		List<String> $ = new ArrayList<>();
+		
 		Map<String,String> dataMap = new HashMap<>();
 		dataMap.put("CNM", "");
 		dataMap.put("CNO", "");
@@ -89,49 +90,49 @@ public class UgParser {
 			if (courses!=null)
 				for (Element course : courses.getElementsByClass("result-row")){
 					++count;
-					System.out.println(course.childNode(1).childNode(1).childNode(0));
-					System.out.println((course.childNode(3).childNode(0) + "").replace("\n","").substring(1));
+					$.add(course.childNode(1).childNode(1).childNode(0).toString());
+					//System.out.println(course.childNode(1).childNode(1).childNode(0));
+					//System.out.println((course.childNode(3).childNode(0) + "").replace("\n","").substring(1));
 
 
 			}
 		}
-		System.out.println("num of courses: " + count);		
+		System.out.println("num of courses: " + count);
+		java.util.Collections.sort($);
+		return $;
 	}
 	
 	
-	public static void printCoursePrerequisites(String courseID){
-		try {
-			for (Element prerequisitesElement : Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
-					.getElementsContainingOwnText("מקצועות קדם")) {
-				for (Element prerequisite : prerequisitesElement.parent().parent().parent().children())
-					System.out.print(((prerequisite + "").contains("<td>ו -</td>") ? " AND "
-							: (!(prerequisite + "").contains("<td>או</td>") ? "" : "} OR ") + "{")
-							+ prerequisite.getElementsByTag("a").text());
-				System.out.println("}");
-			}
-		} catch (IOException ¢) {
-			¢.printStackTrace();
+	public static void createCoursesPrerequisitesDocument(){	
+		for (String courseID : getCoursesNamesAndID()){
+			System.out.println(courseID);
+			createCoursePrerequisitesElement(courseID);
 		}
 	}
+	
 	public static void createCoursePrerequisitesElement(String courseID){
 		try {
 			org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			org.w3c.dom.Element rootElement = doc.createElement("Prerequisites");
 			org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
-			doc.appendChild(rootElement);
-			for (Element prerequisitesElement : Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
-					.getElementsContainingOwnText("מקצועות קדם")) {
-				for (Element prerequisite : prerequisitesElement.parent().parent().parent().children()){
-					if ((prerequisite + "").contains("<td>או</td>")) {
-						rootElement.appendChild(prepOptionElement);
-						prepOptionElement = doc.createElement("PrerOption");
+			Element prerTabElement = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID)).getElementsByAttributeValue("class", "tab0").first();
+			if (prerTabElement != null)
+				for (Element prerequisitesElement : prerTabElement.getElementsContainingOwnText("מקצועות קדם")) {
+					System.out.println(prerequisitesElement);
+					for (Element prerequisite : prerequisitesElement.parent().parent().parent().children()){
+						if ((prerequisite + "").contains("<td>או</td>")) {
+							rootElement.appendChild(prepOptionElement);
+							prepOptionElement = doc.createElement("PrerOption");
+						}
+						org.w3c.dom.Element courseElement = doc.createElement("PrepCourse");
+						courseElement.appendChild(doc.createTextNode(prerequisite.getElementsByTag("a").text()));
+						prepOptionElement.appendChild(courseElement);
 					}
-					org.w3c.dom.Element courseElement = doc.createElement("PrepCourse");
-					courseElement.appendChild(doc.createTextNode(prerequisite.getElementsByTag("a").text()));
-					prepOptionElement.appendChild(courseElement);
+					if (prepOptionElement.hasChildNodes())
+						rootElement.appendChild(prepOptionElement);
 				}
-				rootElement.appendChild(prepOptionElement);
-			}
+			if (rootElement.hasChildNodes())
+				doc.appendChild(rootElement);
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform((new DOMSource(doc)),
