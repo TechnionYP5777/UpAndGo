@@ -4,7 +4,6 @@
 
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -34,9 +33,6 @@ import java.awt.event.ActionEvent;
 
 public class mainLuzerView extends JFrame implements MenuView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
@@ -46,35 +42,11 @@ public class mainLuzerView extends JFrame implements MenuView {
 	static List<ActionListener> listeners;
 	JPanel tblView;
 	JPanel courseView;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					mainLuzerView window = new mainLuzerView();
-					window.mainLuzer.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
-	public mainLuzerView() {
-		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-			initialize();
-		//	this.mainLuzer.setVisible(true);
-		} catch (Throwable ¢) {
-			¢.printStackTrace();
-		}
-	}
 	public mainLuzerView(TimetableVIew tb , AvailableCourses crs) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -90,13 +62,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		listeners = new ArrayList<>();
-		setMainPageProperties();
-		setMenu();
-		setSubViews();
-		createEvents();
-	}
+
 	private void initialize(TimetableVIew tb , AvailableCourses crs) {
 		listeners = new ArrayList<>();
 		setMainPageProperties();
@@ -105,7 +71,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 		createEvents();
 	}
 	private void setMainPageProperties() {
-		mainLuzer = new JFrame();
+		mainLuzer = new JFrame("Wellcome To The LuzeR");
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
@@ -166,12 +132,12 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
 	}
 
-	private void setSubViews() {
-		Container container = mainLuzer.getContentPane();
-		container.setLayout(new BorderLayout());
-		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
-
-	}
+//	private void setSubViews() {
+//		Container container = mainLuzer.getContentPane();
+//		container.setLayout(new BorderLayout());
+//		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
+//
+//	}
 	private void setAvailCoursesView(TimetableVIew tb , AvailableCourses crs) {
 		Container container = mainLuzer.getContentPane();
 		container.setLayout(new BorderLayout());
