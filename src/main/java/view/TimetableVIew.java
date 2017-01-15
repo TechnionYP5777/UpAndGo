@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -97,7 +98,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		add(scroll,c);
 		
 		JPanel otherComponentsPanel=new JPanel();
-		otherComponentsPanel.setLayout(new GridLayout(7,1,3,3));
+		otherComponentsPanel.setLayout(new GridLayout(5,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
@@ -111,6 +112,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		otherComponentsPanel.add(nextprevPannel);
 		
+		JPanel preferences = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
 		JLabel textField = new JLabel("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setBackground(UIManager.getColor("Button.background"));
@@ -119,16 +122,14 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		isDaysOff = new JCheckBox("ימי חופש");
 		isDaysOff.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(isDaysOff);
+		
 		
 		isMinWindows= new JCheckBox("מספר מינימלי של חלונות");
 		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(isMinWindows);
+		
 		
 		JPanel startTimePanel=new JPanel();
-		startTimePanel.setLayout(new GridLayout(1,8));
-		for(int ¢=0 ; ¢ < 6; ++¢)
-			startTimePanel.add(new JPanel());
+		startTimePanel.setLayout(new GridLayout(1,2));
 		
 		startTime = new JPanel(new GridLayout(1,2));
 		startTimeComBoxHours = new JComboBox<>(hours);
@@ -144,12 +145,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		startTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		startTimePanel.add(startTimeChkBox);
 		
-		otherComponentsPanel.add(startTimePanel);
+
 		
 		JPanel endTimePannel=new JPanel();
-		endTimePannel.setLayout(new GridLayout(1,8));
-		for(int ¢=0 ; ¢ < 6; ++¢)
-			endTimePannel.add(new JPanel());
+		endTimePannel.setLayout(new GridLayout(1,2));
 		
 		endTime = new JPanel(new GridLayout(1,2));
 		endTimeComBoxHours = new JComboBox<>(hours);
@@ -165,16 +164,19 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		endTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		endTimePannel.add(endTimeChkBox);
 		
-		otherComponentsPanel.add(endTimePannel);
+		preferences.add(endTimePannel);
+		preferences.add(startTimePanel);
+		preferences.add(isMinWindows);
+		preferences.add(isDaysOff);
+		
+		otherComponentsPanel.add(preferences);
+		JPanel space = new JPanel();
+		otherComponentsPanel.add(space);
 		
 		JPanel panelSchedButton =new JPanel();
-		panelSchedButton.setLayout(new GridLayout(1,6,3,3));
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());	
+		panelSchedButton.setLayout(new FlowLayout());
 		panelSchedButton.add(saveBtn);
 		panelSchedButton.add(schedBtn);
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
 		
 		otherComponentsPanel.add(panelSchedButton);
 		
