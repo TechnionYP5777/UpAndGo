@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -312,6 +313,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			break;
 		case TimeTableProperty.SCHEDULE_INDEX:
 			schedIndex.setText("( " + (String)evt.getNewValue() + " )");
+			break;
+		case TimeTableProperty.NO_SCHEDULE:
+			scheduleWasRequested = false;
+			JOptionPane.showMessageDialog(this, "אין מערכת שמכילה את כל הקורסים שנבחרו.");
 			break;
 		default:
 			break;

@@ -56,11 +56,14 @@ public class TimeTableModel implements Model {
 	public void loadSchedule() {
 		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
-		lessonGroupsList.clear();
-		sched_index = 0;
-		tables.forEach((x) -> lessonGroupsList.add(x.getLessonGroups()));
-
-		notifySchedListeners();
+		if (tables.isEmpty())
+			notifySchedListenersNoSched();
+		else {
+			lessonGroupsList.clear();
+			sched_index = 0;
+			tables.forEach((x) -> lessonGroupsList.add(x.getLessonGroups()));
+			notifySchedListeners();
+		}
 	}
 	
 	public void loadNextSchedule() {
@@ -82,9 +85,12 @@ public class TimeTableModel implements Model {
 		this.listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)))));
 		this.listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,(sched_index+1) + "/" + lessonGroupsList.size()))));
+				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,sched_index + 1 + "/" + lessonGroupsList.size()))));
 	}
-	
+	private void notifySchedListenersNoSched() {
+		this.listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null))));
+	}
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)
