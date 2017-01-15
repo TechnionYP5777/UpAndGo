@@ -359,7 +359,7 @@ public class MainWinView extends JFrame {
 				};
 				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
 					names.add(lstChosenCourses.getModel().getElementAt(¢));
-				m.choseCourses(names);
+				m.saveChosenCourses(names);
 				Message.infoBox(FINISH_MSG, "Finish", new ImageIcon("resources/cat-laptop-icon.png"));
 				close();
 
