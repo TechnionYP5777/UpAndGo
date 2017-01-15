@@ -4,7 +4,6 @@
 
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -34,9 +33,6 @@ import java.awt.event.ActionEvent;
 
 public class mainLuzerView extends JFrame implements MenuView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final String FINISH_MSG = "Luzer will close now!\nWould you like to save your progress?";
 	private static final String BYE_MSG = "Luzer says BYE";
@@ -46,66 +42,38 @@ public class mainLuzerView extends JFrame implements MenuView {
 	static List<ActionListener> listeners;
 	JPanel tblView;
 	JPanel courseView;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					mainLuzerView window = new mainLuzerView();
-					window.mainLuzer.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public mainLuzerView() {
+	public mainLuzerView(TimetableVIew tb, AvailableCourses crs) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-			initialize();
-		//	this.mainLuzer.setVisible(true);
+			initialize(tb, crs);
 		} catch (Throwable ¢) {
 			¢.printStackTrace();
 		}
 	}
-	public mainLuzerView(TimetableVIew tb , AvailableCourses crs) {
-		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-			initialize( tb ,  crs);
-		} catch (Throwable ¢) {
-			¢.printStackTrace();
-		}
-	}
+
 	@Override
-	public void setVisible(boolean ¢){
+	public void setVisible(boolean ¢) {
 		this.mainLuzer.setVisible(¢);
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+
+	private void initialize(TimetableVIew tb, AvailableCourses crs) {
 		listeners = new ArrayList<>();
 		setMainPageProperties();
 		setMenu();
-		setSubViews();
+		setAvailCoursesView(tb, crs);
 		createEvents();
 	}
-	private void initialize(TimetableVIew tb , AvailableCourses crs) {
-		listeners = new ArrayList<>();
-		setMainPageProperties();
-		setMenu();
-		setAvailCoursesView( tb ,  crs);
-		createEvents();
-	}
+
 	private void setMainPageProperties() {
-		mainLuzer = new JFrame();
+		mainLuzer = new JFrame("Wellcome To The LuzeR");
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
@@ -115,7 +83,10 @@ public class mainLuzerView extends JFrame implements MenuView {
 				if (userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
-					Message.hyperCatBox(BYE_MSG,"Bye Bye", new ImageIcon("resources/cat-6-icon.png"));
+					if (userChoise == JOptionPane.YES_OPTION)
+						listeners.forEach(x -> x.actionPerformed(
+								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.SAVE)));
+					Message.hyperCatBox(BYE_MSG, "Bye Bye", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
 				}
 			}
@@ -124,7 +95,6 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mainLuzer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		mainLuzer.setMinimumSize(new Dimension(1100, 600));
 		mainLuzer.setBounds(100, 100, 450, 300);
-
 	}
 
 	void setMenu() {
@@ -166,18 +136,13 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
 	}
 
-	private void setSubViews() {
+	private void setAvailCoursesView(TimetableVIew tb, AvailableCourses crs) {
 		Container container = mainLuzer.getContentPane();
 		container.setLayout(new BorderLayout());
-		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
+		setMainPane(container, crs, tb);
 
 	}
-	private void setAvailCoursesView(TimetableVIew tb , AvailableCourses crs) {
-		Container container = mainLuzer.getContentPane();
-		container.setLayout(new BorderLayout());
-		setMainPane(container,crs, tb);
 
-	}
 	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
 		JPanel mainPane = new JPanel();
 		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
@@ -225,15 +190,15 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				listeners.forEach(x -> x
-						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				listeners.forEach(x -> x
-						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
 		});
 	}
@@ -247,6 +212,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 	public void removeActionListener(ActionListener ¢) {
 		listeners.remove(¢);
 	}
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
