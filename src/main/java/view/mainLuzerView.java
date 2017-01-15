@@ -90,7 +90,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 		listeners = new ArrayList<>();
 		setMainPageProperties();
 		setMenu();
-		setAvailCoursesView();
+		setSubViews();
 		createEvents();
 	}
 	private void initialize(TimetableVIew tb , AvailableCourses crs) {
@@ -162,7 +162,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
 	}
 
-	private void setAvailCoursesView() {
+	private void setSubViews() {
 		Container container = mainLuzer.getContentPane();
 		container.setLayout(new BorderLayout());
 		setMainPane(container, (new AvailableCourses()), (new TimetableVIew()));
