@@ -41,6 +41,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	private JButton saveBtn = new JButton("שמור מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
+	private DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
+	private DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+	
 	
 	JComboBox<String> startTimeComBoxHours;
 	JComboBox<String> startTimeComBoxMins;
@@ -65,31 +68,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		setLayout(new GridBagLayout());
 		setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
-	    table = new MultiSpanCellTable(getCleanTableModel());
+	    clearTable();
 		
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		
-		//Aligning text in the table
-		DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
-		bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
-		bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
-			table.getColumnModel().getColumn(¢).setPreferredWidth(90);
-		table.getColumnModel().getColumn(6).setPreferredWidth(10);
-		
-		for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
-			table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(6).setCellRenderer(bottomCenterRenderer);
-		
-		for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
-			table.getColumnModel().getColumn(¢).setResizable(false);
-		
-		table.setRowHeight(40);
 		
 		//arrange all the components in the pannel using GridBagLayout
 		GridBagConstraints c = new GridBagConstraints();
@@ -257,9 +241,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				scheduleWasRequested = false;
-				table.setModel(getCleanTableModel());
-				table.revalidate();
-				table.repaint();
+				clearTable();
 				
 			}
 		});
@@ -320,7 +302,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	public void displaySchedule(List<LessonGroup> schedule) {
-		table.setModel(getCleanTableModel());
+		clearTable();
 		final ColoredCell cellColor =(ColoredCell)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		final CellSpan cellAtt =(CellSpan)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		
@@ -349,8 +331,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	}
 	
 	@SuppressWarnings("static-method")
-	AttributiveCellTableModel getCleanTableModel(){
-		return new AttributiveCellTableModel(
+	void clearTable(){
+		table = new MultiSpanCellTable(new AttributiveCellTableModel(
 				new Object[][] {
 					
 					{null, null, null, null, null, null, "7:30"},
@@ -389,7 +371,28 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
 				       return false;
 				    }	
-			};
+			});
+			
+			//Aligning text in the table
+			
+			bottomCenterRenderer.setVerticalAlignment(SwingConstants.BOTTOM);
+			bottomCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+			
+			
+			rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+			
+			for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+				table.getColumnModel().getColumn(¢).setPreferredWidth(90);
+			table.getColumnModel().getColumn(6).setPreferredWidth(10);
+			
+			for(int ¢ = 0; ¢<table.getColumnCount()-1; ++¢)
+				table.getColumnModel().getColumn(¢).setCellRenderer(rightRenderer);
+			table.getColumnModel().getColumn(6).setCellRenderer(bottomCenterRenderer);
+			
+			for(int ¢ = 0; ¢<table.getColumnCount(); ++¢)
+				table.getColumnModel().getColumn(¢).setResizable(false);
+			
+			table.setRowHeight(40);
 	}
 
 }
