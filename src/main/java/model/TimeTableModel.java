@@ -24,7 +24,7 @@ public class TimeTableModel implements Model {
 	protected LocalTime minStartTime = null;
 	protected LocalTime maxEndTime = null;
 	
-	protected List<List<LessonGroup>> lessonGroups = new ArrayList<>();
+	protected List<List<LessonGroup>> lessonGroupsList = new ArrayList<>();
 	protected int sched_index = 0;
 	
 	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
@@ -56,27 +56,31 @@ public class TimeTableModel implements Model {
 	public void loadSchedule() {
 		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
-		lessonGroups.clear();
+		lessonGroupsList.clear();
 		sched_index = 0;
-		tables.forEach((x) -> lessonGroups.add(x.getLessonGroups()));
+		tables.forEach((x) -> lessonGroupsList.add(x.getLessonGroups()));
 
 		notifySchedListeners();
 	}
 	
 	public void loadNextSchedule() {
+		if (lessonGroupsList.size() >= sched_index - 1)
+			return;
 		++sched_index;
 		notifySchedListeners();
 	}
 
 	public void loadPrevSchedule() {
-		--sched_index;
-		notifySchedListeners();
+		if(0<sched_index) {
+			--sched_index;
+			notifySchedListeners();
+		}
 		
 	}
 	
 	private void notifySchedListeners() {
 		this.listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroups.get(sched_index)))));
+				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)))));
 	}
 	
 	@Override
