@@ -83,6 +83,10 @@ public class mainLuzerView extends JFrame implements MenuView {
 			¢.printStackTrace();
 		}
 	}
+	@Override
+	public void setVisible(boolean ¢){
+		this.mainLuzer.setVisible(¢);
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
