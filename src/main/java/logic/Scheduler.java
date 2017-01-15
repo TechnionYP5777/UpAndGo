@@ -230,10 +230,18 @@ public class Scheduler {
 	}
 	
 	private static List<LessonGroup> getScheduleByIndexes(ArrayList< List<LessonGroup> > lessonsGroupArray, ArrayList<Integer> indexes){
+		System.out.println(lessonsGroupArray.size());
+		System.out.println("#$#$#$#$\n#$#$#$#\n");
+		System.out.println(lessonsGroupArray);
+		System.out.println("#$#$#$#$\n#$#$#$#\n");
+		System.out.println(lessonsGroupArray.get(0));
+		System.out.println("#$#$#$#$\n#$#$#$#\n");
+		System.out.println(indexes);
+		System.out.println("#$#$#$#$\n#$#$#$#\n");
 		List<LessonGroup> $ = new ArrayList<>();
 		for(int ¢ = 0; ¢ < indexes.size(); ++¢)
 			$.add(lessonsGroupArray.get(¢).get(indexes.get(¢)));
-		
+		System.out.println("******************");
 		return $;
 		
 	}
