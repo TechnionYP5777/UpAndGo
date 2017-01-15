@@ -54,6 +54,8 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void loadSchedule() {
+		if(courses.isEmpty())
+			return;
 		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
