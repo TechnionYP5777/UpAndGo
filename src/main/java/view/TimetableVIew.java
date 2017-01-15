@@ -339,7 +339,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
 	public void displaySchedule(List<LessonGroup> schedule) {
-		
+		System.out.println("sffds");
 		final ColoredCell cellColor =(ColoredCell)defaultTableModel.getCellAttribute();
 		final CellSpan cellAtt =(CellSpan)defaultTableModel.getCellAttribute();
 		table.setModel(defaultTableModel);

@@ -42,7 +42,7 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void setBlankSpaceFlag(boolean f) {
-		isDaysoffCount = f;
+		isBlankSpaceCount = f;
 	}
 	
 	public void setMinStartTime(LocalTime t) {
