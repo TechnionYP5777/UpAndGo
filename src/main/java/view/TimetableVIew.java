@@ -243,6 +243,15 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			}
 		});
 		
+		saveBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				if (scheduleWasRequested)
+					listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.SAVE_SCHED)));
+			}
+		});
+		
 		cleanTble.addActionListener(new ActionListener() {
 			
 			@Override
