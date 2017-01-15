@@ -52,14 +52,11 @@ public class Message {
 		ep.addHyperlinkListener(new HyperlinkListener() {
 			@Override
 			public void hyperlinkUpdate(HyperlinkEvent e) {
-				if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED))
-					if (Desktop.isDesktopSupported()) {
-						try {
-							Desktop.getDesktop().browse(new URI("http://www.iconka.com"));
-						} catch (@SuppressWarnings("unused") Exception ex)
-						{
-							Message.infoBox("couldn't open\nhttp://www.iconika.com", "Something went wrong", null);
-						}
+				if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED) && Desktop.isDesktopSupported())
+					try {
+						Desktop.getDesktop().browse(new URI("http://www.iconka.com"));
+					} catch (@SuppressWarnings("unused") Exception ex) {
+						Message.infoBox("couldn't open\nhttp://www.iconika.com", "Something went wrong", null);
 					}
 			}
 
