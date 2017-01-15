@@ -46,6 +46,9 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			clCtrl.loadChosenCoursesDetails();
 			model.loadSchedule();
 		}
+		else if (¢.getActionCommand().equals(TimeTableCommand.SAVE_SCHED)){
+			saveSchedule();
+		}
 	}
 	
 	public void saveSchedule() {

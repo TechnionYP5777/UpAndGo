@@ -38,6 +38,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	private JButton nextBtn = new JButton("הבא>");
 	private JButton prevBtn = new JButton("<הקודם");
 	private JButton schedBtn = new JButton("בנה מערכת");
+	private JButton saveBtn = new JButton("שמור מערכת");
 	private JCheckBox isDaysOff;
 	private JCheckBox isMinWindows;
 	
@@ -170,15 +171,14 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		otherComponentsPanel.add(endTimePannel);
 		
 		JPanel panelSchedButton =new JPanel();
-		panelSchedButton.setLayout(new GridLayout(1,7,3,3));
+		panelSchedButton.setLayout(new GridLayout(1,6,3,3));
 		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
-		schedBtn.setBackground(UIManager.getColor("Button.darkShadow"));
+		panelSchedButton.add(new JPanel());	
+		panelSchedButton.add(saveBtn);
 		panelSchedButton.add(schedBtn);
 		panelSchedButton.add(new JPanel());
 		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
+		
 		otherComponentsPanel.add(panelSchedButton);
 		
 		c.gridx=0;
