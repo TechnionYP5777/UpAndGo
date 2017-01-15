@@ -35,8 +35,8 @@ import property.TimeTableProperty;
 public class TimetableVIew extends JPanel implements ITimeTableView {
 	MultiSpanCellTable table;
 	private JButton cleanTble = new JButton("נקה מערכת");
-	private JButton nextBtn = new JButton("הבא>");
-	private JButton prevBtn = new JButton("<הקודם");
+	private JButton nextBtn = new JButton("<הבא");
+	private JButton prevBtn = new JButton("הקודם>");
 	private JButton schedBtn = new JButton("בנה מערכת");
 	private JButton saveBtn = new JButton("שמור מערכת");
 	private JCheckBox isDaysOff;
@@ -95,11 +95,11 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
 		nextprevPannel.add(new JPanel());
-		nextprevPannel.add(nextBtn);
+		nextprevPannel.add(prevBtn);
 		nextprevPannel.add(new JPanel());
 		nextprevPannel.add(cleanTble);
 		nextprevPannel.add(new JPanel());
-		nextprevPannel.add(prevBtn);
+		nextprevPannel.add(nextBtn);
 		nextprevPannel.add(new JPanel());
 		
 		otherComponentsPanel.add(nextprevPannel);
