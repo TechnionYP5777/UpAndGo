@@ -43,6 +43,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			model.setBlankSpaceFlag(view.isBlankSpaceCount());
 			model.setMaxEndTime(view.getMaxEndTime());
 			model.setMinStartTime(view.getMinStartTime());
+			clCtrl.loadChosenCoursesDetails();
 			model.loadSchedule();
 		}
 	}

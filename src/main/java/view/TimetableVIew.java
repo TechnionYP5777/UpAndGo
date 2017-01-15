@@ -273,7 +273,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		});
 		
 		//schedBtn button has been pressed -> ask for a schedule (list of lessonGroup)
-		prevBtn.addActionListener(new ActionListener() {
+		schedBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
 				scheduleWasRequested = true;
