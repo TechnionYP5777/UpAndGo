@@ -36,6 +36,10 @@ public class LessonGroup {
 		return lessons;
 	}
 	
+	public String getCourseID(){
+		return lessons.isEmpty() ? "000000" : lessons.get(0).getCourse();
+	}
+	
 	public void addLesson(Lesson ¢){
 		if (groupNum == UNINITIALIZED_GROUP_NUM)
 			throw new IllegalArgumentException();
