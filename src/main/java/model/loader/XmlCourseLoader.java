@@ -33,6 +33,7 @@ import model.Faculty;
 import model.course.Course;
 import model.course.Course.CourseBuilder;
 import model.course.Lesson;
+import model.course.LessonGroup;
 import model.course.Lesson.Type;
 import model.course.StuffMember;
 import model.course.WeekTime;
@@ -42,7 +43,7 @@ public class XmlCourseLoader extends CourseLoader {
 	private String REP_XML_PATH;	//  = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
-	//private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
+	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
 
 	
 	//List<Course> coursesList;
@@ -138,6 +139,36 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 		return $;
 	}
+	
+	@Override
+	public void saveChosenLessonGroups(List<LessonGroup> gs){
+        try {
+    		Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			Element rootElement = doc.createElement("ChosenLessonGroups");
+			doc.appendChild(rootElement);
+			
+			gs.forEach(group->{
+				Element groupElement = doc.createElement("lessonGroup");
+				groupElement.setAttribute("courseID", group.getCourseID());
+				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+				rootElement.appendChild(groupElement);
+			});
+			
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			transformer.transform((new DOMSource(doc)), (new StreamResult(new File(CHOSEN_LESSON_GROUPS))));
+
+		} catch (ParserConfigurationException | TransformerException ¢) {
+			¢.printStackTrace();
+		}
+	}
+	
+	@Override
+	public List<LessonGroup> loadChosenLessonGroups(){
+		return new File(CHOSEN_LESSON_GROUPS).exists() ? new LinkedList<>() : Collections.emptyList();
+	}
+
 	
 	private static void setStaffList (Course.CourseBuilder cb ,Node p, String s) {
 		NodeList TicList = ((Element) p).getElementsByTagName(s);

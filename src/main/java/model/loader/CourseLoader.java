@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import model.course.Course;
+import model.course.LessonGroup;
 import model.Faculty;
 
 /**
@@ -36,5 +37,9 @@ public abstract class CourseLoader {
 	
 	public abstract List<String> loadChosenCourseNames();
 	
+	public abstract void saveChosenLessonGroups(List<LessonGroup> lessonGroups);
+	
+	public abstract List<LessonGroup> loadChosenLessonGroups();
+
 	public abstract List<Faculty> loadFaculties();
 }

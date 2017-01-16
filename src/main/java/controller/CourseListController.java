@@ -67,6 +67,10 @@ public class CourseListController implements Controller{
 		model.saveChosenCourses(model.getChosenCourseNames());
 	}
 	
+	public void saveChosenLessonGroups() {
+		model.saveChosenLessonGroups(model.getChosenLessonGroups());
+	}
+	
 	public void loadGilaionFrom(String path) {
 		model.loadGilaionFrom(path);
 	}
