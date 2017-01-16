@@ -33,10 +33,16 @@ public abstract class CSCatalogLoader extends CatalogLoader {
 		}
 	}
 	@Override
-	public void markDoneCourses(Set<String> userCourses) {
+	protected void markDoneCourses(Set<String> userCourses) {
 		super.markDoneCourses(userCourses);
 		markDoneCoursesForOneList(userCourses, listA);
 		markDoneCoursesForOneList(userCourses, listB);
-
+	}
+	@Override
+	protected List<Course> getDoneCourse() {
+		List<Course> $ = super.getDoneCourse();
+		$.addAll(getDoneCoursesForOneList(listA));
+		$.addAll(getDoneCoursesForOneList(listB));
+		return $;
 	}
 }

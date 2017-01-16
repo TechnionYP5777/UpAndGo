@@ -80,10 +80,24 @@ public abstract class CatalogLoader {
 				¢.MarkDone();
 	}
 
-	public void markDoneCourses(Set<String> userCourses) {
+	protected void markDoneCourses(Set<String> userCourses) {
 		markDoneCoursesForOneList(userCourses, obligatory);
 		markDoneCoursesForOneList(userCourses, malags);
 
 	}
+	protected static List<Course> getDoneCoursesForOneList(List<Course> l) {
+		List<Course> $ = new ArrayList<>();
+		for (Course c: l)
+			if (c.getDone())
+				$.add(c);
+		return $;
+	}
+	
+	protected List<Course> getDoneCourse() {
+		List<Course> $ = getDoneCoursesForOneList(obligatory);
+		$.addAll(getDoneCoursesForOneList(malags));
+		return $;
+	}
+
 
 }

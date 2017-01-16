@@ -53,49 +53,47 @@ public class UserTest extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"הנדסת תוכנה", "ארבע שנתי", "תלת שנתי", "הנדסת מחשבים"}));
-		
+		comboBox.setModel(
+				new DefaultComboBoxModel(new String[] { "הנדסת תוכנה", "ארבע שנתי", "תלת שנתי", "הנדסת מחשבים" }));
+
 		JTextPane textPane = new JTextPane();
-		
+
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String catalogName = comboBox.getSelectedItem().toString();
 				if ("הנדסת תוכנה".equals(catalogName)) {
-					SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML"))); 
+					SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML",
+							new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 					User user = new User(textPane.getText(), catalogLoader);
 					catalogLoader.markDoneCourses(user.courses);
-					JOptionPane.showMessageDialog(null,"שלום " + user.getName() + ", הנתונים נטענו בהצלחה!");
+					System.out.println("++++++++" + catalogLoader.getDoneCourse());
+					JOptionPane.showMessageDialog(null, "שלום " + user.getName() + ", הנתונים נטענו בהצלחה!");
 				}
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(69)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(52)
-							.addComponent(btnDone)))
-					.addContainerGap(136, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(37)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDone))
-					.addGap(18)
-					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(156, Short.MAX_VALUE))
-		);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(69)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(52).addComponent(btnDone)))
+						.addContainerGap(136, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(37)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnDone))
+						.addGap(18).addComponent(textPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(156, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

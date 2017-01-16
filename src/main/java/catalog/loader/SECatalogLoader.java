@@ -23,6 +23,7 @@ public class SECatalogLoader extends CSCatalogLoader {
 	List<Course> core;
 	List<List<Course>> scientificChain;
 	SoftwareEngineering theCatalog;
+
 	public SECatalogLoader(String catalogXmlPath, CourseModel m) {
 		super(catalogXmlPath, m);
 		System.out.println(m.getCoursesNames());
@@ -61,40 +62,41 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(chemistryChain1);
 		scientificChain.add(chemistryChain2);
 		scientificChain.add(otherScientCourses);
-		//* maybe we done need the Catalog class and the catalogLoader is enough *//
+		// * maybe we done need the Catalog class and the catalogLoader is
+		// enough *//
+		
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
 		System.out.println("malags: " + malags);
 		System.out.println("listA: " + listA);
-  		System.out.println("listB: " + listB);
+		System.out.println("listB: " + listB);
 		System.out.println("core: " + core);
-  		System.out.println("scientificChain: " + scientificChain);
+		System.out.println("scientificChain: " + scientificChain);
 		System.out.println("obligatory: " + obligatory);
-		}
+	}
 
 	public Catalog getCatalog() {
 		return theCatalog;
 	}
-	
+
 	@Override
 	public void markDoneCourses(Set<String> userCourses) {
 		super.markDoneCourses(userCourses);
 		markDoneCoursesForOneList(userCourses, core);
-		for (List<Course> ¢: scientificChain)
+		for (List<Course> ¢ : scientificChain)
 			markDoneCoursesForOneList(userCourses, ¢);
-		
-		for (Course c: obligatory) {
-			System.out.println(c + " " +c.getDone());
-		}
 	}
 
+	@Override
 	public List<Course> getDoneCourse() {
-		return core;
-		
-		
+		List<Course> $ = super.getDoneCourse();
+		$.addAll(getDoneCoursesForOneList(core));
+		for (List<Course> ¢: scientificChain) 
+			$.addAll(getDoneCoursesForOneList(¢));
+		return $;
 	}
-	
+
 	public List<Course> getCoursesTheUserCanTake() {
 		return core;
-		
+
 	}
 }
