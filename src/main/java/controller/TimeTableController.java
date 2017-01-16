@@ -24,6 +24,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		
 		this.model.addPropertyChangeListener(TimeTableProperty.SCHEDULE, this.view);
 		this.model.addPropertyChangeListener(TimeTableProperty.SCHEDULE_INDEX, this.view);
+		this.model.addPropertyChangeListener(TimeTableProperty.NO_SCHEDULE, this.view);
 		
 		this.view.addActionListener(this);
 		

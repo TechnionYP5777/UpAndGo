@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -97,7 +99,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		add(scroll,c);
 		
 		JPanel otherComponentsPanel=new JPanel();
-		otherComponentsPanel.setLayout(new GridLayout(7,1,3,3));
+		otherComponentsPanel.setLayout(new GridLayout(5,1,3,3));
 		JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
@@ -111,6 +113,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		otherComponentsPanel.add(nextprevPannel);
 		
+		JPanel preferences = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
 		JLabel textField = new JLabel("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setBackground(UIManager.getColor("Button.background"));
@@ -119,16 +123,14 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		isDaysOff = new JCheckBox("ימי חופש");
 		isDaysOff.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(isDaysOff);
+		
 		
 		isMinWindows= new JCheckBox("מספר מינימלי של חלונות");
 		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		otherComponentsPanel.add(isMinWindows);
+		
 		
 		JPanel startTimePanel=new JPanel();
-		startTimePanel.setLayout(new GridLayout(1,8));
-		for(int ¢=0 ; ¢ < 6; ++¢)
-			startTimePanel.add(new JPanel());
+		startTimePanel.setLayout(new GridLayout(1,2));
 		
 		startTime = new JPanel(new GridLayout(1,2));
 		startTimeComBoxHours = new JComboBox<>(hours);
@@ -144,12 +146,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		startTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		startTimePanel.add(startTimeChkBox);
 		
-		otherComponentsPanel.add(startTimePanel);
+
 		
 		JPanel endTimePannel=new JPanel();
-		endTimePannel.setLayout(new GridLayout(1,8));
-		for(int ¢=0 ; ¢ < 6; ++¢)
-			endTimePannel.add(new JPanel());
+		endTimePannel.setLayout(new GridLayout(1,2));
 		
 		endTime = new JPanel(new GridLayout(1,2));
 		endTimeComBoxHours = new JComboBox<>(hours);
@@ -165,16 +165,19 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		endTimeChkBox.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		endTimePannel.add(endTimeChkBox);
 		
-		otherComponentsPanel.add(endTimePannel);
+		preferences.add(endTimePannel);
+		preferences.add(startTimePanel);
+		preferences.add(isMinWindows);
+		preferences.add(isDaysOff);
+		
+		otherComponentsPanel.add(preferences);
+		JPanel space = new JPanel();
+		otherComponentsPanel.add(space);
 		
 		JPanel panelSchedButton =new JPanel();
-		panelSchedButton.setLayout(new GridLayout(1,6,3,3));
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());	
+		panelSchedButton.setLayout(new FlowLayout());
 		panelSchedButton.add(saveBtn);
 		panelSchedButton.add(schedBtn);
-		panelSchedButton.add(new JPanel());
-		panelSchedButton.add(new JPanel());
 		
 		otherComponentsPanel.add(panelSchedButton);
 		
@@ -311,6 +314,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		case TimeTableProperty.SCHEDULE_INDEX:
 			schedIndex.setText("( " + (String)evt.getNewValue() + " )");
 			break;
+		case TimeTableProperty.NO_SCHEDULE:
+			scheduleWasRequested = false;
+			JOptionPane.showMessageDialog(this, "אין מערכת שמכילה את כל הקורסים שנבחרו.");
+			break;
 		default:
 			break;
 		
@@ -381,6 +388,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 					{null, null, null, null, null, null, "18:30"},
 					{null, null, null, null, null, null, "19:00"},
 					{null, null, null, null, null, null, "19:30"},
+					{null, null, null, null, null, null, "20:00"},
+					{null, null, null, null, null, null, "20:30"},
+					{null, null, null, null, null, null, "21:00"},
+					{null, null, null, null, null, null, "21:30"},
+					{null, null, null, null, null, null, "22:00"},
+					{null, null, null, null, null, null, "22:30"},
 				},
 				new String[] {
 						"\u05e9\u05d9\u05e9\u05d9", "\u05D7\u05DE\u05D9\u05E9\u05D9", "\u05E8\u05D1\u05D9\u05E2\u05D9", "\u05E9\u05DC\u05D9\u05E9\u05D9", "\u05E9\u05E0\u05D9 ", "\u05E8\u05D0\u05E9\u05D5\u05DF", ""

@@ -61,6 +61,12 @@ public abstract class CatalogLoader {
 			Course c = m.getCourseById(((Element) p).getAttribute("number"));
 			if (c != null)
 				cl.add(c);
+			else {
+				NodeList name = ((Element)p).getElementsByTagName("name");
+				Course c2 =new Course(((Element)name.item(0)).getAttribute("courseName"), ((Element) p).getAttribute("number"), "faculty", new ArrayList<>(), 0, null, null, new ArrayList<>(),new ArrayList<>());
+				c2.markAsNotPass();
+				cl.add(c2);
+			}
 		}
 	}
 }
