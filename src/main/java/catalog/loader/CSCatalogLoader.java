@@ -5,6 +5,7 @@ package catalog.loader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.Element;
 
@@ -30,5 +31,12 @@ public abstract class CSCatalogLoader extends CatalogLoader {
 			if ("רשימה ב'".equals(listName))
 				addCoursesToList(elem.getElementsByTagName("Course"), listB, m);
 		}
+	}
+	@Override
+	public void markDoneCourses(Set<String> userCourses) {
+		super.markDoneCourses(userCourses);
+		markDoneCoursesForOneList(userCourses, listA);
+		markDoneCoursesForOneList(userCourses, listB);
+
 	}
 }

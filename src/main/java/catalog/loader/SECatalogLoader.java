@@ -74,16 +74,12 @@ public class SECatalogLoader extends CSCatalogLoader {
 		return theCatalog;
 	}
 	
+	@Override
 	public void markDoneCourses(Set<String> userCourses) {
-		for (String s: userCourses) {
-			String [] course = s.split(" ");
-			Course c = model.getCourseById(course[0]);
-			if (c != null)
-				c.MarkDone();
-		}
-		for (Course c: obligatory) {
-			System.out.println("c is done ?? " + c.getName() + " " + c.getDone());
-		}
+		super.markDoneCourses(userCourses);
+		markDoneCoursesForOneList(userCourses, core);
+		for (List<Course> ¢: scientificChain)
+			markDoneCoursesForOneList(userCourses, ¢);
 	}
 
 	public List<Course> getDoneCourse() {

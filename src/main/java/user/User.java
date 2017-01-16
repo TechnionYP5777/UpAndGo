@@ -21,7 +21,7 @@ public class User {
 				name = ¢.substring(3, ¢.length());
 			}
 			if (flag) {
-				if (¢.contains("עצוממ") || ¢.equals("") || ¢.contains("רוטפ") || ¢.contains("-")) {
+				if (¢.contains("עצוממ") || "".equals(¢) || ¢.contains("רוטפ") || ¢.contains("-")) {
 					flag = false;
 					continue;
 				}

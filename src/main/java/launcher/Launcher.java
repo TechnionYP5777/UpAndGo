@@ -41,6 +41,8 @@ public class Launcher {
 			public void run() {
 				try {
 					cModel = new CourseModel(new XmlCourseLoader("REPFILE/test.XML"));
+					SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", cModel);
+
 					ttModel = new TimeTableModel();
 					mModel = new MenuModel();
 

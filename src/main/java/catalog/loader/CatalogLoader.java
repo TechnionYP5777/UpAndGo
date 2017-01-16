@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +29,7 @@ public abstract class CatalogLoader {
 	protected List<Course> obligatory, malags;
 	NodeList coursesList;
 	protected CourseModel model;
+
 	@SuppressWarnings("resource")
 	CatalogLoader(String catalogXmlPath, CourseModel m) {
 		model = m;
@@ -62,11 +64,26 @@ public abstract class CatalogLoader {
 			if (c != null)
 				cl.add(c);
 			else {
-				NodeList name = ((Element)p).getElementsByTagName("name");
-				Course c2 =new Course(((Element)name.item(0)).getAttribute("courseName"), ((Element) p).getAttribute("number"), "faculty", new ArrayList<>(), 0, null, null, new ArrayList<>(),new ArrayList<>());
+				NodeList name = ((Element) p).getElementsByTagName("name");
+				Course c2 = new Course(((Element) name.item(0)).getAttribute("courseName"),
+						((Element) p).getAttribute("number"), "faculty", new ArrayList<>(), 0, null, null,
+						new ArrayList<>(), new ArrayList<>());
 				c2.markAsNotPass();
 				cl.add(c2);
 			}
 		}
 	}
+
+	protected static void markDoneCoursesForOneList(Set<String> userCourses, List<Course> coursesList) {
+		for (Course ¢ : coursesList)
+			if (userCourses.contains(¢.getName()))
+				¢.MarkDone();
+	}
+
+	public void markDoneCourses(Set<String> userCourses) {
+		markDoneCoursesForOneList(userCourses, obligatory);
+		markDoneCoursesForOneList(userCourses, malags);
+
+	}
+
 }
