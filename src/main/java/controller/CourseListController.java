@@ -49,6 +49,8 @@ public class CourseListController implements Controller{
 				model.getChosenCourseNames();
 		else if (¢.getActionCommand().equals(CourseCommand.GET_FACULTIES))
 			model.loadFacultyNames();
+		else if (¢.getActionCommand().equals(CourseCommand.SAVE_CHOSEN_COURSES))
+			saveChosenCourses();
 	}
 	
 	@Override
