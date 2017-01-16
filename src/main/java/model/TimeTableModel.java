@@ -56,8 +56,11 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void loadSchedule() {
-		if(courses.isEmpty())
+		if(courses.isEmpty()){
+			notifySchedListenersNoCourses();
+
 			return;
+		}
 		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
@@ -94,6 +97,10 @@ public class TimeTableModel implements Model {
 	private void notifySchedListenersNoSched() {
 		this.listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null))));
+	}
+	private void notifySchedListenersNoCourses() {
+		this.listenersMap.get(TimeTableProperty.NO_COURSES).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null))));
 	}
 	
 	

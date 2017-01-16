@@ -316,7 +316,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			break;
 		case TimeTableProperty.NO_SCHEDULE:
 			scheduleWasRequested = false;
+			schedIndex.setVisible(false);
 			JOptionPane.showMessageDialog(this, "אין מערכת שמכילה את כל הקורסים שנבחרו.");
+			break;
+		case TimeTableProperty.NO_COURSES:
+			scheduleWasRequested = false;
+			schedIndex.setVisible(false);
 			break;
 		default:
 			break;
