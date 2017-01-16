@@ -11,6 +11,7 @@ import controller.TimeTableController;
 import model.CourseModel;
 import model.MenuModel;
 import model.TimeTableModel;
+import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
 import view.AvailableCourses;
 import view.TimetableVIew;
@@ -22,6 +23,8 @@ import view.mainLuzerView;
  *         The main class that bootstraps the application (launch it)
  */
 public class Launcher {
+	protected static CourseLoader cLoader;
+	
 	protected static CourseModel cModel;
 	protected static TimeTableModel ttModel;
 	protected static MenuModel mModel;
@@ -39,8 +42,9 @@ public class Launcher {
 			@Override
 			public void run() {
 				try {
-					cModel = new CourseModel(new XmlCourseLoader("REPFILE/test.XML"));
-					ttModel = new TimeTableModel();
+					cLoader = new XmlCourseLoader("REPFILE/test.XML");
+					cModel = new CourseModel(cLoader);
+					ttModel = new TimeTableModel(cLoader);
 					mModel = new MenuModel();
 
 					acView = new AvailableCourses();

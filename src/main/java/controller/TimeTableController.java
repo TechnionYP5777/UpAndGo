@@ -56,6 +56,11 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	public void saveSchedule() {
 		// TODO: implement it
 	}
+	
+	
+	public void saveChosenLessonGroups() {
+		model.saveChosenLessonGroups(model.getChosenLessonGroups());
+	}
 
 	@Override
 	public void init() {

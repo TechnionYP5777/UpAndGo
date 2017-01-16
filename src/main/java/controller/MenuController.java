@@ -34,7 +34,7 @@ public class MenuController implements Controller {
 			clCtrl.loadGilaionFrom(view.getGilayonPath());
 		else if (¢.getActionCommand().equals(MenuCommand.SAVE)) {
 			clCtrl.saveChosenCourses();
-			clCtrl.saveChosenLessonGroups();
+			ttCtrl.saveChosenLessonGroups();
 			clCtrl.saveCatalog();
 			clCtrl.saveGilaion();
 			ttCtrl.saveSchedule();

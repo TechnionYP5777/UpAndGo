@@ -13,7 +13,6 @@ import com.google.common.collect.HashMultimap;
 
 import model.course.Course;
 import model.course.CourseId;
-import model.course.LessonGroup;
 import model.loader.CourseLoader;
 import property.CourseProperty;
 
@@ -135,9 +134,6 @@ public class CourseModel implements Model {
 		return $;
 	}
 	
-	public List<LessonGroup> getChosenLessonGroups() {
-		return new ArrayList<>();
-	}
 
 	public void loadChosenCourses() {
 		// save picking in DB
@@ -155,9 +151,6 @@ public class CourseModel implements Model {
 		this.loader.saveChosenCourseNames(names);
 	}
 	
-	public void saveChosenLessonGroups(List<LessonGroup> ¢) {
-		this.loader.saveChosenLessonGroups(¢);
-	}
 
 	/*
 	 * load needed courses (by name / subname) from DB if empty, load all of
