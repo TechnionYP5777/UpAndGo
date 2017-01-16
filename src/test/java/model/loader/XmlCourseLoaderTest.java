@@ -200,7 +200,7 @@ public class XmlCourseLoaderTest {
 	@After
 	@SuppressWarnings("static-method")
 	public void deleteXml() {
-		new File("data/ChosenCourses.xml").delete();
+		//new File("data/ChosenCourses.xml").delete();
 	}
 
 	

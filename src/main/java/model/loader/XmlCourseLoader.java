@@ -180,9 +180,8 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < chosenList.getLength(); ++i) {
 				Node p = chosenList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					//System.out.println(((Element) p).getAttribute("courseID"));
-					//System.out.println(((Element) p).getAttribute("groupNum"));
-					getLessonGroupOfCOurse(((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
+					addLessonsToLessonGroup((new LessonGroup(Integer.parseInt(((Element) p).getAttribute("groupNum")))),
+							((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
@@ -191,15 +190,17 @@ public class XmlCourseLoader extends CourseLoader {
 
 	}
 	
-	private static void getLessonGroupOfCOurse(String courseID, String groupNum){
+	private static void addLessonsToLessonGroup(LessonGroup g, String courseID, String groupNum){
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
 			XPathExpression courseExpr = XPathFactory.newInstance().newXPath().compile("//course[@id=\""+courseID+"\"]");
-			NodeList courseNodeList = (NodeList) courseExpr.evaluate(doc, XPathConstants.NODESET);
-			Element courseElement  = (Element) courseNodeList.item(0);
+			XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
+			Element courseElement  = (Element) ((NodeList) courseExpr.evaluate(doc, XPathConstants.NODESET)).item(0);
 			System.out.println(courseElement.getAttribute("name"));
 			System.out.println(courseElement.getAttribute("id"));
+			System.out.println(groupNum);
 
+			
 			List<Node> lessonGroupList = new ArrayList<>();
 			NodeList lectureList = (courseElement.getElementsByTagName("lecture"));
 			for (int i = 0 ; i < lectureList.getLength() ; i++){
@@ -215,11 +216,29 @@ public class XmlCourseLoader extends CourseLoader {
 			}
 			
 			lessonGroupList.forEach(groupNode->{
-				if (((Element) groupNode).getAttribute("group").equals(groupNum)){
-					System.out.println(((Element) groupNode).getAttribute("group"));
-
-				}
+				if (((Element) groupNode).getAttribute("group").equals(groupNum))
+					try {
+						NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
+						for (int f = 0; f < lessonList.getLength(); ++f) {
+							Node h = lessonList.item(f);
+							if (h.getNodeType() == Node.ELEMENT_NODE)
+								g.addLesson((new Lesson(new StuffMember("temp", "temp"), new WeekTime(
+										convertStrToDay(((Element) h).getAttribute("day")),
+										(LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+												: ((Element) h).getAttribute("timeStart")))),
+										new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), (LocalTime
+												.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+														: ((Element) h).getAttribute("timeEnd")))),
+										"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
+										courseElement.getAttribute("id"), courseElement.getAttribute("name"))));
+						}
+					} catch (XPathExpressionException ¢) {
+						¢.printStackTrace();
+					}
 			});
+			
+			System.out.println(g.getLessons().size());
+
 
 		} catch (SAXException | ParserConfigurationException | IOException ¢) {
 			¢.printStackTrace();
