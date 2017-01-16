@@ -1,11 +1,17 @@
 package model.course;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class StuffMember {
+public class StuffMember implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7103892149028991099L;
+	
 	public String fName;
 	public String lName;
 	public String title;

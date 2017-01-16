@@ -2,6 +2,7 @@ package model.course;
 
 
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.Objects;
 
@@ -11,7 +12,12 @@ import model.course.StuffMember;
 import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
 
-public class Lesson implements Event {
+public class Lesson implements Event, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 903076596050490635L;
+
 	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT}
 	
 	protected final StuffMember representer;

@@ -210,8 +210,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
+		chckbxKdamim.setVisible(false);	// TODO set visible
 		chckbxKdamim.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
+		chckbxTaken.setVisible(false);	// TODO set visible
 		chckbxTaken.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chckbxCats = new JCheckBox("חתולים");
 		chckbxCats.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);

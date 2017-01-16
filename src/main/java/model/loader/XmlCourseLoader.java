@@ -1,7 +1,13 @@
 package model.loader;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -49,6 +55,7 @@ public class XmlCourseLoader extends CourseLoader {
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
 	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
+	private static final String CHOSEN_LESSON_GROUPS_SER = "data/ChosenLessonGroups.ser";
 
 	
 	//List<Course> coursesList;
@@ -167,8 +174,19 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (ParserConfigurationException | TransformerException ¢) {
 			¢.printStackTrace();
 		}
+        
+        try { 
+        FileOutputStream fileOut = new FileOutputStream(CHOSEN_LESSON_GROUPS_SER);
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(gs);
+        out.close();
+        fileOut.close();
+		} catch (IOException ¢) {
+			¢.printStackTrace();
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<LessonGroup> loadChosenLessonGroups(){
 		if (!(new File(CHOSEN_LESSON_GROUPS).exists()))
@@ -186,6 +204,22 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
+		
+	  try {
+	     FileInputStream fileIn = new FileInputStream(CHOSEN_LESSON_GROUPS_SER);
+	     ObjectInputStream in = new ObjectInputStream(fileIn);
+	     $ = (List<LessonGroup>) in.readObject();
+	     in.close();
+	     fileIn.close();
+	  }catch(IOException i) {
+	     i.printStackTrace();
+	     return $;
+	  }catch(ClassNotFoundException c) {
+	     System.out.println("LessonGroup class not found");
+	     c.printStackTrace();
+	     return $;
+	  }
+		
 		return $;
 
 	}

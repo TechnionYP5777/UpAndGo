@@ -1,5 +1,6 @@
 package model.course;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 /**
  * @author kobybs
@@ -8,7 +9,12 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class WeekTime {
+public class WeekTime implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7431131009009123098L;
+	
 	private DayOfWeek day;
 	private LocalTime time; // = LocalTime.of(22, 15);
 	
