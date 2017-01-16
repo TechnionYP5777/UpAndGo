@@ -133,6 +133,18 @@ public class CourseModel implements Model {
 		return $;
 	}
 
+	public void loadChosenCourses() {
+		// save picking in DB
+		HashSet<CourseId> pickedList = new HashSet<>();
+		this.pickedCourseList.forEach((course) -> {
+			pickedList.add(new CourseId(course.getId(), course.getName()));
+		});
+
+		// notify listeners
+		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
+	}
+	
 	public void saveChosenCourses(List<String> names) {
 		this.loader.saveChosenCourseNames(names);
 	}
