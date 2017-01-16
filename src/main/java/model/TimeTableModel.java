@@ -98,7 +98,7 @@ public class TimeTableModel implements Model {
 	
 	
 	public List<LessonGroup> getChosenLessonGroups() {
-		return new ArrayList<>();
+		return lessonGroupsList.get(sched_index);
 	}
 	
 	public void saveChosenLessonGroups(List<LessonGroup> ¢) {
