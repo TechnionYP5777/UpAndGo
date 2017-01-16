@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.google.common.collect.HashMultimap;
 
@@ -47,7 +48,7 @@ public class CourseModel implements Model {
 			return;
 
 		// save picking in DB
-		HashSet<CourseId> pickedList = new HashSet<>();
+		TreeSet<CourseId> pickedList = new TreeSet<>();
 		List<String> pickedIds = new ArrayList<>();
 		this.pickedCourseList.add(pickedCourse);
 		this.pickedCourseList.forEach((course) -> {
@@ -86,7 +87,7 @@ public class CourseModel implements Model {
 			return;
 
 		// save picking in DB
-		HashSet<CourseId> pickedList = new HashSet<>();
+		TreeSet<CourseId> pickedList = new TreeSet<>();
 		this.pickedCourseList.remove(droppedCourse);
 		this.pickedCourseList.forEach((course) -> {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
@@ -154,7 +155,7 @@ public class CourseModel implements Model {
 	 * them
 	 */
 	public void loadQuery(String query) {
-		HashSet<CourseId> matchingIds = new HashSet<>();
+		TreeSet<CourseId> matchingIds = new TreeSet<>();
 		if(query.isEmpty())
 			this.coursesById.forEach((key, course) -> {
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
@@ -169,7 +170,7 @@ public class CourseModel implements Model {
 					matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});
 		}
-		
+
 		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
 	}
@@ -179,7 +180,7 @@ public class CourseModel implements Model {
 	 * them
 	 */
 	public void loadQueryByFaculty(String query, String faculty) {
-		HashSet<CourseId> matchingIds = new HashSet<>();
+		TreeSet<CourseId> matchingIds = new TreeSet<>();
 		this.coursesById.forEach(query.isEmpty() ? (key, course) -> {
 			if(course.getFaculty().equals(faculty))
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
@@ -195,10 +196,10 @@ public class CourseModel implements Model {
 	 * load faculty names
 	 */
 	public void loadFacultyNames() {
-		List<String> faculties = new ArrayList<>();
+		TreeSet<String> faculties = new TreeSet<>();
 		this.facultyList.forEach((x) -> faculties.add(x.getName()));
 		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, faculties))));
+				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(faculties)))));
 	}
 	
 	public void loadChosenCoursesDetails() {

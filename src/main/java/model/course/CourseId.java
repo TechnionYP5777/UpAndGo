@@ -4,7 +4,7 @@ package model.course;
  * a small class for storing course name and number, without specifying all other details
  */
 
-public class CourseId {
+public class CourseId implements Comparable<CourseId> {
 
 	@Override
 	public int hashCode() {
@@ -37,6 +37,11 @@ public class CourseId {
 	public CourseId(String cNum, String cName) {
 		name = cName;
 		number = cNum;
+	}
+
+	@Override
+	public int compareTo(CourseId ¢) {
+		return this.number.compareTo(¢.number);
 	}
 
 }
