@@ -87,9 +87,11 @@ public abstract class CatalogLoader {
 	}
 	protected static List<Course> getDoneCoursesForOneList(List<Course> l) {
 		List<Course> $ = new ArrayList<>();
-		for (Course c: l)
-			if (c.getDone())
-				$.add(c);
+		for (Course c: l){
+			System.out.println("course: " +c);
+			System.out.println("done: " +c.getDone() + "pass: "+ c.isPassThisSemester());
+			if (c.getDone() && c.isPassThisSemester())
+				$.add(c);}
 		return $;
 	}
 	

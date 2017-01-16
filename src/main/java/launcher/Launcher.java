@@ -5,7 +5,6 @@ package launcher;
 
 import java.awt.EventQueue;
 
-import catalog.loader.SECatalogLoader;
 import controller.CourseListController;
 import controller.MenuController;
 import controller.TimeTableController;
@@ -41,9 +40,6 @@ public class Launcher {
 			public void run() {
 				try {
 					cModel = new CourseModel(new XmlCourseLoader("REPFILE/test.XML"));
-					@SuppressWarnings("unused")
-					SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", cModel);
-
 					ttModel = new TimeTableModel();
 					mModel = new MenuModel();
 

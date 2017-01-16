@@ -6,7 +6,7 @@ import java.util.Set;
 import catalog.loader.CatalogLoader;
 
 public class User {
-	Set<String> courses;
+	public Set<String> courses;
 	CatalogLoader catalog;
 	String name;
 
