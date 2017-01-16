@@ -42,7 +42,8 @@ public class XmlCourseLoader extends CourseLoader {
 	private String REP_XML_PATH;	//  = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
-	
+	//private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
+
 	
 	//List<Course> coursesList;
 	TreeMap<String, Course> coursesById;
@@ -213,8 +214,9 @@ public class XmlCourseLoader extends CourseLoader {
 						//get lectures and tutorial group Lessons
 						NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
-							++groupNum;
 							Node n = lectureList.item(k);
+							groupNum = !((Element) n).hasAttribute("group") ? groupNum + 10
+									: Integer.parseInt(((Element) n).getAttribute("group"));
 							if (n.getNodeType() == Node.ELEMENT_NODE) {
 								createLessonGroup (cb, n, p, "tutorial");
 								createLessonGroup (cb, n, p, "lab");
