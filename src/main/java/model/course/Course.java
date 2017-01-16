@@ -38,6 +38,7 @@ public class Course {
 	protected final List<Course> prerequisites;
 	protected final List<Course> corequisites;
 	protected boolean done;
+	protected boolean passThisSemester;
 	
 	// TODO: create interface LessonGroup as mediator between Lessons and Course
 
@@ -68,6 +69,7 @@ public class Course {
 		this.prerequisites = new ArrayList<>(prerequisitesList);
 		this.corequisites = new ArrayList<>(corequisitesList);
 		this.done = false;
+		this.passThisSemester = true;
 
 	}
 
@@ -165,6 +167,12 @@ public class Course {
 	}
 	public void MarkDone() {
 		done = true;
+	}
+	public boolean isPassThisSemester() {
+		return passThisSemester;
+	}
+	public void markAsNotPass() {
+		passThisSemester = false;
 	}
 	
 	@Override

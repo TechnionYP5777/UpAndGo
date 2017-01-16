@@ -5,6 +5,7 @@ package catalog.loader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import model.CourseModel;
 import model.course.Course;
+import model.course.StuffMember;
 
 /**
  * @author sapir
@@ -55,12 +57,18 @@ public abstract class CatalogLoader {
 		}
 	}
 
-	protected static void addCoursesToList(NodeList coursesList, List<Course> cl, CourseModel m) {
+	protected void addCoursesToList(NodeList coursesList, List<Course> cl, CourseModel m) {
 		for (int i = 0; i < coursesList.getLength(); ++i) {
 			Node p = coursesList.item(i);
 			Course c = m.getCourseById(((Element) p).getAttribute("number"));
 			if (c != null)
 				cl.add(c);
+			else {
+				NodeList name = ((Element)p).getElementsByTagName("name");
+				Course c2 =new Course(((Element)name.item(0)).getAttribute("courseName"), ((Element) p).getAttribute("number"), "faculty", new ArrayList<>(), 0, null, null, new ArrayList<>(),new ArrayList<>());
+				c2.markAsNotPass();
+				cl.add(c2);
+			}
 		}
 	}
 }

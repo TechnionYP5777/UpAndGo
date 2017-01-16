@@ -74,7 +74,6 @@ public class UserGrades extends JFrame {
 					if("הנדסת תוכנה".equals(comboBox.getSelectedItem().toString())){
 						SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 						SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
-						System.out.println(c);
 						User user = new User(result, seCatalog);
 					}
 					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");

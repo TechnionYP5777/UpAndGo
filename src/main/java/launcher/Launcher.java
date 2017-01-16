@@ -5,6 +5,7 @@ package launcher;
 
 import java.awt.EventQueue;
 
+import catalog.loader.SECatalogLoader;
 import controller.CourseListController;
 import controller.MenuController;
 import controller.TimeTableController;
@@ -51,6 +52,8 @@ public class Launcher {
 					mlView = new mainLuzerView(ttView, acView);
 					mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
 					mlView.setVisible(true);
+					
+
 				} catch (Exception ¢) {
 					¢.printStackTrace();
 				}

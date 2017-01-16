@@ -62,7 +62,13 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(chemistryChain2);
 		scientificChain.add(otherScientCourses);
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
-	}
+		System.out.println("malags: " + malags);
+		System.out.println("listA: " + listA);
+  		System.out.println("listB: " + listB);
+		System.out.println("core: " + core);
+  		System.out.println("scientificChain: " + scientificChain);
+		System.out.println("obligatory: " + obligatory);
+		}
 
 	public Catalog getCatalog() {
 		return theCatalog;
@@ -80,4 +86,14 @@ public class SECatalogLoader extends CSCatalogLoader {
 		}
 	}
 
+	public List<Course> getDoneCourse() {
+		return core;
+		
+		
+	}
+	
+	public List<Course> getCoursesTheUserCanTake() {
+		return core;
+		
+	}
 }
