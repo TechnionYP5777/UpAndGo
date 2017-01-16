@@ -105,6 +105,11 @@ public class TimeTableModel implements Model {
 	public void saveChosenLessonGroups(List<LessonGroup> ¢) {
 		this.loader.saveChosenLessonGroups(¢);
 	}
+	
+	public void loadChosenLessonGroups() {
+		this.lessonGroupsList.add(this.loader.loadChosenLessonGroups());
+		notifySchedListeners();
+	}
 
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {

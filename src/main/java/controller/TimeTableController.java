@@ -42,7 +42,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			model.loadPrevSchedule();
 		else if (!¢.getActionCommand().equals(TimeTableCommand.RECALC_SCHED)) {
 			if (¢.getActionCommand().equals(TimeTableCommand.SAVE_SCHED))
-				saveSchedule();
+				saveChosenLessonGroups();
 		} else {
 			model.setDaysoffFlag(view.isDaysoffCount());
 			model.setBlankSpaceFlag(view.isBlankSpaceCount());
@@ -53,18 +53,13 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		}
 	}
 	
-	public void saveSchedule() {
-		// TODO: implement it
-	}
-	
-	
 	public void saveChosenLessonGroups() {
 		model.saveChosenLessonGroups(model.getChosenLessonGroups());
 	}
 
 	@Override
 	public void init() {
-		clCtrl.loadChosenCoursesDetails();
+		model.loadChosenLessonGroups();
 		
 	}
 	
