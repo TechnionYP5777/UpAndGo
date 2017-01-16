@@ -76,7 +76,7 @@ public abstract class CatalogLoader {
 
 	protected static void markDoneCoursesForOneList(Set<String> userCourses, List<Course> coursesList) {
 		for (Course ¢ : coursesList)
-			if (userCourses.contains(¢.getName()))
+			if (userCourses.contains(¢.getId()))
 				¢.MarkDone();
 	}
 

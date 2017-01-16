@@ -31,7 +31,8 @@ public class User {
 						courses.remove(grade[2]);
 					continue;
 				}
-				courses.add(grade[2]);
+				String[] str = grade[2].split(" ");
+				courses.add(str[str.length - 1]);
 			}
 			if (¢.contains("ןויצ"))
 				flag = true;
