@@ -56,6 +56,7 @@ public class CourseListController implements Controller{
 		model.loadQuery("");
 		model.getChosenCourseNames();
 		model.loadFacultyNames();
+		model.loadChosenCourses();
 	}
 
 	public void loadChosenCoursesDetails() {
