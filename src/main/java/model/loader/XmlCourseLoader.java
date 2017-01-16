@@ -22,6 +22,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,7 +45,7 @@ import model.course.WeekTime;
 import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
-	private String REP_XML_PATH;	//  = "REPFILE/REP.XML"
+	private static String REP_XML_PATH;	//  = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
 	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
@@ -175,14 +180,53 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int i = 0; i < chosenList.getLength(); ++i) {
 				Node p = chosenList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
-					System.out.println(((Element) p).getAttribute("courseID"));
-					System.out.println(((Element) p).getAttribute("groupNum"));
+					//System.out.println(((Element) p).getAttribute("courseID"));
+					//System.out.println(((Element) p).getAttribute("groupNum"));
+					getLessonGroupOfCOurse(((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
 		return $;
 
+	}
+	
+	private static void getLessonGroupOfCOurse(String courseID, String groupNum){
+		try {
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
+			XPathExpression courseExpr = XPathFactory.newInstance().newXPath().compile("//course[@id=\""+courseID+"\"]");
+			NodeList courseNodeList = (NodeList) courseExpr.evaluate(doc, XPathConstants.NODESET);
+			Element courseElement  = (Element) courseNodeList.item(0);
+			System.out.println(courseElement.getAttribute("name"));
+			System.out.println(courseElement.getAttribute("id"));
+
+			List<Node> lessonGroupList = new ArrayList<>();
+			NodeList lectureList = (courseElement.getElementsByTagName("lecture"));
+			for (int i = 0 ; i < lectureList.getLength() ; i++){
+				lessonGroupList.add(lectureList.item(i));
+			}
+			NodeList tutorialList = (courseElement.getElementsByTagName("tutorial"));
+			for (int i = 0 ; i < tutorialList.getLength() ; i++){
+				lessonGroupList.add(tutorialList.item(i));
+			}
+			NodeList labList = (courseElement.getElementsByTagName("lab"));
+			for (int i = 0 ; i < labList.getLength() ; i++){
+				lessonGroupList.add(labList.item(i));
+			}
+			
+			lessonGroupList.forEach(groupNode->{
+				if (((Element) groupNode).getAttribute("group").equals(groupNum)){
+					System.out.println(((Element) groupNode).getAttribute("group"));
+
+				}
+			});
+
+		} catch (SAXException | ParserConfigurationException | IOException ¢) {
+			¢.printStackTrace();
+		} catch (XPathExpressionException ¢) {
+			¢.printStackTrace();
+		}
+		
 	}
 
 	
