@@ -362,7 +362,7 @@ public class RepFile {
 					}
 					tutorialElement = d.createElement("tutorial");
 					if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
-						tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
+						setGroupAttr(lectureElement, tutorialElement, lessonLine.substring(3, 5));
 					tutorialsElement.appendChild(tutorialElement);
 					tutorialElement.appendChild(getLessonElement(d, lessonLine));
 				} else if (lessonLine.contains("מתרגל")) {
@@ -385,7 +385,7 @@ public class RepFile {
 						tutorialElement.appendChild(labElement);
 					else {
 						if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
-							labElement.setAttribute("group", lessonLine.substring(3, 5));
+							setGroupAttr(lectureElement, labElement, lessonLine.substring(3, 5));
 						tutorialsElement.appendChild(labElement);
 					}
 				} else if (lessonLine.contains("מדריך")){
@@ -397,7 +397,7 @@ public class RepFile {
 					infoType = InfoType.GROUP;
 					groupElement = d.createElement("group");
 					if (!StringUtils.isBlank(lessonLine.substring(3, 5))){
-						groupElement.setAttribute("group", lessonLine.substring(3, 5));
+						setGroupAttr(lectureElement, groupElement, lessonLine.substring(3, 5));
 						(lectureElement == null ? course : lectureElement).appendChild(groupElement);
 					} else {
 						if (lectureElement == null){
@@ -411,7 +411,7 @@ public class RepFile {
 						if (tutorialElement == null) {
 							tutorialElement = d.createElement("tutorial");
 							if (!StringUtils.isBlank(lessonLine.substring(3, 5)))
-								tutorialElement.setAttribute("group", lessonLine.substring(3, 5));
+								setGroupAttr(lectureElement, tutorialElement, lessonLine.substring(3, 5));
 							tutorialsElement.appendChild(tutorialElement);
 						}
 						tutorialElement.appendChild(groupElement);
@@ -499,6 +499,12 @@ public class RepFile {
 		$.setAttribute("title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
 		$.setAttribute("name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
 		return $;
+	}
+	
+	private static void setGroupAttr(Element lectureElement, Element hasGroupElement, String group){
+		hasGroupElement.setAttribute("group", group);
+		if (lectureElement != null && !lectureElement.hasAttribute("group"))
+			lectureElement.setAttribute("group", String.valueOf(10 * (Integer.parseInt(group) % 10)));
 	}
 		
 	
