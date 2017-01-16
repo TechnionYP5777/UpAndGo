@@ -3,7 +3,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
+import command.CourseCommand;
 import command.MenuCommand;
+import command.TimeTableCommand;
 import model.MenuModel;
 import view.MenuView;
 

@@ -67,6 +67,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static JCheckBox chckbxTaken;
 	static JCheckBox chckbxCats;
 	static List<ActionListener> listeners;
+	
+	static JButton btnSave;
 
 	/**
 	 * Create the panel.
@@ -80,6 +82,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		setTextField();
 		setAddButton();
 		setRemoveButton();
+		setSaveButton();
 		setListViewArea();
 		setCheckBoxes();
 		setComboBox();
@@ -87,6 +90,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		createEvents();
 		btnAddCourse.setEnabled(!courseModel.isEmpty());
 		btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
+		btnSave.setEnabled(true);
 
 	}
 
@@ -125,8 +129,15 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private static void setRemoveButton() {
 		btnRemoveCourse = new JButton("הסר");
 		btnRemoveCourse.setPreferredSize(new Dimension(200, 25));
-		btnAddCourse.setMaximumSize(new Dimension(100000, 25));
-		btnAddCourse.setMinimumSize(new Dimension(200, 25));
+		btnRemoveCourse.setMaximumSize(new Dimension(100000, 25));
+		btnRemoveCourse.setMinimumSize(new Dimension(200, 25));
+	}
+	
+	private static void setSaveButton() {
+		btnSave = new JButton("שמור בחירת קורסים");
+		btnSave.setPreferredSize(new Dimension(100, 25));
+		btnSave.setMaximumSize(new Dimension(100000, 25));
+		btnSave.setMinimumSize(new Dimension(100, 25));
 	}
 
 	//
@@ -239,7 +250,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 								Short.MAX_VALUE)
 						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 						.addComponent(cmbFaculties, 0, 256, Short.MAX_VALUE)
-						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)).addGap(12)));
+						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(btnSave, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+				.addGap(12)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
 						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
@@ -259,6 +272,9 @@ public class AvailableCourses extends JPanel implements CourseListView {
 								.addComponent(chckbxKdamim))
 						.addGap(3).addComponent(chckbxCats).addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addGap(20)
+						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 						.addGap(10)));
 		setLayout(groupLayout);
 	}
@@ -331,6 +347,13 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
 					}
+			}
+		});
+		btnSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+				listeners.forEach(x -> x.actionPerformed(
+						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.SAVE_CHOSEN_COURSES)));
 			}
 		});
 		searchField.addMouseListener(new MouseAdapter() {

@@ -8,4 +8,5 @@ public class CourseCommand {
 	public static final String DETAILS = "details";
 	public static final String GET_CHOSEN = "chosen";
 	public static final String GET_FACULTIES = "chosen_faculty";
+	public static final String SAVE_CHOSEN_COURSES = "save_chosen_courses";
 }
