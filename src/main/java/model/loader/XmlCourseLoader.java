@@ -166,7 +166,23 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	@Override
 	public List<LessonGroup> loadChosenLessonGroups(){
-		return new File(CHOSEN_LESSON_GROUPS).exists() ? new LinkedList<>() : Collections.emptyList();
+		if (!(new File(CHOSEN_LESSON_GROUPS).exists()))
+			return Collections.emptyList();
+		List<LessonGroup> $ = new LinkedList<>();
+		try {
+			NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(CHOSEN_LESSON_GROUPS).getElementsByTagName("lessonGroup");
+			for (int i = 0; i < chosenList.getLength(); ++i) {
+				Node p = chosenList.item(i);
+				if (p.getNodeType() == Node.ELEMENT_NODE)
+					System.out.println(((Element) p).getAttribute("courseID"));
+					System.out.println(((Element) p).getAttribute("groupNum"));
+			}
+		} catch (IOException | SAXException | ParserConfigurationException ¢) {
+			¢.printStackTrace();
+		}
+		return $;
+
 	}
 
 	

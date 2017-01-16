@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import logic.Scheduler;
 import model.course.Course;
 import model.course.LessonGroup;
+import model.loader.CourseLoader;
 import model.schedule.Timetable;
 import property.TimeTableProperty;
 
@@ -23,14 +24,15 @@ public class TimeTableModel implements Model {
 	protected boolean isBlankSpaceCount;
 	protected LocalTime minStartTime;
 	protected LocalTime maxEndTime;
-	
+	protected CourseLoader loader;
+
 	protected List<List<LessonGroup>> lessonGroupsList = new ArrayList<>();
 	protected int sched_index;
 	
 	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
 	
-	public TimeTableModel() {
-		// nothing to do here
+	public TimeTableModel(CourseLoader loader) {
+		this.loader = loader;
 	}
 	
 	public void setCourses(List<Course> ¢) {
@@ -93,6 +95,16 @@ public class TimeTableModel implements Model {
 		this.listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
 				(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null))));
 	}
+	
+	
+	public List<LessonGroup> getChosenLessonGroups() {
+		return lessonGroupsList.get(sched_index);
+	}
+	
+	public void saveChosenLessonGroups(List<LessonGroup> ¢) {
+		this.loader.saveChosenLessonGroups(¢);
+	}
+
 	@Override
 	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
 		if (property == null || l == null)

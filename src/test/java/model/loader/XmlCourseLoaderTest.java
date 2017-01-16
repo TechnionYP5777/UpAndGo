@@ -192,6 +192,11 @@ public class XmlCourseLoaderTest {
 			System.out.println(¢.getId() + "---" + ¢.getName());
 	}
 	
+	@Test
+	public void testloadChosenLessonGroups(){
+		cr.loadChosenLessonGroups();
+	}
+	
 	@After
 	@SuppressWarnings("static-method")
 	public void deleteXml() {
