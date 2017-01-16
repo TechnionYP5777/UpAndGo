@@ -73,7 +73,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 	}
 
 	private void setMainPageProperties() {
-		mainLuzer = new JFrame("Wellcome To The LuzeR");
+		mainLuzer = new JFrame("Welcome To The LuzeR");
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
