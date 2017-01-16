@@ -163,18 +163,23 @@ public class Course {
 	}
 	
 	public boolean getDone() {
-		return done;
+		return this.done;
 	}
 	public void MarkDone() {
-		done = true;
+		this.done = true;
 	}
 	public boolean isPassThisSemester() {
-		return passThisSemester;
+		return this.passThisSemester;
 	}
 	public void markAsNotPass() {
-		passThisSemester = false;
+		this.passThisSemester = false;
 	}
-	
+	public List<Course> getPrerequisites() {
+		return this.prerequisites;
+	}
+	public List<Course> getCorequisites() {
+		return this.corequisites;
+	}
 	@Override
 	public String toString(){
 		return name + " " + id;

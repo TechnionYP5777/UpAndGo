@@ -94,9 +94,12 @@ public class SECatalogLoader extends CSCatalogLoader {
 			$.addAll(getDoneCoursesForOneList(¢));
 		return $;
 	}
-
+	@Override
 	public List<Course> getCoursesTheUserCanTake() {
-		return core;
-
+		List<Course> $ = super.getCoursesTheUserCanTake();
+		$.addAll(getCoursesTheUserCanTakeForOneList(core));
+		for (List<Course> ¢: scientificChain) 
+			$.addAll(getCoursesTheUserCanTakeForOneList(¢));
+		return $;
 	}
 }

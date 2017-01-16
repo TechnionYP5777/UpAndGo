@@ -45,4 +45,11 @@ public abstract class CSCatalogLoader extends CatalogLoader {
 		$.addAll(getDoneCoursesForOneList(listB));
 		return $;
 	}
+	@Override
+	protected List<Course> getCoursesTheUserCanTake() {
+		List<Course> $ = super.getCoursesTheUserCanTake();
+		$.addAll(getCoursesTheUserCanTakeForOneList(listA));
+		$.addAll(getCoursesTheUserCanTakeForOneList(listB));
+		return $;
+	}
 }

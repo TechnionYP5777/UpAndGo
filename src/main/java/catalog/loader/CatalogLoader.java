@@ -87,19 +87,31 @@ public abstract class CatalogLoader {
 	}
 	protected static List<Course> getDoneCoursesForOneList(List<Course> l) {
 		List<Course> $ = new ArrayList<>();
-		for (Course c: l){
-			System.out.println("course: " +c);
-			System.out.println("done: " +c.getDone() + "pass: "+ c.isPassThisSemester());
+		for (Course c: l)
 			if (c.getDone() && c.isPassThisSemester())
-				$.add(c);}
+				$.add(c);
 		return $;
 	}
-	
 	protected List<Course> getDoneCourse() {
 		List<Course> $ = getDoneCoursesForOneList(obligatory);
 		$.addAll(getDoneCoursesForOneList(malags));
 		return $;
 	}
-
+	protected static List<Course> getCoursesTheUserCanTakeForOneList(List<Course> cs) {
+		List<Course> $ = new ArrayList<>();
+		for (Course c: cs) {
+			for (Course c1 : c.getPrerequisites())
+				if (!c1.getDone())
+					break;
+			if (!c.getDone())
+				$.add(c);
+		}
+		return $;
+	} //* TODO: think how to do it for co-requisites courses *//
+	protected List<Course> getCoursesTheUserCanTake() {
+		List<Course> $ = getCoursesTheUserCanTakeForOneList(obligatory);
+		$.addAll(getCoursesTheUserCanTakeForOneList(malags));
+		return $;
+	}
 
 }
