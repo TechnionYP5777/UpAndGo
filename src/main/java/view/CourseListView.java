@@ -19,5 +19,5 @@ public interface CourseListView extends View {
 	
 	
 
-	final String ALL_FACULTIES_STRING = "all faculties";
+	final String ALL_FACULTIES_STRING = "כל הפקולטות";
 }

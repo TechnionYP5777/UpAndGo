@@ -224,11 +224,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setComboBox() {
 		facultiesModel = new DefaultComboBoxModel<>();
-		facultiesModel.addElement("all faculties");
-		facultiesModel.addElement("Physics");
-		facultiesModel.addElement("Computers");
-		facultiesModel.addElement("Sports");
-		facultiesModel.addElement("EE");
 		cmbFaculties = new JComboBox<>(facultiesModel);
 		cmbFaculties.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		((JLabel) cmbFaculties.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
