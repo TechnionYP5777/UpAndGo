@@ -451,7 +451,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
 			btnAddCourse.setEnabled(!courseModel.isEmpty());
-			scpChoseCourses.getHorizontalScrollBar().setValue(scpChoseCourses.getHorizontalScrollBar().getMaximum());
+			scrollPane.getHorizontalScrollBar().setValue(scrollPane.getHorizontalScrollBar().getMaximum());
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
@@ -459,6 +459,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				ChosenCourseModel.addElement(val.number + " " + val.name);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
+			scpChoseCourses.getHorizontalScrollBar().setValue(scpChoseCourses.getHorizontalScrollBar().getMaximum());
+
 			break;
 		case CourseProperty.FACULTY_LIST:
 			facultiesModel = new DefaultComboBoxModel<>();
