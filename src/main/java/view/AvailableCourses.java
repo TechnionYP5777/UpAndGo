@@ -1,6 +1,8 @@
-///
-// Author : Lidia P.  Alex.V
-///
+/**
+ * @author  Lidia P.  Alex.V
+ *
+ */
+
 package view;
 
 import java.awt.event.ActionEvent;
@@ -40,6 +42,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.ComponentOrientation;
+
 
 public class AvailableCourses extends JPanel implements CourseListView {
 

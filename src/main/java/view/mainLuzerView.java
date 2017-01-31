@@ -1,6 +1,4 @@
-//
-// Authors Alex.V & Lidia.P
-//
+
 
 package view;
 
@@ -30,7 +28,11 @@ import javax.swing.border.EtchedBorder;
 import command.MenuCommand;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * 
+ * @author Alex.V & Lidia.P
+ *
+ */
 public class mainLuzerView extends JFrame implements MenuView {
 
 	private static final long serialVersionUID = 1L;
