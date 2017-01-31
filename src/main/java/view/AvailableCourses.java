@@ -67,7 +67,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static JCheckBox chckbxTaken;
 	static JCheckBox chckbxCats;
 	static List<ActionListener> listeners;
-	
+
 	static JButton btnSave;
 
 	/**
@@ -132,7 +132,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		btnRemoveCourse.setMaximumSize(new Dimension(100000, 25));
 		btnRemoveCourse.setMinimumSize(new Dimension(200, 25));
 	}
-	
+
 	private static void setSaveButton() {
 		btnSave = new JButton("שמור בחירת קורסים");
 		btnSave.setPreferredSize(new Dimension(100, 25));
@@ -185,6 +185,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setAvailableCoursesList() {
 		lstAvailableCourses = new JList<>(courseModel);
+
 		lstAvailableCourses.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lstAvailableCourses.setToolTipText("");
 		lstAvailableCourses.setMinimumSize(new Dimension(190, 50));
@@ -210,10 +211,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setCheckBoxes() {
 		chckbxKdamim = new JCheckBox("יש קדמים");
-		chckbxKdamim.setVisible(false);	// TODO set visible
+		chckbxKdamim.setVisible(false); // TODO set visible
 		chckbxKdamim.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chckbxTaken = new JCheckBox("קורסים שלקחתי");
-		chckbxTaken.setVisible(false);	// TODO set visible
+		chckbxTaken.setVisible(false); // TODO set visible
 		chckbxTaken.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		chckbxCats = new JCheckBox("חתולים");
 		chckbxCats.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -254,30 +255,28 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						.addComponent(cmbFaculties, 0, 256, Short.MAX_VALUE)
 						.addComponent(btnAddCourse, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 						.addComponent(btnSave, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
-				.addGap(12)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnRemoveCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(cmbFaculties, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
-								.addComponent(chckbxKdamim))
-						.addGap(3).addComponent(chckbxCats).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(20)
-						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10)));
+						.addGap(12)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addComponent(scpChoseCourses, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(btnRemoveCourse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(searchField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(cmbFaculties, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(chckbxTaken)
+						.addComponent(chckbxKdamim))
+				.addGap(3).addComponent(chckbxCats).addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(btnAddCourse, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(20)
+				.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(10)));
 		setLayout(groupLayout);
 	}
 
@@ -302,6 +301,20 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
+			}
+		});
+		lstAvailableCourses.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2 && lstAvailableCourses.getSelectedValue() != null) {
+					if (courseModel.isEmpty())
+						btnAddCourse.setEnabled(false);
+					else {
+						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
+						listeners.forEach(x -> x.actionPerformed(
+								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
+					}
+				}
 			}
 		});
 		lstChosenCourses.addMouseMotionListener(new MouseMotionAdapter() {
@@ -386,8 +399,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		chckbxCats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				Message.hyperCatBox( "","", catList.get(catIconNum));
-				
+				Message.hyperCatBox("", "", catList.get(catIconNum));
+
 				chckbxCats.setSelected(false);
 				catIconNum = (catIconNum + 1) % 3;
 			}
@@ -444,6 +457,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
 			btnAddCourse.setEnabled(!courseModel.isEmpty());
+			scpChoseCourses.getHorizontalScrollBar().setValue(scpChoseCourses.getHorizontalScrollBar().getMaximum());
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
