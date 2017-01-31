@@ -158,7 +158,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private static void setScrollPane() {
 		scrollPane = new JScrollPane();
-		scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setAutoscrolls(true);
 		scrollPane.setMinimumSize(new Dimension(200, 80));
 		scrollPane.setBorder(
