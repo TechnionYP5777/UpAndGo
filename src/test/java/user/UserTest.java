@@ -56,7 +56,7 @@ public class UserTest extends JFrame {
 
 		final JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(arg0 -> {
-			final String catalogName = "" + comboBox.getSelectedItem();
+			final String catalogName = comboBox.getSelectedItem() + "";
 			if ("הנדסת תוכנה".equals(catalogName)) {
 				final SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML",
 						new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
