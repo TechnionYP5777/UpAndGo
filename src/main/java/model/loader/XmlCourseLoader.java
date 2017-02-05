@@ -225,24 +225,22 @@ public class XmlCourseLoader extends CourseLoader {
 		try {
 			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
 			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
-			final Element courseElement  = (Element) ((NodeList) XPathFactory.newInstance().newXPath().compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
+			final Element courseElement = (Element) ((NodeList) XPathFactory.newInstance().newXPath()
+					.compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
 			System.out.println(courseElement.getAttribute("name"));
 			System.out.println(courseElement.getAttribute("id"));
 			System.out.println(groupNum);
-
-			
 			final List<Node> lessonGroupList = new ArrayList<>();
 			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-			for (int ¢ = 0 ; ¢ < lectureList.getLength() ; ++¢)
+			for (int ¢ = 0; ¢ < lectureList.getLength(); ++¢)
 				lessonGroupList.add(lectureList.item(¢));
 			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-			for (int ¢ = 0 ; ¢ < tutorialList.getLength() ; ++¢)
+			for (int ¢ = 0; ¢ < tutorialList.getLength(); ++¢)
 				lessonGroupList.add(tutorialList.item(¢));
 			final NodeList labList = courseElement.getElementsByTagName("lab");
-			for (int ¢ = 0 ; ¢ < labList.getLength() ; ++¢)
+			for (int ¢ = 0; ¢ < labList.getLength(); ++¢)
 				lessonGroupList.add(labList.item(¢));
-			
-			lessonGroupList.forEach(groupNode->{
+			lessonGroupList.forEach(groupNode -> {
 				if (((Element) groupNode).getAttribute("group").equals(groupNum))
 					try {
 						final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
@@ -263,13 +261,8 @@ public class XmlCourseLoader extends CourseLoader {
 						¢.printStackTrace();
 					}
 			});
-			
 			System.out.println(g.getLessons().size());
-
-
-		} catch (SAXException | ParserConfigurationException | IOException ¢) {
-			¢.printStackTrace();
-		} catch (final XPathExpressionException ¢) {
+		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException ¢) {
 			¢.printStackTrace();
 		}
 		

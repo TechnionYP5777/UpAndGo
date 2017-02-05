@@ -74,7 +74,7 @@ public class TimeTableModel implements Model {
 	}
 	
 	public void loadNextSchedule() {
-		if (lessonGroupsList.size() - 1 <= sched_index)
+		if (lessonGroupsList.size() <= sched_index + 1)
 			return;
 		++sched_index;
 		notifySchedListeners();

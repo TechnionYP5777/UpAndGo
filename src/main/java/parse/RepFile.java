@@ -418,6 +418,22 @@ public class RepFile {
 				}
 				else if (StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13)))
 					switch (infoType) {
+					case ASSISTANT:
+						if (tutorialElement != null)
+							tutorialElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
+						break;
+					case GROUP:
+						if (groupElement != null)
+							groupElement.appendChild(getLessonElement(d, lessonLine));
+						break;
+					case GUIDE:
+						if (labElement != null)
+							labElement.appendChild(getPersonElement(d, lessonLine, "guide"));
+						break;
+					case LAB:
+						if (labElement != null)
+							labElement.appendChild(getLessonElement(d, lessonLine));
+						break;
 					case LECTURE:
 						if (lectureElement != null)
 							lectureElement.appendChild(getLessonElement(d, lessonLine));
@@ -426,31 +442,16 @@ public class RepFile {
 						if (lectureElement != null)
 							lectureElement.appendChild(getPersonElement(d, lessonLine, "lecturer"));
 						break;
-					case TUTORIAL:
-						if (tutorialElement != null)
-							tutorialElement.appendChild(getLessonElement(d, lessonLine));
-						break;
-					case ASSISTANT:
-						if (tutorialElement != null)
-							tutorialElement.appendChild(getPersonElement(d, lessonLine, "assistant"));
-						break;
-					case LAB:
-						if (labElement != null)
-							labElement.appendChild(getLessonElement(d, lessonLine));
-						break;
-					case GUIDE:
-						if (labElement != null)
-							labElement.appendChild(getPersonElement(d, lessonLine, "guide"));
-						break;
-					case GROUP:
-						if (groupElement != null)
-							groupElement.appendChild(getLessonElement(d, lessonLine));
-						break;
 					case MODERATOR:
 						if (groupElement != null)
 							groupElement.appendChild(getPersonElement(d, lessonLine, "moderator"));
 						break;
+					case TUTORIAL:
+						if (tutorialElement != null)
+							tutorialElement.appendChild(getLessonElement(d, lessonLine));
+						break;
 					default:
+						break;
 					}
 		}
 	}

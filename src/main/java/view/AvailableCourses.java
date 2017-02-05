@@ -445,13 +445,12 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			lstAvailableCourses.setToolTipText(evt.getNewValue() + "");
 			lstChosenCourses.setToolTipText(evt.getNewValue() + "");
 			break;
-		case CourseProperty.COURSE_LIST:
-			courseModel = new DefaultListModel<>();
-			for (final CourseId val : (List<CourseId>) evt.getNewValue())
-				courseModel.addElement(val.number + " " + val.name);
-			lstAvailableCourses.setModel(courseModel);
-			btnAddCourse.setEnabled(!courseModel.isEmpty());
-			scrollPane.getHorizontalScrollBar().setValue(scrollPane.getHorizontalScrollBar().getMaximum());
+		case CourseProperty.FACULTY_LIST:
+			facultiesModel = new DefaultComboBoxModel<>();
+			facultiesModel.addElement(ALL_FACULTIES_STRING);
+			for (final String val : (List<String>) evt.getNewValue())
+				facultiesModel.addElement(val);
+			cmbFaculties.setModel(facultiesModel);
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
@@ -460,14 +459,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
 			scpChoseCourses.getHorizontalScrollBar().setValue(scpChoseCourses.getHorizontalScrollBar().getMaximum());
-
 			break;
-		case CourseProperty.FACULTY_LIST:
-			facultiesModel = new DefaultComboBoxModel<>();
-			facultiesModel.addElement(ALL_FACULTIES_STRING);
-			for (final String val : (List<String>) evt.getNewValue())
-				facultiesModel.addElement(val);
-			cmbFaculties.setModel(facultiesModel);
+		case CourseProperty.COURSE_LIST:
+			courseModel = new DefaultListModel<>();
+			for (final CourseId val : (List<CourseId>) evt.getNewValue())
+				courseModel.addElement(val.number + " " + val.name);
+			lstAvailableCourses.setModel(courseModel);
+			btnAddCourse.setEnabled(!courseModel.isEmpty());
+			scrollPane.getHorizontalScrollBar().setValue(scrollPane.getHorizontalScrollBar().getMaximum());
 			break;
 		default:
 			break;

@@ -24,23 +24,15 @@ class xmlParser {
 		// resList.add
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			final NodeList coursesList = factory.newDocumentBuilder().parse("REPFILE/REP.XML").getElementsByTagName("Course");
-			
+			final NodeList coursesList = factory.newDocumentBuilder().parse("REPFILE/REP.XML")
+					.getElementsByTagName("Course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					$.add(cb.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
-
-		} catch (final ParserConfigurationException ¢) {
-			// TODO Auto-generated catch block
-			¢.printStackTrace();
-		} catch (final SAXException ¢) {
-			// TODO Auto-generated catch block
-			¢.printStackTrace();
-		} catch (final IOException ¢) {
-			// TODO Auto-generated catch block
+		} catch (final IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
 		return $;

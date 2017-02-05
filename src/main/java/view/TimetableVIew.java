@@ -294,25 +294,23 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	@SuppressWarnings("unchecked")
 	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
-
-		case TimeTableProperty.SCHEDULE:
-			displaySchedule((List<LessonGroup>) evt.getNewValue());
-			break;
-		case TimeTableProperty.SCHEDULE_INDEX:
-			schedIndex.setText("( " + (String)evt.getNewValue() + " )");
+		case TimeTableProperty.NO_COURSES:
+			scheduleWasRequested = false;
+			schedIndex.setVisible(false);
 			break;
 		case TimeTableProperty.NO_SCHEDULE:
 			scheduleWasRequested = false;
 			schedIndex.setVisible(false);
 			JOptionPane.showMessageDialog(this, "אין מערכת שמכילה את כל הקורסים שנבחרו.");
 			break;
-		case TimeTableProperty.NO_COURSES:
-			scheduleWasRequested = false;
-			schedIndex.setVisible(false);
+		case TimeTableProperty.SCHEDULE:
+			displaySchedule((List<LessonGroup>) evt.getNewValue());
+			break;
+		case TimeTableProperty.SCHEDULE_INDEX:
+			schedIndex.setText("( " + (String) evt.getNewValue() + " )");
 			break;
 		default:
 			break;
-		
 		}
 	}
 	//-----------------------------------------------------------------------------
