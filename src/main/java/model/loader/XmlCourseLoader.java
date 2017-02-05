@@ -224,10 +224,8 @@ public class XmlCourseLoader extends CourseLoader {
 	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum){
 		try {
 			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
-			final XPathExpression courseExpr = XPathFactory.newInstance().newXPath()
-					.compile("//course[@id=\"" + courseID + "\"]"),
-					lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
-			final Element courseElement  = (Element) ((NodeList) courseExpr.evaluate(doc, XPathConstants.NODESET)).item(0);
+			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
+			final Element courseElement  = (Element) ((NodeList) XPathFactory.newInstance().newXPath().compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
 			System.out.println(courseElement.getAttribute("name"));
 			System.out.println(courseElement.getAttribute("id"));
 			System.out.println(groupNum);

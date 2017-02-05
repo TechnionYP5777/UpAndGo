@@ -24,9 +24,7 @@ class xmlParser {
 		// resList.add
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			final DocumentBuilder builder = factory.newDocumentBuilder();
-			final Document doc = builder.parse("REPFILE/REP.XML");
-			final NodeList coursesList = doc.getElementsByTagName("Course");
+			final NodeList coursesList = factory.newDocumentBuilder().parse("REPFILE/REP.XML").getElementsByTagName("Course");
 			
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);

@@ -24,10 +24,9 @@ public class MultiSpanCellTable extends JTable {
 	  
 	  @Override
 	public Rectangle getCellRect(int row, int column, final boolean includeSpacing) {
-	    final Rectangle $ = super.getCellRect(row,column,includeSpacing);
 	    if (row <0 || column<0 ||
 	        getRowCount() <= row || getColumnCount() <= column)
-			return $;
+			return super.getCellRect(row, column, includeSpacing);
 	    final CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 	    if (! cellAtt.isVisible(row,column)) {
 	      final int temp_row = row, temp_column = column;
@@ -45,8 +44,7 @@ public class MultiSpanCellTable extends JTable {
 	    
 	    final Enumeration eeration = getColumnModel().getColumns();
 	    for (; eeration.hasMoreElements(); ++index) {
-			final TableColumn aColumn = (TableColumn) eeration.nextElement();
-			cellFrame.width = columnMargin + aColumn.getWidth() - 1;
+			cellFrame.width = columnMargin + ((TableColumn) eeration.nextElement()).getWidth() - 1;
 			if (index == column)
 				break;
 			cellFrame.x += cellFrame.width;

@@ -61,9 +61,7 @@ public class UserGrades extends JFrame {
 				String result = "";
 				try {
 					final Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-					final boolean hasTransferableText = contents != null
-							&& contents.isDataFlavorSupported(DataFlavor.stringFlavor);
-					if (hasTransferableText)
+					if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor))
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
 					if("הנדסת תוכנה".equals((comboBox.getSelectedItem() + ""))){
 						final SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));

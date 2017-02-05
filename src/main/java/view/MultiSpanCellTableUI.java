@@ -40,11 +40,8 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 		final Rectangle rect = g.getClipBounds();
 		boolean drawn  = false;
 
-		final AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
-		final CellSpan cellAtt = (CellSpan)tableModel.getCellAttribute();
-		final int numColumns = table.getColumnCount();
-
-		for (int column = 0; column < numColumns; ++column) {
+		final CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel) table.getModel()).getCellAttribute();
+		for (int column = 0; column < table.getColumnCount(); ++column) {
 			final Rectangle cellRect = table.getCellRect(row,column,true);
 			int cellRow,cellColumn;
 			if (cellAtt.isVisible(row,column)) {
@@ -69,8 +66,7 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 
 	private void paintCell(final Graphics g, final Rectangle cellRect, final int row, final int column) {
 		final int spacingHeight = table.getRowMargin(), spacingWidth = table.getColumnModel().getColumnMargin();
-		final AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
-		final ColoredCell cellAtt = (ColoredCell)tableModel.getCellAttribute();
+		final ColoredCell cellAtt = (ColoredCell)((AttributiveCellTableModel) table.getModel()).getCellAttribute();
 		final Color c = g.getColor();
 		g.setColor(table.getGridColor());
 		g.drawRect(cellRect.x,cellRect.y,cellRect.width-1,cellRect.height-1);
@@ -88,8 +84,7 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 			component.validate();
 		}
 		else {
-			final TableCellRenderer renderer = table.getCellRenderer(row, column);
-			final Component component = table.prepareRenderer(renderer, row, column);
+			final Component component = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
 
 			if (component.getParent() == null)
 				rendererPane.add(component);

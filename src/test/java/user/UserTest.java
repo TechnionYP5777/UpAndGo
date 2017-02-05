@@ -27,8 +27,7 @@ public class UserTest extends JFrame {
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				final UserTest frame = new UserTest();
-				frame.setVisible(true);
+				new UserTest().setVisible(true);
 			} catch (final Exception ¢) {
 				¢.printStackTrace();
 			}
