@@ -285,7 +285,7 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
 
-		lstCourseList.addListSelectionListener((@SuppressWarnings("unused") final ListSelectionEvent __) -> {
+		lstCourseList.addListSelectionListener((final ListSelectionEvent __) -> {
 			txtCourseDescription.setDisabledTextColor(Color.BLUE);
 			setListColor(lstCourseList, m);
 			txtCourseDescription.setVisible(true);
@@ -294,7 +294,7 @@ public class MainWinView extends JFrame {
 
 		});
 
-		lstChosenCourses.addListSelectionListener((@SuppressWarnings("unused") final ListSelectionEvent __) -> {
+		lstChosenCourses.addListSelectionListener((final ListSelectionEvent __) -> {
 			txtCourseDescription.setDisabledTextColor(new Color(0, 204, 51));
 			setListColor(lstChosenCourses, m);
 			txtCourseDescription.setVisible(true);
@@ -303,7 +303,7 @@ public class MainWinView extends JFrame {
 
 		});
 
-		btnAddCourse.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		btnAddCourse.addActionListener((final ActionEvent __) -> {
 			if (lstCourseList.getSelectedValue() == null)
 				return;
 			ChosenCourseModel.addElement(lstCourseList.getSelectedValue());
@@ -317,7 +317,7 @@ public class MainWinView extends JFrame {
 			txtCourseDescription.setText(NO_COURSES_LEFT);
 			btnAddCourse.setEnabled(false);
 		});
-		btnRemoveCourse.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		btnRemoveCourse.addActionListener((final ActionEvent __) -> {
 			if (lstChosenCourses.getSelectedValue() == null)
 				return;
 			if (courseModel.isEmpty()) {
@@ -330,9 +330,8 @@ public class MainWinView extends JFrame {
 			if (ChosenCourseModel.isEmpty())
 				btnRemoveCourse.setEnabled(false);
 		});
-		btnFinish.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		btnFinish.addActionListener((final ActionEvent __) -> {
 			final List<String> names = new ArrayList<String>() {
-				@SuppressWarnings("hiding")
 				static final long serialVersionUID = 1L;
 			};
 			for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
@@ -348,7 +347,7 @@ public class MainWinView extends JFrame {
 				courseNum.setText("");
 			}
 		});
-		courseNum.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> lstCourseList.setSelectedValue(courseNum.getText(), true));
+		courseNum.addActionListener((final ActionEvent __) -> lstCourseList.setSelectedValue(courseNum.getText(), true));
 		courseNum.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(@SuppressWarnings("unused") final FocusEvent __) {

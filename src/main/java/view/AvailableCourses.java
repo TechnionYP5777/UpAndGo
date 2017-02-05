@@ -394,7 +394,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
-		chckbxCats.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		chckbxCats.addActionListener((final ActionEvent __) -> {
 			Message.hyperCatBox("", "", catList.get(catIconNum));
 
 			chckbxCats.setSelected(false);

@@ -19,7 +19,6 @@ public class TimetableViewTest {
 	private final JFrame frame = new JFrame("Testing");
 	private final TimetableVIew ttpanel = new TimetableVIew();
 	
-	@SuppressWarnings("static-access")
 	public TimetableViewTest(){
 		frame.add(ttpanel);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

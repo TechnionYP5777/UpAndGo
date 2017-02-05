@@ -191,13 +191,13 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	//setting events and actions
 	public void setEvents(){
 		
-		startTimeChkBox.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		startTimeChkBox.addActionListener((final ActionEvent __) -> {
 			startTimeComBoxHours.setEnabled(startTimeChkBox.isSelected());
 			startTimeComBoxMins.setEnabled(startTimeChkBox.isSelected());
 			
 		});
 		
-		endTimeChkBox.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		endTimeChkBox.addActionListener((final ActionEvent __) -> {
 			endTimeComBoxHours.setEnabled(endTimeChkBox.isSelected());
 			endTimeComBoxMins.setEnabled(endTimeChkBox.isSelected());
 			
@@ -245,7 +245,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			}
 		});
 		
-		cleanTble.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+		cleanTble.addActionListener((final ActionEvent __) -> {
 			scheduleWasRequested = false;
 			schedIndex.setVisible(false);
 			resetTable();
