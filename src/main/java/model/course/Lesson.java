@@ -10,9 +10,6 @@ import logic.Event;
 import model.constraint.TimeConstraint;
 
 public class Lesson implements Event, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 903076596050490635L;
 
 	public enum Type {LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT}

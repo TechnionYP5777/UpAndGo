@@ -10,9 +10,6 @@ import model.constraint.TimeConstraint;
 
 public class LessonGroup implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4547987607914277140L;
 
 	public static final int UNINITIALIZED_GROUP_NUM = -1;

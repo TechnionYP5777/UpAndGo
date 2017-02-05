@@ -1,6 +1,3 @@
-/**
- * 
- */
 package catalog.loader;
 
 import java.util.ArrayList;

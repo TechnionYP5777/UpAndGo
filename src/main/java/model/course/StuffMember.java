@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class StuffMember implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7103892149028991099L;
 	
 	public String fName;

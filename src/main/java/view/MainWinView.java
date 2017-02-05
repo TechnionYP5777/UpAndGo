@@ -40,9 +40,6 @@ import model.CourseModel;
 public class MainWinView extends JFrame {
 
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	CourseModel m;
 	private JPanel contentPane;

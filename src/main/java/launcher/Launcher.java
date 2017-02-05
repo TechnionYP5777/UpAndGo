@@ -1,6 +1,3 @@
-/**
- * 
- */
 package launcher;
 
 import java.awt.EventQueue;

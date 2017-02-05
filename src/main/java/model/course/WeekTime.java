@@ -10,9 +10,6 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class WeekTime implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7431131009009123098L;
 	
 	private final DayOfWeek day;
