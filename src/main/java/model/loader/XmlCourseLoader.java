@@ -183,8 +183,8 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<LessonGroup> loadChosenLessonGroups(){
 		if (!new File(CHOSEN_LESSON_GROUPS).exists())
 			return Collections.emptyList();

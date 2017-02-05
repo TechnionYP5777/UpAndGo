@@ -12,8 +12,8 @@ import javax.swing.table.TableCellRenderer;
 
 public class MultiSpanCellTableUI extends BasicTableUI {
 
-	@SuppressWarnings("unused")
 	@Override
+	@SuppressWarnings("unused")
 	public void paint(final Graphics g, final JComponent c) {
 
 		final Rectangle oldClipBounds = g.getClipBounds();

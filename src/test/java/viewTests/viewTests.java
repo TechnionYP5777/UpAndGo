@@ -32,8 +32,8 @@ public class viewTests {
 
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			@SuppressWarnings("unused")
 			@Override
+			@SuppressWarnings("unused")
 			public void run() {
 				try {
 					new viewTests();

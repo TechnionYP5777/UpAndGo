@@ -8,15 +8,15 @@ public class MenuModel implements Model {
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("unused") 
-	@Override
+	@Override 
+	@SuppressWarnings("unused")
 	public void addPropertyChangeListener(final String property, final PropertyChangeListener __) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@SuppressWarnings("unused") 
-	@Override
+	@Override 
+	@SuppressWarnings("unused")
 	public void removePropertyChangeListener(final String property, final PropertyChangeListener __) {
 		// TODO Auto-generated method stub
 

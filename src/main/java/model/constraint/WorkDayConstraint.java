@@ -26,8 +26,8 @@ public class WorkDayConstraint extends Constraint {
 		//		return false;
 		return true;
 	}
-	@SuppressWarnings("unused")
 	@Override
+	@SuppressWarnings("unused")
 	public List<LessonGroup> groupsMeetsConstraint(final Course __) {
 		// TODO Cannot be done until someone will finish the lessonGroup job
 		return null;

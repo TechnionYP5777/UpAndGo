@@ -76,8 +76,8 @@ public class TimetableViewTest {
 
 		
 		SwingUtilities.invokeLater(new Runnable(){
-			@SuppressWarnings("unused")
 			@Override
+			@SuppressWarnings("unused")
 			public void run() {
 				new TimetableViewTest();
 				

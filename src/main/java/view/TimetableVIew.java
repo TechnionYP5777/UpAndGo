@@ -291,8 +291,8 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 						Integer.parseInt(minutes[endTimeComBoxMins.getSelectedIndex()]));
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 

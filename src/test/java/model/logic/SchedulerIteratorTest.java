@@ -58,8 +58,8 @@ CourseLoader cr;
 	}
 	
 	
-	@SuppressWarnings("deprecation")
 	@Test
+	@SuppressWarnings("deprecation")
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
@@ -77,8 +77,8 @@ CourseLoader cr;
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
+	@SuppressWarnings("deprecation")
 	public void test_c() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		

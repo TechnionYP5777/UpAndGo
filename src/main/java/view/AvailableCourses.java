@@ -438,8 +438,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		listeners.remove(¢);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 		case CourseProperty.DETAILS:

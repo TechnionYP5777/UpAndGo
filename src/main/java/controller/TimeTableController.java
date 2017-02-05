@@ -74,8 +74,8 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		model.removePropertyChangeListener(p, l);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 		case CourseProperty.CHOSEN_LIST_DETAILS:

@@ -44,8 +44,8 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	  }
 
 	    
-	  @SuppressWarnings("rawtypes")
-	@Override
+	  @Override
+	@SuppressWarnings("rawtypes")
 	public void setDataVector(final Vector newData, final Vector columnNames) {
 	    if (newData == null)
 	      throw new IllegalArgumentException("setDataVector() - Null parameter");
@@ -62,8 +62,8 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	     TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
 	  }
 
-	  @SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
+	  @Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addColumn(final Object columnName, final Vector columnData) {
 	    if (columnName == null)
 	      throw new IllegalArgumentException("addColumn() - null parameter");
@@ -81,8 +81,8 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	    fireTableStructureChanged();
 	  }
 
-	  @SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
+	  @Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addRow(final Vector rowData) {
 	    Vector newData = null;
 	    if (rowData != null)
@@ -98,8 +98,8 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	       TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
 	  }
 
-	  @SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
+	  @Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void insertRow(final int row, Vector rowData) {
 	    if (rowData != null)
 			rowData.setSize(getColumnCount());
