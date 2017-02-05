@@ -135,18 +135,18 @@ public class Timetable {
 			blankMinutesSum += sumBlank(daySchedule);
 		}
 		
-		final double penalty = 1. * BLANKSPACE_PENALTY_PER_HOUR * blankMinutesSum / 60;
+		final double $ = 1. * BLANKSPACE_PENALTY_PER_HOUR * blankMinutesSum / 60;
 		
 		System.out.println("hist: " + histogram);
 		System.out.println("sum: " + blankMinutesSum);
-		System.out.println("penalty: " + penalty);
+		System.out.println("penalty: " + $);
 		//System.out.println("histover");
 				//histogram[¢.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual case
 		/*for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢)
 			$ += 1 - histogram[¢];(*/
 		//return $;
-		return MAX_BLANKSPACE_RANK-penalty;
+		return MAX_BLANKSPACE_RANK-$;
 	}
 	
 	private int sumBlank(final ArrayList<WeekTime> daySchedule){

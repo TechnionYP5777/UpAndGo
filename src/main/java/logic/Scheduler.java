@@ -247,8 +247,8 @@ public class Scheduler {
 	 * @returns an iterator of Timetable sorted by summerized rank of chosen paramaters
 	 */
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff, final boolean byBlankSpace, final LocalTime byStartTime, final LocalTime byEndTime){
-		final List<Timetable> res = new ArrayList<>(orig);
-		Collections.sort(res, (t1, t2) -> {
+		final List<Timetable> $ = new ArrayList<>(orig);
+		Collections.sort($, (t1, t2) -> {
 			Double rank1 = 0.0;
 			Double rank2 = 0.0;
 			if(byDaysoff){
@@ -270,7 +270,7 @@ public class Scheduler {
 			
 			return -rank1.compareTo(rank2);
 		});
-		return res.iterator();
+		return $.iterator();
 	}
 	
 	/**
@@ -282,8 +282,8 @@ public class Scheduler {
 	 */
 	@Deprecated
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff, final boolean byBlankSpace){
-		final List<Timetable> res = new ArrayList<>(orig);
-		Collections.sort(res, (t1, t2) -> {
+		final List<Timetable> $ = new ArrayList<>(orig);
+		Collections.sort($, (t1, t2) -> {
 			Double rank1 = 0.0;
 			Double rank2 = 0.0;
 			if(byDaysoff){
@@ -297,7 +297,7 @@ public class Scheduler {
 			
 			return -rank1.compareTo(rank2);
 		});
-		return res.iterator();
+		return $.iterator();
 	}
 
 }

@@ -107,18 +107,18 @@ public class CourseModel implements Model {
 	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(final Entry<String, Course> ¢ : coursesById.entrySet())
-			if (name.equals(¢.getValue().getName()))
-				return ¢.getValue();
+		for(final Entry<String, Course> $ : coursesById.entrySet())
+			if (name.equals($.getValue().getName()))
+				return $.getValue();
 		return null;
 	}
 	
 	public Course getCourseById(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(final Entry<String, Course> ¢ : coursesById.entrySet())
-			if (name.equals(¢.getValue().getId()))
-				return ¢.getValue();
+		for(final Entry<String, Course> $ : coursesById.entrySet())
+			if (name.equals($.getValue().getId()))
+				return $.getValue();
 		return null;
 	}
 

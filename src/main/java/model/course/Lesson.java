@@ -61,9 +61,9 @@ public class Lesson implements Event, Serializable {
 	
 	public String getRoomNumber() {
 		if (!place.isEmpty()) {
-			final String[] spilt = place.split(" ");
-			if (spilt.length > 1)
-				return spilt[spilt.length - 1];
+			final String[] $ = place.split(" ");
+			if ($.length > 1)
+				return $[$.length - 1];
 		}
 		return "";
 	}
@@ -90,12 +90,12 @@ public class Lesson implements Event, Serializable {
 		if (l == null) return false;
 	    if (l == this) return true;
 	    if (!(l instanceof Lesson))return false;
-	    final Lesson lesson = (Lesson)l;
-	    return place.equals(lesson.getPlace()) && type == lesson.getType()
-	    		&& group == lesson.getGroup()
-	    		&&  courseId.equals(lesson.getCourse()) &&
-	    		startTime.equals(lesson.getStartTime()) &&
-	    				endTime.equals(lesson.getEndTime());
+	    final Lesson $ = (Lesson)l;
+	    return place.equals($.getPlace()) && type == $.getType()
+	    		&& group == $.getGroup()
+	    		&&  courseId.equals($.getCourse()) &&
+	    		startTime.equals($.getStartTime()) &&
+	    				endTime.equals($.getEndTime());
 	}
 	
 	

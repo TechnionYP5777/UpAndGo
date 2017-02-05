@@ -74,8 +74,8 @@ public class LessonGroup implements Serializable{
 	public int hashCode() {
 		@SuppressWarnings("boxing")
 		final
-		Integer i = groupNum;
-		return i.hashCode();
+		Integer $ = groupNum;
+		return $.hashCode();
 	}
 	
 	@Override

@@ -470,10 +470,10 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 	
 	private String findLGStaff(final Node n, final int groupNum, final String staff) {
-		for (int ¢ = 0; ¢ < ((Element) n).getElementsByTagName(staff).getLength(); ++¢)
-			if (((Element)((Element) n).getElementsByTagName(staff).item(¢).getParentNode()).hasAttribute("group"))
-				if (Integer.parseInt(((Element)((Element) n).getElementsByTagName(staff).item(¢).getParentNode()).getAttribute("group")) == groupNum)
-					return ((Element) n).getElementsByTagName(staff).item(¢).getAttributes()
+		for (int $ = 0; $ < ((Element) n).getElementsByTagName(staff).getLength(); ++$)
+			if (((Element)((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group"))
+				if (Integer.parseInt(((Element)((Element) n).getElementsByTagName(staff).item($).getParentNode()).getAttribute("group")) == groupNum)
+					return ((Element) n).getElementsByTagName(staff).item($).getAttributes()
 							.getNamedItem("name").getNodeValue();
 		return "";
 	}
