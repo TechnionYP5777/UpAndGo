@@ -4,7 +4,7 @@ package model.logic;
  * @since 2-1-17
  */
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

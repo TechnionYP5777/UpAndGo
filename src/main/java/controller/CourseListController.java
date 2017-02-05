@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 import command.CourseCommand;
 import model.CourseModel;

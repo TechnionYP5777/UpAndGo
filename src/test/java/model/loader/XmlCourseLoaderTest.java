@@ -1,26 +1,15 @@
 package model.loader;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
-import java.io.File;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.CourseModel;
 import model.Faculty;
 import model.course.Course;
-import model.course.Lesson;
-import model.course.LessonGroup;
-import model.course.StuffMember;
-import model.course.WeekTime;
 
 public class XmlCourseLoaderTest {
 	

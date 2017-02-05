@@ -5,6 +5,10 @@
 
 package view;
 
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -15,33 +19,31 @@ import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import java.awt.SystemColor;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 import command.CourseCommand;
 import model.course.CourseId;
 import property.CourseProperty;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ListModel;
-import javax.swing.JList;
-import javax.swing.UIManager;
-import javax.swing.ListSelectionModel;
-import javax.swing.JCheckBox;
-import javax.swing.border.LineBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import java.awt.ComponentOrientation;
 
 
 public class AvailableCourses extends JPanel implements CourseListView {

@@ -10,9 +10,10 @@ import java.util.Set;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import catalog.Catalog;
+import catalog.SoftwareEngineering;
 import model.CourseModel;
 import model.course.Course;
-import catalog.*;
 
 /**
  * 

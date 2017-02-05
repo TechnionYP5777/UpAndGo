@@ -1,4 +1,5 @@
 package model.course;
+import java.time.LocalDateTime;
 /**
  * @author nikita
  * @author kobybs (made changes)
@@ -8,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.loader.CourseLoader;
-
-import java.time.LocalDateTime;
 
 // after object creation one can only add or remove lessons
 // TODO: do we need to change it?

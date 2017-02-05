@@ -8,9 +8,6 @@ import java.util.Objects;
 
 import logic.Event;
 import model.constraint.TimeConstraint;
-import model.course.StuffMember;
-import model.loader.CourseLoader;
-import model.loader.XmlCourseLoader;
 
 public class Lesson implements Event, Serializable {
 	/**

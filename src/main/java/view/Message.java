@@ -7,6 +7,7 @@ package view;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.net.URI;
+
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;

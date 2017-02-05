@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
+import model.Faculty;
 import model.course.Course;
 import model.course.LessonGroup;
-import model.Faculty;
 
 /**
  * Abstract class for loading courses data from outside.

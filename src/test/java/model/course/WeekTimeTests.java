@@ -4,7 +4,7 @@ package model.course;
  * @since 25-12-16
  */
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
