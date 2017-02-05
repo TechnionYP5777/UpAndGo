@@ -29,8 +29,8 @@ public class UserTest extends JFrame {
 			try {
 				final UserTest frame = new UserTest();
 				frame.setVisible(true);
-			} catch (final Exception e) {
-				e.printStackTrace();
+			} catch (final Exception ¢) {
+				¢.printStackTrace();
 			}
 		});
 	}

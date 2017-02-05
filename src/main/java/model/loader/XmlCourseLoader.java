@@ -208,12 +208,12 @@ public class XmlCourseLoader extends CourseLoader {
 	     $ = (List<LessonGroup>) in.readObject();
 	     in.close();
 	     fileIn.close();
-	  }catch(final IOException i) {
-	     i.printStackTrace();
+	  }catch(final IOException ¢) {
+	     ¢.printStackTrace();
 	     return $;
-	  }catch(final ClassNotFoundException c) {
+	  }catch(final ClassNotFoundException ¢) {
 	     System.out.println("LessonGroup class not found");
-	     c.printStackTrace();
+	     ¢.printStackTrace();
 	     return $;
 	  }
 		
@@ -234,14 +234,14 @@ public class XmlCourseLoader extends CourseLoader {
 			
 			final List<Node> lessonGroupList = new ArrayList<>();
 			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-			for (int i = 0 ; i < lectureList.getLength() ; ++i)
-				lessonGroupList.add(lectureList.item(i));
+			for (int ¢ = 0 ; ¢ < lectureList.getLength() ; ++¢)
+				lessonGroupList.add(lectureList.item(¢));
 			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-			for (int i = 0 ; i < tutorialList.getLength() ; ++i)
-				lessonGroupList.add(tutorialList.item(i));
+			for (int ¢ = 0 ; ¢ < tutorialList.getLength() ; ++¢)
+				lessonGroupList.add(tutorialList.item(¢));
 			final NodeList labList = courseElement.getElementsByTagName("lab");
-			for (int i = 0 ; i < labList.getLength() ; ++i)
-				lessonGroupList.add(labList.item(i));
+			for (int ¢ = 0 ; ¢ < labList.getLength() ; ++¢)
+				lessonGroupList.add(labList.item(¢));
 			
 			lessonGroupList.forEach(groupNode->{
 				if (((Element) groupNode).getAttribute("group").equals(groupNum))

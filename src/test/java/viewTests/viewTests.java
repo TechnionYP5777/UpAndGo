@@ -37,8 +37,8 @@ public class viewTests {
 			public void run() {
 				try {
 					new viewTests();
-				} catch (final Exception e) {
-					e.printStackTrace();
+				} catch (final Exception ¢) {
+					¢.printStackTrace();
 				}
 
 			}

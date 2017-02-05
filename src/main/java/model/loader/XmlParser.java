@@ -35,15 +35,15 @@ class xmlParser {
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
 
-		} catch (final ParserConfigurationException e) {
+		} catch (final ParserConfigurationException ¢) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (final SAXException e) {
+			¢.printStackTrace();
+		} catch (final SAXException ¢) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (final IOException e) {
+			¢.printStackTrace();
+		} catch (final IOException ¢) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			¢.printStackTrace();
 		}
 		return $;
 	}

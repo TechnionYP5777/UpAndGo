@@ -1,8 +1,8 @@
 package view;
 
 public interface CellSpan {
-	  final int ROW    = 0;
-	  final int COLUMN = 1;
+	  int ROW    = 0;
+	  int COLUMN = 1;
 	  
 	  int[] getSpan(int row, int column);
 	  void setSpan(int[] span, int row, int column);
