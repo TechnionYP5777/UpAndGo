@@ -70,8 +70,7 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	    columnIdentifiers.addElement(columnName);
 	    int index = 0;
 	    for (final Enumeration eeration = dataVector.elements(); eeration.hasMoreElements();) {
-			final Object value = columnData == null || index >= columnData.size() ? null : columnData.elementAt(index);
-			((Vector) eeration.nextElement()).addElement(value);
+			((Vector) eeration.nextElement()).addElement(columnData == null || index >= columnData.size() ? null : columnData.elementAt(index));
 			++index;
 		}
 
@@ -120,8 +119,7 @@ public class AttributiveCellTableModel extends DefaultTableModel {
 	  }
 
 	  public void setCellAttribute(final CellAttribute newCellAtt) {
-	    final int numColumns = getColumnCount();
-	    final int numRows    = getRowCount();
+	    final int numColumns = getColumnCount(), numRows = getRowCount();
 	    if (newCellAtt.getSize().width  != numColumns ||
 	        newCellAtt.getSize().height != numRows)
 			newCellAtt.setSize(new Dimension(numRows, numColumns));

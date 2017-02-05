@@ -32,9 +32,7 @@ public class Scheduler {
 		final List<Timetable> result = new ArrayList<>();
 		final ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
-		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
-		final ArrayList<Integer> max = initMax(lessonsGroupArray);
-		
+		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
 		for (int last = indexes.size() - 1, msb;;) {
 			System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
@@ -108,9 +106,7 @@ public class Scheduler {
 	public static Schedule schedule(final List<Course> lcourse, @SuppressWarnings("unused") final List<TimeConstraint> __){
 		final ArrayList< List<LessonGroup> > lessonsGroupArray = initMainArr(lcourse);
 		
-		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size());
-		final ArrayList<Integer> max = initMax(lessonsGroupArray);
-		
+		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
 		for (int last = indexes.size() - 1, msb;;) {
 			System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
@@ -249,8 +245,7 @@ public class Scheduler {
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff, final boolean byBlankSpace, final LocalTime byStartTime, final LocalTime byEndTime){
 		final List<Timetable> $ = new ArrayList<>(orig);
 		Collections.sort($, (t1, t2) -> {
-			Double rank1 = 0.0;
-			Double rank2 = 0.0;
+			Double rank1 = 0.0, rank2 = 0.0;
 			if(byDaysoff){
 				rank1 += t1.getRankOfDaysoff();
 				rank2 += t2.getRankOfDaysoff();
@@ -284,8 +279,7 @@ public class Scheduler {
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff, final boolean byBlankSpace){
 		final List<Timetable> $ = new ArrayList<>(orig);
 		Collections.sort($, (t1, t2) -> {
-			Double rank1 = 0.0;
-			Double rank2 = 0.0;
+			Double rank1 = 0.0, rank2 = 0.0;
 			if(byDaysoff){
 				rank1 += t1.getRankOfDaysoff();
 				rank2 += t2.getRankOfDaysoff();

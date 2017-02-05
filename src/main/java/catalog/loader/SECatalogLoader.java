@@ -27,11 +27,9 @@ public class SECatalogLoader extends CSCatalogLoader {
 		System.out.println(m.getCoursesNames());
 		core = new ArrayList<>();
 		scientificChain = new ArrayList<>();
-		final List<Course> physicsChain = new ArrayList<>();
-		final List<Course> chemistryChain1 = new ArrayList<>();
-		final List<Course> biologyChain = new ArrayList<>();
-		final List<Course> chemistryChain2 = new ArrayList<>();
-		final List<Course> otherScientCourses = new ArrayList<>();
+		final List<Course> physicsChain = new ArrayList<>(), chemistryChain1 = new ArrayList<>(),
+				biologyChain = new ArrayList<>(), chemistryChain2 = new ArrayList<>(),
+				otherScientCourses = new ArrayList<>();
 		for (int i = 0; i < coursesList.getLength(); ++i) {
 			final Element elem = (Element) coursesList.item(i);
 			final String listName = elem.getAttribute("name");

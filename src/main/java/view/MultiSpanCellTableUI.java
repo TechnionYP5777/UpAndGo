@@ -14,17 +14,14 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 
 	@Override
 	@SuppressWarnings("unused")
-	public void paint(final Graphics g, final JComponent c) {
+	public void paint(final Graphics g, final JComponent __) {
 
-		final Rectangle oldClipBounds = g.getClipBounds();
-		final Rectangle clipBounds    = new Rectangle(oldClipBounds);
+		final Rectangle oldClipBounds = g.getClipBounds(), clipBounds = new Rectangle(oldClipBounds);
 		final int tableWidth   = table.getColumnModel().getTotalColumnWidth();
 		clipBounds.width = Math.min(clipBounds.width, tableWidth);
 		g.setClip(clipBounds);
 
-		final int firstIndex = table.rowAtPoint(new Point(0, clipBounds.y));
-		final int  lastIndex = table.getRowCount()-1;
-
+		final int firstIndex = table.rowAtPoint(new Point(0, clipBounds.y)), lastIndex = table.getRowCount() - 1;
 		final Rectangle rowRect = new Rectangle(0,0,
 				tableWidth, table.getRowHeight() + table.getRowMargin());
 		rowRect.y = firstIndex*rowRect.height;
@@ -59,18 +56,19 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 				cellColumn = column + cellAtt.getSpan(row,column)[CellSpan.COLUMN];
 				//  System.out.print("  ("+column+")");  // debug
 			}
-			if (cellRect.intersects(rect)) {
+			if (!cellRect.intersects(rect)) {
+				if (drawn)
+					break;
+			} else {
 				drawn = true;
 				paintCell(g, cellRect, cellRow, cellColumn);
-			} else if (drawn) break; 
+			} 
 		}
 
 	}
 
 	private void paintCell(final Graphics g, final Rectangle cellRect, final int row, final int column) {
-		final int spacingHeight = table.getRowMargin();
-		final int spacingWidth  = table.getColumnModel().getColumnMargin();
-
+		final int spacingHeight = table.getRowMargin(), spacingWidth = table.getColumnModel().getColumnMargin();
 		final AttributiveCellTableModel tableModel = (AttributiveCellTableModel)table.getModel();
 		final ColoredCell cellAtt = (ColoredCell)tableModel.getCellAttribute();
 		final Color c = g.getColor();

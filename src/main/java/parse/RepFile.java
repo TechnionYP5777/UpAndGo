@@ -85,8 +85,7 @@ public class RepFile {
 	public static void processRepFile(){
 		final Charset ibm862charset = Charset.forName("IBM862");
 
-		final File repyIn = new File(REP_FILE_DOS);
-		final File repyOut = new File(REP_FILE_HEBREW);
+		final File repyIn = new File(REP_FILE_DOS), repyOut = new File(REP_FILE_HEBREW);
 		if (repyIn.exists())
 			try (FileInputStream fis = new FileInputStream(repyIn);
 					InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
@@ -327,13 +326,9 @@ public class RepFile {
 			return;
 		}
 			
-		//System.out.println(course.getAttribute("id"));
-		Element lectureElement = null;
-		Element tutorialsElement = null;
+		Element lectureElement = null, tutorialsElement = null;
 		for (final String courseLesson : courseLessons) {
-			Element tutorialElement = null;
-			Element labElement = null;
-			Element groupElement = null;
+			Element tutorialElement = null, labElement = null, groupElement = null;
 			InfoType infoType = InfoType.UNKNOWN;
 			for (final String lessonLine : courseLesson.split("[\\r\\n]+"))
 				if (lessonLine.contains("הרצאה")) {

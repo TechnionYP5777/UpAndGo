@@ -25,29 +25,42 @@ public class TimetableViewTest {
 		frame.pack();
 		frame.setVisible(true);
 		
-		final Lesson l1 = new Lesson(null, new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(8, 30)), new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "אולמן" , Type.LECTURE, 11,"123", "מערכות הפעלה");
-		final Lesson l2 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(15, 30)), new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(18, 00)), "אולמן" , Type.LECTURE, 11,"123", "מערכות הפעלה");
+		final Lesson l1 = new Lesson(null, new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(8, 30)),
+				new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "אולמן", Type.LECTURE, 11, "123", "מערכות הפעלה"),
+				l2 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(15, 30)),
+						new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(18, 00)), "אולמן", Type.LECTURE, 11, "123",
+						"מערכות הפעלה");
 		final LessonGroup lg1 = new LessonGroup(11);
 		lg1.addLesson(l1);
 		lg1.addLesson(l2);
 		
 		
-		final Lesson l3 = new Lesson(null, new WeekTime(DayOfWeek.MONDAY, LocalTime.of(9, 30)), new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30)), "טאוב" , Type.TUTORIAL, 15,"123", "מבוא לתכנות מערכות");
-		final Lesson l4 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(7, 30)), new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 30)), "טאוב" , Type.LECTURE, 15,"123", "מבוא לתכנות מערכות");
+		final Lesson l3 = new Lesson(null, new WeekTime(DayOfWeek.MONDAY, LocalTime.of(9, 30)),
+				new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30)), "טאוב", Type.TUTORIAL, 15, "123",
+				"מבוא לתכנות מערכות"),
+				l4 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(7, 30)),
+						new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 30)), "טאוב", Type.LECTURE, 15, "123",
+						"מבוא לתכנות מערכות");
 		final LessonGroup lg2 = new LessonGroup(15);
 		lg2.addLesson(l3);
 		lg2.addLesson(l4);
 		
 		
-		final Lesson l5 = new Lesson(null, new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(15, 30)), "אולמן" , Type.LECTURE, 11,"123", "אלגו");
-		final Lesson l6 = new Lesson(null, new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 30)), new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)), "אולמן" , Type.LECTURE, 11, "123","אלגו");
+		final Lesson l5 = new Lesson(null, new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)),
+				new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(15, 30)), "אולמן", Type.LECTURE, 11, "123", "אלגו"),
+				l6 = new Lesson(null, new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 30)),
+						new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)), "אולמן", Type.LECTURE, 11, "123",
+						"אלגו");
 		final LessonGroup lg3 = new LessonGroup(11);
 		lg3.addLesson(l5);
 		lg3.addLesson(l6);
 		
 		
-		final Lesson l7 = new Lesson(null, new WeekTime(DayOfWeek.THURSDAY, LocalTime.of(7, 30)), new WeekTime(DayOfWeek.THURSDAY, LocalTime.of(10, 00)), "טאוב" , Type.LECTURE, 11,"123", "מבני נתונים");
-		final Lesson l8 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 30)), new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(14, 30)), "טאוב" , Type.LECTURE, 11,"123", "מבני נתונים");
+		final Lesson l7 = new Lesson(null, new WeekTime(DayOfWeek.THURSDAY, LocalTime.of(7, 30)),
+				new WeekTime(DayOfWeek.THURSDAY, LocalTime.of(10, 00)), "טאוב", Type.LECTURE, 11, "123", "מבני נתונים"),
+				l8 = new Lesson(null, new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 30)),
+						new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(14, 30)), "טאוב", Type.LECTURE, 11, "123",
+						"מבני נתונים");
 		final LessonGroup lg4 = new LessonGroup(11);
 		lg3.addLesson(l7);
 		lg3.addLesson(l8);

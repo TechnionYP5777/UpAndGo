@@ -30,8 +30,7 @@ public class MultiSpanCellTable extends JTable {
 			return $;
 	    final CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 	    if (! cellAtt.isVisible(row,column)) {
-	      final int temp_row    = row;
-	      final int temp_column = column;
+	      final int temp_row = row, temp_column = column;
 	      row    += cellAtt.getSpan(temp_row,temp_column)[CellSpan.ROW];
 	      column += cellAtt.getSpan(temp_row,temp_column)[CellSpan.COLUMN];      
 	    }
@@ -105,8 +104,7 @@ public class MultiSpanCellTable extends JTable {
 
 	  @Override
 	public void valueChanged(final ListSelectionEvent e) {
-	    final int firstIndex = e.getFirstIndex();
-	    final int  lastIndex = e.getLastIndex();
+	    final int firstIndex = e.getFirstIndex(), lastIndex = e.getLastIndex();
 	    if (firstIndex == -1 && lastIndex == -1)
 			repaint();
 	    final Rectangle dirtyRegion = getCellRect(firstIndex, 0, false);

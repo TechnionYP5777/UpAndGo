@@ -37,7 +37,7 @@ public abstract class CourseLoader {
 	
 	public abstract List<String> loadChosenCourseNames();
 	
-	public abstract void saveChosenLessonGroups(List<LessonGroup> lessonGroups);
+	public abstract void saveChosenLessonGroups(List<LessonGroup> gs);
 	
 	public abstract List<LessonGroup> loadChosenLessonGroups();
 

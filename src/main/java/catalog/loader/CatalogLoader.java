@@ -82,11 +82,11 @@ public abstract class CatalogLoader {
 		markDoneCoursesForOneList(userCourses, malags);
 
 	}
-	protected static List<Course> getDoneCoursesForOneList(final List<Course> l) {
+	protected static List<Course> getDoneCoursesForOneList(final List<Course> cs) {
 		final List<Course> $ = new ArrayList<>();
-		for (final Course c: l)
-			if (c.getDone() && c.isPassThisSemester())
-				$.add(c);
+		for (final Course ¢: cs)
+			if (¢.getDone() && ¢.isPassThisSemester())
+				$.add(¢);
 		return $;
 	}
 	protected List<Course> getDoneCourse() {

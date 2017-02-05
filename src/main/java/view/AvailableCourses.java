@@ -171,7 +171,6 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		scpChoseCourses.setMinimumSize(new Dimension(200, 100));
 		scpChoseCourses.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "הקורסים שנבחרו",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 204, 51)));
-		return;
 	}
 
 	//

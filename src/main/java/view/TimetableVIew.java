@@ -331,9 +331,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			for (final Lesson l : lg.getLessons()) {
 				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue() % 7 - 2;
 				final int startRow = 2 * (l.getStartTime().getTime().getHour() - 7)
-						- (l.getStartTime().getTime().getMinute() > 0 ? -1 : 0 );
-				final int endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
-						- (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
+						- (l.getStartTime().getTime().getMinute() > 0 ? -1 : 0),
+						endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
+								- (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
 				rows = new int[endRow - startRow + 1];
 				for (int ¢ = 0; ¢ < rows.length; ++¢)
 					rows[¢] = ¢ + startRow;

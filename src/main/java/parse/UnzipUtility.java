@@ -33,10 +33,10 @@ public class UnzipUtility {
         try (ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath))){
             for (ZipEntry entry = zipIn.getNextEntry(); entry != null;) {
     			final String filePath = destDirectory + File.separator + entry.getName();
-    			if (!entry.isDirectory())
-    				extractFile(zipIn, filePath);
-    			else
-    				new File(filePath).mkdir();
+    			if (entry.isDirectory())
+					new File(filePath).mkdir();
+				else
+					extractFile(zipIn, filePath);
     			zipIn.closeEntry();
     			entry = zipIn.getNextEntry();
     		}

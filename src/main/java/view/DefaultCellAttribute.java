@@ -55,10 +55,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	@Override
 	public void combine(final int[] rows, final int[] columns) {
 		if (isOutOfBounds(rows, columns)) return;
-		final int    rowSpan  = rows.length;
-		final int columnSpan  = columns.length;
-		final int startRow    = rows[0];
-		final int startColumn = columns[0];
+		final int rowSpan = rows.length, columnSpan = columns.length, startRow = rows[0], startColumn = columns[0];
 		for (int i=0;i<rowSpan;++i)
 			for (int j = 0; j < columnSpan; ++j)
 				if (span[i + startRow][j + startColumn][CellSpan.COLUMN] != 1
@@ -143,8 +140,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	@Override
 	public void addColumn() {
 		final int[][][] oldSpan = span;
-		final int numRows    = oldSpan.length;
-		final int numColumns = oldSpan[0].length;
+		final int numRows = oldSpan.length, numColumns = oldSpan[0].length;
 		span = new int[numRows][numColumns + 1][2];
 		System.arraycopy(oldSpan,0,span,0,numRows);
 		for (int ¢=0;¢<numRows;++¢)
@@ -154,8 +150,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	@Override
 	public void addRow() {
 		final int[][][] oldSpan = span;
-		final int numRows    = oldSpan.length;
-		final int numColumns = oldSpan[0].length;
+		final int numRows = oldSpan.length, numColumns = oldSpan[0].length;
 		span = new int[numRows + 1][numColumns][2];
 		System.arraycopy(oldSpan,0,span,0,numRows);
 		for (int ¢=0;¢<numColumns;++¢)
@@ -165,8 +160,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	@Override
 	public void insertRow(final int row) {
 		final int[][][] oldSpan = span;
-		final int numRows    = oldSpan.length;
-		final int numColumns = oldSpan[0].length;
+		final int numRows = oldSpan.length, numColumns = oldSpan[0].length;
 		span = new int[numRows + 1][numColumns][2];
 		if (row > 0)
 			System.arraycopy(oldSpan, 0, span, 0, row - 1);

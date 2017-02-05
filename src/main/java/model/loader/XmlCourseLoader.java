@@ -224,8 +224,9 @@ public class XmlCourseLoader extends CourseLoader {
 	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum){
 		try {
 			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
-			final XPathExpression courseExpr = XPathFactory.newInstance().newXPath().compile("//course[@id=\""+courseID+"\"]");
-			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
+			final XPathExpression courseExpr = XPathFactory.newInstance().newXPath()
+					.compile("//course[@id=\"" + courseID + "\"]"),
+					lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
 			final Element courseElement  = (Element) ((NodeList) courseExpr.evaluate(doc, XPathConstants.NODESET)).item(0);
 			System.out.println(courseElement.getAttribute("name"));
 			System.out.println(courseElement.getAttribute("id"));
@@ -471,10 +472,11 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	private String findLGStaff(final Node n, final int groupNum, final String staff) {
 		for (int $ = 0; $ < ((Element) n).getElementsByTagName(staff).getLength(); ++$)
-			if (((Element)((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group"))
-				if (Integer.parseInt(((Element)((Element) n).getElementsByTagName(staff).item($).getParentNode()).getAttribute("group")) == groupNum)
-					return ((Element) n).getElementsByTagName(staff).item($).getAttributes()
-							.getNamedItem("name").getNodeValue();
+			if (((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group")
+					&& Integer.parseInt(((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode())
+							.getAttribute("group")) == groupNum)
+				return ((Element) n).getElementsByTagName(staff).item($).getAttributes().getNamedItem("name")
+						.getNodeValue();
 		return "";
 	}
 
