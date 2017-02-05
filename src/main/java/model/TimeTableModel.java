@@ -68,7 +68,7 @@ public class TimeTableModel implements Model {
 		else {
 			lessonGroupsList.clear();
 			sched_index = 0;
-			tables.forEach((x) -> lessonGroupsList.add(x.getLessonGroups()));
+			tables.forEach(x -> lessonGroupsList.add(x.getLessonGroups()));
 			notifySchedListeners();
 		}
 	}
@@ -89,18 +89,16 @@ public class TimeTableModel implements Model {
 	}
 	
 	private void notifySchedListeners() {
-		listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
+		listenersMap.get(TimeTableProperty.SCHEDULE).forEach(x -> x.propertyChange(
 				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index))));
-		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach((x) -> x.propertyChange(
-				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,sched_index + 1 + "/" + lessonGroupsList.size())));
+		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(x -> x.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,
+				sched_index + 1 + "/" + lessonGroupsList.size())));
 	}
 	private void notifySchedListenersNoSched() {
-		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
-				new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
+		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(x -> x.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
 	}
 	private void notifySchedListenersNoCourses() {
-		listenersMap.get(TimeTableProperty.NO_COURSES).forEach((x) -> x.propertyChange(
-				new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
+		listenersMap.get(TimeTableProperty.NO_COURSES).forEach(x -> x.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
 	}
 	
 	
