@@ -234,13 +234,13 @@ public class XmlCourseLoader extends CourseLoader {
 			
 			final List<Node> lessonGroupList = new ArrayList<>();
 			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-			for (int i = 0 ; i < lectureList.getLength() ; i++)
+			for (int i = 0 ; i < lectureList.getLength() ; ++i)
 				lessonGroupList.add(lectureList.item(i));
 			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-			for (int i = 0 ; i < tutorialList.getLength() ; i++)
+			for (int i = 0 ; i < tutorialList.getLength() ; ++i)
 				lessonGroupList.add(tutorialList.item(i));
 			final NodeList labList = courseElement.getElementsByTagName("lab");
-			for (int i = 0 ; i < labList.getLength() ; i++)
+			for (int i = 0 ; i < labList.getLength() ; ++i)
 				lessonGroupList.add(labList.item(i));
 			
 			lessonGroupList.forEach(groupNode->{

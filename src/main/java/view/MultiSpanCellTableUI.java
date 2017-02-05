@@ -29,7 +29,7 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 				tableWidth, table.getRowHeight() + table.getRowMargin());
 		rowRect.y = firstIndex*rowRect.height;
 
-		for (int index = firstIndex; index <= lastIndex; index++) {
+		for (int index = firstIndex; index <= lastIndex; ++index) {
 			if (rowRect.intersects(clipBounds))
 				//System.out.println();                  // debug
 				//System.out.print("" + index +": ");    // row
@@ -47,7 +47,7 @@ public class MultiSpanCellTableUI extends BasicTableUI {
 		final CellSpan cellAtt = (CellSpan)tableModel.getCellAttribute();
 		final int numColumns = table.getColumnCount();
 
-		for (int column = 0; column < numColumns; column++) {
+		for (int column = 0; column < numColumns; ++column) {
 			final Rectangle cellRect = table.getCellRect(row,column,true);
 			int cellRow,cellColumn;
 			if (cellAtt.isVisible(row,column)) {
