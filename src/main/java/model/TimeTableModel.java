@@ -31,27 +31,27 @@ public class TimeTableModel implements Model {
 	
 	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
 	
-	public TimeTableModel(CourseLoader loader) {
+	public TimeTableModel(final CourseLoader loader) {
 		this.loader = loader;
 	}
 	
-	public void setCourses(List<Course> ¢) {
+	public void setCourses(final List<Course> ¢) {
 		courses = new ArrayList<>(¢);
 	}
 	
-	public void setDaysoffFlag(boolean f) {
+	public void setDaysoffFlag(final boolean f) {
 		isDaysoffCount = f;
 	}
 	
-	public void setBlankSpaceFlag(boolean f) {
+	public void setBlankSpaceFlag(final boolean f) {
 		isBlankSpaceCount = f;
 	}
 	
-	public void setMinStartTime(LocalTime ¢) {
+	public void setMinStartTime(final LocalTime ¢) {
 		minStartTime = ¢;
 	}
 	
-	public void setMaxEndTime(LocalTime ¢) {
+	public void setMaxEndTime(final LocalTime ¢) {
 		maxEndTime = ¢;
 	}
 	
@@ -61,7 +61,7 @@ public class TimeTableModel implements Model {
 
 			return;
 		}
-		List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
+		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
 				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
 			notifySchedListenersNoSched();
@@ -89,18 +89,18 @@ public class TimeTableModel implements Model {
 	}
 	
 	private void notifySchedListeners() {
-		this.listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)))));
-		this.listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,sched_index + 1 + "/" + lessonGroupsList.size()))));
+		listenersMap.get(TimeTableProperty.SCHEDULE).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index))));
+		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,sched_index + 1 + "/" + lessonGroupsList.size())));
 	}
 	private void notifySchedListenersNoSched() {
-		this.listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null))));
+		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
 	}
 	private void notifySchedListenersNoCourses() {
-		this.listenersMap.get(TimeTableProperty.NO_COURSES).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null))));
+		listenersMap.get(TimeTableProperty.NO_COURSES).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
 	}
 	
 	
@@ -109,27 +109,27 @@ public class TimeTableModel implements Model {
 				: lessonGroupsList.get(sched_index);
 	}
 	
-	public void saveChosenLessonGroups(List<LessonGroup> ¢) {
-		this.loader.saveChosenLessonGroups(¢);
+	public void saveChosenLessonGroups(final List<LessonGroup> ¢) {
+		loader.saveChosenLessonGroups(¢);
 	}
 	
 	public void loadChosenLessonGroups() {
-		this.lessonGroupsList.add(this.loader.loadChosenLessonGroups());
+		lessonGroupsList.add(loader.loadChosenLessonGroups());
 		notifySchedListeners();
 	}
 
 	@Override
-	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
+	public void addPropertyChangeListener(final String property, final PropertyChangeListener l) {
 		if (property == null || l == null)
 			throw new NullPointerException();
-		this.listenersMap.put(property, l);
+		listenersMap.put(property, l);
 
 	}
 
 	@Override
-	public void removePropertyChangeListener(String property, PropertyChangeListener l) {
-		if (property != null && l != null && this.listenersMap.containsKey(property))
-			this.listenersMap.remove(property, l);
+	public void removePropertyChangeListener(final String property, final PropertyChangeListener l) {
+		if (property != null && l != null && listenersMap.containsKey(property))
+			listenersMap.remove(property, l);
 
 	}
 }

@@ -37,17 +37,17 @@ import property.TimeTableProperty;
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel implements ITimeTableView {
 	MultiSpanCellTable table;
-	private JButton cleanTble = new JButton("נקה מערכת");
-	private JButton nextBtn = new JButton("<הבא");
-	private JButton prevBtn = new JButton("הקודם>");
-	private JButton schedBtn = new JButton("בנה מערכת");
-	private JButton saveBtn = new JButton("שמור מערכת");
-	private JCheckBox isDaysOff;
-	private JCheckBox isMinWindows;
+	private final JButton cleanTble = new JButton("נקה מערכת");
+	private final JButton nextBtn = new JButton("<הבא");
+	private final JButton prevBtn = new JButton("הקודם>");
+	private final JButton schedBtn = new JButton("בנה מערכת");
+	private final JButton saveBtn = new JButton("שמור מערכת");
+	private final JCheckBox isDaysOff;
+	private final JCheckBox isMinWindows;
 	JTextField schedIndex;
 	
-	private DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
-	private DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer bottomCenterRenderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	
 	JComboBox<String> startTimeComBoxHours;
 	JComboBox<String> startTimeComBoxMins;
@@ -86,21 +86,21 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	    table = new MultiSpanCellTable(null);
 	    resetTable();
 		
-		JScrollPane scroll = new JScrollPane(table);
+		final JScrollPane scroll = new JScrollPane(table);
 		scroll.setMinimumSize(new Dimension(500, 350));
 		
 
 		//arrange all the components in the pannel using GridBagLayout
-		GridBagConstraints c = new GridBagConstraints();
+		final GridBagConstraints c = new GridBagConstraints();
 		c.gridy=c.gridx = 0;
 		c.weightx = c.weighty = 1.0;
 		c.fill = GridBagConstraints.BOTH;
 		
 		add(scroll,c);
 		
-		JPanel otherComponentsPanel=new JPanel();
+		final JPanel otherComponentsPanel=new JPanel();
 		otherComponentsPanel.setLayout(new GridLayout(5,1,3,3));
-		JPanel nextprevPannel =new JPanel();
+		final JPanel nextprevPannel =new JPanel();
 		nextprevPannel.setLayout(new GridLayout(1,7,3,3));
 
 		nextprevPannel.add(schedIndex);
@@ -113,9 +113,9 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		otherComponentsPanel.add(nextprevPannel);
 		
-		JPanel preferences = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		final JPanel preferences = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		
-		JLabel textField = new JLabel("בחר/י את ההעדפות לבניית המערכת:");
+		final JLabel textField = new JLabel("בחר/י את ההעדפות לבניית המערכת:");
 		textField.setFont(new Font("Dialog", Font.BOLD, 24));
 		textField.setBackground(UIManager.getColor("Button.background"));
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -129,7 +129,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		isMinWindows.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
 		
-		JPanel startTimePanel=new JPanel();
+		final JPanel startTimePanel=new JPanel();
 		startTimePanel.setLayout(new GridLayout(1,2));
 		
 		startTime = new JPanel(new GridLayout(1,2));
@@ -148,7 +148,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 
 		
-		JPanel endTimePannel=new JPanel();
+		final JPanel endTimePannel=new JPanel();
 		endTimePannel.setLayout(new GridLayout(1,2));
 		
 		endTime = new JPanel(new GridLayout(1,2));
@@ -171,10 +171,10 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		preferences.add(isDaysOff);
 		
 		otherComponentsPanel.add(preferences);
-		JPanel space = new JPanel();
+		final JPanel space = new JPanel();
 		otherComponentsPanel.add(space);
 		
-		JPanel panelSchedButton =new JPanel();
+		final JPanel panelSchedButton =new JPanel();
 		panelSchedButton.setLayout(new FlowLayout());
 		panelSchedButton.add(saveBtn);
 		panelSchedButton.add(schedBtn);
@@ -192,23 +192,16 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	//setting events and actions
 	public void setEvents(){
 		
-		startTimeChkBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				startTimeComBoxHours.setEnabled(startTimeChkBox.isSelected());
-				startTimeComBoxMins.setEnabled(startTimeChkBox.isSelected());
-				
-			}
+		startTimeChkBox.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			startTimeComBoxHours.setEnabled(startTimeChkBox.isSelected());
+			startTimeComBoxMins.setEnabled(startTimeChkBox.isSelected());
+			
 		});
 		
-		endTimeChkBox.addActionListener(new ActionListener() {
+		endTimeChkBox.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			endTimeComBoxHours.setEnabled(endTimeChkBox.isSelected());
+			endTimeComBoxMins.setEnabled(endTimeChkBox.isSelected());
 			
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				endTimeComBoxHours.setEnabled(endTimeChkBox.isSelected());
-				endTimeComBoxMins.setEnabled(endTimeChkBox.isSelected());
-				
-			}
 		});
 		
 		
@@ -216,7 +209,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		//next button has been pressed -> ask for the next schedule
 		nextBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
 					listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_NEXT_GENERATED_SCHED)));
@@ -226,7 +219,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		//prev button has been pressed -> ask for the previous schedule
 		prevBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
 					listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_PREV_GENERATED_SCHED)));
@@ -236,7 +229,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		//schedBtn button has been pressed -> ask for a schedule (list of lessonGroup)
 		schedBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				scheduleWasRequested = true;
 				schedIndex.setVisible(true);
 				listeners.forEach(x -> x.actionPerformed(
@@ -246,23 +239,19 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 		
 		saveBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
 					listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.SAVE_SCHED)));
 			}
 		});
 		
-		cleanTble.addActionListener(new ActionListener() {
+		cleanTble.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			scheduleWasRequested = false;
+			schedIndex.setVisible(false);
+			resetTable();
 			
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				scheduleWasRequested = false;
-				schedIndex.setVisible(false);
-				resetTable();
-				
-				
-			}
+			
 		});
 	}
 	//-------------------------------------------------------------------------------------------------
@@ -270,12 +259,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	//connection with model and controller
 	
 	@Override
-	public void addActionListener(ActionListener ¢) {
+	public void addActionListener(final ActionListener ¢) {
 		listeners.add(¢);
 	}
 
 	@Override
-	public void removeActionListener(ActionListener ¢) {
+	public void removeActionListener(final ActionListener ¢) {
 		listeners.remove(¢);
 	}
 
@@ -305,7 +294,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 
 		case TimeTableProperty.SCHEDULE:
@@ -332,19 +321,19 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 	
 	
 	//this function receives a list of LessonGroup(which is a schedule) and displays the schedule in the GUI 
-	public void displaySchedule(List<LessonGroup> schedule) {
+	public void displaySchedule(final List<LessonGroup> schedule) {
 		resetTable();
 		final ColoredCell cellColor =(ColoredCell)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		final CellSpan cellAtt =(CellSpan)((AttributiveCellTableModel)table.getModel()).getCellAttribute();
 		
-		int[] columns = new int[1];
+		final int[] columns = new int[1];
 		int[] rows;
-		for(LessonGroup lg : schedule)
-			for (Lesson l : lg.getLessons()) {
+		for(final LessonGroup lg : schedule)
+			for (final Lesson l : lg.getLessons()) {
 				columns[0] = table.getColumnCount() - l.getStartTime().getDay().getValue() % 7 - 2;
-				int startRow = 2 * (l.getStartTime().getTime().getHour() - 7)
+				final int startRow = 2 * (l.getStartTime().getTime().getHour() - 7)
 						- (l.getStartTime().getTime().getMinute() > 0 ? -1 : 0 );
-				int endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
+				final int endRow = 2 * (l.getEndTime().getTime().getHour() - 7)
 						- (l.getEndTime().getTime().getMinute() > 0 ? 0 : 1);
 				rows = new int[endRow - startRow + 1];
 				for (int ¢ = 0; ¢ < rows.length; ++¢)
@@ -352,12 +341,12 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 				cellAtt.combine(rows, columns);
 				cellColor.setBackground(Color.lightGray, rows[0],columns[0]);
 				
-				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+				final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 				table.getColumnModel().getColumn(columns[0]).setCellRenderer(centerRenderer);
 				table.setValueAt(
-						((l.getPlace() == "" || l.getPlace() == null) ? l.getCourseName()
-								: l.getCourseName() + " ב" + l.getPlace() + " " + l.getRoomNumber()),
+						l.getPlace() == "" || l.getPlace() == null ? l.getCourseName()
+								: l.getCourseName() + " ב" + l.getPlace() + " " + l.getRoomNumber(),
 						rows[0], columns[0]);
 				
 			}
@@ -407,7 +396,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			){
 				//we want to cells to be non-editable
 				    @Override
-				    public boolean isCellEditable(@SuppressWarnings("unused") int row, @SuppressWarnings("unused") int column) {
+				    public boolean isCellEditable(@SuppressWarnings("unused") final int row, @SuppressWarnings("unused") final int column) {
 				       return false;
 				    }	
 		});

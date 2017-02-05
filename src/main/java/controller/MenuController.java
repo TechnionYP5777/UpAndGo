@@ -16,20 +16,20 @@ public class MenuController implements Controller {
 	MenuModel model;
 	MenuView view;
 	
-	public MenuController(MenuModel m, MenuView v,
-			CourseListController clc, TimeTableController ttc) {
-		this.model = m;
-		this.view = v;
-		this.clCtrl = clc;
-		this.ttCtrl = ttc;
+	public MenuController(final MenuModel m, final MenuView v,
+			final CourseListController clc, final TimeTableController ttc) {
+		model = m;
+		view = v;
+		clCtrl = clc;
+		ttCtrl = ttc;
 		
-		this.view.addActionListener(this);
+		view.addActionListener(this);
 		
 		init();
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ¢) {
+	public void actionPerformed(final ActionEvent ¢) {
 		if (¢.getActionCommand().equals(MenuCommand.LOAD_CATALOG))
 			clCtrl.loadCatalogFrom(view.getCatalogPath());
 		else if (¢.getActionCommand().equals(MenuCommand.LOAD_GILAYON))
@@ -46,13 +46,13 @@ public class MenuController implements Controller {
 	}
 
 	@Override
-	public void registerListenerToProperty(PropertyChangeListener l, String p) {
+	public void registerListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.addPropertyChangeListener(p, l);
 		
 	}
 
 	@Override
-	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
+	public void unregisterListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.removePropertyChangeListener(p, l);
 		
 	}

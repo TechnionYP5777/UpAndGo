@@ -38,10 +38,10 @@ CourseLoader cr;
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -55,13 +55,13 @@ CourseLoader cr;
 	public void test_a2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
 		//List<Timetable> tl = Scheduler.getTimetablesList(courses);
 		//System.out.println(tl.size());
-		Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
 		
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
@@ -74,10 +74,10 @@ CourseLoader cr;
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -89,10 +89,10 @@ CourseLoader cr;
 	public void test_b2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
 		
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(12, 00)));
@@ -103,10 +103,10 @@ CourseLoader cr;
 	public void test_c() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 00)));
@@ -118,10 +118,10 @@ CourseLoader cr;
 	public void test_c2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
 		
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 00)));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(12, 00)));
@@ -132,10 +132,10 @@ CourseLoader cr;
 	public void test_d() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
 		assertNull(s);
@@ -145,7 +145,7 @@ CourseLoader cr;
 	public void test_d2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		assert Scheduler.getTimetablesList(courses).isEmpty();
@@ -157,10 +157,10 @@ CourseLoader cr;
 	public void test_e() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println(s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -175,10 +175,10 @@ CourseLoader cr;
 	public void test_e2() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
 		
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(13, 00)));
@@ -192,7 +192,7 @@ CourseLoader cr;
 	public void test_scheduleTimetable1() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		

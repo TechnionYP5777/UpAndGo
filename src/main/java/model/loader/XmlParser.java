@@ -19,29 +19,29 @@ import model.course.Course;
 @Deprecated
 class xmlParser {
 	public static List<Course> getCourses() {
-		Course.CourseBuilder cb = new Course.CourseBuilder();
-		List<Course> $ = new LinkedList<>();
+		final Course.CourseBuilder cb = new Course.CourseBuilder();
+		final List<Course> $ = new LinkedList<>();
 		// resList.add
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse("REPFILE/REP.XML");
-			NodeList coursesList = doc.getElementsByTagName("Course");
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			final Document doc = builder.parse("REPFILE/REP.XML");
+			final NodeList coursesList = doc.getElementsByTagName("Course");
 			
 			for (int i = 0; i < coursesList.getLength(); ++i) {
-				Node p = coursesList.item(i);
+				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					$.add(cb.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
 
-		} catch (ParserConfigurationException e) {
+		} catch (final ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

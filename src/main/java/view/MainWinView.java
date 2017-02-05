@@ -23,13 +23,12 @@ import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
 
 import model.CourseModel;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ScrollPaneConstants;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -71,12 +70,12 @@ public class MainWinView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWinView(CourseModel m) {
+	public MainWinView(final CourseModel m) {
 		setSize(new Dimension(500, 300));
 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (Throwable ¢) {
+		} catch (final Throwable ¢) {
 			¢.printStackTrace();
 		}
 		this.m = m;
@@ -86,7 +85,7 @@ public class MainWinView extends JFrame {
 	}
 
 	void close() {
-		this.dispose();
+		dispose();
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -126,15 +125,15 @@ public class MainWinView extends JFrame {
 		courseModel = new DefaultListModel<>();
 		ChosenCourseModel = new DefaultListModel<>();
 
-		for (String val : m.getCoursesNames())
+		for (final String val : m.getCoursesNames())
 			courseModel.addElement(val);
-		for (String val : m.getChosenCourseNames()) {
+		for (final String val : m.getChosenCourseNames()) {
 			courseModel.removeElement(val);
 			ChosenCourseModel.addElement(val);
 		}
 	}
 
-	private static void setTitleLbl(JLabel lblTitle) {
+	private static void setTitleLbl(final JLabel lblTitle) {
 		lblTitle.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setForeground(new Color(0, 102, 255));
@@ -160,7 +159,7 @@ public class MainWinView extends JFrame {
 
 	}
 
-	private static void setCourseListArea(JScrollPane scpCourseList) {
+	private static void setCourseListArea(final JScrollPane scpCourseList) {
 		lstCourseList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scpCourseList.setPreferredSize(new Dimension(70, 22));
 		scpCourseList.setMinimumSize(new Dimension(70, 22));
@@ -170,7 +169,7 @@ public class MainWinView extends JFrame {
 		scpCourseList.setViewportView(lstCourseList);
 	}
 
-	private static void setCourseDescriptionArea(JScrollPane scpCourseDescription) {
+	private static void setCourseDescriptionArea(final JScrollPane scpCourseDescription) {
 		txtCourseDescription = new JTextArea();
 		txtCourseDescription.setDisabledTextColor(Color.GRAY);
 		txtCourseDescription.setSelectedTextColor(Color.BLUE);
@@ -193,7 +192,7 @@ public class MainWinView extends JFrame {
 		txtCourseDescription.setVisible(false);
 	}
 
-	private static void setChosenCoursesArea(JScrollPane scpChosenCourses) {
+	private static void setChosenCoursesArea(final JScrollPane scpChosenCourses) {
 		lstChosenCourses = new JList<>(ChosenCourseModel);
 		scpChosenCourses.setPreferredSize(new Dimension(70, 22));
 		scpChosenCourses.setMinimumSize(new Dimension(70, 22));
@@ -229,10 +228,10 @@ public class MainWinView extends JFrame {
 		courseNum.setColumns(10);
 	}
 
-	private void setGroupLayout(JLabel lblTitle, JScrollPane scpCourseDescription, JScrollPane scpCourseList,
-			JScrollPane scpChosenCourses) {
+	private void setGroupLayout(final JLabel lblTitle, final JScrollPane scpCourseDescription, final JScrollPane scpCourseList,
+			final JScrollPane scpChosenCourses) {
 
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		final GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
 				.createSequentialGroup()
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -288,105 +287,80 @@ public class MainWinView extends JFrame {
 	///////////////////////////////////////////////////////////////////////////
 	private void createEvents() {
 
-		lstCourseList.addListSelectionListener(new ListSelectionListener() {
+		lstCourseList.addListSelectionListener((@SuppressWarnings("unused") final ListSelectionEvent __) -> {
+			txtCourseDescription.setDisabledTextColor(Color.BLUE);
+			setListColor(lstCourseList, m);
+			txtCourseDescription.setVisible(true);
+			btnAddCourse.setVisible(true);
+			btnAddCourse.setEnabled(true);
 
-			@Override
-			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
-				txtCourseDescription.setDisabledTextColor(Color.BLUE);
-				setListColor(lstCourseList, m);
-				txtCourseDescription.setVisible(true);
-				btnAddCourse.setVisible(true);
-				btnAddCourse.setEnabled(true);
-
-			}
 		});
 
-		lstChosenCourses.addListSelectionListener(new ListSelectionListener() {
+		lstChosenCourses.addListSelectionListener((@SuppressWarnings("unused") final ListSelectionEvent __) -> {
+			txtCourseDescription.setDisabledTextColor(new Color(0, 204, 51));
+			setListColor(lstChosenCourses, m);
+			txtCourseDescription.setVisible(true);
+			btnAddCourse.setVisible(true);
+			btnAddCourse.setEnabled(true);
 
-			@Override
-			public void valueChanged(@SuppressWarnings("unused") ListSelectionEvent __) {
-				txtCourseDescription.setDisabledTextColor(new Color(0, 204, 51));
-				setListColor(lstChosenCourses, m);
-				txtCourseDescription.setVisible(true);
-				btnAddCourse.setVisible(true);
-				btnAddCourse.setEnabled(true);
-
-			}
 		});
 
-		btnAddCourse.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				if (lstCourseList.getSelectedValue() == null)
-					return;
-				ChosenCourseModel.addElement(lstCourseList.getSelectedValue());
-				courseModel.remove(lstCourseList.getSelectedIndex());
-				lstChosenCourses.setVisible(true);
-				btnFinish.setVisible(true);
-				btnRemoveCourse.setVisible(true);
-				btnRemoveCourse.setEnabled(true);
-				if (!courseModel.isEmpty())
-					return;
-				txtCourseDescription.setText(NO_COURSES_LEFT);
+		btnAddCourse.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			if (lstCourseList.getSelectedValue() == null)
+				return;
+			ChosenCourseModel.addElement(lstCourseList.getSelectedValue());
+			courseModel.remove(lstCourseList.getSelectedIndex());
+			lstChosenCourses.setVisible(true);
+			btnFinish.setVisible(true);
+			btnRemoveCourse.setVisible(true);
+			btnRemoveCourse.setEnabled(true);
+			if (!courseModel.isEmpty())
+				return;
+			txtCourseDescription.setText(NO_COURSES_LEFT);
+			btnAddCourse.setEnabled(false);
+		});
+		btnRemoveCourse.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			if (lstChosenCourses.getSelectedValue() == null)
+				return;
+			if (courseModel.isEmpty()) {
+				txtCourseDescription.setText(EMPTY_DESCRIPTION);
 				btnAddCourse.setEnabled(false);
 			}
+			courseModel.addElement(lstChosenCourses.getSelectedValue());
+			ChosenCourseModel.removeElement(lstChosenCourses.getSelectedValue());
+
+			if (ChosenCourseModel.isEmpty())
+				btnRemoveCourse.setEnabled(false);
 		});
-		btnRemoveCourse.addActionListener(new ActionListener() {
+		btnFinish.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			final List<String> names = new ArrayList<String>() {
+				@SuppressWarnings("hiding")
+				static final long serialVersionUID = 1L;
+			};
+			for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
+				names.add(lstChosenCourses.getModel().getElementAt(¢));
+			m.saveChosenCourses(names);
+			Message.infoBox(FINISH_MSG, "Finish", new ImageIcon("resources/cat-laptop-icon.png"));
+			close();
 
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				if (lstChosenCourses.getSelectedValue() == null)
-					return;
-				if (courseModel.isEmpty()) {
-					txtCourseDescription.setText(EMPTY_DESCRIPTION);
-					btnAddCourse.setEnabled(false);
-				}
-				courseModel.addElement(lstChosenCourses.getSelectedValue());
-				ChosenCourseModel.removeElement(lstChosenCourses.getSelectedValue());
-
-				if (ChosenCourseModel.isEmpty())
-					btnRemoveCourse.setEnabled(false);
-			}
-		});
-		btnFinish.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				List<String> names = new ArrayList<String>() {
-					@SuppressWarnings("hiding")
-					static final long serialVersionUID = 1L;
-				};
-				for (int ¢ = 0; ¢ < lstChosenCourses.getModel().getSize(); ++¢)
-					names.add(lstChosenCourses.getModel().getElementAt(¢));
-				m.saveChosenCourses(names);
-				Message.infoBox(FINISH_MSG, "Finish", new ImageIcon("resources/cat-laptop-icon.png"));
-				close();
-
-			}
 		});
 		courseNum.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
+			public void mousePressed(@SuppressWarnings("unused") final MouseEvent __) {
 				courseNum.setText("");
 			}
 		});
-		courseNum.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				lstCourseList.setSelectedValue(courseNum.getText(), true);
-			}
-		});
+		courseNum.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> lstCourseList.setSelectedValue(courseNum.getText(), true));
 		courseNum.addFocusListener(new FocusAdapter() {
 			@Override
-			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+			public void focusLost(@SuppressWarnings("unused") final FocusEvent __) {
 				courseNum.setText(DEFAULT_COURSE_NUM_TEXT);
 			}
 		});
 
 	}
 
-	static void setListColor(JList<String> lst, CourseModel m) {
+	static void setListColor(final JList<String> lst, final CourseModel m) {
 
 		if (lst.getSelectedIndex() != -1)
 			txtCourseDescription.setText(
@@ -400,7 +374,7 @@ public class MainWinView extends JFrame {
 
 	public static class Message {
 
-		public static void infoBox(String infoMessage, String titleBar, ImageIcon i) {
+		public static void infoBox(final String infoMessage, final String titleBar, final ImageIcon i) {
 
 			JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE, i);
 

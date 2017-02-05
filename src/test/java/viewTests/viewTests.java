@@ -20,24 +20,24 @@ public class viewTests {
 	}
 
 	public static void design() {
-		JFrame f = new JFrame();
+		final JFrame f = new JFrame();
 		f.setMinimumSize(new Dimension(280, 500));
 		f.setSize(280, 500);
 		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setVisible(true);
-		AvailableCourses  avl= new AvailableCourses();
+		final AvailableCourses  avl= new AvailableCourses();
 		cntr= new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/REP.XML")), avl);
 		f.getContentPane().add(avl);
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@SuppressWarnings("unused")
 			@Override
 			public void run() {
 				try {
 					new viewTests();
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 

@@ -42,143 +42,143 @@ public class Course {
 	
 	// TODO: create interface LessonGroup as mediator between Lessons and Course
 
-	public Course(String name1, String id1, String faculty1, List<StuffMember> st, double acPoints, LocalDateTime aT,
-			LocalDateTime bT, List<Course> prerequisitesList, List<Course> corequisitesList) {
+	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st, final double acPoints, final LocalDateTime aT,
+			final LocalDateTime bT, final List<Course> prerequisitesList, final List<Course> corequisitesList) {
 
-		if ((name1 == null) || (faculty1 == null))
+		if (name1 == null || faculty1 == null)
 			throw new NullPointerException();
 		/*if (name1.isEmpty())
 			throw new RuntimeException("The empty field was found!\n"); //$NON-NLS-1$*/
 
-		this.name = name1;
-		this.id = id1;
-		this.faculty = faculty1;
-		this.points = acPoints;
-		this.aTerm = aT;
-		this.bTerm = bT;
+		name = name1;
+		id = id1;
+		faculty = faculty1;
+		points = acPoints;
+		aTerm = aT;
+		bTerm = bT;
 
-		this.stuff = new ArrayList<>(st);
+		stuff = new ArrayList<>(st);
 				
-		this.lectures = new ArrayList<>();
-		this.tutorials = new ArrayList<>();
+		lectures = new ArrayList<>();
+		tutorials = new ArrayList<>();
 		
-		this.listeners = new ArrayList<>();
+		listeners = new ArrayList<>();
 
-		this.projectHours = this.laboratoryHours = this.tutorialHours = this.lectureHours = 0;
+		projectHours = laboratoryHours = tutorialHours = lectureHours = 0;
 
-		this.prerequisites = new ArrayList<>(prerequisitesList);
-		this.corequisites = new ArrayList<>(corequisitesList);
-		this.done = false;
-		this.passThisSemester = true;
+		prerequisites = new ArrayList<>(prerequisitesList);
+		corequisites = new ArrayList<>(corequisitesList);
+		done = false;
+		passThisSemester = true;
 
 	}
 
-	protected void addLecturesLessonGroup(LessonGroup ¢) {
-		this.lectures.add(¢);
+	protected void addLecturesLessonGroup(final LessonGroup ¢) {
+		lectures.add(¢);
 	}
 	
-	protected void addTutorialLessonGroup(LessonGroup ¢) {
-		this.tutorials.add(¢);
+	protected void addTutorialLessonGroup(final LessonGroup ¢) {
+		tutorials.add(¢);
 	}
 	
 	public List<LessonGroup> getLectures(){
-		return this.lectures;
+		return lectures;
 	}
 	
 	public List<LessonGroup> getTutorials(){
-		return this.tutorials;
+		return tutorials;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public String getId() {
-		return this.id;
+		return id;
 	}
 
 	public String getFaculty() {
-		return this.faculty;
+		return faculty;
 	}
 
 	public double getPoints() {
-		return this.points;
+		return points;
 	}
 
 	public LocalDateTime getaTerm() {
-		return this.aTerm;
+		return aTerm;
 	}
 
 	public LocalDateTime getbTerm() {
-		return this.bTerm;
+		return bTerm;
 	}
 
 	public List<StuffMember> getStuff() {
-		return new ArrayList<>(this.stuff);
+		return new ArrayList<>(stuff);
 	}
 	
 	public List<LessonGroup> getLecturesLG() {
-		return new ArrayList<>(this.lectures);
+		return new ArrayList<>(lectures);
 	}
 	
 	public List<LessonGroup> getTutorialsLG() {
-		return new ArrayList<>(this.tutorials);
+		return new ArrayList<>(tutorials);
 	}
 	
 	public int getLectureHours() {
-		return this.lectureHours;
+		return lectureHours;
 	}
 
 	public int getTutorialHours() {
-		return this.tutorialHours;
+		return tutorialHours;
 	}
 
 	public int getLaboratoryHours() {
-		return this.laboratoryHours;
+		return laboratoryHours;
 	}
 
 	public int getProjectHours() {
-		return this.projectHours;
+		return projectHours;
 	}
 
 	public int getTotalHours() {
-		return this.laboratoryHours + this.lectureHours + this.projectHours + this.tutorialHours;
+		return laboratoryHours + lectureHours + projectHours + tutorialHours;
 	}
 
-	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") CourseLoader ¢) {
+	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") final CourseLoader ¢) {
 		return new CourseBuilder();
 	}
 
-	public void addListener(CourseListener ¢) {
-		this.listeners.add(¢);
+	public void addListener(final CourseListener ¢) {
+		listeners.add(¢);
 	}
 
-	public void removeListener(CourseListener ¢) {
-		this.listeners.remove(¢);
+	public void removeListener(final CourseListener ¢) {
+		listeners.remove(¢);
 	}
 
 	public void updateListeners() {
-		for (CourseListener ¢ : this.listeners)
+		for (final CourseListener ¢ : listeners)
 			¢.getUpdate(this);
 	}
 	
 	public boolean getDone() {
-		return this.done;
+		return done;
 	}
 	public void MarkDone() {
-		this.done = true;
+		done = true;
 	}
 	public boolean isPassThisSemester() {
-		return this.passThisSemester;
+		return passThisSemester;
 	}
 	public void markAsNotPass() {
-		this.passThisSemester = false;
+		passThisSemester = false;
 	}
 	public List<Course> getPrerequisites() {
-		return this.prerequisites;
+		return prerequisites;
 	}
 	public List<Course> getCorequisites() {
-		return this.corequisites;
+		return corequisites;
 	}
 	@Override
 	public String toString(){
@@ -203,118 +203,118 @@ public class Course {
 		protected final List<Course> prerequisites = new ArrayList<>();
 		protected final List<Course> corequisites = new ArrayList<>();
 
-		public CourseBuilder setName(String ¢) {
-			this.name = ¢;
+		public CourseBuilder setName(final String ¢) {
+			name = ¢;
 			return this;
 		}
 
-		public CourseBuilder setId(String ¢) {
-			this.id = ¢;
+		public CourseBuilder setId(final String ¢) {
+			id = ¢;
 			return this;
 		}
 
-		public CourseBuilder setFaculty(String ¢) {
-			this.faculty = ¢;
+		public CourseBuilder setFaculty(final String ¢) {
+			faculty = ¢;
 			return this;
 		}
 
-		public CourseBuilder setPoints(double ¢) {
-			this.points = ¢;
+		public CourseBuilder setPoints(final double ¢) {
+			points = ¢;
 			return this;
 		}
 
-		public CourseBuilder setATerm(LocalDateTime ¢) {
-			this.aTerm = ¢;
+		public CourseBuilder setATerm(final LocalDateTime ¢) {
+			aTerm = ¢;
 			return this;
 		}
 
-		public CourseBuilder setBTerm(LocalDateTime ¢) {
-			this.bTerm = ¢;
+		public CourseBuilder setBTerm(final LocalDateTime ¢) {
+			bTerm = ¢;
 			return this;
 		}
 		
-		public CourseBuilder addLectureGroup(int ¢) {
-			for (LessonGroup i : this.lectures)
+		public CourseBuilder addLectureGroup(final int ¢) {
+			for (final LessonGroup i : lectures)
 				if (i.getGroupNum() == ¢)
 					return this;
-			this.lectures.add(new LessonGroup(¢));
+			lectures.add(new LessonGroup(¢));
 			return this;
 		}
 		
-		public CourseBuilder addTutorialGroup(int ¢) {
-			for (LessonGroup i : this.tutorials)
+		public CourseBuilder addTutorialGroup(final int ¢) {
+			for (final LessonGroup i : tutorials)
 				if (i.getGroupNum() == ¢)
 					return this;
-			this.tutorials.add(new LessonGroup(¢));
+			tutorials.add(new LessonGroup(¢));
 			return this;
 		}
 		
-		public CourseBuilder addLessonToGroup(int ¢, Lesson l) {
+		public CourseBuilder addLessonToGroup(final int ¢, final Lesson l) {
 			if (l.getType() == Lesson.Type.LECTURE) {
-				for (LessonGroup i : this.lectures)
-					if ((i.getGroupNum() == ¢) && (!i.getLessons().contains(l))) {
+				for (final LessonGroup i : lectures)
+					if (i.getGroupNum() == ¢ && !i.getLessons().contains(l)) {
 						i.addLesson(l);
 						return this;
 					}
 				return this;
 			}
-			for (LessonGroup i : this.tutorials)
-				if ((i.getGroupNum() == ¢) && (!i.getLessons().contains(l))) {
+			for (final LessonGroup i : tutorials)
+				if (i.getGroupNum() == ¢ && !i.getLessons().contains(l)) {
 					i.addLesson(l);
 					return this;
 				}
 			return this;
 		}
 
-		public CourseBuilder addStuffMember(StuffMember ¢) {
-			if (!this.stuff.contains(¢))
-				this.stuff.add(¢);
+		public CourseBuilder addStuffMember(final StuffMember ¢) {
+			if (!stuff.contains(¢))
+				stuff.add(¢);
 			return this;
 		}
 		
 		public void clearStaffMembers() {
-			this.stuff.clear();
+			stuff.clear();
 		}
 		
 		public void clearlecturesGroups() {
-			this.lectures.clear();
+			lectures.clear();
 		}
 		
 		public void cleartutorialGroup() {
-			this.tutorials.clear();
+			tutorials.clear();
 		}
 		
 		public List<StuffMember> getStaffList() {
-			return this.stuff;
+			return stuff;
 		}
 		
 		
 		
-		public CourseBuilder addLesson(Lesson ¢) {
-			this.lessons.add(¢);
-			if (!this.stuff.contains(¢.representer))
-				this.stuff.add(¢.representer);
+		public CourseBuilder addLesson(final Lesson ¢) {
+			lessons.add(¢);
+			if (!stuff.contains(¢.representer))
+				stuff.add(¢.representer);
 			return this;
 		}
 		
-		public CourseBuilder addPrerequisitesCourse(Course ¢) {
-			if (!this.prerequisites.contains(¢))
-				this.prerequisites.add(¢);
+		public CourseBuilder addPrerequisitesCourse(final Course ¢) {
+			if (!prerequisites.contains(¢))
+				prerequisites.add(¢);
 			return this;
 		}
 		
-		public CourseBuilder addCorequisitesCourse(Course ¢) {
-			if (!this.corequisites.contains(¢))
-				this.corequisites.add(¢);
+		public CourseBuilder addCorequisitesCourse(final Course ¢) {
+			if (!corequisites.contains(¢))
+				corequisites.add(¢);
 			return this;
 		}
 		
 		public Course build() {
-			Course $ = new Course(this.name, this.id, this.faculty, this.stuff, this.points, this.aTerm, this.bTerm,
-					this.prerequisites, this.corequisites);
-			for (LessonGroup ¢ : this.lectures)
+			final Course $ = new Course(name, id, faculty, stuff, points, aTerm, bTerm,
+					prerequisites, corequisites);
+			for (final LessonGroup ¢ : lectures)
 				$.addLecturesLessonGroup(¢);
-			for (LessonGroup ¢ : this.tutorials)
+			for (final LessonGroup ¢ : tutorials)
 				$.addTutorialLessonGroup(¢);
 			return $;
 		}

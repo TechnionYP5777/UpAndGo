@@ -59,13 +59,13 @@ CourseLoader cr;
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
-		for (Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
+		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
 				.hasNext();) {
-			Timetable currentTable = it.next();
+			final Timetable currentTable = it.next();
 			System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
 			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
 			System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.of(10, 00)));
@@ -78,10 +78,10 @@ CourseLoader cr;
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		List<Timetable> tablesList = Scheduler.getTimetablesList(courses);
+		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses);
 		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.of(10, 00), null);
 		Timetable currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 4;

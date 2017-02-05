@@ -11,12 +11,12 @@ import org.jsoup.nodes.Document;
 
 public class Scraper {
 	
-	public static Document getDocumentFromURL(URL ¢) throws IOException{
+	public static Document getDocumentFromURL(final URL ¢) throws IOException{
 		return Jsoup.parse(¢, 15000);
 		//return Jsoup.connect((¢ + "")).timeout(15000).get();
 	}
 	
-	public static Document getSearchResults(String ¢, Map<String,String> dataMap) throws IOException{
+	public static Document getSearchResults(final String ¢, final Map<String,String> dataMap) throws IOException{
 
 
 		return Jsoup.connect(¢).userAgent("Mozilla/5.0").timeout(15000).data(dataMap).post();

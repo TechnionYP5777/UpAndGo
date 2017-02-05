@@ -16,8 +16,8 @@ public abstract class CourseLoader {
 	protected final Course.CourseBuilder cb;
 	protected final String path;
 	
-	public CourseLoader(String path) {
-		this.cb = Course.giveCourseBuilderTo(this);
+	public CourseLoader(final String path) {
+		cb = Course.giveCourseBuilderTo(this);
 		this.path = path;
 	}
 	

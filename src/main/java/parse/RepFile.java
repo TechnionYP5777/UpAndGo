@@ -52,14 +52,14 @@ public class RepFile {
 
 	public static void downloadData(){
 		try {
-			URL repFileUrl = new URL(REP_FILE_URL);
-			File repFileLocal = new File(REP_FILE_ZIP);
+			final URL repFileUrl = new URL(REP_FILE_URL);
+			final File repFileLocal = new File(REP_FILE_ZIP);
 			FileUtils.copyURLToFile(repFileUrl, repFileLocal);
 			if(repFileLocal.exists() && !repFileLocal.isDirectory())
-				UnzipUtility.unzip((repFileLocal + ""), REP_FILE_DIR);
-		} catch (MalformedURLException e1) {
+				UnzipUtility.unzip(repFileLocal + "", REP_FILE_DIR);
+		} catch (final MalformedURLException e1) {
 			e1.printStackTrace();
-		} catch (IOException ¢) {
+		} catch (final IOException ¢) {
 			¢.printStackTrace();
 		}
 		processRepFile();
@@ -67,9 +67,9 @@ public class RepFile {
 
 	
 	public static void printRepFile(){
-		Charset ibm862charset = Charset.forName("IBM862");
+		final Charset ibm862charset = Charset.forName("IBM862");
 
-		File repy = new File(REP_FILE_DOS);
+		final File repy = new File(REP_FILE_DOS);
 		if (repy.exists())
 			try (FileInputStream fis = new FileInputStream(repy);
 					InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
@@ -77,16 +77,16 @@ public class RepFile {
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
 					System.out.println(line);
 				buffReader.close();
-			} catch (IOException ¢) {
+			} catch (final IOException ¢) {
 				¢.printStackTrace();
 			} 
 	}
 	
 	public static void processRepFile(){
-		Charset ibm862charset = Charset.forName("IBM862");
+		final Charset ibm862charset = Charset.forName("IBM862");
 
-		File repyIn = new File(REP_FILE_DOS);
-		File repyOut = new File(REP_FILE_HEBREW);
+		final File repyIn = new File(REP_FILE_DOS);
+		final File repyOut = new File(REP_FILE_HEBREW);
 		if (repyIn.exists())
 			try (FileInputStream fis = new FileInputStream(repyIn);
 					InputStreamReader reader = new InputStreamReader(fis, ibm862charset);
@@ -99,34 +99,34 @@ public class RepFile {
 					buffWriter.write(HebReverse.reverseTextNotNumbers(line) + "\n");
 				buffReader.close();
 				buffWriter.close();
-			} catch (IOException ¢) {
+			} catch (final IOException ¢) {
 				¢.printStackTrace();
 			} 
 	}
 	
 
 	public static void getCoursesNamesAndIds(){
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-			Document doc = factory.newDocumentBuilder().newDocument();
-			Element rootElement = doc.createElement("Courses");
+			final Document doc = factory.newDocumentBuilder().newDocument();
+			final Element rootElement = doc.createElement("Courses");
 			doc.appendChild(rootElement);
 			
-			for (Matcher regexMatcher = Pattern
+			for (final Matcher regexMatcher = Pattern
 					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>)", Pattern.MULTILINE)
 					.matcher(getRepFileAsString()); regexMatcher.find();){
 				//System.out.println(regexMatcher.group("CourseID") + " " + regexMatcher.group("CourseName")); 
-				Element course = doc.createElement("Course");
+				final Element course = doc.createElement("Course");
 				course.setAttribute("id", regexMatcher.group("CourseID"));
-				Element courseName = doc.createElement("name");
+				final Element courseName = doc.createElement("name");
 				courseName.appendChild(doc.createTextNode(regexMatcher.group("CourseName")));
 				course.appendChild(courseName);
 				rootElement.appendChild(course);
 			}
 			
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File(REP_FILE_XML))));
+			transformer.transform(new DOMSource(doc), new StreamResult(new File(REP_FILE_XML)));
 
 		} catch (ParserConfigurationException | TransformerException ¢) {
 			¢.printStackTrace();
@@ -138,29 +138,29 @@ public class RepFile {
 
 		
 	public static void getCoursesInfoFromRepFile(){
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			Document doc = factory.newDocumentBuilder().newDocument();
-			Element rootElement = doc.createElement("courses");
+			final Document doc = factory.newDocumentBuilder().newDocument();
+			final Element rootElement = doc.createElement("courses");
 			doc.appendChild(rootElement);
 			
-			for (Matcher facultyMatcher = Pattern
+			for (final Matcher facultyMatcher = Pattern
 					.compile(SEPARATING_DOUBLE_LINE+FACULTY_NAME+SEPARATING_DOUBLE_LINE+FACULTY_COURSES, Pattern.MULTILINE+Pattern.DOTALL)
 					.matcher(getRepFileAsString()); facultyMatcher.find();){
 				System.out.println(facultyMatcher.group("FacultyName"));
-				for (Matcher courseMatcher = Pattern
+				for (final Matcher courseMatcher = Pattern
 						.compile(SEPARATING_LINE+COURSE_SUMMERY+SEPARATING_LINE+COURSE_INFO_AND_LESSONS, Pattern.MULTILINE)
 						.matcher(facultyMatcher.group("FacultyCourses")); courseMatcher.find();){
 					
-					Element course = createCourseElement(doc, courseMatcher.group("CourseSummery"));
+					final Element course = createCourseElement(doc, courseMatcher.group("CourseSummery"));
 					course.setAttribute("faculty", facultyMatcher.group("FacultyName").substring(15, 43).replaceAll("\\s+$", ""));
 					
-					ArrayList<String> courseInfoAndLessons = new ArrayList<>(Arrays.asList(
+					final ArrayList<String> courseInfoAndLessons = new ArrayList<>(Arrays.asList(
 							Pattern.compile("^\\|(רישום\\s+|מס.+|\\s+)\\|\\n", Pattern.MULTILINE)
 							.split(courseMatcher.group("CourseInfoAndLessons"))));
 										
 					
-					String courseInfo = courseInfoAndLessons.get(0);
+					final String courseInfo = courseInfoAndLessons.get(0);
 					courseInfoAndLessons.remove(0);
 					courseInfoAndLessons.removeAll(Arrays.asList("", null));
 					addInfoToCourse(doc, course, courseInfo);
@@ -171,9 +171,9 @@ public class RepFile {
 			}
 
 			
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
-			transformer.transform((new DOMSource(doc)), (new StreamResult(new File("REPFILE/test.XML"))));
+			transformer.transform(new DOMSource(doc), new StreamResult(new File("REPFILE/test.XML")));
 
 
 		} catch (ParserConfigurationException | TransformerException ¢) {
@@ -182,7 +182,7 @@ public class RepFile {
 			
 	}
 	
-	private static boolean isSportCourse(String id){
+	private static boolean isSportCourse(final String id){
 		return "3948".equals(id.substring(0, 4)) || "3949".equals(id.substring(0, 4));
 	}
 	
@@ -193,29 +193,29 @@ public class RepFile {
 
 		String $ = null;
 		try (BufferedReader repFileReader = new BufferedReader(new FileReader(REP_FILE_HEBREW))) {
-			StringBuilder sb = new StringBuilder();
+			final StringBuilder sb = new StringBuilder();
 			for (String line = repFileReader.readLine(); line != null; line = repFileReader.readLine())
 				sb.append(line).append("\n");
 			$ = sb + "";
 			repFileReader.close();
-		} catch (IOException ¢) {
+		} catch (final IOException ¢) {
 			¢.printStackTrace();
 		}
 		return $;
 	}
 	
-	private static Element createCourseElement(Document d, String courseSummery){
-		Element $ = d.createElement("course");
+	private static Element createCourseElement(final Document d, final String courseSummery){
+		final Element $ = d.createElement("course");
 		
-		Matcher courseSummeryMatcher = Pattern
+		final Matcher courseSummeryMatcher = Pattern
 				.compile("^\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>.*?(?=\\s*\\|))", Pattern.MULTILINE)
 				.matcher(courseSummery);
 		if (courseSummeryMatcher.find())
 			$.setAttribute("id", courseSummeryMatcher.group("CourseID"));
 			$.setAttribute("name", courseSummeryMatcher.group("CourseName"));
 
-		String[] courseSummeryLines = courseSummery.split("\\n");
-		if (courseSummeryLines.length == 2){
+		final String[] courseSummeryLines = courseSummery.split("\\n");
+		if (courseSummeryLines.length == 2)
 			if (isSportCourse($.getAttribute("id"))){
 				$.setAttribute("points", courseSummeryLines[1].substring(46, 49));
 				$.setAttribute("hours", courseSummeryLines[1].substring(31, 32));
@@ -231,37 +231,35 @@ public class RepFile {
 					$.setAttribute("hoursProject", courseSummeryLines[1].substring(33, 34));
 			}
 
-		}
-
 		return $;
 	}
 	
-	private static void addInfoToCourse(Document d, Element course, String courseInfo){
+	private static void addInfoToCourse(final Document d, final Element course, final String courseInfo){
 
 		if (isSportCourse(course.getAttribute("id"))){  
 			System.out.println(course.getAttribute("id"));
 			course.setAttribute("faculty", "מקצועות ספורט");
-			for (String infoLine : courseInfo.split("[\\r\\n]+"))
+			for (final String infoLine : courseInfo.split("[\\r\\n]+"))
 				if (infoLine.contains("מורה")) {
-					Element teacherInChargeElement = d.createElement("teacherInCharge");
+					final Element teacherInChargeElement = d.createElement("teacherInCharge");
 					teacherInChargeElement.setAttribute("title", infoLine.substring(22, 26).replaceAll("\\s+$", ""));
 					teacherInChargeElement.setAttribute("name", infoLine.substring(29, 45).replaceAll("\\s+$", ""));
 					course.appendChild(teacherInChargeElement);
 				}
 		} else {
-			Element examsElement = d.createElement("exams");
-			for (String infoLine : courseInfo.split("[\\r\\n]+"))
+			final Element examsElement = d.createElement("exams");
+			for (final String infoLine : courseInfo.split("[\\r\\n]+"))
 				if (infoLine.contains("מורה  אחראי")) {
-					Element teacherInChargeElement = d.createElement("teacherInCharge");
+					final Element teacherInChargeElement = d.createElement("teacherInCharge");
 					teacherInChargeElement.setAttribute("title", infoLine.substring(16, 22).replaceAll("\\s+$", ""));
 					teacherInChargeElement.setAttribute("name", infoLine.substring(23, 40).replaceAll("\\s+$", ""));
 					course.appendChild(teacherInChargeElement);
 				} else if (infoLine.contains("מועד ראשון :")) {
-					Element examElement = d.createElement("moedA");
+					final Element examElement = d.createElement("moedA");
 					addTimeToExam(examElement, infoLine);
 					examsElement.appendChild(examElement);
 				} else if (infoLine.contains("מועד שני   :")) {
-					Element examElement = d.createElement("moedB");
+					final Element examElement = d.createElement("moedB");
 					addTimeToExam(examElement, infoLine);
 					examsElement.appendChild(examElement);
 				}
@@ -271,21 +269,21 @@ public class RepFile {
 
 	}
 	
-	private static void addNotesToCourse(Document d, Element course, String courseInfo){
+	private static void addNotesToCourse(final Document d, final Element course, final String courseInfo){
 
-		int notePoint = isSportCourse(course.getAttribute("id")) ? 9 : 3;
-		LinkedList<String> notes = new LinkedList<>();
-		for (String infoLine : courseInfo.split("[\\r\\n]+"))
+		final int notePoint = isSportCourse(course.getAttribute("id")) ? 9 : 3;
+		final LinkedList<String> notes = new LinkedList<>();
+		for (final String infoLine : courseInfo.split("[\\r\\n]+"))
 			if (".".equals(StringUtils.substring(infoLine, notePoint, notePoint + 1)))
 				notes.add(infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
 			else if (!notes.isEmpty())
 				notes.add(notes.removeLast() + " " + infoLine.substring(notePoint+1).replaceAll("\\s+\\|$", ""));
 		if (notes.isEmpty())
 			return;
-		Element notesElement = d.createElement("notes");
+		final Element notesElement = d.createElement("notes");
 		course.appendChild(notesElement);
-		for (String note : notes) {
-			Element noteElement = d.createElement("note");
+		for (final String note : notes) {
+			final Element noteElement = d.createElement("note");
 			noteElement.appendChild(d.createTextNode(note));
 			notesElement.appendChild(noteElement);
 		}
@@ -294,7 +292,7 @@ public class RepFile {
 
 	}
 	
-	private static void addTimeToExam(Element exam, String infoLine){
+	private static void addTimeToExam(final Element exam, final String infoLine){
 		exam.setAttribute("day", infoLine.substring(22, 24));
 		exam.setAttribute("month", infoLine.substring(25, 27));
 		exam.setAttribute("year", "20" + infoLine.substring(28, 30));
@@ -308,13 +306,13 @@ public class RepFile {
 		UNKNOWN, LECTURE, LECTURER, TUTORIAL, ASSISTANT, LAB, GUIDE, GROUP, MODERATOR
 	}
 	
-	private static void addLessonsToCourse(Document d, Element course, ArrayList<String> courseLessons){
+	private static void addLessonsToCourse(final Document d, final Element course, final ArrayList<String> courseLessons){
 		
 		if (isSportCourse(course.getAttribute("id"))){
 			
-			for (String courseLesson : courseLessons){
+			for (final String courseLesson : courseLessons){
 				Element sportElement = null;
-				for (String lessonLine : courseLesson.split("[\\r\\n]+"))
+				for (final String lessonLine : courseLesson.split("[\\r\\n]+"))
 					if (sportElement != null)
 						sportElement.appendChild(getSportLessonElement(d, lessonLine));
 					else {
@@ -332,12 +330,12 @@ public class RepFile {
 		//System.out.println(course.getAttribute("id"));
 		Element lectureElement = null;
 		Element tutorialsElement = null;
-		for (String courseLesson : courseLessons) {
+		for (final String courseLesson : courseLessons) {
 			Element tutorialElement = null;
 			Element labElement = null;
 			Element groupElement = null;
 			InfoType infoType = InfoType.UNKNOWN;
-			for (String lessonLine : courseLesson.split("[\\r\\n]+"))
+			for (final String lessonLine : courseLesson.split("[\\r\\n]+"))
 				if (lessonLine.contains("הרצאה")) {
 					infoType = InfoType.LECTURE;
 					lectureElement = d.createElement("lecture");
@@ -423,7 +421,7 @@ public class RepFile {
 					if (groupElement != null)
 						groupElement.appendChild(getPersonElement(d, lessonLine, "moderator"));
 				}
-				else if ((StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13))))
+				else if (StringUtils.isBlank(lessonLine.substring(7, 14)) || ":".equals(lessonLine.substring(12, 13)))
 					switch (infoType) {
 					case LECTURE:
 						if (lectureElement != null)
@@ -462,29 +460,29 @@ public class RepFile {
 		}
 	}
 	
-	private static Element getLessonElement(Document d, String lessonLine){
-		Element $ = d.createElement("lesson");
-		String day = lessonLine.substring(14,15);
+	private static Element getLessonElement(final Document d, final String lessonLine){
+		final Element $ = d.createElement("lesson");
+		final String day = lessonLine.substring(14,15);
 		if (!StringUtils.isBlank(day))
 			$.setAttribute("day", day);
-		String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+		final String lessonTime[] = lessonLine.substring(16, 27).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
 		if (lessonTime.length == 2) {
 			$.setAttribute("timeStart", StringUtils.leftPad(lessonTime[1],5,'0'));
 			$.setAttribute("timeEnd", StringUtils.leftPad(lessonTime[0],5,'0'));
 		}
-		String roomNumber = lessonLine.substring(28, 32).replaceAll("\\s+", "");
+		final String roomNumber = lessonLine.substring(28, 32).replaceAll("\\s+", "");
 		if (!StringUtils.isBlank(roomNumber))
 			$.setAttribute("roomNumber", roomNumber);
-		String building = lessonLine.substring(33, 43).replaceAll("\\s+$", "");
+		final String building = lessonLine.substring(33, 43).replaceAll("\\s+$", "");
 		if (!StringUtils.isBlank(building))
 			$.setAttribute("building", building);
 		return $;
 	}
 	
-	private static Element getSportLessonElement(Document d, String lessonLine){
-		Element $ = d.createElement("lesson");
+	private static Element getSportLessonElement(final Document d, final String lessonLine){
+		final Element $ = d.createElement("lesson");
 		$.setAttribute("day", lessonLine.substring(29,30));
-		String lessonTime[] = lessonLine.substring(31, 42).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
+		final String lessonTime[] = lessonLine.substring(31, 42).replaceAll("\\s+", "").replaceAll("\\.", ":").split("\\-");
 		if (lessonTime.length == 2) {
 			$.setAttribute("timeStart", StringUtils.leftPad(lessonTime[1],5,'0'));
 			$.setAttribute("timeEnd", StringUtils.leftPad(lessonTime[0],5,'0'));
@@ -494,14 +492,14 @@ public class RepFile {
 	}
 	
 	
-	private static Element getPersonElement(Document d, String lessonLine, String role){
-		Element $ = d.createElement(role);
+	private static Element getPersonElement(final Document d, final String lessonLine, final String role){
+		final Element $ = d.createElement(role);
 		$.setAttribute("title", lessonLine.substring(14, 20).replaceAll("\\s+$", ""));
 		$.setAttribute("name", lessonLine.substring(21, 40).replaceAll("\\s+$", ""));
 		return $;
 	}
 	
-	private static void setGroupAttr(Element lectureElement, Element hasGroupElement, String group){
+	private static void setGroupAttr(final Element lectureElement, final Element hasGroupElement, final String group){
 		hasGroupElement.setAttribute("group", group);
 		if (lectureElement != null && !lectureElement.hasAttribute("group"))
 			lectureElement.setAttribute("group", String.valueOf(10 * (Integer.parseInt(group) % 10)));

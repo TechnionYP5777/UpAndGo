@@ -18,7 +18,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	protected ITimeTableView view;
 	protected CourseListController clCtrl;
 	
-	public TimeTableController(TimeTableModel model, ITimeTableView view, CourseListController clCtrl) {
+	public TimeTableController(final TimeTableModel model, final ITimeTableView view, final CourseListController clCtrl) {
 		this.model = model;
 		this.view = view;
 		
@@ -36,7 +36,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent ¢) {
+	public void actionPerformed(final ActionEvent ¢) {
 		if (¢.getActionCommand().equals(TimeTableCommand.GET_NEXT_GENERATED_SCHED))
 			model.loadNextSchedule();
 		else if (¢.getActionCommand().equals(TimeTableCommand.GET_PREV_GENERATED_SCHED))
@@ -65,18 +65,18 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	}
 	
 	@Override
-	public void registerListenerToProperty(PropertyChangeListener l, String p) {
+	public void registerListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.addPropertyChangeListener(p, l);
 	}
 
 	@Override
-	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
+	public void unregisterListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.removePropertyChangeListener(p, l);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 		case CourseProperty.CHOSEN_LIST_DETAILS:
 			model.setCourses((List<Course>) evt.getNewValue());

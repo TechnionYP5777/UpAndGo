@@ -12,10 +12,10 @@ import model.course.LessonGroup;
 import model.course.WeekTime;
 
 public class TimeConstraint extends Constraint {
-	private WeekTime startTime;
-	private WeekTime endTime;
+	private final WeekTime startTime;
+	private final WeekTime endTime;
 	
-	public TimeConstraint(WeekTime startTime, WeekTime endTime) {
+	public TimeConstraint(final WeekTime startTime, final WeekTime endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -23,33 +23,33 @@ public class TimeConstraint extends Constraint {
 	
 	
 	@Override
-	public boolean canMeetConstraint(Course c) {
-		for(LessonGroup ¢ : c.getLectures())
+	public boolean canMeetConstraint(final Course c) {
+		for(final LessonGroup ¢ : c.getLectures())
 			if (!clashWithLessonGroup(¢))
 				return true;
 		return false;
 	}
 
 	@Override
-	public List<LessonGroup> groupsMeetsConstraint(Course c) {
-		List<LessonGroup> $ = new ArrayList<>();
-		for(LessonGroup ¢ : c.getLectures())
+	public List<LessonGroup> groupsMeetsConstraint(final Course c) {
+		final List<LessonGroup> $ = new ArrayList<>();
+		for(final LessonGroup ¢ : c.getLectures())
 			if (!clashWithLessonGroup(¢))
 				$.add(¢);
 		return $;
 	}
 	
-	private boolean clashWithLessonGroup(LessonGroup g){
-		for(Lesson ¢ : g.getLessons())
+	private boolean clashWithLessonGroup(final LessonGroup g){
+		for(final Lesson ¢ : g.getLessons())
 			if (clashWithLesson(¢))
 				return true;
 		return false;
 	}
 	
 	// DO NOT SPARTANIZE
-	private boolean clashWithLesson(Lesson ¢){
-		return (startTime.compareTo(¢.getStartTime()) >= 0) && startTime.compareTo(¢.getEndTime()) < 0
-				|| (endTime.compareTo(¢.getStartTime()) > 0) && endTime.compareTo(¢.getEndTime()) <= 0;
+	private boolean clashWithLesson(final Lesson ¢){
+		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
+				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
 	}
 
 	public WeekTime getStartTime() {

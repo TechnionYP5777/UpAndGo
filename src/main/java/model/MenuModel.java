@@ -10,14 +10,14 @@ public class MenuModel implements Model {
 
 	@SuppressWarnings("unused") 
 	@Override
-	public void addPropertyChangeListener(String property, PropertyChangeListener __) {
+	public void addPropertyChangeListener(final String property, final PropertyChangeListener __) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@SuppressWarnings("unused") 
 	@Override
-	public void removePropertyChangeListener(String property, PropertyChangeListener __) {
+	public void removePropertyChangeListener(final String property, final PropertyChangeListener __) {
 		// TODO Auto-generated method stub
 
 	}

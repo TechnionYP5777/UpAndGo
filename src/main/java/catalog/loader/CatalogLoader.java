@@ -31,7 +31,7 @@ public abstract class CatalogLoader {
 	protected CourseModel model;
 
 	@SuppressWarnings("resource")
-	CatalogLoader(String catalogXmlPath, CourseModel m) {
+	CatalogLoader(final String catalogXmlPath, final CourseModel m) {
 		model = m;
 		obligatory = new ArrayList<>();
 		malags = new ArrayList<>();
@@ -39,14 +39,14 @@ public abstract class CatalogLoader {
 			coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new InputSource(new FileInputStream(catalogXmlPath))).getElementsByTagName("CourseList");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
-				Element elem = (Element) coursesList.item(i);
-				String listName = elem.getAttribute("name");
+				final Element elem = (Element) coursesList.item(i);
+				final String listName = elem.getAttribute("name");
 				if ("מקצועות חובה".equals(listName))
 					addCoursesToList(elem.getElementsByTagName("Course"), obligatory, m);
 				if ("בחירה חופשית".equals(listName)) {
-					NodeList freeChoiceCourses = elem.getElementsByTagName("CourseList");
+					final NodeList freeChoiceCourses = elem.getElementsByTagName("CourseList");
 					for (int j = 0; j < freeChoiceCourses.getLength(); ++j) {
-						Element elem2 = (Element) freeChoiceCourses.item(j);
+						final Element elem2 = (Element) freeChoiceCourses.item(j);
 						if ("מלגים".equals(elem2.getAttribute("name")))
 							addCoursesToList(elem2.getElementsByTagName("Course"), malags, m);
 					}
@@ -57,15 +57,15 @@ public abstract class CatalogLoader {
 		}
 	}
 
-	protected static void addCoursesToList(NodeList coursesList, List<Course> cl, CourseModel m) {
+	protected static void addCoursesToList(final NodeList coursesList, final List<Course> cl, final CourseModel m) {
 		for (int i = 0; i < coursesList.getLength(); ++i) {
-			Node p = coursesList.item(i);
-			Course c = m.getCourseById(((Element) p).getAttribute("number"));
+			final Node p = coursesList.item(i);
+			final Course c = m.getCourseById(((Element) p).getAttribute("number"));
 			if (c != null)
 				cl.add(c);
 			else {
-				NodeList name = ((Element) p).getElementsByTagName("name");
-				Course c2 = new Course(((Element) name.item(0)).getAttribute("courseName"),
+				final NodeList name = ((Element) p).getElementsByTagName("name");
+				final Course c2 = new Course(((Element) name.item(0)).getAttribute("courseName"),
 						((Element) p).getAttribute("number"), "faculty", new ArrayList<>(), 0, null, null,
 						new ArrayList<>(), new ArrayList<>());
 				c2.markAsNotPass();
@@ -74,33 +74,33 @@ public abstract class CatalogLoader {
 		}
 	}
 
-	protected static void markDoneCoursesForOneList(Set<String> userCourses, List<Course> coursesList) {
-		for (Course ¢ : coursesList)
+	protected static void markDoneCoursesForOneList(final Set<String> userCourses, final List<Course> coursesList) {
+		for (final Course ¢ : coursesList)
 			if (userCourses.contains(¢.getId()))
 				¢.MarkDone();
 	}
 
-	protected void markDoneCourses(Set<String> userCourses) {
+	protected void markDoneCourses(final Set<String> userCourses) {
 		markDoneCoursesForOneList(userCourses, obligatory);
 		markDoneCoursesForOneList(userCourses, malags);
 
 	}
-	protected static List<Course> getDoneCoursesForOneList(List<Course> l) {
-		List<Course> $ = new ArrayList<>();
-		for (Course c: l)
+	protected static List<Course> getDoneCoursesForOneList(final List<Course> l) {
+		final List<Course> $ = new ArrayList<>();
+		for (final Course c: l)
 			if (c.getDone() && c.isPassThisSemester())
 				$.add(c);
 		return $;
 	}
 	protected List<Course> getDoneCourse() {
-		List<Course> $ = getDoneCoursesForOneList(obligatory);
+		final List<Course> $ = getDoneCoursesForOneList(obligatory);
 		$.addAll(getDoneCoursesForOneList(malags));
 		return $;
 	}
-	protected static List<Course> getCoursesTheUserCanTakeForOneList(List<Course> cs) {
-		List<Course> $ = new ArrayList<>();
-		for (Course c: cs) {
-			for (Course c1 : c.getPrerequisites())
+	protected static List<Course> getCoursesTheUserCanTakeForOneList(final List<Course> cs) {
+		final List<Course> $ = new ArrayList<>();
+		for (final Course c: cs) {
+			for (final Course c1 : c.getPrerequisites())
 				if (!c1.getDone())
 					break;
 			if (!c.getDone())
@@ -109,7 +109,7 @@ public abstract class CatalogLoader {
 		return $;
 	} //* TODO: think how to do it for co-requisites courses *//
 	protected List<Course> getCoursesTheUserCanTake() {
-		List<Course> $ = getCoursesTheUserCanTakeForOneList(obligatory);
+		final List<Course> $ = getCoursesTheUserCanTakeForOneList(obligatory);
 		$.addAll(getCoursesTheUserCanTakeForOneList(malags));
 		return $;
 	}

@@ -30,44 +30,44 @@ public class Lesson implements Event, Serializable {
 	protected final String courseId;
 	protected final String courseName;
 	
-	public Lesson(StuffMember repr, WeekTime theStartTime, WeekTime endTime, String place1, Type t, int g, String c, String n) {
-		if((theStartTime==null) || (place1==null))
+	public Lesson(final StuffMember repr, final WeekTime theStartTime, final WeekTime endTime, final String place1, final Type t, final int g, final String c, final String n) {
+		if(theStartTime==null || place1==null)
 			throw new NullPointerException();
 		
-		this.representer = repr;
-		this.startTime = theStartTime;
+		representer = repr;
+		startTime = theStartTime;
 		this.endTime = endTime;
-		this.place = place1;
-		this.type = t;
-		this.group = g;
+		place = place1;
+		type = t;
+		group = g;
 		//this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
-		this.courseId = c;
-		this.courseName = n;
+		courseId = c;
+		courseName = n;
 	}
 	
 	public String getCourse() {
-		return this.courseId;
+		return courseId;
 	}
 	
 	public String getCourseName() {
-		return this.courseName;
+		return courseName;
 	}
 	
 	public int getGroup() {
-		return this.group;
+		return group;
 	}
 
 	public StuffMember getRepresenter() {
-		return this.representer;
+		return representer;
 	}
 
 	public WeekTime getStartTime() {
-		return this.startTime;
+		return startTime;
 	}
 	
 	public String getRoomNumber() {
-		if (!this.place.isEmpty()) {
-			String[] spilt = this.place.split(" ");
+		if (!place.isEmpty()) {
+			final String[] spilt = place.split(" ");
 			if (spilt.length > 1)
 				return spilt[spilt.length - 1];
 		}
@@ -75,15 +75,15 @@ public class Lesson implements Event, Serializable {
 	}
 	
 	public WeekTime getEndTime() {
-		return this.endTime;
+		return endTime;
 	}
 
 	public String getPlace() {
-		return this.place;
+		return place;
 	}
 	
 	public Type getType() {
-		return this.type;
+		return type;
 	}
 	
 	// return value between 0 to 6.
@@ -92,22 +92,22 @@ public class Lesson implements Event, Serializable {
 	}
 	
 	@Override
-	public boolean equals(Object l){
+	public boolean equals(final Object l){
 		if (l == null) return false;
 	    if (l == this) return true;
 	    if (!(l instanceof Lesson))return false;
-	    Lesson lesson = (Lesson)l;
-	    return (((this.place).equals(lesson.getPlace())) && ((this.type) == lesson.getType())
-	    		&& (((this.group) == lesson.getGroup()))
-	    		&&  ((this.courseId).equals(lesson.getCourse())) &&
-	    		((this.startTime).equals(lesson.getStartTime())) &&
-	    				((this.endTime).equals(lesson.getEndTime())));
+	    final Lesson lesson = (Lesson)l;
+	    return place.equals(lesson.getPlace()) && type == lesson.getType()
+	    		&& group == lesson.getGroup()
+	    		&&  courseId.equals(lesson.getCourse()) &&
+	    		startTime.equals(lesson.getStartTime()) &&
+	    				endTime.equals(lesson.getEndTime());
 	}
 	
 	
-	public boolean IsClashWith(Lesson ¢){
-		return (startTime.compareTo(¢.getStartTime()) >= 0) && startTime.compareTo(¢.getEndTime()) < 0
-				|| (endTime.compareTo(¢.getStartTime()) > 0) && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean IsClashWith(final Lesson ¢){
+		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
+				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
 
 		/*
 		return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
@@ -116,9 +116,9 @@ public class Lesson implements Event, Serializable {
 				&& endTime.compareTo(¢.getEndTime()) != 0;*/
 	}
 	
-	public boolean IsClashWith(TimeConstraint ¢){
-		return (startTime.compareTo(¢.getStartTime()) >= 0) && startTime.compareTo(¢.getEndTime()) < 0
-				|| (endTime.compareTo(¢.getStartTime()) > 0) && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean IsClashWith(final TimeConstraint ¢){
+		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
+				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
 
 		/*return (startTime.compareTo(¢.getStartTime()) != 0 && startTime.compareTo(¢.getStartTime()) <= 0
 				|| startTime.compareTo(¢.getEndTime()) >= 0)

@@ -33,10 +33,10 @@ public class scheduleTimetablesTest {
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
-		Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
+		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
 		System.out.println("Schedule: " + s);
 		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -50,15 +50,15 @@ public class scheduleTimetablesTest {
 	public void test_scheduleTimetable1() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
 		
-		List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 		
 		
-		List<Timetable> tl = Scheduler.getTimetablesList(courses);
+		final List<Timetable> tl = Scheduler.getTimetablesList(courses);
 		System.out.println(tl);
 		
 		assert tl.size() == 4;
-		for(Timetable ¢ : tl)
+		for(final Timetable ¢ : tl)
 			System.out.println("rank: " + ¢.getRankOfDaysoff());
 	}
 

@@ -19,52 +19,52 @@ public class StuffMember implements Serializable {
 	public String office;
 	public final List<LocalDateTime> officeHours;
 	
-	public StuffMember(String fName1, String lName1) {
+	public StuffMember(final String fName1, final String lName1) {
 		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
-		this.fName = fName1;
-		this.lName = lName1;
+		fName = fName1;
+		lName = lName1;
 		officeHours = null;
 	}
 	
-	public StuffMember(String fName1, String lName1, String title) {
+	public StuffMember(final String fName1, final String lName1, final String title) {
 		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
-		this.fName = fName1;
-		this.lName = lName1;
+		fName = fName1;
+		lName = lName1;
 		this.title = title;
-		this.office = this.email = "";
+		office = email = "";
 		officeHours = null;
 	}
 	
 	
 	
 	public String getFirstName () {
-		return this.fName;
+		return fName;
 	}
 	
 	public String getLastName () {
-		return this.lName;
+		return lName;
 	}
 	
 	public String getTitle () {
-		return this.title;
+		return title;
 	}
 	
-	public StuffMember(String fName1, String lName1, String ttl, String eml, String office1,
-																			List<LocalDateTime> ofHours) {
-		this.fName = fName1;
-		this.lName = lName1;
-		this.title = ttl;
-		this.email = eml;
-		this.office = office1;
-		this.officeHours = new ArrayList<>(ofHours);
+	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml, final String office1,
+																			final List<LocalDateTime> ofHours) {
+		fName = fName1;
+		lName = lName1;
+		title = ttl;
+		email = eml;
+		office = office1;
+		officeHours = new ArrayList<>(ofHours);
 	}
 	
 	@Override
-	public boolean equals(Object ¢){
+	public boolean equals(final Object ¢){
 		return ¢ != null && (¢ == this || ¢ instanceof StuffMember 
-				&& ((this.fName).equals(((StuffMember) ¢).getFirstName()))
-				&& ((this.lName).equals(((StuffMember) ¢).getLastName()))
-				&& ((this.title).equals(((StuffMember) ¢).getTitle())));
+				&& fName.equals(((StuffMember) ¢).getFirstName())
+				&& lName.equals(((StuffMember) ¢).getLastName())
+				&& title.equals(((StuffMember) ¢).getTitle()));
 	}
 	
 	@Override

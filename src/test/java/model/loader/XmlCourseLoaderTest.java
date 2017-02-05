@@ -35,7 +35,7 @@ public class XmlCourseLoaderTest {
 	@Test
 	public void testLoadAllCourses() {
 		//Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
-		TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
+		final TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
 		
 		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
@@ -61,27 +61,27 @@ public class XmlCourseLoaderTest {
 		assert "רפואה".equals(String.valueOf(coursesMap.get("274349").getFaculty()));
 		assert "הנדסת תעשיה וניהול".equals(String.valueOf(coursesMap.get("097120").getFaculty()));
 		
-		assert "2017-07-13T00:00".equals((coursesMap.get("134153").getaTerm() + ""));
-		assert "2017-07-18T00:00".equals((coursesMap.get("035022").getaTerm() + ""));
+		assert "2017-07-13T00:00".equals(coursesMap.get("134153").getaTerm() + "");
+		assert "2017-07-18T00:00".equals(coursesMap.get("035022").getaTerm() + "");
 		assertNull(coursesMap.get("205719").getaTerm());
-		assert "2017-07-09T00:00".equals((coursesMap.get("014852").getaTerm() + ""));
-		assert "2017-07-12T00:00".equals((coursesMap.get("236635").getaTerm() + ""));
+		assert "2017-07-09T00:00".equals(coursesMap.get("014852").getaTerm() + "");
+		assert "2017-07-12T00:00".equals(coursesMap.get("236635").getaTerm() + "");
 		
-		assert "2017-09-25T00:00".equals((coursesMap.get("044148").getbTerm() + ""));
+		assert "2017-09-25T00:00".equals(coursesMap.get("044148").getbTerm() + "");
 		assertNull(coursesMap.get("394820-12").getaTerm());
-		assert "2017-09-25T00:00".equals((coursesMap.get("014003").getbTerm() + ""));
-		assert "2017-10-17T00:00".equals((coursesMap.get("095113").getbTerm() + ""));
-		assert "2017-10-03T00:00".equals((coursesMap.get("236353").getbTerm() + ""));
+		assert "2017-09-25T00:00".equals(coursesMap.get("014003").getbTerm() + "");
+		assert "2017-10-17T00:00".equals(coursesMap.get("095113").getbTerm() + "");
+		assert "2017-10-03T00:00".equals(coursesMap.get("236353").getbTerm() + "");
 		
-		assert (coursesMap.get("236350").getStuff().size() == 1);
-		assert "ג.נקבלי".equals((coursesMap.get("236350").getStuff().get(0).getLastName()));
+		assert coursesMap.get("236350").getStuff().size() == 1;
+		assert "ג.נקבלי".equals(coursesMap.get("236350").getStuff().get(0).getLastName());
 		
-		assert (coursesMap.get("324975").getStuff().size() == 1);
-		assert "א.פסקוביץ".equals((coursesMap.get("324975").getStuff().get(0).getLastName()));
+		assert coursesMap.get("324975").getStuff().size() == 1;
+		assert "א.פסקוביץ".equals(coursesMap.get("324975").getStuff().get(0).getLastName());
 		
-		assert (coursesMap.get("044191").getStuff().size() == 0);
+		assert coursesMap.get("044191").getStuff().size() == 0;
 		
-		assert (coursesMap.get("034039").getStuff().size() == 2);
+		assert coursesMap.get("034039").getStuff().size() == 2;
 		
 		assert "הצימוד החשמלי-מכני בשרירי הלב".equals(coursesMap.get("338515").getLecturesLG().get(0).getLessons().get(0).getCourseName());
 		/*
@@ -188,7 +188,7 @@ public class XmlCourseLoaderTest {
 	
 	@Test
 	public void testLoadFaculties() {
-		for (Faculty ¢ : cr.loadFaculties())
+		for (final Faculty ¢ : cr.loadFaculties())
 			System.out.println(¢.getId() + "---" + ¢.getName());
 	}
 	

@@ -37,29 +37,26 @@ public class Launcher {
 	protected static TimeTableController ttCtrl;
 	protected static MenuController mCtrl;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					cLoader = new XmlCourseLoader("REPFILE/test.XML");
-					cModel = new CourseModel(cLoader);
-					ttModel = new TimeTableModel(cLoader);
-					mModel = new MenuModel();
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(() -> {
+			try {
+				cLoader = new XmlCourseLoader("REPFILE/test.XML");
+				cModel = new CourseModel(cLoader);
+				ttModel = new TimeTableModel(cLoader);
+				mModel = new MenuModel();
 
-					acView = new AvailableCourses();
-					ttView = new TimetableVIew();
+				acView = new AvailableCourses();
+				ttView = new TimetableVIew();
 
-					clCtrl = new CourseListController(cModel, acView);
-					ttCtrl = new TimeTableController(ttModel, ttView, clCtrl);
-					mlView = new mainLuzerView(ttView, acView);
-					mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
-					mlView.setVisible(true);
-					
+				clCtrl = new CourseListController(cModel, acView);
+				ttCtrl = new TimeTableController(ttModel, ttView, clCtrl);
+				mlView = new mainLuzerView(ttView, acView);
+				mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
+				mlView.setVisible(true);
+				
 
-				} catch (Exception ¢) {
-					¢.printStackTrace();
-				}
+			} catch (final Exception ¢) {
+				¢.printStackTrace();
 			}
 		});
 

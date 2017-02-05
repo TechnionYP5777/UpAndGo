@@ -15,10 +15,10 @@ public class WeekTime implements Serializable {
 	 */
 	private static final long serialVersionUID = -7431131009009123098L;
 	
-	private DayOfWeek day;
-	private LocalTime time; // = LocalTime.of(22, 15);
+	private final DayOfWeek day;
+	private final LocalTime time; // = LocalTime.of(22, 15);
 	
-	public WeekTime(DayOfWeek day, LocalTime time){
+	public WeekTime(final DayOfWeek day, final LocalTime time){
 		this.day = day;
 		this.time = time;
 	}
@@ -36,22 +36,22 @@ public class WeekTime implements Serializable {
 	 * @param b
 	 * @return the amount of minutes between b to a (like a-b)
 	 */
-	public static int difference(WeekTime a, WeekTime b){
+	public static int difference(final WeekTime a, final WeekTime b){
 		return a.getTime().getMinute() + 60 * (a.getTime().getHour() - b.getTime().getHour())-b.getTime().getMinute();
 	}
 	
-	public static int compareTo(WeekTime a, WeekTime b){
+	public static int compareTo(final WeekTime a, final WeekTime b){
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())
 				: a.getTime().compareTo(b.getTime());
 	}
 	
-	public int compareTo(WeekTime b){
-		return this.getDay().compareTo(b.getDay()) != 0 ? this.getDay().compareTo(b.getDay())
-				: this.getTime().compareTo(b.getTime());
+	public int compareTo(final WeekTime b){
+		return getDay().compareTo(b.getDay()) != 0 ? getDay().compareTo(b.getDay())
+				: getTime().compareTo(b.getTime());
 	}
 	
 	@Override
-	public boolean equals(Object d){
+	public boolean equals(final Object d){
 		return d instanceof WeekTime && compareTo((WeekTime) d) == 0;
 		/*return d != null && (d == this || d instanceof WeekTime && (this.day.equals(((WeekTime) d).getDay()))
 				&& ((this.time).equals(((WeekTime) d).getTime())));*/

@@ -29,106 +29,106 @@ public class CourseModel implements Model {
 	protected CourseLoader loader;
 	protected List<Faculty> facultyList;
 
-	public CourseModel(CourseLoader loader) {
-		this.pickedCourseList = new ArrayList<>();
-		this.listenersMap = HashMultimap.create();
+	public CourseModel(final CourseLoader loader) {
+		pickedCourseList = new ArrayList<>();
+		listenersMap = HashMultimap.create();
 		this.loader = loader;
-		this.coursesById = loader.loadAllCoursesById();
-		this.coursesByName = loader.loadAllCoursesByName();
-		this.facultyList = loader.loadFaculties();
-		for(String id: this.loader.loadChosenCourseNames())
-			this.pickedCourseList.add(this.coursesById.get(id));
+		coursesById = loader.loadAllCoursesById();
+		coursesByName = loader.loadAllCoursesByName();
+		facultyList = loader.loadFaculties();
+		for(final String id: this.loader.loadChosenCourseNames())
+			pickedCourseList.add(coursesById.get(id));
 	}
 
-	public void pickCourse(String name) {
+	public void pickCourse(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course pickedCourse = this.getCourseById(name);
-		if (this.pickedCourseList.contains(pickedCourse))
+		final Course pickedCourse = getCourseById(name);
+		if (pickedCourseList.contains(pickedCourse))
 			return;
 
 		// save picking in DB
-		TreeSet<CourseId> pickedList = new TreeSet<>();
-		List<String> pickedIds = new ArrayList<>();
-		this.pickedCourseList.add(pickedCourse);
-		this.pickedCourseList.forEach((course) -> {
+		final TreeSet<CourseId> pickedList = new TreeSet<>();
+		final List<String> pickedIds = new ArrayList<>();
+		pickedCourseList.add(pickedCourse);
+		pickedCourseList.forEach((course) -> {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
 			pickedIds.add(course.getId());
 		});
 
 		// notify listeners
-		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
+		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
 
-	public void addCourse(String name) {
+	public void addCourse(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		List<String> prevCourseList = this.getCoursesNames();
-		this.coursesById.put(name, loader.loadCourse(name));
+		final List<String> prevCourseList = getCoursesNames();
+		coursesById.put(name, loader.loadCourse(name));
 
-		List<String> curCourseList = new ArrayList<>(prevCourseList);
+		final List<String> curCourseList = new ArrayList<>(prevCourseList);
 		curCourseList.remove(name);
 
 		// notify listeners
-		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList))));
+		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList)));
 	}
 
 	public List<String> getCoursesNames() {
-		return new ArrayList<>(this.coursesById.keySet());
+		return new ArrayList<>(coursesById.keySet());
 	}
 
-	public void dropCourse(String name) {
+	public void dropCourse(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		Course droppedCourse = this.getCourseById(name);
-		if (!this.pickedCourseList.contains(droppedCourse))
+		final Course droppedCourse = getCourseById(name);
+		if (!pickedCourseList.contains(droppedCourse))
 			return;
 
 		// save picking in DB
-		TreeSet<CourseId> pickedList = new TreeSet<>();
-		this.pickedCourseList.remove(droppedCourse);
-		this.pickedCourseList.forEach((course) -> {
+		final TreeSet<CourseId> pickedList = new TreeSet<>();
+		pickedCourseList.remove(droppedCourse);
+		pickedCourseList.forEach((course) -> {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
 		});
 
 		// notify listeners
-		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
+		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
 
 	/*
 	 * expose course to listeners for "course_list" property
 	 */
-	public void exposeCourse(String name) {
+	public void exposeCourse(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		this.listenersMap.get(CourseProperty.DETAILS).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, this.getCourseById(name)))));
+		listenersMap.get(CourseProperty.DETAILS).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.DETAILS, null, getCourseById(name))));
 	}
 
-	public Course getCourseByName(String name) {
+	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Entry<String, Course> ¢ : coursesById.entrySet())
+		for(final Entry<String, Course> ¢ : coursesById.entrySet())
 			if (name.equals(¢.getValue().getName()))
 				return ¢.getValue();
 		return null;
 	}
 	
-	public Course getCourseById(String name) {
+	public Course getCourseById(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(Entry<String, Course> ¢ : coursesById.entrySet())
+		for(final Entry<String, Course> ¢ : coursesById.entrySet())
 			if (name.equals(¢.getValue().getId()))
 				return ¢.getValue();
 		return null;
 	}
 
 	public List<String> getChosenCourseNames() {
-		List<String> $ = new ArrayList<>();
-		this.pickedCourseList.forEach((course) -> {
+		final List<String> $ = new ArrayList<>();
+		pickedCourseList.forEach((course) -> {
 			$.add(course.getId());
 		});
 		return $;
@@ -137,18 +137,18 @@ public class CourseModel implements Model {
 
 	public void loadChosenCourses() {
 		// save picking in DB
-		HashSet<CourseId> pickedList = new HashSet<>();
-		this.pickedCourseList.forEach((course) -> {
+		final HashSet<CourseId> pickedList = new HashSet<>();
+		pickedCourseList.forEach((course) -> {
 			pickedList.add(new CourseId(course.getId(), course.getName()));
 		});
 
 		// notify listeners
-		this.listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList)))));
+		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
 	
-	public void saveChosenCourses(List<String> names) {
-		this.loader.saveChosenCourseNames(names);
+	public void saveChosenCourses(final List<String> names) {
+		loader.saveChosenCourseNames(names);
 	}
 	
 
@@ -156,78 +156,78 @@ public class CourseModel implements Model {
 	 * load needed courses (by name / subname) from DB if empty, load all of
 	 * them
 	 */
-	public void loadQuery(String query) {
-		TreeSet<CourseId> matchingIds = new TreeSet<>();
+	public void loadQuery(final String query) {
+		final TreeSet<CourseId> matchingIds = new TreeSet<>();
 		if(query.isEmpty())
-			this.coursesById.forEach((key, course) -> {
+			coursesById.forEach((key, course) -> {
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});	
 		else {
-			this.coursesById.forEach((key, course) -> {
+			coursesById.forEach((key, course) -> {
 				if (key.contains(query))
 					matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});
-			this.coursesByName.forEach((key, course) -> {
+			coursesByName.forEach((key, course) -> {
 				if (key.toLowerCase().contains(query.toLowerCase()))
 					matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});
 		}
 
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
+		listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
 	}
 	
 	/*
 	 * load needed courses (by name / subname) from DB if empty, load all of
 	 * them
 	 */
-	public void loadQueryByFaculty(String query, String faculty) {
-		TreeSet<CourseId> matchingIds = new TreeSet<>();
-		this.coursesById.forEach(query.isEmpty() ? (key, course) -> {
+	public void loadQueryByFaculty(final String query, final String faculty) {
+		final TreeSet<CourseId> matchingIds = new TreeSet<>();
+		coursesById.forEach(query.isEmpty() ? (key, course) -> {
 			if(course.getFaculty().equals(faculty))
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
 		} : (key, course) -> {
 			if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty))
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
 		});
-		this.listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds)))));
+		listenersMap.get(CourseProperty.COURSE_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
 	}
 	
 	/*
 	 * load faculty names
 	 */
 	public void loadFacultyNames() {
-		TreeSet<String> faculties = new TreeSet<>();
-		this.facultyList.forEach((x) -> faculties.add(x.getName()));
-		this.listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(faculties)))));
+		final TreeSet<String> faculties = new TreeSet<>();
+		facultyList.forEach((x) -> faculties.add(x.getName()));
+		listenersMap.get(CourseProperty.FACULTY_LIST).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(faculties))));
 	}
 	
 	public void loadChosenCoursesDetails() {
-		this.listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach((x) -> x.propertyChange(
-				(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, this.pickedCourseList))));
+		listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach((x) -> x.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, pickedCourseList)));
 	}
 	
-	public void loadGilaionFrom(@SuppressWarnings("unused") String path) {
+	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
 	
-	public void loadCatalogFrom(@SuppressWarnings("unused") String path) {
+	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
 	
 	@Override
-	public void addPropertyChangeListener(String property, PropertyChangeListener l) {
+	public void addPropertyChangeListener(final String property, final PropertyChangeListener l) {
 		if (property == null || l == null)
 			throw new NullPointerException();
-		this.listenersMap.put(property, l);
+		listenersMap.put(property, l);
 	}
 
 	@Override
-	public void removePropertyChangeListener(String property, PropertyChangeListener l) {
-		if (property != null && l != null && this.listenersMap.containsKey(property))
-			this.listenersMap.remove(property, l);
+	public void removePropertyChangeListener(final String property, final PropertyChangeListener l) {
+		if (property != null && l != null && listenersMap.containsKey(property))
+			listenersMap.remove(property, l);
 
 	}
 }

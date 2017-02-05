@@ -236,7 +236,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// Sets the overall group layout
 	//
 	private void setGroupLayout() {
-		GroupLayout groupLayout = new GroupLayout(this);
+		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
 				groupLayout.createSequentialGroup().addContainerGap().addGroup(groupLayout
 						.createParallelGroup(Alignment.TRAILING)
@@ -280,7 +280,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	// *************************** helper private methods
 	// **********************//
 
-	static String getIdFromDescription(String val) {
+	static String getIdFromDescription(final String val) {
 		return val.split(" ")[0]; // 0= name , 1 = id
 	}
 
@@ -289,10 +289,10 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	private static void createEvents() {
 		lstAvailableCourses.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) {
-				JList<?> theList = (JList<?>) e.getSource();
-				ListModel<?> model = theList.getModel();
-				int index = theList.locationToIndex(e.getPoint());
+			public void mouseMoved(final MouseEvent e) {
+				final JList<?> theList = (JList<?>) e.getSource();
+				final ListModel<?> model = theList.getModel();
+				final int index = theList.locationToIndex(e.getPoint());
 				if (index <= -1)
 					return;
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
@@ -302,8 +302,8 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		lstAvailableCourses.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2 && lstAvailableCourses.getSelectedValue() != null) {
+			public void mouseClicked(final MouseEvent e) {
+				if (e.getClickCount() == 2 && lstAvailableCourses.getSelectedValue() != null)
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
 					else {
@@ -311,15 +311,14 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						listeners.forEach(x -> x.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
 					}
-				}
 			}
 		});
 		lstChosenCourses.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) {
-				JList<?> theList = (JList<?>) e.getSource();
-				ListModel<?> model = theList.getModel();
-				int index = theList.locationToIndex(e.getPoint());
+			public void mouseMoved(final MouseEvent e) {
+				final JList<?> theList = (JList<?>) e.getSource();
+				final ListModel<?> model = theList.getModel();
+				final int index = theList.locationToIndex(e.getPoint());
 				if (index <= -1)
 					return;
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
@@ -329,7 +328,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		cmbFaculties.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				chosenFaculty = cmbFaculties.getSelectedItem() + "";
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
@@ -337,7 +336,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		btnAddCourse.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (lstAvailableCourses.getSelectedValue() != null)
 					if (courseModel.isEmpty())
 						btnAddCourse.setEnabled(false);
@@ -350,7 +349,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		btnRemoveCourse.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (lstChosenCourses.getSelectedValue() != null)
 					if (ChosenCourseModel.isEmpty())
 						btnRemoveCourse.setEnabled(false);
@@ -363,20 +362,20 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		btnSave.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.SAVE_CHOSEN_COURSES)));
 			}
 		});
 		searchField.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(@SuppressWarnings("unused") MouseEvent __) {
+			public void mousePressed(@SuppressWarnings("unused") final MouseEvent __) {
 				searchField.setText("");
 			}
 		});
 		searchField.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				query = searchField.getText();
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
@@ -384,7 +383,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		});
 		searchField.addFocusListener(new FocusAdapter() {
 			@Override
-			public void focusLost(@SuppressWarnings("unused") FocusEvent __) {
+			public void focusLost(@SuppressWarnings("unused") final FocusEvent __) {
 				if (!courseModel.isEmpty() && !"".equals(searchField.getText()))
 					return;
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
@@ -393,29 +392,26 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
-		chckbxCats.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				Message.hyperCatBox("", "", catList.get(catIconNum));
+		chckbxCats.addActionListener((@SuppressWarnings("unused") final ActionEvent __) -> {
+			Message.hyperCatBox("", "", catList.get(catIconNum));
 
-				chckbxCats.setSelected(false);
-				catIconNum = (catIconNum + 1) % 3;
-			}
+			chckbxCats.setSelected(false);
+			catIconNum = (catIconNum + 1) % 3;
 		});
 		chckbxKdamim.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				String txt = searchField.getText();
-				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
+				final String txt = searchField.getText();
+				query = txt.equals(DEFAULT_COURSE_NUM_TEXT) ? "" : txt;
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
 		chckbxTaken.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
-				String txt = searchField.getText();
-				query = (txt.equals(DEFAULT_COURSE_NUM_TEXT)) ? "" : txt;
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
+				final String txt = searchField.getText();
+				query = txt.equals(DEFAULT_COURSE_NUM_TEXT) ? "" : txt;
 				listeners.forEach(x -> x
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
@@ -431,26 +427,26 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	static String chosenFaculty = ALL_FACULTIES_STRING;
 
 	@Override
-	public void addActionListener(ActionListener ¢) {
+	public void addActionListener(final ActionListener ¢) {
 		listeners.add(¢);
 	}
 
 	@Override
-	public void removeActionListener(ActionListener ¢) {
+	public void removeActionListener(final ActionListener ¢) {
 		listeners.remove(¢);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 		case CourseProperty.DETAILS:
-			lstAvailableCourses.setToolTipText((evt.getNewValue() + ""));
-			lstChosenCourses.setToolTipText((evt.getNewValue() + ""));
+			lstAvailableCourses.setToolTipText(evt.getNewValue() + "");
+			lstChosenCourses.setToolTipText(evt.getNewValue() + "");
 			break;
 		case CourseProperty.COURSE_LIST:
 			courseModel = new DefaultListModel<>();
-			for (CourseId val : (List<CourseId>) evt.getNewValue())
+			for (final CourseId val : (List<CourseId>) evt.getNewValue())
 				courseModel.addElement(val.number + " " + val.name);
 			lstAvailableCourses.setModel(courseModel);
 			btnAddCourse.setEnabled(!courseModel.isEmpty());
@@ -458,7 +454,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			break;
 		case CourseProperty.CHOSEN_LIST:
 			ChosenCourseModel = new DefaultListModel<>();
-			for (CourseId val : (List<CourseId>) evt.getNewValue())
+			for (final CourseId val : (List<CourseId>) evt.getNewValue())
 				ChosenCourseModel.addElement(val.number + " " + val.name);
 			lstChosenCourses.setModel(ChosenCourseModel);
 			btnRemoveCourse.setEnabled(!ChosenCourseModel.isEmpty());
@@ -468,7 +464,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		case CourseProperty.FACULTY_LIST:
 			facultiesModel = new DefaultComboBoxModel<>();
 			facultiesModel.addElement(ALL_FACULTIES_STRING);
-			for (String val : (List<String>) evt.getNewValue())
+			for (final String val : (List<String>) evt.getNewValue())
 				facultiesModel.addElement(val);
 			cmbFaculties.setModel(facultiesModel);
 			break;

@@ -8,16 +8,16 @@ public class CourseId implements Comparable<CourseId> {
 
 	@Override
 	public int hashCode() {
-		return 31 * (((name == null) ? 0 : name.hashCode()) + 31) + ((number == null) ? 0 : number.hashCode());
+		return 31 * ((name == null ? 0 : name.hashCode()) + 31) + (number == null ? 0 : number.hashCode());
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(final Object o) {
 		if (o == this)
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		CourseId other = (CourseId) o;
+		final CourseId other = (CourseId) o;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -34,14 +34,14 @@ public class CourseId implements Comparable<CourseId> {
 	public final String name;
 	public final String number;
 	
-	public CourseId(String cNum, String cName) {
+	public CourseId(final String cNum, final String cName) {
 		name = cName;
 		number = cNum;
 	}
 
 	@Override
-	public int compareTo(CourseId ¢) {
-		return this.number.compareTo(¢.number);
+	public int compareTo(final CourseId ¢) {
+		return number.compareTo(¢.number);
 	}
 
 }

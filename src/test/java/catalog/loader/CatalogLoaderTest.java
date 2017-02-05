@@ -16,11 +16,11 @@ public class CatalogLoaderTest {
 	@Test
 	@SuppressWarnings({ "static-method", "unused" })
 	public void Test0() {
-		SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("resources//testXML//REP2.XML")));
+		final SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("resources//testXML//REP2.XML")));
 	}
 	@Test
 	@SuppressWarnings({ "static-method", "unused" })
 	public void Test1() {
-		SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
+		final SECatalogLoader cl = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 	}
 }

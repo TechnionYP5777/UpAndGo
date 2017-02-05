@@ -19,26 +19,22 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 
 public class UserTest extends JFrame {
 
-	private JPanel contentPane;
+	private final JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserTest frame = new UserTest();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(() -> {
+			try {
+				final UserTest frame = new UserTest();
+				frame.setVisible(true);
+			} catch (final Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -55,27 +51,26 @@ public class UserTest extends JFrame {
 		setContentPane(contentPane);
 
 		@SuppressWarnings("rawtypes")
+		final
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "הנדסת תוכנה", "ארבע שנתי", "תלת שנתי", "הנדסת מחשבים" }));
 
-		JTextPane textPane = new JTextPane();
+		final JTextPane textPane = new JTextPane();
 
-		JButton btnDone = new JButton("Done");
-		btnDone.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String catalogName = comboBox.getSelectedItem().toString();
-				if ("הנדסת תוכנה".equals(catalogName)) {
-					SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML",
-							new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
-					User user = new User(textPane.getText(), catalogLoader);
-					catalogLoader.markDoneCourses(user.courses);
-					System.out.println("++++++++" + catalogLoader.getDoneCourse());
-					JOptionPane.showMessageDialog(null, "שלום " + user.getName() + ", הנתונים נטענו בהצלחה!");
-				}
+		final JButton btnDone = new JButton("Done");
+		btnDone.addActionListener(arg0 -> {
+			final String catalogName = comboBox.getSelectedItem().toString();
+			if ("הנדסת תוכנה".equals(catalogName)) {
+				final SECatalogLoader catalogLoader = new SECatalogLoader("SoftwareEngineering.XML",
+						new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
+				final User user = new User(textPane.getText(), catalogLoader);
+				catalogLoader.markDoneCourses(user.courses);
+				System.out.println("++++++++" + catalogLoader.getDoneCourse());
+				JOptionPane.showMessageDialog(null, "שלום " + user.getName() + ", הנתונים נטענו בהצלחה!");
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		final GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addGap(69)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)

@@ -10,7 +10,7 @@ public class User {
 	CatalogLoader catalog;
 	String name;
 
-	public User(String grades, CatalogLoader c) {
+	public User(final String grades, final CatalogLoader c) {
 		catalog = c;
 		courses = new HashSet<>();
 		int count = 0;
@@ -25,13 +25,13 @@ public class User {
 					flag = false;
 					continue;
 				}
-				String[] grade = ¢.split("\\t");
+				final String[] grade = ¢.split("\\t");
 				if (grade[0].contains("םילשה אל") || Integer.parseInt(grade[0]) < 55) {
 					if (!grade[0].contains("םילשה אל") && courses.contains(grade[2]))
 						courses.remove(grade[2]);
 					continue;
 				}
-				String[] str = grade[2].split(" ");
+				final String[] str = grade[2].split(" ");
 				courses.add(str[str.length - 1]);
 			}
 			if (¢.contains("ןויצ"))

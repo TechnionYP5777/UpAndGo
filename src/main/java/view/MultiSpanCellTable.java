@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 @SuppressWarnings("serial")
 public class MultiSpanCellTable extends JTable {
 
-	  public MultiSpanCellTable(TableModel model) {
+	  public MultiSpanCellTable(final TableModel model) {
 	    super(model);
 	    setUI(new MultiSpanCellTableUI());
 	    getTableHeader().setReorderingAllowed(false);
@@ -24,30 +24,30 @@ public class MultiSpanCellTable extends JTable {
 	  
 	  
 	  @Override
-	public Rectangle getCellRect(int row, int column, boolean includeSpacing) {
-	    Rectangle $ = super.getCellRect(row,column,includeSpacing);
-	    if ((row <0) || (column<0) ||
-	        (getRowCount() <= row) || (getColumnCount() <= column))
+	public Rectangle getCellRect(int row, int column, final boolean includeSpacing) {
+	    final Rectangle $ = super.getCellRect(row,column,includeSpacing);
+	    if (row <0 || column<0 ||
+	        getRowCount() <= row || getColumnCount() <= column)
 			return $;
-	    CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
+	    final CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 	    if (! cellAtt.isVisible(row,column)) {
-	      int temp_row    = row;
-	      int temp_column = column;
+	      final int temp_row    = row;
+	      final int temp_column = column;
 	      row    += cellAtt.getSpan(temp_row,temp_column)[CellSpan.ROW];
 	      column += cellAtt.getSpan(temp_row,temp_column)[CellSpan.COLUMN];      
 	    }
-	    int[] n = cellAtt.getSpan(row,column);
+	    final int[] n = cellAtt.getSpan(row,column);
 
 	    int index = 0;
-	    int columnMargin = getColumnModel().getColumnMargin();
-	    Rectangle cellFrame = new Rectangle();
-	    int aCellHeight = rowHeight + rowMargin;
+	    final int columnMargin = getColumnModel().getColumnMargin();
+	    final Rectangle cellFrame = new Rectangle();
+	    final int aCellHeight = rowHeight + rowMargin;
 	    cellFrame.y = row * aCellHeight;
 	    cellFrame.height = aCellHeight * n[CellSpan.ROW];
 	    
-	    Enumeration eeration = getColumnModel().getColumns();
+	    final Enumeration eeration = getColumnModel().getColumns();
 	    for (; eeration.hasMoreElements(); ++index) {
-			TableColumn aColumn = (TableColumn) eeration.nextElement();
+			final TableColumn aColumn = (TableColumn) eeration.nextElement();
 			cellFrame.width = columnMargin + aColumn.getWidth() - 1;
 			if (index == column)
 				break;
@@ -59,7 +59,7 @@ public class MultiSpanCellTable extends JTable {
 	    
 
 	    if (!includeSpacing) {
-	      Dimension spacing = getIntercellSpacing();
+	      final Dimension spacing = getIntercellSpacing();
 	      cellFrame.setBounds(cellFrame.x +      spacing.width/2,
 	        cellFrame.y +      spacing.height/2,
 	        cellFrame.width -  spacing.width,
@@ -69,13 +69,13 @@ public class MultiSpanCellTable extends JTable {
 	  }
 	  
 	  
-	  private int[] rowColumnAtPoint(Point p) {
-	    int[] $ = {-1,-1};
-	    int row = p.y / (rowHeight + rowMargin);
-	    if ((row <0)||(getRowCount() <= row)) return $;
-	    int column = getColumnModel().getColumnIndexAtX(p.x);
+	  private int[] rowColumnAtPoint(final Point p) {
+	    final int[] $ = {-1,-1};
+	    final int row = p.y / (rowHeight + rowMargin);
+	    if (row <0||getRowCount() <= row) return $;
+	    final int column = getColumnModel().getColumnIndexAtX(p.x);
 
-	    CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
+	    final CellSpan cellAtt = (CellSpan)((AttributiveCellTableModel)getModel()).getCellAttribute();
 
 	    if (cellAtt.isVisible(row,column)) {
 	      $[CellSpan.COLUMN] = column;
@@ -89,29 +89,29 @@ public class MultiSpanCellTable extends JTable {
 
 	  
 	  @Override
-	public int rowAtPoint(Point ¢) {
+	public int rowAtPoint(final Point ¢) {
 	    return rowColumnAtPoint(¢)[CellSpan.ROW];
 	  }
 	  @Override
-	public int columnAtPoint(Point ¢) {
+	public int columnAtPoint(final Point ¢) {
 	    return rowColumnAtPoint(¢)[CellSpan.COLUMN];
 	  }
 	 
 
 	  
 	@Override
-	public void columnSelectionChanged(ListSelectionEvent __) {
+	public void columnSelectionChanged(final ListSelectionEvent __) {
 	    repaint();
 	  }
 
 	  @Override
-	public void valueChanged(ListSelectionEvent e) {
-	    int firstIndex = e.getFirstIndex();
-	    int  lastIndex = e.getLastIndex();
+	public void valueChanged(final ListSelectionEvent e) {
+	    final int firstIndex = e.getFirstIndex();
+	    final int  lastIndex = e.getLastIndex();
 	    if (firstIndex == -1 && lastIndex == -1)
 			repaint();
-	    Rectangle dirtyRegion = getCellRect(firstIndex, 0, false);
-	    int numCoumns = getColumnCount();
+	    final Rectangle dirtyRegion = getCellRect(firstIndex, 0, false);
+	    final int numCoumns = getColumnCount();
 	    int index = firstIndex;
 	    for (int ¢=0;¢<numCoumns;++¢)
 			dirtyRegion.add(getCellRect(index, ¢, false));

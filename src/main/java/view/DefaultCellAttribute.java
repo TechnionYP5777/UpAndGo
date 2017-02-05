@@ -22,7 +22,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 		this(1,1);
 	}
 
-	public DefaultCellAttribute(int numRows, int numColumns) {
+	public DefaultCellAttribute(final int numRows, final int numColumns) {
 		setSize(new Dimension(numColumns, numRows)); 
 	}
 
@@ -37,32 +37,32 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	// CellSpan
 	//
 	@Override
-	public int[] getSpan(int row, int column) {
+	public int[] getSpan(final int row, final int column) {
 		return isOutOfBounds(row, column) ? new int[] { 1, 1 } : span[row][column];
 	}
 
 	@Override
-	public void setSpan(int[] span, int row, int column) {
+	public void setSpan(final int[] span, final int row, final int column) {
 		if (!isOutOfBounds(row, column))
 			this.span[row][column] = span;
 	}
 
 	@Override
-	public boolean isVisible(int row, int column) {
+	public boolean isVisible(final int row, final int column) {
 		return !isOutOfBounds(row, column) && span[row][column][CellSpan.COLUMN] >= 1 && span[row][column][CellSpan.ROW] >= 1;
 	}
 
 	@Override
-	public void combine(int[] rows, int[] columns) {
+	public void combine(final int[] rows, final int[] columns) {
 		if (isOutOfBounds(rows, columns)) return;
-		int    rowSpan  = rows.length;
-		int columnSpan  = columns.length;
-		int startRow    = rows[0];
-		int startColumn = columns[0];
+		final int    rowSpan  = rows.length;
+		final int columnSpan  = columns.length;
+		final int startRow    = rows[0];
+		final int startColumn = columns[0];
 		for (int i=0;i<rowSpan;++i)
 			for (int j = 0; j < columnSpan; ++j)
-				if ((span[i + startRow][j + startColumn][CellSpan.COLUMN] != 1)
-						|| (span[i + startRow][j + startColumn][CellSpan.ROW] != 1))
+				if (span[i + startRow][j + startColumn][CellSpan.COLUMN] != 1
+						|| span[i + startRow][j + startColumn][CellSpan.ROW] != 1)
 					return;
 		for (int i=0,ii=0;i<rowSpan;++i,--ii)
 			for (int j = 0, jj = 0; j < columnSpan; ++j, --jj) {
@@ -75,7 +75,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	}
 
 	@Override
-	public void split(int row, int column) {
+	public void split(final int row, final int column) {
 		if (!isOutOfBounds(row, column))
 			for (int i = 0; i < span[row][column][CellSpan.ROW]; ++i)
 				for (int j = 0; j < span[row][column][CellSpan.COLUMN]; ++j)
@@ -87,30 +87,30 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	// ColoredCell
 	//
 	@Override
-	public Color getForeground(int row, int column) {
+	public Color getForeground(final int row, final int column) {
 		return isOutOfBounds(row, column) ? null : foreground[row][column];
 	}
 	@Override
-	public void setForeground(Color c, int row, int column) {
+	public void setForeground(final Color c, final int row, final int column) {
 		if (!isOutOfBounds(row, column))
 			foreground[row][column] = c;
 	}
 	@Override
-	public void setForeground(Color c, int[] rows, int[] columns) {
+	public void setForeground(final Color c, final int[] rows, final int[] columns) {
 		if (!isOutOfBounds(rows, columns))
 			setValues(foreground, c, rows, columns);
 	}
 	@Override
-	public Color getBackground(int row, int column) {
+	public Color getBackground(final int row, final int column) {
 		return isOutOfBounds(row, column) ? null : background[row][column];
 	}
 	@Override
-	public void setBackground(Color c, int row, int column) {
+	public void setBackground(final Color c, final int row, final int column) {
 		if (!isOutOfBounds(row, column))
 			background[row][column] = c;
 	}
 	@Override
-	public void setBackground(Color c, int[] rows, int[] columns) {
+	public void setBackground(final Color c, final int[] rows, final int[] columns) {
 		if (!isOutOfBounds(rows, columns))
 			setValues(background, c, rows, columns);
 	}
@@ -121,18 +121,18 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	// CellFont
 	//
 	@Override
-	public Font getFont(int row, int column) {
+	public Font getFont(final int row, final int column) {
 		return isOutOfBounds(row, column) ? null : font[row][column];
 	}
 	@Override
-	public void setFont(Font f, int row, int column) {
+	public void setFont(final Font f, final int row, final int column) {
 		if (!isOutOfBounds(row, column))
-			this.font[row][column] = f;
+			font[row][column] = f;
 	}
 	@Override
-	public void setFont(Font f, int[] rows, int[] columns) {
+	public void setFont(final Font f, final int[] rows, final int[] columns) {
 		if (!isOutOfBounds(rows, columns))
-			setValues(this.font, f, rows, columns);
+			setValues(font, f, rows, columns);
 	}
 	//
 
@@ -142,9 +142,9 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	//
 	@Override
 	public void addColumn() {
-		int[][][] oldSpan = span;
-		int numRows    = oldSpan.length;
-		int numColumns = oldSpan[0].length;
+		final int[][][] oldSpan = span;
+		final int numRows    = oldSpan.length;
+		final int numColumns = oldSpan[0].length;
 		span = new int[numRows][numColumns + 1][2];
 		System.arraycopy(oldSpan,0,span,0,numRows);
 		for (int ¢=0;¢<numRows;++¢)
@@ -153,9 +153,9 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 
 	@Override
 	public void addRow() {
-		int[][][] oldSpan = span;
-		int numRows    = oldSpan.length;
-		int numColumns = oldSpan[0].length;
+		final int[][][] oldSpan = span;
+		final int numRows    = oldSpan.length;
+		final int numColumns = oldSpan[0].length;
 		span = new int[numRows + 1][numColumns][2];
 		System.arraycopy(oldSpan,0,span,0,numRows);
 		for (int ¢=0;¢<numColumns;++¢)
@@ -163,10 +163,10 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	}
 
 	@Override
-	public void insertRow(int row) {
-		int[][][] oldSpan = span;
-		int numRows    = oldSpan.length;
-		int numColumns = oldSpan[0].length;
+	public void insertRow(final int row) {
+		final int[][][] oldSpan = span;
+		final int numRows    = oldSpan.length;
+		final int numColumns = oldSpan[0].length;
 		span = new int[numRows + 1][numColumns][2];
 		if (row > 0)
 			System.arraycopy(oldSpan, 0, span, 0, row - 1);
@@ -181,7 +181,7 @@ implements CellAttribute ,CellSpan ,ColoredCell ,CellFont {
 	}
 
 	@Override
-	public void setSize(Dimension size) {
+	public void setSize(final Dimension size) {
 		columnSize = size.width;
 		rowSize    = size.height;
 		span = new int[rowSize][columnSize][2];   // 2: COLUMN,ROW
@@ -203,23 +203,23 @@ public void changeAttribute(int[] rows, int[] columns, Object command) {
 
 
 
-	protected boolean isOutOfBounds(int row, int column) {
+	protected boolean isOutOfBounds(final int row, final int column) {
 		return row < 0 || rowSize <= row || column < 0 || columnSize <= column;
 	}
 
-	protected boolean isOutOfBounds(int[] rows, int[] columns) {
-		for (int ¢=0;¢<rows.length;++¢)
-			if ((rows[¢] < 0) || (rowSize <= rows[¢]))
+	protected boolean isOutOfBounds(final int[] rows, final int[] columns) {
+		for (final int row2 : rows)
+			if (row2 < 0 || rowSize <= row2)
 				return true;
-		for (int ¢=0;¢<columns.length;++¢)
-			if ((columns[¢] < 0) || (columnSize <= columns[¢]))
+		for (final int column2 : columns)
+			if (column2 < 0 || columnSize <= column2)
 				return true;
 		return false;
 	}
 
 	@SuppressWarnings("static-method")
-	protected void setValues(Object[][] target, Object value,
-			int[] rows, int[] columns) {
+	protected void setValues(final Object[][] target, final Object value,
+			final int[] rows, final int[] columns) {
 		for (int i=0;i<rows.length;++i)
 			for (int j = 0; j < columns.length; ++j)
 				target[rows[i]][columns[j]] = value;

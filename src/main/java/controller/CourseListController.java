@@ -18,7 +18,7 @@ public class CourseListController implements Controller{
 	protected CourseModel model;
 	protected CourseListView view;
 	
-	public CourseListController(CourseModel model, CourseListView view) {
+	public CourseListController(final CourseModel model, final CourseListView view) {
 		this.model = model;
 		this.view = view;
 		
@@ -33,7 +33,7 @@ public class CourseListController implements Controller{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ¢) {
+	public void actionPerformed(final ActionEvent ¢) {
 		if (¢.getActionCommand().equals(CourseCommand.DETAILS))
 			model.exposeCourse(view.getHighlightedCourse());
 		else if (¢.getActionCommand().equals(CourseCommand.GET_QUERY))
@@ -69,21 +69,21 @@ public class CourseListController implements Controller{
 		model.saveChosenCourses(model.getChosenCourseNames());
 	}
 	
-	public void loadGilaionFrom(String path) {
+	public void loadGilaionFrom(final String path) {
 		model.loadGilaionFrom(path);
 	}
 	
-	public void loadCatalogFrom(String path) {
+	public void loadCatalogFrom(final String path) {
 		model.loadCatalogFrom(path);
 	}
 	
 	@Override
-	public void registerListenerToProperty(PropertyChangeListener l, String p) {
+	public void registerListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.addPropertyChangeListener(p, l);
 	}
 
 	@Override
-	public void unregisterListenerToProperty(PropertyChangeListener l, String p) {
+	public void unregisterListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.removePropertyChangeListener(p, l);
 	}
 

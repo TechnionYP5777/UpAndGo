@@ -26,17 +26,17 @@ public class UnzipUtility {
      * @param destDirectory
      * @throws IOException
      */
-    public static void unzip(String zipFilePath, String destDirectory) throws IOException {
-        File destDir = new File(destDirectory);
+    public static void unzip(final String zipFilePath, final String destDirectory) throws IOException {
+        final File destDir = new File(destDirectory);
         if (!destDir.exists())
 			destDir.mkdir();
         try (ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath))){
             for (ZipEntry entry = zipIn.getNextEntry(); entry != null;) {
-    			String filePath = destDirectory + File.separator + entry.getName();
+    			final String filePath = destDirectory + File.separator + entry.getName();
     			if (!entry.isDirectory())
     				extractFile(zipIn, filePath);
     			else
-    				(new File(filePath)).mkdir();
+    				new File(filePath).mkdir();
     			zipIn.closeEntry();
     			entry = zipIn.getNextEntry();
     		}
@@ -49,9 +49,9 @@ public class UnzipUtility {
      * @param filePath
      * @throws IOException
      */
-    private static void extractFile(ZipInputStream s, String filePath) throws IOException {
+    private static void extractFile(final ZipInputStream s, final String filePath) throws IOException {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath))){
-            byte[] bytesIn = new byte[BUFFER_SIZE];
+            final byte[] bytesIn = new byte[BUFFER_SIZE];
             for (int read = s.read(bytesIn); read != -1; read = s.read(bytesIn))
     			bos.write(bytesIn, 0, read);
             bos.close();	

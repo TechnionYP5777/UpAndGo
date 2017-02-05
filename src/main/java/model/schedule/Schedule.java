@@ -8,14 +8,14 @@ import model.course.LessonGroup;
 
 
 public class Schedule {
-	private List<LessonGroup> lessons;
-	private List<TimeConstraint> constraints;
+	private final List<LessonGroup> lessons;
+	private final List<TimeConstraint> constraints;
 	
 	public Schedule(){
 		lessons = new ArrayList<>();
 		constraints = new ArrayList<>();
 	}
-	public Schedule(List<LessonGroup> lessons,List<TimeConstraint> constraints){
+	public Schedule(final List<LessonGroup> lessons,final List<TimeConstraint> constraints){
 		this.lessons = new ArrayList<>(lessons);
 		this.constraints = new ArrayList<>(constraints);
 	}
@@ -25,30 +25,30 @@ public class Schedule {
 	 * @param ¢
 	 * @return true if lessonGroup can be added to lessond without causing a collision
 	 */
-	public boolean addLesson(LessonGroup ¢) {
+	public boolean addLesson(final LessonGroup ¢) {
 		/*if(!lessons.contains(¢)) // add equals to lessonsgroup
 			lessons.add(¢);*/
 		if(lessons.isEmpty()){
 			lessons.add(¢);
 			return true;
 		}
-		for(LessonGroup l : lessons)
+		for(final LessonGroup l : lessons)
 			if (l.isCLashWIth(¢))
 				return false;
 		lessons.add(¢);
 		return true;
 	}
 	
-	public void removeLesson(LessonGroup ¢) {
+	public void removeLesson(final LessonGroup ¢) {
 		lessons.remove(¢);
 	}
 	
-	public void addConstraint(TimeConstraint ¢) {
+	public void addConstraint(final TimeConstraint ¢) {
 		if(!constraints.contains(¢))
 			constraints.add(¢);
 	}
 	
-	public void removeConstraint(TimeConstraint ¢) {
+	public void removeConstraint(final TimeConstraint ¢) {
 		constraints.remove(¢);
 	}
 	
@@ -67,11 +67,11 @@ public class Schedule {
 			
 	}
 	
-	public boolean hasLesson(LessonGroup ¢) {
+	public boolean hasLesson(final LessonGroup ¢) {
 		return lessons.contains(¢);
 	}
 	
-	public boolean hasConstraint(TimeConstraint ¢) {
+	public boolean hasConstraint(final TimeConstraint ¢) {
 		return constraints.contains(¢);
 	}
 	
@@ -80,7 +80,7 @@ public class Schedule {
 			for(int j=i+1; j < lessons.size(); ++j)
 				if (lessons.get(i).isCLashWIth(lessons.get(j)))
 					return false;
-			for(TimeConstraint ¢ : constraints)
+			for(final TimeConstraint ¢ : constraints)
 				if (lessons.get(i).isCLashWIth(¢))
 					return false;
 		}

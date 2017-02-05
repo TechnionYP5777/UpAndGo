@@ -15,10 +15,11 @@ public class TimeConstraintTests {
 	@Test
 	public void test_a() {
 		@SuppressWarnings("unused")
-		Course c = (new CourseBuilder()).setId("1234").setName("first")
-				.addLesson((new Lesson(new StuffMember("koby", "bs"),
+		final
+		Course c = new CourseBuilder().setId("1234").setName("first")
+				.addLesson(new Lesson(new StuffMember("koby", "bs"),
 						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)),
-						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234", "first")))
+						new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234", "first"))
 				.build();
 		
 		//TreeMap<String, Course> coursesMap = cr.loadAllCourses();

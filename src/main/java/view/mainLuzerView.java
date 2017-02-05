@@ -46,25 +46,25 @@ public class mainLuzerView extends JFrame implements MenuView {
 	/**
 	 * Create the application.
 	 */
-	public mainLuzerView(TimetableVIew tb, AvailableCourses crs) {
+	public mainLuzerView(final TimetableVIew tb, final AvailableCourses crs) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			initialize(tb, crs);
-		} catch (Throwable ¢) {
+		} catch (final Throwable ¢) {
 			¢.printStackTrace();
 		}
 	}
 
 	@Override
-	public void setVisible(boolean ¢) {
-		this.mainLuzer.setVisible(¢);
+	public void setVisible(final boolean ¢) {
+		mainLuzer.setVisible(¢);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 
-	private void initialize(TimetableVIew tb, AvailableCourses crs) {
+	private void initialize(final TimetableVIew tb, final AvailableCourses crs) {
 		listeners = new ArrayList<>();
 		setMainPageProperties();
 		setMenu();
@@ -77,8 +77,8 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mainLuzer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainLuzer.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(@SuppressWarnings("unused") WindowEvent __) {
-				int userChoise = Message.yesNoCancleBox(FINISH_MSG, "CLOSE",
+			public void windowClosing(@SuppressWarnings("unused") final WindowEvent __) {
+				final int userChoise = Message.yesNoCancleBox(FINISH_MSG, "CLOSE",
 						new ImageIcon("resources/cat-laptop-icon.png"));
 				if (userChoise == JOptionPane.CANCEL_OPTION)
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -137,15 +137,15 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.setHorizontalAlignment(SwingConstants.RIGHT);
 	}
 
-	private void setAvailCoursesView(TimetableVIew tb, AvailableCourses crs) {
-		Container container = mainLuzer.getContentPane();
+	private void setAvailCoursesView(final TimetableVIew tb, final AvailableCourses crs) {
+		final Container container = mainLuzer.getContentPane();
 		container.setLayout(new BorderLayout());
 		setMainPane(container, crs, tb);
 
 	}
 
-	private static void setMainPane(Container c, AvailableCourses avl, TimetableVIew timeTbl) {
-		JPanel mainPane = new JPanel();
+	private static void setMainPane(final Container c, final AvailableCourses avl, final TimetableVIew timeTbl) {
+		final JPanel mainPane = new JPanel();
 		mainPane.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 				new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
 		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -154,8 +154,8 @@ public class mainLuzerView extends JFrame implements MenuView {
 		setSplitPane(mainPane, setCoursesPane(avl), setTablePane(timeTbl));
 	}
 
-	private static void setSplitPane(JPanel mainPane, JPanel panel1, JPanel panel2) {
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+	private static void setSplitPane(final JPanel mainPane, final JPanel panel1, final JPanel panel2) {
+		final JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		splitPaneV.setResizeWeight(0.5);
 		splitPaneV.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		splitPaneV.setOneTouchExpandable(true);
@@ -163,7 +163,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 		splitPaneV.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mainPane.add(splitPaneV, BorderLayout.CENTER);
 
-		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		final JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panel2);
 		splitPaneH.setResizeWeight(1);
 		splitPaneH.setRightComponent(panel1);
@@ -171,15 +171,15 @@ public class mainLuzerView extends JFrame implements MenuView {
 
 	}
 
-	private static JPanel setTablePane(TimetableVIew timeTbl) {
-		JPanel $ = new JPanel();
+	private static JPanel setTablePane(final TimetableVIew timeTbl) {
+		final JPanel $ = new JPanel();
 		$.setLayout(new BorderLayout());
 		$.add(timeTbl, BorderLayout.CENTER);
 		return $;
 	}
 
-	private static JPanel setCoursesPane(AvailableCourses avl) {
-		JPanel $ = new JPanel();
+	private static JPanel setCoursesPane(final AvailableCourses avl) {
+		final JPanel $ = new JPanel();
 		$.setPreferredSize(new Dimension(280, 500));
 		$.setMinimumSize(new Dimension(280, 500));
 		$.setLayout(new BorderLayout());
@@ -190,14 +190,14 @@ public class mainLuzerView extends JFrame implements MenuView {
 	private void createEvents() {
 		mnItCatalog.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent __) {
+			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				listeners.forEach(x -> x.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
@@ -205,17 +205,17 @@ public class mainLuzerView extends JFrame implements MenuView {
 	}
 
 	@Override
-	public void addActionListener(ActionListener ¢) {
+	public void addActionListener(final ActionListener ¢) {
 		listeners.add(¢);
 	}
 
 	@Override
-	public void removeActionListener(ActionListener ¢) {
+	public void removeActionListener(final ActionListener ¢) {
 		listeners.remove(¢);
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		switch (evt.getPropertyName()) {
 		default:
 			break;

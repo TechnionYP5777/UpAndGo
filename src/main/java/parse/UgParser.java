@@ -33,16 +33,16 @@ public class UgParser {
 
 	
 	public static List<Faculty> getFaculties(){
-		List<Faculty> $ = new ArrayList<>();
-		List<String> ignoredIds = Arrays.asList("", "7", "99", "300", "450");
+		final List<Faculty> $ = new ArrayList<>();
+		final List<String> ignoredIds = Arrays.asList("", "7", "99", "300", "450");
 
 		try {
-			for (Element faculty : Scraper.getDocumentFromURL(new URL(UG_SEARCH_URL))
+			for (final Element faculty : Scraper.getDocumentFromURL(new URL(UG_SEARCH_URL))
 					.select("select[name=\"FAC\"] option"))
 				if (!ignoredIds.contains(faculty.attr("value")))
 					$.add(new Faculty(faculty.attr("value"), faculty.text()));
 				
-		} catch (IOException ¢) {
+		} catch (final IOException ¢) {
 			¢.printStackTrace();
 		}
 		
@@ -52,9 +52,9 @@ public class UgParser {
 	
 	public static List<String> getCoursesNamesAndID(){
 		Document courses = null;
-		List<String> $ = new ArrayList<>();
+		final List<String> $ = new ArrayList<>();
 		
-		Map<String,String> dataMap = new HashMap<>();
+		final Map<String,String> dataMap = new HashMap<>();
 		dataMap.put("CNM", "");
 		dataMap.put("CNO", "");
 		dataMap.put("PNT", "");
@@ -79,16 +79,16 @@ public class UgParser {
 		
 		int count = 0;
 		
-		for (Faculty faculty : getFaculties()){
+		for (final Faculty faculty : getFaculties()){
 			try {
 				dataMap.put("FAC", faculty.getId());
 				courses = Scraper.getSearchResults(UG_SEARCH_URL,dataMap);			
-			} catch (IOException ¢) {
+			} catch (final IOException ¢) {
 				// TODO Auto-generated catch block
 				¢.printStackTrace();
 			}
 			if (courses!=null)
-				for (Element course : courses.getElementsByClass("result-row")){
+				for (final Element course : courses.getElementsByClass("result-row")){
 					++count;
 					$.add(course.childNode(1).childNode(1).childNode(0).toString());
 					//System.out.println(course.childNode(1).childNode(1).childNode(0));
@@ -104,27 +104,27 @@ public class UgParser {
 	
 	
 	public static void createCoursesPrerequisitesDocument(){	
-		for (String courseID : getCoursesNamesAndID()){
+		for (final String courseID : getCoursesNamesAndID()){
 			System.out.println(courseID);
 			createCoursePrerequisitesElement(courseID);
 		}
 	}
 	
-	public static void createCoursePrerequisitesElement(String courseID){
+	public static void createCoursePrerequisitesElement(final String courseID){
 		try {
-			org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			org.w3c.dom.Element rootElement = doc.createElement("Prerequisites");
+			final org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			final org.w3c.dom.Element rootElement = doc.createElement("Prerequisites");
 			org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
-			Element prerTabElement = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID)).getElementsByAttributeValue("class", "tab0").first();
+			final Element prerTabElement = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID)).getElementsByAttributeValue("class", "tab0").first();
 			if (prerTabElement != null)
-				for (Element prerequisitesElement : prerTabElement.getElementsContainingOwnText("מקצועות קדם")) {
+				for (final Element prerequisitesElement : prerTabElement.getElementsContainingOwnText("מקצועות קדם")) {
 					System.out.println(prerequisitesElement);
-					for (Element prerequisite : prerequisitesElement.parent().parent().parent().children()){
+					for (final Element prerequisite : prerequisitesElement.parent().parent().parent().children()){
 						if ((prerequisite + "").contains("<td>או</td>")) {
 							rootElement.appendChild(prepOptionElement);
 							prepOptionElement = doc.createElement("PrerOption");
 						}
-						org.w3c.dom.Element courseElement = doc.createElement("PrepCourse");
+						final org.w3c.dom.Element courseElement = doc.createElement("PrepCourse");
 						courseElement.appendChild(doc.createTextNode(prerequisite.getElementsByTag("a").text()));
 						prepOptionElement.appendChild(courseElement);
 					}
@@ -133,10 +133,10 @@ public class UgParser {
 				}
 			if (rootElement.hasChildNodes())
 				doc.appendChild(rootElement);
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform((new DOMSource(doc)),
-					(new StreamResult(new OutputStreamWriter(System.out, "UTF-8"))));
+			transformer.transform(new DOMSource(doc),
+					new StreamResult(new OutputStreamWriter(System.out, "UTF-8")));
 		} catch (TransformerException | IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}

@@ -10,7 +10,7 @@ public abstract class Catalog {
 	int REQ_OBLIGATORY_POINTS;
 	int REQ_FREE_CHOICE_POINTS;
 
-	public Catalog(List<Course> obligatoryList, List<Course> malagsList, int reqObligatory, int reqFreeChoice) {
+	public Catalog(final List<Course> obligatoryList, final List<Course> malagsList, final int reqObligatory, final int reqFreeChoice) {
 		if (obligatoryList == null || malagsList == null)
 			throw new NullPointerException();
 		obligatory = new ArrayList<>(obligatoryList);
