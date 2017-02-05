@@ -179,7 +179,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 	//
 	private void setCoursesListsModels() {
 		listeners.forEach(
-				x -> x.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
+				λ -> λ.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 		courseModel = new DefaultListModel<>();
 		ChosenCourseModel = new DefaultListModel<>();
 	}
@@ -298,7 +298,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				if (index <= -1)
 					return;
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
 			}
 		});
@@ -310,7 +310,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						btnAddCourse.setEnabled(false);
 					else {
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
-						listeners.forEach(x -> x.actionPerformed(
+						listeners.forEach(λ -> λ.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
 					}
 			}
@@ -324,7 +324,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 				if (index <= -1)
 					return;
 				highlighted = getIdFromDescription((String) model.getElementAt(index));
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DETAILS)));
 			}
 		});
@@ -332,7 +332,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				chosenFaculty = cmbFaculties.getSelectedItem() + "";
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
@@ -344,7 +344,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						btnAddCourse.setEnabled(false);
 					else {
 						picked = getIdFromDescription(lstAvailableCourses.getSelectedValue());
-						listeners.forEach(x -> x.actionPerformed(
+						listeners.forEach(λ -> λ.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.PICK)));
 					}
 			}
@@ -357,7 +357,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 						btnRemoveCourse.setEnabled(false);
 					else {
 						droped = getIdFromDescription(lstChosenCourses.getSelectedValue());
-						listeners.forEach(x -> x.actionPerformed(
+						listeners.forEach(λ -> λ.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.DROP)));
 					}
 			}
@@ -365,7 +365,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
-				listeners.forEach(x -> x.actionPerformed(
+				listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.SAVE_CHOSEN_COURSES)));
 			}
 		});
@@ -379,7 +379,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				query = searchField.getText();
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
@@ -390,7 +390,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 					return;
 				searchField.setText(DEFAULT_COURSE_NUM_TEXT);
 				query = "";
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
@@ -405,7 +405,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				final String txt = searchField.getText();
 				query = txt.equals(DEFAULT_COURSE_NUM_TEXT) ? "" : txt;
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});
@@ -414,7 +414,7 @@ public class AvailableCourses extends JPanel implements CourseListView {
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				final String txt = searchField.getText();
 				query = txt.equals(DEFAULT_COURSE_NUM_TEXT) ? "" : txt;
-				listeners.forEach(x -> x
+				listeners.forEach(λ -> λ
 						.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, CourseCommand.GET_QUERY)));
 			}
 		});

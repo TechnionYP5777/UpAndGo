@@ -86,7 +86,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 					mainLuzer.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 				else {
 					if (userChoise == JOptionPane.YES_OPTION)
-						listeners.forEach(x -> x.actionPerformed(
+						listeners.forEach(λ -> λ.actionPerformed(
 								new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.SAVE)));
 					Message.hyperCatBox(BYE_MSG, "Bye Bye", new ImageIcon("resources/cat-6-icon.png"));
 					System.exit(0);
@@ -193,14 +193,14 @@ public class mainLuzerView extends JFrame implements MenuView {
 		mnItCatalog.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
-				listeners.forEach(x -> x.actionPerformed(
+				listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_CATALOG)));
 			}
 		});
 		mnItGilayon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
-				listeners.forEach(x -> x.actionPerformed(
+				listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, MenuCommand.LOAD_GILAYON)));
 			}
 		});

@@ -210,7 +210,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
-					listeners.forEach(x -> x.actionPerformed(
+					listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_NEXT_GENERATED_SCHED)));
 			}
 		});
@@ -220,7 +220,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
-					listeners.forEach(x -> x.actionPerformed(
+					listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.GET_PREV_GENERATED_SCHED)));
 			}
 		});
@@ -231,7 +231,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				scheduleWasRequested = true;
 				schedIndex.setVisible(true);
-				listeners.forEach(x -> x.actionPerformed(
+				listeners.forEach(λ -> λ.actionPerformed(
 					new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.RECALC_SCHED)));
 			}
 		});
@@ -240,7 +240,7 @@ public class TimetableVIew extends JPanel implements ITimeTableView {
 			@Override
 			public void actionPerformed(@SuppressWarnings("unused") final ActionEvent __) {
 				if (scheduleWasRequested)
-					listeners.forEach(x -> x.actionPerformed(
+					listeners.forEach(λ -> λ.actionPerformed(
 						new ActionEvent(this, ActionEvent.ACTION_PERFORMED, TimeTableCommand.SAVE_SCHED)));
 			}
 		});
