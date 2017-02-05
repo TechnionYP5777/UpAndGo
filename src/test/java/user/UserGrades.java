@@ -56,7 +56,6 @@ public class UserGrades extends JFrame {
 		final JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			@Override
-			@SuppressWarnings("null")
 			public void actionPerformed(final ActionEvent arg0) {
 				String result = "";
 				try {
