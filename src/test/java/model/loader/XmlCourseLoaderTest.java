@@ -68,7 +68,7 @@ public class XmlCourseLoaderTest {
 		assert coursesMap.get("324975").getStuff().size() == 1;
 		assert "א.פסקוביץ".equals(coursesMap.get("324975").getStuff().get(0).getLastName());
 		
-		assert coursesMap.get("044191").getStuff().size() == 0;
+		assert coursesMap.get("044191").getStuff().isEmpty();
 		
 		assert coursesMap.get("034039").getStuff().size() == 2;
 		
