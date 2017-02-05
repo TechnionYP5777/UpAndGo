@@ -90,7 +90,7 @@ public class UgParser {
 			if (courses!=null)
 				for (final Element course : courses.getElementsByClass("result-row")){
 					++count;
-					$.add((course.childNode(1).childNode(1).childNode(0) + ""));
+					$.add(course.childNode(1).childNode(1).childNode(0) + "");
 					//System.out.println(course.childNode(1).childNode(1).childNode(0));
 					//System.out.println((course.childNode(3).childNode(0) + "").replace("\n","").substring(1));
 

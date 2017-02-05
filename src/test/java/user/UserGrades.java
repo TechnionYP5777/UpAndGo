@@ -63,7 +63,7 @@ public class UserGrades extends JFrame {
 					final Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
 					if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor))
 						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
-					if("הנדסת תוכנה".equals((comboBox.getSelectedItem() + ""))){
+					if("הנדסת תוכנה".equals(comboBox.getSelectedItem() + "")){
 						final SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
 						final SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
 						final User user = new User(result, seCatalog);

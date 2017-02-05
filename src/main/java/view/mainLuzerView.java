@@ -218,10 +218,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 
 	@Override
 	public void propertyChange(final PropertyChangeEvent evt) {
-		switch (evt.getPropertyName()) {
-		default:
-			break;
-		}
+		evt.getPropertyName();
 	}
 
 	@Override
