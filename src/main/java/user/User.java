@@ -17,7 +17,7 @@ public class User {
 		boolean flag = false;
 		for (String ¢ : grades.split("\\r?\\n")) {
 			if (count++ == 7) {
-				¢ = new StringBuffer(¢).reverse().toString();
+				¢ = "" + new StringBuffer(¢).reverse();
 				name = ¢.substring(3, ¢.length());
 			}
 			if (flag) {
