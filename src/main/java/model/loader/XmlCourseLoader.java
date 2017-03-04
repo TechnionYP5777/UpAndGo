@@ -48,31 +48,30 @@ import model.course.WeekTime;
 import parse.RepFile;
 
 public class XmlCourseLoader extends CourseLoader {
-	private static String REP_XML_PATH;	//  = "REPFILE/REP.XML"
+	private static String REP_XML_PATH; // = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
 	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
 	private static final String CHOSEN_LESSON_GROUPS_SER = "data/ChosenLessonGroups.ser";
 
-	
-	//List<Course> coursesList;
+	// List<Course> coursesList;
 	TreeMap<String, Course> coursesById;
 	TreeMap<String, Course> coursesByName;
-	
+
 	public XmlCourseLoader(final String REP_XML_PATH) {
 		super(REP_XML_PATH);
 		XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
-		
+
 		if (!new File(path).exists())
 			RepFile.getCoursesNamesAndIds();
-		
-		//Create a data dir for saving changes if it does not exists
+
+		// Create a data dir for saving changes if it does not exists
 		final File dataDir = new File(DATA_DIR_PATH);
 		if (!dataDir.exists() || !dataDir.isDirectory())
 			dataDir.mkdir();
-		
-		//coursesList = xmlParser.getCourses(path);
-		//Get data from REP XML file.
+
+		// coursesList = xmlParser.getCourses(path);
+		// Get data from REP XML file.
 		coursesById = new TreeMap<>();
 		coursesByName = new TreeMap<>();
 		getCourses();
@@ -87,7 +86,7 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public void updateCourse(@SuppressWarnings("unused") final Course __) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -100,25 +99,25 @@ public class XmlCourseLoader extends CourseLoader {
 	public TreeMap<String, Course> loadAllCoursesById() {
 		return coursesById;
 	}
-	
+
 	@Override
 	public TreeMap<String, Course> loadAllCoursesByName() {
 		return coursesByName;
 	}
-	
+
 	@Override
-	public void saveChosenCourseNames(final List<String> names){
-        try {
-    		final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+	public void saveChosenCourseNames(final List<String> names) {
+		try {
+			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			final Element rootElement = doc.createElement("ChosenCourses");
 			doc.appendChild(rootElement);
-			
-			names.forEach(name->{
+
+			names.forEach(name -> {
 				final Element course = doc.createElement("Course");
 				course.appendChild(doc.createTextNode(name));
 				rootElement.appendChild(course);
 			});
-			
+
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
@@ -135,6 +134,7 @@ public class XmlCourseLoader extends CourseLoader {
 		if (!new File(CHOSEN_COURSES_PATH).exists())
 			return Collections.emptyList();
 		final List<String> $ = new LinkedList<>();
+		// TODO use try-with-resource
 		try {
 			final NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(CHOSEN_COURSES_PATH).getElementsByTagName("Course");
@@ -148,21 +148,21 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 		return $;
 	}
-	
+
 	@Override
-	public void saveChosenLessonGroups(final List<LessonGroup> gs){
-        try {
-    		final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+	public void saveChosenLessonGroups(final List<LessonGroup> gs) {
+		try {
+			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			final Element rootElement = doc.createElement("ChosenLessonGroups");
 			doc.appendChild(rootElement);
-			
-			gs.forEach(group->{
+
+			gs.forEach(group -> {
 				final Element groupElement = doc.createElement("lessonGroup");
 				groupElement.setAttribute("courseID", group.getCourseID());
 				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
 				rootElement.appendChild(groupElement);
 			});
-			
+
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
@@ -171,21 +171,21 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (ParserConfigurationException | TransformerException ¢) {
 			¢.printStackTrace();
 		}
-        
-        try { 
-        final FileOutputStream fileOut = new FileOutputStream(CHOSEN_LESSON_GROUPS_SER);
-        final ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(gs);
-        out.close();
-        fileOut.close();
+		// TODO Use try with resource
+		try {
+			final FileOutputStream fileOut = new FileOutputStream(CHOSEN_LESSON_GROUPS_SER);
+			final ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(gs);
+			out.close();
+			fileOut.close();
 		} catch (final IOException ¢) {
 			¢.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<LessonGroup> loadChosenLessonGroups(){
+	public List<LessonGroup> loadChosenLessonGroups() {
 		if (!new File(CHOSEN_LESSON_GROUPS).exists())
 			return Collections.emptyList();
 		List<LessonGroup> $ = new LinkedList<>();
@@ -201,27 +201,27 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
-		
-	  try {
-	     final FileInputStream fileIn = new FileInputStream(CHOSEN_LESSON_GROUPS_SER);
-	     final ObjectInputStream in = new ObjectInputStream(fileIn);
-	     $ = (List<LessonGroup>) in.readObject();
-	     in.close();
-	     fileIn.close();
-	  }catch(final IOException ¢) {
-	     ¢.printStackTrace();
-	     return $;
-	  }catch(final ClassNotFoundException ¢) {
-	     System.out.println("LessonGroup class not found");
-	     ¢.printStackTrace();
-	     return $;
-	  }
-		
+		// TODO: Use try-with-resources, and enable this warning --yg
+		try {
+			final FileInputStream fileIn = new FileInputStream(CHOSEN_LESSON_GROUPS_SER);
+			final ObjectInputStream in = new ObjectInputStream(fileIn);
+			$ = (List<LessonGroup>) in.readObject();
+			in.close();
+			fileIn.close();
+		} catch (final IOException ¢) {
+			¢.printStackTrace();
+			return $;
+		} catch (final ClassNotFoundException ¢) {
+			System.out.println("LessonGroup class not found");
+			¢.printStackTrace();
+			return $;
+		}
+
 		return $;
 
 	}
-	
-	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum){
+
+	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
 		try {
 			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
 			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
@@ -265,29 +265,27 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException ¢) {
 			¢.printStackTrace();
 		}
-		
+
 	}
 
-	
-	private static void setStaffList (final Course.CourseBuilder cb ,final Node p, final String s) {
+	private static void setStaffList(final Course.CourseBuilder cb, final Node p, final String s) {
 		final NodeList TicList = ((Element) p).getElementsByTagName(s);
 		for (int k = 0; k < TicList.getLength(); ++k) {
 			final Node n = TicList.item(k);
 			if (n.getNodeType() == Node.ELEMENT_NODE) {
 				String firstName = "";
-				final String[] splited = ((Element) n).getAttributes()
-						.getNamedItem("name").getNodeValue().split(" ");
-				for (int j=0; j < splited.length -1 ; ++j) {
+				final String[] splited = ((Element) n).getAttributes().getNamedItem("name").getNodeValue().split(" ");
+				for (int j = 0; j < splited.length - 1; ++j) {
 					firstName += splited[j];
-					if (j+1 != splited.length -1)
+					if (j + 1 != splited.length - 1)
 						firstName += " ";
 				}
 				cb.addStuffMember(new StuffMember(firstName, splited[splited.length - 1],
 						((Element) n).getAttributes().getNamedItem("title").getNodeValue()));
-			}	
+			}
 		}
 	}
-	
+
 	private void getCourses() {
 		try {
 			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH)
@@ -298,15 +296,15 @@ public class XmlCourseLoader extends CourseLoader {
 					if ("מקצועות ספורט".equals(((Element) p).getAttribute("faculty")))
 						sportParsing(cb, p);
 					else {
-						//get course id
+						// get course id
 						cb.setId(((Element) p).getAttribute("id"));
-						//get course name
+						// get course name
 						cb.setName(((Element) p).getAttribute("name"));
-						//get course faculty
+						// get course faculty
 						cb.setFaculty(((Element) p).getAttribute("faculty"));
-						//get course points
+						// get course points
 						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
-						//get course exam's A date and time
+						// get course exam's A date and time
 						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
 								: LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
@@ -321,45 +319,49 @@ public class XmlCourseLoader extends CourseLoader {
 												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 														.getNamedItem("time").getNodeValue(),
 										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-			 			//get course exam's B date and time
+						// get course exam's B date and time
 						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
 								: LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("year").getNodeValue()
+												.getNamedItem("year").getNodeValue()
 												+ "-"
 												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("month").getNodeValue()
+														.getNamedItem("month").getNodeValue()
 												+ "-"
 												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("day").getNodeValue()
-												+ " " + ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-													.getNamedItem("time").getNodeValue(), 
+														.getNamedItem("day").getNodeValue()
+												+ " "
+												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
+														.getNamedItem("time").getNodeValue(),
 										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-						//get course staff 
-						setStaffList (cb, p,"teacherInCharge");
-						setStaffList (cb, p,"lecturer");
-						setStaffList (cb, p,"assistant");
-						setStaffList (cb, p,"moderator");
-						setStaffList (cb, p,"guide");
-						//get lectures and tutorial group Lessons
+						// get course staff
+						setStaffList(cb, p, "teacherInCharge");
+						setStaffList(cb, p, "lecturer");
+						setStaffList(cb, p, "assistant");
+						setStaffList(cb, p, "moderator");
+						setStaffList(cb, p, "guide");
+						// get lectures and tutorial group Lessons
 						final NodeList lectureList = ((Element) p).getElementsByTagName("lecture");
 						for (int groupNum = 0, k = 0; k < lectureList.getLength(); ++k) {
 							final Node n = lectureList.item(k);
 							groupNum = !((Element) n).hasAttribute("group") ? groupNum + 10
 									: Integer.parseInt(((Element) n).getAttribute("group"));
 							if (n.getNodeType() == Node.ELEMENT_NODE) {
-								createLessonGroup (cb, n, p, "tutorial");
-								createLessonGroup (cb, n, p, "lab");
+								createLessonGroup(cb, n, p, "tutorial");
+								createLessonGroup(cb, n, p, "lab");
 								final NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 								for (int g = 0; g < lessonList.getLength(); ++g) {
 									final Node m = lessonList.item(g);
-									if (m.getNodeType() == Node.ELEMENT_NODE && "lecture".equals(((Element) m).getParentNode().getNodeName()) && ((Element) m).hasAttributes()) {
+									if (m.getNodeType() == Node.ELEMENT_NODE
+											&& "lecture".equals(((Element) m).getParentNode().getNodeName())
+											&& ((Element) m).hasAttributes()) {
 										String place = ((Element) m).getAttribute("building");
 										if (!((Element) m).getAttribute("roomNumber").isEmpty())
 											place += " " + ((Element) m).getAttribute("roomNumber");
 										cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
-												createLesson(n, m, p, 0, convertStrToDay(((Element) m).getAttribute("day")),
-														groupNum, place, Lesson.Type.LECTURE, "lecturer"));
+												createLesson(n, m, p, 0,
+														convertStrToDay(((Element) m).getAttribute("day")), groupNum,
+														place, Lesson.Type.LECTURE, "lecturer"));
 									}
 								}
 							}
@@ -369,10 +371,10 @@ public class XmlCourseLoader extends CourseLoader {
 						coursesByName.put(c.getName(), c);
 						cb.cleartutorialGroup();
 					}
-					
-					cb.clearStaffMembers();
-					cb.clearlecturesGroups();
-					
+
+				cb.clearStaffMembers();
+				cb.clearlecturesGroups();
+
 			}
 		} catch (IOException | SAXException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
@@ -383,14 +385,14 @@ public class XmlCourseLoader extends CourseLoader {
 		b.setFaculty(((Element) p).getAttribute("faculty"));
 		b.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 		final String courseNum = ((Element) p).getAttribute("id");
-		setStaffList (b, p,"teacherInCharge");
+		setStaffList(b, p, "teacherInCharge");
 		final NodeList sportsList = ((Element) p).getElementsByTagName("sport");
 		for (int i = 0; i < sportsList.getLength(); ++i) {
 			final Node n = sportsList.item(i);
 			b.setName(((Element) n).getAttribute("name"));
 			b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
 			createLessonGroup(b, p, p, "sport");
-			coursesById.put(((Element) p).getAttribute("id")+ "-" + ((Element) n).getAttribute("group"), cb.build());
+			coursesById.put(((Element) p).getAttribute("id") + "-" + ((Element) n).getAttribute("group"), cb.build());
 			cb.cleartutorialGroup();
 		}
 	}
@@ -418,8 +420,13 @@ public class XmlCourseLoader extends CourseLoader {
 									: Integer.parseInt(((Element) parentNode.getParentNode()).getAttribute("group"));
 					if (parentGroup != -1) {
 						if (parentGroup == 0)
-							parentGroup = Integer.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group"));
-						if (h.getNodeType() == Node.ELEMENT_NODE && /*(s.equals(((Element) h).getParentNode().getNodeName())) &&*/ parentGroup ==  tutorialGroupNum) {
+							parentGroup = Integer
+									.parseInt(((Element) ((Element) h).getParentNode()).getAttribute("group"));
+						if (h.getNodeType() == Node.ELEMENT_NODE
+								&& /*
+									 * (s.equals(((Element)
+									 * h).getParentNode().getNodeName())) &&
+									 */ parentGroup == tutorialGroupNum) {
 							String place = ((Element) h).getAttribute("building");
 							if (!((Element) h).getAttribute("roomNumber").isEmpty())
 								place += " " + ((Element) h).getAttribute("roomNumber");
@@ -427,21 +434,21 @@ public class XmlCourseLoader extends CourseLoader {
 								b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
 										createLesson(n, h, p, g, convertStrToDay(((Element) h).getAttribute("day")),
 												tutorialGroupNum, place, t, "assistant"));
-						}	
+						}
 					}
 				}
 				if ("sport".equals(s))
 					return;
-			}	
+			}
 		}
-		
+
 	}
 
 	private static StuffMember findStaffByName(final Course.CourseBuilder cb, final String[] splited) {
 		String firstName = "";
-		for (int j=0; j < splited.length -1 ; ++j) {
+		for (int j = 0; j < splited.length - 1; ++j) {
 			firstName += splited[j];
-			if (j+1 != splited.length -1)
+			if (j + 1 != splited.length - 1)
 				firstName += " ";
 		}
 		for (final StuffMember $ : cb.getStaffList())
@@ -450,7 +457,8 @@ public class XmlCourseLoader extends CourseLoader {
 		return null;
 	}
 
-	private Lesson createLesson(final Node n, final Node h, final Node p, final int index, final DayOfWeek lectureDay, final int groupNum, final String place, final Lesson.Type t, final String staff) {
+	private Lesson createLesson(final Node n, final Node h, final Node p, final int index, final DayOfWeek lectureDay,
+			final int groupNum, final String place, final Lesson.Type t, final String staff) {
 		return new Lesson(
 				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
 						: findStaffByName(cb, findLGStaff(n, groupNum, staff).split(" ")),
@@ -460,7 +468,7 @@ public class XmlCourseLoader extends CourseLoader {
 						: ((Element) h).getAttribute("timeEnd"))),
 				place, t, groupNum, ((Element) p).getAttribute("id"), ((Element) p).getAttribute("name"));
 	}
-	
+
 	private String findLGStaff(final Node n, final int groupNum, final String staff) {
 		for (int $ = 0; $ < ((Element) n).getElementsByTagName(staff).getLength(); ++$)
 			if (((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group")
@@ -473,27 +481,34 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private static DayOfWeek convertStrToDay(final String ¢) {
 		switch (¢) {
-		  case "א":  return DayOfWeek.valueOf("SUNDAY");
-		  case "ב":  return DayOfWeek.valueOf("MONDAY");
-		  case "ג":  return DayOfWeek.valueOf("TUESDAY");
-		  case "ד":  return DayOfWeek.valueOf("WEDNESDAY");
-		  case "ה":  return DayOfWeek.valueOf("THURSDAY");
-		  case "ו":  return DayOfWeek.valueOf("FRIDAY");
-		  default: return DayOfWeek.valueOf("SATURDAY");
+		case "א":
+			return DayOfWeek.valueOf("SUNDAY");
+		case "ב":
+			return DayOfWeek.valueOf("MONDAY");
+		case "ג":
+			return DayOfWeek.valueOf("TUESDAY");
+		case "ד":
+			return DayOfWeek.valueOf("WEDNESDAY");
+		case "ה":
+			return DayOfWeek.valueOf("THURSDAY");
+		case "ו":
+			return DayOfWeek.valueOf("FRIDAY");
+		default:
+			return DayOfWeek.valueOf("SATURDAY");
 		}
 	}
 
 	@Override
 	public List<Faculty> loadFaculties() {
 		final List<Faculty> $ = new ArrayList<>();
-		for(final Entry<String, Course> ¢ : coursesById.entrySet()) {
+		for (final Entry<String, Course> ¢ : coursesById.entrySet()) {
 			final Faculty faculty = new Faculty(¢.getKey().substring(0, 2), ¢.getValue().getFaculty());
 			if (!$.contains(faculty))
 				$.add(faculty);
 		}
-		return $;		
+		return $;
 	}
-	
+
 	@Override
 	public Course loadCourse(final String name) {
 		return !coursesById.containsKey(name) ? null : coursesById.get(name);

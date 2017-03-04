@@ -4,7 +4,6 @@ package model.course;
  * @since 2-1-17
  */
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,30 +14,28 @@ import model.loader.XmlCourseLoader;
 
 public class LessonTest {
 
-CourseLoader cr;
-	
-	
-	
+	CourseLoader cr;
+
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest5.XML");
-		
+
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 
 		assert !courses.get(0).getLectures().get(0).getLessons().get(0)
 				.IsClashWith(courses.get(0).getTutorials().get(0).getLessons().get(0));
-		//assertNull(s);
+		// assertNull(s);
 	}
-	
+
 	@Test
 	public void test_b() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest6.XML");
-		
+
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 
 		assert courses.get(0).getLectures().get(0).getLessons().get(0)
 				.IsClashWith(courses.get(0).getTutorials().get(0).getLessons().get(0));
-		//assertNull(s);
+		// assertNull(s);
 	}
 
 }

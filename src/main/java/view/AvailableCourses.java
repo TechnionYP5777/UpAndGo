@@ -45,7 +45,6 @@ import command.CourseCommand;
 import model.course.CourseId;
 import property.CourseProperty;
 
-
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;

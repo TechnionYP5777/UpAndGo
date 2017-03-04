@@ -21,7 +21,7 @@ import view.mainLuzerView;
  */
 public class Launcher {
 	protected static CourseLoader cLoader;
-	
+
 	protected static CourseModel cModel;
 	protected static TimeTableModel ttModel;
 	protected static MenuModel mModel;
@@ -50,7 +50,6 @@ public class Launcher {
 				mlView = new mainLuzerView(ttView, acView);
 				mCtrl = new MenuController(mModel, mlView, clCtrl, ttCtrl);
 				mlView.setVisible(true);
-				
 
 			} catch (final Exception ¢) {
 				¢.printStackTrace();

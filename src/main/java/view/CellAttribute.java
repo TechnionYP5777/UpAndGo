@@ -3,15 +3,14 @@ package view;
 import java.awt.Dimension;
 
 public interface CellAttribute {
-	 void addColumn();
+	void addColumn();
 
-	  void addRow();
+	void addRow();
 
-	  void insertRow(int row);
+	void insertRow(int row);
 
-	  Dimension getSize();
+	Dimension getSize();
 
-	  void setSize(Dimension size);
-
+	void setSize(Dimension size);
 
 }

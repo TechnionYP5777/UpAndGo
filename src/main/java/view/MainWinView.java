@@ -39,7 +39,6 @@ import model.CourseModel;
 
 public class MainWinView extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
 	CourseModel m;
 	private JPanel contentPane;
@@ -57,11 +56,11 @@ public class MainWinView extends JFrame {
 	static JButton btnRemoveCourse;
 	JTextField courseNum;
 
-	private static final String DEFAULT_COURSE_NUM_TEXT ="Enter course number";
-	private static final String EMPTY_DESCRIPTION=" Choose course to add ";
-	private static final String NO_COURSES_LEFT=	" No Courses Left ";
+	private static final String DEFAULT_COURSE_NUM_TEXT = "Enter course number";
+	private static final String EMPTY_DESCRIPTION = " Choose course to add ";
+	private static final String NO_COURSES_LEFT = " No Courses Left ";
 	private static final String FINISH_MSG = "Your choise has been saved!\n   Up&Go will close now!";
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -223,8 +222,8 @@ public class MainWinView extends JFrame {
 		courseNum.setColumns(10);
 	}
 
-	private void setGroupLayout(final JLabel lblTitle, final JScrollPane scpCourseDescription, final JScrollPane scpCourseList,
-			final JScrollPane scpChosenCourses) {
+	private void setGroupLayout(final JLabel lblTitle, final JScrollPane scpCourseDescription,
+			final JScrollPane scpCourseList, final JScrollPane scpChosenCourses) {
 
 		final GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
@@ -344,7 +343,8 @@ public class MainWinView extends JFrame {
 				courseNum.setText("");
 			}
 		});
-		courseNum.addActionListener((final ActionEvent __) -> lstCourseList.setSelectedValue(courseNum.getText(), true));
+		courseNum
+				.addActionListener((final ActionEvent __) -> lstCourseList.setSelectedValue(courseNum.getText(), true));
 		courseNum.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(@SuppressWarnings("unused") final FocusEvent __) {

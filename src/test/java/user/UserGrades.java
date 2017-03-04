@@ -5,8 +5,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -51,50 +49,40 @@ public class UserGrades extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		final JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"הנדסת תוכנה", "תלת שנתי", "ארבע שנתי", "הנדסת מחשבים"}));
+		comboBox.setModel(
+				new DefaultComboBoxModel(new String[] { "הנדסת תוכנה", "תלת שנתי", "ארבע שנתי", "הנדסת מחשבים" }));
 		final GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		final JButton btnDone = new JButton("Done");
-		btnDone.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				String result = "";
-				try {
-					final Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-					if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor))
-						result = (String) contents.getTransferData(DataFlavor.stringFlavor);
-					if("הנדסת תוכנה".equals(comboBox.getSelectedItem() + "")){
-						final SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML", new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
-						final SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
-						final User user = new User(result, seCatalog);
-					}
-					JOptionPane.showMessageDialog(null,"הקטלוג נטען בהצלחה!");
-					} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {
-						JOptionPane.showMessageDialog(null,"העתק מתוך UG את גיליון הציונים שלך");
-					}
-
+		btnDone.addActionListener(arg0 -> {
+			String result = "";
+			try {
+				final Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+				if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor))
+					result = (String) contents.getTransferData(DataFlavor.stringFlavor);
+				if ("הנדסת תוכנה".equals(comboBox.getSelectedItem() + "")) {
+					final SECatalogLoader seCatalog = new SECatalogLoader("SoftwareEngineering.XML",
+							new CourseModel(new XmlCourseLoader("REPFILE/REP.XML")));
+					final SoftwareEngineering c = (SoftwareEngineering) seCatalog.getCatalog();
+					final User user = new User(result, seCatalog);
+				}
+				JOptionPane.showMessageDialog(null, "הקטלוג נטען בהצלחה!");
+			} catch (@SuppressWarnings("unused") UnsupportedFlavorException | IOException ¢) {
+				JOptionPane.showMessageDialog(null, "העתק מתוך UG את גיליון הציונים שלך");
 			}
+
 		});
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(156)
-							.addComponent(btnDone))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(51)
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(213, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(56)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(31)
-					.addComponent(btnDone)
-					.addContainerGap(154, Short.MAX_VALUE))
-		);
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup().addGap(156).addComponent(btnDone))
+								.addGroup(gl_contentPane.createSequentialGroup().addGap(51).addComponent(comboBox,
+										GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(213, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(56)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(31).addComponent(btnDone).addContainerGap(154, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

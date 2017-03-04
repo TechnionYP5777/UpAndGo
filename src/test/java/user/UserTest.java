@@ -46,8 +46,7 @@ public class UserTest extends JFrame {
 		setContentPane(contentPane);
 
 		@SuppressWarnings("rawtypes")
-		final
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "הנדסת תוכנה", "ארבע שנתי", "תלת שנתי", "הנדסת מחשבים" }));
 

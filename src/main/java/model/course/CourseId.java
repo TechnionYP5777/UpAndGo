@@ -33,7 +33,7 @@ public class CourseId implements Comparable<CourseId> {
 
 	public final String name;
 	public final String number;
-	
+
 	public CourseId(final String cNum, final String cName) {
 		name = cName;
 		number = cNum;

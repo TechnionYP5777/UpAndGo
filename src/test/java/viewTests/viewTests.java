@@ -12,10 +12,10 @@ import model.loader.XmlCourseLoader;
 import view.AvailableCourses;
 
 public class viewTests {
-	static CourseListController cntr; 
+	static CourseListController cntr;
 
 	public viewTests() {
-		
+
 		design();
 	}
 
@@ -25,8 +25,8 @@ public class viewTests {
 		f.setSize(280, 500);
 		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setVisible(true);
-		final AvailableCourses  avl= new AvailableCourses();
-		cntr= new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/REP.XML")), avl);
+		final AvailableCourses avl = new AvailableCourses();
+		cntr = new CourseListController(new CourseModel(new XmlCourseLoader("resources/testXML/REP.XML")), avl);
 		f.getContentPane().add(avl);
 	}
 

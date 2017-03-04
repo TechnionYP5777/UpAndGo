@@ -16,10 +16,11 @@ public class SoftwareEngineering extends CSCatalog {
 	static final double TOTAL_FACULTY_CHOICE_POINTS = 25.5;
 	static final int FREE_CHOICE_POINTS = 10;
 
-	public SoftwareEngineering(final List<Course> obligatoryList, final List<Course> malagsList, final List<Course> listAList,
-			final List<Course> listBList, final List<Course> coreList, final List<List<Course>> scientChainLists) {
-		super(obligatoryList, malagsList, listAList, listBList, OBLIGATORY_POINTS,
-				FREE_CHOICE_POINTS, MIN_LISTA_POINTS);
+	public SoftwareEngineering(final List<Course> obligatoryList, final List<Course> malagsList,
+			final List<Course> listAList, final List<Course> listBList, final List<Course> coreList,
+			final List<List<Course>> scientChainLists) {
+		super(obligatoryList, malagsList, listAList, listBList, OBLIGATORY_POINTS, FREE_CHOICE_POINTS,
+				MIN_LISTA_POINTS);
 		if (coreList == null || scientChainLists == null)
 			throw new NullPointerException();
 		core = new ArrayList<>(coreList);

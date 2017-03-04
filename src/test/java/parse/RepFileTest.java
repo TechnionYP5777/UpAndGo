@@ -10,19 +10,19 @@ public class RepFileTest {
 		RepFile.downloadData();
 		assert true;
 	}
-	
+
 	@Test
 	@SuppressWarnings("static-method")
 	public void testGetCoursesFromRepFile() {
 		RepFile.getCoursesNamesAndIds();
 		assert true;
 	}
-	
+
 	@Test
 	@SuppressWarnings("static-method")
 	public void testGetCoursesInfoFromRepFile() {
 		RepFile.getCoursesInfoFromRepFile();
 		assert true;
 	}
-	
+
 }

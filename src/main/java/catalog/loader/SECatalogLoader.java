@@ -60,7 +60,7 @@ public class SECatalogLoader extends CSCatalogLoader {
 		scientificChain.add(otherScientCourses);
 		// * maybe we done need the Catalog class and the catalogLoader is
 		// enough *//
-		
+
 		theCatalog = new SoftwareEngineering(obligatory, malags, listA, listB, core, scientificChain);
 		System.out.println("malags: " + malags);
 		System.out.println("listA: " + listA);
@@ -86,15 +86,16 @@ public class SECatalogLoader extends CSCatalogLoader {
 	public List<Course> getDoneCourse() {
 		final List<Course> $ = super.getDoneCourse();
 		$.addAll(getDoneCoursesForOneList(core));
-		for (final List<Course> ¢: scientificChain) 
+		for (final List<Course> ¢ : scientificChain)
 			$.addAll(getDoneCoursesForOneList(¢));
 		return $;
 	}
+
 	@Override
 	public List<Course> getCoursesTheUserCanTake() {
 		final List<Course> $ = super.getCoursesTheUserCanTake();
 		$.addAll(getCoursesTheUserCanTakeForOneList(core));
-		for (final List<Course> ¢: scientificChain) 
+		for (final List<Course> ¢ : scientificChain)
 			$.addAll(getCoursesTheUserCanTakeForOneList(¢));
 		return $;
 	}

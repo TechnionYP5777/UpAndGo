@@ -28,6 +28,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 
 import command.MenuCommand;
+
 /**
  * 
  * @author Alex.V & Lidia.P
@@ -109,7 +110,7 @@ public class mainLuzerView extends JFrame implements MenuView {
 
 		// Build the menu.
 		menu = new JMenu("טעינה");
-		menu.setVisible(false);	// TODO: set visible
+		menu.setVisible(false); // TODO: set visible
 		menu.setPreferredSize(new Dimension(100, 20));
 		menu.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);

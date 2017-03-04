@@ -28,41 +28,41 @@ public class TimeTableModel implements Model {
 
 	protected List<List<LessonGroup>> lessonGroupsList = new ArrayList<>();
 	protected int sched_index;
-	
+
 	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
-	
+
 	public TimeTableModel(final CourseLoader loader) {
 		this.loader = loader;
 	}
-	
+
 	public void setCourses(final List<Course> ¢) {
 		courses = new ArrayList<>(¢);
 	}
-	
+
 	public void setDaysoffFlag(final boolean f) {
 		isDaysoffCount = f;
 	}
-	
+
 	public void setBlankSpaceFlag(final boolean f) {
 		isBlankSpaceCount = f;
 	}
-	
+
 	public void setMinStartTime(final LocalTime ¢) {
 		minStartTime = ¢;
 	}
-	
+
 	public void setMaxEndTime(final LocalTime ¢) {
 		maxEndTime = ¢;
 	}
-	
+
 	public void loadSchedule() {
-		if(courses.isEmpty()){
+		if (courses.isEmpty()) {
 			notifySchedListenersNoCourses();
 
 			return;
 		}
-		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(
-				Scheduler.getTimetablesList(courses), isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(courses),
+				isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
 			notifySchedListenersNoSched();
 		else {
@@ -72,7 +72,7 @@ public class TimeTableModel implements Model {
 			notifySchedListeners();
 		}
 	}
-	
+
 	public void loadNextSchedule() {
 		if (lessonGroupsList.size() <= sched_index + 1)
 			return;
@@ -85,32 +85,35 @@ public class TimeTableModel implements Model {
 			return;
 		--sched_index;
 		notifySchedListeners();
-		
+
 	}
-	
+
 	private void notifySchedListeners() {
 		listenersMap.get(TimeTableProperty.SCHEDULE).forEach(λ -> λ.propertyChange(
 				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index))));
-		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE_INDEX, null,
-				sched_index + 1 + "/" + lessonGroupsList.size())));
+		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this,
+				TimeTableProperty.SCHEDULE_INDEX, null, sched_index + 1 + "/" + lessonGroupsList.size())));
 	}
+
 	private void notifySchedListenersNoSched() {
-		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
+		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(
+				λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
 	}
+
 	private void notifySchedListenersNoCourses() {
-		listenersMap.get(TimeTableProperty.NO_COURSES).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
+		listenersMap.get(TimeTableProperty.NO_COURSES).forEach(
+				λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
 	}
-	
-	
+
 	public List<LessonGroup> getChosenLessonGroups() {
 		return lessonGroupsList.size() <= sched_index + 1 ? new ArrayList<LessonGroup>()
 				: lessonGroupsList.get(sched_index);
 	}
-	
+
 	public void saveChosenLessonGroups(final List<LessonGroup> ¢) {
 		loader.saveChosenLessonGroups(¢);
 	}
-	
+
 	public void loadChosenLessonGroups() {
 		lessonGroupsList.add(loader.loadChosenLessonGroups());
 		notifySchedListeners();

@@ -82,21 +82,24 @@ public abstract class CatalogLoader {
 		markDoneCoursesForOneList(userCourses, malags);
 
 	}
+
 	protected static List<Course> getDoneCoursesForOneList(final List<Course> cs) {
 		final List<Course> $ = new ArrayList<>();
-		for (final Course ¢: cs)
+		for (final Course ¢ : cs)
 			if (¢.getDone() && ¢.isPassThisSemester())
 				$.add(¢);
 		return $;
 	}
+
 	protected List<Course> getDoneCourse() {
 		final List<Course> $ = getDoneCoursesForOneList(obligatory);
 		$.addAll(getDoneCoursesForOneList(malags));
 		return $;
 	}
+
 	protected static List<Course> getCoursesTheUserCanTakeForOneList(final List<Course> cs) {
 		final List<Course> $ = new ArrayList<>();
-		for (final Course c: cs) {
+		for (final Course c : cs) {
 			for (final Course c1 : c.getPrerequisites())
 				if (!c1.getDone())
 					break;
@@ -104,7 +107,8 @@ public abstract class CatalogLoader {
 				$.add(c);
 		}
 		return $;
-	} //* TODO: think how to do it for co-requisites courses *//
+	} // * TODO: think how to do it for co-requisites courses *//
+
 	protected List<Course> getCoursesTheUserCanTake() {
 		final List<Course> $ = getCoursesTheUserCanTakeForOneList(obligatory);
 		$.addAll(getCoursesTheUserCanTakeForOneList(malags));

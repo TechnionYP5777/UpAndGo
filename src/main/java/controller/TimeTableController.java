@@ -12,29 +12,30 @@ import property.CourseProperty;
 import property.TimeTableProperty;
 import view.ITimeTableView;
 
-public class TimeTableController implements Controller, PropertyChangeListener{
+public class TimeTableController implements Controller, PropertyChangeListener {
 
 	protected TimeTableModel model;
 	protected ITimeTableView view;
 	protected CourseListController clCtrl;
-	
-	public TimeTableController(final TimeTableModel model, final ITimeTableView view, final CourseListController clCtrl) {
+
+	public TimeTableController(final TimeTableModel model, final ITimeTableView view,
+			final CourseListController clCtrl) {
 		this.model = model;
 		this.view = view;
-		
+
 		this.model.addPropertyChangeListener(TimeTableProperty.SCHEDULE, this.view);
 		this.model.addPropertyChangeListener(TimeTableProperty.SCHEDULE_INDEX, this.view);
 		this.model.addPropertyChangeListener(TimeTableProperty.NO_SCHEDULE, this.view);
 		this.model.addPropertyChangeListener(TimeTableProperty.NO_COURSES, this.view);
-		
+
 		this.view.addActionListener(this);
-		
+
 		this.clCtrl = clCtrl;
 		this.clCtrl.registerListenerToProperty(this, CourseProperty.CHOSEN_LIST_DETAILS);
-		
+
 		init();
 	}
-	
+
 	@Override
 	public void actionPerformed(final ActionEvent ¢) {
 		if (¢.getActionCommand().equals(TimeTableCommand.GET_NEXT_GENERATED_SCHED))
@@ -53,7 +54,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 			model.loadSchedule();
 		}
 	}
-	
+
 	public void saveChosenLessonGroups() {
 		model.saveChosenLessonGroups(model.getChosenLessonGroups());
 	}
@@ -61,9 +62,9 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	@Override
 	public void init() {
 		model.loadChosenLessonGroups();
-		
+
 	}
-	
+
 	@Override
 	public void registerListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.addPropertyChangeListener(p, l);
@@ -73,7 +74,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 	public void unregisterListenerToProperty(final PropertyChangeListener l, final String p) {
 		model.removePropertyChangeListener(p, l);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public void propertyChange(final PropertyChangeEvent evt) {
@@ -84,7 +85,7 @@ public class TimeTableController implements Controller, PropertyChangeListener{
 		default:
 			break;
 		}
-		
+
 	}
 
 }

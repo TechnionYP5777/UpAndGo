@@ -52,8 +52,8 @@ public class MultiSpanCellTable extends JTable {
 
 		if (!includeSpacing) {
 			final Dimension spacing = getIntercellSpacing();
-			$.setBounds($.x + spacing.width / 2, $.y + spacing.height / 2,
-					$.width - spacing.width, $.height - spacing.height);
+			$.setBounds($.x + spacing.width / 2, $.y + spacing.height / 2, $.width - spacing.width,
+					$.height - spacing.height);
 		}
 		return $;
 	}

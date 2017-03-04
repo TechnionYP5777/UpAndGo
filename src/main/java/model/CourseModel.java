@@ -36,7 +36,7 @@ public class CourseModel implements Model {
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
 		facultyList = loader.loadFaculties();
-		for(final String id: this.loader.loadChosenCourseNames())
+		for (final String id : this.loader.loadChosenCourseNames())
 			pickedCourseList.add(coursesById.get(id));
 	}
 
@@ -71,7 +71,8 @@ public class CourseModel implements Model {
 		curCourseList.remove(name);
 
 		// notify listeners
-		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList)));
+		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList)));
 	}
 
 	public List<String> getCoursesNames() {
@@ -101,22 +102,23 @@ public class CourseModel implements Model {
 	public void exposeCourse(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		listenersMap.get(CourseProperty.DETAILS).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, getCourseById(name))));
+		listenersMap.get(CourseProperty.DETAILS).forEach(λ -> λ
+				.propertyChange(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, getCourseById(name))));
 	}
 
 	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(final Entry<String, Course> $ : coursesById.entrySet())
+		for (final Entry<String, Course> $ : coursesById.entrySet())
 			if (name.equals($.getValue().getName()))
 				return $.getValue();
 		return null;
 	}
-	
+
 	public Course getCourseById(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for(final Entry<String, Course> $ : coursesById.entrySet())
+		for (final Entry<String, Course> $ : coursesById.entrySet())
 			if (name.equals($.getValue().getId()))
 				return $.getValue();
 		return null;
@@ -127,7 +129,6 @@ public class CourseModel implements Model {
 		pickedCourseList.forEach(λ -> $.add(λ.getId()));
 		return $;
 	}
-	
 
 	public void loadChosenCourses() {
 		// save picking in DB
@@ -138,11 +139,10 @@ public class CourseModel implements Model {
 		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
 				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
-	
+
 	public void saveChosenCourses(final List<String> names) {
 		loader.saveChosenCourseNames(names);
 	}
-	
 
 	/*
 	 * load needed courses (by name / subname) from DB if empty, load all of
@@ -150,8 +150,8 @@ public class CourseModel implements Model {
 	 */
 	public void loadQuery(final String query) {
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
-		if(query.isEmpty())
-			coursesById.forEach((key, course) -> matchingIds.add(new CourseId(course.getId(), course.getName())));	
+		if (query.isEmpty())
+			coursesById.forEach((key, course) -> matchingIds.add(new CourseId(course.getId(), course.getName())));
 		else {
 			coursesById.forEach((key, course) -> {
 				if (key.contains(query))
@@ -166,7 +166,7 @@ public class CourseModel implements Model {
 		listenersMap.get(CourseProperty.COURSE_LIST).forEach(λ -> λ.propertyChange(
 				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
 	}
-	
+
 	/*
 	 * load needed courses (by name / subname) from DB if empty, load all of
 	 * them
@@ -174,7 +174,7 @@ public class CourseModel implements Model {
 	public void loadQueryByFaculty(final String query, final String faculty) {
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
 		coursesById.forEach(query.isEmpty() ? (key, course) -> {
-			if(course.getFaculty().equals(faculty))
+			if (course.getFaculty().equals(faculty))
 				matchingIds.add(new CourseId(course.getId(), course.getName()));
 		} : (key, course) -> {
 			if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty))
@@ -183,7 +183,7 @@ public class CourseModel implements Model {
 		listenersMap.get(CourseProperty.COURSE_LIST).forEach(λ -> λ.propertyChange(
 				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
 	}
-	
+
 	/*
 	 * load faculty names
 	 */
@@ -193,19 +193,20 @@ public class CourseModel implements Model {
 		listenersMap.get(CourseProperty.FACULTY_LIST).forEach(λ -> λ.propertyChange(
 				new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(faculties))));
 	}
-	
+
 	public void loadChosenCoursesDetails() {
-		listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, pickedCourseList)));
+		listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach(λ -> λ.propertyChange(
+				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, pickedCourseList)));
 	}
-	
+
 	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
-	
+
 	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
-	
+
 	@Override
 	public void addPropertyChangeListener(final String property, final PropertyChangeListener l) {
 		if (property == null || l == null)
