@@ -353,7 +353,7 @@ public class XmlCourseLoader extends CourseLoader {
 								final NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 								for (int g = 0; g < lessonList.getLength(); ++g) {
 									final Node m = lessonList.item(g);
-									if (m.getNodeType() == Node.ELEMENT_NODE && "lecture".equals(((Element) m).getParentNode().getNodeName()) && ((Element) m).hasAttributes() == true) {
+									if (m.getNodeType() == Node.ELEMENT_NODE && "lecture".equals(((Element) m).getParentNode().getNodeName()) && ((Element) m).hasAttributes()) {
 										String place = ((Element) m).getAttribute("building");
 										if (!((Element) m).getAttribute("roomNumber").isEmpty())
 											place += " " + ((Element) m).getAttribute("roomNumber");
@@ -496,6 +496,6 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	@Override
 	public Course loadCourse(final String name) {
-		return coursesById.containsKey(name) == false ? null : coursesById.get(name);
+		return !coursesById.containsKey(name) ? null : coursesById.get(name);
 	}
 }
