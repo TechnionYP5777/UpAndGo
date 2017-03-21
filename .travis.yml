@@ -8,11 +8,6 @@ addons:
   packages:
    - oracle-java8-installer
 
-# blocklist: add here branches you don't want build using Travis
-branches:
- except:
- - Travis_integration
-
 # safe list: add here branches you want to verify the build & tests will pass
 branches:
  only:
