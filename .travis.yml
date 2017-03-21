@@ -1,0 +1,27 @@
+language: java
+
+jdk:
+ - oraclejdk8
+ 
+addons:
+ apt:
+  packages:
+   - oracle-java8-installer
+
+# blocklist: add here branches you don't want build using Travis
+branches:
+ except:
+ - Travis_integration
+
+# safe list: add here branches you want to verify the build & tests will pass
+branches:
+ only:
+  - master
+
+
+# add this if you use maven for your project and want to verify mvn build is successful and all unit tests pass.
+script:
+ - mvn clean install
+ - mvn cobertura:cobertura
+
+
