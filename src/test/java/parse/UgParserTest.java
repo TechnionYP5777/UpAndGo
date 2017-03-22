@@ -1,9 +1,12 @@
 package parse;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class UgParserTest {
 
+	
 	@Test
 	@SuppressWarnings("static-method")
 	public void test() {
