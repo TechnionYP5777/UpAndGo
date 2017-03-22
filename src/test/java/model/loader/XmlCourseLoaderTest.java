@@ -17,7 +17,7 @@ public class XmlCourseLoaderTest {
 
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("REPFILE/test.XML");
+		cr = new XmlCourseLoader("resources/testXML/test.XML");
 		// cr = new XmlCourseLoader("resources/testXML/REP.XML");
 	}
 
