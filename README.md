@@ -1,4 +1,8 @@
 # Up&Go
+[![Build Status](https://travis-ci.org/TechnionYP5777/UpAndGo.png)](https://travis-ci.org/TechnionYP5777/UpAndGo)
+
+[![codecov](https://codecov.io/gh/TechnionYP5777/UpAndGo/branch/master/graph/badge.svg)](https://codecov.io/gh/TechnionYP5777/UpAndGo)
+
 Up&GO project
 
 Development Status
