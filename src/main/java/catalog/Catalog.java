@@ -5,6 +5,14 @@ import java.util.List;
 
 import model.course.Course;
 
+/**
+ * 
+ * @author Sapir Bismot
+ * @since 19-12-2016
+ * 
+ * Abstract class to represent study catalog for degree.
+ * 
+ */
 public abstract class Catalog {
 	List<Course> obligatory, malags;
 	int REQ_OBLIGATORY_POINTS;

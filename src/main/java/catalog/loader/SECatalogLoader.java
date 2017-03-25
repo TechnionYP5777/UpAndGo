@@ -14,8 +14,11 @@ import model.course.Course;
 
 /**
  * 
- * @author sapir
- * @since Jan 13, 2017
+ * @author Sapir Bismot
+ * @since 13-01-2017
+ * 
+ * Class for loading Software Engineering study catalog.
+ * 
  */
 public class SECatalogLoader extends CSCatalogLoader {
 	List<Course> core;

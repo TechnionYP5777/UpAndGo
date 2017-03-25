@@ -5,6 +5,14 @@ import java.util.List;
 
 import model.course.Course;
 
+/**
+ * 
+ * @author Sapir Bismot
+ * @since 19-12-2016
+ * 
+ * Abstract class to represent study catalog for Computer Science.
+ * 
+ */
 public abstract class CSCatalog extends Catalog {
 	List<Course> listA, listB;
 	int REQ_FACULTY_CHOICE;
