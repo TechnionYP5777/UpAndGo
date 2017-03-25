@@ -47,6 +47,14 @@ import model.course.StuffMember;
 import model.course.WeekTime;
 import parse.RepFile;
 
+/**
+ * 
+ * @author kobybs
+ * @since 12-12-16
+ * 
+ * Class for loading courses data from xml file.
+ * 
+ */
 public class XmlCourseLoader extends CourseLoader {
 	private static String REP_XML_PATH; // = "REPFILE/REP.XML"
 	private static final String DATA_DIR_PATH = "data";

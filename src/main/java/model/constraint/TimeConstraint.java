@@ -3,6 +3,8 @@ package model.constraint;
 /**
  * @author kobybs
  * @since 25-12-16
+ * 
+ * Class that represents hours that aren't available for studying.
  */
 import java.util.ArrayList;
 import java.util.List;

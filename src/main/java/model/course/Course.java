@@ -11,8 +11,14 @@ import java.util.List;
 
 import model.loader.CourseLoader;
 
-// after object creation one can only add or remove lessons
-// TODO: do we need to change it?
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 06-12-16
+ * 
+ * Class that holds information about specific course.
+ * 
+ */
 public class Course {
 
 	protected final String name;

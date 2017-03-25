@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 06-12-16
+ * 
+ * Class that holds information about specific staff member.
+ * 
+ */
 public class StuffMember implements Serializable {
 	private static final long serialVersionUID = 7103892149028991099L;
 

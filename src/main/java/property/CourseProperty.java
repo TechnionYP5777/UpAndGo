@@ -1,5 +1,13 @@
 package property;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 27-12-2016
+ * 
+ * Class that represents all types of properties that {@link #CourseListController} can ask to load from {@link #CourseModel}.
+ * 
+ */
 public class CourseProperty {
 
 	public static final String COURSE_LIST = "course_list";

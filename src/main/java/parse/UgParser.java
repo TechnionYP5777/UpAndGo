@@ -23,6 +23,14 @@ import org.jsoup.nodes.Element;
 
 import model.Faculty;
 
+/**
+ * 
+ * @author Yaniv Levinsky
+ * @since 07-01-17
+ * 
+ * Class for parsing information posted in UG.
+ * 
+ */
 public class UgParser {
 
 	private static final String UG_SEARCH_URL = "https://ug3.technion.ac.il/rishum/search";

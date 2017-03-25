@@ -9,10 +9,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * This utility extracts files and directories of a standard zip file to a
- * destination directory.
  * 
  * @author www.codejava.net
+ * 
+ * This utility extracts files and directories of a standard zip file to a
+ * destination directory.
  *
  */
 public class UnzipUtility {

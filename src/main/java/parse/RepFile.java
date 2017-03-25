@@ -31,6 +31,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * 
+ * @author Yaniv Levinsky
+ * @since 10-12-16
+ * 
+ * Class for translation information from repfile to xml.
+ * 
+ */
 public class RepFile {
 
 	private static final String REP_FILE_URL = "http://ug3.technion.ac.il/rep/REPFILE.zip";

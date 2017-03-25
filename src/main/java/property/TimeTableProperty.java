@@ -1,5 +1,13 @@
 package property;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 12-01-2017
+ * 
+ * Class that represents all types of properties that {@link #TimeTableController} can ask to load from {@link #TimeTableModel}.
+ * 
+ */
 public class TimeTableProperty {
 
 	public static final String SCHEDULE = "current_schedule";
