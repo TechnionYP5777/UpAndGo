@@ -108,6 +108,7 @@ public class UgParser {
 
 	public static void createCoursesPrerequisitesDocument() {
 		for (final String courseID : getCoursesNamesAndID()) {
+			System.out.println("");
 			System.out.println("Prerequisites of: " + courseID);
 			createCoursePrerequisitesElement(courseID);
 		}
@@ -132,9 +133,18 @@ public class UgParser {
 					}
 					if (prerTableElementRow.getElementsByTag("td").get(6).text().contains("מקצועות קדם"))
 						state = 1;
-					
-					if (state == 1)
-						System.out.println(prerTableElementRow.getElementsByTag("a").text());
+										
+					if (state == 1){
+						if (prerTableElementRow.getElementsByTag("td").get(5).text().contains("או"))
+							System.out.println("");
+						if (prerTableElementRow.getElementsByTag("td").get(4).text().contains("("))
+							System.out.print("( ");
+						if (prerTableElementRow.getElementsByTag("td").get(3).text().contains("ו"))
+							System.out.print(" & ");
+						System.out.print(prerTableElementRow.getElementsByTag("a").text());
+						if (prerTableElementRow.getElementsByTag("td").get(0).text().contains(")"))
+							System.out.print(" )");
+					}
 					
 				}
 
