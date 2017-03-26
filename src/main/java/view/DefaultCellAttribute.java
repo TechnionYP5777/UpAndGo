@@ -4,6 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 13-01-2017
+ * 
+ * Class for storing table cells' displaying properties.
+ * 
+ */
 class DefaultCellAttribute
 		// implements CellAttribute ,CellSpan {
 		implements CellAttribute, CellSpan, ColoredCell, CellFont {

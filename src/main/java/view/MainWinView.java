@@ -37,6 +37,14 @@ import javax.swing.event.ListSelectionEvent;
 
 import model.CourseModel;
 
+/**
+ * 
+ * @author Lidia.P
+ * @since 09-16-2017
+ * 
+ * Class for displaying menu and upper frame of the application (isn't used anymore).
+ * 
+ */
 public class MainWinView extends JFrame {
 
 	private static final long serialVersionUID = 1L;

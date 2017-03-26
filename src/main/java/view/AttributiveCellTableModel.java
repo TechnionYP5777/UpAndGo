@@ -7,6 +7,14 @@ import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 13-01-2017
+ * 
+ * Class for creating table.
+ * 
+ */
 @SuppressWarnings("serial")
 public class AttributiveCellTableModel extends DefaultTableModel {
 

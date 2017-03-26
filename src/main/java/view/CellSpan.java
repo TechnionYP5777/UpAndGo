@@ -1,5 +1,13 @@
 package view;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 13-01-2017
+ * 
+ * Class for representing group of cells in table.
+ * 
+ */
 public interface CellSpan {
 	int ROW = 0;
 	int COLUMN = 1;

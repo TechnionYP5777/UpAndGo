@@ -9,6 +9,14 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.plaf.basic.BasicTableUI;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 13-01-2017
+ * 
+ * Class for creating table that allows merging cells.
+ * 
+ */
 public class MultiSpanCellTableUI extends BasicTableUI {
 
 	@Override

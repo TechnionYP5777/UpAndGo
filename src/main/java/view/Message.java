@@ -1,7 +1,3 @@
-//
-//	Author Alex V.
-//
-
 package view;
 
 import java.awt.Desktop;
@@ -14,9 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.HyperlinkEvent;
 
-///
-// This class is a massage box class
-///
+/**
+ * 
+ * @author Alex V.
+ * @since 13-01-2017
+ * 
+ * Class represents a massage box.
+ * 
+ */
 public class Message {
 	// info message with ok button
 	public static void infoBox(final String infoMessage, final String titleBar, final ImageIcon i) {

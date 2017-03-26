@@ -32,6 +32,14 @@ import model.course.Lesson;
 import model.course.LessonGroup;
 import property.TimeTableProperty;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 08-01-2017
+ * 
+ * Class for displaying schedule and schedule options in UI.
+ * 
+ */
 @SuppressWarnings("serial")
 public class TimetableVIew extends JPanel implements ITimeTableView {
 	MultiSpanCellTable table;
