@@ -5,6 +5,13 @@ import java.util.List;
 
 import model.course.Course;
 
+/**
+ * 
+ * @author Sapir Bismot
+ * @since 10-01-2017
+ * 
+ * Class to represent study catalog for Software Engineering.
+ */
 public class SoftwareEngineering extends CSCatalog {
 	List<Course> core;
 	List<List<Course>> scientificChain;

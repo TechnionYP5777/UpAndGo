@@ -14,6 +14,14 @@ import org.xml.sax.SAXException;
 
 import model.course.Course;
 
+/**
+ * 
+ * @author kobybs
+ * @since 12-12-16
+ * 
+ * Class for parsing courses data from xml file.
+ * 
+ */
 @Deprecated
 class xmlParser {
 	public static List<Course> getCourses() {

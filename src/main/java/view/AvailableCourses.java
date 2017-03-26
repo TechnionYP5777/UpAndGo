@@ -1,8 +1,3 @@
-/**
- * @author  Lidia P.  Alex.V
- *
- */
-
 package view;
 
 import java.awt.Color;
@@ -45,6 +40,14 @@ import command.CourseCommand;
 import model.course.CourseId;
 import property.CourseProperty;
 
+/**
+ * 
+ * @author Lidia P. & Alex V.
+ * @since 06-01-2017
+ *
+ * Class for displaying overall course list and chosen courses' list.
+ *
+ */
 public class AvailableCourses extends JPanel implements CourseListView {
 
 	private static final long serialVersionUID = 1L;

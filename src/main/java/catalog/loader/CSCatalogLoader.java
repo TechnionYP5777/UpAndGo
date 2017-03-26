@@ -11,8 +11,11 @@ import model.course.Course;
 
 /**
  * 
- * @author sapir
- * @since Jan 13, 2017
+ * @author Sapir Bismot
+ * @since 13-01-2017
+ * 
+ * Abstract class for loading Computer Science study catalog.
+ * 
  */
 public abstract class CSCatalogLoader extends CatalogLoader {
 	protected List<Course> listA, listB;

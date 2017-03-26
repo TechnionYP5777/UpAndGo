@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * 
+ * @author Yaniv Levinsky
+ * @since 07-01-17
+ * 
+ * Class that holds information about specific faculty.
+ * 
+ */
 public class Faculty {
 
 	private String id;

@@ -6,6 +6,14 @@ import java.util.List;
 
 import model.constraint.TimeConstraint;
 
+/**
+ * 
+ * @author kobybs
+ * @since 23-12-16
+ * 
+ * Class that holds information about specific lesson group.
+ * 
+ */
 public class LessonGroup implements Serializable {
 
 	private static final long serialVersionUID = 4547987607914277140L;

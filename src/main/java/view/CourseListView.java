@@ -1,5 +1,13 @@
 package view;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 27-12-2016
+ * 
+ * Interface that defines part of UI that is in charge of displaying overall course list and chosen courses' list.
+ * 
+ */
 public interface CourseListView extends View {
 
 	String getQuery(); // returns string that user typed in search field

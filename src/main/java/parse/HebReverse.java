@@ -3,6 +3,14 @@ package parse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * @author Yaniv Levinsky
+ * @since 03-12-16
+ * 
+ * Class for hebrew reversing.
+ * 
+ */
 public class HebReverse {
 
 	public static String reverseLine(final String line) {

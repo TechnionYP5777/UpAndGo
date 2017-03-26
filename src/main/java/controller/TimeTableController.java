@@ -12,6 +12,14 @@ import property.CourseProperty;
 import property.TimeTableProperty;
 import view.ITimeTableView;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 12-01-2017
+ * 
+ * Corresponds to {@link ITimeTableView} and {@link TimeTableModel} that show study schedule according to sorting and displaying options.
+ * 
+ */
 public class TimeTableController implements Controller, PropertyChangeListener {
 
 	protected TimeTableModel model;

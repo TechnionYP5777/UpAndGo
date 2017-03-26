@@ -12,6 +12,12 @@ import java.util.List;
 import model.course.Course;
 import model.course.LessonGroup;
 
+/**
+ * @author kobybs
+ * @since 23-12-16
+ * 
+ * Class that represents day that isn't available for studying.
+ */
 public class WorkDayConstraint extends Constraint {
 	// private int workDay;
 	public WorkDayConstraint(@SuppressWarnings("unused") final int d) {
