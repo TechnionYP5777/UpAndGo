@@ -1,7 +1,6 @@
 package parse;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,11 +14,9 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import model.Faculty;
 
@@ -37,6 +34,7 @@ public class UgParser {
 	// private static final String UG_COURSE_URL =
 	// "https://ug3.technion.ac.il/rishum/course/";
 	private static final String GRADUATE_SEARCH_URL = "http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=";
+	//private static final String PREREQUISITES_XML = "data/Prerequisites.xml";
 
 	public static List<Faculty> getFaculties() {
 		final List<Faculty> $ = new ArrayList<>();
@@ -110,7 +108,7 @@ public class UgParser {
 
 	public static void createCoursesPrerequisitesDocument() {
 		for (final String courseID : getCoursesNamesAndID()) {
-			System.out.println(courseID);
+			System.out.println("Prerequisites of: " + courseID);
 			createCoursePrerequisitesElement(courseID);
 		}
 	}
@@ -119,10 +117,31 @@ public class UgParser {
 		try {
 			final org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			final org.w3c.dom.Element rootElement = doc.createElement("Prerequisites");
-			org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
-			final Element prerTabElement = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
+			//org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
+			final Element prerTableElement = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID))
 					.getElementsByAttributeValue("class", "tab0").first();
-			if (prerTabElement != null)
+			if (prerTableElement != null) {
+				final Elements prerTableElementRows = prerTableElement.getElementsByTag("tr");
+
+				int state = 0;
+
+				for (Element prerTableElementRow : prerTableElementRows){
+					if (prerTableElementRow.getElementsByTag("td").size() < 7){
+						state = 0;
+						continue;
+					}
+					if (prerTableElementRow.getElementsByTag("td").get(6).text().contains("מקצועות קדם"))
+						state = 1;
+					
+					if (state == 1)
+						System.out.println(prerTableElementRow.getElementsByTag("a").text());
+					
+				}
+
+
+			}
+			
+/*			if (prerTabElement != null)
 				for (final Element prerequisitesElement : prerTabElement.getElementsContainingOwnText("מקצועות קדם")) {
 					System.out.println(prerequisitesElement);
 					for (final Element prerequisite : prerequisitesElement.parent().parent().parent().children()) {
@@ -136,13 +155,15 @@ public class UgParser {
 					}
 					if (prepOptionElement.hasChildNodes())
 						rootElement.appendChild(prepOptionElement);
-				}
+				}*/
 			if (rootElement.hasChildNodes())
 				doc.appendChild(rootElement);
-			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")));
-		} catch (TransformerException | IOException | ParserConfigurationException ¢) {
+								
+			//final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			//transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			//transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")));
+			//transformer.transform(new DOMSource(doc), new StreamResult(new File(PREREQUISITES_XML)));
+		} catch (/*TransformerException |*/ IOException | ParserConfigurationException ¢) {
 			¢.printStackTrace();
 		}
 	}
