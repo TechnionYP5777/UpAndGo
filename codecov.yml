@@ -10,16 +10,7 @@ coverage:
     project: off
     patch: off
     changes: no
-  ignore: 
-   - "src/main/java/view/"
-   - "src/main/java/view"
-   - "src/main/java/view/.*"
-   - src/main/java/view/.*
-   - src/main/java/controller/.*
-   - view/.*
-   - "src/main/java/controller/"
-   - "src/main/java/controller"
-   - "src/main/java/controller/.*"
+  
 
 # Don't post a comment on pull requests.
 comment: off
