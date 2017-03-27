@@ -10,6 +10,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+/**
+ * 
+ * @author Dan Abramovich
+ * @since 13-01-2017
+ * 
+ * Class for displaying table that allows merging cells.
+ * 
+ */
 @SuppressWarnings("serial")
 public class MultiSpanCellTable extends JTable {
 

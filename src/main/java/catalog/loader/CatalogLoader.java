@@ -19,8 +19,12 @@ import model.CourseModel;
 import model.course.Course;
 
 /**
- * @author sapir
- * @since 2017-01-12
+ * 
+ * @author Sapir Bismot
+ * @since 12-01-2017
+ * 
+ * Abstract class for loading study catalogs.
+ * 
  */
 public abstract class CatalogLoader {
 	protected List<Course> obligatory, malags;

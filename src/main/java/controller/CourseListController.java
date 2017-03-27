@@ -8,8 +8,12 @@ import model.CourseModel;
 import property.CourseProperty;
 import view.CourseListView;
 
-/*
- * Corresponds to the View that shows list of available courses, lets to pick/drop them and peep inside them.
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 9-30-2016
+ * 
+ * Corresponds to {@link CourseListView} and {@link CourseModel} that show list of available courses, let to pick/drop them and peep inside them.
  * 
  */
 public class CourseListController implements Controller {

@@ -10,10 +10,12 @@ import model.course.LessonGroup;
 import model.course.WeekTime;
 
 /**
- * /**
  * 
  * @author kobybs
- * @since 5-1-17
+ * @since 05-01-17
+ * 
+ * Class that represents timetable of the specific study schedule.
+ * 
  */
 
 public class Timetable {
@@ -151,7 +153,7 @@ public class Timetable {
 		return MAX_BLANKSPACE_RANK - $;
 	}
 
-	private int sumBlank(final ArrayList<WeekTime> daySchedule) {
+	private static int sumBlank(final ArrayList<WeekTime> daySchedule) {
 		int $ = 0;
 		for (int ¢ = daySchedule.size() - 2; ¢ > 0; ¢ -= 2)
 			$ += WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢ - 1));

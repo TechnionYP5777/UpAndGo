@@ -7,6 +7,14 @@ import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/**
+ * 
+ * @author Yaniv Levinsky
+ * @since 07-01-17
+ * 
+ * Class for loading files from server.
+ * 
+ */
 public class Scraper {
 
 	public static Document getDocumentFromURL(final URL ¢) throws IOException {

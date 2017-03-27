@@ -3,6 +3,8 @@ package model.constraint;
 /**
  * @author kobybs
  * @since 20-12-16
+ * 
+ * Abstract class that represents general constraint for scheduler.
  */
 import java.util.List;
 /**

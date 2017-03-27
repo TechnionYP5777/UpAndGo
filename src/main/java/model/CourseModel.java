@@ -17,8 +17,12 @@ import model.loader.CourseLoader;
 import property.CourseProperty;
 
 /**
- * Interface for storing data inside the program. The data typically should come
- * from loader.
+ * 
+ * @author Nikita Dizhur
+ * @since 30-11-16
+ * 
+ * Class that is in charge of loading courses and choosing the ones that we want to schedule.
+ * 
  */
 public class CourseModel implements Model {
 

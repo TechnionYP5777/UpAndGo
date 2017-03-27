@@ -1,9 +1,13 @@
 package model.course;
 
-/*
- * a small class for storing course name and number, without specifying all other details
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 11-01-17
+ * 
+ * A small class for storing course name and number, without specifying all other details.
+ * 
  */
-
 public class CourseId implements Comparable<CourseId> {
 
 	@Override

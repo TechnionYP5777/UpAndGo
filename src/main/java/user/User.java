@@ -5,6 +5,14 @@ import java.util.Set;
 
 import catalog.loader.CatalogLoader;
 
+/**
+ * 
+ * @author Sapir Bismot
+ * @since 09-01-2017
+ * 
+ * Class that represents user.
+ * 
+ */
 public class User {
 	public Set<String> courses;
 	CatalogLoader catalog;

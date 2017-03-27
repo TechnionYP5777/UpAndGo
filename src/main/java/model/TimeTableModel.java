@@ -16,6 +16,14 @@ import model.loader.CourseLoader;
 import model.schedule.Timetable;
 import property.TimeTableProperty;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 12-01-17
+ * 
+ * Class that is in charge of scheduling chosen courses under given constraints and ordering policy.
+ * 
+ */
 public class TimeTableModel implements Model {
 
 	protected List<Course> courses = new ArrayList<>();
@@ -106,7 +114,7 @@ public class TimeTableModel implements Model {
 	}
 
 	public List<LessonGroup> getChosenLessonGroups() {
-		return lessonGroupsList.size() <= sched_index + 1 ? new ArrayList<LessonGroup>()
+		return lessonGroupsList.size() <= sched_index + 1 ? new ArrayList<>()
 				: lessonGroupsList.get(sched_index);
 	}
 

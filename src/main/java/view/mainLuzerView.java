@@ -32,7 +32,10 @@ import command.MenuCommand;
 /**
  * 
  * @author Alex.V & Lidia.P
- *
+ * @since 12-01-2017
+ * 
+ * Class for displaying menu and upper frame of the application.
+ * 
  */
 public class mainLuzerView extends JFrame implements MenuView {
 

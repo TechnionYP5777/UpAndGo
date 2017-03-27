@@ -15,9 +15,12 @@ import view.TimetableVIew;
 import view.mainLuzerView;
 
 /**
- * @author nikitadizhur
+ * 
+ * @author Nikita Dizhur
+ * @since 6-12-2016
  *
- *         The main class that bootstraps the application (launch it)
+ * The main class that bootstraps the application (launches it).
+ * 
  */
 public class Launcher {
 	protected static CourseLoader cLoader;

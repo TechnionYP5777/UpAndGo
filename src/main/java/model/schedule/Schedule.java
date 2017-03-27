@@ -6,6 +6,14 @@ import java.util.List;
 import model.constraint.TimeConstraint;
 import model.course.LessonGroup;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 12-12-16
+ * 
+ * Class that represents study schedule.
+ * 
+ */
 public class Schedule {
 	private final List<LessonGroup> lessons;
 	private final List<TimeConstraint> constraints;

@@ -9,6 +9,14 @@ import command.TimeTableCommand;
 import model.MenuModel;
 import view.MenuView;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 9-30-2016
+ * 
+ * Corresponds to {@link MenuView} and {@link MenuModel} that represent the menu bar and all actions that one can perform from there.
+ * 
+ */
 public class MenuController implements Controller {
 
 	CourseListController clCtrl;

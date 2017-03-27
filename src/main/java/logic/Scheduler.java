@@ -17,6 +17,9 @@ import model.schedule.Timetable;
  * 
  * @author kobybs
  * @since 22-12-16
+ * 
+ * Class that builds the study schedule given information about needed courses, constraints, sorting and displaying options.
+ * 
  */
 
 @SuppressWarnings("boxing")

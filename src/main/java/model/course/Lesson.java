@@ -7,6 +7,14 @@ import java.util.Objects;
 import logic.Event;
 import model.constraint.TimeConstraint;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 06-12-16
+ * 
+ * Class that holds information about specific lesson.
+ * 
+ */
 public class Lesson implements Event, Serializable {
 	private static final long serialVersionUID = 903076596050490635L;
 
