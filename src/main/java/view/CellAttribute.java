@@ -4,7 +4,9 @@ import java.awt.Dimension;
 
 /**
  * 
- * @author Dan Abramovich
+ * This code was taken from http://www.java2s.com/Code/Java/Swing-Components/MultiSpanCellTableExample.htm
+ * 
+ * @author danabra
  * @since 13-01-2017
  * 
  * Class for storing table cell's position and dimention properties.

@@ -34,7 +34,7 @@ import property.TimeTableProperty;
 
 /**
  * 
- * @author Dan Abramovich
+ * @author danabra
  * @since 08-01-2017
  * 
  * Class for displaying schedule and schedule options in UI.

@@ -3,8 +3,9 @@ package view;
 import java.awt.Color;
 
 /**
+ * This code was taken from http://www.java2s.com/Code/Java/Swing-Components/MultiSpanCellTableExample.htm
  * 
- * @author Dan Abramovich
+ * @author danabra
  * @since 13-01-2017
  * 
  * Class for storing table cell's color properties.
