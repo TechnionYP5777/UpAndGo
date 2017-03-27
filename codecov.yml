@@ -15,12 +15,7 @@ coverage:
 comment: off
 
   ignore: 
-   - "src/main/java/view/"
-   - "src/main/java/view"
-   - "src/main/java/view/.*"
-- "src/main/java/controller/"
-   - "src/main/java/controller"
-   - "src/main/java/controller/.*"
+   - src/main/java/view/
 
 comment:
   layout: "header, diff, changes, sunburst, uncovered, tree"
