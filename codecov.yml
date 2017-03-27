@@ -14,6 +14,9 @@ coverage:
    - "src/main/java/view/"
    - "src/main/java/view"
    - "src/main/java/view/.*"
+   - src/main/java/view/.*
+   - src/main/java/controller/.*
+   - view/.*
    - "src/main/java/controller/"
    - "src/main/java/controller"
    - "src/main/java/controller/.*"
