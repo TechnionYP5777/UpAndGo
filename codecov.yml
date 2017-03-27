@@ -1,3 +1,8 @@
+coverage:
+  ignore:
+    - "src/main/java/view/*"
+
+
 codecov:
   branch: master
   bot: null
