@@ -112,6 +112,8 @@ public class Lesson implements Event, Serializable {
 		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
 				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
 
+		// THOSE COMMENTS ARE HERE SINCE ITS ALMOST IMPOSSIBLE 
+		// TO UNDERSTAND THE IDEA BEHIND THE SPARTANIZED VERSION OF IT
 		/*
 		 * return (startTime.compareTo(¢.getStartTime()) != 0 &&
 		 * startTime.compareTo(¢.getStartTime()) <= 0 ||

@@ -56,7 +56,8 @@ public class Schedule {
 		return lessons;
 	}
 
-
+	// to be removed after some progress on the project assures that there is no
+	// need for that functionality
 	/*public void removeLesson(final LessonGroup ¢) {
 		lessons.remove(¢);
 	}
