@@ -17,7 +17,7 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
 import model.schedule.Timetable;
 
-@SuppressWarnings("static-method")
+@SuppressWarnings({"static-method","deprecation"})
 public class scheduleTimetablesTest {
 
 	CourseLoader cr;

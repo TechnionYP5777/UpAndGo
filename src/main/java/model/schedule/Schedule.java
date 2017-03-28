@@ -7,8 +7,8 @@ import model.constraint.TimeConstraint;
 import model.course.LessonGroup;
 
 /**
- * 
- * @author Nikita Dizhur
+ * @author kobybs
+ * @author Nikita Dizhur	/ probably here by mistake?
  * @since 12-12-16
  * 
  * Class that represents study schedule.
@@ -23,11 +23,7 @@ public class Schedule {
 		constraints = new ArrayList<>();
 	}
 
-	public Schedule(final List<LessonGroup> lessons, final List<TimeConstraint> constraints) {
-		this.lessons = new ArrayList<>(lessons);
-		this.constraints = new ArrayList<>(constraints);
-	}
-
+	
 	/**
 	 * 
 	 * @param ¢
@@ -49,8 +45,19 @@ public class Schedule {
 		lessons.add(¢);
 		return true;
 	}
+	
+	public Timetable getTimetable() {
+		return new Timetable(lessons);
 
-	public void removeLesson(final LessonGroup ¢) {
+	}
+	
+	@Deprecated
+	public List<LessonGroup> getLessonGroups() {
+		return lessons;
+	}
+
+
+	/*public void removeLesson(final LessonGroup ¢) {
 		lessons.remove(¢);
 	}
 
@@ -71,10 +78,7 @@ public class Schedule {
 		return lessons;
 	}
 
-	public Timetable getTimetable() {
-		return new Timetable(lessons);
-
-	}
+	
 
 	public boolean hasLesson(final LessonGroup ¢) {
 		return lessons.contains(¢);
@@ -94,11 +98,12 @@ public class Schedule {
 					return false;
 		}
 		return true;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return lessons + "";
 	}
+	
 
 }

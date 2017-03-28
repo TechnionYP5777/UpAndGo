@@ -23,7 +23,7 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
 import model.schedule.Timetable;
 
-@SuppressWarnings("static-method")
+@SuppressWarnings({"static-method","deprecation"})
 public class SchedulerTest {
 
 	CourseLoader cr;
@@ -33,6 +33,7 @@ public class SchedulerTest {
 		System.out.println("***");
 	}
 
+	
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
