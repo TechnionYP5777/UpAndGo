@@ -1,5 +1,7 @@
 coverage:
   paths:
+	- src/main/java/view/**/*
+	- "src/main/java/view/**/*"
 	- src/main/java/view
   - !"src/main/java/view/"
    - !"src/main/java/view"
