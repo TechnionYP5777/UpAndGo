@@ -1,21 +1,21 @@
 coverage:
   paths:
-	- src/main/java/view/**/*
-	- "src/main/java/view/**/*"
-	- src/main/java/view
-  - !"src/main/java/view/"
-   - !"src/main/java/view"
-   - !"src/main/java/view/.*"
-	- !"src/main/java/view/*"
-	- !"main/java/view/*"
-	- !"java/view/*"
-	- !"view/*"
-   - !src/main/java/view/.*
-   - !src/main/java/controller/.*
+	- src/main/java/model/**/*
+	- "src/main/java/model/**/*"
+	- src/main/java/model
+  - !"src/main/java/model/"
+   - !"src/main/java/model"
+   - !"src/main/java/model/.*"
+	- !"src/main/java/model/*"
+	- !"main/java/model/*"
+	- !"java/model/*"
+	- !"model/*"
+   - !src/main/java/model/.*
+   - !src/main/java/model/.*
    - !view/.*
-   - !"src/main/java/controller/"
-   - !"src/main/java/controller"
-   - !"src/main/java/controller/.*"
+   - !"src/main/java/model/"
+   - !"src/main/java/model"
+   - !"src/main/java/model/.*"
 
 
 codecov:
@@ -31,19 +31,19 @@ coverage:
     patch: off
     changes: no
   ignore: 
-   - "src/main/java/view/"
-   - "src/main/java/view"
-   - "src/main/java/view/.*"
-	- "src/main/java/view/*"
-	- "main/java/view/*"
-	- "java/view/*"
-	- "view/*"
-   - src/main/java/view/.*
-   - src/main/java/controller/.*
+   - "src/main/java/model/"
+   - "src/main/java/model"
+   - "src/main/java/model/.*"
+	- "src/main/java/model/*"
+	- "main/java/model/*"
+	- "java/model/*"
+	- "model/*"
+   - src/main/java/model/.*
+   - src/main/java/model/.*
    - view/.*
-   - "src/main/java/controller/"
-   - "src/main/java/controller"
-   - "src/main/java/controller/.*"
+   - "src/main/java/model/"
+   - "src/main/java/model"
+   - "src/main/java/model/.*"
 
 # Don't post a comment on pull requests.
 comment: off
