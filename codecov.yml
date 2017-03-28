@@ -1,6 +1,19 @@
 coverage:
-  ignore:
-    - "src/main/java/view/*"
+  paths:
+	- src/main/java/view
+  - !"src/main/java/view/"
+   - !"src/main/java/view"
+   - !"src/main/java/view/.*"
+	- !"src/main/java/view/*"
+	- !"main/java/view/*"
+	- !"java/view/*"
+	- !"view/*"
+   - !src/main/java/view/.*
+   - !src/main/java/controller/.*
+   - !view/.*
+   - !"src/main/java/controller/"
+   - !"src/main/java/controller"
+   - !"src/main/java/controller/.*"
 
 
 codecov:
