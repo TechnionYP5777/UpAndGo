@@ -1,7 +1,6 @@
 package model.course;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.util.Objects;
 
 import model.constraint.TimeConstraint;
@@ -90,7 +89,8 @@ public class Lesson implements Serializable {
 
 	// return value between 0 to 6.
 	public int getDay() {
-		return startTime.getDay() == DayOfWeek.SUNDAY ? 0 : startTime.getDay().getValue();
+		return startTime.getDay().ordinal();
+		//return startTime.getDay() == DayOfWeek.SUNDAY ? 0 : startTime.getDay().getValue();
 	}
 
 	@Override

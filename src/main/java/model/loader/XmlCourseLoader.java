@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +39,7 @@ import org.xml.sax.SAXException;
 import model.Faculty;
 import model.course.Course;
 import model.course.Course.CourseBuilder;
+import model.course.Day;
 import model.course.Lesson;
 import model.course.Lesson.Type;
 import model.course.LessonGroup;
@@ -438,7 +438,7 @@ public class XmlCourseLoader extends CourseLoader {
 							String place = ((Element) h).getAttribute("building");
 							if (!((Element) h).getAttribute("roomNumber").isEmpty())
 								place += " " + ((Element) h).getAttribute("roomNumber");
-							if (convertStrToDay(((Element) h).getAttribute("day")) != DayOfWeek.SATURDAY)
+							if (convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
 								b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
 										createLesson(n, h, p, g, convertStrToDay(((Element) h).getAttribute("day")),
 												tutorialGroupNum, place, t, "assistant"));
@@ -465,7 +465,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return null;
 	}
 
-	private Lesson createLesson(final Node n, final Node h, final Node p, final int index, final DayOfWeek lectureDay,
+	private Lesson createLesson(final Node n, final Node h, final Node p, final int index, final Day lectureDay,
 			final int groupNum, final String place, final Lesson.Type t, final String staff) {
 		return new Lesson(
 				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
@@ -487,22 +487,22 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-	private static DayOfWeek convertStrToDay(final String ¢) {
+	private static Day convertStrToDay(final String ¢) {
 		switch (¢) {
 		case "א":
-			return DayOfWeek.valueOf("SUNDAY");
+			return Day.SUNDAY;
 		case "ב":
-			return DayOfWeek.valueOf("MONDAY");
+			return Day.MONDAY;
 		case "ג":
-			return DayOfWeek.valueOf("TUESDAY");
+			return Day.TUESDAY;
 		case "ד":
-			return DayOfWeek.valueOf("WEDNESDAY");
+			return Day.WEDNESDAY;
 		case "ה":
-			return DayOfWeek.valueOf("THURSDAY");
+			return Day.THURSDAY;
 		case "ו":
-			return DayOfWeek.valueOf("FRIDAY");
+			return Day.FRIDAY;
 		default:
-			return DayOfWeek.valueOf("SATURDAY");
+			return Day.SATURDAY;
 		}
 	}
 

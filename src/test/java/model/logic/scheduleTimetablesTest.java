@@ -4,7 +4,6 @@ package model.logic;
  * @since 2-1-17
  */
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.junit.Test;
 import logic.Scheduler;
 import model.constraint.TimeConstraint;
 import model.course.Course;
+import model.course.Day;
 import model.course.WeekTime;
 import model.loader.CourseLoader;
 import model.loader.XmlCourseLoader;
@@ -42,13 +42,13 @@ public class scheduleTimetablesTest {
 		System.out.println("Schedule: " + s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(13, 00)));
 		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(DayOfWeek.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
 		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(DayOfWeek.WEDNESDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(14, 00)));
 
 	}
 

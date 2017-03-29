@@ -6,7 +6,6 @@ package model.course;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import org.junit.Test;
@@ -16,38 +15,38 @@ public class WeekTimeTests {
 
 	@Test
 	public void test_a() {
-		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))), 0);
+		assertEquals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))), 0);
 	}
 
 	@Test
 	public void test_b() {
-		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 40))), -1);
+		assert(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.SUNDAY, LocalTime.of(10, 40))) < 0);
 	}
 
 	@Test
 	public void test_c() {
-		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 20))), 1);
+		assert(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.SUNDAY, LocalTime.of(10, 20))) > 0);
 	}
 
 	@Test
 	public void test_d() {
-		assert(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))) > 0);
+		assert(new WeekTime(Day.MONDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))) > 0);
 	}
 
 	@Test
 	public void test_e() {
-		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30))), -1);
+		assert(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.MONDAY, LocalTime.of(10, 30))) < 0);
 	}
 
 	@Test
 	public void test_f() {
-		assertEquals(new WeekTime(DayOfWeek.SATURDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))), 1);
+		assert(new WeekTime(Day.SATURDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))) > 0);
 	}
 
 }

@@ -1,7 +1,6 @@
 package model.course;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 /**
  * @author kobybs
  * @since 25-12-16
@@ -22,17 +21,18 @@ import java.util.Objects;
 
 
 public class WeekTime implements Serializable {
+	
 	private static final long serialVersionUID = -7431131009009123098L;
 
-	private final DayOfWeek day;
+	private final Day day;
 	private final LocalTime time; // = LocalTime.of(22, 15);
 
-	public WeekTime(final DayOfWeek day, final LocalTime time) {
+	public WeekTime(final Day day, final LocalTime time) {
 		this.day = day;
 		this.time = time;
 	}
 
-	public DayOfWeek getDay() {
+	public Day getDay() {
 		return day;
 	}
 
