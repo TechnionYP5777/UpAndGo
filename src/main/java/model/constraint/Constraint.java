@@ -12,9 +12,7 @@ package model.constraint;
  * @since 25-12-16
  */
 
-import model.course.Course;
 import model.course.Lesson;
-import model.course.LessonGroup;
 
 public interface Constraint<T> {
 	boolean isClashWith(final Lesson ¢);

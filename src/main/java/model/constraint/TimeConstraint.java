@@ -6,12 +6,10 @@ package model.constraint;
  * 
  * Class that represents hours that aren't available for studying.
  */
-import java.util.ArrayList;
-import java.util.List;
 
-import model.course.Course;
+
+
 import model.course.Lesson;
-import model.course.LessonGroup;
 import model.course.WeekTime;
 
 public class TimeConstraint implements Constraint<TimeConstraint> {
@@ -38,6 +36,7 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 
 	}
 	
+	// TO BE REMOVED ONCE ASSURED THERE IS NO NEED FOR THAT FUNCTIONALITY
 	/*public boolean isCLashWIth(TimeConstraint newc) {
 		// TODO Auto-generated method stub
 		return false;

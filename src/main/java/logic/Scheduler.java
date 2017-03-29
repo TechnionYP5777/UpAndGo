@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import model.constraint.Constraint;
 import model.constraint.TimeConstraint;
 import model.course.Course;
 import model.course.LessonGroup;
@@ -300,10 +299,6 @@ public class Scheduler {
 			return -rank1.compareTo(rank2);
 		});
 		return $.iterator();
-	}
-	
-	public void somefunc(){
-		
 	}
 
 }
