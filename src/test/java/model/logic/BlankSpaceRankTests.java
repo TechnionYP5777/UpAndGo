@@ -5,6 +5,8 @@ package model.logic;
  */
 
 import java.time.LocalTime;
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -77,7 +79,7 @@ public class BlankSpaceRankTests {
 		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses, null);
 		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.of(10, 00), null);
 		Timetable currentTable = it.next();
-		assert currentTable.getRankOfDaysoff() == 4;
+		assertTrue(currentTable.getRankOfDaysoff() == 4);
 		assert currentTable.getRankOfBlankSpace() == 1.75;
 		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
 

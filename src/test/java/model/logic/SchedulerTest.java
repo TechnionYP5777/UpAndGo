@@ -4,7 +4,8 @@ package model.logic;
  * @since 2-1-17
  */
 
-import static org.junit.Assert.assertNull;
+
+import static org.junit.Assert.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -230,6 +231,108 @@ public class SchedulerTest {
 
 		// assertNull(s);
 	}
+	
+	@Test
+	public void test_constraints1() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		System.out.println(courses);
+
+		final List<TimeConstraint> constraints = new ArrayList<>();
+		constraints.add(new TimeConstraint(
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)),
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))));
+		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
+
+		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+
+		// assertNull(s);
+	}
+	
+	@Test
+	public void test_constraints2() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		System.out.println(courses);
+
+		final List<TimeConstraint> constraints = new ArrayList<>();
+		constraints.add(new TimeConstraint(
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)),
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))));
+		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
+
+		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(10, 00)));
+		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(11, 00)));
+		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+
+		// assertNull(s);
+	}
+	
+	@Test
+	public void test_constraints3() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		System.out.println(courses);
+
+		final List<TimeConstraint> constraints = new ArrayList<>();
+		constraints.add(new TimeConstraint(
+				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00))));
+		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
+
+		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+
+		// assertNull(s);
+	}
+	
+	@Test
+	public void test_constraints4() {
+		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+
+		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
+		System.out.println(courses);
+
+		final List<TimeConstraint> constraints = new ArrayList<>();
+		constraints.add(new TimeConstraint(
+				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
+				new WeekTime(Day.SUNDAY, LocalTime.of(10, 01))));
+		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
+
+		assertTrue( t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(10, 00))) );
+		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(11, 00)));
+		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+
+
+		// assertNull(s);
+	}
+
 
 	@Test
 	public void test_scheduleTimetable1() {
