@@ -20,26 +20,31 @@ public class WeekTimeTests {
 				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))), 0);
 	}
 
+	@Test
 	public void test_b() {
 		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
 				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 40))), -1);
 	}
 
+	@Test
 	public void test_c() {
 		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
 				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 20))), 1);
 	}
 
+	@Test
 	public void test_d() {
-		assertEquals(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30))
-				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))), 1);
+		assert(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30))
+				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))) > 0);
 	}
 
+	@Test
 	public void test_e() {
 		assertEquals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))
 				.compareTo(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(10, 30))), -1);
 	}
 
+	@Test
 	public void test_f() {
 		assertEquals(new WeekTime(DayOfWeek.SATURDAY, LocalTime.of(10, 30))
 				.compareTo(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 30))), 1);

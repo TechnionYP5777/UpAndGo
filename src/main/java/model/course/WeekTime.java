@@ -17,6 +17,10 @@ import java.util.Objects;
  * Class that represents moment of time on specific day of the week.
  * 
  */
+
+
+
+
 public class WeekTime implements Serializable {
 	private static final long serialVersionUID = -7431131009009123098L;
 

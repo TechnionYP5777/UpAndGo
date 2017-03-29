@@ -72,7 +72,8 @@ public class Schedule {
 
 	}
 	
-	@Deprecated
+	
+	@Deprecated		// get it from the TimeTable not from here!
 	public List<LessonGroup> getLessonGroups() {
 		return lessons;
 	}
