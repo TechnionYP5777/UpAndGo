@@ -34,7 +34,7 @@ public class SchedulerIteratorTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final List<Timetable> tl = Scheduler.getTimetablesList(courses);
+		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
 		for (final Timetable ¢ : tl)
 			System.out.println("rank: " + ¢.getRankOfDaysoff());
 		for (@SuppressWarnings("deprecation")
@@ -65,7 +65,7 @@ public class SchedulerIteratorTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses), true, false); it
+		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null), true, false); it
 				.hasNext();) {
 			final Timetable currentTable = it.next();
 			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
@@ -83,7 +83,7 @@ public class SchedulerIteratorTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses);
+		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses, null);
 		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false);
 		assert it.next().getRankOfDaysoff() == 4;
 		assert it.next().getRankOfDaysoff() == 3;

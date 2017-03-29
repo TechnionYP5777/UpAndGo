@@ -23,22 +23,10 @@ public class Schedule {
 		constraints = new ArrayList<>();
 	}
 	
-	/*public Schedule(final List<TimeConstraint> constraintsList) {
-		this();
-		
-		for(final TimeConstraint c : constraintsList){
-			if (constraints.isEmpty()) {
-				constraints.add(¢);
-				return true;
-			}
-			for (final LessonGroup l : lessons)
-				if (l.isCLashWIth(¢))
-					return false;
-			lessons.add(¢);
-		}
-	}*/
-	
 	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
+		if(constraintsList == null)
+			return true;
+		
 		for(final TimeConstraint newc : constraintsList){
 			if (constraints.isEmpty()) {
 				constraints.add(newc);
@@ -62,12 +50,18 @@ public class Schedule {
 		 * if(!lessons.contains(¢)) // add equals to lessonsgroup
 		 * lessons.add(¢);
 		 */
-		if (lessons.isEmpty()) {
+		/*if (lessons.isEmpty()) {
 			lessons.add(¢);
 			return true;
-		}
+		}*/
+		
+		
+		for (final TimeConstraint c : constraints)
+			if (c.isClashWith(¢))
+				return false;
+		
 		for (final LessonGroup l : lessons)
-			if (l.isCLashWIth(¢))
+			if (l.isClashWith(¢))
 				return false;
 		lessons.add(¢);
 		return true;

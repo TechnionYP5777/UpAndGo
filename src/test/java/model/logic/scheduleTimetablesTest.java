@@ -55,7 +55,7 @@ public class scheduleTimetablesTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final List<Timetable> tl = Scheduler.getTimetablesList(courses);
+		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
 		System.out.println(tl);
 
 		assert tl.size() == 4;

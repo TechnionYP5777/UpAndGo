@@ -29,7 +29,7 @@ public class Scheduler {
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
-	public static List<Timetable> getTimetablesList(final List<Course> lcourse) {
+	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		final List<Timetable> result = new ArrayList<>();
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
 
@@ -38,6 +38,7 @@ public class Scheduler {
 			System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
+			$.addConstraintsList(cs);
 
 			boolean b = false;
 			int lastAdded = 0;
