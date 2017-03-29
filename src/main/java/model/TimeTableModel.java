@@ -69,7 +69,7 @@ public class TimeTableModel implements Model {
 
 			return;
 		}
-		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(courses),
+		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null),
 				isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
 			notifySchedListenersNoSched();

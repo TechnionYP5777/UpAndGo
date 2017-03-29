@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import model.constraint.Constraint;
 import model.constraint.TimeConstraint;
 import model.course.Course;
 import model.course.LessonGroup;
@@ -30,7 +29,7 @@ public class Scheduler {
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
-	public static List<Timetable> getTimetablesList(final List<Course> lcourse) {
+	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		final List<Timetable> result = new ArrayList<>();
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
 
@@ -39,6 +38,7 @@ public class Scheduler {
 			System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
+			$.addConstraintsList(cs);
 
 			boolean b = false;
 			int lastAdded = 0;
@@ -106,6 +106,7 @@ public class Scheduler {
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
+	@Deprecated
 	public static Schedule schedule(final List<Course> lcourse,
 			@SuppressWarnings("unused") final List<TimeConstraint> __) {
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
@@ -175,17 +176,18 @@ public class Scheduler {
 		return null;
 	}
 
+	
 	/**
 	 * @param c
 	 * @param lconstraint
 	 * @return false if course c cannot meet the given list of constraints
 	 */
-	public static boolean canMeetConstraints(final Course c, final List<Constraint> lconstraint) {
+	/*public static boolean canMeetConstraints(final Course c, final List<Constraint> lconstraint) {
 		for (final Constraint ¢ : lconstraint)
 			if (!¢.canMeetConstraint(c))
 				return false;
 		return true;
-	}
+	}*/
 
 	/**
 	 * @param c
@@ -194,12 +196,12 @@ public class Scheduler {
 	 *         constraints this is a shallow check one by one, and doesnt mean
 	 *         all courses can be placed together.
 	 */
-	public static boolean canMeetConstraints(final List<Course> lcourse, final List<Constraint> lconstraint) {
+	/*public static boolean canMeetConstraints(final List<Course> lcourse, final List<Constraint> lconstraint) {
 		for (final Course ¢ : lcourse)
 			if (!canMeetConstraints(¢, lconstraint))
 				return false;
 		return true;
-	}
+	}*/
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
@@ -298,10 +300,6 @@ public class Scheduler {
 			return -rank1.compareTo(rank2);
 		});
 		return $.iterator();
-	}
-	
-	public void somefunc(){
-		
 	}
 
 }

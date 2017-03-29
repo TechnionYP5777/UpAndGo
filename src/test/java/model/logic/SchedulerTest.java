@@ -23,7 +23,7 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
 import model.schedule.Timetable;
 
-@SuppressWarnings("static-method")
+@SuppressWarnings({"static-method","deprecation"})
 public class SchedulerTest {
 
 	CourseLoader cr;
@@ -33,6 +33,7 @@ public class SchedulerTest {
 		System.out.println("***");
 	}
 
+	
 	@Test
 	public void test_a() {
 		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
@@ -84,7 +85,7 @@ public class SchedulerTest {
 
 		// List<Timetable> tl = Scheduler.getTimetablesList(courses);
 		// System.out.println(tl.size());
-		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -121,7 +122,7 @@ public class SchedulerTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -154,7 +155,7 @@ public class SchedulerTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14, 00)));
@@ -183,7 +184,7 @@ public class SchedulerTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		assert Scheduler.getTimetablesList(courses).isEmpty();
+		assert Scheduler.getTimetablesList(courses, null).isEmpty();
 
 	}
 
@@ -216,7 +217,7 @@ public class SchedulerTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		final Timetable t = Scheduler.getTimetablesList(courses).get(0);
+		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(10, 00)));
@@ -237,7 +238,7 @@ public class SchedulerTest {
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
 
-		System.out.println(Scheduler.getTimetablesList(courses));
+		System.out.println(Scheduler.getTimetablesList(courses, null));
 	}
 
 }
