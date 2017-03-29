@@ -4,10 +4,11 @@ package model.course;
  * @since 25-12-16
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.time.LocalTime;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("static-method")
