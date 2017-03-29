@@ -38,7 +38,8 @@ public class Scheduler {
 			System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
-			$.addConstraintsList(cs);
+			if(!$.addConstraintsList(cs))
+				return result;
 
 			boolean b = false;
 			int lastAdded = 0;
