@@ -7,8 +7,8 @@ import model.constraint.TimeConstraint;
 import model.course.LessonGroup;
 
 /**
- * 
- * @author Nikita Dizhur
+ * @author kobybs
+ * @author Nikita Dizhur	/ probably here by mistake?
  * @since 12-12-16
  * 
  * Class that represents study schedule.
@@ -22,12 +22,23 @@ public class Schedule {
 		lessons = new ArrayList<>();
 		constraints = new ArrayList<>();
 	}
-
-	public Schedule(final List<LessonGroup> lessons, final List<TimeConstraint> constraints) {
-		this.lessons = new ArrayList<>(lessons);
-		this.constraints = new ArrayList<>(constraints);
+	
+	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
+		if(constraintsList == null)
+			return true;
+		
+		for(final TimeConstraint newc : constraintsList){
+			if (constraints.isEmpty()) {
+				constraints.add(newc);
+				continue;
+			}
+			for (final TimeConstraint oldc : constraints)
+				if (oldc.isClashWith(newc))
+					return false;
+			constraints.add(newc);
+		}
+		return true;
 	}
-
 	/**
 	 * 
 	 * @param ¢
@@ -39,18 +50,36 @@ public class Schedule {
 		 * if(!lessons.contains(¢)) // add equals to lessonsgroup
 		 * lessons.add(¢);
 		 */
-		if (lessons.isEmpty()) {
+		/*if (lessons.isEmpty()) {
 			lessons.add(¢);
 			return true;
-		}
+		}*/
+		
+		
+		for (final TimeConstraint c : constraints)
+			if (c.isClashWith(¢))
+				return false;
+		
 		for (final LessonGroup l : lessons)
-			if (l.isCLashWIth(¢))
+			if (l.isClashWith(¢))
 				return false;
 		lessons.add(¢);
 		return true;
 	}
+	
+	public Timetable getTimetable() {
+		return new Timetable(lessons);
 
-	public void removeLesson(final LessonGroup ¢) {
+	}
+	
+	@Deprecated
+	public List<LessonGroup> getLessonGroups() {
+		return lessons;
+	}
+
+	// to be removed after some progress on the project assures that there is no
+	// need for that functionality
+	/*public void removeLesson(final LessonGroup ¢) {
 		lessons.remove(¢);
 	}
 
@@ -71,10 +100,7 @@ public class Schedule {
 		return lessons;
 	}
 
-	public Timetable getTimetable() {
-		return new Timetable(lessons);
-
-	}
+	
 
 	public boolean hasLesson(final LessonGroup ¢) {
 		return lessons.contains(¢);
@@ -94,11 +120,12 @@ public class Schedule {
 					return false;
 		}
 		return true;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return lessons + "";
 	}
+	
 
 }

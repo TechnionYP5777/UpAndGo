@@ -13,6 +13,7 @@ import model.loader.XmlCourseLoader;
 import model.schedule.Schedule;
 import model.schedule.Timetable;
 
+@SuppressWarnings("deprecation")
 public class TimetableTest {
 
 	CourseLoader cr;

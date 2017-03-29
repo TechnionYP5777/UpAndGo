@@ -55,7 +55,7 @@ public class LessonGroup implements Serializable {
 		lessons.add(¢);
 	}
 
-	public boolean isCLashWIth(final LessonGroup g) {
+	public boolean isClashWith(final LessonGroup g) {
 		if (g == this)
 			return true;
 		for (final Lesson ls1 : lessons)
@@ -65,7 +65,7 @@ public class LessonGroup implements Serializable {
 		return false;
 	}
 
-	public boolean isCLashWIth(final TimeConstraint g) {
+	public boolean isClashWith(final TimeConstraint g) {
 		for (final Lesson ls1 : lessons)
 			if (ls1.IsClashWith(g))
 				return true;
