@@ -6,18 +6,18 @@ package model.constraint;
  * 
  * Abstract class that represents general constraint for scheduler.
  */
-import java.util.List;
+
 /**
  * @author kobybs
  * @since 25-12-16
  */
 
-import logic.Event;
 import model.course.Course;
+import model.course.Lesson;
 import model.course.LessonGroup;
 
-public abstract class Constraint implements Event {
-	public abstract boolean canMeetConstraint(Course c);
+public interface Constraint<T> {
+	boolean isClashWith(final Lesson ¢);
 
-	public abstract List<LessonGroup> groupsMeetsConstraint(Course c);
+	boolean isClashWith(final T ¢);
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.Objects;
 
-import logic.Event;
 import model.constraint.TimeConstraint;
 
 /**
@@ -15,7 +14,7 @@ import model.constraint.TimeConstraint;
  * Class that holds information about specific lesson.
  * 
  */
-public class Lesson implements Event, Serializable {
+public class Lesson implements Serializable {
 	private static final long serialVersionUID = 903076596050490635L;
 
 	public enum Type {

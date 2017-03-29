@@ -22,8 +22,35 @@ public class Schedule {
 		lessons = new ArrayList<>();
 		constraints = new ArrayList<>();
 	}
-
 	
+	/*public Schedule(final List<TimeConstraint> constraintsList) {
+		this();
+		
+		for(final TimeConstraint c : constraintsList){
+			if (constraints.isEmpty()) {
+				constraints.add(¢);
+				return true;
+			}
+			for (final LessonGroup l : lessons)
+				if (l.isCLashWIth(¢))
+					return false;
+			lessons.add(¢);
+		}
+	}*/
+	
+	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
+		for(final TimeConstraint newc : constraintsList){
+			if (constraints.isEmpty()) {
+				constraints.add(newc);
+				continue;
+			}
+			for (final TimeConstraint oldc : constraints)
+				if (oldc.isClashWith(newc))
+					return false;
+			constraints.add(newc);
+		}
+		return true;
+	}
 	/**
 	 * 
 	 * @param ¢

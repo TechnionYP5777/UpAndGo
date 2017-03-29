@@ -14,7 +14,7 @@ import model.course.Lesson;
 import model.course.LessonGroup;
 import model.course.WeekTime;
 
-public class TimeConstraint extends Constraint {
+public class TimeConstraint implements Constraint<TimeConstraint> {
 	private final WeekTime startTime;
 	private final WeekTime endTime;
 
@@ -22,7 +22,30 @@ public class TimeConstraint extends Constraint {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
+	
 
+	
+	@Override
+	public boolean isClashWith(final Lesson ¢) {
+		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
+				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	}
+
+	@Override
+	public boolean isClashWith(final TimeConstraint ¢) {
+		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
+				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+
+	}
+	
+	/*public boolean isCLashWIth(TimeConstraint newc) {
+		// TODO Auto-generated method stub
+		return false;
+	}*/
+	
+	
+	/* TO BE REMOVED ONCE MADE SOME PROGRESS WITH THE PROJECT THE ASsUREs
+	 * THERE IS NOT NEED FOR THAT FUNCTIONALITY
 	@Override
 	public boolean canMeetConstraint(final Course c) {
 		for (final LessonGroup ¢ : c.getLectures())
@@ -51,7 +74,7 @@ public class TimeConstraint extends Constraint {
 	private boolean clashWithLesson(final Lesson ¢) {
 		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
 				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
-	}
+	} */
 
 	public WeekTime getStartTime() {
 		return startTime;
@@ -61,4 +84,13 @@ public class TimeConstraint extends Constraint {
 		return endTime;
 	}
 
+
+
+	
+
+
+	
+
+
+	
 }

@@ -176,17 +176,18 @@ public class Scheduler {
 		return null;
 	}
 
+	
 	/**
 	 * @param c
 	 * @param lconstraint
 	 * @return false if course c cannot meet the given list of constraints
 	 */
-	public static boolean canMeetConstraints(final Course c, final List<Constraint> lconstraint) {
+	/*public static boolean canMeetConstraints(final Course c, final List<Constraint> lconstraint) {
 		for (final Constraint ¢ : lconstraint)
 			if (!¢.canMeetConstraint(c))
 				return false;
 		return true;
-	}
+	}*/
 
 	/**
 	 * @param c
@@ -195,12 +196,12 @@ public class Scheduler {
 	 *         constraints this is a shallow check one by one, and doesnt mean
 	 *         all courses can be placed together.
 	 */
-	public static boolean canMeetConstraints(final List<Course> lcourse, final List<Constraint> lconstraint) {
+	/*public static boolean canMeetConstraints(final List<Course> lcourse, final List<Constraint> lconstraint) {
 		for (final Course ¢ : lcourse)
 			if (!canMeetConstraints(¢, lconstraint))
 				return false;
 		return true;
-	}
+	}*/
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
