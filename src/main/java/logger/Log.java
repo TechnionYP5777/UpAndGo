@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  * @author danabra
  * @since 30-03-17
  * 
- * Top-level static-like class for logging events
+ * Top-level static-like class for logging events (Wrapper class of Logger)
  * 
  */
 public final class Log { // final because it supposed to be a static class so there's no sense in inheriting this class
