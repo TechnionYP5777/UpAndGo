@@ -1,8 +1,5 @@
 package logger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 
  * @author danabra
@@ -11,8 +8,13 @@ import org.slf4j.LoggerFactory;
  * Top-level static-like class for logging events (Wrapper class of Logger)
  * 
  */
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public final class Log { // final because it supposed to be a static class so there's no sense in inheriting this class
-	private static Logger logger = LoggerFactory.getLogger("logger.Log");
+	private static Logger logger = LoggerFactory.getLogger("Log");
 	
 	private Log(){ // we don't want more than one instance
 

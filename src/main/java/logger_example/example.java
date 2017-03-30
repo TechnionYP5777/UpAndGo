@@ -1,7 +1,5 @@
 package logger_example;
 
- import logger.Log;
-
  /**
   * 
   * @author danabra
@@ -10,6 +8,10 @@ package logger_example;
   * Usage example of Log
   * 
   */
+
+ import logger.Log;
+
+
  
 public class example {
 
