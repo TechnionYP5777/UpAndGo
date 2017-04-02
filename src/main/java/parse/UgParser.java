@@ -31,15 +31,15 @@ public class UgParser {
 	// "https://ug3.technion.ac.il/rishum/course/";
 	private static final String GRADUATE_SEARCH_URL = "http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=";
 	//private static final String PREREQUISITES_XML = "data/Prerequisites.xml";
+	static final List<String> ignoredFacutlyIds = Arrays.asList("", "7", "99", "300", "450");
 
 	public static List<Faculty> getFaculties() {
 		final List<Faculty> $ = new ArrayList<>();
-		final List<String> ignoredIds = Arrays.asList("", "7", "99", "300", "450");
 
 		try {
 			for (final Element faculty : Scraper.getDocumentFromURL(new URL(UG_SEARCH_URL))
 					.select("select[name=\"FAC\"] option"))
-				if (!ignoredIds.contains(faculty.attr("value")))
+				if (!ignoredFacutlyIds.contains(faculty.attr("value")))
 					$.add(new Faculty(faculty.attr("value"), faculty.text()));
 
 		} catch (final IOException ¢) {
@@ -97,7 +97,7 @@ public class UgParser {
 
 				}
 		}
-		System.out.println("num of courses: " + count);
+		//System.out.println("num of courses: " + count);
 		java.util.Collections.sort($);
 		return $;
 	}
