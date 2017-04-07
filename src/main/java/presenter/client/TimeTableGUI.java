@@ -28,16 +28,18 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, 0, Integer.toString(i+7)+":30");
     		t.setText(2*i, 0, Integer.toString(i+8)+":00");
-    		t.getRowFormatter().addStyleName(2*i-1, "watchListHeader");
-    		t.getRowFormatter().addStyleName(2*i, "watchListHeader");
+    		t.getCellFormatter().addStyleName(2*i-1, 0, "watchListHeader");
+    		t.getCellFormatter().addStyleName(2*i, 0, "watchListHeader");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, 1, "");
-    		t.setText(2*i, 1, "");
-    		t.getRowFormatter().addStyleName(2*i-1, "insideEmptyCell");
-    		t.getRowFormatter().addStyleName(2*i, "insideEmptyCell");
+    		t.getFlexCellFormatter().setRowSpan(i, 1, 2);
+    		//t.setText(2*i, 1, "");
+    		t.getCellFormatter().addStyleName(2*i-1, 1, "insideEmptyCell");
+    		//t.getCellFormatter().addStyleName(2*i, 1, "insideEmptyCell");
+    		
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
