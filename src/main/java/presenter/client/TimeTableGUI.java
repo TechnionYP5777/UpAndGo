@@ -33,6 +33,14 @@ public class TimeTableGUI extends LayoutPanel {
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, 1, "");
+    		t.setText(2*i, 1, "");
+    		t.getRowFormatter().addStyleName(2*i-1, "insideEmptyCell");
+    		t.getRowFormatter().addStyleName(2*i, "insideEmptyCell");
+    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+    	}
+    	
     	
     	
     	
