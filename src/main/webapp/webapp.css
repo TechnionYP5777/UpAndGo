@@ -27,8 +27,11 @@
   	text-align: center;
 }
 
-.insideEmptyCell {
+.insideEmptyCellEven {
 	background-color: #d3d7cf;
+}
+.insideEmptyCellOdd {
+	background-color: #babdb6;
 }
 
 .watchListNumericColumn {

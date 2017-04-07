@@ -33,14 +33,14 @@ public class TimeTableGUI extends LayoutPanel {
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
-    	for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, 1, "");
-    		t.getFlexCellFormatter().setRowSpan(i, 1, 2);
-    		//t.setText(2*i, 1, "");
-    		t.getCellFormatter().addStyleName(2*i-1, 1, "insideEmptyCell");
-    		//t.getCellFormatter().addStyleName(2*i, 1, "insideEmptyCell");
-    		
-    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+    	for(int day = 1; day < 6; day++){
+	    	for(int i = 1; i<12; i++){
+	    		t.setText(2*i-1, day, "");
+	    		t.getFlexCellFormatter().setRowSpan(2*i-1, day, 2);
+	    		String cssSign = (i % 2 == 0) ? "insideEmptyCellEven":"insideEmptyCellOdd";
+	    		t.getCellFormatter().addStyleName(2*i-1, day, cssSign);
+	    		
+	    	}
     	}
     	
     	
