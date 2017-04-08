@@ -40,6 +40,7 @@ public class CourseSelectionGUI extends LayoutPanel {
     private Label cc = new Label("קורסים שנבחרו:");
     private ListBox scl = new ListBox(); //all courses list
     private Label sc = new Label("בחר קורסים:");
+    private ListBox faculties = new ListBox(); //chosen courses
     private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
     private Collection<String> courses; //all the courses that user didn't choose yet
@@ -105,6 +106,15 @@ public class CourseSelectionGUI extends LayoutPanel {
     	//initializing course suggestion
     	coursesSugg.addAll(courses);
     	
+    	//initializing faculty selection
+    	faculties.setWidth("100%");
+    	faculties.setHeight("2em");
+    	faculties.addItem("פקולטה");
+    	faculties.addItem("מדעי המחשב");
+    	faculties.addItem("חשמל");
+    	faculties.addItem("פיזיקה");
+    	faculties.addItem("מתמטיקה");
+    	
     	//search course text field initialization
     	searchCourse.setHeight("1em");
     	searchCourse.setWidth("100%");
@@ -120,7 +130,7 @@ public class CourseSelectionGUI extends LayoutPanel {
 					for (String s : courses)//IMPORTANT : cent char crashes the app so don't sparatanize 
 						scl.addItem(s);
 				else
-					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {
+					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {//need to improve search
 						@Override
 						public void onSuggestionsReady(@SuppressWarnings({ "unused", "hiding" }) Request __, Response r) {
 							for (Suggestion s : r.getSuggestions())//IMPORTANT : cent char crashes the app so don't sparatanize 
@@ -134,12 +144,14 @@ public class CourseSelectionGUI extends LayoutPanel {
     	this.add(cc);
 	    this.add(ccl);
 	    this.add(sc);
+	    this.add(faculties);
 	    this.add(searchCourse);
 	    this.add(scl);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(ccl, 1.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sc, 30,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(searchCourse, 31.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(scl, 34.5,  Unit.EM, 2, Unit.EM);
+	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
     }
 }
