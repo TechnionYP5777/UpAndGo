@@ -46,16 +46,26 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "headerRowStyle");
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "headerRowStyle");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "emptyCol");
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "emptyCol");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
-    	for(int i = 1; i<12; i++){
+    	// OLD CODE:
+    	/*for(int i = 1; i<12; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
     		t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "headerRowStyle");
     		t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
+    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+    	}*/
+    	
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
+    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
+    		//t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
+    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "headerRowStyle");
+    		//t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
