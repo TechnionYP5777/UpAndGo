@@ -82,7 +82,7 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, "emptyCell");
 		
-		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים ועוד דברים ועוד דברים");
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים ועוד דברים ועוד דברים ועוד דברים ועוד דברים ועוד דברים");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
 		t.getCellFormatter().addStyleName(11, 2, "notEmptyCell1");
 		

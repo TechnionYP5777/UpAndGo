@@ -21,12 +21,20 @@
   padding-top: 5px;
   vertical-align: top;
   text-align: center;
+  height:3em;
 }
 
 
 
 
+/*
+.table td:nth-child(1), table th:nth-child(1)  {
+			display:none;
+		}*/
+
 .timetableFlexStyle {
+	
+	
 	background-color: #888a85;
   border: 1px solid #d3d7cf;
   border-right-width: 0px;
@@ -43,17 +51,21 @@
 
 /* do not change this one */
 .tableArciCol {
+	display: none;
 	border-color: blue;
 	background-color: blue;
 	padding: 0px;
 	border-spacing: 0px;
 	
-	width:0em;
+	width:0%;
   	height:1.5em;
   	text-align: center;
+  	
+  	background: rgba(255,255,255,1);
 }
 
 .emptyCell {
+	
 	text-align: center;
 	background-color: #ffffff;
 }
