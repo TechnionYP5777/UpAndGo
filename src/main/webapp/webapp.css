@@ -14,10 +14,10 @@
 }
 
 .timetableFlexStyle {
-	background-color: #73d216;
+	background-color: #888a85;
   border: 1px solid #d3d7cf;
-  border-right-color: blue;
-  border-radius: 1px;
+  border-right-width: 0px;
+  border-radius: 3px;
   border-spacing: 1px;
   padding: 0px;
 }
