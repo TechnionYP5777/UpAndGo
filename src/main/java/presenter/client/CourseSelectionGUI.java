@@ -16,6 +16,8 @@ import java.util.Collection;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -38,40 +40,86 @@ public class CourseSelectionGUI extends LayoutPanel {
     private Label cc = new Label("קורסים שנבחרו:");
     private ListBox scl = new ListBox(); //all courses list
     private Label sc = new Label("בחר קורסים:");
+    private ListBox faculties = new ListBox(); //chosen courses
     private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
-    private Collection<String> courses;
-    public CourseSelectionGUI(){
+    private Collection<String> courses; //all the courses that user didn't choose yet
+    @SuppressWarnings("unused")
+	public CourseSelectionGUI(){
     	courses = new ArrayList<String>();
-    	courses.add("קורס5");
-    	courses.add("קורס6");
-    	courses.add("קורס7");
-    	courses.add("קורס8");
+    	courses.add("אקורס1");
+    	courses.add("אקורס2");
+    	courses.add("אקורס3");
+    	courses.add("בקורס4");
+    	courses.add("בקורס5");
+    	courses.add("גקורס6");
+    	courses.add("גקורס7");
+    	courses.add("גקורס8");
     	InitializePanel();
     }
     private void InitializePanel(){
     	// chosen course list initialization
     	ccl.setMultipleSelect(true);
-    	ccl.addItem("קורס1");
-    	ccl.addItem("קורס2");
-    	ccl.addItem("קורס3");
-    	ccl.addItem("קורס4");
+
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
+    	ccl.addDoubleClickHandler(new DoubleClickHandler() {
+			
+    		//need to keep list sorted
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				if(ccl.getSelectedValue() != null){
+					scl.addItem(ccl.getSelectedValue());
+					courses.add(ccl.getSelectedValue());
+					ccl.removeItem(ccl.getSelectedIndex());
+					coursesSugg.clear();
+					coursesSugg.addAll(courses);
+				}
+				
+			}
+		});
     	
     	//all courses list initialization
     	scl.setMultipleSelect(true);
     	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
 			scl.addItem(s);
     	scl.setWidth("100%");
+    	scl.addDoubleClickHandler(new DoubleClickHandler() {
+			
+    		//need to keep list sorted
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent e) { // maybe use button?
+				if(scl.getSelectedValue() != null){
+					ccl.addItem(scl.getSelectedValue());
+					courses.remove(scl.getSelectedValue());
+					scl.removeItem(scl.getSelectedIndex());
+					coursesSugg.clear();
+					coursesSugg.addAll(courses);
+					
+				}
+				
+			}
+		});
     	
     	//initializing course suggestion
     	coursesSugg.addAll(courses);
     	
+    	//initializing faculty selection
+    	faculties.setWidth("100%");
+    	faculties.setHeight("2em");
+    	faculties.addItem("פקולטה");
+    	faculties.addItem("מדעי המחשב");
+    	faculties.addItem("חשמל");
+    	faculties.addItem("פיזיקה");
+    	faculties.addItem("מתמטיקה");
+    	
     	//search course text field initialization
     	searchCourse.setHeight("1em");
-    	searchCourse.setWidth("100%");
+    	searchCourse.setWidth("97%");
     	searchCourse.setTitle("חפש קורסים");
+    	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
     	searchCourse.addKeyUpHandler(new KeyUpHandler() {
 			
 			@SuppressWarnings("synthetic-access")
@@ -82,7 +130,7 @@ public class CourseSelectionGUI extends LayoutPanel {
 					for (String s : courses)//IMPORTANT : cent char crashes the app so don't sparatanize 
 						scl.addItem(s);
 				else
-					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {
+					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {//need to improve search
 						@Override
 						public void onSuggestionsReady(@SuppressWarnings({ "unused", "hiding" }) Request __, Response r) {
 							for (Suggestion s : r.getSuggestions())//IMPORTANT : cent char crashes the app so don't sparatanize 
@@ -96,12 +144,14 @@ public class CourseSelectionGUI extends LayoutPanel {
     	this.add(cc);
 	    this.add(ccl);
 	    this.add(sc);
+	    this.add(faculties);
 	    this.add(searchCourse);
 	    this.add(scl);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(ccl, 1.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sc, 30,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(searchCourse, 31.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(scl, 34.5,  Unit.EM, 2, Unit.EM);
+	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
     }
 }
