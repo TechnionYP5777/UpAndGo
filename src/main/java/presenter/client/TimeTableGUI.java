@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
 public class TimeTableGUI extends LayoutPanel { 
+	// LEARNING SOME NEW STUFF, so comments will stay for a few days
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
 	
@@ -36,9 +37,8 @@ public class TimeTableGUI extends LayoutPanel {
     	//t.setText(0, 5, "שישי");
     	
     	t.getRowFormatter().addStyleName(0, "headerRowStyle");
-    	t.getCellFormatter().addStyleName(0, 0, "emptyCol");
+    	t.getCellFormatter().addStyleName(0, 0, "tableArciCol");
     	t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
-    	t.getColumnFormatter().addStyleName(HOURS_COL, "letTry");
     	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     	}
@@ -47,8 +47,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "emptyCol");
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "emptyCol");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "tableArciCol");
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "tableArciCol");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
@@ -71,8 +71,56 @@ public class TimeTableGUI extends LayoutPanel {
     	}
     	
     	
-    	
-    	for(int day = 2; day < 7; day++){
+    	t.setText(1, 2, "");
+		t.getFlexCellFormatter().setRowSpan(1, 2, 4);
+		t.getCellFormatter().addStyleName(1, 2, "emptyCell");
+		
+		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
+		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
+		t.getCellFormatter().addStyleName(5, 2, "notEmptyCell1");
+		
+		t.setText(9, 2, "");
+		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
+		t.getCellFormatter().addStyleName(9, 2, "emptyCell");
+		
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
+		t.getCellFormatter().addStyleName(11, 2, "notEmptyCell1");
+		
+		t.setText(13, 2, "");
+		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
+		t.getCellFormatter().addStyleName(13, 2, "emptyCell");
+		
+		
+		
+		//*******************************
+		
+		t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
+		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
+		t.getCellFormatter().addStyleName(1, 3, "notEmptyCell2");
+		
+		t.setText(5, 3, "תיכון תוכנה, טאוב 10");
+		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
+		t.getCellFormatter().addStyleName(5, 3, "notEmptyCell4");
+		
+		t.setText(9, 3, "");
+		t.getFlexCellFormatter().setRowSpan(9, 3, 14);
+		t.getCellFormatter().addStyleName(9, 3, "emptyCell");
+		/*t.setText(9, 2, "");
+		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
+		t.getCellFormatter().addStyleName(9, 2, "emptyCell");
+		
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
+		t.getCellFormatter().addStyleName(11, 2, "notEmptyCell1");
+		
+		t.setText(13, 2, "");
+		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
+		t.getCellFormatter().addStyleName(13, 2, "emptyCell");*/
+		
+		
+		
+    	/*for(int day = 4; day < 7; day++){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, day, "");
 	    		t.getFlexCellFormatter().setRowSpan(2*i-1, day, 2);
@@ -80,7 +128,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		t.getCellFormatter().addStyleName(2*i-1, day, cssSign);
 	    		
 	    	}
-    	}
+    	}*/
     	
     	
     	
