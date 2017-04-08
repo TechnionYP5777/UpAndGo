@@ -15,7 +15,7 @@ public class TimeTableGUI extends LayoutPanel {
     	InitializePanel();
     }
     private void InitializePanel(){
-    	t.setText(0, 0, "שעה");
+    	t.setText(0, 0, "x");
     	t.setText(0, 1, "שעה");
     	t.setText(0, 2, "ראשון");
     	t.setText(0, 3, "שני");
@@ -35,8 +35,9 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	//t.setText(0, 5, "שישי");
     	t.getRowFormatter().addStyleName(0, "headerRow");
+    	t.getCellFormatter().addStyleName(0, 0, "headerCell");
     	t.getCellFormatter().addStyleName(0, 1, "hourCol");
-    	for(int i = 1; i<7; i++){
+    	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCell");
     	}
     	
