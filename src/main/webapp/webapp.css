@@ -6,14 +6,14 @@
   
   /* time table css: */
   
-.watchListHeader {
+.headerRowStyle {
   background-color: #ffffff;
   color: black;
   padding: 0px;
   
 }
 
-.watchList {
+.timetableFlexStyle {
 	background-color: #888a85;
   border: 1px solid #d3d7cf;
   border-radius: 1px;
@@ -34,7 +34,7 @@
 	background-color: #babdb6;
 }
 
-.watchListNumericColumn {
+.headerCellStyle {
 	border-color: #cc0000;
 	border-width: 1px;
   text-align: center;

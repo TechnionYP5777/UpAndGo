@@ -23,24 +23,24 @@ public class TimeTableGUI extends LayoutPanel {
     	/*for(int i = 1; i<24; i++){
     		t.setText(i, 6, "s");
     		//t.setText(2*i, 0, Integer.toString(i+8)+":00");
-    		//t.getCellFormatter().addStyleName(2*i-1, 0, "watchListHeader");
-    		//t.getCellFormatter().addStyleName(2*i, 0, "watchListHeader");
+    		//t.getCellFormatter().addStyleName(2*i-1, 0, "headerRowStyle");
+    		//t.getCellFormatter().addStyleName(2*i, 0, "headerRowStyle");
     		
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}*/
     	
     	//t.setText(0, 5, "שישי");
-    	t.getRowFormatter().addStyleName(0, "watchListHeader");
+    	t.getRowFormatter().addStyleName(0, "headerRowStyle");
     	t.getCellFormatter().addStyleName(0, 0, "hourCol");
     	for(int i = 1; i<6; i++){
-    		t.getCellFormatter().addStyleName(0, i, "watchListNumericColumn");
+    		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     	}
     	
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, 0, Integer.toString(i+7)+":30");
     		t.setText(2*i, 0, Integer.toString(i+8)+":00");
-    		t.getCellFormatter().addStyleName(2*i-1, 0, "watchListHeader");
-    		t.getCellFormatter().addStyleName(2*i, 0, "watchListHeader");
+    		t.getCellFormatter().addStyleName(2*i-1, 0, "headerRowStyle");
+    		t.getCellFormatter().addStyleName(2*i, 0, "headerRowStyle");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
@@ -70,13 +70,13 @@ public class TimeTableGUI extends LayoutPanel {
 
 	    // ...and set it's column span so that it takes up the whole row.
 	    //t.getFlexCellFormatter().setRowSpan(1, 0, 2);
-	    /*t.getRowFormatter().addStyleName(0, "watchListHeader");
-	    t.getRowFormatter().addStyleName(1, "watchListHeader");
-	    t.getRowFormatter().addStyleName(2, "watchListHeader");*/
+	    /*t.getRowFormatter().addStyleName(0, "headerRowStyle");
+	    t.getRowFormatter().addStyleName(1, "headerRowStyle");
+	    t.getRowFormatter().addStyleName(2, "headerRowStyle");*/
 	    /*t.getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");*/
-	    t.addStyleName("watchList");
+	    t.addStyleName("timetableFlexStyle");
 	    
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
