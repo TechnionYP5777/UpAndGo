@@ -38,7 +38,6 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getRowFormatter().addStyleName(0, "headerRowStyle");
     	t.getCellFormatter().addStyleName(0, 0, "emptyCol");
     	t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
-    	t.getColumnFormatter().addStyleName(HOURS_COL, "letTry");
     	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     	}

@@ -10,7 +10,6 @@
   background-color: #ffffff;
   color: black;
   padding: 0px;
-  border: 1px solid black;
   
 }
 
@@ -22,25 +21,18 @@
   padding-top: 5px;
   vertical-align: top;
   text-align: center;
-  border: 1px solid black;
 }
 
 
-.letTry {
-	color: blue;
-	background-color: blue;
-	border-spacing: 5px;
-	
-}
+
 
 .timetableFlexStyle {
 	background-color: #888a85;
   border: 1px solid #d3d7cf;
   border-right-width: 0px;
   border-radius: 3px;
-  border-spacing: 0px;
+  border-spacing: 1px;
   padding: 0px;
-  border-collapse: collapse;
 }
 
 .hourCol {
