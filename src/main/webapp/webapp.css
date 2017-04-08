@@ -6,7 +6,7 @@
   
   /* time table css: */
   
-.headerRow {
+.watchListHeader {
   background-color: #ffffff;
   color: black;
   padding: 0px;
@@ -34,7 +34,7 @@
 	background-color: #babdb6;
 }
 
-.headerCell {
+.watchListNumericColumn {
 	border-color: #cc0000;
 	border-width: 1px;
   text-align: center;
