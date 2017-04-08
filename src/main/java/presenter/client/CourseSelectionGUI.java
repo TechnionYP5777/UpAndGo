@@ -16,6 +16,8 @@ import java.util.Collection;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -65,6 +67,17 @@ public class CourseSelectionGUI extends LayoutPanel {
     	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
 			scl.addItem(s);
     	scl.setWidth("100%");
+    	scl.addDoubleClickHandler(new DoubleClickHandler() {
+			
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				if(scl.getSelectedValue() != null){
+					ccl.addItem(scl.getSelectedValue());
+					scl.removeItem(scl.getSelectedIndex());
+				}
+				
+			}
+		});
     	
     	//initializing course suggestion
     	coursesSugg.addAll(courses);
