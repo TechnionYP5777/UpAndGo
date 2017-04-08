@@ -62,6 +62,19 @@ public class CourseSelectionGUI extends LayoutPanel {
 
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
+    	ccl.addDoubleClickHandler(new DoubleClickHandler() {
+			
+    		//need to keep list sorted
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				if(ccl.getSelectedValue() != null){
+					scl.addItem(ccl.getSelectedValue());
+					ccl.removeItem(ccl.getSelectedIndex());
+				}
+				
+			}
+		});
     	
     	//all courses list initialization
     	scl.setMultipleSelect(true);
@@ -70,9 +83,10 @@ public class CourseSelectionGUI extends LayoutPanel {
     	scl.setWidth("100%");
     	scl.addDoubleClickHandler(new DoubleClickHandler() {
 			
+    		//need to keep list sorted
 			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) { // maybe use button?
+			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent e) { // maybe use button?
 				if(scl.getSelectedValue() != null){
 					ccl.addItem(scl.getSelectedValue());
 					scl.removeItem(scl.getSelectedIndex());
@@ -88,6 +102,7 @@ public class CourseSelectionGUI extends LayoutPanel {
     	searchCourse.setHeight("1em");
     	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
+    	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
     	searchCourse.addKeyUpHandler(new KeyUpHandler() {
 			
 			@SuppressWarnings("synthetic-access")
