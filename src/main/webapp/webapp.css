@@ -57,9 +57,21 @@
 	text-align: center;
 	background-color: #ffffff;
 }
-.notEmptyCell {
+.notEmptyCell1 {
 	text-align: center;
 	background-color: #ad7fa8;
+}
+.notEmptyCell2 {
+	text-align: center;
+	background-color: #8ae234;
+}
+.notEmptyCell3 {
+	text-align: center;
+	background-color: #fcaf3e;
+}
+.notEmptyCell4 {
+	text-align: center;
+	background-color: #729fcf;
 }
 
 /* not in use */
