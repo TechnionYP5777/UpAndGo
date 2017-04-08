@@ -1,6 +1,9 @@
 package presenter.client;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * 
  * @author danabra
@@ -31,16 +34,23 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class CourseSelectionGUI extends LayoutPanel {
-    private ListBox ccl = new ListBox();
+    private ListBox ccl = new ListBox(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
-    private ListBox scl = new ListBox();
+    private ListBox scl = new ListBox(); //all courses list
     private Label sc = new Label("בחר קורסים:");
-    private MultiWordSuggestOracle courses = new MultiWordSuggestOracle();
+    private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
+    private Collection<String> courses;
     public CourseSelectionGUI(){
+    	courses = new ArrayList<String>();
+    	courses.add("קורס5");
+    	courses.add("קורס6");
+    	courses.add("קורס7");
+    	courses.add("קורס8");
     	InitializePanel();
     }
     private void InitializePanel(){
+    	// chosen course list initialization
     	ccl.setMultipleSelect(true);
     	ccl.addItem("קורס1");
     	ccl.addItem("קורס2");
@@ -48,41 +58,41 @@ public class CourseSelectionGUI extends LayoutPanel {
     	ccl.addItem("קורס4");
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
+    	
+    	//all courses list initialization
     	scl.setMultipleSelect(true);
-    	scl.addItem("קורס5");
-    	scl.addItem("קורס6");
-    	scl.addItem("קורס7");
-    	scl.addItem("קורס8");
+    	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
+			scl.addItem(s);
     	scl.setWidth("100%");
+    	
+    	//initializing course suggestion
+    	coursesSugg.addAll(courses);
+    	
+    	//search course text field initialization
     	searchCourse.setHeight("1em");
     	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
     	searchCourse.addKeyUpHandler(new KeyUpHandler() {
 			
+			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onKeyUp(KeyUpEvent event) {
+			public void onKeyUp(@SuppressWarnings("unused") KeyUpEvent __) {
 				scl.clear();
-				if(searchCourse.getValue().equals("")){
-			    	scl.addItem("קורס5");
-			    	scl.addItem("קורס6");
-			    	scl.addItem("קורס7");
-			    	scl.addItem("קורס8");
-				}
-				else{
-					courses.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback(){
-
+				if("".equals(searchCourse.getValue()))
+					for (String s : courses)//IMPORTANT : cent char crashes the app so don't sparatanize 
+						scl.addItem(s);
+				else
+					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {
 						@Override
-						public void onSuggestionsReady(Request request, Response response) {
-							for(Suggestion s : response.getSuggestions()){
+						public void onSuggestionsReady(@SuppressWarnings({ "unused", "hiding" }) Request __, Response r) {
+							for (Suggestion s : r.getSuggestions())//IMPORTANT : cent char crashes the app so don't sparatanize 
 								scl.addItem(s.getReplacementString());
-							}
-							
 						}
-						
 					});
-				}
 			}
 		});
+    	
+    	//adding widgets to panel
     	this.add(cc);
 	    this.add(ccl);
 	    this.add(sc);
