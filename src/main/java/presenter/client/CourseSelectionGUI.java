@@ -35,7 +35,6 @@ public class CourseSelectionGUI extends LayoutPanel {
     private Label cc = new Label("קורסים שנבחרו:");
     private ListBox scl = new ListBox();
     private Label sc = new Label("בחר קורסים:");
-    private
     private MultiWordSuggestOracle courses = new MultiWordSuggestOracle();
     private TextBox searchCourse = new TextBox();
     public CourseSelectionGUI(){
@@ -55,7 +54,6 @@ public class CourseSelectionGUI extends LayoutPanel {
     	scl.addItem("קורס7");
     	scl.addItem("קורס8");
     	scl.setWidth("100%");
-    	courses.addAll(scl.get);
     	searchCourse.setHeight("1em");
     	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
