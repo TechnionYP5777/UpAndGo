@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
 public class TimeTableGUI extends LayoutPanel { 
+	// LEARNING SOME NEW STUFF, so comments will stay for a few days
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
 	
@@ -82,18 +83,43 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, "emptyCell");
 		
-		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים ועוד דברים ועוד דברים ועוד דברים ועוד דברים ועוד דברים");
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
 		t.getCellFormatter().addStyleName(11, 2, "notEmptyCell1");
 		
+		t.setText(13, 2, "");
+		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
+		t.getCellFormatter().addStyleName(13, 2, "emptyCell");
 		
 		
-		t.setText(1, 3, "");
-		t.getFlexCellFormatter().setRowSpan(1, 3, 10);
-		t.getCellFormatter().addStyleName(1, 3, "insideEmptyCellEven");
-    	
-    	
-    	
+		
+		//*******************************
+		
+		t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
+		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
+		t.getCellFormatter().addStyleName(1, 3, "notEmptyCell2");
+		
+		t.setText(5, 3, "תיכון תוכנה, טאוב 10");
+		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
+		t.getCellFormatter().addStyleName(5, 3, "notEmptyCell4");
+		
+		t.setText(9, 3, "");
+		t.getFlexCellFormatter().setRowSpan(9, 3, 14);
+		t.getCellFormatter().addStyleName(9, 3, "emptyCell");
+		/*t.setText(9, 2, "");
+		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
+		t.getCellFormatter().addStyleName(9, 2, "emptyCell");
+		
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
+		t.getCellFormatter().addStyleName(11, 2, "notEmptyCell1");
+		
+		t.setText(13, 2, "");
+		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
+		t.getCellFormatter().addStyleName(13, 2, "emptyCell");*/
+		
+		
+		
     	/*for(int day = 4; day < 7; day++){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, day, "");
