@@ -43,19 +43,20 @@ public class CourseSelectionGUI extends LayoutPanel {
     private Collection<String> courses;
     public CourseSelectionGUI(){
     	courses = new ArrayList<String>();
-    	courses.add("קורס5");
-    	courses.add("קורס6");
-    	courses.add("קורס7");
-    	courses.add("קורס8");
+    	courses.add("אקורס1");
+    	courses.add("אקורס2");
+    	courses.add("אקורס3");
+    	courses.add("בקורס4");
+    	courses.add("בקורס5");
+    	courses.add("גקורס6");
+    	courses.add("גקורס7");
+    	courses.add("גקורס8");
     	InitializePanel();
     }
     private void InitializePanel(){
     	// chosen course list initialization
     	ccl.setMultipleSelect(true);
-    	ccl.addItem("קורס1");
-    	ccl.addItem("קורס2");
-    	ccl.addItem("קורס3");
-    	ccl.addItem("קורס4");
+
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
     	
