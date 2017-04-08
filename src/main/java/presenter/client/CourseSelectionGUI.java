@@ -43,7 +43,8 @@ public class CourseSelectionGUI extends LayoutPanel {
     private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
     private Collection<String> courses;
-    public CourseSelectionGUI(){
+    @SuppressWarnings("unused")
+	public CourseSelectionGUI(){
     	courses = new ArrayList<String>();
     	courses.add("אקורס1");
     	courses.add("אקורס2");
@@ -69,8 +70,9 @@ public class CourseSelectionGUI extends LayoutPanel {
     	scl.setWidth("100%");
     	scl.addDoubleClickHandler(new DoubleClickHandler() {
 			
+			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onDoubleClick(DoubleClickEvent event) {
+			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) { // maybe use button?
 				if(scl.getSelectedValue() != null){
 					ccl.addItem(scl.getSelectedValue());
 					scl.removeItem(scl.getSelectedIndex());
