@@ -18,6 +18,17 @@ public class TimeTableGUI extends LayoutPanel {
     	t.setText(0, 3, "שלישי");
     	t.setText(0, 4, "רביעי");
     	t.setText(0, 5, "חמישי");
+    	t.setText(0, 6, "x");
+    	
+    	for(int i = 1; i<24; i++){
+    		t.setText(i, 6, "s");
+    		//t.setText(2*i, 0, Integer.toString(i+8)+":00");
+    		//t.getCellFormatter().addStyleName(2*i-1, 0, "watchListHeader");
+    		//t.getCellFormatter().addStyleName(2*i, 0, "watchListHeader");
+    		
+    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+    	}
+    	
     	//t.setText(0, 5, "שישי");
     	t.getRowFormatter().addStyleName(0, "watchListHeader");
     	t.getCellFormatter().addStyleName(0, 0, "hourCol");
