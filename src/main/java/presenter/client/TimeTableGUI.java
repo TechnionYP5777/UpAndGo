@@ -6,18 +6,22 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
 public class TimeTableGUI extends LayoutPanel { 
+	static final int EMPTY_COL = 0;
+	static final int HOURS_COL = 1;
+	
 	FlexTable t = new FlexTable();
 	
 	public TimeTableGUI(){
     	InitializePanel();
     }
     private void InitializePanel(){
-    	t.setText(0, 0, "שעה");
-    	t.setText(0, 1, "ראשון");
-    	t.setText(0, 2, "שני");
-    	t.setText(0, 3, "שלישי");
-    	t.setText(0, 4, "רביעי");
-    	t.setText(0, 5, "חמישי");
+    	t.setText(0, 0, "");
+    	t.setText(0, 1, "שעה");
+    	t.setText(0, 2, "ראשון");
+    	t.setText(0, 3, "שני");
+    	t.setText(0, 4, "שלישי");
+    	t.setText(0, 5, "רביעי");
+    	t.setText(0, 6, "חמישי");
     	//t.setText(0, 6, "x");
     	
     	/*for(int i = 1; i<24; i++){
@@ -30,20 +34,33 @@ public class TimeTableGUI extends LayoutPanel {
     	}*/
     	
     	//t.setText(0, 5, "שישי");
+    	
     	t.getRowFormatter().addStyleName(0, "headerRowStyle");
-    	t.getCellFormatter().addStyleName(0, 0, "hourCol");
-    	for(int i = 1; i<6; i++){
+    	t.getCellFormatter().addStyleName(0, 0, "emptyCol");
+    	t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
+    	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     	}
     	
+    	
     	for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, 0, Integer.toString(i+7)+":30");
-    		t.setText(2*i, 0, Integer.toString(i+8)+":00");
-    		t.getCellFormatter().addStyleName(2*i-1, 0, "headerRowStyle");
-    		t.getCellFormatter().addStyleName(2*i, 0, "headerRowStyle");
+    		t.setText(2*i-1, EMPTY_COL, "");
+    		t.setText(2*i, EMPTY_COL, "");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "headerRowStyle");
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "headerRowStyle");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
+    		t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
+    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "headerRowStyle");
+    		t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
+    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+    	}
+    	
+    	
+    	/*
     	for(int day = 1; day < 6; day++){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, day, "");
@@ -52,7 +69,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		t.getCellFormatter().addStyleName(2*i-1, day, cssSign);
 	    		
 	    	}
-    	}
+    	}*/
     	
     	
     	

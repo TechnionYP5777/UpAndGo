@@ -14,8 +14,9 @@
 }
 
 .timetableFlexStyle {
-	background-color: #888a85;
+	background-color: #73d216;
   border: 1px solid #d3d7cf;
+  border-right-color: blue;
   border-radius: 1px;
   border-spacing: 1px;
   padding: 0px;
@@ -23,6 +24,16 @@
 
 .hourCol {
 	width:6em;
+  	height:4em;
+  	text-align: center;
+}
+
+.emptyCol {
+	border-color: blue;
+	background-color: blue;
+	padding: 0px;
+	border-spacing: 0px;
+	width:0em;
   	height:4em;
   	text-align: center;
 }
