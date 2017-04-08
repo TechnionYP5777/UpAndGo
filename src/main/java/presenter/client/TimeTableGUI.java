@@ -38,6 +38,7 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getRowFormatter().addStyleName(0, "headerRowStyle");
     	t.getCellFormatter().addStyleName(0, 0, "emptyCol");
     	t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
+    	t.getColumnFormatter().addStyleName(HOURS_COL, "letTry");
     	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     	}
@@ -64,14 +65,14 @@ public class TimeTableGUI extends LayoutPanel {
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
     		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
     		//t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
-    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "headerRowStyle");
+    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "hoursCellStyle");
     		//t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
     	
-    	/*
-    	for(int day = 1; day < 6; day++){
+    	
+    	for(int day = 2; day < 7; day++){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, day, "");
 	    		t.getFlexCellFormatter().setRowSpan(2*i-1, day, 2);
@@ -79,7 +80,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		t.getCellFormatter().addStyleName(2*i-1, day, cssSign);
 	    		
 	    	}
-    	}*/
+    	}
     	
     	
     	

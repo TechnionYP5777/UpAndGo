@@ -13,6 +13,16 @@
   
 }
 
+
+.hoursCellStyle {
+  background-color: #ffffff;
+  color: black;
+  padding: 0px;
+  padding-top: 5px;
+  vertical-align: top;
+  text-align: center;
+}
+
 .timetableFlexStyle {
 	background-color: #888a85;
   border: 1px solid #d3d7cf;
@@ -33,7 +43,8 @@
 	background-color: blue;
 	padding: 0px;
 	border-spacing: 0px;
-	width:1em;
+	
+	width:0em;
   	height:1.5em;
   	text-align: center;
 }
