@@ -36,7 +36,7 @@ public class TimeTableGUI extends LayoutPanel {
     	//t.setText(0, 5, "שישי");
     	
     	t.getRowFormatter().addStyleName(0, "headerRowStyle");
-    	t.getCellFormatter().addStyleName(0, 0, "emptyCol");
+    	t.getCellFormatter().addStyleName(0, 0, "tableArciCol");
     	t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
     	for(int i = 2; i<7; i++){
     		t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
@@ -46,8 +46,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "emptyCol");
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "emptyCol");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "tableArciCol");
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "tableArciCol");
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
@@ -70,8 +70,23 @@ public class TimeTableGUI extends LayoutPanel {
     	}
     	
     	
+    	t.setText(1, 2, "");
+		t.getFlexCellFormatter().setRowSpan(1, 2, 4);
+		t.getCellFormatter().addStyleName(1, 2, "emptyCell");
+		
+		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
+		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
+		t.getCellFormatter().addStyleName(5, 2, "notEmptyCell");
+		
+		
+		
+		t.setText(1, 3, "");
+		t.getFlexCellFormatter().setRowSpan(1, 3, 10);
+		t.getCellFormatter().addStyleName(1, 3, "insideEmptyCellEven");
     	
-    	for(int day = 2; day < 7; day++){
+    	
+    	
+    	/*for(int day = 4; day < 7; day++){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, day, "");
 	    		t.getFlexCellFormatter().setRowSpan(2*i-1, day, 2);
@@ -79,7 +94,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		t.getCellFormatter().addStyleName(2*i-1, day, cssSign);
 	    		
 	    	}
-    	}
+    	}*/
     	
     	
     	

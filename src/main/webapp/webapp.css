@@ -41,7 +41,8 @@
   	text-align: left;
 }
 
-.emptyCol {
+/* do not change this one */
+.tableArciCol {
 	border-color: blue;
 	background-color: blue;
 	padding: 0px;
@@ -52,6 +53,16 @@
   	text-align: center;
 }
 
+.emptyCell {
+	text-align: center;
+	background-color: #ffffff;
+}
+.notEmptyCell {
+	text-align: center;
+	background-color: #ad7fa8;
+}
+
+/* not in use */
 .insideEmptyCellEven {
 	background-color: #d3d7cf;
 }
