@@ -117,7 +117,7 @@ public class CourseSelectionGUI extends LayoutPanel {
     	
     	//search course text field initialization
     	searchCourse.setHeight("1em");
-    	searchCourse.setWidth("100%");
+    	searchCourse.setWidth("97%");
     	searchCourse.setTitle("חפש קורסים");
     	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
     	searchCourse.addKeyUpHandler(new KeyUpHandler() {
