@@ -42,7 +42,7 @@ public class CourseSelectionGUI extends LayoutPanel {
     private Label sc = new Label("בחר קורסים:");
     private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
-    private Collection<String> courses;
+    private Collection<String> courses; //all the courses that user didn't choose yet
     @SuppressWarnings("unused")
 	public CourseSelectionGUI(){
     	courses = new ArrayList<String>();
@@ -70,7 +70,10 @@ public class CourseSelectionGUI extends LayoutPanel {
 			public void onDoubleClick(DoubleClickEvent event) {
 				if(ccl.getSelectedValue() != null){
 					scl.addItem(ccl.getSelectedValue());
+					courses.add(ccl.getSelectedValue());
 					ccl.removeItem(ccl.getSelectedIndex());
+					coursesSugg.clear();
+					coursesSugg.addAll(courses);
 				}
 				
 			}
@@ -89,7 +92,11 @@ public class CourseSelectionGUI extends LayoutPanel {
 			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent e) { // maybe use button?
 				if(scl.getSelectedValue() != null){
 					ccl.addItem(scl.getSelectedValue());
+					courses.remove(scl.getSelectedValue());
 					scl.removeItem(scl.getSelectedIndex());
+					coursesSugg.clear();
+					coursesSugg.addAll(courses);
+					
 				}
 				
 			}
