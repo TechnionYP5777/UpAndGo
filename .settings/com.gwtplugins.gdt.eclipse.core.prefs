@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-gwtMavenModuleName=presenter.Webapp
+gwtMavenModuleName=webapp.Webapp
 gwtMavenModuleShortName=Webapp
 lastWarOutDir=/home/kobybs/owlRipo/UpAndGo/target/Internet-Browser-Plugin-0.0.1-SNAPSHOT
 warSrcDir=src/main/webapp

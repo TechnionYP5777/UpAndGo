@@ -1,10 +1,10 @@
-package presenter.client.view;
+package webapp.client.view;
 
 import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
 
-import presenter.client.common.ColumnDefinition;
+import webapp.client.common.ColumnDefinition;
 
 public interface CourseListView<T> {
 

@@ -118,7 +118,7 @@
 		          </execution>
 		        </executions>
 		        <configuration>
-		          <moduleName>presenter.Webapp</moduleName>
+		          <moduleName>webapp.Webapp</moduleName>
 		          <moduleShortName>Webapp</moduleShortName>
 		          <failOnError>true</failOnError>
 		          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use

@@ -1,4 +1,4 @@
-package presenter.client;
+package webapp.client;
 
 import java.util.ArrayList;
 

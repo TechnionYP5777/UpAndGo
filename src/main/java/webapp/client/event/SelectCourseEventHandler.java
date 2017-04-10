@@ -1,4 +1,4 @@
-package presenter.client.event;
+package webapp.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 

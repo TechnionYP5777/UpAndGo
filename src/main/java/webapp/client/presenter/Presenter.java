@@ -1,4 +1,4 @@
-package presenter.client.presenter;
+package webapp.client.presenter;
 
 import com.google.gwt.user.client.ui.Panel;
 

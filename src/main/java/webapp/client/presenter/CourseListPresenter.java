@@ -1,4 +1,4 @@
-package presenter.client.presenter;
+package webapp.client.presenter;
 
 import java.util.ArrayList;
 import com.google.gwt.event.shared.EventBus;
@@ -8,8 +8,8 @@ import com.google.gwt.user.client.ui.Panel;
 
 import logger.Log;
 import model.course.CourseId;
-import presenter.client.CoursesServiceAsync;
-import presenter.client.view.CourseListView;
+import webapp.client.CoursesServiceAsync;
+import webapp.client.view.CourseListView;
 
 public class CourseListPresenter implements Presenter, CourseListView.Presenter<CourseId> {
 

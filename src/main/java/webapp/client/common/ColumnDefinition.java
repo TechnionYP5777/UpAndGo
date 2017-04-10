@@ -1,4 +1,4 @@
-package presenter.client.common;
+package webapp.client.common;
 
 import com.google.gwt.user.client.ui.Widget;
 

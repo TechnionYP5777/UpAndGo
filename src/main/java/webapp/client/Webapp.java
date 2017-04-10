@@ -1,4 +1,4 @@
-package presenter.client;
+package webapp.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
