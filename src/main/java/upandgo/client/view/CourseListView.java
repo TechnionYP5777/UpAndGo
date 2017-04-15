@@ -6,6 +6,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.common.ColumnDefinition;
 
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 06-04-16
+ * 
+ * Class that is in charge of creating UI with list of existing courses and choosing the ones that we want to schedule.
+ * 
+ * The presenter can pass the model untouched and the view has no rendering code.
+ */
+
 public interface CourseListView<T> {
 
 	public interface Presenter<T> {

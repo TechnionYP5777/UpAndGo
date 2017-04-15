@@ -8,8 +8,18 @@ import com.google.gwt.user.client.ui.Panel;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.view.CourseListView;
-import upandgo.server.logger.Log;
 import upandgo.shared.entities.course.CourseId;
+
+/**
+ * 
+ * @author Nikita Dizhur
+ * @since 06-04-16
+ * 
+ * A concrete presenter for {@link CourseListView}.
+ * 
+ */
+
+// TODO: add History management and Event management
 
 public class CourseListPresenter implements Presenter, CourseListView.Presenter<CourseId> {
 
