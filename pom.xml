@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>Internet-Browser-Plugin</groupId>
-  <artifactId>Internet-Browser-Plugin</artifactId>
+  <groupId>UpAndGo</groupId>
+  <artifactId>UpAndGo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <properties>
     <!-- Setting maven.compiler.source to something different to 1.8
@@ -118,8 +118,8 @@
 		          </execution>
 		        </executions>
 		        <configuration>
-		          <moduleName>webapp.Webapp</moduleName>
-		          <moduleShortName>Webapp</moduleShortName>
+		          <moduleName>upandgo.UpAndGo</moduleName>
+		          <moduleShortName>UpAndGo</moduleShortName>
 		          <failOnError>true</failOnError>
 		          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
 		               a different source language for java compilation -->
@@ -135,7 +135,7 @@
 		          <classpathScope>compile+runtime</classpathScope>
 		          <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
 		          <startupUrls>
-		            <startupUrl>Webapp.html</startupUrl>
+		            <startupUrl>upandgo.html</startupUrl>
 		          </startupUrls>
 		        </configuration>
 		      </plugin>
