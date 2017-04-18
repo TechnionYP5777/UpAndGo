@@ -19,7 +19,7 @@ import upandgo.shared.entities.course.CourseId;
  * @author Nikita Dizhur
  * @since 06-04-16
  * 
- * A concrete presenter for {@link CourseListView}.
+ *        A concrete presenter for {@link CourseListView}.
  * 
  */
 
@@ -31,12 +31,14 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 	CourseListView<CourseId> view;
 	EventBus eventBus;
 
+	String faculty = "";
+
 	public CourseListPresenter(CoursesServiceAsync rpc, CourseListView<CourseId> display, EventBus eventBus) {
 		this.rpcService = rpc;
 		this.view = display;
 		this.eventBus = eventBus;
 		this.view.setPresenter(this);
-//	    TODO: this.view.setColumnDefinitions(columnDefinitions);
+		// TODO: this.view.setColumnDefinitions(columnDefinitions);
 	}
 
 	@Override
@@ -59,36 +61,44 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 
 	@Override
 	public void onSelectedCourseClicked(CourseId clickedCourse) {
-		 eventBus.fireEvent(new SelectCourseEvent(clickedCourse));
-		 fetchCourses();
+		eventBus.fireEvent(new UnselectCourseEvent(clickedCourse));
+		rpcService.unselectCourse(clickedCourse, new AsyncCallback<Void>() {
+			@Override
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+				Window.alert("Error while unselecting course.");
+				Log.error("Error while unselecting course.");
+			}
+
+			@Override
+			public void onSuccess(@SuppressWarnings("unused") Void result) {
+				CourseListPresenter.this.fetchCourses();
+			}
+		});
 	}
 
 	@Override
 	public void onNotSelectedCourseClicked(CourseId clickedCourse) {
-		 eventBus.fireEvent(new UnselectCourseEvent(clickedCourse));
-		 fetchCourses();
-	}
-	
-	@Override
-	public void onCourseHighlighted(CourseId highlightedCourse) {
-		 eventBus.fireEvent(new HighlightCourseEvent(highlightedCourse));
-	}
-
-	@SuppressWarnings("unused")
-	private void fetchCourses() {
-		rpcService.getNotSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+		eventBus.fireEvent(new SelectCourseEvent(clickedCourse));
+		rpcService.selectCourse(clickedCourse, new AsyncCallback<Void>() {
 			@Override
-			public void onSuccess(ArrayList<CourseId> result) {
-				view.setNotSelectedCourses(result);
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+				Window.alert("Error while selecting course.");
+				Log.error("Error while selecting course.");
 			}
 
 			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Error fetching not selected courses.");
-				Log.error("Error fetching not selected courses.");
+			public void onSuccess(@SuppressWarnings("unused") Void result) {
+				CourseListPresenter.this.fetchCourses();
 			}
 		});
-		
+	}
+
+	@Override
+	public void onCourseHighlighted(CourseId highlightedCourse) {
+		eventBus.fireEvent(new HighlightCourseEvent(highlightedCourse));
+	}
+
+	void fetchCourses() {
 		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
@@ -96,12 +106,32 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 			}
 
 			@Override
-			public void onFailure(Throwable caught) {
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 				Window.alert("Error fetching selected courses.");
+				Log.error("Error fetching selected courses.");
+			}
+		});
+
+		rpcService.getNotSelectedCourses(faculty, new AsyncCallback<ArrayList<CourseId>>() {
+			@Override
+			public void onSuccess(ArrayList<CourseId> result) {
+				view.setNotSelectedCourses(result);
+			}
+
+			@Override
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+				Window.alert("Error fetching not selected courses.");
 				Log.error("Error fetching not selected courses.");
 			}
 		});
 	}
 
+	@Override
+	public void onFacultySelected(String f) {
+		if (this.faculty.equals(f))
+			return;
+		this.faculty = f;
+		fetchCourses();
+	}
+
 }
- 

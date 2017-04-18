@@ -24,6 +24,8 @@ public interface CourseListView<T> {
 		void onNotSelectedCourseClicked(T clickedCourse);
 
 		void onCourseHighlighted(T highlightedCourse);
+		
+		void onFacultySelected(String faculty);
 	}
 
 	void setPresenter(Presenter<T> presenter);
