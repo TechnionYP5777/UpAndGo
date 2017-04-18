@@ -19,6 +19,11 @@ public class SchedulerPresenter implements Presenter {
 	private final Display view;
 	
 	public interface Display {
+		public void clearSchedule();
+		public void nextSchedule();
+		public void prevSchedule();
+		public void buildSchedule();
+		public void saveSchedule();
 		public Widget asWidget();
 	}
 	
@@ -42,7 +47,6 @@ public class SchedulerPresenter implements Presenter {
 	@Override
 	public void go(Panel panel) {
 		panel.add(view.asWidget());
-
 	}
 
 }
