@@ -2,6 +2,8 @@ package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
+import upandgo.shared.entities.course.CourseId;
+
 /**
  * 
  * @author Nikita Dizhur
@@ -13,14 +15,14 @@ import com.google.gwt.event.shared.GwtEvent;
 
 public class UnselectCourseEvent extends GwtEvent<UnselectCourseEventHandler> {
 	public static Type<UnselectCourseEventHandler> TYPE = new Type<>();
-	private final String idOrName;
+	private final CourseId id;
 
-	public UnselectCourseEvent(String idOrName) {
-	    this.idOrName = idOrName;
+	public UnselectCourseEvent(CourseId id) {
+	    this.id = id;
 	  }
 
-	public String getIdOrName() {
-		return idOrName;
+	public CourseId getId() {
+		return id;
 	}
 	@Override
 	public Type<UnselectCourseEventHandler> getAssociatedType() {
