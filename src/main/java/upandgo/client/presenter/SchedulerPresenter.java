@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.clearScheduleEvent;
+import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
 
 /**
@@ -58,6 +59,11 @@ public class SchedulerPresenter implements Presenter {
 	public void onClearSchedule() {
 		eventBus.fireEvent(new clearScheduleEvent());
 		this.view.clearSchedule();
+	}
+	
+	public void onSaveSchedule() {
+		eventBus.fireEvent(new saveScheduleEvent());
+		this.view.saveSchedule();
 	}
 
 }
