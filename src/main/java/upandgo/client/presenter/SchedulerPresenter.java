@@ -1,8 +1,11 @@
 package upandgo.client.presenter;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
+import upandgo.client.event.UnselectCourseEvent;
+import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.view.CourseListView;
 
 /**
@@ -17,6 +20,7 @@ import upandgo.client.view.CourseListView;
 public class SchedulerPresenter implements Presenter {
 	
 	private final Display view;
+	private final EventBus eventBus;
 	
 	public interface Display {
 		public void clearSchedule();
@@ -27,7 +31,8 @@ public class SchedulerPresenter implements Presenter {
 		public Widget asWidget();
 	}
 	
-	public SchedulerPresenter(Display view) {
+	public SchedulerPresenter(Display view, EventBus eventBus) {
+		this.eventBus = eventBus; 
 		this.view = view;
 	}
 	
@@ -46,7 +51,13 @@ public class SchedulerPresenter implements Presenter {
 
 	@Override
 	public void go(Panel panel) {
+		panel.clear();
 		panel.add(view.asWidget());
+	}
+	
+	public void onClearSchedule() {
+		eventBus.fireEvent(new clearScheduleEvent());
+		this.view.clearSchedule();
 	}
 
 }
