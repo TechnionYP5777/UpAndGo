@@ -3,6 +3,7 @@ package upandgo.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 
@@ -35,7 +36,11 @@ import com.google.gwt.user.client.ui.SuggestOracle.Response;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class CourseSelectionGUI extends LayoutPanel {
+import upandgo.client.common.ColumnDefinition;
+import upandgo.client.view.CourseListView;
+import upandgo.shared.entities.course.Course;
+
+public class CourseSelectionGUI extends LayoutPanel implements CourseListView<Course> {
     private ListBox ccl = new ListBox(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
     private ListBox scl = new ListBox(); //all courses list
@@ -154,4 +159,23 @@ public class CourseSelectionGUI extends LayoutPanel {
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
     }
+	@Override
+	public void setPresenter(upandgo.client.view.CourseListView.Presenter<Course> presenter) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void setColumnDefinitions(List<ColumnDefinition<Course>> columnDefinitions) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setSelectedCourses(List<Course> selectedCourses) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setNotSelectedCourses(List<Course> notSelectedCourses) {
+		// TODO Auto-generated method stub
+		
+	}
 }

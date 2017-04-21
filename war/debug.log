@@ -470,3 +470,777 @@
 2017-04-21 14:06:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772782732
 2017-04-21 14:06:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772811257
 2017-04-21 14:06:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772812733
+2017-04-21 14:07:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772841257
+2017-04-21 14:07:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772842733
+2017-04-21 14:07:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772871257
+2017-04-21 14:07:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772872733
+2017-04-21 14:08:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772901258
+2017-04-21 14:08:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772902734
+2017-04-21 14:08:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772931258
+2017-04-21 14:08:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772932734
+2017-04-21 14:09:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772961258
+2017-04-21 14:09:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772962735
+2017-04-21 14:09:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772991259
+2017-04-21 14:09:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492772992735
+2017-04-21 14:10:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773021259
+2017-04-21 14:10:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773022736
+2017-04-21 14:10:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773051260
+2017-04-21 14:10:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773052736
+2017-04-21 14:11:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773081260
+2017-04-21 14:11:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773082737
+2017-04-21 14:11:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773111261
+2017-04-21 14:11:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773112737
+2017-04-21 14:12:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773141261
+2017-04-21 14:12:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773142738
+2017-04-21 14:12:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773171262
+2017-04-21 14:12:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773172738
+2017-04-21 14:13:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773201262
+2017-04-21 14:13:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773202739
+2017-04-21 14:13:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773231263
+2017-04-21 14:13:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773232739
+2017-04-21 14:14:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773261263
+2017-04-21 14:14:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773262740
+2017-04-21 14:14:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773291263
+2017-04-21 14:14:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773292740
+2017-04-21 14:15:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773321264
+2017-04-21 14:15:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773322741
+2017-04-21 14:15:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773351264
+2017-04-21 14:15:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773352741
+2017-04-21 14:16:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773381265
+2017-04-21 14:16:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773382742
+2017-04-21 14:16:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773411265
+2017-04-21 14:16:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773412742
+2017-04-21 14:17:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773441265
+2017-04-21 14:17:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773442742
+2017-04-21 14:17:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773471266
+2017-04-21 14:17:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773472743
+2017-04-21 14:18:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773501266
+2017-04-21 14:18:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773502744
+2017-04-21 14:18:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773531267
+2017-04-21 14:18:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773532744
+2017-04-21 14:19:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773561267
+2017-04-21 14:19:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773562745
+2017-04-21 14:19:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773591268
+2017-04-21 14:19:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773592745
+2017-04-21 14:20:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773621268
+2017-04-21 14:20:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773622746
+2017-04-21 14:20:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773651269
+2017-04-21 14:20:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773652746
+2017-04-21 14:21:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773681269
+2017-04-21 14:21:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773682747
+2017-04-21 14:21:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773711270
+2017-04-21 14:21:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773712747
+2017-04-21 14:22:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773741270
+2017-04-21 14:22:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773742748
+2017-04-21 14:22:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773771271
+2017-04-21 14:22:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773772748
+2017-04-21 14:23:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773801271
+2017-04-21 14:23:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773802749
+2017-04-21 14:23:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773831272
+2017-04-21 14:23:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773832749
+2017-04-21 14:24:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773861272
+2017-04-21 14:24:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773862750
+2017-04-21 14:24:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773891273
+2017-04-21 14:24:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773892750
+2017-04-21 14:25:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773921273
+2017-04-21 14:25:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773922751
+2017-04-21 14:25:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773951273
+2017-04-21 14:25:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773952751
+2017-04-21 14:26:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773981274
+2017-04-21 14:26:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492773982752
+2017-04-21 14:26:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774011274
+2017-04-21 14:26:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774012752
+2017-04-21 14:27:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774041275
+2017-04-21 14:27:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774042752
+2017-04-21 14:27:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774071275
+2017-04-21 14:27:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774072753
+2017-04-21 14:28:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774101276
+2017-04-21 14:28:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774102753
+2017-04-21 14:28:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774131276
+2017-04-21 14:28:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774132754
+2017-04-21 14:29:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774161277
+2017-04-21 14:29:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774162754
+2017-04-21 14:29:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774191277
+2017-04-21 14:29:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774192755
+2017-04-21 14:30:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774221278
+2017-04-21 14:30:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774222755
+2017-04-21 14:30:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774251278
+2017-04-21 14:30:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774252756
+2017-04-21 14:31:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774281278
+2017-04-21 14:31:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774282756
+2017-04-21 14:31:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774311279
+2017-04-21 14:31:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774312756
+2017-04-21 14:32:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774341279
+2017-04-21 14:32:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774342757
+2017-04-21 14:32:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774371280
+2017-04-21 14:32:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774372757
+2017-04-21 14:33:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774401280
+2017-04-21 14:33:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774402758
+2017-04-21 14:33:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774431281
+2017-04-21 14:33:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774432758
+2017-04-21 14:34:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774461281
+2017-04-21 14:34:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774462758
+2017-04-21 14:34:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774491281
+2017-04-21 14:34:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774492759
+2017-04-21 14:35:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774521282
+2017-04-21 14:35:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774522759
+2017-04-21 14:35:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774551282
+2017-04-21 14:35:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774552760
+2017-04-21 14:36:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774581283
+2017-04-21 14:36:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774582760
+2017-04-21 14:36:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774611283
+2017-04-21 14:36:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774612760
+2017-04-21 14:37:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774641284
+2017-04-21 14:37:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774642761
+2017-04-21 14:37:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774671284
+2017-04-21 14:37:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774672761
+2017-04-21 14:38:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774701285
+2017-04-21 14:38:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774702762
+2017-04-21 14:38:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774731285
+2017-04-21 14:38:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774732762
+2017-04-21 14:39:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774761286
+2017-04-21 14:39:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774762763
+2017-04-21 14:39:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774791286
+2017-04-21 14:39:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774792763
+2017-04-21 14:40:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774821287
+2017-04-21 14:40:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774822764
+2017-04-21 14:40:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774851287
+2017-04-21 14:40:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774852764
+2017-04-21 14:41:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774881287
+2017-04-21 14:41:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774882765
+2017-04-21 14:41:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774911288
+2017-04-21 14:41:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774912765
+2017-04-21 14:42:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774941288
+2017-04-21 14:42:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774942765
+2017-04-21 14:42:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774971289
+2017-04-21 14:42:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492774972766
+2017-04-21 14:43:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775001289
+2017-04-21 14:43:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775002766
+2017-04-21 14:43:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775031290
+2017-04-21 14:43:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775032767
+2017-04-21 14:44:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775061290
+2017-04-21 14:44:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775062767
+2017-04-21 14:44:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775091291
+2017-04-21 14:44:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775092767
+2017-04-21 14:45:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775121291
+2017-04-21 14:45:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775122768
+2017-04-21 14:45:51 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775151291
+2017-04-21 14:45:52 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775152768
+2017-04-21 14:46:21 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775181292
+2017-04-21 14:46:22 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492775182769
+2017-04-21 19:54:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793699616
+2017-04-21 19:55:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793701093
+2017-04-21 19:55:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793729616
+2017-04-21 19:55:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793731093
+2017-04-21 19:55:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793759617
+2017-04-21 19:56:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793761093
+2017-04-21 19:56:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793789617
+2017-04-21 19:56:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793791094
+2017-04-21 19:56:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793819617
+2017-04-21 19:57:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793821094
+2017-04-21 19:57:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793849618
+2017-04-21 19:57:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793851095
+2017-04-21 19:57:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793879618
+2017-04-21 19:58:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793881095
+2017-04-21 19:58:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793909619
+2017-04-21 19:58:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793911095
+2017-04-21 19:58:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793939619
+2017-04-21 19:59:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793941096
+2017-04-21 19:59:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793969619
+2017-04-21 19:59:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793971096
+2017-04-21 19:59:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492793999620
+2017-04-21 20:00:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794001096
+2017-04-21 20:00:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794029620
+2017-04-21 20:00:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794031097
+2017-04-21 20:00:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794059621
+2017-04-21 20:01:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794061097
+2017-04-21 20:01:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794089621
+2017-04-21 20:01:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794091098
+2017-04-21 20:01:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794119621
+2017-04-21 20:02:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794121098
+2017-04-21 20:02:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794149622
+2017-04-21 20:02:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794151099
+2017-04-21 20:02:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794179622
+2017-04-21 20:03:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794181099
+2017-04-21 20:03:28 [qtp758447837-54-acceptor-0@2e1de4e0-ServerConnector@36747d6e{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@707cfd4b
+2017-04-21 20:03:28 [qtp1111317633-40-acceptor-0@e71f407-ServerConnector@6a1e902a{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2820cce4
+2017-04-21 20:03:28 [qtp758447837-54-acceptor-0@2e1de4e0-ServerConnector@36747d6e{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6df5f258
+2017-04-21 20:03:28 [qtp1111317633-40-acceptor-0@e71f407-ServerConnector@6a1e902a{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3532f974
+2017-04-21 20:03:28 [qtp758447837-54-acceptor-0@2e1de4e0-ServerConnector@36747d6e{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6c289a44
+2017-04-21 20:03:28 [qtp1111317633-40-acceptor-0@e71f407-ServerConnector@6a1e902a{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2718f224
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@707cfd4b
+2017-04-21 20:03:28 [qtp1111317633-40-acceptor-0@e71f407-ServerConnector@6a1e902a{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@69a9e8
+2017-04-21 20:03:28 [qtp1111317633-40-acceptor-0@e71f407-ServerConnector@6a1e902a{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2e8002ed
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2718f224
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2820cce4
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@197520c8
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@65773948{/127.0.0.1:50972<->9876,Open,in,out,R,-,1/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@192e6518{/127.0.0.1:50976<->9876,Open,in,out,R,-,1/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@718390a5{/127.0.0.1:55524<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2e8002ed
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@197520c8
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp1111317633-39-selector-ServerConnectorManager@6ef7f054/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5d9bcc0f
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@69a9e8
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@1fa1801{/127.0.0.1:50980<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@32c7aacf
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3532f974
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@35a4121e{/127.0.0.1:50978<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@32c7aacf
+2017-04-21 20:03:28 [qtp1111317633-36-selector-ServerConnectorManager@6ef7f054/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6df5f258
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@4795347c{/127.0.0.1:55526<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6c289a44
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@149fadb5
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@5a485c7d{/127.0.0.1:55528<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@149fadb5
+2017-04-21 20:03:28 [qtp758447837-51-selector-ServerConnectorManager@1b673bbc/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5d9bcc0f
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cb69056
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@de0b6a7{/127.0.0.1:50974<->9876,Open,in,out,R,-,4/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cb69056
+2017-04-21 20:03:28 [qtp1111317633-38-selector-ServerConnectorManager@6ef7f054/2] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.html on HttpChannelOverHttp@32c03592{r=1,c=false,a=DISPATCHED,uri=/upandgo.html}
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.html @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.html @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@3b97b2ae
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.html|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.html  304 handled=true
+2017-04-21 20:03:28 [qtp758447837-47] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.css on HttpChannelOverHttp@32c03592{r=2,c=false,a=DISPATCHED,uri=/upandgo.css}
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@3b97b2ae
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.css|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@269c8d56{r=1,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@3b97b2ae
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/upandgo.nocache.js|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.css  304 handled=true
+2017-04-21 20:03:28 [qtp758447837-50] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-04-21 20:03:28 [qtp758447837-53] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:28 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@14b40230
+2017-04-21 20:03:28 [qtp758447837-48-selector-ServerConnectorManager@1b673bbc/3] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:28 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile-requester/upandgo on HttpChannelOverHttp@77e0cade{r=1,c=false,a=DISPATCHED,uri=/recompile-requester/upandgo}
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile-requester/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:28 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile-requester/upandgo  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile/upandgo on HttpChannelOverHttp@77e0cade{r=2,c=false,a=DISPATCHED,uri=/recompile/upandgo?user.agent=safari&_callback=__gwt_sdm_globals.callbacks.c1492794209027}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile/upandgo @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile/upandgo @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile/upandgo  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@77e0cade{r=3,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/upandgo.nocache.js -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/clean_rtl.css on HttpChannelOverHttp@77e0cade{r=4,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/clean_rtl.css}
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/clean_rtl.css -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/clean_rtl.css  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/10249957DCE76353E839D417E0CE91FA.cache.js on HttpChannelOverHttp@77e0cade{r=5,c=false,a=DISPATCHED,uri=/upandgo/10249957DCE76353E839D417E0CE91FA.cache.js}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/10249957DCE76353E839D417E0CE91FA.cache.js @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/10249957DCE76353E839D417E0CE91FA.cache.js @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/10249957DCE76353E839D417E0CE91FA.cache.js -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/10249957DCE76353E839D417E0CE91FA.cache.js  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/images/hborder.png on HttpChannelOverHttp@77e0cade{r=6,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/images/hborder.png}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@227b4be7{/,null,AVAILABLE}
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@67fb8066
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/images/hborder.png -> com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-1ed14ca1->com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-1ed14ca1
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-52dc7ac4@fbec2bb3==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/images/hborder.png  200 handled=true
+2017-04-21 20:03:29 [qtp1111317633-81] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@213752d
+2017-04-21 20:03:29 [qtp1111317633-37-selector-ServerConnectorManager@6ef7f054/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt-log-triangle-10x10.png on HttpChannelOverHttp@269c8d56{r=2,c=false,a=DISPATCHED,uri=/upandgo/gwt-log-triangle-10x10.png}
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@1294bcb1{/,file:/home/dan635z/UpAndGo/war/,AVAILABLE}{/home/dan635z/UpAndGo/war}
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@3b97b2ae
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG org.eclipse.jetty.server.session - session=null
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log-triangle-10x10.png|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log-triangle-10x10.png  304 handled=true
+2017-04-21 20:03:29 [qtp758447837-47] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b3823dc
+2017-04-21 20:03:29 [qtp758447837-49-selector-ServerConnectorManager@1b673bbc/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-04-21 20:03:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794209623
+2017-04-21 20:03:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794211099
+2017-04-21 20:03:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794239623
+2017-04-21 20:04:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794241100
+2017-04-21 20:04:28 [qtp1111317633-43] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@1fa1801{/127.0.0.1:50980<->9876,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:28 [qtp1111317633-83] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@de0b6a7{/127.0.0.1:50974<->9876,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:28 [qtp1111317633-41] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@35a4121e{/127.0.0.1:50978<->9876,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:28 [qtp1111317633-81] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@192e6518{/127.0.0.1:50976<->9876,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:28 [qtp758447837-50] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@5a485c7d{/127.0.0.1:55528<->8888,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:28 [qtp758447837-53] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@718390a5{/127.0.0.1:55524<->8888,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:29 [qtp1111317633-85] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@65773948{/127.0.0.1:50972<->9876,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:29 [qtp758447837-47] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@4795347c{/127.0.0.1:55526<->8888,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=1,kio=-1,kro=-1}
+2017-04-21 20:04:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794269623
+2017-04-21 20:04:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794271100
+2017-04-21 20:04:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794299624
+2017-04-21 20:05:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794301100
+2017-04-21 20:05:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794329624
+2017-04-21 20:05:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794331101
+2017-04-21 20:05:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794359625
+2017-04-21 20:06:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794361101
+2017-04-21 20:06:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794389625
+2017-04-21 20:06:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794391101
+2017-04-21 20:06:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794419626
+2017-04-21 20:07:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794421102
+2017-04-21 20:07:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794449626
+2017-04-21 20:07:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794451102
+2017-04-21 20:07:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794479626
+2017-04-21 20:08:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794481103
+2017-04-21 20:08:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794509627
+2017-04-21 20:08:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794511103
+2017-04-21 20:08:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794539628
+2017-04-21 20:09:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794541103
+2017-04-21 20:09:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794569628
+2017-04-21 20:09:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794571104
+2017-04-21 20:09:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794599628
+2017-04-21 20:10:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794601104
+2017-04-21 20:10:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794629629
+2017-04-21 20:10:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794631104
+2017-04-21 20:10:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794659629
+2017-04-21 20:11:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794661105
+2017-04-21 20:11:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794689629
+2017-04-21 20:11:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794691105
+2017-04-21 20:11:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794719630
+2017-04-21 20:12:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794721106
+2017-04-21 20:12:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794749630
+2017-04-21 20:12:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794751106
+2017-04-21 20:12:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794779630
+2017-04-21 20:13:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794781106
+2017-04-21 20:13:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794809630
+2017-04-21 20:13:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794811107
+2017-04-21 20:13:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794839631
+2017-04-21 20:14:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794841107
+2017-04-21 20:14:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794869631
+2017-04-21 20:14:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794871107
+2017-04-21 20:14:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794899631
+2017-04-21 20:15:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794901108
+2017-04-21 20:15:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794929632
+2017-04-21 20:15:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794931108
+2017-04-21 20:15:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794959632
+2017-04-21 20:16:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794961108
+2017-04-21 20:16:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794989632
+2017-04-21 20:16:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492794991109
+2017-04-21 20:16:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795019633
+2017-04-21 20:17:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795021109
+2017-04-21 20:17:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795049633
+2017-04-21 20:17:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795051109
+2017-04-21 20:17:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795079633
+2017-04-21 20:18:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795081110
+2017-04-21 20:18:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795109633
+2017-04-21 20:18:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795111110
+2017-04-21 20:18:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795139634
+2017-04-21 20:19:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795141110
+2017-04-21 20:19:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795169634
+2017-04-21 20:19:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795171111
+2017-04-21 20:19:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795199634
+2017-04-21 20:20:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795201111
+2017-04-21 20:20:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795229635
+2017-04-21 20:20:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795231112
+2017-04-21 20:20:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795259635
+2017-04-21 20:21:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795261112
+2017-04-21 20:21:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795289636
+2017-04-21 20:21:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795291112
+2017-04-21 20:21:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795319636
+2017-04-21 20:22:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795321113
+2017-04-21 20:22:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795349637
+2017-04-21 20:22:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795351113
+2017-04-21 20:22:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795379637
+2017-04-21 20:23:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795381113
+2017-04-21 20:23:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795409637
+2017-04-21 20:23:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795411114
+2017-04-21 20:23:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795439638
+2017-04-21 20:24:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795441114
+2017-04-21 20:24:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795469638
+2017-04-21 20:24:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795471115
+2017-04-21 20:24:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795499639
+2017-04-21 20:25:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795501115
+2017-04-21 20:25:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795529639
+2017-04-21 20:25:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795531115
+2017-04-21 20:25:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795559639
+2017-04-21 20:26:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795561116
+2017-04-21 20:26:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795589640
+2017-04-21 20:26:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795591116
+2017-04-21 20:26:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795619640
+2017-04-21 20:27:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795621116
+2017-04-21 20:27:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795649640
+2017-04-21 20:27:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795651117
+2017-04-21 20:27:59 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795679641
+2017-04-21 20:28:01 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795681117
+2017-04-21 20:28:29 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795709641
+2017-04-21 20:28:31 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795711117
+2017-04-21 20:28:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795738660
+2017-04-21 20:29:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795740136
+2017-04-21 20:29:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795768660
+2017-04-21 20:29:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795770137
+2017-04-21 20:29:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795798661
+2017-04-21 20:30:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795800137
+2017-04-21 20:30:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795828661
+2017-04-21 20:30:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795830137
+2017-04-21 20:30:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795858661
+2017-04-21 20:31:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795860137
+2017-04-21 20:31:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795888661
+2017-04-21 20:31:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795890138
+2017-04-21 20:31:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795918662
+2017-04-21 20:32:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795920138
+2017-04-21 20:32:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795948662
+2017-04-21 20:32:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795950138
+2017-04-21 20:32:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795978663
+2017-04-21 20:33:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492795980139
+2017-04-21 20:33:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796008663
+2017-04-21 20:33:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796010139
+2017-04-21 20:33:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796038663
+2017-04-21 20:34:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796040139
+2017-04-21 20:34:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796068663
+2017-04-21 20:34:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796070140
+2017-04-21 20:34:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796098664
+2017-04-21 20:35:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796100140
+2017-04-21 20:35:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796128664
+2017-04-21 20:35:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796130140
+2017-04-21 20:35:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796158665
+2017-04-21 20:36:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796160141
+2017-04-21 20:36:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796188665
+2017-04-21 20:36:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796190141
+2017-04-21 20:36:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796218666
+2017-04-21 20:37:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796220141
+2017-04-21 20:37:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796248666
+2017-04-21 20:37:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796250142
+2017-04-21 20:37:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796278666
+2017-04-21 20:38:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796280142
+2017-04-21 20:38:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796308667
+2017-04-21 20:38:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796310143
+2017-04-21 20:38:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796338667
+2017-04-21 20:39:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796340143
+2017-04-21 20:39:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796368668
+2017-04-21 20:39:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796370143
+2017-04-21 20:39:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796398668
+2017-04-21 20:40:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796400144
+2017-04-21 20:40:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796428668
+2017-04-21 20:40:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796430144
+2017-04-21 20:40:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796458669
+2017-04-21 20:41:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796460145
+2017-04-21 20:41:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796488669
+2017-04-21 20:41:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796490145
+2017-04-21 20:41:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796518670
+2017-04-21 20:42:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796520145
+2017-04-21 20:42:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796548670
+2017-04-21 20:42:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796550146
+2017-04-21 20:42:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796578670
+2017-04-21 20:43:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796580146
+2017-04-21 20:43:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796608671
+2017-04-21 20:43:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796610146
+2017-04-21 20:43:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796638671
+2017-04-21 20:44:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796640147
+2017-04-21 20:44:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796668671
+2017-04-21 20:44:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796670147
+2017-04-21 20:44:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796698672
+2017-04-21 20:45:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796700147
+2017-04-21 20:45:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796728672
+2017-04-21 20:45:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796730148
+2017-04-21 20:45:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796758672
+2017-04-21 20:46:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796760148
+2017-04-21 20:46:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796788673
+2017-04-21 20:46:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796790148
+2017-04-21 20:46:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796818673
+2017-04-21 20:47:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796820149
+2017-04-21 20:47:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796848673
+2017-04-21 20:47:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796850149
+2017-04-21 20:47:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796878674
+2017-04-21 20:48:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796880149
+2017-04-21 20:48:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796908674
+2017-04-21 20:48:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796910150
+2017-04-21 20:48:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796938675
+2017-04-21 20:49:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796940150
+2017-04-21 20:49:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796968675
+2017-04-21 20:49:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796970150
+2017-04-21 20:49:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492796998675
+2017-04-21 20:50:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797000151
+2017-04-21 20:50:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797028676
+2017-04-21 20:50:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797030151
+2017-04-21 20:50:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797058676
+2017-04-21 20:51:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797060152
+2017-04-21 20:51:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797088676
+2017-04-21 20:51:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797090152
+2017-04-21 20:51:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797118677
+2017-04-21 20:52:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797120152
+2017-04-21 20:52:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797148677
+2017-04-21 20:52:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797150152
+2017-04-21 20:52:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797178677
+2017-04-21 20:53:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797180153
+2017-04-21 20:53:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797208678
+2017-04-21 20:53:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797210153
+2017-04-21 20:53:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797238678
+2017-04-21 20:54:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797240154
+2017-04-21 20:54:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797268678
+2017-04-21 20:54:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797270154
+2017-04-21 20:54:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797298679
+2017-04-21 20:55:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797300154
+2017-04-21 20:55:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797328679
+2017-04-21 20:55:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797330155
+2017-04-21 20:55:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797358679
+2017-04-21 20:56:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797360155
+2017-04-21 20:56:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797388680
+2017-04-21 20:56:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797390155
+2017-04-21 20:56:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797418680
+2017-04-21 20:57:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797420156
+2017-04-21 20:57:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797448680
+2017-04-21 20:57:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797450156
+2017-04-21 20:57:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797478680
+2017-04-21 20:58:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797480156
+2017-04-21 20:58:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797508681
+2017-04-21 20:58:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797510156
+2017-04-21 20:58:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797538681
+2017-04-21 20:59:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797540157
+2017-04-21 20:59:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797568681
+2017-04-21 20:59:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797570157
+2017-04-21 20:59:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797598682
+2017-04-21 21:00:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797600157
+2017-04-21 21:00:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797628682
+2017-04-21 21:00:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797630158
+2017-04-21 21:00:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797658683
+2017-04-21 21:01:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797660158
+2017-04-21 21:01:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797688683
+2017-04-21 21:01:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797690158
+2017-04-21 21:01:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797718683
+2017-04-21 21:02:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797720159
+2017-04-21 21:02:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797748684
+2017-04-21 21:02:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797750159
+2017-04-21 21:02:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797778684
+2017-04-21 21:03:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797780159
+2017-04-21 21:03:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797808684
+2017-04-21 21:03:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797810159
+2017-04-21 21:03:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797838685
+2017-04-21 21:04:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797840160
+2017-04-21 21:04:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797868685
+2017-04-21 21:04:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797870160
+2017-04-21 21:04:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797898685
+2017-04-21 21:05:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797900160
+2017-04-21 21:05:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797928686
+2017-04-21 21:05:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797930160
+2017-04-21 21:05:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797958686
+2017-04-21 21:06:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797960161
+2017-04-21 21:06:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797988686
+2017-04-21 21:06:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492797990161
+2017-04-21 21:06:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798018686
+2017-04-21 21:07:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798020161
+2017-04-21 21:07:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798048687
+2017-04-21 21:07:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798050162
+2017-04-21 21:07:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798078687
+2017-04-21 21:08:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798080162
+2017-04-21 21:08:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798108687
+2017-04-21 21:08:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798110162
+2017-04-21 21:08:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798138688
+2017-04-21 21:09:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798140163
+2017-04-21 21:09:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798168688
+2017-04-21 21:09:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798170163
+2017-04-21 21:09:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798198688
+2017-04-21 21:10:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798200163
+2017-04-21 21:10:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798228689
+2017-04-21 21:10:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798230163
+2017-04-21 21:10:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798258689
+2017-04-21 21:11:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798260164
+2017-04-21 21:11:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798288689
+2017-04-21 21:11:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798290164
+2017-04-21 21:11:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798318690
+2017-04-21 21:12:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798320164
+2017-04-21 21:12:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798348690
+2017-04-21 21:12:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798350165
+2017-04-21 21:12:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798378690
+2017-04-21 21:13:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798380165
+2017-04-21 21:13:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798408690
+2017-04-21 21:13:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798410165
+2017-04-21 21:13:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798438691
+2017-04-21 21:14:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798440165
+2017-04-21 21:14:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798468691
+2017-04-21 21:14:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798470166
+2017-04-21 21:14:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798498691
+2017-04-21 21:15:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798500166
+2017-04-21 21:15:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798528692
+2017-04-21 21:15:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798530166
+2017-04-21 21:15:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798558692
+2017-04-21 21:16:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798560167
+2017-04-21 21:16:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798588692
+2017-04-21 21:16:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798590167
+2017-04-21 21:16:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798618693
+2017-04-21 21:17:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798620167
+2017-04-21 21:17:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798648693
+2017-04-21 21:17:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798650167
+2017-04-21 21:17:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798678693
+2017-04-21 21:18:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798680168
+2017-04-21 21:18:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798708694
+2017-04-21 21:18:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798710168
+2017-04-21 21:18:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798738694
+2017-04-21 21:19:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798740168
+2017-04-21 21:19:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798768695
+2017-04-21 21:19:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798770169
+2017-04-21 21:19:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798798695
+2017-04-21 21:20:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798800169
+2017-04-21 21:20:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798828695
+2017-04-21 21:20:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798830169
+2017-04-21 21:20:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798858696
+2017-04-21 21:21:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798860170
+2017-04-21 21:21:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798888696
+2017-04-21 21:21:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798890170
+2017-04-21 21:21:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798918696
+2017-04-21 21:22:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798920170
+2017-04-21 21:22:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798948697
+2017-04-21 21:22:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798950171
+2017-04-21 21:22:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798978697
+2017-04-21 21:23:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492798980171
+2017-04-21 21:23:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799008697
+2017-04-21 21:23:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799010171
+2017-04-21 21:23:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799038698
+2017-04-21 21:24:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799040172
+2017-04-21 21:24:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799068698
+2017-04-21 21:24:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799070172
+2017-04-21 21:24:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799098699
+2017-04-21 21:25:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799100172
+2017-04-21 21:25:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799128699
+2017-04-21 21:25:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799130173
+2017-04-21 21:25:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799158699
+2017-04-21 21:26:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799160173
+2017-04-21 21:26:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799188699
+2017-04-21 21:26:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799190173
+2017-04-21 21:26:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799218700
+2017-04-21 21:27:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799220174
+2017-04-21 21:27:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799248700
+2017-04-21 21:27:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799250174
+2017-04-21 21:27:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799278700
+2017-04-21 21:28:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799280174
+2017-04-21 21:28:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799308700
+2017-04-21 21:28:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799310174
+2017-04-21 21:28:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799338701
+2017-04-21 21:29:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799340175
+2017-04-21 21:29:28 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799368701
+2017-04-21 21:29:30 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799370175
+2017-04-21 21:29:58 [org.eclipse.jetty.server.session.HashSessionManager@67fb8066Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799398701
+2017-04-21 21:30:00 [org.eclipse.jetty.server.session.HashSessionManager@3b97b2aeTimer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1492799400175
