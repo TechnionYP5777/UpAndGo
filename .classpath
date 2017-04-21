@@ -28,5 +28,22 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-codeserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA.jar" sourcepath="/home/dan635z/.p2/pool/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

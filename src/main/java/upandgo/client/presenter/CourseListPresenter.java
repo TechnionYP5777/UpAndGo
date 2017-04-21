@@ -11,7 +11,7 @@ import upandgo.client.event.HighlightCourseEvent;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.view.CourseListView;
-import upandgo.server.logger.Log;
+import com.allen_sauer.gwt.log.client.Log;
 import upandgo.shared.entities.course.CourseId;
 
 /**

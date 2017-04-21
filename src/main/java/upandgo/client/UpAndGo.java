@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -10,6 +11,11 @@ public class UpAndGo implements EntryPoint {
 	private LayoutPanel p = new LayoutPanel();
 	@Override
 	public void onModuleLoad() {
+	    Log.debug("debug_msg");
+	    Log.error("error_msg");
+	    Log.info("info_msg");
+	    Log.trace("trace_msg");
+	    Log.warn("warning_msg");
 		CourseSelectionGUI cc = new CourseSelectionGUI();
 		TimeTableGUI t = new TimeTableGUI();
 		p.add(cc);

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="DEV_HOME" value="." />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE-AUDIT"
+		class="ch.qos.logback.core.FileAppender">
+		<file>${DEV_HOME}/debug.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+
+	</appender>
+
+	<!-- Send logs to both console and file audit -->
+	<logger name="upandgo" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="FILE-AUDIT" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="DEBUG">
+		<appender-ref ref="FILE-AUDIT" />
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
