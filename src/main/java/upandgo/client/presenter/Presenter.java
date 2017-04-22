@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.Panel;
 /**
  * 
  * @author Nikita Dizhur
- * @since 06-04-16
+ * @since 06-04-17
  * 
  * A presenter contains all of the logic for application (usually including history management, view transition
  * and data sync via RPCs back to the server).

@@ -17,7 +17,7 @@ import upandgo.shared.entities.course.CourseId;
 /**
  * 
  * @author Nikita Dizhur
- * @since 06-04-16
+ * @since 06-04-17
  * 
  *        A concrete presenter for {@link CourseListView}.
  * 
