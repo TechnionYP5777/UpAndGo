@@ -61,7 +61,6 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 
 	@Override
 	public void onSelectedCourseClicked(CourseId clickedCourse) {
-		eventBus.fireEvent(new UnselectCourseEvent(clickedCourse));
 		rpcService.unselectCourse(clickedCourse, new AsyncCallback<Void>() {
 			@Override
 			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -72,13 +71,13 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 			@Override
 			public void onSuccess(@SuppressWarnings("unused") Void result) {
 				CourseListPresenter.this.fetchCourses();
+				CourseListPresenter.this.eventBus.fireEvent(new UnselectCourseEvent(clickedCourse));
 			}
 		});
 	}
 
 	@Override
 	public void onNotSelectedCourseClicked(CourseId clickedCourse) {
-		eventBus.fireEvent(new SelectCourseEvent(clickedCourse));
 		rpcService.selectCourse(clickedCourse, new AsyncCallback<Void>() {
 			@Override
 			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -89,6 +88,7 @@ public class CourseListPresenter implements Presenter, CourseListView.Presenter<
 			@Override
 			public void onSuccess(@SuppressWarnings("unused") Void result) {
 				CourseListPresenter.this.fetchCourses();
+				CourseListPresenter.this.eventBus.fireEvent(new SelectCourseEvent(clickedCourse));
 			}
 		});
 	}
