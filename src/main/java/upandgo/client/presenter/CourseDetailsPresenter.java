@@ -1,10 +1,10 @@
 package upandgo.client.presenter;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.common.base.Optional;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.thirdparty.guava.common.base.Optional;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
