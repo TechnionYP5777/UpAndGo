@@ -4,16 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.thirdparty.guava.common.base.Optional;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.CoursesServiceAsync;
+import upandgo.client.event.SelectCourseEvent;
+import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.view.CourseListView;
 import com.allen_sauer.gwt.log.client.Log;
 import upandgo.shared.entities.course.CourseId;
@@ -29,7 +42,7 @@ import upandgo.shared.entities.course.CourseId;
 
 // TODO: add History management and Event management
 
-public class CourseListPresenter implements Presenter {
+public class CourseListPresenter implements Presenter, MouseOverHandler {
 
 	CoursesServiceAsync rpcService;
 	Display display;
@@ -38,9 +51,9 @@ public class CourseListPresenter implements Presenter {
 	String faculty = "";
 
 	public interface Display {
-		<T extends HasDoubleClickHandlers & HasMouseOverHandlers> T getSelectedCoursesList();
+		<T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList();
 
-		<T extends HasDoubleClickHandlers & HasMouseOverHandlers> T getNotSelectedCoursesList();
+		<T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList();
 
 		HasChangeHandlers getFacultyDropList();
 
@@ -68,7 +81,76 @@ public class CourseListPresenter implements Presenter {
 
 	@Override
 	public void bind() {
-		// TODO
+		display.getFacultyDropList().addChangeHandler(new ChangeHandler(){
+
+			@Override
+			public void onChange(@SuppressWarnings("unused") ChangeEvent event) {
+				String $ = display.getFaculty();
+				if (faculty.equals($))
+					return;
+				faculty = $;
+				fetchNotSelectedCourses();
+				
+			}});
+		
+		display.getSelectedCoursesList().addDoubleClickHandler(new DoubleClickHandler(){
+
+			@Override
+			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) {
+				Optional<CourseId> $ = display.getSelectedCourse();
+				if($.isPresent())
+					rpcService.unselectCourse($.get(), new AsyncCallback<Void>() {
+						@Override
+						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+							Window.alert("Error while unselecting course.");
+							Log.error("Error while unselecting course.");
+						}
+			
+						@Override
+						public void onSuccess(@SuppressWarnings("unused") Void result) {
+							fetchAllCourses();
+							eventBus.fireEvent(new UnselectCourseEvent($.get()));
+						}			
+					});
+			}
+		});
+		
+		display.getSelectedCoursesList().addMouseOverHandler(new MouseOverHandler(){
+
+			@Override
+			public void onMouseOver(MouseOverEvent event) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+		display.getNotSelectedCoursesList().addDoubleClickHandler(new DoubleClickHandler(){
+
+			@Override
+			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) {
+				Optional<CourseId> $ = display.getUnselectedCourse();
+				if($.isPresent())
+					rpcService.selectCourse($.get(), new AsyncCallback<Void>() {
+						@Override
+						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+							Window.alert("Error while selecting course.");
+							Log.error("Error while selecting course.");
+						}
+			
+						@Override
+						public void onSuccess(@SuppressWarnings("unused") Void result) {
+							fetchAllCourses();
+							eventBus.fireEvent(new SelectCourseEvent($.get()));
+						}			
+					});
+			}});
+		
+		display.getNotSelectedCoursesList().addMouseOverHandler(new MouseOverHandler(){
+
+			@Override
+			public void onMouseOver(MouseOverEvent event) {
+				// TODO Auto-generated method stub
+				
+			}});
 	}
 
 	@Override
@@ -83,7 +165,8 @@ public class CourseListPresenter implements Presenter {
 		panel.clear();
 		panel.add(display.asWidget());
 
-		fetchCourses();
+		fetchFaculties();
+		fetchAllCourses();
 	}
 
 //	@Override
@@ -125,20 +208,12 @@ public class CourseListPresenter implements Presenter {
 //		eventBus.fireEvent(new HighlightCourseEvent(highlightedCourse));
 //	}
 
-	void fetchCourses() {
-		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
-			@Override
-			public void onSuccess(ArrayList<CourseId> result) {
-				display.setSelectedCourses(result);
-			}
+	void fetchAllCourses() {
+		fetchSelectedCourses();
+		fetchNotSelectedCourses();
+	}
 
-			@Override
-			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-				Window.alert("Error fetching selected courses.");
-				Log.error("Error fetching selected courses.");
-			}
-		});
-
+	void fetchNotSelectedCourses() {
 		rpcService.getNotSelectedCourses(faculty, new AsyncCallback<ArrayList<CourseId>>() {
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
@@ -152,7 +227,21 @@ public class CourseListPresenter implements Presenter {
 			}
 		});
 	}
+	void fetchSelectedCourses() {
+		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+			@Override
+			public void onSuccess(ArrayList<CourseId> result) {
+				display.setSelectedCourses(result);
+			}
 
+			@Override
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+				Window.alert("Error fetching selected courses.");
+				Log.error("Error fetching selected courses.");
+			}
+		});
+}
+	
 	void fetchFaculties() {
 		rpcService.getFaculties(new AsyncCallback<ArrayList<String>>() {
 			@Override
@@ -167,13 +256,17 @@ public class CourseListPresenter implements Presenter {
 			}
 		});
 	}
-	
-//	@Override
-//	public void onFacultySelected(String f) {
-//		if (this.faculty.equals(f))
-//			return;
-//		this.faculty = f;
-//		fetchCourses();
-//	}
 
+	@Override
+	public void onMouseOver(MouseOverEvent event) {
+		Timer timer = new Timer() {
+			@Override
+			public void run() {
+				MouseOverHandler $;
+				ListBox b;
+//				b.
+			}
+		};
+		
+	}
 }
