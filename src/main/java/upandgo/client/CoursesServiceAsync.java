@@ -20,6 +20,8 @@ public interface CoursesServiceAsync {
 	public void getSelectedCourses(AsyncCallback<ArrayList<CourseId>> callback);
 
 	public void getNotSelectedCourses(String faculty, AsyncCallback<ArrayList<CourseId>> callback);
+	
+	public void getFaculties(AsyncCallback<ArrayList<String>> callback);
 
 	public void getCourseDetails(AsyncCallback<Course> callback);
 
