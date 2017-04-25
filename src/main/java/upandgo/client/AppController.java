@@ -3,8 +3,8 @@ package upandgo.client;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.web.bindery.event.shared.EventBus;
 
-import upandgo.client.event.HighlightCourseEvent;
-import upandgo.client.event.HighlightCourseEventHandler;
+import upandgo.client.event.GetCourseDetailsEvent;
+import upandgo.client.event.GetCourseDetailsEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
@@ -64,10 +64,10 @@ class AppController implements Presenter {
 			}
 		});
 
-		eventBus.addHandler(HighlightCourseEvent.TYPE, new HighlightCourseEventHandler() {
+		eventBus.addHandler(GetCourseDetailsEvent.TYPE, new GetCourseDetailsEventHandler() {
 
 			@Override
-			public void onHighlightCourse(@SuppressWarnings("unused") HighlightCourseEvent event) {
+			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent event) {
 				// TODO Auto-generated method stub
 				
 			}

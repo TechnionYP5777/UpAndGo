@@ -25,10 +25,13 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.CoursesServiceAsync;
+import upandgo.client.event.GetCourseDetailsEvent;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.view.CourseListView;
 import com.allen_sauer.gwt.log.client.Log;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+
 import upandgo.shared.entities.course.CourseId;
 
 /**
@@ -63,9 +66,13 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		
 		void setFaculties(List<String> faculties);
 
-		Optional<CourseId> getSelectedCourse();	// you can pass Optional.absent() if there is no course selected
+		int getSelectedCourseRow();	// pass -1 if none
 
-		Optional<CourseId> getUnselectedCourse();	// you can pass Optional.absent() if there is no course unselected
+		int getUnselectedCourseRow();	// pass -1 if none
+		
+		int getHoveredSelectedCourseRow();	// pass -1 if none
+		
+		int getHoveredNotSelectedCourseRow();	// pass -1 if none
 
 		String getFaculty();	// pass empty string if there is no faculty chosen
 
@@ -205,7 +212,7 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 //
 //	@Override
 //	public void onCourseHighlighted(CourseId highlightedCourse) {
-//		eventBus.fireEvent(new HighlightCourseEvent(highlightedCourse));
+//		eventBus.fireEvent(new GetCourseDetailsEvent(highlightedCourse));
 //	}
 
 	void fetchAllCourses() {
@@ -259,14 +266,14 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 
 	@Override
 	public void onMouseOver(MouseOverEvent event) {
-		Timer timer = new Timer() {
-			@Override
-			public void run() {
-				MouseOverHandler $;
-				ListBox b;
-//				b.
-			}
-		};
+//		event.
+//		display.getNotSelectedCoursesList().
+//		Timer timer = new Timer() {
+//			@Override
+//			public void run() {
+//				eventBus.fireEvent(new GetCourseDetailsEvent(event));
+//			}
+//		};
 		
 	}
 }
