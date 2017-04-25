@@ -63,11 +63,13 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListView<Co
     	courses.add("גקורס7");
     	courses.add("גקורס8");
     	InitializePanel();
+    	Resources.INSTANCE.courseListStyle().ensureInjected();
+
     }
     private void InitializePanel(){
     	// chosen course list initialization
     	ccl.setMultipleSelect(true);
-
+    	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
     	ccl.addDoubleClickHandler(new DoubleClickHandler() {

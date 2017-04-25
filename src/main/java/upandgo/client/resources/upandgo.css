@@ -43,11 +43,7 @@
   padding: 0px;
 }
 
-.hourCol {
-	width:6em;
-  	height:4em;
-  	text-align: left;
-}
+
 
 /* do not change this one */
 .tableArciCol {
@@ -63,7 +59,7 @@
   	
   	background: rgba(255,255,255,1);
 }
-
+/*
 .emptyCell {
 	
 	text-align: center;
@@ -85,7 +81,7 @@
 	text-align: center;
 	background-color: #729fcf;
 }
-
+*/
 /* not in use */
 .insideEmptyCellEven {
 	background-color: #d3d7cf;

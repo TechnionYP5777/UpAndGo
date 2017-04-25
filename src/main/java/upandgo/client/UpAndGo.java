@@ -25,7 +25,7 @@ public class UpAndGo implements EntryPoint {
 		p.setWidgetLeftWidth(t, 1, Unit.EM, 70, Unit.PCT);
 		p.setWidgetTopHeight(t, 1, Unit.EM, 100, Unit.PCT);
 		RootLayoutPanel.get().add(p);
-		Resources.INSTANCE.css().ensureInjected();
+		Resources.INSTANCE.mainCss().ensureInjected();
 	}
 
 }
