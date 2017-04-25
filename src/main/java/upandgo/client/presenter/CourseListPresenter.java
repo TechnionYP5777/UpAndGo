@@ -51,7 +51,8 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 	Display display;
 	EventBus eventBus;
 
-	String faculty = "";
+	String selectedFaculty = "";
+	Optional<CourseId> hoveredCourse = Optional.absent();
 
 	public interface Display {
 		<T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList();
@@ -74,7 +75,7 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		
 		int getHoveredNotSelectedCourseRow(MouseOverEvent event);	// pass -1 if none
 
-		int getSelectedFacultyRow(ChangeEvent event);	// pass -1 if there is no faculty chosen
+		int getSelectedFacultyRow(ChangeEvent event);	// pass -1 if there is no selectedFaculty chosen
 
 		Widget asWidget();
 	}
@@ -96,11 +97,11 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		display.getFacultyDropList().addChangeHandler(new ChangeHandler(){
 
 			@Override
-			public void onChange(@SuppressWarnings("unused") ChangeEvent event) {
-				String $ = display.getFaculty();
-				if (faculty.equals($))
+			public void onChange(ChangeEvent event) {
+				int $ = display.getSelectedFacultyRow(event);
+				if ($ >= 0)
 					return;
-				faculty = $;
+				selectedFaculty = faculties.get($);
 				fetchNotSelectedCourses();
 				
 			}});
@@ -108,10 +109,11 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		display.getSelectedCoursesList().addDoubleClickHandler(new DoubleClickHandler(){
 
 			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) {
-				Optional<CourseId> $ = display.getSelectedCourse();
-				if($.isPresent())
-					rpcService.unselectCourse($.get(), new AsyncCallback<Void>() {
+			public void onDoubleClick(DoubleClickEvent event) {
+				int $ = display.getUnselectedCourseRow(event);
+				if($ >= 0) {
+					CourseId course = selectedCourses.get($);
+					rpcService.unselectCourse(course, new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 							Window.alert("Error while unselecting course.");
@@ -121,16 +123,17 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
 							fetchAllCourses();
-							eventBus.fireEvent(new UnselectCourseEvent($.get()));
+							eventBus.fireEvent(new UnselectCourseEvent(course));
 						}			
 					});
+				}
 			}
 		});
 		
 		display.getSelectedCoursesList().addMouseOverHandler(new MouseOverHandler(){
 
 			@Override
-			public void onMouseOver(MouseOverEvent event) {
+			public void onMouseOver(@SuppressWarnings("unused") MouseOverEvent event) {
 				// TODO Auto-generated method stub
 				
 			}});
@@ -138,10 +141,11 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		display.getNotSelectedCoursesList().addDoubleClickHandler(new DoubleClickHandler(){
 
 			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent event) {
-				Optional<CourseId> $ = display.getUnselectedCourse();
-				if($.isPresent())
-					rpcService.selectCourse($.get(), new AsyncCallback<Void>() {
+			public void onDoubleClick(DoubleClickEvent event) {
+				int $ = display.getSelectedCourseRow(event);
+				if($ >= 0) {
+					CourseId course = selectedCourses.get($);
+					rpcService.selectCourse(course, new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 							Window.alert("Error while selecting course.");
@@ -151,15 +155,16 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
 							fetchAllCourses();
-							eventBus.fireEvent(new SelectCourseEvent($.get()));
+							eventBus.fireEvent(new SelectCourseEvent(course));
 						}			
 					});
+				}
 			}});
 		
 		display.getNotSelectedCoursesList().addMouseOverHandler(new MouseOverHandler(){
 
 			@Override
-			public void onMouseOver(MouseOverEvent event) {
+			public void onMouseOver(@SuppressWarnings("unused") MouseOverEvent event) {
 				// TODO Auto-generated method stub
 				
 			}});
@@ -226,10 +231,11 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 	}
 
 	void fetchNotSelectedCourses() {
-		rpcService.getNotSelectedCourses(faculty, new AsyncCallback<ArrayList<CourseId>>() {
+		rpcService.getNotSelectedCourses(selectedFaculty, new AsyncCallback<ArrayList<CourseId>>() {
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
-				display.setNotSelectedCourses(result);
+				notSelectedCourses = result;
+				display.setNotSelectedCourses(notSelectedCourses);
 			}
 
 			@Override
@@ -243,7 +249,8 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
-				display.setSelectedCourses(result);
+				selectedCourses = result;
+				display.setSelectedCourses(selectedCourses);
 			}
 
 			@Override
@@ -258,7 +265,8 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		rpcService.getFaculties(new AsyncCallback<ArrayList<String>>() {
 			@Override
 			public void onSuccess(ArrayList<String> result) {
-				display.setFaculties(result);
+				faculties = result;
+				display.setFaculties(faculties);
 			}
 
 			@Override
