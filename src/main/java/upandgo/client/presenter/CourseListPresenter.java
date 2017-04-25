@@ -66,18 +66,23 @@ public class CourseListPresenter implements Presenter, MouseOverHandler {
 		
 		void setFaculties(List<String> faculties);
 
-		int getSelectedCourseRow();	// pass -1 if none
+		int getSelectedCourseRow(DoubleClickEvent event);	// pass -1 if none
 
-		int getUnselectedCourseRow();	// pass -1 if none
+		int getUnselectedCourseRow(DoubleClickEvent event);	// pass -1 if none
 		
-		int getHoveredSelectedCourseRow();	// pass -1 if none
+		int getHoveredSelectedCourseRow(MouseOverEvent event);	// pass -1 if none
 		
-		int getHoveredNotSelectedCourseRow();	// pass -1 if none
+		int getHoveredNotSelectedCourseRow(MouseOverEvent event);	// pass -1 if none
 
-		String getFaculty();	// pass empty string if there is no faculty chosen
+		int getSelectedFacultyRow(ChangeEvent event);	// pass -1 if there is no faculty chosen
 
 		Widget asWidget();
 	}
+	
+	List<CourseId> selectedCourses;
+	List<CourseId> notSelectedCourses;
+	List<String> faculties;
+	
 
 	public CourseListPresenter(CoursesServiceAsync rpc, EventBus eventBus, Display display) {
 		this.rpcService = rpc;
