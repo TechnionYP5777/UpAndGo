@@ -1,24 +1,35 @@
 package upandgo.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
 import upandgo.client.Resources.TimeTableStyle;
+import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.WeekTime;
 
 public class TimeTableGUI extends LayoutPanel { 
+	
 	// LEARNING SOME NEW STUFF, so comments will stay for a few days
+	private final int DAYS_IN_WEEK = 7;
+	
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
 	
-	FlexTable t = new FlexTable();
-	TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
+	private FlexTable t = new FlexTable();
+	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableGUI(){
     	InitializePanel();
     	ttStyle.ensureInjected();
     }
+	
     private void InitializePanel(){
     	t.setText(0, 0, "");
     	t.setText(0, 1, "שעה");
@@ -169,6 +180,9 @@ public class TimeTableGUI extends LayoutPanel {
 	    t.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");*/
 	    t.addStyleName("table-bordered");
 	    t.addStyleName(ttStyle.timeTable());
+	    
+	    
+	    //drawDay(new ArrayList<Lesson>(), 3);
 
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
@@ -176,4 +190,46 @@ public class TimeTableGUI extends LayoutPanel {
 	    this.setWidgetTopBottom(sc, 30,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(scl, 31.5,  Unit.EM, 0, Unit.EM);*/
     }
+    
+    
+    /*
+    // this function receives a list of LessonGroup(which is a schedule) and
+ 	// displays the schedule in the GUI
+ 	public void displaySchedule(final List<LessonGroup> schedule) {
+ 		//resetTable();
+ 		
+ 		final ArrayList<ArrayList<Lesson>> lessonsOfDay = seperateLessonsByDay(schedule);
+ 		
+ 		for(int day = 0; day < DAYS_IN_WEEK; day++){
+ 			final ArrayList<Lesson> daySchedule = lessonsOfDay.get(day);
+ 			Collections.sort(daySchedule, (t1, t2) -> t1.getStartTime().compareTo(t2.getStartTime()));
+			drawDay(daySchedule, day);
+ 		}
+ 	}
+ 	*/
+ 	private ArrayList<ArrayList<Lesson>> seperateLessonsByDay(final List<LessonGroup> schedule){
+ 		final ArrayList<ArrayList<Lesson>> lessonsOfDay = new ArrayList<>();
+ 		/*for (int i = 0; i < 7; i++){
+ 			int j = 5;
+ 		}*/
+ 			//lessonsOfDay.add(new ArrayList<>());
+ 		/*
+ 		for (final LessonGroup lg : schedule){
+			for (final Lesson ¢ : lg.getLessons()) {
+				lessonsOfDay.get(¢.getDay()).add(¢);
+			}
+ 		}*/
+ 		return lessonsOfDay;
+ 	}
+ 	
+ 	private void drawDay(ArrayList<Lesson> lessons, int day){
+ 		if(lessons.isEmpty()){
+ 			t.setText(1, day, "");
+ 			t.getFlexCellFormatter().setRowSpan(1, day, 22);
+ 			t.getCellFormatter().addStyleName(1, day, ttStyle.noEvent());
+ 		}
+ 		//lessons.get(0).getStartTime()
+ 	}
+ 	
+ 	
 }

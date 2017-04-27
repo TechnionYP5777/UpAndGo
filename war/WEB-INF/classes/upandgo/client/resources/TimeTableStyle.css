@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+.timeTable{
+	table-layout: fixed;
+
+}
+
+.tableRow td {
+	height:20px;
+		overflow: hidden;
+	text-overflow: ellipsis;
+	
+}
+
+.headerRow td{
+	text-align: center;
+	padding: 1em;
+}
+
+.hoursCol{
+
+}
+
+.hoursCell{
+	text-align: center;
+	padding: 1em;
+}
+
+.dayCol{	
+	width:20%;
+}
+
+.hasEvent{
+	color: white;
+	font-weight: bold;
+	padding: .8em;
+	background: #577F92;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hasEvent:hover{
+  background: #618da1;
+}
+
+.noEvent{
+}
