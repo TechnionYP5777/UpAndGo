@@ -182,7 +182,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
-	    //drawDay(new ArrayList<Lesson>(), 3);
+	    drawDay(new ArrayList<Lesson>(), 4);
 
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
@@ -192,7 +192,7 @@ public class TimeTableGUI extends LayoutPanel {
     }
     
     
-    /*
+    
     // this function receives a list of LessonGroup(which is a schedule) and
  	// displays the schedule in the GUI
  	public void displaySchedule(final List<LessonGroup> schedule) {
@@ -206,19 +206,19 @@ public class TimeTableGUI extends LayoutPanel {
 			drawDay(daySchedule, day);
  		}
  	}
- 	*/
+ 	
  	private ArrayList<ArrayList<Lesson>> seperateLessonsByDay(final List<LessonGroup> schedule){
  		final ArrayList<ArrayList<Lesson>> lessonsOfDay = new ArrayList<>();
- 		/*for (int i = 0; i < 7; i++){
- 			int j = 5;
- 		}*/
- 			//lessonsOfDay.add(new ArrayList<>());
- 		/*
+ 		
+ 		for (int i = 0; i < DAYS_IN_WEEK; ++i)
+ 			lessonsOfDay.add(new ArrayList<>());
+ 		
+ 		lessonsOfDay.add(new ArrayList<>());
  		for (final LessonGroup lg : schedule){
-			for (final Lesson ¢ : lg.getLessons()) {
-				lessonsOfDay.get(¢.getDay()).add(¢);
+			for (final Lesson l : lg.getLessons()) {
+				lessonsOfDay.get(l.getDay()).add(l);
 			}
- 		}*/
+ 		}
  		return lessonsOfDay;
  	}
  	
@@ -226,7 +226,7 @@ public class TimeTableGUI extends LayoutPanel {
  		if(lessons.isEmpty()){
  			t.setText(1, day, "");
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
- 			t.getCellFormatter().addStyleName(1, day, ttStyle.noEvent());
+ 			t.getCellFormatter().addStyleName(1, day, ttStyle.hasEvent());
  		}
  		//lessons.get(0).getStartTime()
  	}
