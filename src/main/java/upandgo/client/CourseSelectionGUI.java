@@ -1,9 +1,10 @@
 package upandgo.client;
-
+import upandgo.client.presenter.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -21,12 +22,17 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -41,8 +47,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import upandgo.client.common.ColumnDefinition;
 import upandgo.client.view.CourseListView;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.entities.course.CourseId;
 
-public class CourseSelectionGUI extends LayoutPanel implements CourseListView<Course> {
+public class CourseSelectionGUI extends LayoutPanel implements CourseListPresenter.Display {
     private ListBox ccl = new ListBox(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
     private ListBox scl = new ListBox(); //all courses list
@@ -165,24 +172,67 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListView<Co
 	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
-    }
+    } 
+    
+    // Implementation of Display
+	@SuppressWarnings("unchecked")
 	@Override
-	public void setPresenter(upandgo.client.view.CourseListView.Presenter<Course> presenter) {
-		// TODO Auto-generated method stub
+	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList() {
+		return (T) ccl;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList() {
+		return (T) scl;
 	}
 	@Override
-	public void setColumnDefinitions(List<ColumnDefinition<Course>> columnDefinitions) {
-		// TODO Auto-generated method stub
+	public HasChangeHandlers getFacultyDropList() {
+		return faculties;
+	}
+	@Override
+	public void setSelectedCourses(List<CourseId> courses) {
+		ccl.clear();
+		for(CourseId c : courses){
+			ccl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
+		}
 		
 	}
 	@Override
-	public void setSelectedCourses(List<Course> selectedCourses) {
-		// TODO Auto-generated method stub
+	public void setNotSelectedCourses(List<CourseId> courses) {
+		scl.clear();
+		for(CourseId c : courses){
+			scl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
+		}
 		
 	}
 	@Override
-	public void setNotSelectedCourses(List<Course> notSelectedCourses) {
-		// TODO Auto-generated method stub
+	public void setFaculties(List<String> faculties) {
+		this.faculties.clear();
+		for(String f : faculties){
+			this.faculties.addItem(f);
+		}
 		
+	}
+	@Override
+	public int getSelectedCourseRow(DoubleClickEvent event) {
+		return ccl.getSelectedIndex();
+	}
+	@Override
+	public int getUnselectedCourseRow(DoubleClickEvent event) {
+		return scl.getSelectedIndex();
+	}
+	@Override
+	public int getHoveredSelectedCourseRow(MouseOverEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getHoveredNotSelectedCourseRow(MouseOverEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getSelectedFacultyRow(ChangeEvent event) {
+		return faculties.getSelectedIndex();
 	}
 }

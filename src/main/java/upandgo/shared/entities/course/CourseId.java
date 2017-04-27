@@ -42,6 +42,10 @@ public class CourseId implements Comparable<CourseId> {
 		name = cName;
 		number = cNum;
 	}
+	
+	public String getTitle(){
+		return name + " - " + number;
+	}
 
 	@Override
 	public int compareTo(final CourseId ¢) {
