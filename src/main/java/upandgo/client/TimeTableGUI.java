@@ -248,7 +248,7 @@ public class TimeTableGUI extends LayoutPanel {
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
  			t.getCellFormatter().addStyleName(1, day, ttStyle.hasEvent());
  			
- 			int differenceInMinutes = WeekTime.difference(LocalTime.of(10, 30), LocalTime.of(8, 30));
+ 			//int differenceInMinutes = WeekTime.difference(LocalTime.of(10, 30), LocalTime.of(8, 30));
  	 		
  			return;
  		}
