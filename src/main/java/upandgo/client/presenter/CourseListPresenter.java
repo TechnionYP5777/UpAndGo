@@ -11,8 +11,11 @@ import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseMoveHandlers;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
@@ -55,9 +58,9 @@ public class CourseListPresenter implements Presenter, MouseOutHandler {
 	Optional<Timer> timer = Optional.absent();
 
 	public interface Display {
-		<T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList();
+		<T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getSelectedCoursesList();
 
-		<T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList();
+		<T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList();
 
 		HasChangeHandlers getFacultyDropList();
 
@@ -71,10 +74,10 @@ public class CourseListPresenter implements Presenter, MouseOutHandler {
 
 		int getUnselectedCourseRow(DoubleClickEvent event); // pass -1 if none
 
-		int getHoveredSelectedCourseRow(MouseOverEvent event); // pass -1 if
+		int getHoveredSelectedCourseRow(MouseMoveEvent event); // pass -1 if
 																// none
 
-		int getHoveredNotSelectedCourseRow(MouseOverEvent event); // pass -1 if
+		int getHoveredNotSelectedCourseRow(MouseMoveEvent event); // pass -1 if
 																	// none
 
 		int getSelectedFacultyRow(ChangeEvent event); // pass -1 if there is no
@@ -139,10 +142,10 @@ public class CourseListPresenter implements Presenter, MouseOutHandler {
 			}
 		});
 
-		display.getSelectedCoursesList().addMouseOverHandler(new MouseOverHandler() {
-
+		display.getSelectedCoursesList().addMouseMoveHandler(new MouseMoveHandler() {
+			
 			@Override
-			public void onMouseOver(MouseOverEvent event) {
+			public void onMouseMove(MouseMoveEvent event) {
 				stopHoveredTimer();
 				
 				int $ = display.getHoveredSelectedCourseRow(event);
@@ -151,7 +154,6 @@ public class CourseListPresenter implements Presenter, MouseOutHandler {
 				}
 				
 				hoveredCourse = Optional.of(selectedCourses.get($));
-				
 				timer = Optional.of(new Timer() {
 					@Override
 					public void run() {
@@ -190,12 +192,11 @@ public class CourseListPresenter implements Presenter, MouseOutHandler {
 			}
 		});
 
-		display.getNotSelectedCoursesList().addMouseOverHandler(new MouseOverHandler() {
-
+		display.getNotSelectedCoursesList().addMouseMoveHandler(new MouseMoveHandler() {
+			
 			@Override
-			public void onMouseOver(MouseOverEvent event) {
+			public void onMouseMove(MouseMoveEvent event) {
 				stopHoveredTimer();
-				
 				int $ = display.getHoveredNotSelectedCourseRow(event);
 				if ($ < 0) {
 					return;

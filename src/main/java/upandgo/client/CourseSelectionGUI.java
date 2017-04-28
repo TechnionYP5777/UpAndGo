@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collector;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.dom.client.NodeList;
+import com.google.gwt.dom.client.OptionElement;
+import com.google.gwt.dom.client.SelectElement;
 
 /**
  * 
@@ -24,6 +27,7 @@ import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseMoveHandlers;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.event.dom.client.KeyDownEvent;
@@ -32,7 +36,10 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -96,7 +103,9 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 				
 			}
 		});
-    	
+
+
+
     	//all courses list initialization
     	scl.setMultipleSelect(true);
     	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
@@ -121,7 +130,14 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 				
 			}
 		});
-    	
+    	//may be useful
+//    	SelectElement selectElement = SelectElement.as(scl.getElement());
+//    	NodeList<OptionElement> options = selectElement.getOptions();
+//
+//    	for (int i = 0; i < options.getLength(); i++) {
+//    	     options.getItem(i).getClientHeight();
+//    	     options.getItem(i).setTitle("helooo" + i);
+//    	}
     	//initializing course suggestion
     	coursesSugg.addAll(courses);
     	
@@ -136,7 +152,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	
     	//search course text field initialization
     	searchCourse.setHeight("1em");
-    	searchCourse.setWidth("97%");
+    	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
     	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
     	searchCourse.addKeyUpHandler(new KeyUpHandler() {
@@ -173,16 +189,15 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
     } 
-    
     // Implementation of Display
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList() {
+	public <T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getSelectedCoursesList() {
 		return (T) ccl;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList() {
+	public <T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList() {
 		return (T) scl;
 	}
 	@Override
@@ -222,14 +237,15 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 		return scl.getSelectedIndex();
 	}
 	@Override
-	public int getHoveredSelectedCourseRow(MouseOverEvent event) {
+	public int getHoveredSelectedCourseRow(MouseMoveEvent event) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
-	public int getHoveredNotSelectedCourseRow(MouseOverEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getHoveredNotSelectedCourseRow(MouseMoveEvent event) {
+		int i =  event.getY()/scl.getOffsetHeight();
+		Log.info("index = " + i);
+		return i;
 	}
 	@Override
 	public int getSelectedFacultyRow(ChangeEvent event) {
