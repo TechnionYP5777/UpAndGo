@@ -10,6 +10,8 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.FontWeight;
 
 /**
  * 
@@ -23,6 +25,8 @@ import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -38,6 +42,8 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Label;
@@ -76,6 +82,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	courses.add("גקורס6");
     	courses.add("גקורס7");
     	courses.add("גקורס8");
+
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
 
@@ -86,22 +93,102 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
-
+    	ccl.addMouseMoveHandler(new MouseMoveHandler() {
+			
+			@Override
+			public void onMouseMove(MouseMoveEvent event) {
+				SelectElement selectElement = SelectElement.as(ccl.getElement());
+		    	NodeList<OptionElement> options = selectElement.getOptions();
+				int y = event.getY()-4;
+				if(y<0)
+					y=0;
+				int row = y/options.getItem(0).getScrollHeight();
+				Log.debug("y coor = " + (event.getY()-2));
+				Log.debug("offsetheight = " + options.getItem(1).getClientHeight());
+		    	for (int i = 0; i < options.getLength(); i++) {
+		    		if(i == row){
+		    			options.getItem(i).getStyle().setBackgroundColor("#577F92");
+		    			//options.getItem(i).getStyle().setFontSize(1.13, Unit.EM);
+		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.BOLD);
+		    		}
+		    		else{
+		    			options.getItem(i).getStyle().setBackgroundColor("white");
+		    			//options.getItem(i).getStyle().setFontSize(1, Unit.EM);
+		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+		    		}
+		   	     }
+				
+			}
+		});
+    	ccl.addMouseOutHandler(new MouseOutHandler() {
+    		SelectElement selectElement = SelectElement.as(ccl.getElement());
+        	NodeList<OptionElement> options = selectElement.getOptions();
+			@Override
+			public void onMouseOut(MouseOutEvent event) {
+				for (int i = 0; i < options.getLength(); i++) {
+	    			options.getItem(i).getStyle().setBackgroundColor("white");
+	    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+		   	     }
+				
+				
+			}
+		});
 
     	//all courses list initialization
     	scl.setMultipleSelect(true);
     	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
 			scl.addItem(s);
     	scl.setWidth("100%");
+    	scl.addMouseMoveHandler(new MouseMoveHandler() {
+			
+			@Override
+			public void onMouseMove(MouseMoveEvent event) {
+				SelectElement selectElement = SelectElement.as(scl.getElement());
+		    	NodeList<OptionElement> options = selectElement.getOptions();
+				int y = event.getY()-4;
+				if(y<0)
+					y=0;
+				int row = y/options.getItem(0).getScrollHeight();
+				Log.debug("y coor = " + (event.getY()-2));
+				Log.debug("offsetheight = " + options.getItem(1).getClientHeight());
+		    	for (int i = 0; i < options.getLength(); i++) {
+		    		if(i == row){
+		    			options.getItem(i).getStyle().setBackgroundColor("#577F92");
+		    			//options.getItem(i).getStyle().setFontSize(1.13, Unit.EM);
+		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.BOLD);
+		    		}
+		    		else{
+		    			options.getItem(i).getStyle().setBackgroundColor("white");
+		    			//options.getItem(i).getStyle().setFontSize(1, Unit.EM);
+		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+		    		}
+		   	     }
+				
+			}
+		});
+    	scl.addMouseOutHandler(new MouseOutHandler() {
+    		SelectElement selectElement = SelectElement.as(scl.getElement());
+        	NodeList<OptionElement> options = selectElement.getOptions();
+			@Override
+			public void onMouseOut(MouseOutEvent event) {
+				for (int i = 0; i < options.getLength(); i++) {
+	    			options.getItem(i).getStyle().setBackgroundColor("white");
+	    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+		   	     }
+				
+				
+			}
+		});
     	
     	SelectElement selectElement = SelectElement.as(scl.getElement());
     	NodeList<OptionElement> options = selectElement.getOptions();
+    	//tooltip for now
+    	for (int i = 0; i < options.getLength(); i++) {
+    		options.getItem(i).getStyle().setBackgroundColor("white");
+    		options.getItem(i).setDefaultSelected(false);
+   	     	options.getItem(i).setTitle("helooo " + i);
+   	     }
     	
-    	//may be useful
-//    	for (int i = 0; i < options.getLength(); i++) {
-//    	     options.getItem(i).getClientHeight();
-//    	     options.getItem(i).setTitle("helooo" + i);
-//    	}
     	//initializing course suggestion
     	coursesSugg.addAll(courses);
     	
@@ -138,6 +225,15 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 					});
 			}
 		});
+    	scl.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				scl.setSelectedIndex(scl.getSelectedIndex());
+				
+			}
+		});
+
     	
     	//adding widgets to panel
     	this.add(cc);
@@ -153,6 +249,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
     } 
+    
     // Implementation of Display
 	@SuppressWarnings("unchecked")
 	@Override
