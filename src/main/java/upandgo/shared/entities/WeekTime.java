@@ -49,6 +49,11 @@ public class WeekTime implements Serializable {
 	public static int difference(final WeekTime a, final WeekTime b) {
 		return a.getTime().getMinute() + 60 * (a.getTime().getHour() - b.getTime().getHour()) - b.getTime().getMinute();
 	}
+	
+	public static int difference(final LocalTime a, LocalTime b){
+		return a.getMinute() + 60 * (a.getHour() - b.getHour()) - b.getMinute();
+	}
+	
 
 	public static int compareTo(final WeekTime a, final WeekTime b) {
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())

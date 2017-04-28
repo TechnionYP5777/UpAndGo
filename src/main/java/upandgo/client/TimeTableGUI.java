@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +11,9 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.LayoutPanel;
 
 import upandgo.client.Resources.TimeTableStyle;
+import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
 
@@ -182,7 +185,24 @@ public class TimeTableGUI extends LayoutPanel {
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
-	    drawDay(new ArrayList<Lesson>(), 4);
+	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+	    /*Lesson l = new Lesson(null,
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
+	    		"place",
+	    		Type.LECTURE,
+	    		3,
+	    		"12",
+	    		"OOP");*/
+	    /*lessons.add(new Lesson(null,
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
+	    		"place",
+	    		Type.LECTURE,
+	    		3,
+	    		"12",
+	    		"OOP"));*/
+	    drawDay(lessons, 4);
 
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
@@ -227,10 +247,24 @@ public class TimeTableGUI extends LayoutPanel {
  			t.setText(1, day, "");
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
  			t.getCellFormatter().addStyleName(1, day, ttStyle.hasEvent());
+ 			
+ 			int differenceInMinutes = WeekTime.difference(LocalTime.of(10, 30), LocalTime.of(8, 30));
+ 	 		
  			return;
  		}
  		
+ 		LocalTime firstLessonStartTime = lessons.get(0).getStartTime().getTime();
+ 		int differenceInMinutes = WeekTime.difference(firstLessonStartTime, LocalTime.of(8, 30));
+ 		int span = differenceInMinutes/30;
+ 		
+ 		t.setText(1, day, "");
+		t.getFlexCellFormatter().setRowSpan(1, day, span);
+		t.getCellFormatter().addStyleName(1, day, ttStyle.hasEvent());
+ 		
  		//lessons.get(0).getStartTime().getTime().getHour()
+ 		
+ 		
+ 		
  	}
  	
  	
