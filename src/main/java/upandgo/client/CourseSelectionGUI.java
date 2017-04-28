@@ -86,24 +86,6 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
     	ccl.setHeight("25em");
-    	ccl.addDoubleClickHandler(new DoubleClickHandler() {
-			
-    		//need to keep list sorted
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void onDoubleClick(DoubleClickEvent event) {
-				if(ccl.getSelectedValue() != null){
-					Log.info("Course: " + ccl.getSelectedValue() + "has been unchosen");
-					scl.addItem(ccl.getSelectedValue());
-					courses.add(ccl.getSelectedValue());
-					ccl.removeItem(ccl.getSelectedIndex());
-					coursesSugg.clear();
-					coursesSugg.addAll(courses);
-				}
-				
-			}
-		});
-
 
 
     	//all courses list initialization
@@ -111,29 +93,11 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
 			scl.addItem(s);
     	scl.setWidth("100%");
-    	scl.addDoubleClickHandler(new DoubleClickHandler() {
-			
-    		//need to keep list sorted
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent e) { // maybe use button?
-				if(scl.getSelectedValue() != null){
-					Log.info("Course: " + scl.getSelectedValue() + "has been chosen");
-					ccl.addItem(scl.getSelectedValue());
-					courses.remove(scl.getSelectedValue());
-					scl.removeItem(scl.getSelectedIndex());
-					coursesSugg.clear();
-					coursesSugg.addAll(courses);
-					
-					
-				}
-				
-			}
-		});
+    	
+    	SelectElement selectElement = SelectElement.as(scl.getElement());
+    	NodeList<OptionElement> options = selectElement.getOptions();
+    	
     	//may be useful
-//    	SelectElement selectElement = SelectElement.as(scl.getElement());
-//    	NodeList<OptionElement> options = selectElement.getOptions();
-//
 //    	for (int i = 0; i < options.getLength(); i++) {
 //    	     options.getItem(i).getClientHeight();
 //    	     options.getItem(i).setTitle("helooo" + i);
@@ -151,7 +115,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	faculties.addItem("מתמטיקה");
     	
     	//search course text field initialization
-    	searchCourse.setHeight("1em");
+    	searchCourse.setHeight("2em");
     	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
     	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
@@ -238,14 +202,15 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	}
 	@Override
 	public int getHoveredSelectedCourseRow(MouseMoveEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+    	SelectElement selectElement = SelectElement.as(ccl.getElement());
+    	NodeList<OptionElement> options = selectElement.getOptions();
+		return event.getY()/options.getItem(0).getOffsetHeight();
 	}
 	@Override
 	public int getHoveredNotSelectedCourseRow(MouseMoveEvent event) {
-		int i =  event.getY()/scl.getOffsetHeight();
-		Log.info("index = " + i);
-		return i;
+    	SelectElement selectElement = SelectElement.as(ccl.getElement());
+    	NodeList<OptionElement> options = selectElement.getOptions();
+		return event.getY()/options.getItem(0).getOffsetHeight();
 	}
 	@Override
 	public int getSelectedFacultyRow(ChangeEvent event) {
