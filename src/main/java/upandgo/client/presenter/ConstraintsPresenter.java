@@ -1,22 +1,28 @@
 package upandgo.client.presenter;
 
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
-import com.google.gwt.event.dom.client.HasMouseMoveHandlers;
-import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.View;
+
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
-import upandgo.client.CoursesServiceAsync;
-import upandgo.client.presenter.SchedulerPresenter.Display;
+import upandgo.shared.entities.constraint.TimeConstraint;
 
 public class ConstraintsPresenter implements Presenter {
 	
 	private final Display view;
 	private final EventBus eventBus;
+	private final List<TimeConstraint> constraintsList;
 		
 	public interface Display {
-		public boolean isDayOffChecked();
+		<T extends HasClickHandlers> T getDaysOffValue();
+		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
 		public boolean isMinWindowsChecked();
 		public boolean isStartTimeChecked();
 		public boolean isFinishTimeChecked();
@@ -28,13 +34,27 @@ public class ConstraintsPresenter implements Presenter {
 	public ConstraintsPresenter(Display view, EventBus eventBus) {
 		this.eventBus = eventBus; 
 		this.view = view;
+		this.constraintsList = new ArrayList<>();
 	}
 	
 	@Override
 	public void bind() {
-		// TODO Auto-generated method stub
-
-	}
+		
+		view.getDaysOffValue().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onClick(ClickEvent event) {
+				int $ = view.isDayOffChecked(event);
+				if ($ == 1) {
+					constraintsList.add(null); //change null to real constraints
+				} else {
+					constraintsList.remove(null); //change null to real constraints
+				}
+			}
+		});	
+		
+		
+		}
 
 	@Override
 	public void unbind() {

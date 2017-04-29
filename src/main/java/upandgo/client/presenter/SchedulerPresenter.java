@@ -38,6 +38,7 @@ public class SchedulerPresenter implements Presenter {
 	public SchedulerPresenter(Display view, EventBus eventBus) {
 		this.eventBus = eventBus; 
 		this.view = view;
+		bind();
 	}
 	
 	
