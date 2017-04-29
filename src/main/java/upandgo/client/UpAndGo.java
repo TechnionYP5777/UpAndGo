@@ -11,13 +11,9 @@ public class UpAndGo implements EntryPoint {
 	private LayoutPanel p = new LayoutPanel();
 	@Override
 	public void onModuleLoad() {
-	    Log.debug("debug_msg");
-	    Log.error("error_msg");
-	    Log.info("info_msg");
-	    Log.trace("trace_msg");
-	    Log.warn("warning_msg");
 		CourseSelectionGUI cc = new CourseSelectionGUI();
 		TimeTableGUI t = new TimeTableGUI();
+		cc.getElement().getStyle().setBackgroundColor("WhiteSmoke");
 		p.add(cc);
 		p.setWidgetRightWidth(cc, 1, Unit.EM, 20, Unit.PCT);
 		p.setWidgetTopHeight(cc, 1, Unit.EM, 100, Unit.PCT);
