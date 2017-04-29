@@ -34,5 +34,8 @@ public interface CoursesServiceAsync {
 	
 	public void getSchedule(List<CourseId> selectedCourses, List<TimeConstraint> constraintsList, AsyncCallback<Schedule> callback);
 
-	public void getnextSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+	public void getNextSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+
+	public void getPreviousSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+
 }

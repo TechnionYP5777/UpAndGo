@@ -98,7 +98,7 @@ public class SchedulerPresenter implements Presenter {
 			@SuppressWarnings("synthetic-access")
 			@Override
 			public void onClick(ClickEvent event) {
-				rpcService.getnextSchedule(schedule , new AsyncCallback<Schedule>() {
+				rpcService.getNextSchedule(schedule , new AsyncCallback<Schedule>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						Window.alert("Error while retrieving next schedule.");
@@ -109,6 +109,26 @@ public class SchedulerPresenter implements Presenter {
 					public void onSuccess(Schedule result) {
 						schedule = result;
 						eventBus.fireEvent(new nextScheduleEvent());
+					}
+				});
+			}
+		});
+		
+		view.prevSchedule().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onClick(ClickEvent event) {
+				rpcService.getPreviousSchedule(schedule , new AsyncCallback<Schedule>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Error while retrieving previous schedule.");
+						Log.error("Error while retrieving previous schedule.");
+					}
+						
+					@Override
+					public void onSuccess(Schedule result) {
+						schedule = result;
+						eventBus.fireEvent(new prevScheduleEvent());
 					}
 				});
 			}
@@ -126,16 +146,6 @@ public class SchedulerPresenter implements Presenter {
 	public void go(Panel panel) {
 		panel.clear();
 		panel.add(view.asWidget());
-	}
-	
-	public void onNextSchedule() {
-		eventBus.fireEvent(new nextScheduleEvent());
-		this.view.nextSchedule();
-	}
-	
-	public void onPrevSchedule() {
-		eventBus.fireEvent(new prevScheduleEvent());
-		this.view.prevSchedule();
 	}
 	
 	public void onSaveSchedule() {
