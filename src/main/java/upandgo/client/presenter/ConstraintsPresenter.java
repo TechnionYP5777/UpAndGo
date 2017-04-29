@@ -122,8 +122,10 @@ public class ConstraintsPresenter implements Presenter {
 
 	@Override
 	public void go(Panel panel) {
-		// TODO Auto-generated method stub
+		bind();
 
+		panel.clear();
+		panel.add(view.asWidget());
 	}
 
 }
