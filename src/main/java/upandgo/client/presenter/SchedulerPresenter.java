@@ -1,6 +1,9 @@
 package upandgo.client.presenter;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -29,7 +32,7 @@ public class SchedulerPresenter implements Presenter {
 	CoursesServiceAsync rpcService;
 	
 	public interface Display {
-		public void clearSchedule();
+		public <T extends HasClickHandlers> T clearSchedule();
 		public void nextSchedule();
 		public void prevSchedule();
 		public void buildSchedule();
@@ -47,7 +50,13 @@ public class SchedulerPresenter implements Presenter {
 	
 	@Override
 	public void bind() {
-		// TODO Auto-generated method stub
+
+		view.clearSchedule().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new clearScheduleEvent());
+			}
+		});
 
 	}
 
