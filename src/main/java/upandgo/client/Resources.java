@@ -27,6 +27,8 @@ public interface Resources extends ClientBundle {
 		 String noEvent();
 		 
 		 String hasEvent();
+		 
+		 String hasEventWrap();
 	 }
 
 	@CssResource.NotStrict

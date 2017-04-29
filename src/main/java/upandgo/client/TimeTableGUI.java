@@ -8,7 +8,9 @@ import java.util.List;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
@@ -111,8 +113,12 @@ public class TimeTableGUI extends LayoutPanel {
 		t.setText(9, 2, "");
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, ttStyle.noEvent());
-		
-		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+
+		SimplePanel eventCell = new SimplePanel();
+		t.setWidget(11,	2, eventCell);
+		eventCell.add(new Label("מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה"));
+		eventCell.addStyleName(ttStyle.hasEventWrap());
+		//t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
 		t.getCellFormatter().addStyleName(11, 2, ttStyle.hasEvent());
 		

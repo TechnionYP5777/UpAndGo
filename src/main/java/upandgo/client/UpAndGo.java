@@ -16,6 +16,7 @@ public class UpAndGo implements EntryPoint {
 		LayoutPanel container_cc = new LayoutPanel();
 		container_cc.getElement().getStyle().setBackgroundColor("WhiteSmoke");
 		container_cc.add(cc);
+		t.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		p.add(container_cc);
 		p.setWidgetRightWidth(container_cc, 1, Unit.EM, 20, Unit.PCT);
 		p.setWidgetTopHeight(container_cc, 1, Unit.EM, 100, Unit.PCT);
