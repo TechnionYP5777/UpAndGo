@@ -13,6 +13,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
 import upandgo.shared.entities.constraint.TimeConstraint;
+/**
+ * 
+ * @author Omri Ben- Shmuel
+ * @since 29-04-17
+ * 
+ *        A concrete presenter for {@link constraintsView}.
+ * 
+ */
 
 public class ConstraintsPresenter implements Presenter {
 	
@@ -23,8 +31,8 @@ public class ConstraintsPresenter implements Presenter {
 	public interface Display {
 		<T extends HasClickHandlers> T getDaysOffValue();
 		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
-		public boolean isMinWindowsChecked();
-		public boolean isStartTimeChecked();
+		<T extends HasClickHandlers> T getMinWindowsValue();
+		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
 		public boolean isFinishTimeChecked();
 		public String getReqStartTime(); // result in format HH:MM
 		public String getReqFinishTime(); // result in format HH:MM
@@ -53,6 +61,19 @@ public class ConstraintsPresenter implements Presenter {
 			}
 		});	
 		
+		view.getMinWindowsValue().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onClick(ClickEvent event) {
+				int $ = view.isMinWindowsChecked(event);
+				if ($ == 1) {
+					constraintsList.add(null); //change null to real constraints
+				} else {
+					constraintsList.remove(null); //change null to real constraints
+				}
+				
+			}
+		});
 		
 		}
 
