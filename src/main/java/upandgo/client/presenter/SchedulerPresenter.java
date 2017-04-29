@@ -5,9 +5,12 @@ import com.google.web.bindery.event.shared.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -72,9 +75,22 @@ public class SchedulerPresenter implements Presenter {
 		});
 		
 		view.buildSchedule().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new clearScheduleEvent());
+				rpcService.getSchedule(selectedCourses, constraintsList, new AsyncCallback<Schedule>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Error while building schedule.");
+						Log.error("Error while building schedule.");
+					}
+						
+					@Override
+					public void onSuccess(Schedule result) {
+						schedule = result;
+						eventBus.fireEvent(new buildScheduleEvent());
+						}
+				});
 			}
 		});
 		
@@ -98,11 +114,6 @@ public class SchedulerPresenter implements Presenter {
 	public void go(Panel panel) {
 		panel.clear();
 		panel.add(view.asWidget());
-	}
-	
-	public void onClearSchedule() {
-		eventBus.fireEvent(new clearScheduleEvent());
-		this.view.clearSchedule();
 	}
 	
 	public void onNextSchedule() {
