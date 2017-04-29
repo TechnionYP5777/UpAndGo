@@ -39,9 +39,10 @@ public class ConstraintsPresenter implements Presenter {
 		public int isStartTimeChecked(ClickEvent event);
 		public String getReqStartTime(); // result in format HH:MM
 		
-		public boolean isFinishTimeChecked();
+		<T extends HasClickHandlers> T getFinishTimeValue();
+		public int isFinishTimeChecked(ClickEvent event);
 		public String getReqFinishTime(); // result in format HH:MM
-		
+				
 		public Widget asWidget();
 	}
 	
@@ -86,9 +87,24 @@ public class ConstraintsPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				int $ = view.isStartTimeChecked(event);
-				//TimeConstraint con = new TimeConstraint(startTime); ** check how construct timeConstraints
 				if ($ == 1) {
 					String startTime = view.getReqStartTime();
+					//TimeConstraint con = new TimeConstraint(startTime); ** check how construct timeConstraints
+					//constraintsList.add(con);
+				} else {
+					//constraintsList.remove(null); // need change
+				}
+			}
+		});
+		
+		view.getFinishTimeValue().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				int $ = view.isFinishTimeChecked(event);
+				if ($ == 1) {
+					String finishTime = view.getReqFinishTime();
+					//TimeConstraint con = new TimeConstraint(finishTime); ** check how construct timeConstraints
 					//constraintsList.add(con);
 				} else {
 					//constraintsList.remove(con);
