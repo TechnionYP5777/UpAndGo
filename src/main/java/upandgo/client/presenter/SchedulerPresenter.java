@@ -1,6 +1,10 @@
 package upandgo.client.presenter;
 
 import com.google.web.bindery.event.shared.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -15,6 +19,9 @@ import upandgo.client.event.nextScheduleEvent;
 import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
+import upandgo.server.model.schedule.Schedule;
+import upandgo.shared.entities.constraint.TimeConstraint;
+import upandgo.shared.entities.course.CourseId;
 
 /**
  * 
@@ -31,11 +38,15 @@ public class SchedulerPresenter implements Presenter {
 	private final EventBus eventBus;
 	CoursesServiceAsync rpcService;
 	
+	private List<CourseId> selectedCourses;
+	private List<TimeConstraint> constraintsList;
+	Schedule schedule;
+	
 	public interface Display {
 		public <T extends HasClickHandlers> T clearSchedule();
-		public void nextSchedule();
+		public <T extends HasClickHandlers> T buildSchedule();
+		public <T extends HasClickHandlers> T nextSchedule();
 		public void prevSchedule();
-		public void buildSchedule();
 		public void saveSchedule();
 		public Widget asWidget();
 	}
@@ -44,6 +55,8 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus = eventBus; 
 		this.view = view;
 		this.rpcService = rpc;
+		this.constraintsList = new ArrayList<>();
+		this.selectedCourses = new ArrayList<>();
 		bind();
 	}
 	
@@ -55,6 +68,21 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				eventBus.fireEvent(new clearScheduleEvent());
+			}
+		});
+		
+		view.buildSchedule().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new clearScheduleEvent());
+			}
+		});
+		
+		view.nextSchedule().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+		
+				
 			}
 		});
 
@@ -95,6 +123,14 @@ public class SchedulerPresenter implements Presenter {
 	public void onSaveSchedule() {
 		eventBus.fireEvent(new saveScheduleEvent());
 		this.view.saveSchedule();
+	}
+	
+	public void setSelectedCourses(List<CourseId> selectedCourses) {
+	    this.selectedCourses = selectedCourses;
+	}
+	
+	public void setSelectedConstraints(List<TimeConstraint> constraintsList) {
+	    this.constraintsList = constraintsList;
 	}
 
 }
