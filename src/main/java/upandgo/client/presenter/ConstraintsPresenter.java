@@ -31,11 +31,17 @@ public class ConstraintsPresenter implements Presenter {
 	public interface Display {
 		<T extends HasClickHandlers> T getDaysOffValue();
 		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
+		
 		<T extends HasClickHandlers> T getMinWindowsValue();
 		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
-		public boolean isFinishTimeChecked();
+		
+		<T extends HasClickHandlers> T getStartTimeValue();
+		public int isStartTimeChecked(ClickEvent event);
 		public String getReqStartTime(); // result in format HH:MM
+		
+		public boolean isFinishTimeChecked();
 		public String getReqFinishTime(); // result in format HH:MM
+		
 		public Widget asWidget();
 	}
 	
@@ -69,9 +75,24 @@ public class ConstraintsPresenter implements Presenter {
 				if ($ == 1) {
 					constraintsList.add(null); //change null to real constraints
 				} else {
-					constraintsList.remove(null); //change null to real constraints
+					constraintsList.remove(null); //change null to real constraints, override equals method in timeConstraints
 				}
 				
+			}
+		});
+		
+		view.getStartTimeValue().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				int $ = view.isStartTimeChecked(event);
+				//TimeConstraint con = new TimeConstraint(startTime); ** check how construct timeConstraints
+				if ($ == 1) {
+					String startTime = view.getReqStartTime();
+					//constraintsList.add(con);
+				} else {
+					//constraintsList.remove(con);
+				}
 			}
 		});
 		
