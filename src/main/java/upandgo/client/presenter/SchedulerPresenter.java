@@ -49,8 +49,8 @@ public class SchedulerPresenter implements Presenter {
 		public <T extends HasClickHandlers> T clearSchedule();
 		public <T extends HasClickHandlers> T buildSchedule();
 		public <T extends HasClickHandlers> T nextSchedule();
-		public void prevSchedule();
-		public void saveSchedule();
+		public <T extends HasClickHandlers> T prevSchedule();
+		public <T extends HasClickHandlers> T saveSchedule();
 		public Widget asWidget();
 	}
 	
@@ -89,16 +89,28 @@ public class SchedulerPresenter implements Presenter {
 					public void onSuccess(Schedule result) {
 						schedule = result;
 						eventBus.fireEvent(new buildScheduleEvent());
-						}
+					}
 				});
 			}
 		});
 		
 		view.nextSchedule().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 			public void onClick(ClickEvent event) {
-		
-				
+				rpcService.getnextSchedule(schedule , new AsyncCallback<Schedule>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Error while retrieving next schedule.");
+						Log.error("Error while retrieving next schedule.");
+					}
+						
+					@Override
+					public void onSuccess(Schedule result) {
+						schedule = result;
+						eventBus.fireEvent(new nextScheduleEvent());
+					}
+				});
 			}
 		});
 
@@ -124,11 +136,6 @@ public class SchedulerPresenter implements Presenter {
 	public void onPrevSchedule() {
 		eventBus.fireEvent(new prevScheduleEvent());
 		this.view.prevSchedule();
-	}
-	
-	public void onBuildSchedule() {
-		eventBus.fireEvent(new buildScheduleEvent());
-		this.view.buildSchedule();
 	}
 	
 	public void onSaveSchedule() {
