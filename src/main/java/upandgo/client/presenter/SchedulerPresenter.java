@@ -4,6 +4,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
+import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.buildScheduleEvent;
 import upandgo.client.event.clearScheduleEvent;
@@ -25,6 +26,7 @@ public class SchedulerPresenter implements Presenter {
 	
 	private final Display view;
 	private final EventBus eventBus;
+	CoursesServiceAsync rpcService;
 	
 	public interface Display {
 		public void clearSchedule();
@@ -35,9 +37,10 @@ public class SchedulerPresenter implements Presenter {
 		public Widget asWidget();
 	}
 	
-	public SchedulerPresenter(Display view, EventBus eventBus) {
+	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
 		this.eventBus = eventBus; 
 		this.view = view;
+		this.rpcService = rpc;
 		bind();
 	}
 	

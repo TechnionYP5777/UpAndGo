@@ -3,8 +3,6 @@ package upandgo.client.presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.View;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
