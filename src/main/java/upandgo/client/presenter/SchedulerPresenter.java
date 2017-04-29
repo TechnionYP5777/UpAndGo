@@ -148,9 +148,10 @@ public class SchedulerPresenter implements Presenter {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void go(Panel panel) {
+		bind();
 		panel.clear();
 		panel.add(view.asWidget());
 	}
