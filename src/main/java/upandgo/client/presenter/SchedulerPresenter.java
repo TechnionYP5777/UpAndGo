@@ -133,7 +133,14 @@ public class SchedulerPresenter implements Presenter {
 				});
 			}
 		});
-
+		
+		view.saveSchedule().addClickHandler(new ClickHandler() {
+			@SuppressWarnings("synthetic-access")
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new saveScheduleEvent());
+			}
+		});
 	}
 
 	@Override
@@ -146,11 +153,6 @@ public class SchedulerPresenter implements Presenter {
 	public void go(Panel panel) {
 		panel.clear();
 		panel.add(view.asWidget());
-	}
-	
-	public void onSaveSchedule() {
-		eventBus.fireEvent(new saveScheduleEvent());
-		this.view.saveSchedule();
 	}
 	
 	public void setSelectedCourses(List<CourseId> selectedCourses) {
