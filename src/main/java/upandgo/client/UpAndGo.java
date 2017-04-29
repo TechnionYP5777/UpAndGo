@@ -13,12 +13,14 @@ public class UpAndGo implements EntryPoint {
 	public void onModuleLoad() {
 		CourseSelectionGUI cc = new CourseSelectionGUI();
 		TimeTableGUI t = new TimeTableGUI();
-		cc.getElement().getStyle().setBackgroundColor("WhiteSmoke");
-		p.add(cc);
-		p.setWidgetRightWidth(cc, 1, Unit.EM, 20, Unit.PCT);
-		p.setWidgetTopHeight(cc, 1, Unit.EM, 100, Unit.PCT);
+		LayoutPanel container_cc = new LayoutPanel();
+		container_cc.getElement().getStyle().setBackgroundColor("WhiteSmoke");
+		container_cc.add(cc);
+		p.add(container_cc);
+		p.setWidgetRightWidth(container_cc, 1, Unit.EM, 20, Unit.PCT);
+		p.setWidgetTopHeight(container_cc, 1, Unit.EM, 100, Unit.PCT);
 		p.add(t);
-		p.setWidgetLeftWidth(t, 1, Unit.EM, 70, Unit.PCT);
+		p.setWidgetLeftWidth(t, 1, Unit.EM, 78, Unit.PCT);
 		p.setWidgetTopHeight(t, 1, Unit.EM, 100, Unit.PCT);
 		RootLayoutPanel.get().add(p);
 		Resources.INSTANCE.mainCss().ensureInjected();

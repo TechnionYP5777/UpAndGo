@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.dom.client.Style.BorderStyle;
+import com.google.gwt.dom.client.Style.FontStyle;
+import com.google.gwt.dom.client.Style.TextDecoration;
 
 /**
  * 
@@ -50,6 +53,19 @@ public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPres
     	courses.add("תכנות מקביליו מבוזר");
     	courses.add("מערכות מסדי נתונים");
     	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
 
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
@@ -68,9 +84,13 @@ public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPres
 		};
 	    ccl.addColumn(course);
         ccl.setRowCount(0, true);
-	    ccl.setRowData(0, new ArrayList<String>());
+        ccl.setVisibleRange(0, courses.size());
+	    ccl.setRowData(0,courses);
 	    cclp.add(ccl);
 	    cclp.setHeight("25em");
+	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
+	    cclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
+	    cclp.getElement().getStyle().setBorderColor("LightGray");
 //    	ccl.addMouseMoveHandler(new MouseMoveHandler() {
 //			
 //			@Override
@@ -127,6 +147,9 @@ public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPres
         scl.setVisibleRange(0, courses.size());
 	    scl.setRowData(0,courses);
 	    sclp.add(scl);
+	    sclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
+	    sclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
+	    sclp.getElement().getStyle().setBorderColor("LightGray");
 //    	scl.addMouseMoveHandler(new MouseMoveHandler() {
 //			
 //			@Override
@@ -222,8 +245,14 @@ public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPres
 //			}
 //		});
 
-    	
+    	cc.getElement().getStyle().setFontStyle(FontStyle.OBLIQUE);
+    	cc.getElement().getStyle().setFontSize(1.2, Unit.EM);
+    	cc.getElement().getStyle().setColor("Red");
+    	sc.getElement().getStyle().setFontStyle(FontStyle.OBLIQUE);
+    	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
+    	sc.getElement().getStyle().setColor("Red");
     	//adding widgets to panel
+    	this.getElement().getStyle().setMargin(10, Unit.PX);
     	this.add(cc);
 	    this.add(cclp);
 	    this.add(sc);
@@ -231,8 +260,8 @@ public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPres
 	    this.add(searchCourse);
 	    this.add(sclp);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(cclp, 1.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sc, 30,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(sc, 29.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sclp, 37.5,  Unit.EM, 2, Unit.EM);
