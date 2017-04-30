@@ -60,7 +60,7 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
     	//t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
     	//t.getColumnFormatter().addStyleName(0, ttStyle.arciCol());
-    	t.getColumnFormatter().addStyleName(1, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
 
     	for(int i = 1; i<7; i++){
     		//t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
@@ -189,7 +189,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    /*t.getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");*/
-	    t.addStyleName("table-bordered");
+	    //t.addStyleName("table-bordered");
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
