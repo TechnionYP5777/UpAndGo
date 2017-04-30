@@ -208,7 +208,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		3,
 	    		"12",
 	    		"OOP"));*/
-	    drawDay(lessons, 4);
+	    //drawDay(lessons, 4);
 
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
