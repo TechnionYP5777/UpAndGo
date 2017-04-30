@@ -57,9 +57,11 @@ public class TimeTableGUI extends LayoutPanel {
     	//t.setText(0, 5, "שישי");
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	t.getCellFormatter().addStyleName(0, 0, "tableArciCol");
+    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
     	//t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
-    	t.getColumnFormatter().addStyleName(HOURS_COL, ttStyle.hoursCol());
+    	//t.getColumnFormatter().addStyleName(0, ttStyle.arciCol());
+    	t.getColumnFormatter().addStyleName(1, ttStyle.hoursCol());
+
     	for(int i = 1; i<7; i++){
     		//t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
@@ -69,8 +71,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "tableArciCol");
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "tableArciCol");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
     		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 

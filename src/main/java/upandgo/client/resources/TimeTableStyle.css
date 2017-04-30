@@ -13,20 +13,22 @@
 
 .headerRow td{
 	text-align: center;
-	padding: 1em;
-	background: white;
-	z-index: 1;
+	padding: 0.6em;
+
+}
+
+.arciCol {
+	display: none;
+	background: #577F92;
 }
 
 .hoursCol{
-
 }
 
 .hoursCell{
 	text-align: center;
 	padding: 1em;
-	background: white;
-	z-index: 1;
+
 }
 
 .dayCol{	
