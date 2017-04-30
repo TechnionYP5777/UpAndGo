@@ -22,7 +22,7 @@ import upandgo.shared.entities.course.CourseId;
 public interface CoursesServiceAsync {
 	public void getSelectedCourses(AsyncCallback<ArrayList<CourseId>> callback);
 
-	public void getNotSelectedCourses(String faculty, AsyncCallback<ArrayList<CourseId>> callback);
+	public void getNotSelectedCourses(String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
 	
 	public void getFaculties(AsyncCallback<ArrayList<String>> callback);
 
@@ -37,5 +37,4 @@ public interface CoursesServiceAsync {
 	public void getNextSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
 
 	public void getPreviousSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
-
 }
