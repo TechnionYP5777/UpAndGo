@@ -18,6 +18,8 @@ public interface Resources extends ClientBundle {
 		 
 		 String tableRow();
 		 
+		 String arciCol();
+		 
 		 String hoursCol();
 		 
 		 String hoursCell();
@@ -27,9 +29,10 @@ public interface Resources extends ClientBundle {
 		 String noEvent();
 		 
 		 String hasEvent();
+		 
+		 String hasEventWrap();
 	 }
 
-	@CssResource.NotStrict
 	@Source("resources/upandgo.css")
 	public CssResource mainCss();
 

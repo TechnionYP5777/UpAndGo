@@ -1,12 +1,12 @@
 package upandgo.client;
-import upandgo.client.presenter.*;
-
+import java.awt.ScrollPane;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.dom.client.Style.BorderStyle;
+import com.google.gwt.dom.client.Style.FontStyle;
+import com.google.gwt.dom.client.Style.TextDecoration;
 
 /**
  * 
@@ -18,112 +18,190 @@ import com.allen_sauer.gwt.log.client.Log;
  */
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.DoubleClickEvent;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
-import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
-import com.google.gwt.event.dom.client.HasMouseOutHandlers;
-import com.google.gwt.event.dom.client.HasMouseOverHandlers;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Request;
-import com.google.gwt.user.client.ui.SuggestOracle.Response;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
-import upandgo.client.common.ColumnDefinition;
-import upandgo.client.view.CourseListView;
-import upandgo.shared.entities.course.Course;
-import upandgo.shared.entities.course.CourseId;
-
-public class CourseSelectionGUI extends LayoutPanel implements CourseListPresenter.Display {
-    private ListBox ccl = new ListBox(); //chosen courses
+public class CourseSelectionGUI extends LayoutPanel /* implements CourseListPresenter.Display */{
+    private CellTable<String> ccl = new CellTable<>(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
-    private ListBox scl = new ListBox(); //all courses list
+    private CellTable<String> scl = new CellTable<>(); //all courses list
     private Label sc = new Label("בחר קורסים:");
     private ListBox faculties = new ListBox(); //chosen courses
-    private MultiWordSuggestOracle coursesSugg = new MultiWordSuggestOracle();//course suggestion by name
     private TextBox searchCourse = new TextBox();
-    private Collection<String> courses; //all the courses that user didn't choose yet
-    @SuppressWarnings("unused")
-	public CourseSelectionGUI(){
+    private List<String> courses; //all the courses that user didn't choose yet
+    private ScrollPanel cclp = new ScrollPanel();
+    private ScrollPanel sclp = new ScrollPanel();
+    public CourseSelectionGUI(){
     	courses = new ArrayList<String>();
-    	courses.add("אקורס1");
-    	courses.add("אקורס2");
-    	courses.add("אקורס3");
-    	courses.add("בקורס4");
-    	courses.add("בקורס5");
-    	courses.add("גקורס6");
-    	courses.add("גקורס7");
-    	courses.add("גקורס8");
+    	courses.add("חישביות");
+    	courses.add("הסתברות");
+    	courses.add("סיבוכיות");
+    	courses.add("פרויקט שנתי חלק א");
+    	courses.add("פרויקט שנתי חלק ב");
+    	courses.add("אוטומטים ושפות פורמליות");
+    	courses.add("לוגיקה");
+    	courses.add("קומבינטוריקה למדעי המחשב");
+    	courses.add("שפות תכנות");
+    	courses.add("מבני נתונים");
+    	courses.add("מבנה מחשבים ספרתיים");
+    	courses.add("תכנות מקביליו מבוזר");
+    	courses.add("מערכות מסדי נתונים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+    	courses.add("אלגוריתמים");
+
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
 
     }
     private void InitializePanel(){
     	// chosen course list initialization
-    	ccl.setMultipleSelect(true);
-    	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
+    	//ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
-    	ccl.setHeight("25em");
-    	ccl.addDoubleClickHandler(new DoubleClickHandler() {
-			
-    		//need to keep list sorted
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void onDoubleClick(DoubleClickEvent event) {
-				if(ccl.getSelectedValue() != null){
-					Log.info("Course: " + ccl.getSelectedValue() + "has been unchosen");
-					scl.addItem(ccl.getSelectedValue());
-					courses.add(ccl.getSelectedValue());
-					ccl.removeItem(ccl.getSelectedIndex());
-					coursesSugg.clear();
-					coursesSugg.addAll(courses);
-				}
-				
-			}
-		});
-    	
+    	//ccl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+    	TextColumn<String> course = new TextColumn<String>(){
+    	      @Override
+    	      public String getValue(String object) {
+    	        return object;
+    	      }
+		};
+	    ccl.addColumn(course);
+        ccl.setRowCount(0, true);
+        ccl.setVisibleRange(0, courses.size());
+	    ccl.setRowData(0,courses);
+	    cclp.add(ccl);
+	    cclp.setHeight("25em");
+	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
+	    cclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
+	    cclp.getElement().getStyle().setBorderColor("LightGray");
+//    	ccl.addMouseMoveHandler(new MouseMoveHandler() {
+//			
+//			@Override
+//			public void onMouseMove(MouseMoveEvent event) {
+//				SelectElement selectElement = SelectElement.as(ccl.getElement());
+//		    	NodeList<OptionElement> options = selectElement.getOptions();
+//				int y = event.getY()-4;
+//				if(y<0)
+//					y=0;
+//				int row = y/options.getItem(0).getScrollHeight();
+//				Log.debug("y coor = " + (event.getY()-2));
+//				Log.debug("offsetheight = " + options.getItem(1).getClientHeight());
+//		    	for (int i = 0; i < options.getLength(); i++) {
+//		    		if(i == row){
+//		    			options.getItem(i).getStyle().setBackgroundColor("#577F92");
+//		    			//options.getItem(i).getStyle().setFontSize(1.13, Unit.EM);
+//		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.BOLD);
+//		    		}
+//		    		else{
+//		    			options.getItem(i).getStyle().setBackgroundColor("white");
+//		    			//options.getItem(i).getStyle().setFontSize(1, Unit.EM);
+//		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+//		    		}
+//		   	     }
+//				
+//			}
+//		});
+//    	ccl.addMouseOutHandler(new MouseOutHandler() {
+//    		SelectElement selectElement = SelectElement.as(ccl.getElement());
+//        	NodeList<OptionElement> options = selectElement.getOptions();
+//			@Override
+//			public void onMouseOut(MouseOutEvent event) {
+//				for (int i = 0; i < options.getLength(); i++) {
+//	    			options.getItem(i).getStyle().setBackgroundColor("white");
+//	    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+//		   	     }
+//				
+//				
+//			}
+//		});
+
     	//all courses list initialization
-    	scl.setMultipleSelect(true);
-    	for(String s: courses) //IMPORTANT : cent char crashes the app so don't sparatanize 
-			scl.addItem(s);
+
     	scl.setWidth("100%");
-    	scl.addDoubleClickHandler(new DoubleClickHandler() {
-			
-    		//need to keep list sorted
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") DoubleClickEvent e) { // maybe use button?
-				if(scl.getSelectedValue() != null){
-					Log.info("Course: " + scl.getSelectedValue() + "has been chosen");
-					ccl.addItem(scl.getSelectedValue());
-					courses.remove(scl.getSelectedValue());
-					scl.removeItem(scl.getSelectedIndex());
-					coursesSugg.clear();
-					coursesSugg.addAll(courses);
-					
-					
-				}
-				
-			}
-		});
+    	scl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+    	TextColumn<String> course1 = new TextColumn<String>(){
+  	      @Override
+  	      public String getValue(String object) {
+  	        return object;
+  	      }
+		};
+    	scl.addColumn(course1);
+        scl.setRowCount(courses.size(), true);
+        scl.setVisibleRange(0, courses.size());
+	    scl.setRowData(0,courses);
+	    sclp.add(scl);
+	    sclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
+	    sclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
+	    sclp.getElement().getStyle().setBorderColor("LightGray");
+//    	scl.addMouseMoveHandler(new MouseMoveHandler() {
+//			
+//			@Override
+//			public void onMouseMove(MouseMoveEvent event) {
+//				SelectElement selectElement = SelectElement.as(scl.getElement());
+//		    	NodeList<OptionElement> options = selectElement.getOptions();
+//				int y = event.getY()-4;
+//				if(y<0)
+//					y=0;
+//				int row = y/options.getItem(0).getScrollHeight();
+//				Log.debug("y coor = " + (event.getY()-2));
+//				Log.debug("offsetheight = " + options.getItem(1).getClientHeight());
+//		    	for (int i = 0; i < options.getLength(); i++) {
+//		    		if(i == row){
+//		    			options.getItem(i).getStyle().setBackgroundColor("#577F92");
+//		    			//options.getItem(i).getStyle().setFontSize(1.13, Unit.EM);
+//		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.BOLD);
+//		    		}
+//		    		else{
+//		    			options.getItem(i).getStyle().setBackgroundColor("white");
+//		    			//options.getItem(i).getStyle().setFontSize(1, Unit.EM);
+//		    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+//		    		}
+//		   	     }
+//				
+//			}
+//		});
+//    	scl.addMouseOutHandler(new MouseOutHandler() {
+//    		SelectElement selectElement = SelectElement.as(scl.getElement());
+//        	NodeList<OptionElement> options = selectElement.getOptions();
+//			@Override
+//			public void onMouseOut(MouseOutEvent event) {
+//				for (int i = 0; i < options.getLength(); i++) {
+//	    			options.getItem(i).getStyle().setBackgroundColor("white");
+//	    			options.getItem(i).getStyle().setFontWeight(Style.FontWeight.NORMAL);
+//		   	     }
+//				
+//				
+//			}
+//		});
+//    	
+//    	SelectElement selectElement = SelectElement.as(scl.getElement());
+//    	NodeList<OptionElement> options = selectElement.getOptions();
+//    	//tooltip for now
+//    	for (int i = 0; i < options.getLength(); i++) {
+//    		options.getItem(i).getStyle().setBackgroundColor("white");
+//    		options.getItem(i).setDefaultSelected(false);
+//   	     	options.getItem(i).setTitle("helooo " + i);
+//   	     }
     	
     	//initializing course suggestion
-    	coursesSugg.addAll(courses);
+    	//coursesSugg.addAll(courses);
     	
     	//initializing faculty selection
     	faculties.setWidth("100%");
@@ -135,104 +213,121 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	faculties.addItem("מתמטיקה");
     	
     	//search course text field initialization
-    	searchCourse.setHeight("1em");
-    	searchCourse.setWidth("97%");
+    	searchCourse.setHeight("2em");
+    	searchCourse.setWidth("100%");
     	searchCourse.setTitle("חפש קורסים");
     	searchCourse.getElement().setPropertyString("placeholder", "חפש קורסים...");
-    	searchCourse.addKeyUpHandler(new KeyUpHandler() {
-			
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void onKeyUp(@SuppressWarnings("unused") KeyUpEvent __) {
-				scl.clear();
-				if("".equals(searchCourse.getValue()))
-					for (String s : courses)//IMPORTANT : cent char crashes the app so don't sparatanize 
-						scl.addItem(s);
-				else
-					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {//need to improve search
-						@Override
-						public void onSuggestionsReady(@SuppressWarnings({ "unused", "hiding" }) Request __, Response r) {
-							for (Suggestion s : r.getSuggestions())//IMPORTANT : cent char crashes the app so don't sparatanize 
-								scl.addItem(s.getReplacementString());
-						}
-					});
-			}
-		});
-    	
+//    	searchCourse.addKeyUpHandler(new KeyUpHandler() {
+//			
+//			@SuppressWarnings("synthetic-access")
+//			@Override
+//			public void onKeyUp(@SuppressWarnings("unused") KeyUpEvent __) {
+//				scl.clear();
+//				if("".equals(searchCourse.getValue()))
+//					for (String s : courses)//IMPORTANT : cent char crashes the app so don't sparatanize 
+//						scl.addItem(s);
+//				else
+//					coursesSugg.requestSuggestions(new Request(searchCourse.getValue()), new SuggestOracle.Callback() {//need to improve search
+//						@Override
+//						public void onSuggestionsReady(@SuppressWarnings({ "unused", "hiding" }) Request __, Response r) {
+//							for (Suggestion s : r.getSuggestions())//IMPORTANT : cent char crashes the app so don't sparatanize 
+//								scl.addItem(s.getReplacementString());
+//						}
+//					});
+//			}
+//		});
+//    	scl.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				scl.setSelectedIndex(scl.getSelectedIndex());
+//				
+//			}
+//		});
+
+    	cc.getElement().getStyle().setFontStyle(FontStyle.OBLIQUE);
+    	cc.getElement().getStyle().setFontSize(1.2, Unit.EM);
+    	cc.getElement().getStyle().setColor("Red");
+    	sc.getElement().getStyle().setFontStyle(FontStyle.OBLIQUE);
+    	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
+    	sc.getElement().getStyle().setColor("Red");
     	//adding widgets to panel
+    	this.getElement().getStyle().setMargin(10, Unit.PX);
     	this.add(cc);
-	    this.add(ccl);
+	    this.add(cclp);
 	    this.add(sc);
 	    this.add(faculties);
 	    this.add(searchCourse);
-	    this.add(scl);
+	    this.add(sclp);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(ccl, 1.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sc, 30,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(sc, 29.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(scl, 37.5,  Unit.EM, 2, Unit.EM);
+	    this.setWidgetTopBottom(sclp, 37.5,  Unit.EM, 2, Unit.EM);
     } 
     
     // Implementation of Display
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getSelectedCoursesList() {
-		return (T) ccl;
-	}
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends HasDoubleClickHandlers & HasMouseOverHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList() {
-		return (T) scl;
-	}
-	@Override
-	public HasChangeHandlers getFacultyDropList() {
-		return faculties;
-	}
-	@Override
-	public void setSelectedCourses(List<CourseId> courses) {
-		ccl.clear();
-		for(CourseId c : courses){
-			ccl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
-		}
-		
-	}
-	@Override
-	public void setNotSelectedCourses(List<CourseId> courses) {
-		scl.clear();
-		for(CourseId c : courses){
-			scl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
-		}
-		
-	}
-	@Override
-	public void setFaculties(List<String> faculties) {
-		this.faculties.clear();
-		for(String f : faculties){
-			this.faculties.addItem(f);
-		}
-		
-	}
-	@Override
-	public int getSelectedCourseRow(DoubleClickEvent event) {
-		return ccl.getSelectedIndex();
-	}
-	@Override
-	public int getUnselectedCourseRow(DoubleClickEvent event) {
-		return scl.getSelectedIndex();
-	}
-	@Override
-	public int getHoveredSelectedCourseRow(MouseOverEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public int getHoveredNotSelectedCourseRow(MouseOverEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public int getSelectedFacultyRow(ChangeEvent event) {
-		return faculties.getSelectedIndex();
-	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public <T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getSelectedCoursesList() {
+//		return (T) ccl;
+//	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public <T extends HasDoubleClickHandlers & HasMouseMoveHandlers & HasMouseOutHandlers> T getNotSelectedCoursesList() {
+//		return (T) scl;
+//	}
+//	@Override
+//	public HasChangeHandlers getFacultyDropList() {
+//		return faculties;
+//	}
+//	@Override
+//	public void setSelectedCourses(List<CourseId> courses) {
+//		ccl.clear();
+//		for(CourseId c : courses){
+//			ccl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
+//		}
+//		
+//	}
+//	@Override
+//	public void setNotSelectedCourses(List<CourseId> courses) {
+//		scl.clear();
+//		for(CourseId c : courses){
+//			scl.addItem(c.getTitle());  // I would have used java stream but there is no addAll method in ListBox
+//		}
+//		
+//	}
+//	@Override
+//	public void setFaculties(List<String> faculties) {
+//		this.faculties.clear();
+//		for(String f : faculties){
+//			this.faculties.addItem(f);
+//		}
+//		
+//	}
+//	@Override
+//	public int getSelectedCourseRow(DoubleClickEvent event) {
+//		return ccl.getSelectedIndex();
+//	}
+//	@Override
+//	public int getUnselectedCourseRow(DoubleClickEvent event) {
+//		return scl.getSelectedIndex();
+//	}
+//	@Override
+//	public int getHoveredSelectedCourseRow(MouseMoveEvent event) {
+//    	SelectElement selectElement = SelectElement.as(ccl.getElement());
+//    	NodeList<OptionElement> options = selectElement.getOptions();
+//		return event.getY()/options.getItem(0).getOffsetHeight();
+//	}
+//	@Override
+//	public int getHoveredNotSelectedCourseRow(MouseMoveEvent event) {
+//    	SelectElement selectElement = SelectElement.as(ccl.getElement());
+//    	NodeList<OptionElement> options = selectElement.getOptions();
+//		return event.getY()/options.getItem(0).getOffsetHeight();
+//	}
+//	@Override
+//	public int getSelectedFacultyRow(ChangeEvent event) {
+//		return faculties.getSelectedIndex();
+//	}
 }

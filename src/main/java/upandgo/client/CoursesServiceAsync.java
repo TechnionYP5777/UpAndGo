@@ -1,9 +1,12 @@
 package upandgo.client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import upandgo.server.model.schedule.Schedule;
+import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -28,4 +31,11 @@ public interface CoursesServiceAsync {
 	public void selectCourse(CourseId id, AsyncCallback<Void> callback);
 
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
+	
+	public void getSchedule(List<CourseId> selectedCourses, List<TimeConstraint> constraintsList, AsyncCallback<Schedule> callback);
+
+	public void getNextSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+
+	public void getPreviousSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+
 }

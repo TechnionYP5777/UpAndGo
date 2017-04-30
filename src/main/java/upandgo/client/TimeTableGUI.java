@@ -8,7 +8,9 @@ import java.util.List;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
@@ -55,9 +57,11 @@ public class TimeTableGUI extends LayoutPanel {
     	//t.setText(0, 5, "שישי");
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	t.getCellFormatter().addStyleName(0, 0, "tableArciCol");
+    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
     	//t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
-    	t.getColumnFormatter().addStyleName(HOURS_COL, ttStyle.hoursCol());
+    	//t.getColumnFormatter().addStyleName(0, ttStyle.arciCol());
+    	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
+
     	for(int i = 1; i<7; i++){
     		//t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
     		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
@@ -67,8 +71,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, "tableArciCol");
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, "tableArciCol");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
     		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 
@@ -111,8 +115,12 @@ public class TimeTableGUI extends LayoutPanel {
 		t.setText(9, 2, "");
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, ttStyle.noEvent());
-		
-		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+
+		SimplePanel eventCell = new SimplePanel();
+		t.setWidget(11,	2, eventCell);
+		eventCell.add(new Label("מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה"));
+		eventCell.addStyleName(ttStyle.hasEventWrap());
+		//t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
 		t.getCellFormatter().addStyleName(11, 2, ttStyle.hasEvent());
 		
@@ -181,7 +189,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    /*t.getCellFormatter().addStyleName(0, 0, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 1, "watchListNumericColumn");
 	    t.getCellFormatter().addStyleName(0, 2, "watchListNumericColumn");*/
-	    t.addStyleName("table-bordered");
+	    //t.addStyleName("table-bordered");
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
@@ -202,7 +210,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    		3,
 	    		"12",
 	    		"OOP"));*/
-	    drawDay(lessons, 4);
+	    //drawDay(lessons, 4);
 
 	    this.add(t);
 	    /*this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
