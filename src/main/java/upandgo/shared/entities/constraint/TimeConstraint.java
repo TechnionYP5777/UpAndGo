@@ -16,23 +16,23 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 
 	
 	
-	public boolean isClashWith(final Lesson ¢) {
-		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
-				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean isClashWith(final Lesson xxx) {
+		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
 	}
 	
 	@Override
 	public boolean isClashWith(final LessonGroup g) {
-		for (final Lesson ¢ : g.getLessons())
-			if (isClashWith(¢))
+		for (final Lesson xxx : g.getLessons())
+			if (isClashWith(xxx))
 				return true;
 		return false;
 	}
 
 	@Override
-	public boolean isClashWith(final TimeConstraint ¢) {
-		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
-				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean isClashWith(final TimeConstraint xxx) {
+		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
 
 	}
 	
@@ -47,8 +47,8 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 	 * THERE IS NOT NEED FOR THAT FUNCTIONALITY
 	@Override
 	public boolean canMeetConstraint(final Course c) {
-		for (final LessonGroup ¢ : c.getLectures())
-			if (!clashWithLessonGroup(¢))
+		for (final LessonGroup xxx : c.getLectures())
+			if (!clashWithLessonGroup(xxx))
 				return true;
 		return false;
 	}
@@ -56,23 +56,23 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 	@Override
 	public List<LessonGroup> groupsMeetsConstraint(final Course c) {
 		final List<LessonGroup> $ = new ArrayList<>();
-		for (final LessonGroup ¢ : c.getLectures())
-			if (!clashWithLessonGroup(¢))
-				$.add(¢);
+		for (final LessonGroup xxx : c.getLectures())
+			if (!clashWithLessonGroup(xxx))
+				$.add(xxx);
 		return $;
 	}
 
 	private boolean clashWithLessonGroup(final LessonGroup g) {
-		for (final Lesson ¢ : g.getLessons())
-			if (clashWithLesson(¢))
+		for (final Lesson xxx : g.getLessons())
+			if (clashWithLesson(xxx))
 				return true;
 		return false;
 	}
 
 	// DO NOT SPARTANIZE
-	private boolean clashWithLesson(final Lesson ¢) {
-		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
-				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	private boolean clashWithLesson(final Lesson xxx) {
+		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
 	} */
 
 	public WeekTime getStartTime() {

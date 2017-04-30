@@ -35,11 +35,11 @@ public class SchedulerIteratorTest {
 		System.out.println(courses);
 
 		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
-		for (final Timetable ¢ : tl)
-			System.out.println("rank: " + ¢.getRankOfDaysoff());
+		for (final Timetable xxx : tl)
+			System.out.println("rank: " + xxx.getRankOfDaysoff());
 		for (@SuppressWarnings("deprecation")
-		final Iterator<Timetable> ¢ = Scheduler.sortedBy(tl, false, false); ¢.hasNext();)
-			System.out.println(¢.next().getRankOfDaysoff());
+		final Iterator<Timetable> xxx = Scheduler.sortedBy(tl, false, false); xxx.hasNext();)
+			System.out.println(xxx.next().getRankOfDaysoff());
 
 		// System.out.println(tl);
 		/*

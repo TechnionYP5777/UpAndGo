@@ -35,9 +35,9 @@ public class Faculty {
 	}
 
 	@Override
-	public boolean equals(final Object ¢) {
-		return ¢ != null && (¢ == this
-				|| ¢ instanceof Faculty && id.equals(((Faculty) ¢).getId()) && name.equals(((Faculty) ¢).getName()));
+	public boolean equals(final Object xxx) {
+		return xxx != null && (xxx == this
+				|| xxx instanceof Faculty && id.equals(((Faculty) xxx).getId()) && name.equals(((Faculty) xxx).getName()));
 	}
 
 }

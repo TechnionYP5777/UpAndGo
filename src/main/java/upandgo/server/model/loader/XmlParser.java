@@ -38,8 +38,8 @@ class xmlParser {
 					$.add(cb.setId(((Element) p).getAttribute("id"))
 							.setName(((Element) p).getElementsByTagName("name").item(0).getTextContent()).build());
 			}
-		} catch (final IOException | SAXException | ParserConfigurationException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
 		return $;
 	}

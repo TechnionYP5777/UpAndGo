@@ -85,12 +85,12 @@ public class Course {
 
 	}
 
-	public void addLecturesLessonGroup(final LessonGroup ¢) {
-		lectures.add(¢);
+	public void addLecturesLessonGroup(final LessonGroup xxx) {
+		lectures.add(xxx);
 	}
 
-	public void addTutorialLessonGroup(final LessonGroup ¢) {
-		tutorials.add(¢);
+	public void addTutorialLessonGroup(final LessonGroup xxx) {
+		tutorials.add(xxx);
 	}
 
 	public List<LessonGroup> getLectures() {
@@ -157,21 +157,21 @@ public class Course {
 		return laboratoryHours + lectureHours + projectHours + tutorialHours;
 	}
 
-/*	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") final CourseLoader ¢) {
+/*	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") final CourseLoader xxx) {
 		return new CourseBuilder();
 	}*/
 
-	public void addListener(final CourseListener ¢) {
-		listeners.add(¢);
+	public void addListener(final CourseListener xxx) {
+		listeners.add(xxx);
 	}
 
-	public void removeListener(final CourseListener ¢) {
-		listeners.remove(¢);
+	public void removeListener(final CourseListener xxx) {
+		listeners.remove(xxx);
 	}
 
 	public void updateListeners() {
-		for (final CourseListener ¢ : listeners)
-			¢.getUpdate(this);
+		for (final CourseListener xxx : listeners)
+			xxx.getUpdate(this);
 	}
 
 	public boolean getDone() {

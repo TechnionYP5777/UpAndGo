@@ -119,9 +119,9 @@ public class XmlCourseLoaderTest {
 		 * ((coursesMap.get("014005").getLecturesLG().size()) == 0); assert
 		 * ((coursesMap.get("014005").getTutorialsLG().size()) == 6);
 		 * 
-		 * for (int ¢ = 0; ¢ <
-		 * (coursesMap.get("014005").getTutorialsLG().size()); ++¢) assert
-		 * ((coursesMap.get("014005").getTutorialsLG().get(¢).getGroupNum() == ¢
+		 * for (int xxx = 0; xxx <
+		 * (coursesMap.get("014005").getTutorialsLG().size()); ++xxx) assert
+		 * ((coursesMap.get("014005").getTutorialsLG().get(xxx).getGroupNum() == xxx
 		 * + 11));
 		 * 
 		 * assert
@@ -143,14 +143,14 @@ public class XmlCourseLoaderTest {
 		 * StuffMember("", "א.ב.יהושוע", "מר")));
 		 * 
 		 * assert ((coursesMap.get("123456").getLecturesLG().size() == 2)); for
-		 * (int ¢ = 0; ¢ < (coursesMap.get("123456").getLecturesLG().size());
-		 * ++¢) assert
-		 * ((coursesMap.get("123456").getLecturesLG().get(¢).getGroupNum() == ¢
+		 * (int xxx = 0; xxx < (coursesMap.get("123456").getLecturesLG().size());
+		 * ++xxx) assert
+		 * ((coursesMap.get("123456").getLecturesLG().get(xxx).getGroupNum() == xxx
 		 * + 1));
 		 * 
-		 * for (int ¢ = 0; ¢ <
-		 * (coursesMap.get("234107").getLecturesLG().size()); ++¢) assert
-		 * ((coursesMap.get("234107").getLecturesLG().get(¢).getGroupNum() == ¢
+		 * for (int xxx = 0; xxx <
+		 * (coursesMap.get("234107").getLecturesLG().size()); ++xxx) assert
+		 * ((coursesMap.get("234107").getLecturesLG().get(xxx).getGroupNum() == xxx
 		 * + 1));
 		 * 
 		 * assert ((coursesMap.get("014536").getTutorialsLG().size() == 2));
@@ -222,8 +222,8 @@ public class XmlCourseLoaderTest {
 
 	@Test
 	public void testLoadFaculties() {
-		for (final Faculty ¢ : cr.loadFaculties())
-			System.out.println(¢.getId() + "---" + ¢.getName());
+		for (final Faculty xxx : cr.loadFaculties())
+			System.out.println(xxx.getId() + "---" + xxx.getName());
 	}
 
 	@Test

@@ -28,7 +28,7 @@ public class TimeConstraintTests {
 		// TreeMap<String, Course> coursesMap = cr.loadAllCourses();
 		// assert "648013".equals(coursesMap.get("648013").getId());
 		// Course.CourseBuilder cb = new CourseBuilder();
-		// cb.setId("1234").setName("first").addLesson(¢).build();
+		// cb.setId("1234").setName("first").addLesson(xxx).build();
 	}
 
 }

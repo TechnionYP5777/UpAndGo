@@ -48,8 +48,8 @@ public class CourseId implements Comparable<CourseId> {
 	}
 
 	@Override
-	public int compareTo(final CourseId ¢) {
-		return number.compareTo(¢.number);
+	public int compareTo(final CourseId xxx) {
+		return number.compareTo(xxx.number);
 	}
 
 }

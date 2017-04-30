@@ -58,13 +58,13 @@ public class Timetable {
 		double $ = 0.0;
 		// create an histogram which holds a list of lessons times of each day
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
-		for (int ¢ = 0; ¢ < DAYS_IN_WEEK; ++¢)
+		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
 			histogram.add(new ArrayList<>());
 
 		for (final LessonGroup lg : lessonGroups)
-			for (final Lesson ¢ : lg.getLessons()) {
-				histogram.get(¢.getDay()).add(¢.getStartTime());
-				histogram.get(¢.getDay()).add(¢.getEndTime());
+			for (final Lesson xxx : lg.getLessons()) {
+				histogram.get(xxx.getDay()).add(xxx.getStartTime());
+				histogram.get(xxx.getDay()).add(xxx.getEndTime());
 			}
 
 		for (final ArrayList<WeekTime> daySchedule : histogram) {
@@ -92,13 +92,13 @@ public class Timetable {
 		double $ = 0.0;
 		// create an histogram which holds a list of lessons times of each day
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
-		for (int ¢ = 0; ¢ < DAYS_IN_WEEK; ++¢)
+		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
 			histogram.add(new ArrayList<>());
 
 		for (final LessonGroup lg : lessonGroups)
-			for (final Lesson ¢ : lg.getLessons()) {
-				histogram.get(¢.getDay()).add(¢.getStartTime());
-				histogram.get(¢.getDay()).add(¢.getEndTime());
+			for (final Lesson xxx : lg.getLessons()) {
+				histogram.get(xxx.getDay()).add(xxx.getStartTime());
+				histogram.get(xxx.getDay()).add(xxx.getEndTime());
 			}
 
 		for (final ArrayList<WeekTime> daySchedule : histogram) {
@@ -122,13 +122,13 @@ public class Timetable {
 	private double rankBlankSpace() {
 
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
-		for (int ¢ = 0; ¢ < DAYS_IN_WEEK; ++¢)
+		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
 			histogram.add(new ArrayList<>());
 
 		for (final LessonGroup lg : lessonGroups)
-			for (final Lesson ¢ : lg.getLessons()) {
-				histogram.get(¢.getDay()).add(¢.getStartTime());
-				histogram.get(¢.getDay()).add(¢.getEndTime());
+			for (final Lesson xxx : lg.getLessons()) {
+				histogram.get(xxx.getDay()).add(xxx.getStartTime());
+				histogram.get(xxx.getDay()).add(xxx.getEndTime());
 			}
 
 		int blankMinutesSum = 0;
@@ -143,11 +143,11 @@ public class Timetable {
 		System.out.println("sum: " + blankMinutesSum);
 		System.out.println("penalty: " + $);
 		// System.out.println("histover");
-		// histogram[¢.getDay()] = 1;
+		// histogram[xxx.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual
 		// case
 		/*
-		 * for(int ¢ = 0; ¢ < DAYS_IN_WEEK-2; ++¢) $ += 1 - histogram[¢];(
+		 * for(int xxx = 0; xxx < DAYS_IN_WEEK-2; ++xxx) $ += 1 - histogram[xxx];(
 		 */
 		// return $;
 		return MAX_BLANKSPACE_RANK - $;
@@ -155,8 +155,8 @@ public class Timetable {
 
 	private static int sumBlank(final ArrayList<WeekTime> daySchedule) {
 		int $ = 0;
-		for (int ¢ = daySchedule.size() - 2; ¢ > 0; ¢ -= 2)
-			$ += WeekTime.difference(daySchedule.get(¢), daySchedule.get(¢ - 1));
+		for (int xxx = daySchedule.size() - 2; xxx > 0; xxx -= 2)
+			$ += WeekTime.difference(daySchedule.get(xxx), daySchedule.get(xxx - 1));
 		return $;
 	}
 
@@ -172,8 +172,8 @@ public class Timetable {
 		final int[] histogram = new int[DAYS_IN_WEEK];
 
 		for (final LessonGroup lg : lessonGroups)
-			for (final Lesson ¢ : lg.getLessons())
-				histogram[¢.getDay()] = 1;
+			for (final Lesson xxx : lg.getLessons())
+				histogram[xxx.getDay()] = 1;
 
 		rankFreeThursday = rankFreeWednesday = rankFreeTuesday = rankFreeMonday = rankFreeSunday = 0;
 		if (histogram[0] == 0)
@@ -189,8 +189,8 @@ public class Timetable {
 
 		// don't give any value for free friday or saturday since it's usual
 		// case
-		for (int ¢ = 0; ¢ < DAYS_IN_WEEK - 2; ++¢)
-			$ += 1 - histogram[¢];
+		for (int xxx = 0; xxx < DAYS_IN_WEEK - 2; ++xxx)
+			$ += 1 - histogram[xxx];
 		return $;
 	}
 

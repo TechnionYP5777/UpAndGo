@@ -2,6 +2,6 @@ eclipse.preferences.version=1
 gwtMavenModuleName=upandgo.UpAndGo
 gwtMavenModuleShortName=UpAndGo
 jarsExcludedFromWebInfLib=
-lastWarOutDir=/home/leyaniv/git/UpAndGo/target/UpAndGo-0.0.1-SNAPSHOT
+lastWarOutDir=/home/kobybs/owlRipo/UpAndGo/target/UpAndGo-0.0.1-SNAPSHOT
 warSrcDir=src/main/webapp
 warSrcDirIsOutput=false

@@ -39,7 +39,7 @@ public class BlankSpaceRankTests {
 	 * 
 	 * 
 	 * List<Timetable> tl = Scheduler.getTimetablesList(courses); for(Timetable
-	 * ¢ : tl) System.out.println("rank: " + ¢.getRankOfDaysoff());
+	 * xxx : tl) System.out.println("rank: " + xxx.getRankOfDaysoff());
 	 * Iterator<Timetable> it = Scheduler.sortedBy(tl, false, false); while
 	 * (it.hasNext()) { System.out.println(it.next().getRankOfDaysoff()); }
 	 * 

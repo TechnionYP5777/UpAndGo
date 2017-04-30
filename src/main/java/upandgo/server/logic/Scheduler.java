@@ -49,10 +49,10 @@ public class Scheduler {
 				// him are not valid
 				// therefore there is no use to check the rest of them -
 				// increase bit of found lesson
-				// indexes.set(¢, indexes.get(¢)+1);
+				// indexes.set(xxx, indexes.get(xxx)+1);
 				// if found index was maxed, than find msb that wasn't maxed and
 				// max it
-				// if (indexes.get(¢) > max.get(¢)) {
+				// if (indexes.get(xxx) > max.get(xxx)) {
 				if (!b)
 					break;
 
@@ -75,8 +75,8 @@ public class Scheduler {
 						break;
 					// increase msb and zero everything to its right
 					indexes.set(msb, indexes.get(msb) + 1);
-					for (int ¢ = msb + 1; ¢ <= last; ++¢)
-						indexes.set(¢, 0);
+					for (int xxx = msb + 1; xxx <= last; ++xxx)
+						indexes.set(xxx, 0);
 				}
 				continue;
 			}
@@ -95,8 +95,8 @@ public class Scheduler {
 					break;
 				// increase msb and zero everything to its right
 				indexes.set(msb, indexes.get(msb) + 1);
-				for (int ¢ = msb + 1; ¢ <= last; ++¢)
-					indexes.set(¢, 0);
+				for (int xxx = msb + 1; xxx <= last; ++xxx)
+					indexes.set(xxx, 0);
 			}
 		}
 		return result;
@@ -126,10 +126,10 @@ public class Scheduler {
 				// him are not valid
 				// therefore there is no use to check the rest of them -
 				// increase bit of found lesson
-				// indexes.set(¢, indexes.get(¢)+1);
+				// indexes.set(xxx, indexes.get(xxx)+1);
 				// if found index was maxed, than find msb that wasn't maxed and
 				// max it
-				// if (indexes.get(¢) > max.get(¢)) {
+				// if (indexes.get(xxx) > max.get(xxx)) {
 				if (!b)
 					break;
 
@@ -150,8 +150,8 @@ public class Scheduler {
 						break;
 					// increase msb and zero everything to its right
 					indexes.set(msb, indexes.get(msb) + 1);
-					for (int ¢ = msb + 1; ¢ <= last; ++¢)
-						indexes.set(¢, 0);
+					for (int xxx = msb + 1; xxx <= last; ++xxx)
+						indexes.set(xxx, 0);
 				}
 				continue;
 			}
@@ -170,8 +170,8 @@ public class Scheduler {
 					break;
 				// increase msb and zero everything to its right
 				indexes.set(msb, indexes.get(msb) + 1);
-				for (int ¢ = msb + 1; ¢ <= last; ++¢)
-					indexes.set(¢, 0);
+				for (int xxx = msb + 1; xxx <= last; ++xxx)
+					indexes.set(xxx, 0);
 			}
 		}
 		return null;
@@ -180,18 +180,18 @@ public class Scheduler {
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
-		for (final Course ¢ : lcourse) {
-			if (!¢.getLectures().isEmpty())
-				$.add(¢.getLectures());
-			if (!¢.getTutorials().isEmpty())
-				$.add(¢.getTutorials());
+		for (final Course xxx : lcourse) {
+			if (!xxx.getLectures().isEmpty())
+				$.add(xxx.getLectures());
+			if (!xxx.getTutorials().isEmpty())
+				$.add(xxx.getTutorials());
 		}
 		return $;
 	}
 
 	private static ArrayList<Integer> initIndexes(final int size) {
 		final ArrayList<Integer> $ = new ArrayList<>();
-		for (int ¢ = 0; ¢ < size; ++¢)
+		for (int xxx = 0; xxx < size; ++xxx)
 			$.add(0);
 		return $;
 
@@ -199,8 +199,8 @@ public class Scheduler {
 
 	private static ArrayList<Integer> initMax(final ArrayList<List<LessonGroup>> lessonsGroupArray) {
 		final ArrayList<Integer> $ = new ArrayList<>();
-		for (final List<LessonGroup> ¢ : lessonsGroupArray)
-			$.add(¢.size() - 1);
+		for (final List<LessonGroup> xxx : lessonsGroupArray)
+			$.add(xxx.size() - 1);
 		return $;
 
 	}
@@ -208,8 +208,8 @@ public class Scheduler {
 	private static List<LessonGroup> getScheduleByIndexes(final ArrayList<List<LessonGroup>> lessonsGroupArray,
 			final ArrayList<Integer> indexes) {
 		final List<LessonGroup> $ = new ArrayList<>();
-		for (int ¢ = 0; ¢ < indexes.size(); ++¢)
-			$.add(lessonsGroupArray.get(¢).get(indexes.get(¢)));
+		for (int xxx = 0; xxx < indexes.size(); ++xxx)
+			$.add(lessonsGroupArray.get(xxx).get(indexes.get(xxx)));
 		return $;
 
 	}

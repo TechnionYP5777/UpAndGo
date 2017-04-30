@@ -130,8 +130,8 @@ public class XmlCourseLoader extends CourseLoader {
 
 			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_COURSES_PATH)));
 
-		} catch (ParserConfigurationException | TransformerException ¢) {
-			¢.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
 		}
 
 	}
@@ -150,8 +150,8 @@ public class XmlCourseLoader extends CourseLoader {
 				if (p.getNodeType() == Node.ELEMENT_NODE)
 					$.add(((Element) p).getTextContent());
 			}
-		} catch (IOException | SAXException | ParserConfigurationException ¢) {
-			¢.printStackTrace();
+		} catch (IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
 		return $;
 	}
@@ -175,8 +175,8 @@ public class XmlCourseLoader extends CourseLoader {
 
 			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_LESSON_GROUPS)));
 
-		} catch (ParserConfigurationException | TransformerException ¢) {
-			¢.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
 		}
 		// TODO Use try with resource
 		try {
@@ -185,8 +185,8 @@ public class XmlCourseLoader extends CourseLoader {
 			out.writeObject(gs);
 			out.close();
 			fileOut.close();
-		} catch (final IOException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 		}
 	}
 
@@ -205,8 +205,8 @@ public class XmlCourseLoader extends CourseLoader {
 					addLessonsToLessonGroup(new LessonGroup(Integer.parseInt(((Element) p).getAttribute("groupNum"))),
 							((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
 			}
-		} catch (IOException | SAXException | ParserConfigurationException ¢) {
-			¢.printStackTrace();
+		} catch (IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
 		// TODO: Use try-with-resources, and enable this warning --yg
 		try {
@@ -215,12 +215,12 @@ public class XmlCourseLoader extends CourseLoader {
 			$ = (List<LessonGroup>) in.readObject();
 			in.close();
 			fileIn.close();
-		} catch (final IOException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 			return $;
-		} catch (final ClassNotFoundException ¢) {
+		} catch (final ClassNotFoundException xxx) {
 			System.out.println("LessonGroup class not found");
-			¢.printStackTrace();
+			xxx.printStackTrace();
 			return $;
 		}
 
@@ -239,14 +239,14 @@ public class XmlCourseLoader extends CourseLoader {
 			System.out.println(groupNum);
 			final List<Node> lessonGroupList = new ArrayList<>();
 			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-			for (int ¢ = 0; ¢ < lectureList.getLength(); ++¢)
-				lessonGroupList.add(lectureList.item(¢));
+			for (int xxx = 0; xxx < lectureList.getLength(); ++xxx)
+				lessonGroupList.add(lectureList.item(xxx));
 			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-			for (int ¢ = 0; ¢ < tutorialList.getLength(); ++¢)
-				lessonGroupList.add(tutorialList.item(¢));
+			for (int xxx = 0; xxx < tutorialList.getLength(); ++xxx)
+				lessonGroupList.add(tutorialList.item(xxx));
 			final NodeList labList = courseElement.getElementsByTagName("lab");
-			for (int ¢ = 0; ¢ < labList.getLength(); ++¢)
-				lessonGroupList.add(labList.item(¢));
+			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
+				lessonGroupList.add(labList.item(xxx));
 			lessonGroupList.forEach(groupNode -> {
 				if (((Element) groupNode).getAttribute("group").equals(groupNum))
 					try {
@@ -264,13 +264,13 @@ public class XmlCourseLoader extends CourseLoader {
 										"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
 										courseElement.getAttribute("id"), courseElement.getAttribute("name")));
 						}
-					} catch (final XPathExpressionException ¢) {
-						¢.printStackTrace();
+					} catch (final XPathExpressionException xxx) {
+						xxx.printStackTrace();
 					}
 			});
 			System.out.println(g.getLessons().size());
-		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException ¢) {
-			¢.printStackTrace();
+		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
+			xxx.printStackTrace();
 		}
 
 	}
@@ -383,8 +383,8 @@ public class XmlCourseLoader extends CourseLoader {
 				cb.clearlecturesGroups();
 
 			}
-		} catch (IOException | SAXException | ParserConfigurationException ¢) {
-			¢.printStackTrace();
+		} catch (IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
 	}
 
@@ -486,8 +486,8 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-	private static Day convertStrToDay(final String ¢) {
-		switch (¢) {
+	private static Day convertStrToDay(final String xxx) {
+		switch (xxx) {
 		case "א":
 			return Day.SUNDAY;
 		case "ב":
@@ -508,8 +508,8 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public List<Faculty> loadFaculties() {
 		final List<Faculty> $ = new ArrayList<>();
-		for (final Entry<String, Course> ¢ : coursesById.entrySet()) {
-			final Faculty faculty = new Faculty(¢.getKey().substring(0, 2), ¢.getValue().getFaculty());
+		for (final Entry<String, Course> xxx : coursesById.entrySet()) {
+			final Faculty faculty = new Faculty(xxx.getKey().substring(0, 2), xxx.getValue().getFaculty());
 			if (!$.contains(faculty))
 				$.add(faculty);
 		}

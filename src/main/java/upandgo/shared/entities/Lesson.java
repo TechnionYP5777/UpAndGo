@@ -107,33 +107,33 @@ public class Lesson implements Serializable {
 				&& endTime.equals($.getEndTime());
 	}
 
-	public boolean IsClashWith(final Lesson ¢) {
-		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
-				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean IsClashWith(final Lesson xxx) {
+		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
 
 		// THOSE COMMENTS ARE HERE SINCE ITS ALMOST IMPOSSIBLE 
 		// TO UNDERSTAND THE IDEA BEHIND THE SPARTANIZED VERSION OF IT
 		/*
-		 * return (startTime.compareTo(¢.getStartTime()) != 0 &&
-		 * startTime.compareTo(¢.getStartTime()) <= 0 ||
-		 * startTime.compareTo(¢.getEndTime()) >= 0) &&
-		 * (endTime.compareTo(¢.getStartTime()) <= 0 ||
-		 * endTime.compareTo(¢.getEndTime()) >= 0) &&
-		 * endTime.compareTo(¢.getEndTime()) != 0;
+		 * return (startTime.compareTo(xxx.getStartTime()) != 0 &&
+		 * startTime.compareTo(xxx.getStartTime()) <= 0 ||
+		 * startTime.compareTo(xxx.getEndTime()) >= 0) &&
+		 * (endTime.compareTo(xxx.getStartTime()) <= 0 ||
+		 * endTime.compareTo(xxx.getEndTime()) >= 0) &&
+		 * endTime.compareTo(xxx.getEndTime()) != 0;
 		 */
 	}
 
-	public boolean IsClashWith(final TimeConstraint ¢) {
-		return startTime.compareTo(¢.getStartTime()) >= 0 && startTime.compareTo(¢.getEndTime()) < 0
-				|| endTime.compareTo(¢.getStartTime()) > 0 && endTime.compareTo(¢.getEndTime()) <= 0;
+	public boolean IsClashWith(final TimeConstraint xxx) {
+		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
 
 		/*
-		 * return (startTime.compareTo(¢.getStartTime()) != 0 &&
-		 * startTime.compareTo(¢.getStartTime()) <= 0 ||
-		 * startTime.compareTo(¢.getEndTime()) >= 0) &&
-		 * (endTime.compareTo(¢.getStartTime()) <= 0 ||
-		 * endTime.compareTo(¢.getEndTime()) >= 0) &&
-		 * endTime.compareTo(¢.getEndTime()) != 0;
+		 * return (startTime.compareTo(xxx.getStartTime()) != 0 &&
+		 * startTime.compareTo(xxx.getStartTime()) <= 0 ||
+		 * startTime.compareTo(xxx.getEndTime()) >= 0) &&
+		 * (endTime.compareTo(xxx.getStartTime()) <= 0 ||
+		 * endTime.compareTo(xxx.getEndTime()) >= 0) &&
+		 * endTime.compareTo(xxx.getEndTime()) != 0;
 		 */
 	}
 

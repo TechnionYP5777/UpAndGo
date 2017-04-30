@@ -63,8 +63,8 @@ public class scheduleTimetablesTest {
 		System.out.println(tl);
 
 		assert tl.size() == 4;
-		for (final Timetable ¢ : tl)
-			System.out.println("rank: " + ¢.getRankOfDaysoff());
+		for (final Timetable xxx : tl)
+			System.out.println("rank: " + xxx.getRankOfDaysoff());
 	}
 
 }

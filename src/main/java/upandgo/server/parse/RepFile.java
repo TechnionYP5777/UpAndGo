@@ -67,8 +67,8 @@ public class RepFile {
 				UnzipUtility.unzip(repFileLocal + "", REP_FILE_DIR);
 		} catch (final MalformedURLException e1) {
 			e1.printStackTrace();
-		} catch (final IOException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 		}
 		processRepFile();
 	}
@@ -84,8 +84,8 @@ public class RepFile {
 				for (String line = buffReader.readLine(); line != null; line = buffReader.readLine())
 					System.out.println(line);
 				buffReader.close();
-			} catch (final IOException ¢) {
-				¢.printStackTrace();
+			} catch (final IOException xxx) {
+				xxx.printStackTrace();
 			}
 	}
 
@@ -105,8 +105,8 @@ public class RepFile {
 					buffWriter.write(HebReverse.reverseTextNotNumbers(line) + "\n");
 				buffReader.close();
 				buffWriter.close();
-			} catch (final IOException ¢) {
-				¢.printStackTrace();
+			} catch (final IOException xxx) {
+				xxx.printStackTrace();
 			}
 	}
 
@@ -134,8 +134,8 @@ public class RepFile {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(new DOMSource(doc), new StreamResult(new File(REP_FILE_XML)));
 
-		} catch (ParserConfigurationException | TransformerException ¢) {
-			¢.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
 		}
 
 	}
@@ -179,8 +179,8 @@ public class RepFile {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(new DOMSource(doc), new StreamResult(new File("REPFILE/test.XML")));
 
-		} catch (ParserConfigurationException | TransformerException ¢) {
-			¢.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
 		}
 
 	}
@@ -200,8 +200,8 @@ public class RepFile {
 				sb.append(line).append("\n");
 			$ = sb + "";
 			repFileReader.close();
-		} catch (final IOException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 		}
 		return $;
 	}

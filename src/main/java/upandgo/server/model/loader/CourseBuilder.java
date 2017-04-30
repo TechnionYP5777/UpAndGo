@@ -28,72 +28,72 @@ public class CourseBuilder {
 	protected final List<Course> prerequisites = new ArrayList<>();
 	protected final List<Course> corequisites = new ArrayList<>();
 
-	public CourseBuilder setName(final String ¢) {
-		name = ¢;
+	public CourseBuilder setName(final String xxx) {
+		name = xxx;
 		return this;
 	}
 
-	public CourseBuilder setId(final String ¢) {
-		id = ¢;
+	public CourseBuilder setId(final String xxx) {
+		id = xxx;
 		return this;
 	}
 
-	public CourseBuilder setFaculty(final String ¢) {
-		faculty = ¢;
+	public CourseBuilder setFaculty(final String xxx) {
+		faculty = xxx;
 		return this;
 	}
 
-	public CourseBuilder setPoints(final double ¢) {
-		points = ¢;
+	public CourseBuilder setPoints(final double xxx) {
+		points = xxx;
 		return this;
 	}
 
-	public CourseBuilder setATerm(final LocalDateTime ¢) {
-		aTerm = ¢;
+	public CourseBuilder setATerm(final LocalDateTime xxx) {
+		aTerm = xxx;
 		return this;
 	}
 
-	public CourseBuilder setBTerm(final LocalDateTime ¢) {
-		bTerm = ¢;
+	public CourseBuilder setBTerm(final LocalDateTime xxx) {
+		bTerm = xxx;
 		return this;
 	}
 
-	public CourseBuilder addLectureGroup(final int ¢) {
+	public CourseBuilder addLectureGroup(final int xxx) {
 		for (final LessonGroup i : lectures)
-			if (i.getGroupNum() == ¢)
+			if (i.getGroupNum() == xxx)
 				return this;
-		lectures.add(new LessonGroup(¢));
+		lectures.add(new LessonGroup(xxx));
 		return this;
 	}
 
-	public CourseBuilder addTutorialGroup(final int ¢) {
+	public CourseBuilder addTutorialGroup(final int xxx) {
 		for (final LessonGroup i : tutorials)
-			if (i.getGroupNum() == ¢)
+			if (i.getGroupNum() == xxx)
 				return this;
-		tutorials.add(new LessonGroup(¢));
+		tutorials.add(new LessonGroup(xxx));
 		return this;
 	}
 
-	public CourseBuilder addLessonToGroup(final int ¢, final Lesson l) {
+	public CourseBuilder addLessonToGroup(final int xxx, final Lesson l) {
 		if (l.getType() == Lesson.Type.LECTURE) {
 			for (final LessonGroup i : lectures)
-				if (i.getGroupNum() == ¢ && !i.getLessons().contains(l)) {
+				if (i.getGroupNum() == xxx && !i.getLessons().contains(l)) {
 					i.addLesson(l);
 					return this;
 				}
 			return this;
 		}
 		for (final LessonGroup i : tutorials)
-			if (i.getGroupNum() == ¢ && !i.getLessons().contains(l)) {
+			if (i.getGroupNum() == xxx && !i.getLessons().contains(l)) {
 				i.addLesson(l);
 				return this;
 			}
 		return this;
 	}
 
-	public CourseBuilder addStuffMember(final StuffMember ¢) {
-		if (!stuff.contains(¢))
-			stuff.add(¢);
+	public CourseBuilder addStuffMember(final StuffMember xxx) {
+		if (!stuff.contains(xxx))
+			stuff.add(xxx);
 		return this;
 	}
 
@@ -113,31 +113,31 @@ public class CourseBuilder {
 		return stuff;
 	}
 
-	public CourseBuilder addLesson(final Lesson ¢) {
-		lessons.add(¢);
-		if (!stuff.contains(¢.getRepresenter()))
-			stuff.add(¢.getRepresenter());
+	public CourseBuilder addLesson(final Lesson xxx) {
+		lessons.add(xxx);
+		if (!stuff.contains(xxx.getRepresenter()))
+			stuff.add(xxx.getRepresenter());
 		return this;
 	}
 
-	public CourseBuilder addPrerequisitesCourse(final Course ¢) {
-		if (!prerequisites.contains(¢))
-			prerequisites.add(¢);
+	public CourseBuilder addPrerequisitesCourse(final Course xxx) {
+		if (!prerequisites.contains(xxx))
+			prerequisites.add(xxx);
 		return this;
 	}
 
-	public CourseBuilder addCorequisitesCourse(final Course ¢) {
-		if (!corequisites.contains(¢))
-			corequisites.add(¢);
+	public CourseBuilder addCorequisitesCourse(final Course xxx) {
+		if (!corequisites.contains(xxx))
+			corequisites.add(xxx);
 		return this;
 	}
 
 	public Course build() {
 		final Course $ = new Course(name, id, faculty, stuff, points, aTerm, bTerm, prerequisites, corequisites);
-		for (final LessonGroup ¢ : lectures)
-			$.addLecturesLessonGroup(¢);
-		for (final LessonGroup ¢ : tutorials)
-			$.addTutorialLessonGroup(¢);
+		for (final LessonGroup xxx : lectures)
+			$.addLecturesLessonGroup(xxx);
+		for (final LessonGroup xxx : tutorials)
+			$.addTutorialLessonGroup(xxx);
 		return $;
 	}
 }

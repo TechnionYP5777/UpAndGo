@@ -63,9 +63,9 @@ public class StuffMember implements Serializable {
 	}
 
 	@Override
-	public boolean equals(final Object ¢) {
-		return ¢ != null && (¢ == this || ¢ instanceof StuffMember && fName.equals(((StuffMember) ¢).getFirstName())
-				&& lName.equals(((StuffMember) ¢).getLastName()) && title.equals(((StuffMember) ¢).getTitle()));
+	public boolean equals(final Object xxx) {
+		return xxx != null && (xxx == this || xxx instanceof StuffMember && fName.equals(((StuffMember) xxx).getFirstName())
+				&& lName.equals(((StuffMember) xxx).getLastName()) && title.equals(((StuffMember) xxx).getTitle()));
 	}
 
 	@Override

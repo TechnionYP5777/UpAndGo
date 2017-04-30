@@ -43,8 +43,8 @@ public class TimeTableModel implements Model {
 		this.loader = loader;
 	}
 
-	public void setCourses(final List<Course> ¢) {
-		courses = new ArrayList<>(¢);
+	public void setCourses(final List<Course> xxx) {
+		courses = new ArrayList<>(xxx);
 	}
 
 	public void setDaysoffFlag(final boolean f) {
@@ -55,12 +55,12 @@ public class TimeTableModel implements Model {
 		isBlankSpaceCount = f;
 	}
 
-	public void setMinStartTime(final LocalTime ¢) {
-		minStartTime = ¢;
+	public void setMinStartTime(final LocalTime xxx) {
+		minStartTime = xxx;
 	}
 
-	public void setMaxEndTime(final LocalTime ¢) {
-		maxEndTime = ¢;
+	public void setMaxEndTime(final LocalTime xxx) {
+		maxEndTime = xxx;
 	}
 
 	public void loadSchedule() {
@@ -118,8 +118,8 @@ public class TimeTableModel implements Model {
 				: lessonGroupsList.get(sched_index);
 	}
 
-	public void saveChosenLessonGroups(final List<LessonGroup> ¢) {
-		loader.saveChosenLessonGroups(¢);
+	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
+		loader.saveChosenLessonGroups(xxx);
 	}
 
 	public void loadChosenLessonGroups() {

@@ -49,10 +49,10 @@ public class LessonGroup implements Serializable {
 		return lessons.isEmpty() ? "000000" : lessons.get(0).getCourse();
 	}
 
-	public void addLesson(final Lesson ¢) {
+	public void addLesson(final Lesson xxx) {
 		if (groupNum == UNINITIALIZED_GROUP_NUM)
 			throw new IllegalArgumentException();
-		lessons.add(¢);
+		lessons.add(xxx);
 	}
 
 	public boolean isClashWith(final LessonGroup g) {
@@ -91,8 +91,8 @@ public class LessonGroup implements Serializable {
 		String $ = "group number: " + groupNum + " lessons: ";
 		// ret.concat("ok");
 		// ret += "ok";
-		for (final Lesson ¢ : lessons)
-			$ = $.concat("\n" + ¢);
+		for (final Lesson xxx : lessons)
+			$ = $.concat("\n" + xxx);
 		return $ = $.concat("\n");
 	}
 }

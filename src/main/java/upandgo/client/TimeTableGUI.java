@@ -194,14 +194,14 @@ public class TimeTableGUI extends LayoutPanel {
 	    
 	    
 	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
-	    /*Lesson l = new Lesson(null,
+	    Lesson l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
 	    		"place",
 	    		Type.LECTURE,
 	    		3,
 	    		"12",
-	    		"OOP");*/
+	    		"OOP");
 	    /*lessons.add(new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),

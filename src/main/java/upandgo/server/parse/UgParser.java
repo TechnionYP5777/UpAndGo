@@ -42,8 +42,8 @@ public class UgParser {
 				if (!ignoredFacutlyIds.contains(faculty.attr("value")))
 					$.add(new Faculty(faculty.attr("value"), faculty.text()));
 
-		} catch (final IOException ¢) {
-			¢.printStackTrace();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 		}
 
 		return $;
@@ -83,9 +83,9 @@ public class UgParser {
 			try {
 				dataMap.put("FAC", faculty.getId());
 				courses = Scraper.getSearchResults(UG_SEARCH_URL, dataMap);
-			} catch (final IOException ¢) {
+			} catch (final IOException xxx) {
 				// TODO Auto-generated catch block
-				¢.printStackTrace();
+				xxx.printStackTrace();
 			}
 			if (courses != null)
 				for (final Element course : courses.getElementsByClass("result-row")) {
@@ -169,8 +169,8 @@ public class UgParser {
 			//transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			//transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(System.out, "UTF-8")));
 			//transformer.transform(new DOMSource(doc), new StreamResult(new File(PREREQUISITES_XML)));
-		} catch (/*TransformerException |*/ IOException | ParserConfigurationException ¢) {
-			¢.printStackTrace();
+		} catch (/*TransformerException |*/ IOException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
 	}
 

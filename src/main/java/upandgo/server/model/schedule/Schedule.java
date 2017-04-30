@@ -41,29 +41,29 @@ public class Schedule {
 	}
 	/**
 	 * 
-	 * @param ¢
+	 * @param xxx
 	 * @return true if lessonGroup can be added to lessond without causing a
 	 *         collision
 	 */
-	public boolean addLesson(final LessonGroup ¢) {
+	public boolean addLesson(final LessonGroup xxx) {
 		/*
-		 * if(!lessons.contains(¢)) // add equals to lessonsgroup
-		 * lessons.add(¢);
+		 * if(!lessons.contains(xxx)) // add equals to lessonsgroup
+		 * lessons.add(xxx);
 		 */
 		/*if (lessons.isEmpty()) {
-			lessons.add(¢);
+			lessons.add(xxx);
 			return true;
 		}*/
 		
 		
 		for (final TimeConstraint c : constraints)
-			if (c.isClashWith(¢))
+			if (c.isClashWith(xxx))
 				return false;
 		
 		for (final LessonGroup l : lessons)
-			if (l.isClashWith(¢))
+			if (l.isClashWith(xxx))
 				return false;
-		lessons.add(¢);
+		lessons.add(xxx);
 		return true;
 	}
 	
@@ -80,17 +80,17 @@ public class Schedule {
 
 	// to be removed after some progress on the project assures that there is no
 	// need for that functionality
-	/*public void removeLesson(final LessonGroup ¢) {
-		lessons.remove(¢);
+	/*public void removeLesson(final LessonGroup xxx) {
+		lessons.remove(xxx);
 	}
 
-	public void addConstraint(final TimeConstraint ¢) {
-		if (!constraints.contains(¢))
-			constraints.add(¢);
+	public void addConstraint(final TimeConstraint xxx) {
+		if (!constraints.contains(xxx))
+			constraints.add(xxx);
 	}
 
-	public void removeConstraint(final TimeConstraint ¢) {
-		constraints.remove(¢);
+	public void removeConstraint(final TimeConstraint xxx) {
+		constraints.remove(xxx);
 	}
 
 	public List<TimeConstraint> getConstraints() {
@@ -103,12 +103,12 @@ public class Schedule {
 
 	
 
-	public boolean hasLesson(final LessonGroup ¢) {
-		return lessons.contains(¢);
+	public boolean hasLesson(final LessonGroup xxx) {
+		return lessons.contains(xxx);
 	}
 
-	public boolean hasConstraint(final TimeConstraint ¢) {
-		return constraints.contains(¢);
+	public boolean hasConstraint(final TimeConstraint xxx) {
+		return constraints.contains(xxx);
 	}
 
 	public boolean isLegalSchedule() {
@@ -116,8 +116,8 @@ public class Schedule {
 			for (int j = i + 1; j < lessons.size(); ++j)
 				if (lessons.get(i).isCLashWIth(lessons.get(j)))
 					return false;
-			for (final TimeConstraint ¢ : constraints)
-				if (lessons.get(i).isCLashWIth(¢))
+			for (final TimeConstraint xxx : constraints)
+				if (lessons.get(i).isCLashWIth(xxx))
 					return false;
 		}
 		return true;
