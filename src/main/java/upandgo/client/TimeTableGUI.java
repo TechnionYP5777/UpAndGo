@@ -77,22 +77,12 @@ public class TimeTableGUI extends LayoutPanel {
     		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
     	}
     	
-    	// OLD CODE:
-    	/*for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
-    		t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
-    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, "headerRowStyle");
-    		t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
-    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
-    	}*/
     	
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
     		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
-    		//t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
-    		//t.getCellFormatter().addStyleName(2*i, HOURS_COL, "headerRowStyle");
-    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
+
     	}
     	
     	for(int i = 2; i<7; i++){
@@ -146,14 +136,22 @@ public class TimeTableGUI extends LayoutPanel {
 	    
 	    
 	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
-	    lessons.add(new Lesson(null,
+	    Lesson l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
 	    		"טאוב 7",
 	    		Type.LECTURE,
 	    		3,
 	    		"123123",
-	    		"OOP"));
+	    		"OOP");
+	    lessons.add(l);
+	    
+	    ArrayList<LessonGroup> lgList = new ArrayList<>();
+	    LessonGroup lg = new LessonGroup(14);
+	    lg.addLesson(l);
+	    lgList.add(lg);
+	    
+	    //displaySchedule(lgList);
 	    drawDay(lessons, 4);
 
 	    this.add(t);
