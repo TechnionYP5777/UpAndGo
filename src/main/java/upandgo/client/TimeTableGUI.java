@@ -37,53 +37,22 @@ public class TimeTableGUI extends LayoutPanel {
     }
 	
     private void InitializePanel(){
-    	setHeaders();
-    	
-    	
-    	
-    	//t.setText(0, 6, "x");
-    	
-    	/*for(int i = 1; i<24; i++){
-    		t.setText(i, 6, "s");
-    		//t.setText(2*i, 0, Integer.toString(i+8)+":00");
-    		//t.getCellFormatter().addStyleName(2*i-1, 0, "headerRowStyle");
-    		//t.getCellFormatter().addStyleName(2*i, 0, "headerRowStyle");
-    		
-    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
-    	}*/
-    	
-    	//t.setText(0, 5, "שישי");
+    	drawHeaders();
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	//t.getCellFormatter().addStyleName(0, HOURS_COL, "hourCol");
-    	//t.getColumnFormatter().addStyleName(0, ttStyle.arciCol());
     	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
 
-    	for(int i = 1; i<7; i++){
-    		//t.getCellFormatter().addStyleName(0, i, "headerCellStyle");
+    	for(int i = 1; i<7; i++){;
     		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
     	}
     	
     	
-    	for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, EMPTY_COL, "");
-    		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
-    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-
-    		//t.getFlexCellFormatter().setRowSpan(i, 0, 2);
-    	}
+    	// invisible arcitcure column
+    	drawArciCol();
     	
     	
-    	for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
-    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
-    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
-
-    	}
+    	drawHoursCol();
     	
     	for(int i = 2; i<7; i++){
     		t.setText(1, i, "");
@@ -159,7 +128,29 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     
-    private void setHeaders() {
+    private void drawArciCol() {
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, EMPTY_COL, "");
+    		t.setText(2*i, EMPTY_COL, "");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
+    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
+    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
+    	}
+    	
+		
+	}
+
+	private void drawHoursCol() {
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
+    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
+    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
+
+    	}
+	}
+
+	private void drawHeaders() {
     	t.setText(0, 0, "");
     	t.setText(0, 1, "שעה");
     	t.setText(0, 2, "ראשון");
