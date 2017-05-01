@@ -61,9 +61,9 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	
     	t.setText(1, 2, "");
-		t.getFlexCellFormatter().setRowSpan(1, 2, 22);
+		t.getFlexCellFormatter().setRowSpan(1, 2, 4);
 		t.getCellFormatter().addStyleName(1, 2, ttStyle.noEvent());
-		/*
+		
 		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
 		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
 		t.getCellFormatter().addStyleName(5, 2, ttStyle.hasEvent());
@@ -72,36 +72,54 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, ttStyle.noEvent());
 
-		SimplePanel eventCell = new SimplePanel();
+		/*SimplePanel eventCell = new SimplePanel();
 		t.setWidget(11,	2, eventCell);
 		eventCell.add(new Label("מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה"));
-		eventCell.addStyleName(ttStyle.hasEventWrap());
-		//t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+		eventCell.addStyleName(ttStyle.hasEventWrap());*/
+		t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
 		t.getCellFormatter().addStyleName(11, 2, ttStyle.hasEvent());
 		
 		t.setText(13, 2, "");
 		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
 		t.getCellFormatter().addStyleName(13, 2, ttStyle.noEvent());
-		*/
+		
 		
 		
 		//*******************************
 		
     	
-    	
-		t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
+		t.setText(1, 3, "");
+		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
+		t.getCellFormatter().addStyleName(1, 3, ttStyle.noEvent());
+		
+		t.setText(5, 3, "מבוא לכלכלה, ניהול 306");
+		t.getFlexCellFormatter().setRowSpan(5, 3, 5);
+		t.getCellFormatter().addStyleName(5, 3, ttStyle.hasEvent());
+		
+		/*
+		t.setText(10, 3, "");
+		t.getFlexCellFormatter().setRowSpan(10, 3, 1);
+		t.getCellFormatter().addStyleName(10, 3, ttStyle.noEvent());
+		*/
+		/*t.setText(11, 3, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
+		t.getFlexCellFormatter().setRowSpan(11, 3, 2);
+		t.getCellFormatter().addStyleName(11, 3, ttStyle.hasEvent());
+		*/
+		/*t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
 		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
 		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
 		
 		t.setText(5, 3, "תיכון תוכנה, טאוב 10");
-		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
-		t.getCellFormatter().addStyleName(5, 3, ttStyle.hasEvent());
+		t.getFlexCellFormatter().setRowSpan(5, 3, 5);
+		t.getCellFormatter().addStyleName(5, 3, ttStyle.hasEvent());*/
 		
+		
+		/*
 		t.setText(9, 3, "");
 		t.getFlexCellFormatter().setRowSpan(9, 3, 14);
 		t.getCellFormatter().addStyleName(9, 3, ttStyle.noEvent());
-
+*/
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
