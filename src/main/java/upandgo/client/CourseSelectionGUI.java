@@ -160,48 +160,47 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 		return searchCourse;
 	}
 	@Override
-	public void setSelectedCourses(List<CourseId> courses) {
-        scl.setRowCount(courses.size(), true);
-        scl.setVisibleRange(0, courses.size());
-	    scl.setRowData(0,courses);
+	public void setSelectedCourses(List<CourseId> is) {
+        scl.setRowCount(is.size(), true);
+        scl.setVisibleRange(0, is.size());
+	    scl.setRowData(0,is);
 		
 	}
 	@Override
-	public void setNotSelectedCourses(List<CourseId> courses) {
-		ccl.setRowCount(courses.size(), true);
-        ccl.setVisibleRange(0, courses.size());
-	    ccl.setRowData(0,courses);
+	public void setNotSelectedCourses(List<CourseId> is) {
+		ccl.setRowCount(is.size(), true);
+        ccl.setVisibleRange(0, is.size());
+	    ccl.setRowData(0,is);
 		
 	}
 	@Override
 	public void setFaculties(List<String> faculties) {
-		for(String s : faculties){
+		for(String s : faculties)
 			this.faculties.addItem(s);
-		}
 		
 	}
 	@Override
-	public int getSelectedCourseRow(CellPreviewEvent<CourseId> event) {
-		return event.getIndex();
+	public int getSelectedCourseRow(CellPreviewEvent<CourseId> i) {
+		return i.getIndex();
 	}
 	@Override
-	public int getUnselectedCourseRow(CellPreviewEvent<CourseId> event) {
-		return event.getIndex();
+	public int getUnselectedCourseRow(CellPreviewEvent<CourseId> i) {
+		return i.getIndex();
 	}
 	@Override
-	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> event) {
-		return event.getIndex();
+	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i) {
+		return i.getIndex();
 	}
 	@Override
-	public int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> event) {
-		return event.getIndex();
+	public int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> i) {
+		return i.getIndex();
 	}
 	@Override
-	public int getSelectedFacultyRow(@SuppressWarnings("unused") ChangeEvent event) {
+	public int getSelectedFacultyRow(@SuppressWarnings("unused") ChangeEvent e) {
 		return this.faculties.getSelectedIndex();
 	}
 	@Override
-	public String getCourseQuery(@SuppressWarnings("unused") KeyUpEvent event) {
+	public String getCourseQuery(@SuppressWarnings("unused") KeyUpEvent e) {
 		return this.searchCourse.getValue();
 	} 
     
