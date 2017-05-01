@@ -37,13 +37,10 @@ public class TimeTableGUI extends LayoutPanel {
     }
 	
     private void InitializePanel(){
-    	t.setText(0, 0, "");
-    	t.setText(0, 1, "שעה");
-    	t.setText(0, 2, "ראשון");
-    	t.setText(0, 3, "שני");
-    	t.setText(0, 4, "שלישי");
-    	t.setText(0, 5, "רביעי");
-    	t.setText(0, 6, "חמישי");
+    	setHeaders();
+    	
+    	
+    	
     	//t.setText(0, 6, "x");
     	
     	/*for(int i = 1; i<24; i++){
@@ -214,7 +211,18 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     
-    // this function receives a list of LessonGroup(which is a schedule) and
+    private void setHeaders() {
+    	t.setText(0, 0, "");
+    	t.setText(0, 1, "שעה");
+    	t.setText(0, 2, "ראשון");
+    	t.setText(0, 3, "שני");
+    	t.setText(0, 4, "שלישי");
+    	t.setText(0, 5, "רביעי");
+    	t.setText(0, 6, "חמישי");
+		
+	}
+
+	// this function receives a list of LessonGroup(which is a schedule) and
  	// displays the schedule in the GUI
  	public void displaySchedule(final List<LessonGroup> schedule) {
  		//resetTable();
@@ -243,6 +251,8 @@ public class TimeTableGUI extends LayoutPanel {
  		return lessonsOfDay;
  	}
  	
+ 	
+ 	//gets a group of lessond and a day and draw the schedule for that day.
  	private void drawDay(ArrayList<Lesson> lessons, int day){
  		if(lessons.isEmpty()){
  			t.setText(1, day, "");
