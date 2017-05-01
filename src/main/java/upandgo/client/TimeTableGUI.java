@@ -48,12 +48,11 @@ public class TimeTableGUI extends LayoutPanel {
     	}
     	
     	
-    	// invisible arcitcure column
-    	drawArciCol();
     	
-    	
+    	drawArciCol();  // invisible architecture column
     	drawHoursCol();
     	
+    	//t.getFlexCellFormatter().setRowSpan(1, 1, 22);
     	for(int i = 2; i<7; i++){
     		t.setText(1, i, "");
     		t.getFlexCellFormatter().setRowSpan(1, i, 22);
@@ -62,9 +61,9 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	
     	t.setText(1, 2, "");
-		t.getFlexCellFormatter().setRowSpan(1, 2, 4);
+		t.getFlexCellFormatter().setRowSpan(1, 2, 22);
 		t.getCellFormatter().addStyleName(1, 2, ttStyle.noEvent());
-		
+		/*
 		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
 		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
 		t.getCellFormatter().addStyleName(5, 2, ttStyle.hasEvent());
@@ -84,11 +83,13 @@ public class TimeTableGUI extends LayoutPanel {
 		t.setText(13, 2, "");
 		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
 		t.getCellFormatter().addStyleName(13, 2, ttStyle.noEvent());
-		
+		*/
 		
 		
 		//*******************************
 		
+    	
+    	
 		t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
 		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
 		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
@@ -121,7 +122,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    lgList.add(lg);
 	    
 	    //displaySchedule(lgList);
-	    drawDay(lessons, 4);
+	    //drawDay(lessons, 4);
 
 	    this.add(t);
     }
