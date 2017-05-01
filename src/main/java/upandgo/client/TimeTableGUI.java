@@ -248,47 +248,41 @@ public class TimeTableGUI extends LayoutPanel {
  			t.setText(1, day, "");
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
  			t.getCellFormatter().addStyleName(1, day, ttStyle.noEvent());
- 			
- 			//int differenceInMinutes = WeekTime.difference(LocalTime.of(10, 30), LocalTime.of(8, 30));
- 	 		
  			return;
  		}
- 		
- 		LocalTime firstLessonStartTime = lessons.get(0).getStartTime().getTime();
- 		int differenceInMinutes = WeekTime.difference(firstLessonStartTime, LocalTime.of(8, 30));
+
+ 		int differenceInMinutes;
  		int currentCell = 1;
- 		int span = differenceInMinutes/30;
+ 		int span;
  		
- 		
- 		t.setText(1, day, "");
-		t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
-		t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
-		
 		LocalTime startTime;
 		LocalTime endTime;
+		LocalTime previousEndTime = LocalTime.of(8, 30);
+		
  		for(Lesson l : lessons){
  			startTime = l.getStartTime().getTime();
  			endTime = l.getEndTime().getTime();
 	 		
-			differenceInMinutes = WeekTime.difference(endTime, startTime);
-			currentCell += span;
+			differenceInMinutes = WeekTime.difference(startTime, previousEndTime);
 			span = differenceInMinutes/30;
 			
+			t.setText(currentCell, day, "");
+			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
+			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
+			currentCell += span;
 			
-			Log.info("LOGGED");
+			differenceInMinutes = WeekTime.difference(endTime, startTime);
+			span = differenceInMinutes/30;
+			
 			String displayString = l.getCourseName() + " " + l.getCourse() + " " + l.getPlace();
+			
+			
 			t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.hasEvent());
 			
 	 		
 		}
-		
-		
- 		
- 		//lessons.get(0).getStartTime().getTime().getHour()
- 		
- 		
  		
  	}
  	
