@@ -108,7 +108,14 @@ public class TimeTableGUI extends LayoutPanel {
     	drawCell(8, col-1, "מבוא לכלכלה, ניהול 306", 5, ttStyle.hasEvent());
     	drawCell(13, col, "", 10, ttStyle.noEvent());
     	
-    	col = MONDAY_COL;
+    	/*
+    	drawCell(1, col, "", 2, ttStyle.noEvent());
+    	drawCell(3, col, "קורס כלשהו", 2, ttStyle.hasEvent());
+    	drawCell(5, col, "", 4, ttStyle.noEvent());
+    	drawCell(9, col, "מבוא לכלכלה, ניהול 306", 4, ttStyle.hasEvent());
+    	drawCell(13, col, "", 10, ttStyle.noEvent());*/
+    	
+    	/*col = MONDAY_COL;
     	
     	drawCell(1, col, "", 1, ttStyle.noEvent());
     	drawCell(2, col-2, "קורס 1", 1, ttStyle.hasEvent());
@@ -119,7 +126,7 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	drawCell(1, col, "", 1, ttStyle.noEvent());
     	drawCell(2, col-2, "קורס 2", 2, ttStyle.hasEvent());
-    	
+    	*/
     	
     	/*
     	t.setText(2, col-2, "sdf");
@@ -225,6 +232,15 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     private void drawCell(int row, int col, String text, int span, String styleName) {
+/*
+    	if(row % 2 == 0){
+    		if(col == SUNDAY_COL){
+        		col = col-1;
+        	}else{
+        		col = col-2;
+        	}
+    	}*/
+
     	t.setText(row, col, text);
     	clearBeforeSpan(row,col,span);
 		t.getFlexCellFormatter().setRowSpan(row, col, span);
