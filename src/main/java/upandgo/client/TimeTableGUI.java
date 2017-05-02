@@ -97,12 +97,13 @@ public class TimeTableGUI extends LayoutPanel {
     	t.setText(2, 2, "aa");
     	t.setText(3, 3, "aa");
     	t.removeCell(2, 2);
+    	t.removeCell(3, 3);
     	
     	//t.getCellFormatter().addStyleName(2, 3, ttStyle.arciCol());
-		//t.getFlexCellFormatter().setRowSpan(1, 3, 2);
+		t.getFlexCellFormatter().setRowSpan(1, 3, 3);
     	
 		//t.getCellFormatter().addStyleName(2, 6, ttStyle.arciCol());
-		//t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
+		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
 		
 		
 		/*t.setText(1, 5, "aa");
