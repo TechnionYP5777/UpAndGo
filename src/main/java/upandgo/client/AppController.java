@@ -21,7 +21,10 @@ import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.prevScheduleEventHandler;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.event.saveScheduleEventHandler;
+import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.Presenter;
+import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.client.presenter.SchedulerPresenter.Display;
 
 /**
  * 
@@ -71,7 +74,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(GetCourseDetailsEvent.TYPE, new GetCourseDetailsEventHandler() {
 
 			@Override
-			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent event) {
+			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent event) {//need to be implemented with DI
 				// TODO Auto-generated method stub
 				
 			}
@@ -139,6 +142,11 @@ class AppController implements Presenter {
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
 		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		
+		CourseListPresenter clPresenter = new CourseListPresenter(rpcService, eventBus, courseSelectionView);
+		
+		SchedulerPresenter sPresenter = new SchedulerPresenter((Display) timeTableView, eventBus, rpcService);
+		
 		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		mainView.add(courseSelectionView);
 		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
@@ -146,6 +154,10 @@ class AppController implements Presenter {
 		mainView.add(timeTableView);
 		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
+		
+		clPresenter.go(panel);
+		sPresenter.go(panel);
+		
 		return mainView;
 	}
 }
