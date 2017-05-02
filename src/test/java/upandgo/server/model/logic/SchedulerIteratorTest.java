@@ -14,8 +14,8 @@ import org.junit.Test;
 import upandgo.server.logic.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.XmlCourseLoader;
-import upandgo.server.model.schedule.Timetable;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Timetable;
 
 @SuppressWarnings("static-method")
 public class SchedulerIteratorTest {

@@ -1,4 +1,4 @@
-package upandgo.server.model.schedule;
+package upandgo.shared.model.scedule;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -94,7 +94,6 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 
     	//all courses list initialization
     	scl.setWidth("100%");
-    	scl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
     	scl.addColumn(course);
         scl.setRowCount(courses.size(), true);
         scl.setVisibleRange(0, courses.size());
