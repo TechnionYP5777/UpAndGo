@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import upandgo.server.model.schedule.Schedule;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Schedule;
 
 /**
  * 

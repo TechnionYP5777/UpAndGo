@@ -22,9 +22,9 @@ import upandgo.client.event.nextScheduleEvent;
 import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
-import upandgo.server.model.schedule.Schedule;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Schedule;
 
 /**
  * 

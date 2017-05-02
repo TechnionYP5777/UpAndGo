@@ -17,12 +17,12 @@ import org.junit.Test;
 import upandgo.server.logic.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.XmlCourseLoader;
-import upandgo.server.model.schedule.Schedule;
-import upandgo.server.model.schedule.Timetable;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Schedule;
+import upandgo.shared.model.scedule.Timetable;
 
 @SuppressWarnings({"static-method","deprecation"})
 public class SchedulerTest {

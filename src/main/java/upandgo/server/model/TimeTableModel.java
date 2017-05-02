@@ -11,9 +11,9 @@ import com.google.common.collect.Lists;
 
 import upandgo.server.logic.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
-import upandgo.server.model.schedule.Timetable;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Timetable;
 import upandgo.shared.property.TimeTableProperty;
 
 /**
