@@ -102,11 +102,14 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	
     	int col = SUNDAY_COL;
-    	drawCell(1, col, "", 2, ttStyle.noEvent());
-    	drawCell(3, col, "קורס כלשהו", 2, ttStyle.hasEvent());
+    	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
+    	drawCell(3, col, "", 2, ttStyle.noEvent());
+    	drawCell(5, col, "קורס 2", 4, ttStyle.hasEvent());
+    	/*drawCell(3, col, "קורס כלשהו", 2, ttStyle.hasEvent());
     	drawCell(5, col, "", 3, ttStyle.noEvent());
     	drawCell(8, col, "מבוא לכלכלה, ניהול 306", 5, ttStyle.hasEvent());
     	drawCell(13, col, "", 10, ttStyle.noEvent());
+    	*/
     	
     	/*
     	drawCell(1, col, "", 2, ttStyle.noEvent());
@@ -117,7 +120,8 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	col = MONDAY_COL;
     	
-    	//drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(2, col, "קורס 3", 1, ttStyle.hasEvent());
     	//drawCell(2, col, "קורס 1", 1, ttStyle.hasEvent());
     	
     	//drawCell(3, col, "", 1, ttStyle.noEvent());
@@ -125,7 +129,7 @@ public class TimeTableGUI extends LayoutPanel {
     	//drawCell(4, col, "קורס 3", 1, ttStyle.hasEvent());
     	//drawCell(9, col-1, "קורס 5", 2, ttStyle.hasEvent());
     	
-    	drawCell(7, col, "קורס", 1, ttStyle.hasEvent());
+    	//drawCell(7, col, "קורס", 1, ttStyle.hasEvent());
     	//drawCell(10, col, "", 13, ttStyle.noEvent());
     	
     	/*
@@ -239,29 +243,8 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     private void drawCell(int row, int col, String text, int span, String styleName) {
-    	if(row % 2 == 0){
-    		if(col == SUNDAY_COL){
-    			t.setText(row, col-1, text);
-    	    	clearBeforeSpan(row,col,span);
-    			t.getFlexCellFormatter().setRowSpan(row, col-1, span);
-    			t.getCellFormatter().addStyleName(row, col-1, styleName);
-    			return;
-    		}
-			t.setText(row, col-2, text);
-			clearBeforeSpan2(row,col,span);
-			t.getFlexCellFormatter().setRowSpan(row, col-2, span);
-			t.getCellFormatter().addStyleName(row, col-2, styleName);
-			return;
-    	}
-    	/*
-    	if(row % 2 == 0){
-    		if(col == SUNDAY_COL){
-        		col = col-1;
-        	}else{
-        		col = col-2;
-        	}
-    	}*/
-    	Log.info("row: " + row + " col: " + col + " text: " + text);
+    	
+    	//Log.info("row: " + row + " col: " + col + " text: " + text);
     	t.setText(row, col, text);
     	clearBeforeSpan(row,col,span);
 		t.getFlexCellFormatter().setRowSpan(row, col, span);
@@ -274,11 +257,7 @@ public class TimeTableGUI extends LayoutPanel {
 		// TODO Auto-generated method stub
     	
     	for(int i = r+1; i < r+span; i++){
-    		if(i % 2 == 0){
-    			t.removeCell(i, c-1);
-    		}else{
     			t.removeCell(i, c);
-    		}
 		}
 	}
     
@@ -307,9 +286,9 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int col = 2; col<=12; col+=2){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, col, "");
-	    		t.setText(2*i, col-1, "");
+	    		t.setText(2*i, col, "");
 	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
+	    		t.getCellFormatter().addStyleName(2*i, col, ttStyle.arciCol());
 	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
 	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 	    	}
@@ -321,8 +300,10 @@ public class TimeTableGUI extends LayoutPanel {
 	private void drawHoursCol() {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
-    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
+    		//t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
+    		t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
+    		t.getCellFormatter().addStyleName(2*i, HOURS_COL, ttStyle.hoursCell());
 
     	}
 	}
