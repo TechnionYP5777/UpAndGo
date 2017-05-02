@@ -40,8 +40,6 @@ public class TimeTableGUI extends LayoutPanel {
     	drawHeaders();
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	
-    	/*
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(4, 0, ttStyle.arciCol());
@@ -49,20 +47,22 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getCellFormatter().addStyleName(8, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());
     	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
-*/
 
-
-    	/*
-    	for(int i = 1; i<7; i++){;
+    	
+    	
+    	for(int i = 1; i<=11; i+=2){;
     		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
     	}
-    	*/
+    	
+    	
+    	
+    	/*
     	t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(3, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(5, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(7, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(9, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(11, ttStyle.dayCol());
+    	t.getColumnFormatter().addStyleName(11, ttStyle.dayCol());*/
     	
     	
     	drawArciCol();  // invisible architecture column
@@ -162,83 +162,36 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     private void drawArciCol() {
-    	//for(int col = 0; col<3; col+=2){
+    	for(int i = 1; i<12; i++){
+    		t.setText(2*i-1, EMPTY_COL, "");
+    		t.setText(2*i, EMPTY_COL, "");
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
+    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
+    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
+    	}
+    	
+    	for(int col = 2; col<12; col+=2){
 	    	for(int i = 1; i<12; i++){
-	    		t.setText(2*i-1, EMPTY_COL, "");
-	    		t.setText(2*i, EMPTY_COL, "");
-	    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
+	    		t.setText(2*i-1, col, "");
+	    		t.setText(2*i, col, "");
+	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
+	    		t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
 	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
 	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 	    	}
-	    	
-	    	/*
-	    	for(int i = 1; i<12; i++){
-	    		t.setText(2*i-1, EMPTY_COL+2, "");
-	    		t.setText(2*i, EMPTY_COL+2, "");
-	    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL+2, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL+2, ttStyle.arciCol());
-	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-	    	}*/
-    	//}
+    	}
     	
 		
 	}
 
 	private void drawHoursCol() {
-		t.setText(1, HOURS_COL, Integer.toString(1+7)+":30");
-		t.getFlexCellFormatter().setRowSpan(1, HOURS_COL, 10);
-		
-		t.setText(1, HOURS_COL+1, Integer.toString(1+7)+":40");
-		t.setText(2	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(3	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(4	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(5	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(6	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(7	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(8	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(9	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(10	, HOURS_COL, Integer.toString(1+7)+":50");
-		t.setText(11	, HOURS_COL, Integer.toString(1+7)+":50");
-		//t.getFlexCellFormatter().setRowSpan(1, HOURS_COL, 2);
-		/*for(int i = 1; i<2; i++){
+    	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
     		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
 
-    	}*/
-		
-		/*
-		for(int i = 1; i<6; i++){
-    		t.setText(2*i-1, EMPTY_COL+2, "");
-    		t.getFlexCellFormatter().setRowSpan(2*i-1, EMPTY_COL+2, 2);
-    		//t.setText(2*i, EMPTY_COL+2, "");
-    		//t.getFlexCellFormatter().setRowSpan(2*i, EMPTY_COL+2, 1);
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL+2, ttStyle.arciCol());
-    		//t.getCellFormatter().addStyleName(2*i, EMPTY_COL+2, ttStyle.arciCol());
-    		//t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-    		//t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-    	}*/
-		
-		/*
-		for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, EMPTY_COL+2, "");
-    		t.getFlexCellFormatter().setRowSpan(2*i-1, EMPTY_COL+2, 1);
-    		t.setText(2*i, EMPTY_COL+2, "");
-    		t.getFlexCellFormatter().setRowSpan(2*i, EMPTY_COL+2, 1);
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL+2, ttStyle.arciCol());
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL+2, ttStyle.arciCol());
-    		//t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-    		//t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-    	}*/
-		
-    	/*for(int i = 1; i<12; i++){
-    		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
-    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
-    		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
-
-    	}*/
+    	}
 	}
 
 	private void drawHeaders() {
