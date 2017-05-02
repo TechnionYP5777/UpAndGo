@@ -94,15 +94,8 @@ public class TimeTableGUI extends LayoutPanel {
     	t.setText(3, 3, "aa");
     	t.removeCell(2, 2);*/
     	t.setText(1, 3, "aa");
-    	t.setText(2, 2, "aa");
-    	t.setText(3, 3, "aa");
-    	t.removeCell(2, 2);
-    	t.removeCell(3, 3);
-    	
-    	//t.getCellFormatter().addStyleName(2, 3, ttStyle.arciCol());
+    	clearBeforeSpan(1,3,2);
 		t.getFlexCellFormatter().setRowSpan(1, 3, 3);
-    	
-		//t.getCellFormatter().addStyleName(2, 6, ttStyle.arciCol());
 		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
 		
 		
@@ -206,7 +199,19 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     
-    private void drawArciCol() {
+    private void clearBeforeSpan(int r, int c, int span) {
+		// TODO Auto-generated method stub
+    	
+    	for(int i = r+1; i <= r+span; i++){
+    		if(i % 2 == 0){
+    			t.removeCell(i, c-1);
+    		}else{
+    			t.removeCell(i, c);
+    		}
+		}
+	}
+
+	private void drawArciCol() {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
