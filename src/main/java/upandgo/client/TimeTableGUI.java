@@ -48,6 +48,7 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getCellFormatter().addStyleName(0, 6, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 8, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 10, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 12, ttStyle.arciCol());
     	
     	/*t.getCellFormatter().addStyleName(1, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(1, 1, ttStyle.arciCol());
@@ -97,6 +98,8 @@ public class TimeTableGUI extends LayoutPanel {
     	clearBeforeSpan(1,3,2);
 		t.getFlexCellFormatter().setRowSpan(1, 3, 3);
 		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
+		
+		
 		
 		
 		/*t.setText(1, 5, "aa");
@@ -221,7 +224,7 @@ public class TimeTableGUI extends LayoutPanel {
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
     	}
     	
-    	for(int col = 2; col<12; col+=2){
+    	for(int col = 2; col<=12; col+=2){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, col, "");
 	    		t.setText(2*i, col-1, "");
