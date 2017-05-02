@@ -49,12 +49,7 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getCellFormatter().addStyleName(8, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());*/
     	
-    	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(4, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(6, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(10, ttStyle.hoursCol());
+    	
     	
     	
     	for(int i = 1; i<=11; i+=2){;
@@ -140,6 +135,12 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getCellFormatter().addStyleName(9, 3, ttStyle.noEvent());
 		*/
 		
+    	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
+    	/*t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(4, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(6, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(10, ttStyle.hoursCol());*/
 
 	    t.addStyleName(ttStyle.timeTable());
 	    
@@ -172,8 +173,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
-    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
+    		//t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		//t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
     		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
     	}
@@ -181,9 +182,9 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int col = 2; col<12; col+=2){
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, col, "");
-	    		t.setText(2*i, col, "");
-	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
+	    		t.setText(2*i, col-1, "");
+	    		//t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
+	    		//t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
 	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
 	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 	    	}

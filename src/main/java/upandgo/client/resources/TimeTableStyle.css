@@ -23,12 +23,13 @@
 }
 
 .arciCol {
-
+	display: none;
 	background: #577F92;
 	
 }
 
 .hoursCol{
+	display: none;
 	background: #cc0000;
 }
 
