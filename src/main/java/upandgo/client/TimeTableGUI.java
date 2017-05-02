@@ -42,9 +42,18 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
     	
     	
-    	//t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	/*t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(4, 0, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 2, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 4, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 6, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 8, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(0, 10, ttStyle.arciCol());
+    	
+    	/*t.getCellFormatter().addStyleName(1, 0, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(1, 1, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(2, 1, ttStyle.arciCol());*/
+    	/*t.getCellFormatter().addStyleName(4, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(6, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(8, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());*/
@@ -52,16 +61,16 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	
     	
-    	for(int i = 1; i<=11; i+=2){;
+    	for(int i = 1; i<=5; i++){; // return
     		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
     	}
     	
     	
     	
-    	/*
-    	t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(3, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(5, ttStyle.dayCol());
+    	
+    	//t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
+    	//t.getColumnFormatter().addStyleName(2, ttStyle.dayCol());
+    	/*t.getColumnFormatter().addStyleName(5, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(7, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(9, ttStyle.dayCol());
     	t.getColumnFormatter().addStyleName(11, ttStyle.dayCol());*/
@@ -80,11 +89,36 @@ public class TimeTableGUI extends LayoutPanel {
     	*/
     	
     	
-    	/*t.setText(1, 2, "");
-		t.getFlexCellFormatter().setRowSpan(1, 2, 4);
-		t.getCellFormatter().addStyleName(1, 2, ttStyle.noEvent());
+    	/*t.setText(1, 3, "aa");
+    	t.setText(2, 2, "aa");
+    	t.setText(3, 3, "aa");
+    	t.removeCell(2, 2);*/
+    	t.setText(1, 3, "aa");
+    	t.setText(2, 2, "aa");
+    	t.setText(3, 3, "aa");
+    	t.removeCell(2, 2);
+    	
+    	//t.getCellFormatter().addStyleName(2, 3, ttStyle.arciCol());
+		//t.getFlexCellFormatter().setRowSpan(1, 3, 2);
+    	
+		//t.getCellFormatter().addStyleName(2, 6, ttStyle.arciCol());
+		//t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
 		
-		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
+		
+		/*t.setText(1, 5, "aa");
+		t.getFlexCellFormatter().setRowSpan(1, 5, 3);
+		t.getCellFormatter().addStyleName(2, 8, ttStyle.arciCol());
+		t.getCellFormatter().addStyleName(3, 7, ttStyle.arciCol());
+		t.getCellFormatter().addStyleName(1, 5, ttStyle.hasEvent());
+		*/
+		
+		/*
+		t.setText(1, 11, "aa");
+		t.getFlexCellFormatter().setRowSpan(1, 11, 3);
+		t.getCellFormatter().addStyleName(1, 11, ttStyle.hasEvent());
+		*/
+		
+		/*t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
 		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
 		t.getCellFormatter().addStyleName(5, 2, ttStyle.hasEvent());
 		
@@ -92,10 +126,12 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
 		t.getCellFormatter().addStyleName(9, 2, ttStyle.noEvent());
 */
+		
 		/*SimplePanel eventCell = new SimplePanel();
 		t.setWidget(11,	2, eventCell);
 		eventCell.add(new Label("מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה"));
 		eventCell.addStyleName(ttStyle.hasEventWrap());*/
+		
 		/*
     	t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
 		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
@@ -135,8 +171,8 @@ public class TimeTableGUI extends LayoutPanel {
 		t.getCellFormatter().addStyleName(9, 3, ttStyle.noEvent());
 		*/
 		
-    	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
-    	/*t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
+    	/*t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
     	t.getColumnFormatter().addStyleName(4, ttStyle.hoursCol());
     	t.getColumnFormatter().addStyleName(6, ttStyle.hoursCol());
     	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
@@ -145,7 +181,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    t.addStyleName(ttStyle.timeTable());
 	    
 	    
-	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+	    /*ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 	    Lesson l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
@@ -159,7 +195,7 @@ public class TimeTableGUI extends LayoutPanel {
 	    ArrayList<LessonGroup> lgList = new ArrayList<>();
 	    LessonGroup lg = new LessonGroup(14);
 	    lg.addLesson(l);
-	    lgList.add(lg);
+	    lgList.add(lg);*/
 	    
 	    //displaySchedule(lgList);
 	    //drawDay(lessons, 4);
@@ -173,8 +209,8 @@ public class TimeTableGUI extends LayoutPanel {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
-    		//t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
-    		//t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i-1, EMPTY_COL, ttStyle.arciCol());
+    		t.getCellFormatter().addStyleName(2*i, EMPTY_COL, ttStyle.arciCol());
     		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
     	}
@@ -183,8 +219,8 @@ public class TimeTableGUI extends LayoutPanel {
 	    	for(int i = 1; i<12; i++){
 	    		t.setText(2*i-1, col, "");
 	    		t.setText(2*i, col-1, "");
-	    		//t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
-	    		//t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
+	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
+	    		t.getCellFormatter().addStyleName(2*i, col-1, ttStyle.arciCol());
 	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
 	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 	    	}
