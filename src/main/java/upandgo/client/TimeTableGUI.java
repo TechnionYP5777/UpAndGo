@@ -94,28 +94,29 @@ public class TimeTableGUI extends LayoutPanel {
     	t.setText(2, 2, "aa");
     	t.setText(3, 3, "aa");
     	t.removeCell(2, 2);*/
-    	t.setText(1, 3, "aa");
-    	clearBeforeSpan(1,3,2);
-		t.getFlexCellFormatter().setRowSpan(1, 3, 3);
-		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
+    	
+    	
+    	drawCell(1, 3, "", 2, ttStyle.noEvent());
+    	
 		
 		
+    	drawCell(3, 3, "קורס כלשהו", 2, ttStyle.hasEvent());
 		
 		
-		/*t.setText(1, 5, "aa");
-		t.getFlexCellFormatter().setRowSpan(1, 5, 3);
-		t.getCellFormatter().addStyleName(2, 8, ttStyle.arciCol());
-		t.getCellFormatter().addStyleName(3, 7, ttStyle.arciCol());
-		t.getCellFormatter().addStyleName(1, 5, ttStyle.hasEvent());
-		*/
+		t.setText(5, 3, "");
+		clearBeforeSpan(5,3,4);
+		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
+		t.getCellFormatter().addStyleName(5, 3, ttStyle.noEvent());
+		
+		
+		t.setText(9, 3, "מבוא לכלכלה, ניהול 306");
+		clearBeforeSpan(9,3,4);
+		t.getFlexCellFormatter().setRowSpan(9, 3, 4);
+		t.getCellFormatter().addStyleName(9, 3, ttStyle.hasEvent());
+		
 		
 		/*
-		t.setText(1, 11, "aa");
-		t.getFlexCellFormatter().setRowSpan(1, 11, 3);
-		t.getCellFormatter().addStyleName(1, 11, ttStyle.hasEvent());
-		*/
-		
-		/*t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
+		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
 		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
 		t.getCellFormatter().addStyleName(5, 2, ttStyle.hasEvent());
 		
@@ -202,10 +203,19 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     
-    private void clearBeforeSpan(int r, int c, int span) {
+    private void drawCell(int row, int col, String text, int span, String styleName) {
+    	t.setText(row, col, text);
+    	clearBeforeSpan(row,col,span);
+		t.getFlexCellFormatter().setRowSpan(row, col, span);
+		t.getCellFormatter().addStyleName(row, col, styleName);
+		
+		
+	}
+
+	private void clearBeforeSpan(int r, int c, int span) {
 		// TODO Auto-generated method stub
     	
-    	for(int i = r+1; i <= r+span; i++){
+    	for(int i = r+1; i < r+span; i++){
     		if(i % 2 == 0){
     			t.removeCell(i, c-1);
     		}else{
