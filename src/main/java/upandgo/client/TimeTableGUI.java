@@ -40,14 +40,21 @@ public class TimeTableGUI extends LayoutPanel {
     	drawHeaders();
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
+    	
+    	
+    	//t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
+    	/*t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(4, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(6, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(8, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());
+    	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());*/
+    	
     	t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
-
+    	t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(4, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(6, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
+    	t.getColumnFormatter().addStyleName(10, ttStyle.hoursCol());
     	
     	
     	for(int i = 1; i<=11; i+=2){;

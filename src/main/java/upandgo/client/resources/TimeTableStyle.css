@@ -23,12 +23,13 @@
 }
 
 .arciCol {
-	
+
 	background: #577F92;
 	
 }
 
 .hoursCol{
+	background: #cc0000;
 }
 
 .hoursCell{
@@ -39,7 +40,7 @@
 }
 
 .dayCol{	
-	width:10%;
+	width:20%;
 }
 
 .hasEvent{
