@@ -1,4 +1,5 @@
 package upandgo.client;
+import com.allen_sauer.gwt.log.client.Log;
 /**
  * 
  * @author danabra
@@ -10,7 +11,7 @@ package upandgo.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class UpAndGo implements EntryPoint {
 	
@@ -25,19 +26,21 @@ public class UpAndGo implements EntryPoint {
 
 		appViewer.go(RootPanel.get());*/
 		
+		Log.info("message");
+		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
-		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		//TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
 		
-		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
+		//timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		mainView.add(courseSelectionView);
 		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
 		mainView.setWidgetTopHeight(courseSelectionView, 1, Unit.EM, 100, Unit.PCT);
-		mainView.add(timeTableView);
-		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
+		//mainView.add(timeTableView);
+		//mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
+		//mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
 		
-		RootPanel.get().add(mainView);
+		RootLayoutPanel.get().add(mainView);
 	}
 
 }
