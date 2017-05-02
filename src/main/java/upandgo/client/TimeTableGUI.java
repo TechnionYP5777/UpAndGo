@@ -27,6 +27,11 @@ public class TimeTableGUI extends LayoutPanel {
 	
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
+	static final int SUNDAY_COL = 3;
+	static final int MONDAY_COL = 5;
+	static final int TUESDAY_COL = 7;
+	static final int WEDNESDAY_COL = 9;
+	static final int THURSDAY_COL = 11;
 	
 	private FlexTable t = new FlexTable();
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
@@ -96,23 +101,39 @@ public class TimeTableGUI extends LayoutPanel {
     	t.removeCell(2, 2);*/
     	
     	
-    	drawCell(1, 3, "", 2, ttStyle.noEvent());
+    	int col = SUNDAY_COL;
+    	drawCell(1, col, "", 2, ttStyle.noEvent());
+    	drawCell(3, col, "קורס כלשהו", 2, ttStyle.hasEvent());
+    	drawCell(5, col, "", 3, ttStyle.noEvent());
+    	drawCell(8, col-1, "מבוא לכלכלה, ניהול 306", 5, ttStyle.hasEvent());
+    	drawCell(13, col, "", 10, ttStyle.noEvent());
     	
-		
-		
-    	drawCell(3, 3, "קורס כלשהו", 2, ttStyle.hasEvent());
-		
-		
-		t.setText(5, 3, "");
-		clearBeforeSpan(5,3,4);
-		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
-		t.getCellFormatter().addStyleName(5, 3, ttStyle.noEvent());
-		
-		
-		t.setText(9, 3, "מבוא לכלכלה, ניהול 306");
-		clearBeforeSpan(9,3,4);
-		t.getFlexCellFormatter().setRowSpan(9, 3, 4);
-		t.getCellFormatter().addStyleName(9, 3, ttStyle.hasEvent());
+    	col = MONDAY_COL;
+    	
+    	drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(2, col-2, "קורס 1", 1, ttStyle.hasEvent());
+    	drawCell(3, col, "", 1, ttStyle.noEvent());
+    	drawCell(4, col-2, "קורס 3", 3, ttStyle.hasEvent());
+    	
+    	col = TUESDAY_COL;
+    	
+    	drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(2, col-2, "קורס 2", 2, ttStyle.hasEvent());
+    	
+    	
+    	/*
+    	t.setText(2, col-2, "sdf");
+    	clearBeforeSpan(2,col,1);
+		t.getFlexCellFormatter().setRowSpan(2, col, 1);
+		t.getCellFormatter().addStyleName(2, col, ttStyle.hasEvent());
+		*/
+    	
+    	//drawCell(4, col, "קורס כלשהו", 2, ttStyle.hasEvent());
+    	/*drawCell(4, col, "קורס כלשהו", 1, ttStyle.hasEvent());
+    	drawCell(5, col, "", 4, ttStyle.noEvent());
+    	drawCell(9, col, "מבוא לכלכלה, ניהול 306", 4, ttStyle.hasEvent());
+    	drawCell(13, col, "", 10, ttStyle.noEvent());
+    	*/
 		
 		
 		/*
