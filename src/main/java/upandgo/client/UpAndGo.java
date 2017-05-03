@@ -26,7 +26,7 @@ public class UpAndGo implements EntryPoint {
 
 		appViewer.go(RootPanel.get());*/
 		
-		Log.info("message");
+		Log.warn("message");
 		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
