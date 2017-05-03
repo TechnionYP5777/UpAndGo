@@ -24,8 +24,14 @@
 }
 
 .arciCol {
-	
+	display: none;
 	background: #577F92;
+	
+}
+
+.arciCol2 {
+	
+	background: #ef2929;
 	
 }
 
