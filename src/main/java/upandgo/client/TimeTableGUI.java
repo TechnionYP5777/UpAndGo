@@ -94,14 +94,49 @@ public class TimeTableGUI extends HorizontalPanel {
 	    drawDay(lessons, tuesdayTable);
 	    drawDay(lessons, thursdayTable);
 	    
-
+	    
 	    this.add(t);
 	    this.add(sundayTable);
 	    this.add(mondayTable);
 	    this.add(tuesdayTable);
 	    this.add(wednesdayTable);
 	    this.add(thursdayTable);
+	    
+	    //clearTable();
     }
+    
+    private void clearTable(){
+    	this.remove(t);
+ 	    this.remove(sundayTable);
+ 	    this.remove(mondayTable);
+ 	    this.remove(tuesdayTable);
+ 	    this.remove(wednesdayTable);
+ 	    this.remove(thursdayTable);
+ 	    
+ 	    t = new FlexTable();
+ 		sundayTable = new FlexTable();
+ 		mondayTable = new FlexTable();
+ 		tuesdayTable = new FlexTable();
+ 		wednesdayTable = new FlexTable();
+ 		thursdayTable = new FlexTable();
+ 		
+ 		drawHoursTable(t);
+    	drawDayTable(sundayTable, "ראשון");
+    	drawDayTable(mondayTable, "שני");
+    	drawDayTable(tuesdayTable, "שלישי");
+    	drawDayTable(wednesdayTable, "רביעי");
+    	drawDayTable(thursdayTable, "חמישי");
+ 		
+ 		this.add(t);
+ 	    this.add(sundayTable);
+ 	    this.add(mondayTable);
+ 	    this.add(tuesdayTable);
+ 	    this.add(wednesdayTable);
+ 	    this.add(thursdayTable);
+ 		
+ 		
+    }
+    
     
     private void drawDayTable(FlexTable t, String header) {
     	t.setText(0, 0, "");
