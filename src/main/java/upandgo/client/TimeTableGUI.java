@@ -261,10 +261,10 @@ public class TimeTableGUI extends LayoutPanel {
     private void redrawArci() {
     	for(int col = 0; col<=12; col+=2){
 	    	for(int i = 1; i<12; i++){
-	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, col, ttStyle.arciCol());
-	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
+	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol2());
+	    		t.getCellFormatter().addStyleName(2*i, col, ttStyle.arciCol2());
+	    		//t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
+	    		//t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
 	    	}
     	}
 	}

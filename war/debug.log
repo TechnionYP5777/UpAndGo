@@ -12320,3 +12320,926 @@
 2017-05-03 11:39:19 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@280d4752
 2017-05-03 11:39:19 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
 2017-05-03 11:39:19 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@18a21664{/127.0.0.1:45846<->8888,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:39:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800786876
+2017-05-03 11:39:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800789714
+2017-05-03 11:40:16 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800816876
+2017-05-03 11:40:19 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800819714
+2017-05-03 11:40:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800846876
+2017-05-03 11:40:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800849714
+2017-05-03 11:41:16 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800876876
+2017-05-03 11:41:19 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800879714
+2017-05-03 11:41:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800906877
+2017-05-03 11:41:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800909715
+2017-05-03 11:42:16 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800936877
+2017-05-03 11:42:19 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800939715
+2017-05-03 11:42:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800966877
+2017-05-03 11:42:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800969715
+2017-05-03 11:43:01 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@44e00501
+2017-05-03 11:43:01 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2504e638
+2017-05-03 11:43:01 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6f89ef54
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@44e00501
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@1f5fcf13
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@18c8c76a{/127.0.0.1:37742<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@6f89ef54
+2017-05-03 11:43:01 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@426e71e5
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5a59b7b6
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@474c3c5{/127.0.0.1:37746<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5a59b7b6
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@1f5fcf13
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@2504e638
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1c4435e9
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@3a02bce{/127.0.0.1:37744<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@1597618c{/127.0.0.1:45868<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1c4435e9
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@426e71e5
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@19d35f96{/127.0.0.1:45870<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.css on HttpChannelOverHttp@627dd23f{r=1,c=false,a=DISPATCHED,uri=/upandgo.css}
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.css|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.css  404 handled=true
+2017-05-03 11:43:01 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:01 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@54fdd322{r=1,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/upandgo.nocache.js|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:43:01 [qtp1622465228-48] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:01 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile-requester/upandgo on HttpChannelOverHttp@35a51c30{r=1,c=false,a=DISPATCHED,uri=/recompile-requester/upandgo}
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile-requester/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile-requester/upandgo  200 handled=true
+2017-05-03 11:43:01 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:01 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile/upandgo on HttpChannelOverHttp@35a51c30{r=2,c=false,a=DISPATCHED,uri=/recompile/upandgo?user.agent=gecko1_8&_callback=__gwt_sdm_globals.callbacks.c1493800981215}
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:01 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile/upandgo  200 handled=true
+2017-05-03 11:43:02 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@35a51c30{r=3,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/upandgo.nocache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:43:02 [qtp1181670854-39] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/clean_rtl.css on HttpChannelOverHttp@35a51c30{r=4,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/clean_rtl.css}
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/clean_rtl.css -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/clean_rtl.css  200 handled=true
+2017-05-03 11:43:02 [qtp1181670854-42] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js on HttpChannelOverHttp@35a51c30{r=5,c=false,a=DISPATCHED,uri=/upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js}
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/FD155AA67BC66317D4AF0DAB593A51F9.cache.js  200 handled=true
+2017-05-03 11:43:02 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt-log-triangle-10x10.png on HttpChannelOverHttp@54fdd322{r=2,c=false,a=DISPATCHED,uri=/upandgo/gwt-log-triangle-10x10.png}
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log-triangle-10x10.png|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log-triangle-10x10.png  200 handled=true
+2017-05-03 11:43:02 [qtp1622465228-54] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:02 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/images/hborder.png on HttpChannelOverHttp@35a51c30{r=6,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/images/hborder.png}
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/images/hborder.png -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/images/hborder.png  200 handled=true
+2017-05-03 11:43:02 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:02 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - REQUEST POST /upandgo/gwt-log on HttpChannelOverHttp@54fdd322{r=3,c=false,a=DISPATCHED,uri=/upandgo/gwt-log}
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log  404 handled=true
+2017-05-03 11:43:03 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:03 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:06 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:06 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:06 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1c4435e9
+2017-05-03 11:43:06 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5a59b7b6
+2017-05-03 11:43:06 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1c4435e9
+2017-05-03 11:43:06 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5a59b7b6
+2017-05-03 11:43:06 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:06 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:06 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@3a02bce{/127.0.0.1:37744<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:06 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@474c3c5{/127.0.0.1:37746<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:16 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800996877
+2017-05-03 11:43:19 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493800999715
+2017-05-03 11:43:31 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:31 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:31 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d8e546c
+2017-05-03 11:43:31 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:31 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@1597618c{/127.0.0.1:45868<->8888,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:32 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:32 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:32 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@5cd9ad1c
+2017-05-03 11:43:32 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:32 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@18c8c76a{/127.0.0.1:37742<->9876,CLOSED,ISHUT,OSHUT,-,-,0/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:33 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:33 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:33 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@4e181e24
+2017-05-03 11:43:33 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:33 [qtp1622465228-54] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@19d35f96{/127.0.0.1:45870<->8888,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801026877
+2017-05-03 11:43:47 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@7a0a6f79
+2017-05-03 11:43:47 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3e86a534
+2017-05-03 11:43:47 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3c31b1fa
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@7a0a6f79
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@41b060f9{/127.0.0.1:37766<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3c31b1fa
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7b697b11
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@391c7363{/127.0.0.1:37770<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7b697b11
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3e86a534
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7fa12c56
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@5de9a6c5{/127.0.0.1:37768<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7fa12c56
+2017-05-03 11:43:47 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@763582f
+2017-05-03 11:43:47 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@18e1b3c5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@763582f
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@18e1b3c5
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@14444fa2{/127.0.0.1:45894<->8888,Open,in,out,R,-,1/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@452d8f8d{/127.0.0.1:45892<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.css on HttpChannelOverHttp@67317471{r=1,c=false,a=DISPATCHED,uri=/upandgo.css}
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@73d89ce5{r=1,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.css|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.css  404 handled=true
+2017-05-03 11:43:47 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/upandgo.nocache.js|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:43:47 [qtp1622465228-50] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:47 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:43:47 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile-requester/upandgo on HttpChannelOverHttp@3d73fe7c{r=1,c=false,a=DISPATCHED,uri=/recompile-requester/upandgo}
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile-requester/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile-requester/upandgo  200 handled=true
+2017-05-03 11:43:47 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:47 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile/upandgo on HttpChannelOverHttp@3d73fe7c{r=2,c=false,a=DISPATCHED,uri=/recompile/upandgo?user.agent=gecko1_8&_callback=__gwt_sdm_globals.callbacks.c1493801027240}
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:47 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile/upandgo  200 handled=true
+2017-05-03 11:43:48 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@3d73fe7c{r=3,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/upandgo.nocache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:43:48 [qtp1181670854-39] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/clean_rtl.css on HttpChannelOverHttp@3d73fe7c{r=4,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/clean_rtl.css}
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/clean_rtl.css -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/clean_rtl.css  200 handled=true
+2017-05-03 11:43:48 [qtp1181670854-42] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js on HttpChannelOverHttp@3d73fe7c{r=5,c=false,a=DISPATCHED,uri=/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js}
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js  200 handled=true
+2017-05-03 11:43:48 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt-log-triangle-10x10.png on HttpChannelOverHttp@73d89ce5{r=2,c=false,a=DISPATCHED,uri=/upandgo/gwt-log-triangle-10x10.png}
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log-triangle-10x10.png|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log-triangle-10x10.png  200 handled=true
+2017-05-03 11:43:48 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/images/hborder.png on HttpChannelOverHttp@3d73fe7c{r=6,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/images/hborder.png}
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/images/hborder.png -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/images/hborder.png  200 handled=true
+2017-05-03 11:43:48 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:43:48 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - REQUEST POST /upandgo/gwt-log on HttpChannelOverHttp@73d89ce5{r=3,c=false,a=DISPATCHED,uri=/upandgo/gwt-log}
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log  404 handled=true
+2017-05-03 11:43:48 [qtp1622465228-48] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:43:48 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801029715
+2017-05-03 11:43:52 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:43:52 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:43:52 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7fa12c56
+2017-05-03 11:43:52 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7b697b11
+2017-05-03 11:43:52 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7b697b11
+2017-05-03 11:43:52 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7fa12c56
+2017-05-03 11:43:52 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:52 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:43:52 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@5de9a6c5{/127.0.0.1:37768<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:43:52 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@391c7363{/127.0.0.1:37770<->9876,CLOSED,ISHUT,OSHUT,-,-,5001/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:16 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801056878
+2017-05-03 11:44:17 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:17 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:44:17 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6b981da5
+2017-05-03 11:44:17 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:17 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@452d8f8d{/127.0.0.1:45892<->8888,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:18 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:18 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:44:18 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@43cccd5a
+2017-05-03 11:44:18 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:18 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@41b060f9{/127.0.0.1:37766<->9876,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:18 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:18 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:44:18 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@17e88d53
+2017-05-03 11:44:18 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:18 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@14444fa2{/127.0.0.1:45894<->8888,CLOSED,ISHUT,OSHUT,-,-,1/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:19 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801059716
+2017-05-03 11:44:37 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@1c621a67
+2017-05-03 11:44:37 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@353acf35
+2017-05-03 11:44:37 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3e9e63a3
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@1c621a67
+2017-05-03 11:44:37 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@7927c09d
+2017-05-03 11:44:37 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@48f76705
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@7927c09d
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@69af8185{/127.0.0.1:37782<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3e9e63a3
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@644f02af
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@48f76705
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@353acf35
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@718417c
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@289c4afa
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@311721a3{/127.0.0.1:45910<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@7241a8ba{/127.0.0.1:37784<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@718417c
+2017-05-03 11:44:37 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@6993f3a{/127.0.0.1:45908<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@717916ac{/127.0.0.1:37786<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@644f02af
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@289c4afa
+2017-05-03 11:44:37 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.css on HttpChannelOverHttp@3cee367e{r=1,c=false,a=DISPATCHED,uri=/upandgo.css}
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.css|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.css  404 handled=true
+2017-05-03 11:44:37 [qtp1622465228-48] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@3cee367e{r=2,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/upandgo.nocache.js|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:44:37 [qtp1622465228-54] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:37 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile-requester/upandgo on HttpChannelOverHttp@4d090c16{r=1,c=false,a=DISPATCHED,uri=/recompile-requester/upandgo}
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile-requester/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile-requester/upandgo  200 handled=true
+2017-05-03 11:44:37 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:37 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile/upandgo on HttpChannelOverHttp@4d090c16{r=2,c=false,a=DISPATCHED,uri=/recompile/upandgo?user.agent=gecko1_8&_callback=__gwt_sdm_globals.callbacks.c1493801077364}
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:37 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile/upandgo  200 handled=true
+2017-05-03 11:44:38 [qtp1181670854-39] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@4d090c16{r=3,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/upandgo.nocache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:44:38 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/clean_rtl.css on HttpChannelOverHttp@4d090c16{r=4,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/clean_rtl.css}
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/clean_rtl.css -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/clean_rtl.css  200 handled=true
+2017-05-03 11:44:38 [qtp1181670854-42] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js on HttpChannelOverHttp@4d090c16{r=5,c=false,a=DISPATCHED,uri=/upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js}
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/0F08FEB23FB3A063F26F86755D35CA1D.cache.js  200 handled=true
+2017-05-03 11:44:38 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:38 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt-log-triangle-10x10.png on HttpChannelOverHttp@3cee367e{r=3,c=false,a=DISPATCHED,uri=/upandgo/gwt-log-triangle-10x10.png}
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log-triangle-10x10.png|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log-triangle-10x10.png  200 handled=true
+2017-05-03 11:44:39 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/images/hborder.png on HttpChannelOverHttp@4d090c16{r=6,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/images/hborder.png}
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/images/hborder.png -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/images/hborder.png  200 handled=true
+2017-05-03 11:44:39 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:39 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - REQUEST POST /upandgo/gwt-log on HttpChannelOverHttp@3cee367e{r=4,c=false,a=DISPATCHED,uri=/upandgo/gwt-log}
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log  404 handled=true
+2017-05-03 11:44:39 [qtp1622465228-50] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:39 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:42 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:42 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@718417c
+2017-05-03 11:44:42 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@718417c
+2017-05-03 11:44:42 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:42 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:42 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@289c4afa
+2017-05-03 11:44:42 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@289c4afa
+2017-05-03 11:44:42 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:42 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:42 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@644f02af
+2017-05-03 11:44:42 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@644f02af
+2017-05-03 11:44:42 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@311721a3{/127.0.0.1:45910<->8888,CLOSED,ISHUT,OSHUT,-,-,4999/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:42 [qtp1181670854-39] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@7241a8ba{/127.0.0.1:37784<->9876,CLOSED,ISHUT,OSHUT,-,-,4999/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:42 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:42 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@717916ac{/127.0.0.1:37786<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:46 [org.eclipse.jetty.server.session.HashSessionManager@677b5145Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801086878
+2017-05-03 11:44:49 [org.eclipse.jetty.server.session.HashSessionManager@452115b1Timer] DEBUG org.eclipse.jetty.server.session - Scavenging sessions at 1493801089716
+2017-05-03 11:44:53 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@f11bbeb
+2017-05-03 11:44:53 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3ac294c
+2017-05-03 11:44:53 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@55c8fc14
+2017-05-03 11:44:53 [qtp1181670854-38-acceptor-0@1fa21cb8-ServerConnector@1d6ed26{HTTP/1.1}{127.0.0.1:9876}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@600c0d6b
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@55c8fc14
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@f11bbeb
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6ffd64f6
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@10860a24{/127.0.0.1:37792<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@600c0d6b
+2017-05-03 11:44:53 [qtp1622465228-52-acceptor-0@71f55a59-ServerConnector@7fb4c8bc{HTTP/1.1}{127.0.0.1:8888}] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@40a212f3
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/1 selected
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@3ac294c
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/0 selected
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectorManager$ManagedSelector$Accept@40a212f3
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d47219
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@3f724b6a
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@3821dfc7{/127.0.0.1:37794<->9876,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d47219
+2017-05-03 11:44:53 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@37e06e0c{/127.0.0.1:45920<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@3f724b6a
+2017-05-03 11:44:53 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@507db39f{/127.0.0.1:45918<->8888,Open,in,out,R,-,0/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:53 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@750eeb29
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Created SelectChannelEndPoint@55790c88{/127.0.0.1:37796<->9876,Open,in,out,R,-,1/30000,HttpConnection}{io=1,kio=0,kro=0}
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6ffd64f6
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@750eeb29
+2017-05-03 11:44:53 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo.css on HttpChannelOverHttp@3cee367e{r=5,c=false,a=DISPATCHED,uri=/upandgo.css}
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo.css @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo.css|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@488b5412{r=1,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo.css  404 handled=true
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1622465228-48] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/upandgo.nocache.js|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:44:54 [qtp1622465228-54] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:54 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile-requester/upandgo on HttpChannelOverHttp@4d090c16{r=7,c=false,a=DISPATCHED,uri=/recompile-requester/upandgo}
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile-requester/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile-requester/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile-requester/upandgo  200 handled=true
+2017-05-03 11:44:54 [qtp1181670854-42] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /recompile/upandgo on HttpChannelOverHttp@4d090c16{r=8,c=false,a=DISPATCHED,uri=/recompile/upandgo?user.agent=gecko1_8&_callback=__gwt_sdm_globals.callbacks.c1493801094075}
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - scope null||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.j.server.handler.ContextHandler - context=||/recompile/upandgo @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/recompile/upandgo -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG org.eclipse.jetty.server.Server - RESPONSE /recompile/upandgo  200 handled=true
+2017-05-03 11:44:54 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/upandgo.nocache.js on HttpChannelOverHttp@4d090c16{r=9,c=false,a=DISPATCHED,uri=/upandgo/upandgo.nocache.js}
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/upandgo.nocache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/upandgo.nocache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/upandgo.nocache.js  200 handled=true
+2017-05-03 11:44:54 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/clean_rtl.css on HttpChannelOverHttp@4d090c16{r=10,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/clean_rtl.css}
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/clean_rtl.css @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/clean_rtl.css -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/clean_rtl.css  200 handled=true
+2017-05-03 11:44:54 [qtp1181670854-39] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js on HttpChannelOverHttp@4d090c16{r=11,c=false,a=DISPATCHED,uri=/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js}
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/AE985593362CEABDD7EA2092425BEAF6.cache.js  200 handled=true
+2017-05-03 11:44:54 [qtp1181670854-40] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:54 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt-log-triangle-10x10.png on HttpChannelOverHttp@3cee367e{r=6,c=false,a=DISPATCHED,uri=/upandgo/gwt-log-triangle-10x10.png}
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log-triangle-10x10.png @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log-triangle-10x10.png|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log-triangle-10x10.png  200 handled=true
+2017-05-03 11:44:55 [qtp1622465228-51] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@2fe18983
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - REQUEST GET /upandgo/gwt/clean/images/hborder.png on HttpChannelOverHttp@4d090c16{r=12,c=false,a=DISPATCHED,uri=/upandgo/gwt/clean/images/hborder.png}
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt/clean/images/hborder.png @ o.e.j.s.ServletContextHandler@5145dc7{/,null,AVAILABLE}
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@677b5145
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - servlet ||/upandgo/gwt/clean/images/hborder.png -> com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - chain=org.eclipse.jetty.servlets.GzipFilter-2d03be3->com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call filter org.eclipse.jetty.servlets.GzipFilter-2d03be3
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG o.e.jetty.servlet.ServletHandler - call servlet com.google.gwt.dev.codeserver.WebServer$1-121c65d0@55f371a==com.google.gwt.dev.codeserver.WebServer$1,-1,true
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt/clean/images/hborder.png  200 handled=true
+2017-05-03 11:44:55 [qtp1181670854-42] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@7960cdfb
+2017-05-03 11:44:55 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - REQUEST POST /upandgo/gwt-log on HttpChannelOverHttp@488b5412{r=2,c=false,a=DISPATCHED,uri=/upandgo/gwt-log}
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - scope null||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG o.e.j.server.handler.ContextHandler - context=||/upandgo/gwt-log @ c.g.g.d.s.j.WebAppContextWithReload@5d65a2f1{/,file:/home/kobybs/owlRipo/UpAndGo/war/,AVAILABLE}{/home/kobybs/owlRipo/UpAndGo/war}
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - sessionManager=org.eclipse.jetty.server.session.HashSessionManager@452115b1
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.session - session=null
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - servlet |/upandgo/gwt-log|null -> default@5c13d641==org.eclipse.jetty.servlet.DefaultServlet,0,true
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG o.e.jetty.servlet.ServletHandler - chain=null
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG org.eclipse.jetty.server.Server - RESPONSE /upandgo/gwt-log  404 handled=true
+2017-05-03 11:44:55 [qtp1622465228-50] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 0/2 selected
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1fd22645
+2017-05-03 11:44:55 [qtp1622465228-53-selector-ServerConnectorManager@423ab841/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:58 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/2 selected
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 2/2 selected
+2017-05-03 11:44:58 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d47219
+2017-05-03 11:44:58 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop woken up from select, 1/1 selected
+2017-05-03 11:44:58 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@3f724b6a
+2017-05-03 11:44:58 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@1d47219
+2017-05-03 11:44:58 [qtp1181670854-36-selector-ServerConnectorManager@7606a261/0] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@750eeb29
+2017-05-03 11:44:58 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@3821dfc7{/127.0.0.1:37794<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Queued change org.eclipse.jetty.io.SelectChannelEndPoint$1@6ffd64f6
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@750eeb29
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@6ffd64f6
+2017-05-03 11:44:58 [qtp1181670854-37-selector-ServerConnectorManager@7606a261/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:58 [qtp1181670854-43] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@10860a24{/127.0.0.1:37792<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:58 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Running change org.eclipse.jetty.io.SelectChannelEndPoint$1@3f724b6a
+2017-05-03 11:44:58 [qtp1622465228-49-selector-ServerConnectorManager@423ab841/1] DEBUG org.eclipse.jetty.io.SelectorManager - Selector loop waiting on select
+2017-05-03 11:44:58 [qtp1622465228-47] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@37e06e0c{/127.0.0.1:45920<->8888,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}
+2017-05-03 11:44:58 [qtp1181670854-41] DEBUG org.eclipse.jetty.io.SelectorManager - Destroyed SelectChannelEndPoint@55790c88{/127.0.0.1:37796<->9876,CLOSED,ISHUT,OSHUT,-,-,5000/30000,HttpConnection}{io=0,kio=-1,kro=-1}

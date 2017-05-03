@@ -20,6 +20,8 @@ public interface Resources extends ClientBundle {
 		 
 		 String arciCol();
 		 
+		 String arciCol2();
+		 
 		 String hoursCol();
 		 
 		 String hoursCell();
