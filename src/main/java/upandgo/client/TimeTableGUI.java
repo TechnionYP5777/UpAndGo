@@ -32,6 +32,13 @@ public class TimeTableGUI extends HorizontalPanel {
 	
 	private FlexTable t = new FlexTable();
 	private FlexTable sundayTable = new FlexTable();
+	private FlexTable mondayTable = new FlexTable();
+	private FlexTable tuesdayTable = new FlexTable();
+	private FlexTable wednesdayTable = new FlexTable();
+	private FlexTable thursdayTable = new FlexTable();
+	
+	
+	
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableGUI(){
@@ -41,7 +48,13 @@ public class TimeTableGUI extends HorizontalPanel {
 	
     private void InitializePanel(){
     	drawHoursTable(t);
-    	drawDayTable(sundayTable);
+    	drawDayTable(sundayTable, "ראשון");
+    	drawDayTable(mondayTable, "שני");
+    	drawDayTable(tuesdayTable, "שלישי");
+    	drawDayTable(wednesdayTable, "רביעי");
+    	drawDayTable(thursdayTable, "חמישי");
+    	
+    	
 	    
 	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 	    Lesson l = new Lesson(null,
@@ -78,15 +91,22 @@ public class TimeTableGUI extends HorizontalPanel {
 	    lgList.add(lg);
 	    
 	    //displaySchedule(lgList);
-	    drawDay(lessons, 4, sundayTable);
+	    drawDay(lessons, sundayTable);
+	    drawDay(lessons, tuesdayTable);
+	    drawDay(lessons, thursdayTable);
+	    
 
 	    this.add(t);
 	    this.add(sundayTable);
+	    this.add(mondayTable);
+	    this.add(tuesdayTable);
+	    this.add(wednesdayTable);
+	    this.add(thursdayTable);
     }
     
-    private void drawDayTable(FlexTable t) {
+    private void drawDayTable(FlexTable t, String header) {
     	t.setText(0, 0, "");
-    	t.setText(0, 1, "ראשון");
+    	t.setText(0, 1, header);
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
@@ -227,8 +247,8 @@ public class TimeTableGUI extends HorizontalPanel {
  	
  	
  	//gets a group of lessond and a day and draw the schedule for that day.
- 	private void drawDay(ArrayList<Lesson> lessons, int day, FlexTable t){
- 		day = LESSONS_COL;
+ 	private void drawDay(ArrayList<Lesson> lessons, FlexTable t){
+ 		int day = LESSONS_COL;
  		if(lessons.isEmpty()){
  			t.setText(1, day, "");
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
