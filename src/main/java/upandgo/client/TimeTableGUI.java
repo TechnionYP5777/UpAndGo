@@ -9,6 +9,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -20,22 +21,16 @@ import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
 
-public class TimeTableGUI extends LayoutPanel { 
+public class TimeTableGUI extends HorizontalPanel { 
 	
 	// LEARNING SOME NEW STUFF, so comments will stay for a few days
 	private final int DAYS_IN_WEEK = 7;
 	
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
-	static final int SUNDAY_COL = 3;
-	static final int MONDAY_COL = 5;
-	static final int TUESDAY_COL = 7;
-	static final int WEDNESDAY_COL = 9;
-	static final int THURSDAY_COL = 11;
 	
 	private FlexTable t = new FlexTable();
-	private int[] deletedHistogram = new int[23];
-	private int[] toPush = new int[23];
+	private FlexTable sundayTable = new FlexTable();
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableGUI(){
@@ -44,199 +39,10 @@ public class TimeTableGUI extends LayoutPanel {
     }
 	
     private void InitializePanel(){
-    	drawHeaders();
-    	
-    	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	
-    	
-    	
-    	
-    	/*t.getCellFormatter().addStyleName(1, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(1, 1, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(2, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(2, 1, ttStyle.arciCol());*/
-    	/*t.getCellFormatter().addStyleName(4, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(6, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(8, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(10, 0, ttStyle.arciCol());*/
-    	
-    	
-    	
-    	
-    	for(int i = 1; i<=5; i++){; // return
-    		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
-    	}
-    	
-    	
-    	
-    	
-    	//t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
-    	//t.getColumnFormatter().addStyleName(2, ttStyle.dayCol());
-    	/*t.getColumnFormatter().addStyleName(5, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(7, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(9, ttStyle.dayCol());
-    	t.getColumnFormatter().addStyleName(11, ttStyle.dayCol());*/
-    	
-    	
-    	drawArciCol();  // invisible architecture column
-    	drawHoursCol();
-    	
-    	//t.getFlexCellFormatter().setRowSpan(1, 1, 22);
-    	
-    	/*
-    	for(int i = 2; i<7; i++){
-    		t.setText(1, i, "");
-    		t.getFlexCellFormatter().setRowSpan(1, i, 22);
-    	}
-    	*/
-    	
-    	
-    	/*t.setText(1, 3, "aa");
-    	t.setText(2, 2, "aa");
-    	t.setText(3, 3, "aa");
-    	t.removeCell(2, 2);*/
-    	
-    	/*
-			try {
-				t.wait();
-			} catch (InterruptedException e) {
-				Log.info("SDf");
-			}*/
-    	
- 
-    	for(int i = 0; i < 23; i++){
-    		deletedHistogram[i] = 0;
-    		toPush[i] = 0;
-    	}
-    	
-    	
-    	int col = SUNDAY_COL;
-    	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
-    	drawCell(3, col, "", 1, ttStyle.noEvent());
-    	drawCell(4, col, "קורס 5", 3, ttStyle.hasEvent());
-    	drawCell(7, col, "", 2, ttStyle.noEvent());
-    	
-    	col = MONDAY_COL;
-    	
-    	drawCell(1, col, "", 1, ttStyle.noEvent());
-    	drawCell(2, col, "קורס 3", 1, ttStyle.hasEvent());
-    	drawCell(3, col, "", 2, ttStyle.noEvent());
-    	drawCell(5, col, "קורס 6", 2, ttStyle.hasEvent());
-    	
-    	col = TUESDAY_COL;
-    	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
-    	
-    	col = WEDNESDAY_COL;
-    	
-    	drawCell(1, col, "", 1, ttStyle.noEvent());
-    	drawCell(2, col, "קורס 4", 1, ttStyle.hasEvent());
-    	//t.notify();
-    	
-    	//drawCell(2, col, "קורס 1", 1, ttStyle.hasEvent());
-    	
-    	//drawCell(3, col, "", 1, ttStyle.noEvent());
-    	
-    	//drawCell(4, col, "קורס 3", 1, ttStyle.hasEvent());
-    	//drawCell(9, col-1, "קורס 5", 2, ttStyle.hasEvent());
-    	
-    	//drawCell(7, col, "קורס", 1, ttStyle.hasEvent());
-    	//drawCell(10, col, "", 13, ttStyle.noEvent());
-    	
-    	/*
-    	col = TUESDAY_COL;
-    	
-    	drawCell(1, col, "", 1, ttStyle.noEvent());
-    	drawCell(2, col-2, "קורס 2", 2, ttStyle.hasEvent());
-    	*/
-    	
-    	/*
-    	t.setText(2, col-2, "sdf");
-    	clearBeforeSpan(2,col,1);
-		t.getFlexCellFormatter().setRowSpan(2, col, 1);
-		t.getCellFormatter().addStyleName(2, col, ttStyle.hasEvent());
-		*/
-    	
-    	//drawCell(4, col, "קורס כלשהו", 2, ttStyle.hasEvent());
-    	/*drawCell(4, col, "קורס כלשהו", 1, ttStyle.hasEvent());
-    	drawCell(5, col, "", 4, ttStyle.noEvent());
-    	drawCell(9, col, "מבוא לכלכלה, ניהול 306", 4, ttStyle.hasEvent());
-    	drawCell(13, col, "", 10, ttStyle.noEvent());
-    	*/
-		
-		
-		/*
-		t.setText(5, 2, "מבוא לכלכלה, ניהול 306");
-		t.getFlexCellFormatter().setRowSpan(5, 2, 4);
-		t.getCellFormatter().addStyleName(5, 2, ttStyle.hasEvent());
-		
-		t.setText(9, 2, "");
-		t.getFlexCellFormatter().setRowSpan(9, 2, 2);
-		t.getCellFormatter().addStyleName(9, 2, ttStyle.noEvent());
-*/
-		
-		/*SimplePanel eventCell = new SimplePanel();
-		t.setWidget(11,	2, eventCell);
-		eventCell.add(new Label("מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה"));
-		eventCell.addStyleName(ttStyle.hasEventWrap());*/
-		
-		/*
-    	t.setText(11, 2, "מבוא לכלכה, תרגול, כיתה 301 ועוד דברים בדיקת חריגה מגבולות בדיקת חריגה מגבולות בדיקת חריגה");
-		t.getFlexCellFormatter().setRowSpan(11, 2, 2);
-		t.getCellFormatter().addStyleName(11, 2, ttStyle.hasEvent());
-		
-		t.setText(13, 2, "");
-		t.getFlexCellFormatter().setRowSpan(13, 2, 10);
-		t.getCellFormatter().addStyleName(13, 2, ttStyle.noEvent());
-		*/
-		
-		
-		//*******************************
-		
-    	
-		
-		
-		/*t.setText(1, 3, "מבוא לאישים בתנך, בית מדרש 1");
-		t.getFlexCellFormatter().setRowSpan(1, 3, 4);
-		t.getCellFormatter().addStyleName(1, 3, ttStyle.hasEvent());
-		
-		t.setText(5, 3, "תיכון תוכנה, טאוב 10");
-		t.getFlexCellFormatter().setRowSpan(5, 3, 4);
-		t.getCellFormatter().addStyleName(5, 3, ttStyle.hasEvent());
-		
-		t.setText(9, 3, "תיכון תוכנה, טאוב 10");
-		t.getFlexCellFormatter().setRowSpan(9, 3, 4);
-		t.getCellFormatter().addStyleName(9, 3, ttStyle.hasEvent());
-		
-		t.setText(13, 3, "תיכון תוכנה, טאוב 10");
-		t.getFlexCellFormatter().setRowSpan(13, 3, 1);
-		t.getCellFormatter().addStyleName(13, 3, ttStyle.hasEvent());
-		*/
-		
-		/*
-		t.setText(9, 3, "");
-		t.getFlexCellFormatter().setRowSpan(9, 3, 14);
-		t.getCellFormatter().addStyleName(9, 3, ttStyle.noEvent());
-		*/
-		
-    	/*t.getColumnFormatter().addStyleName(0, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(2, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(4, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(6, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
-    	t.getColumnFormatter().addStyleName(10, ttStyle.hoursCol());*/
-
-    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 2, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 4, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 6, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 8, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 10, ttStyle.arciCol());
-    	t.getCellFormatter().addStyleName(0, 12, ttStyle.arciCol());
-    	
-	    t.addStyleName(ttStyle.timeTable());
+    	drawHoursTable(t);
+    	drawDayTable(sundayTable);
 	    
-	    
-	    /*ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 	    Lesson l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
@@ -250,81 +56,91 @@ public class TimeTableGUI extends LayoutPanel {
 	    ArrayList<LessonGroup> lgList = new ArrayList<>();
 	    LessonGroup lg = new LessonGroup(14);
 	    lg.addLesson(l);
-	    lgList.add(lg);*/
+	    lgList.add(lg);
 	    
 	    //displaySchedule(lgList);
 	    //drawDay(lessons, 4);
 
 	    this.add(t);
+	    this.add(sundayTable);
     }
     
-    
-    
-    private void drawCell(int row, int col, String text, int span, String styleName) {
-    	Log.info(text + ": " + deletedHistogram);
-    	//Log.info(text + "*: " + toPush);
+    private void drawDayTable(FlexTable t) {
+    	t.setText(0, 0, "");
+    	t.setText(0, 1, "ראשון");
+    	
+    	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
+    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
+    	t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
+    	
+    	/*
+    	for(int i = 1; i<7; i++){;
+    		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
+    	}*/
     	
     	
-    	col = col-toPush[row];
+    	// invisible arcitcure column
+    	drawArciCol(t);
+    	
+    	drawCell(t, 1, 1, "aaa3", 1, ttStyle.noEvent());
+    	/*t.setText(1, 1, "aaa");
+		t.getFlexCellFormatter().setRowSpan(1, 1, 1);
+		t.getCellFormatter().addStyleName(1, 1, ttStyle.noEvent());
+		*/
+		//t.getCellFormatter().addStyleName(1, 1, ttStyle.noEvent());
+	
+    	
+    	/*
+    	for(int i = 2; i<7; i++){
+    		t.setText(1, i, "");
+    		t.getFlexCellFormatter().setRowSpan(1, i, 22);
+    	}
+    	*/
+    	
+	    t.addStyleName(ttStyle.timeTable());
+	    
+	}
+
+    
+    private void drawHoursTable(FlexTable t) {
+    	drawHeaders(t);
+    	
+    	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
+    	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
+    	t.getColumnFormatter().addStyleName(1, ttStyle.hoursCol());
+    	
+    	/*
+    	for(int i = 1; i<7; i++){;
+    		t.getColumnFormatter().addStyleName(i, ttStyle.dayCol());
+    	}*/
+    	
+    	
+    	// invisible arcitcure column
+    	drawArciCol(t);
+    	
+    	drawHoursCol(t);
+    	
+    	
+    	/*
+    	for(int i = 2; i<7; i++){
+    		t.setText(1, i, "");
+    		t.getFlexCellFormatter().setRowSpan(1, i, 22);
+    	}
+    	*/
+    	
+	    t.addStyleName(ttStyle.timeTable());
+	    
+	}
+    
+    private void drawCell(FlexTable t, int row, int col, String text, int span, String styleName) {
+    	
     	//Log.info("row: " + row + " col: " + col + " text: " + text);
     	t.setText(row, col, text);
-    	
-    	//if(col <= SUNDAY_COL){
-    	clearBeforeSpan(row,col,span);
-    	//}
-    	//if(col <= SUNDAY_COL){
-    		t.getFlexCellFormatter().setRowSpan(row, col, span);
-        //}
-		//t.getFlexCellFormatter().setRowSpan(row, col, span);
+		t.getFlexCellFormatter().setRowSpan(row, col, span);
 		t.getCellFormatter().addStyleName(row, col, styleName);
-		
-		
 	}
 
-    private void clearBeforeSpan(int r, int c, int span) {
-		// TODO Auto-generated method stub
-    	
-    	for(int i = r+1; i < r+span; i++){
-    		t.removeCell(i, c);
-			//t.setText(i, c, "back");
-			toPush[i]++;
-			deletedHistogram[i]++;
-			
-			if(deletedHistogram[i] > 1){
-				Log.info("x: " + i + " :" + deletedHistogram[i]);
-				//t.removeCell(i, c);
-				t.getCellFormatter().addStyleName(i, c-1, ttStyle.arciCol());
-				t.setText(i, c-1, ""+r+","+c);
-				//toPush[i]++;
-				//deletedHistogram[i]++;
-			}
-			/*
-    			if(deletedHistogram[i] == 0){
-    				t.removeCell(i, c);
-    				//t.setText(i, c, "back");
-    				toPush[i]++;
-    				deletedHistogram[i]++;
-    			}else{
-    				t.removeCell(i, c);
-    				//t.setText(i, c, "back");
-    				deletedHistogram[i] = 0;
-    			}*/
-		}
-	}
-    
-	private void clearBeforeSpan2(int r, int c, int span) {
-		// TODO Auto-generated method stub
-    	/*
-    	for(int i = r+1; i < r+span; i++){
-    		if(i % 2 == 0){
-    			t.removeCell(i, c-1);
-    		}else{
-    			t.removeCell(i, c);
-    		}
-		}*/
-	}
-
-	private void drawArciCol() {
+	private void drawArciCol(FlexTable t) {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, EMPTY_COL, "");
     		t.setText(2*i, EMPTY_COL, "");
@@ -334,44 +150,28 @@ public class TimeTableGUI extends LayoutPanel {
     		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
     	}
     	
-    	for(int col = 2; col<=12; col+=2){
-	    	for(int i = 1; i<12; i++){
-	    		t.setText(2*i-1, col, "");
-	    		t.setText(2*i, col, "");
-	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol());
-	    		t.getCellFormatter().addStyleName(2*i, col, ttStyle.arciCol());
-	    		t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-	    		t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-	    	}
-    	}
-    	
 		
 	}
 
-	private void drawHoursCol() {
+	private void drawHoursCol(FlexTable t) {
     	for(int i = 1; i<12; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
-    		//t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
+    		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
-    		t.setText(2*i, HOURS_COL, Integer.toString(i+8)+":00");
-    		t.getCellFormatter().addStyleName(2*i, HOURS_COL, ttStyle.hoursCell());
 
     	}
 	}
 
-	private void drawHeaders() {
+	private void drawHeaders(FlexTable t) {
     	t.setText(0, 0, "");
     	t.setText(0, 1, "שעה");
-    	t.setText(0, 2, "");
-    	t.setText(0, 3, "ראשון");
-    	t.setText(0, 4, "");
-    	t.setText(0, 5, "שני");
-    	t.setText(0, 6, "");
-    	t.setText(0, 7, "שלישי");
-    	t.setText(0, 8, "");
-    	t.setText(0, 9, "רביעי");
-    	t.setText(0, 10, "");
-    	t.setText(0, 11, "חמישי");
+    	
+    	/*
+    	t.setText(0, 2, "ראשון");
+    	t.setText(0, 3, "שני");
+    	t.setText(0, 4, "שלישי");
+    	t.setText(0, 5, "רביעי");
+    	t.setText(0, 6, "חמישי");*/
 		
 	}
 

@@ -1,0 +1,23 @@
+2017-05-03 16:15:17 [qtp1490310532-53] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 1: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - : 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 5: 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - : 0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - : 0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 3: 0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - : 0,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 6: 0,0,1,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - x: 6 :2
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 1: 0,0,1,0,1,1,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - x: 2 :2
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - : 0,0,2,0,1,1,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:15:17 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - קורס 4: 0,0,2,0,1,1,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03 16:17:47 [qtp1490310532-51] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:34:36 [qtp1490310532-52] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:34:58 [qtp1490310532-53] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:35:32 [qtp1490310532-51] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:35:50 [qtp1490310532-51] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:36:03 [qtp1490310532-51] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:36:58 [qtp1490310532-52] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:39:00 [qtp1490310532-54] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 16:39:23 [qtp1490310532-53] WARN  com.allen_sauer.gwt.log.client.Log - message

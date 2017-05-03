@@ -24,8 +24,8 @@
 }
 
 .arciCol {
-	
-	background: #577F92;
+	height: 3em;
+	background: #5c3566;
 	
 }
 
@@ -36,17 +36,18 @@
 }
 
 .hoursCol{
+	background: #eeeeec;
 }
 
 .hoursCell{
 	text-align: center;
-	padding: 1em;
+	
 	font-weight: bold;
 		color:  #555753;
 }
 
 .dayCol{	
-	width:20%;
+	width:10em;
 }
 
 .hasEvent{
