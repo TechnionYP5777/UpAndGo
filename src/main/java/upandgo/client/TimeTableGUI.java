@@ -35,6 +35,7 @@ public class TimeTableGUI extends LayoutPanel {
 	
 	private FlexTable t = new FlexTable();
 	private int[] deletedHistogram = new int[23];
+	private int[] toPush = new int[23];
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableGUI(){
@@ -105,7 +106,9 @@ public class TimeTableGUI extends LayoutPanel {
  
     	for(int i = 0; i < 23; i++){
     		deletedHistogram[i] = 0;
+    		toPush[i] = 0;
     	}
+    	
     	
     	int col = SUNDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
@@ -218,7 +221,6 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getColumnFormatter().addStyleName(8, ttStyle.hoursCol());
     	t.getColumnFormatter().addStyleName(10, ttStyle.hoursCol());*/
 
-    	
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 2, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 4, ttStyle.arciCol());
@@ -226,10 +228,6 @@ public class TimeTableGUI extends LayoutPanel {
     	t.getCellFormatter().addStyleName(0, 8, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 10, ttStyle.arciCol());
     	t.getCellFormatter().addStyleName(0, 12, ttStyle.arciCol());
-    	
-    	
-    	redrawArci();
-    	
     	
 	    t.addStyleName(ttStyle.timeTable());
 	    
@@ -258,21 +256,12 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     
-    private void redrawArci() {
-    	for(int col = 0; col<=12; col+=2){
-	    	for(int i = 1; i<12; i++){
-	    		t.getCellFormatter().addStyleName(2*i-1, col, ttStyle.arciCol2());
-	    		t.getCellFormatter().addStyleName(2*i, col, ttStyle.arciCol2());
-	    		//t.getRowFormatter().setStyleName(2*i-1, ttStyle.tableRow());
-	    		//t.getRowFormatter().setStyleName(2*i, ttStyle.tableRow());
-	    	}
-    	}
-	}
-
-	private void drawCell(int row, int col, String text, int span, String styleName) {
-    	Log.info("a: " + deletedHistogram);
+    private void drawCell(int row, int col, String text, int span, String styleName) {
+    	Log.info(text + ": " + deletedHistogram);
+    	Log.info(text + "*: " + toPush);
     	
-    	col = col-deletedHistogram[row];
+    	
+    	col = col-toPush[row];
     	//Log.info("row: " + row + " col: " + col + " text: " + text);
     	t.setText(row, col, text);
     	
@@ -292,8 +281,29 @@ public class TimeTableGUI extends LayoutPanel {
 		// TODO Auto-generated method stub
     	
     	for(int i = r+1; i < r+span; i++){
-    			t.removeCell(i, c);
-    			deletedHistogram[i]++;
+    		t.removeCell(i, c);
+			//t.setText(i, c, "back");
+			toPush[i]++;
+			deletedHistogram[i]++;
+			
+			if(deletedHistogram[i] > 1){
+				//t.removeCell(i, c);
+				t.getCellFormatter().addStyleName(i, c-1, ttStyle.arciCol());
+				t.setText(i, c-1, "back");
+				//toPush[i]++;
+				//deletedHistogram[i]++;
+			}
+			/*
+    			if(deletedHistogram[i] == 0){
+    				t.removeCell(i, c);
+    				//t.setText(i, c, "back");
+    				toPush[i]++;
+    				deletedHistogram[i]++;
+    			}else{
+    				t.removeCell(i, c);
+    				//t.setText(i, c, "back");
+    				deletedHistogram[i] = 0;
+    			}*/
 		}
 	}
     
