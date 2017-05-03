@@ -112,20 +112,24 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	int col = SUNDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
-    	
+    	drawCell(3, col, "", 1, ttStyle.noEvent());
+    	drawCell(4, col, "קורס 5", 3, ttStyle.hasEvent());
+    	drawCell(7, col, "", 2, ttStyle.noEvent());
     	
     	col = MONDAY_COL;
     	
-    	drawCell(1, col, "aa", 1, ttStyle.noEvent());
-    	drawCell(2, col, "קורס 3", 1, ttStyle.noEvent());
+    	drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(2, col, "קורס 3", 1, ttStyle.hasEvent());
+    	drawCell(3, col, "", 2, ttStyle.noEvent());
+    	drawCell(5, col, "קורס 6", 2, ttStyle.hasEvent());
     	
     	col = TUESDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
     	
     	col = WEDNESDAY_COL;
     	
-    	drawCell(1, col, "aa", 1, ttStyle.noEvent());
-    	drawCell(2, col, "קורס 4", 1, ttStyle.noEvent());
+    	drawCell(1, col, "", 1, ttStyle.noEvent());
+    	drawCell(2, col, "קורס 4", 1, ttStyle.hasEvent());
     	//t.notify();
     	
     	//drawCell(2, col, "קורס 1", 1, ttStyle.hasEvent());
@@ -258,7 +262,7 @@ public class TimeTableGUI extends LayoutPanel {
     
     private void drawCell(int row, int col, String text, int span, String styleName) {
     	Log.info(text + ": " + deletedHistogram);
-    	Log.info(text + "*: " + toPush);
+    	//Log.info(text + "*: " + toPush);
     	
     	
     	col = col-toPush[row];
@@ -287,9 +291,10 @@ public class TimeTableGUI extends LayoutPanel {
 			deletedHistogram[i]++;
 			
 			if(deletedHistogram[i] > 1){
+				Log.info("x: " + i + " :" + deletedHistogram[i]);
 				//t.removeCell(i, c);
 				t.getCellFormatter().addStyleName(i, c-1, ttStyle.arciCol());
-				t.setText(i, c-1, "back");
+				t.setText(i, c-1, ""+r+","+c);
 				//toPush[i]++;
 				//deletedHistogram[i]++;
 			}
