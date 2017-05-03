@@ -17,11 +17,7 @@
 		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
       	<evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
         	<expression>
-        	if(logger.startsWith("com.allen"))
-      			return false;
-      			
-      		return true;
-   
+        	return !(logger.startsWith("com.allen"));
 			</expression>
       	</evaluator>
        <OnMismatch>NEUTRAL</OnMismatch>
