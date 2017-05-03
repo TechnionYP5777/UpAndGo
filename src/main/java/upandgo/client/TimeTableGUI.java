@@ -23,7 +23,6 @@ import upandgo.shared.entities.WeekTime;
 
 public class TimeTableGUI extends HorizontalPanel { 
 	
-	// LEARNING SOME NEW STUFF, so comments will stay for a few days
 	private final int DAYS_IN_WEEK = 7;
 	
 	static final int EMPTY_COL = 0;
