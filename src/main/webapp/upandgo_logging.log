@@ -21,3 +21,38 @@
 2017-05-03 16:36:58 [qtp1490310532-52] WARN  com.allen_sauer.gwt.log.client.Log - message
 2017-05-03 16:39:00 [qtp1490310532-54] WARN  com.allen_sauer.gwt.log.client.Log - message
 2017-05-03 16:39:23 [qtp1490310532-53] WARN  com.allen_sauer.gwt.log.client.Log - message
+2017-05-03 17:21:37 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - span: 4
+2017-05-03 17:21:37 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - span: 2
+2017-05-03 17:23:05 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - span: 4
+2017-05-03 17:23:05 [qtp1490310532-53] INFO  com.allen_sauer.gwt.log.client.Log - span: 2
+2017-05-03 17:24:28 [qtp1490310532-49] INFO  com.allen_sauer.gwt.log.client.Log - span: 4
+2017-05-03 17:24:28 [qtp1490310532-49] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 5
+2017-05-03 17:24:28 [qtp1490310532-49] INFO  com.allen_sauer.gwt.log.client.Log - span: 2
+2017-05-03 17:24:28 [qtp1490310532-49] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 7
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 4
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 5
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 2
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 7
+2017-05-03 17:25:19 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 2
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 4
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 5
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 2
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 11
+2017-05-03 17:25:55 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 2
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 4
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 5
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 2
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 11
+2017-05-03 17:26:31 [qtp1490310532-51] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 0
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 1
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 2
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 2
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 5
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - blank_span: 2
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - currentCell: 11
+2017-05-03 17:27:12 [qtp1490310532-54] INFO  com.allen_sauer.gwt.log.client.Log - lesson_span: 4

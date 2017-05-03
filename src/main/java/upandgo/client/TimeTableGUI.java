@@ -28,6 +28,7 @@ public class TimeTableGUI extends HorizontalPanel {
 	
 	static final int EMPTY_COL = 0;
 	static final int HOURS_COL = 1;
+	static final int LESSONS_COL = 1;
 	
 	private FlexTable t = new FlexTable();
 	private FlexTable sundayTable = new FlexTable();
@@ -44,6 +45,15 @@ public class TimeTableGUI extends HorizontalPanel {
 	    
 	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 	    Lesson l = new Lesson(null,
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(8, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(9, 30)),
+	    		"טאוב 5",
+	    		Type.LECTURE,
+	    		3,
+	    		"123123",
+	    		"אישים בתנך");
+	    lessons.add(l);
+	    l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
 	    		"טאוב 7",
@@ -52,6 +62,15 @@ public class TimeTableGUI extends HorizontalPanel {
 	    		"123123",
 	    		"OOP");
 	    lessons.add(l);
+	    l = new Lesson(null,
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(15, 30)),
+	    		"טאוב 8",
+	    		Type.LECTURE,
+	    		3,
+	    		"123123",
+	    		"מבוא לכלכלה");
+	    lessons.add(l);
 	    
 	    ArrayList<LessonGroup> lgList = new ArrayList<>();
 	    LessonGroup lg = new LessonGroup(14);
@@ -59,7 +78,7 @@ public class TimeTableGUI extends HorizontalPanel {
 	    lgList.add(lg);
 	    
 	    //displaySchedule(lgList);
-	    //drawDay(lessons, 4);
+	    drawDay(lessons, 4, sundayTable);
 
 	    this.add(t);
 	    this.add(sundayTable);
@@ -82,7 +101,9 @@ public class TimeTableGUI extends HorizontalPanel {
     	// invisible arcitcure column
     	drawArciCol(t);
     	
-    	drawCell(t, 1, 1, "aaa3", 1, ttStyle.noEvent());
+    	//drawCell(t, 1, LESSONS_COL, "", 1, ttStyle.noEvent());
+    	//drawCell(t, 2, LESSONS_COL, "aaa3", 1, ttStyle.hasEvent());
+    	
     	/*t.setText(1, 1, "aaa");
 		t.getFlexCellFormatter().setRowSpan(1, 1, 1);
 		t.getCellFormatter().addStyleName(1, 1, ttStyle.noEvent());
@@ -185,7 +206,7 @@ public class TimeTableGUI extends HorizontalPanel {
  		for(int day = 0; day < DAYS_IN_WEEK; day++){
  			final ArrayList<Lesson> daySchedule = lessonsOfDay.get(day);
  			Collections.sort(daySchedule, (t1, t2) -> t1.getStartTime().compareTo(t2.getStartTime()));
-			drawDay(daySchedule, day);
+			//drawDay(daySchedule, day);
  		}
  	}
  	
@@ -206,7 +227,8 @@ public class TimeTableGUI extends HorizontalPanel {
  	
  	
  	//gets a group of lessond and a day and draw the schedule for that day.
- 	private void drawDay(ArrayList<Lesson> lessons, int day){
+ 	private void drawDay(ArrayList<Lesson> lessons, int day, FlexTable t){
+ 		day = LESSONS_COL;
  		if(lessons.isEmpty()){
  			t.setText(1, day, "");
  			t.getFlexCellFormatter().setRowSpan(1, day, 22);
@@ -227,15 +249,22 @@ public class TimeTableGUI extends HorizontalPanel {
  			endTime = l.getEndTime().getTime();
 	 		
 			differenceInMinutes = WeekTime.difference(startTime, previousEndTime);
+			previousEndTime = endTime;
 			span = differenceInMinutes/30;
+			Log.info("blank_span: " + span);
 			
-			t.setText(currentCell, day, "");
-			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
-			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
-			currentCell += span;
+			if(span > 0){
+				t.setText(currentCell, day, "");
+				t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
+				t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
+				currentCell += span;
+			}
+			
+			Log.info("currentCell: " + currentCell);
 			
 			differenceInMinutes = WeekTime.difference(endTime, startTime);
 			span = differenceInMinutes/30;
+			Log.info("lesson_span: " + span);
 			
 			String displayString = l.getCourseName() + " " + l.getCourse() + " " + l.getPlace();
 			
@@ -243,7 +272,7 @@ public class TimeTableGUI extends HorizontalPanel {
 			t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.hasEvent());
-			
+			currentCell += span;
 	 		
 		}
  		
