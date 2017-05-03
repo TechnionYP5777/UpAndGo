@@ -13,6 +13,9 @@
 <!-- For development, a default of `DEBUG` is recommended -->
 <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
 
+<!-- Send client logging to server -->
+<inherits name="com.allen_sauer.gwt.log.gwt-log-RemoteLogger" />
+
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
@@ -22,7 +25,9 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
-
+  <inherits name="com.google.gwt.resources.Resources" />
+  <inherits name="com.google.common.base.Base" />
+  
   <!-- Specify the app entry point class.                         -->
   <entry-point class='upandgo.client.UpAndGo'/>
 

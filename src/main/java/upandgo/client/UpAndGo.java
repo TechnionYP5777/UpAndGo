@@ -30,15 +30,15 @@ public class UpAndGo implements EntryPoint {
 		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
-		//TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
 		
-		//timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
+		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		mainView.add(courseSelectionView);
 		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
 		mainView.setWidgetTopHeight(courseSelectionView, 1, Unit.EM, 100, Unit.PCT);
-		//mainView.add(timeTableView);
-		//mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		//mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
+		mainView.add(timeTableView);
+		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
 		
 		RootLayoutPanel.get().add(mainView);
 	}

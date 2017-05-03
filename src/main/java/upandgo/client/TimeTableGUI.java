@@ -100,11 +100,23 @@ public class TimeTableGUI extends LayoutPanel {
     	t.setText(3, 3, "aa");
     	t.removeCell(2, 2);*/
     	
+    	/*
+			try {
+				t.wait();
+			} catch (InterruptedException e) {
+				Log.info("SDf");
+			}*/
+    	
+ 
+
     	
     	int col = SUNDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
-    	drawCell(3, col, "", 2, ttStyle.noEvent());
-    	drawCell(5, col, "קורס 2", 4, ttStyle.hasEvent());
+    	
+    	//drawCell(3, col, "", 2, ttStyle.noEvent());
+    	
+    	//drawCell(5, col, "קורס 2", 4, ttStyle.hasEvent());
+    	
     	/*drawCell(3, col, "קורס כלשהו", 2, ttStyle.hasEvent());
     	drawCell(5, col, "", 3, ttStyle.noEvent());
     	drawCell(8, col, "מבוא לכלכלה, ניהול 306", 5, ttStyle.hasEvent());
@@ -120,8 +132,18 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	col = MONDAY_COL;
     	
-    	drawCell(1, col, "", 1, ttStyle.noEvent());
-    	drawCell(2, col, "קורס 3", 1, ttStyle.hasEvent());
+    	drawCell(1, col, "aa", 1, ttStyle.noEvent());
+    	drawCell(2, col-1, "קורס 3", 1, ttStyle.noEvent());
+    	
+    	col = TUESDAY_COL;
+    	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
+    	
+    	col = WEDNESDAY_COL;
+    	
+    	drawCell(1, col, "aa", 1, ttStyle.noEvent());
+    	drawCell(2, col-2, "קורס 3", 1, ttStyle.noEvent());
+    	//t.notify();
+    	
     	//drawCell(2, col, "קורס 1", 1, ttStyle.hasEvent());
     	
     	//drawCell(3, col, "", 1, ttStyle.noEvent());
@@ -263,14 +285,14 @@ public class TimeTableGUI extends LayoutPanel {
     
 	private void clearBeforeSpan2(int r, int c, int span) {
 		// TODO Auto-generated method stub
-    	
+    	/*
     	for(int i = r+1; i < r+span; i++){
     		if(i % 2 == 0){
     			t.removeCell(i, c-1);
     		}else{
     			t.removeCell(i, c);
     		}
-		}
+		}*/
 	}
 
 	private void drawArciCol() {
