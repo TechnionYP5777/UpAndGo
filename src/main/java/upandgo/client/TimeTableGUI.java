@@ -34,6 +34,7 @@ public class TimeTableGUI extends LayoutPanel {
 	static final int THURSDAY_COL = 11;
 	
 	private FlexTable t = new FlexTable();
+	private int[] deletedHistogram = new int[23];
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableGUI(){
@@ -108,7 +109,9 @@ public class TimeTableGUI extends LayoutPanel {
 			}*/
     	
  
-
+    	for(int i = 0; i < 23; i++){
+    		deletedHistogram[i] = 0;
+    	}
     	
     	int col = SUNDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
@@ -133,7 +136,7 @@ public class TimeTableGUI extends LayoutPanel {
     	col = MONDAY_COL;
     	
     	drawCell(1, col, "aa", 1, ttStyle.noEvent());
-    	drawCell(2, col-1, "קורס 3", 1, ttStyle.noEvent());
+    	drawCell(2, col, "קורס 3", 1, ttStyle.noEvent());
     	
     	col = TUESDAY_COL;
     	drawCell(1, col, "קורס 1", 2, ttStyle.hasEvent());
@@ -141,7 +144,7 @@ public class TimeTableGUI extends LayoutPanel {
     	col = WEDNESDAY_COL;
     	
     	drawCell(1, col, "aa", 1, ttStyle.noEvent());
-    	drawCell(2, col-2, "קורס 3", 1, ttStyle.noEvent());
+    	drawCell(2, col, "קורס 3", 1, ttStyle.noEvent());
     	//t.notify();
     	
     	//drawCell(2, col, "קורס 1", 1, ttStyle.hasEvent());
@@ -265,7 +268,9 @@ public class TimeTableGUI extends LayoutPanel {
     
     
     private void drawCell(int row, int col, String text, int span, String styleName) {
+    	Log.info("a: " + deletedHistogram);
     	
+    	col = col-deletedHistogram[row];
     	//Log.info("row: " + row + " col: " + col + " text: " + text);
     	t.setText(row, col, text);
     	clearBeforeSpan(row,col,span);
@@ -280,6 +285,7 @@ public class TimeTableGUI extends LayoutPanel {
     	
     	for(int i = r+1; i < r+span; i++){
     			t.removeCell(i, c);
+    			deletedHistogram[i]++;
 		}
 	}
     
