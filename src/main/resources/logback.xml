@@ -14,6 +14,19 @@
 	<appender name="FILE-AUDIT"
 		class="ch.qos.logback.core.FileAppender">
 		<file>${DEV_HOME}/upandgo_logging.log</file>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+      	<evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+        	<expression>
+        	if(logger.startsWith("com.allen"))
+      			return false;
+      			
+      		return true;
+   
+			</expression>
+      	</evaluator>
+       <OnMismatch>NEUTRAL</OnMismatch>
+      <OnMatch>DENY</OnMatch>
+    </filter>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
@@ -23,7 +36,7 @@
 	</appender>
 
 	<!-- Send logs to both console and file audit -->
-	<logger name="upandgo" level="INFO"
+	<logger name="upandgo" level="DEBUG"
 		additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
 		<appender-ref ref="STDOUT" />
