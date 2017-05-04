@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -20,8 +21,9 @@ import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
+import upandgo.client.presenter.SchedulerPresenter;
 
-public class TimeTableGUI extends HorizontalPanel { 
+public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.Display{ 
 	
 	private final int DAYS_IN_WEEK = 7;
 	
@@ -331,6 +333,36 @@ public class TimeTableGUI extends HorizontalPanel {
 		}
  		
  	}
+
+	@Override
+	public <T extends HasClickHandlers> T clearSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T buildSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T nextSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T prevSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T saveSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
  	
  	
 }
