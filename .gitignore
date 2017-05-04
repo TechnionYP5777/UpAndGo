@@ -4,3 +4,5 @@
 /data
 /.settings/org.eclipse.jdt.ui.prefs
 /spartanizer.xml
+/src/main/gwt-unitCache/
+/get-unitCache/
