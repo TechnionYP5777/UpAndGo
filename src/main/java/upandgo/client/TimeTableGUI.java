@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
@@ -364,5 +365,10 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 		return null;
 	}
  	
+	@Override
+	public Widget asWidget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
  	
 }
