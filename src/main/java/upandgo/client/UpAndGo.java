@@ -39,6 +39,7 @@ public class UpAndGo implements EntryPoint {
 		mainView.add(timeTableView);
 		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
+		Resources.INSTANCE.mainCss().ensureInjected();
 		
 		RootLayoutPanel.get().add(mainView);
 	}
