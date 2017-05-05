@@ -29,6 +29,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/gwt-log-3.3.2.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/gwt-log-3.3.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -29,8 +29,8 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	private final int DAYS_IN_WEEK = 7;
 	
 	static final int EMPTY_COL = 0;
-	static final int HOURS_COL = 1;
-	static final int LESSONS_COL = 1;
+	static final int HOURS_COL = 0;
+	static final int LESSONS_COL = 0;
 	
 	private FlexTable t = new FlexTable();
 	private FlexTable sundayTable = new FlexTable();
@@ -93,11 +93,11 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	    lgList.add(lg);
 	    
 	    //displaySchedule(lgList);
-	    drawDay(lessons, sundayTable);
+	    drawDay(lessons, mondayTable);
 	    drawDay(lessons, tuesdayTable);
-	    drawDay(lessons, thursdayTable);
+	    //drawDay(lessons, thursdayTable);
 	    
-	    
+	    this.setStyleName(ttStyle.timeTable());
 	    this.add(t);
 	    this.add(sundayTable);
 	    this.add(mondayTable);
@@ -143,11 +143,11 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     
     private void drawDayTable(FlexTable t, String header) {
     	t.setText(0, 0, "");
-    	t.setText(0, 1, header);
+    	t.setText(0, 0, header);
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	t.getColumnFormatter().addStyleName(1, ttStyle.dayCol());
+    	t.getColumnFormatter().addStyleName(0, ttStyle.dayCol());
     	
     	/*
     	for(int i = 1; i<7; i++){;
@@ -156,7 +156,8 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     	
     	
     	// invisible arcitcure column
-    	drawArciCol(t);
+    	//drawArciCol(t);
+    	t.setText(25, 0, "");
     	
     	//drawCell(t, 1, LESSONS_COL, "", 1, ttStyle.noEvent());
     	//drawCell(t, 2, LESSONS_COL, "aaa3", 1, ttStyle.hasEvent());
@@ -175,7 +176,7 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     	}
     	*/
     	
-	    t.addStyleName(ttStyle.timeTable());
+	    t.addStyleName(ttStyle.dayTable());
 	    
 	}
 
@@ -185,7 +186,7 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     	
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
     	t.getCellFormatter().addStyleName(0, 0, ttStyle.arciCol());
-    	t.getColumnFormatter().addStyleName(1, ttStyle.hoursCol());
+    	//t.getColumnFormatter().addStyleName(0, ttStyle.hoursTable());
     	
     	/*
     	for(int i = 1; i<7; i++){;
@@ -194,8 +195,8 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     	
     	
     	// invisible arcitcure column
-    	drawArciCol(t);
-    	
+    	//drawArciCol(t);
+    	//t.setText(25, 0, "");
     	drawHoursCol(t);
     	
     	
@@ -206,7 +207,7 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
     	}
     	*/
     	
-	    t.addStyleName(ttStyle.timeTable());
+	    t.addStyleName(ttStyle.hoursTable());
 	    
 	}
     
@@ -232,17 +233,19 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	}
 
 	private void drawHoursCol(FlexTable t) {
-    	for(int i = 1; i<12; i++){
+    	for(int i = 1; i<13; i++){
     		t.setText(2*i-1, HOURS_COL, Integer.toString(i+7)+":30");
     		t.getFlexCellFormatter().setRowSpan(2*i-1, HOURS_COL, 2);
     		t.getCellFormatter().addStyleName(2*i-1, HOURS_COL, ttStyle.hoursCell());
-
     	}
+    	t.setText(25,0,"20:30");
+		t.getCellFormatter().addStyleName(25,0, ttStyle.hoursCell());
+
 	}
 
 	private void drawHeaders(FlexTable t) {
     	t.setText(0, 0, "");
-    	t.setText(0, 1, "שעה");
+    	t.setText(0, 0, "שעה");
     	
     	/*
     	t.setText(0, 2, "ראשון");
@@ -325,8 +328,11 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 			
 			String displayString = l.getCourseName() + " " + l.getCourse() + " " + l.getPlace();
 			
-			
-			t.setText(currentCell, day, displayString);
+			SimplePanel eventCell = new SimplePanel();
+			eventCell.add(new Label(displayString));
+			eventCell.addStyleName(ttStyle.hasEventWrap());
+			t.setWidget(currentCell, day, eventCell);
+			//t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.hasEvent());
 			currentCell += span;

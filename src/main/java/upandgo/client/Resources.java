@@ -14,6 +14,8 @@ public interface Resources extends ClientBundle {
 	 interface TimeTableStyle extends CssResource {	 
 		 String timeTable();
 		 
+		 String dayTable();
+		 
 		 String headerRow();
 		 
 		 String tableRow();
@@ -22,7 +24,7 @@ public interface Resources extends ClientBundle {
 		 
 		 String arciCol2();
 		 
-		 String hoursCol();
+		 String hoursTable();
 		 
 		 String hoursCell();
 		 
