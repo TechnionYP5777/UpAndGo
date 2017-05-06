@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import upandgo.client.CoursesService;
+import upandgo.server.model.CourseModel;
+import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -27,8 +29,17 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
+	String REP_XML_PATH = "resources/testXML/test.XML";
+	
 	public CoursesServiceImpl() {
-		System.out.println("CoursesServiceImpl is alive!");
+		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
+	}
+	
+	public CoursesServiceImpl(String path) {
+		REP_XML_PATH = path;
+		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
+		CourseModel model = new CourseModel(loader);
+		model.getChosenCourseNames();
 	}
 	
 	@Override
@@ -50,7 +61,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public Course getCourseDetails() {
+	public Course getCourseDetails(CourseId id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

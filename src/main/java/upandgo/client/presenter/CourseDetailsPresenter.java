@@ -5,6 +5,7 @@ import com.google.common.base.Optional;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.user.cellview.client.RowHoverEvent.HoveringScope;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
@@ -15,6 +16,7 @@ import upandgo.client.event.HideCourseDetailsEvent;
 import com.allen_sauer.gwt.log.client.Log;
 
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.entities.course.CourseId;
 
 /**
  * 
@@ -77,7 +79,8 @@ public class CourseDetailsPresenter implements Presenter {
 	}
 
 	void fetchCourseDetails() {
-		rpcService.getCourseDetails(new AsyncCallback<Course>() {
+		// TODO: give courseId to it!
+		rpcService.getCourseDetails(new CourseId("", ""), new AsyncCallback<Course>() {
 			@Override
 			public void onSuccess(Course result) {
 				course = Optional.fromNullable(result);

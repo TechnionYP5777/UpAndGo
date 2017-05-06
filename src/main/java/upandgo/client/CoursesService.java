@@ -29,7 +29,7 @@ public interface CoursesService extends RemoteService {
 	
 	public ArrayList<String> getFaculties();
 
-	public Course getCourseDetails();
+	public Course getCourseDetails(CourseId id);
 
 	public void selectCourse(CourseId id);
 
