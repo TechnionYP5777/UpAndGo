@@ -37,6 +37,10 @@ public interface Resources extends ClientBundle {
 		 String hasEventWrap();
 	 }
 
+	 interface ConstraintsStyle extends CssResource {	 
+		 
+	 }
+	 
 	@Source("resources/upandgo.css")
 	public CssResource mainCss();
 
@@ -45,5 +49,8 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/TimeTableStyle.css")
 	public TimeTableStyle timeTableStyle();
+	
+	@Source("resources/ConstraintsStyle.css")
+	public ConstraintsStyle constraintsStyle();
 
 }
