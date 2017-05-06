@@ -15,11 +15,13 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class UpAndGo implements EntryPoint {
 	
+//	private CoursesServiceAsync myEmailService = (CoursesServiceAsync) GWT.create(CoursesService.class);
+	
 	@Override
 	public void onModuleLoad() {
 		
 		//not using appcontroller until rpc is implemented 
-		/*CoursesServiceAsync service = GWT.create(CoursesServiceAsync.class);
+		/*CoursesServiceAsync service = GWT.create(CoursesService.class);
 		EventBus eventBus = new SimpleEventBus();
 
 		AppController appViewer = new AppController(service, eventBus);
