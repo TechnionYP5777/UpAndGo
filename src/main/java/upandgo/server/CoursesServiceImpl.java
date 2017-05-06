@@ -27,6 +27,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
+	public CoursesServiceImpl() {
+		System.out.println("CoursesServiceImpl is alive!");
+	}
+	
 	@Override
 	public ArrayList<CourseId> getSelectedCourses() {
 		// TODO Auto-generated method stub

@@ -7,11 +7,12 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>CoursesServiceImpl</servlet-name>
-    <servlet-class>'upandgo.server.CoursesServiceImpl</servlet-class>
+    <servlet-class>upandgo.server.CoursesServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>CoursesServiceImpl</servlet-name>
     <url-pattern>/upandgo/coursesManipulations</url-pattern>
   </servlet-mapping>
+  
 </web-app>
