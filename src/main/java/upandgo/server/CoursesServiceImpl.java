@@ -29,53 +29,49 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
-	String REP_XML_PATH = "resources/testXML/test.XML";
+	private String REP_XML_PATH = "resources/testXML/test.XML";
+	
+	private final CourseModel model;
 	
 	public CoursesServiceImpl() {
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
+		model = new CourseModel(loader);
 	}
 	
 	public CoursesServiceImpl(String path) {
 		REP_XML_PATH = path;
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
-		CourseModel model = new CourseModel(loader);
-		model.getChosenCourseNames();
+		model = new CourseModel(loader);
 	}
 	
 	@Override
-	public ArrayList<CourseId> getSelectedCourses() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CourseId> getSelectedCourses() {
+		return model.loadChosenCourses();
 	}
 
 	@Override
-	public ArrayList<CourseId> getNotSelectedCourses(String query, String faculty) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CourseId> getNotSelectedCourses(String query, String faculty) {
+		return model.loadQueryByFaculty(query, faculty);
 	}
 
 	@Override
-	public ArrayList<String> getFaculties() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getFaculties() {
+		return model.loadFacultyNames();
 	}
 
 	@Override
 	public Course getCourseDetails(CourseId id) {
-		// TODO Auto-generated method stub
-		return null;
+		return model.getCourseById(id.number);
 	}
 
 	@Override
 	public void selectCourse(CourseId id) {
-		// TODO Auto-generated method stub
-		
+		model.pickCourse(id.number);
 	}
 
 	@Override
 	public void unselectCourse(CourseId id) {
-		// TODO Auto-generated method stub
-		
+		model.dropCourse(id.number);
 	}
 
 	@Override

@@ -45,10 +45,10 @@ public class CourseModel { // implements Model {
 			pickedCourseList.add(coursesById.get(id));
 	}
 
-	public void pickCourse(final String name) {
-		if (name == null)
+	public void pickCourse(final String id) {
+		if (id == null)
 			throw new NullPointerException();
-		final Course pickedCourse = getCourseById(name);
+		final Course pickedCourse = getCourseById(id);
 		if (pickedCourseList.contains(pickedCourse))
 			return;
 
@@ -84,10 +84,10 @@ public class CourseModel { // implements Model {
 		return new ArrayList<>(coursesById.keySet());
 	}
 
-	public void dropCourse(final String name) {
-		if (name == null)
+	public void dropCourse(final String id) {
+		if (id == null)
 			throw new NullPointerException();
-		final Course droppedCourse = getCourseById(name);
+		final Course droppedCourse = getCourseById(id);
 		if (!pickedCourseList.contains(droppedCourse))
 			return;
 
@@ -114,17 +114,17 @@ public class CourseModel { // implements Model {
 	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for (final Entry<String, Course> $ : coursesById.entrySet())
+		for (final Entry<String, Course> $ : coursesByName.entrySet())
 			if (name.equals($.getValue().getName()))
 				return $.getValue();
 		return null;
 	}
 
-	public Course getCourseById(final String name) {
-		if (name == null)
+	public Course getCourseById(final String id) {
+		if (id == null)
 			throw new NullPointerException();
 		for (final Entry<String, Course> $ : coursesById.entrySet())
-			if (name.equals($.getValue().getId()))
+			if (id.equals($.getValue().getId()))
 				return $.getValue();
 		return null;
 	}
