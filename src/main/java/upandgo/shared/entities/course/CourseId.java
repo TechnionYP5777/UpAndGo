@@ -1,5 +1,7 @@
 package upandgo.shared.entities.course;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Nikita Dizhur
@@ -8,8 +10,19 @@ package upandgo.shared.entities.course;
  * A small class for storing course name and number, without specifying all other details.
  * 
  */
-public class CourseId implements Comparable<CourseId> {
+public class CourseId implements Comparable<CourseId>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6764877847352075970L;
+
+	@SuppressWarnings("unused")
+	private CourseId() {
+		// here because GWT needs it
+		name = number = "";
+	}
+	
 	@Override
 	public int hashCode() {
 		return 31 * ((name == null ? 0 : name.hashCode()) + 31) + (number == null ? 0 : number.hashCode());

@@ -9,13 +9,14 @@ import com.allen_sauer.gwt.log.client.Log;
  * 
  */
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class UpAndGo implements EntryPoint {
 	
-//	private CoursesServiceAsync myEmailService = (CoursesServiceAsync) GWT.create(CoursesService.class);
+	private CoursesServiceAsync coursesService = (CoursesServiceAsync) GWT.create(CoursesService.class);
 	
 	@Override
 	public void onModuleLoad() {

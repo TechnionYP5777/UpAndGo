@@ -1,5 +1,6 @@
 package upandgo.shared.entities.course;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
  * @author nikita
@@ -22,8 +23,13 @@ import upandgo.shared.entities.StuffMember;
  * Class that holds information about specific course.
  * 
  */
-public class Course {
+public class Course implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2572698212840839164L;
+	
 	protected final String name;
 	protected final String id;
 	protected final String faculty;
@@ -33,7 +39,6 @@ public class Course {
 
 	protected final List<StuffMember> stuff;
 
-	// TODO: this should replace List lessons
 	protected List<LessonGroup> lectures;
 	protected List<LessonGroup> tutorials;
 
@@ -49,8 +54,19 @@ public class Course {
 	protected boolean done;
 	protected boolean passThisSemester;
 
-	// TODO: create interface LessonGroup as mediator between Lessons and Course
+	@SuppressWarnings("unused")
+	private Course() {
+		// here because GWT needs it
+		name = id = faculty = "";
+		points = 0;
+		aTerm = bTerm = null;
 
+		stuff = null;
+		listeners = null;
+		prerequisites = null;
+		corequisites = null;
+	}
+	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,
 			final double acPoints, final LocalDateTime aT, final LocalDateTime bT, final List<Course> prerequisitesList,
 			final List<Course> corequisitesList) {

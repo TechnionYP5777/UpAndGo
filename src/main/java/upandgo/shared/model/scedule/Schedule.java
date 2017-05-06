@@ -1,5 +1,6 @@
 package upandgo.shared.model.scedule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,12 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  * Class that represents study schedule.
  * 
  */
-public class Schedule {
+public class Schedule implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8446677507440908429L;
+	
 	private final List<LessonGroup> lessons;
 	private final List<TimeConstraint> constraints;
 
