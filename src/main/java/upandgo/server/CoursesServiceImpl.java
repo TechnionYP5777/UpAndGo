@@ -1,6 +1,5 @@
 package upandgo.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

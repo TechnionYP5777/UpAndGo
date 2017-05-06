@@ -1,6 +1,5 @@
 package upandgo.client.presenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.web.bindery.event.shared.EventBus;
@@ -246,9 +245,9 @@ public class CourseListPresenter implements Presenter {
 		hoveredCourse = Optional.absent();
 	}
 
-	class FetchSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
+	class FetchSelectedCoursesAsyncCallback implements AsyncCallback<List<CourseId>> {
 		@Override
-		public void onSuccess(ArrayList<CourseId> result) {
+		public void onSuccess(List<CourseId> result) {
 			selectedCourses = result;
 			display.setSelectedCourses(selectedCourses);
 		}
@@ -260,9 +259,9 @@ public class CourseListPresenter implements Presenter {
 		}
 	}
 
-	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
+	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<List<CourseId>> {
 		@Override
-		public void onSuccess(ArrayList<CourseId> result) {
+		public void onSuccess(List<CourseId> result) {
 			notSelectedCourses = result;
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
@@ -274,9 +273,9 @@ public class CourseListPresenter implements Presenter {
 		}
 	}
 
-	class FetchFacultiesAsyncCallback implements AsyncCallback<ArrayList<String>> {
+	class FetchFacultiesAsyncCallback implements AsyncCallback<List<String>> {
 		@Override
-		public void onSuccess(ArrayList<String> result) {
+		public void onSuccess(List<String> result) {
 			faculties = result;
 			display.setFaculties(faculties);
 		}
