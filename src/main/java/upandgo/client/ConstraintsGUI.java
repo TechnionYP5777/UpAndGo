@@ -1,8 +1,12 @@
 package upandgo.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 
 import upandgo.client.Resources.ConstraintsStyle;
 import upandgo.client.presenter.ConstraintsPresenter;
@@ -15,9 +19,71 @@ import upandgo.client.presenter.ConstraintsPresenter;
 
 public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresenter.Display{
 
+	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
+	
+	CheckBox daysOffCB = new CheckBox("ימי חופש");
+
+	CheckBox minWindowsCB = new CheckBox("מספר מינימלי של חלונות");
+
+	CheckBox startTimeCB = new CheckBox("שעת התחלה");
+	
+	ListBox startTimeLB = new ListBox();
+
+	CheckBox finishTimeCB = new CheckBox("שעת סיום");
+
+	ListBox finishTimeLB = new ListBox();
+
 	
 	private ConstraintsStyle cStyle = Resources.INSTANCE.constraintsStyle();
 
+	public ConstraintsGUI(){
+	    InitializeTimeLBs();
+    	InitializePanel();
+    	cStyle.ensureInjected();
+    }
+	
+	private void InitializeTimeLBs(){
+    	for(int i = 1; i<13; i++){
+    		startTimeLB.addItem(Integer.toString(i+7)+":30");
+    		finishTimeLB.addItem(Integer.toString(i+7)+":30");
+    	}
+    	startTimeLB.setEnabled(false);
+    	finishTimeLB.setEnabled(false);
+
+	}
+	    
+    private void InitializePanel(){
+    	this.add(constraintsTitle);
+
+    	this.add(daysOffCB);
+    	this.add(minWindowsCB);
+    	this.add(startTimeCB);
+    	this.add(startTimeLB);
+    	this.add(finishTimeCB);
+    	this.add(finishTimeLB);
+
+    	
+    	startTimeCB.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+		        boolean checked = ((CheckBox) event.getSource()).getValue();
+		        startTimeLB.setEnabled(checked);
+			}
+    		
+    	});
+    	
+    	finishTimeCB.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+		        boolean checked = ((CheckBox) event.getSource()).getValue();
+		        finishTimeLB.setEnabled(checked);
+			}
+    		
+    	});
+
+    }
 	
 	@Override
 	public <T extends HasClickHandlers> T getDaysOffValue() {
