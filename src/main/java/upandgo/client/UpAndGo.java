@@ -31,6 +31,7 @@ public class UpAndGo implements EntryPoint {
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
 		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		SchedualerControlsGUI schedualerControlsView = new SchedualerControlsGUI();
 		ConstraintsGUI constraintsView = new ConstraintsGUI();
 		
 		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
@@ -39,7 +40,10 @@ public class UpAndGo implements EntryPoint {
 		mainView.setWidgetTopHeight(courseSelectionView, 1, Unit.EM, 100, Unit.PCT);
 		mainView.add(timeTableView);
 		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 90, Unit.PCT);
+		mainView.setWidgetTopBottom(timeTableView, 1, Unit.EM, 7, Unit.EM);
+		mainView.add(schedualerControlsView);
+		mainView.setWidgetLeftWidth(schedualerControlsView, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetBottomHeight(schedualerControlsView, 4, Unit.EM, 3, Unit.EM);
 		mainView.add(constraintsView);
 		mainView.setWidgetLeftWidth(constraintsView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetBottomHeight(constraintsView, 1, Unit.EM, 3, Unit.EM);

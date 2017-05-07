@@ -36,6 +36,10 @@ public interface Resources extends ClientBundle {
 		 
 		 String hasEventWrap();
 	 }
+	 
+	 interface SchedualerControlsStyle extends CssResource {	 
+		 String SchedualerControlsPanel();
+	 }
 
 	 interface ConstraintsStyle extends CssResource {	 
 		 String constraintsPanel();
@@ -53,6 +57,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/TimeTableStyle.css")
 	public TimeTableStyle timeTableStyle();
+	
+	@Source("resources/SchedualerControlsStyle.css")
+	public SchedualerControlsStyle schedualerControlsStyle();
 	
 	@Source("resources/ConstraintsStyle.css")
 	public ConstraintsStyle constraintsStyle();
