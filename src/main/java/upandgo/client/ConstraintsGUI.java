@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -53,14 +54,22 @@ public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresen
 	}
 	    
     private void InitializePanel(){
-    	this.add(constraintsTitle);
+    	this.setHorizontalAlignment(ALIGN_RIGHT);
+    	//this.setVerticalAlignment(ALIGN_BOTTOM);
 
+    	this.add(constraintsTitle);
     	this.add(daysOffCB);
     	this.add(minWindowsCB);
     	this.add(startTimeCB);
     	this.add(startTimeLB);
     	this.add(finishTimeCB);
     	this.add(finishTimeLB);
+    	
+    	daysOffCB.addStyleName(cStyle.onlyCheckBox());
+    	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
+
+    	startTimeCB.addStyleName(cStyle.timeCheckBox());
+    	finishTimeCB.addStyleName(cStyle.timeCheckBox());
 
     	
     	startTimeCB.addClickHandler(new ClickHandler(){
@@ -82,6 +91,10 @@ public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresen
 			}
     		
     	});
+    	
+    	this.setStyleName(cStyle.constraintsPanel());
+    	//this.getElement().getStyle().setBackgroundColor("WhiteSmoke");
+    	//this.getElement().getStyle().setWidth(100, Unit.PCT);
 
     }
 	

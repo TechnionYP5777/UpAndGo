@@ -38,7 +38,11 @@ public interface Resources extends ClientBundle {
 	 }
 
 	 interface ConstraintsStyle extends CssResource {	 
+		 String constraintsPanel();
 		 
+		 String onlyCheckBox();
+		 
+		 String timeCheckBox();
 	 }
 	 
 	@Source("resources/upandgo.css")

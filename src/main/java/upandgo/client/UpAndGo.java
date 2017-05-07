@@ -39,10 +39,10 @@ public class UpAndGo implements EntryPoint {
 		mainView.setWidgetTopHeight(courseSelectionView, 1, Unit.EM, 100, Unit.PCT);
 		mainView.add(timeTableView);
 		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 80, Unit.PCT);
+		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 90, Unit.PCT);
 		mainView.add(constraintsView);
 		mainView.setWidgetLeftWidth(constraintsView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetBottomHeight(constraintsView, 1, Unit.EM, 20, Unit.PCT);
+		mainView.setWidgetBottomHeight(constraintsView, 1, Unit.EM, 3, Unit.EM);
 		
 		Resources.INSTANCE.mainCss().ensureInjected();
 		
