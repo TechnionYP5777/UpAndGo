@@ -86,10 +86,11 @@
 	    <artifactId>logback-classic</artifactId>
 	    <version>1.2.2</version>
 	</dependency>
+<!-- https://mvnrepository.com/artifact/org.gwtbootstrap3/gwtbootstrap3 -->
 	<dependency>
-  		<groupId>com.github.gwtbootstrap</groupId>
-  		<artifactId>gwt-bootstrap</artifactId>
-  		<version>2.3.2.0</version>
+	    <groupId>org.gwtbootstrap3</groupId>
+	    <artifactId>gwtbootstrap3</artifactId>
+	    <version>0.9.4</version>
 	</dependency>
   </dependencies>
   

@@ -1,4 +1,11 @@
 package upandgo.client;
+import org.gwtbootstrap3.client.ui.Navbar;
+import org.gwtbootstrap3.client.ui.NavbarBrand;
+import org.gwtbootstrap3.client.ui.NavbarLink;
+import org.gwtbootstrap3.client.ui.NavbarText;
+import org.gwtbootstrap3.client.ui.constants.NavbarPosition;
+import org.gwtbootstrap3.client.ui.constants.Pull;
+
 import com.allen_sauer.gwt.log.client.Log;
 /**
  * 
@@ -10,6 +17,7 @@ import com.allen_sauer.gwt.log.client.Log;
  */
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
@@ -35,7 +43,6 @@ public class UpAndGo implements EntryPoint {
 		ConstraintsGUI constraintsView = new ConstraintsGUI();
 		NavBarGUI navBarView = new NavBarGUI();
 		
-		//timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
 		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);

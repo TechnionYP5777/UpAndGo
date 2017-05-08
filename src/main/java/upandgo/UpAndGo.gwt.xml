@@ -28,7 +28,7 @@
   <!-- Other module inherits                                      -->
   <inherits name="com.google.gwt.resources.Resources" />
   <inherits name="com.google.common.base.Base" />
-  <inherits name="com.github.gwtbootstrap.Bootstrap" />
+  <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
   
   <!-- Specify the app entry point class.                         -->
   <entry-point class='upandgo.client.UpAndGo'/>
