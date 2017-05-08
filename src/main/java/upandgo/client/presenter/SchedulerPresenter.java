@@ -46,11 +46,27 @@ public class SchedulerPresenter implements Presenter {
 	Schedule schedule;
 	
 	public interface Display {
+		
 		public <T extends HasClickHandlers> T clearSchedule();
 		public <T extends HasClickHandlers> T buildSchedule();
 		public <T extends HasClickHandlers> T nextSchedule();
 		public <T extends HasClickHandlers> T prevSchedule();
 		public <T extends HasClickHandlers> T saveSchedule();
+		
+		public <T extends HasClickHandlers> T getDaysOffValue();
+		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
+		
+		public <T extends HasClickHandlers> T getMinWindowsValue();
+		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
+		
+		public <T extends HasClickHandlers> T getStartTimeValue();
+		public int isStartTimeChecked(ClickEvent event);
+		public String getReqStartTime(); // result in format HH:MM
+		
+		public <T extends HasClickHandlers> T getFinishTimeValue();
+		public int isFinishTimeChecked(ClickEvent event);
+		public String getReqFinishTime(); // result in format HH:MM
+		
 		public Widget asWidget();
 	}
 	
