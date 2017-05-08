@@ -2,6 +2,8 @@ package upandgo.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.FontStyle;
 
@@ -13,7 +15,12 @@ import com.google.gwt.dom.client.Style.FontStyle;
  * GUI class for list of courses and course selection 
  * 
  */
-
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacementProvider;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipTrigger;
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+import static com.google.gwt.query.client.GQuery.*;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -39,7 +46,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     private Label cc = new Label("קורסים שנבחרו:");
     private CellTable<CourseId> scl = new CellTable<>(); //all courses list
     private Label sc = new Label("בחר קורסים:");
-    private ListBox faculties = new ListBox(); //chosen courses
+    private ListBox faculties = new ListBox(); //faculties
     private TextBox searchCourse = new TextBox();
     private List<CourseId> courses; //all the courses that user didn't choose yet
     private ScrollPanel cclp = new ScrollPanel();
@@ -131,6 +138,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	sc.getElement().getStyle().setFontStyle(FontStyle.OBLIQUE);
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
+    	
     	
     	//adding widgets to panel
     	this.getElement().getStyle().setMargin(10, Unit.PX);

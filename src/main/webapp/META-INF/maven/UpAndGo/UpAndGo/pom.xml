@@ -59,6 +59,17 @@
       <artifactId>guava-gwt</artifactId>
       <version>21.0</version>
     </dependency>
+    <dependency>
+    <groupId>com.arcbees.gquery</groupId>
+    <artifactId>tooltip</artifactId>
+    <version>1.1</version>
+	</dependency>
+   <dependency>
+     <groupId>com.googlecode.gwtquery</groupId>
+     <artifactId>gwtquery</artifactId>
+     <version>1.1.0</version>
+     <scope>provided</scope>
+   </dependency>
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-lang3</artifactId>
@@ -85,6 +96,12 @@
 	    <groupId>ch.qos.logback</groupId>
 	    <artifactId>logback-classic</artifactId>
 	    <version>1.2.2</version>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.gwtbootstrap3/gwtbootstrap3 -->
+	<dependency>
+	    <groupId>org.gwtbootstrap3</groupId>
+	    <artifactId>gwtbootstrap3</artifactId>
+	    <version>0.9.4</version>
 	</dependency>
   </dependencies>
   

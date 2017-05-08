@@ -73,9 +73,9 @@ public class UpAndGo implements EntryPoint {
 		Resources.INSTANCE.mainCss().ensureInjected();
 		
 		CourseListPresenter clp = new CourseListPresenter(rpc, eventBus, courseSelectionView);
-		clp.go(RootLayoutPanel.get());
+		//clp.go(RootLayoutPanel.get());
 		
-//		RootLayoutPanel.get().add(mainView);
+		RootLayoutPanel.get().add(mainView);
 	}
 
 }

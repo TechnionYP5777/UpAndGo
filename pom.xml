@@ -59,6 +59,17 @@
       <artifactId>guava-gwt</artifactId>
       <version>21.0</version>
     </dependency>
+    <dependency>
+    <groupId>com.arcbees.gquery</groupId>
+    <artifactId>tooltip</artifactId>
+    <version>1.1</version>
+	</dependency>
+   <dependency>
+     <groupId>com.googlecode.gwtquery</groupId>
+     <artifactId>gwtquery</artifactId>
+     <version>1.1.0</version>
+     <scope>provided</scope>
+   </dependency>
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-lang3</artifactId>
