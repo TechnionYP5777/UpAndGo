@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-@external .gwt-CheckBox .gwt-Label;
+@external .gwt-CheckBox .gwt-Label .gwt-ListBox;
 
 .constraintsPanel{
 	background-color: WhiteSmoke;
@@ -32,12 +32,20 @@
 }
 
 .gwt-CheckBox input{
-  vertical-align: middle;
+	vertical-align: bottom;
+
 
  }
  
 .gwt-CheckBox label{
   padding-right: 5px;
+  display: inline;
+}
+
+.gwt-ListBox{
+	height: auto;
+	width: auto;
+	padding: 0;
 }
 
 

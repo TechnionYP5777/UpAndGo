@@ -138,7 +138,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	    this.setWidgetTopBottom(sc, 29.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sclp, 37.5,  Unit.EM, 2, Unit.EM);
+	    this.setWidgetTopBottom(sclp, 37.5,  Unit.EM, 0, Unit.EM);
     }
     
     // Implementation of Display

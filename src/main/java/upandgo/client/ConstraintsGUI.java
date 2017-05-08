@@ -70,7 +70,6 @@ public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresen
 
     	startTimeCB.addStyleName(cStyle.timeCheckBox());
     	finishTimeCB.addStyleName(cStyle.timeCheckBox());
-
     	
     	startTimeCB.addClickHandler(new ClickHandler(){
 

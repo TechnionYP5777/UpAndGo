@@ -49,6 +49,10 @@ public interface Resources extends ClientBundle {
 		 String timeCheckBox();
 	 }
 	 
+	 interface NavBarStyle extends CssResource {	 
+		 String NavBarPanel();
+	 }
+	 
 	@Source("resources/upandgo.css")
 	public CssResource mainCss();
 
@@ -63,5 +67,8 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/ConstraintsStyle.css")
 	public ConstraintsStyle constraintsStyle();
+	
+	@Source("resources/NavBarStyle.css")
+	public NavBarStyle navBarStyle();
 
 }
