@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 
 import upandgo.client.Resources.ConstraintsStyle;
-import upandgo.client.presenter.ConstraintsPresenter;
+import upandgo.client.presenter.SchedulerPresenter;
 
 
 /**
@@ -18,7 +18,7 @@ import upandgo.client.presenter.ConstraintsPresenter;
  *
  */
 
-public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresenter.Display{
+public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresenter.Display{
 
 	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
 	
@@ -153,6 +153,36 @@ public class ConstraintsGUI extends HorizontalPanel implements ConstraintsPresen
 
 	@Override
 	public String getReqFinishTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T clearSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T buildSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T nextSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T prevSchedule() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T saveSchedule() {
 		// TODO Auto-generated method stub
 		return null;
 	}
