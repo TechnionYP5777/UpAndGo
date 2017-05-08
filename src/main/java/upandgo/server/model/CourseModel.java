@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+
+import com.allen_sauer.gwt.log.client.Log;
+
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -157,6 +160,7 @@ public class CourseModel { // implements Model {
 	 */
 	public List<CourseId> loadQuery(final String query) {
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
+		Log.warn("***************" + coursesById.get(0).getName());
 		if (query.isEmpty())
 			coursesById.forEach((key, course) -> matchingIds.add(new CourseId(course.getId(), course.getName())));
 		else {
@@ -181,6 +185,8 @@ public class CourseModel { // implements Model {
 	 * them
 	 */
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
+		if(faculty.isEmpty())
+			return loadQuery(query);
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
 		coursesById.forEach(query.isEmpty() ? (key, course) -> {
 			if (course.getFaculty().equals(faculty))

@@ -89,9 +89,9 @@ public class CourseListPresenter implements Presenter {
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;
 	List<String> faculties;
-	String courseQuery;
+	String courseQuery = "";
 
-	String selectedFaculty;
+	String selectedFaculty = "";
 	Optional<CourseId> hoveredCourse = Optional.absent();
 
 

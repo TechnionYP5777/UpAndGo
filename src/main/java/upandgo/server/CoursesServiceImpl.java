@@ -2,6 +2,7 @@ package upandgo.server;
 
 import java.util.List;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import upandgo.client.CoursesService;
@@ -28,16 +29,19 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
-	private String REP_XML_PATH = "resources/testXML/test.XML";
+	private String REP_XML_PATH = "../../resources/testXML/test.XML";
 	
 	private final CourseModel model;
 	
 	public CoursesServiceImpl() {
+		System.out.println("!!!!!!!!!!!!!!!!!!"+REP_XML_PATH);
+		
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
 	}
 	
 	public CoursesServiceImpl(String path) {
+		System.out.println("!!!!!!!!!!!!!!!!!!"+REP_XML_PATH);
 		REP_XML_PATH = path;
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
@@ -50,6 +54,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public List<CourseId> getNotSelectedCourses(String query, String faculty) {
+		Log.warn("!!!!!!!!!!!!!!!!!!"+REP_XML_PATH);
 		return model.loadQueryByFaculty(query, faculty);
 	}
 

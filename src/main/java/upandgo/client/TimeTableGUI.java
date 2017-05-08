@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -22,6 +23,7 @@ import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
+import upandgo.shared.model.scedule.Schedule;
 import upandgo.client.presenter.SchedulerPresenter;
 
 public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.Display{ 
@@ -373,6 +375,72 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
  	
 	@Override
 	public Widget asWidget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSchedule(Schedule schedule) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T getDaysOffValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int isDayOffChecked(ClickEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T getMinWindowsValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int isMinWindowsChecked(ClickEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T getStartTimeValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int isStartTimeChecked(ClickEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getReqStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends HasClickHandlers> T getFinishTimeValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int isFinishTimeChecked(ClickEvent event) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getReqFinishTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}

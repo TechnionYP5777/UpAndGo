@@ -7,6 +7,7 @@ import org.gwtbootstrap3.client.ui.constants.NavbarPosition;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 /**
  * 
  * @author danabra
@@ -16,15 +17,24 @@ import com.allen_sauer.gwt.log.client.Log;
  * 
  */
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.web.bindery.event.shared.SimpleEventBus;
+
+import upandgo.client.presenter.CourseListPresenter;
 
 public class UpAndGo implements EntryPoint {
 	
+	public static SimpleEventBus eventBus = new SimpleEventBus();
+	public static CoursesServiceAsync rpc = GWT.create(CoursesService.class);
+	
 	@Override
 	public void onModuleLoad() {
+		
+		Log.warn("aaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		//not using appcontroller until rpc is implemented 
 		/*CoursesServiceAsync service = GWT.create(CoursesServiceAsync.class);
@@ -62,7 +72,10 @@ public class UpAndGo implements EntryPoint {
 		
 		Resources.INSTANCE.mainCss().ensureInjected();
 		
-		RootLayoutPanel.get().add(mainView);
+		CourseListPresenter clp = new CourseListPresenter(rpc, eventBus, courseSelectionView);
+		clp.go(RootLayoutPanel.get());
+		
+//		RootLayoutPanel.get().add(mainView);
 	}
 
 }

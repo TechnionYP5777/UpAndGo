@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -82,6 +83,12 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	        return object.getTitle();
     	      }
 		};
+		TextColumn<CourseId> course1 = new TextColumn<CourseId>(){
+  	      @Override
+  	      public String getValue(CourseId object) {
+  	        return object.getTitle();
+  	      }
+		};
 	    ccl.addColumn(course);
         ccl.setRowCount(0, true);
         ccl.setVisibleRange(0, courses.size());
@@ -94,7 +101,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 
     	//all courses list initialization
     	scl.setWidth("100%");
-    	scl.addColumn(course);
+    	scl.addColumn(course1);
         scl.setRowCount(courses.size(), true);
         scl.setVisibleRange(0, courses.size());
 	    scl.setRowData(0,courses);
@@ -160,16 +167,19 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	}
 	@Override
 	public void setSelectedCourses(List<CourseId> is) {
-        scl.setRowCount(is.size(), true);
-        scl.setVisibleRange(0, is.size());
-	    scl.setRowData(0,is);
+		
+        ccl.setRowCount(is.size(), true);
+        ccl.setVisibleRange(0, is.size());
+	    ccl.setRowData(0,is);
 		
 	}
 	@Override
 	public void setNotSelectedCourses(List<CourseId> is) {
-		ccl.setRowCount(is.size(), true);
-        ccl.setVisibleRange(0, is.size());
-	    ccl.setRowData(0,is);
+
+		Window.alert(is.get(0).getTitle());
+		scl.setRowCount(is.size(), true);
+        scl.setVisibleRange(0, is.size());
+	    scl.setRowData(0,is);
 		
 	}
 	@Override
