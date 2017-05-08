@@ -78,6 +78,7 @@ public class SchedulerPresenter implements Presenter {
 		this.rpcService = rpc;
 		this.constraintsList = new ArrayList<>();
 		this.selectedCourses = new ArrayList<>();
+		this.schedule = new Schedule();
 		bind();
 	}
 	
