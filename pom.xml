@@ -3,6 +3,14 @@
   <groupId>UpAndGo</groupId>
   <artifactId>UpAndGo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+<repositories>
+<repository>
+  <id>sonatype-snapshots</id>
+  <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+  <snapshots><enabled>true</enabled></snapshots>
+  <releases><enabled>false</enabled></releases>
+</repository>
+</repositories>
   <properties>
     <!-- Setting maven.compiler.source to something different to 1.8
          needs that you configure the sourceLevel in gwt-maven-plugin since
@@ -59,17 +67,19 @@
       <artifactId>guava-gwt</artifactId>
       <version>21.0</version>
     </dependency>
-    <dependency>
+
+<!-- https://mvnrepository.com/artifact/com.googlecode.gwtquery/gwtquery -->
+<dependency>
+    <groupId>com.googlecode.gwtquery</groupId>
+    <artifactId>gwtquery</artifactId>
+    <version>1.5-beta1</version>
+</dependency>
+
+<dependency>
     <groupId>com.arcbees.gquery</groupId>
     <artifactId>tooltip</artifactId>
-    <version>1.1</version>
-	</dependency>
-   <dependency>
-     <groupId>com.googlecode.gwtquery</groupId>
-     <artifactId>gwtquery</artifactId>
-     <version>1.1.0</version>
-     <scope>provided</scope>
-   </dependency>
+    <version>1.2-SNAPSHOT</version>
+</dependency>
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
 	    <artifactId>commons-lang3</artifactId>

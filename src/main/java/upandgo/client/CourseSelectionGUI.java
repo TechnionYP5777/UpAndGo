@@ -1,4 +1,6 @@
 package upandgo.client;
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +17,13 @@ import com.google.gwt.dom.client.Style.FontStyle;
  * GUI class for list of courses and course selection 
  * 
  */
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacementProvider;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipTrigger;
-import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
-import static com.google.gwt.query.client.GQuery.*;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Label;
@@ -40,7 +36,7 @@ import com.google.gwt.view.client.HasCellPreviewHandlers;
 
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.CourseId;
-
+import static com.google.gwt.query.client.GQuery.$;
 public class CourseSelectionGUI extends LayoutPanel implements CourseListPresenter.Display {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
@@ -139,6 +135,8 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
     	
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.LEFT).withContent("hello");;
+    	$(sc).as(Tooltip).tooltip(options);
     	
     	//adding widgets to panel
     	this.getElement().getStyle().setMargin(10, Unit.PX);
