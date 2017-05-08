@@ -1,3 +1,8 @@
+
+/*
+ * merged with scheduler presenter 
+ */
+/*
 package upandgo.client.presenter;
 
 import java.util.ArrayList;
@@ -11,6 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
 import upandgo.shared.entities.constraint.TimeConstraint;
+*/
 /**
  * 
  * @author Omri Ben- Shmuel
@@ -19,7 +25,7 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  *        A concrete presenter for {@link constraintsView}.
  * 
  */
-
+/*
 public class ConstraintsPresenter implements Presenter {
 	
 	private final Display view;
@@ -126,4 +132,4 @@ public class ConstraintsPresenter implements Presenter {
 		panel.add(view.asWidget());
 	}
 
-}
+}*/
