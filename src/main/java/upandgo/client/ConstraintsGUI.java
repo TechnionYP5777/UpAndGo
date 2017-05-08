@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.ListBox;
 
 import upandgo.client.Resources.ConstraintsStyle;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.shared.model.scedule.Schedule;
 
 
 /**
@@ -185,6 +186,12 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	public <T extends HasClickHandlers> T saveSchedule() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setSchedule(Schedule schedule) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

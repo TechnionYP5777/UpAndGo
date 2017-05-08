@@ -52,7 +52,8 @@ public class SchedulerPresenter implements Presenter {
 		public <T extends HasClickHandlers> T nextSchedule();
 		public <T extends HasClickHandlers> T prevSchedule();
 		public <T extends HasClickHandlers> T saveSchedule();
-		
+		public void setSchedule(Schedule schedule);
+				
 		public <T extends HasClickHandlers> T getDaysOffValue();
 		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
 		
