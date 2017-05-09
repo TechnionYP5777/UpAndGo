@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
@@ -57,7 +58,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onBuildSchedule(@SuppressWarnings("unused") buildScheduleEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Build Schedule Event");
 				
 			}
 		});
@@ -66,7 +67,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onClearSchedule(@SuppressWarnings("unused") clearScheduleEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Clear Schedule Event");
 				
 			}
 		});
@@ -75,7 +76,6 @@ class AppController implements Presenter {
 
 			@Override
 			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent event) {//need to be implemented with DI
-				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -84,7 +84,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onNextSchedule(@SuppressWarnings("unused") nextScheduleEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Next Schedule Event");
 				
 			}
 		});
@@ -93,7 +93,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onPrevSchedule(@SuppressWarnings("unused") prevScheduleEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Previous Schedule Event");
 				
 			}
 		});
@@ -102,7 +102,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onSaveSchedule(@SuppressWarnings("unused") saveScheduleEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Save Schedule Event");
 				
 			}
 		});
@@ -111,7 +111,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onSelectCourse(@SuppressWarnings("unused") SelectCourseEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Course " + event.getId().getTitle() + " Selected");
 				
 			}
 		});
@@ -120,7 +120,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onUnselectCourse(@SuppressWarnings("unused") UnselectCourseEvent event) {
-				// TODO Auto-generated method stub
+				Log.info("Course " + event.getId().getTitle() + " Unselected");
 				
 			}
 		});
