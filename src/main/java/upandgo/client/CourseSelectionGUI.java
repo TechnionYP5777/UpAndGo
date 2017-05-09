@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.FontStyle;
 
@@ -26,6 +28,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -135,8 +138,18 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
     	
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.LEFT).withContent("hello");;
-    	$(sc).as(Tooltip).tooltip(options);
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
+			
+			@Override
+			public String getContent(Element element) {
+				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
+				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+	              return "course number  " + absoluteRowIndex;
+			}
+		});
+        options.withSelector("tbody tr");
+    	$(scl).as(Tooltip).tooltip(options);
+    	$(ccl).as(Tooltip).tooltip(options);
     	
     	//adding widgets to panel
     	this.getElement().getStyle().setMargin(10, Unit.PX);
@@ -156,12 +169,12 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     
     // Implementation of Display
 	@Override
-	public HasCellPreviewHandlers<CourseId> getSelectedCoursesList() {
-		return ccl;
+	public <T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getSelectedCoursesList() {
+		return (T) ccl;
 	}
 	@Override
-	public HasCellPreviewHandlers<CourseId> getNotSelectedCoursesList() {
-		return scl;
+	public <T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getNotSelectedCoursesList() {
+		return (T) scl;
 	}
 	@Override
 	public HasChangeHandlers getFacultyDropList() {

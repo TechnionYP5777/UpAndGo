@@ -1,10 +1,15 @@
 package upandgo.client.presenter;
 
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+
+import static com.google.gwt.query.client.GQuery.$;
+
 import java.util.List;
 
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.common.base.Optional;
 import com.google.gwt.dom.client.BrowserEvents;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -14,6 +19,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
@@ -26,6 +32,9 @@ import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.view.CourseListView;
 import com.allen_sauer.gwt.log.client.Log;
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
 
 import upandgo.shared.entities.course.CourseId;
 
@@ -43,9 +52,9 @@ import upandgo.shared.entities.course.CourseId;
 public class CourseListPresenter implements Presenter {
 
 	public interface Display {
-		HasCellPreviewHandlers<CourseId> getSelectedCoursesList();
+		<T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getSelectedCoursesList();
 
-		HasCellPreviewHandlers<CourseId> getNotSelectedCoursesList();
+		<T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getNotSelectedCoursesList();
 
 		HasChangeHandlers getFacultyDropList();
 
@@ -114,7 +123,7 @@ public class CourseListPresenter implements Presenter {
 		});
 
 		// define selected courses list functionality
-		display.getSelectedCoursesList().addCellPreviewHandler(new Handler<CourseId>() {
+		((HasCellPreviewHandlers<CourseId>)display.getSelectedCoursesList()).addCellPreviewHandler(new Handler<CourseId>() {
 
 			@Override
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
@@ -164,7 +173,7 @@ public class CourseListPresenter implements Presenter {
 		});
 
 		// define not selected courses list functionality
-		display.getNotSelectedCoursesList().addCellPreviewHandler(new Handler<CourseId>() {
+		((HasCellPreviewHandlers<CourseId>)display.getNotSelectedCoursesList()).addCellPreviewHandler(new Handler<CourseId>() {
 
 			@Override
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
@@ -221,6 +230,19 @@ public class CourseListPresenter implements Presenter {
 						new FetchNotSelectedCoursesAsyncCallback());
 			}
 		});
+		
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
+			
+			@Override
+			public String getContent(Element element) {
+				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
+				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+	              return "course number  " + absoluteRowIndex;
+			}
+		});
+        options.withSelector("tbody tr");
+    	$(display.getNotSelectedCoursesList().asWidget()).as(Tooltip).tooltip(options);
+    	$(display.getSelectedCoursesList().asWidget()).as(Tooltip).tooltip(options);
 	}
 
 	@Override
