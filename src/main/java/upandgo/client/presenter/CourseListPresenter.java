@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.CellPreviewEvent.Handler;
+import com.google.inject.Inject;
 import com.google.gwt.view.client.HasCellPreviewHandlers;
 
 import upandgo.client.CoursesServiceAsync;
@@ -36,6 +37,7 @@ import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
 
+import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
 /**
@@ -84,6 +86,7 @@ public class CourseListPresenter implements Presenter {
 	final int courseDetailsExposingDelay = 2000;
 	final CourseDetailsTimer courseDetailsTimer = new CourseDetailsTimer();
 
+	@Inject
 	public CourseListPresenter(CoursesServiceAsync rpc, EventBus eventBus, Display display) {
 		this.rpcService = rpc;
 		this.display = display;
@@ -231,18 +234,62 @@ public class CourseListPresenter implements Presenter {
 			}
 		});
 		
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
+		//Course Tooltip functionality
+    	TooltipOptions selectedOptions = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
 				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
 				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-	              return "course number  " + absoluteRowIndex;
+				  final String c = "Loading...";
+				  rpcService.getCourseDetails(selectedCourses.get(absoluteRowIndex), new AsyncCallback<Course>() {
+					
+					@Override
+					public void onSuccess(Course result) {
+						//c = result;
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Log.error("Error while loading course details.");
+						
+					}
+				});
+	              return c;
 			}
 		});
-        options.withSelector("tbody tr");
-    	$(display.getNotSelectedCoursesList().asWidget()).as(Tooltip).tooltip(options);
-    	$(display.getSelectedCoursesList().asWidget()).as(Tooltip).tooltip(options);
+    	selectedOptions.withSelector("tbody tr");
+    	
+    	TooltipOptions notSelectedOptions = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
+			
+			@Override
+			public String getContent(Element element) {
+				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
+				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+				  final String courseDetail = "Loading...";
+				  rpcService.getCourseDetails(notSelectedCourses.get(absoluteRowIndex), new AsyncCallback<Course>() {
+					
+					@Override
+					public void onSuccess(Course result) {
+						//courseDetail = result.toString();
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Log.error("Error while loading course details.");
+						//courseDetail = "Error loading course details";
+						
+					}
+				});
+	              return courseDetail;
+			}
+		});
+
+    	notSelectedOptions.withSelector("tbody tr");
+    	$(display.getNotSelectedCoursesList().asWidget()).as(Tooltip).tooltip(notSelectedOptions);
+    	$(display.getSelectedCoursesList().asWidget()).as(Tooltip).tooltip(selectedOptions);
 	}
 
 	@Override
