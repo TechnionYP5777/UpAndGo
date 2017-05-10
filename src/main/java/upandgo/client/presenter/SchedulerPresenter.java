@@ -13,6 +13,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.UnselectCourseEvent;
@@ -71,7 +72,7 @@ public class SchedulerPresenter implements Presenter {
 		
 		public Widget asWidget();
 	}
-	
+	@Inject
 	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
 		this.eventBus = eventBus; 
 		this.view = view;

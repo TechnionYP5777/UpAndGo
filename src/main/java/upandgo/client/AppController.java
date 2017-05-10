@@ -4,6 +4,9 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.EventBus;
 
 import upandgo.client.event.GetCourseDetailsEvent;
@@ -44,6 +47,7 @@ class AppController implements Presenter {
 	private EventBus eventBus;
 	private CoursesServiceAsync rpcService;
 	
+	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
 		panel.add(getMainView());
 		Resources.INSTANCE.mainCss().ensureInjected();
@@ -143,9 +147,10 @@ class AppController implements Presenter {
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
 		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
 		
-		CourseListPresenter clPresenter = new CourseListPresenter(rpcService, eventBus, courseSelectionView);
+		Injector injector = Guice.createInjector(new PresentersModule());
+		CourseListPresenter clPresenter = injector.getInstance(CourseListPresenter.class);
 		
-		SchedulerPresenter sPresenter = new SchedulerPresenter((Display) timeTableView, eventBus, rpcService);
+		SchedulerPresenter sPresenter =injector.getInstance(SchedulerPresenter.class);
 		
 		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		mainView.add(courseSelectionView);

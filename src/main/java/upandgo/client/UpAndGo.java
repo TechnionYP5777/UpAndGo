@@ -37,10 +37,10 @@ public class UpAndGo implements EntryPoint {
 		Log.warn("aaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		//not using appcontroller until rpc is implemented 
-		/*CoursesServiceAsync service = GWT.create(CoursesServiceAsync.class);
-		EventBus eventBus = new SimpleEventBus();
+		/*
+		Injector injector = Guice.createInjector(new PresentersModule());
 
-		AppController appViewer = new AppController(service, eventBus);
+		AppController appViewer = injector.getInstance(AppController.class);
 
 		appViewer.go(RootPanel.get());*/
 		
