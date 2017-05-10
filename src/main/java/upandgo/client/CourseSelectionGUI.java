@@ -4,6 +4,7 @@ import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
@@ -28,6 +29,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -38,6 +40,7 @@ import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.HasCellPreviewHandlers;
 
 import upandgo.client.presenter.CourseListPresenter;
+import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import static com.google.gwt.query.client.GQuery.$;
 public class CourseSelectionGUI extends LayoutPanel implements CourseListPresenter.Display {
@@ -50,6 +53,8 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     private List<CourseId> courses; //all the courses that user didn't choose yet
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
+    String hoveredCourseDetail = "Loading...";
+    int rowNum = -1; //help verify that hoveredCourseDetail is relevant
     public CourseSelectionGUI(){
     	courses = new ArrayList<>();
     	courses.add(new CourseId("1234", "חישביות"));
@@ -138,18 +143,22 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
     	
+		//Course Tooltip functionality
     	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
 				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
 				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-	              return "course number  " + absoluteRowIndex;
+				  if(rowNum == absoluteRowIndex)
+					  return hoveredCourseDetail;
+				  return "Loading...";
 			}
 		});
-        options.withSelector("tbody tr");
-    	$(scl).as(Tooltip).tooltip(options);
+    	options.withSelector("tbody tr");
+    	
     	$(ccl).as(Tooltip).tooltip(options);
+    	$(scl).as(Tooltip).tooltip(options);
     	
     	//adding widgets to panel
     	this.getElement().getStyle().setMargin(10, Unit.PX);
@@ -169,12 +178,12 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     
     // Implementation of Display
 	@Override
-	public <T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getSelectedCoursesList() {
-		return (T) ccl;
+	public HasCellPreviewHandlers<CourseId> getSelectedCoursesList() {
+		return ccl;
 	}
 	@Override
-	public <T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getNotSelectedCoursesList() {
-		return (T) scl;
+	public HasCellPreviewHandlers<CourseId> getNotSelectedCoursesList() {
+		return scl;
 	}
 	@Override
 	public HasChangeHandlers getFacultyDropList() {
@@ -230,6 +239,16 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
 	@Override
 	public String getCourseQuery(@SuppressWarnings("unused") KeyUpEvent e) {
 		return this.searchCourse.getValue();
+	}
+	@Override
+	public void setHoveredRow(int row) {
+		rowNum = row;
+		
+	}
+	@Override
+	public void setHoveredCourseDetail(String detail) {
+		hoveredCourseDetail = detail;
+		
 	} 
     
 }

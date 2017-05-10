@@ -54,9 +54,9 @@ import upandgo.shared.entities.course.CourseId;
 public class CourseListPresenter implements Presenter {
 
 	public interface Display {
-		<T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getSelectedCoursesList();
+		HasCellPreviewHandlers<CourseId> getSelectedCoursesList();
 
-		<T extends IsWidget & HasCellPreviewHandlers<CourseId> > T getNotSelectedCoursesList();
+		HasCellPreviewHandlers<CourseId> getNotSelectedCoursesList();
 
 		HasChangeHandlers getFacultyDropList();
 
@@ -67,6 +67,10 @@ public class CourseListPresenter implements Presenter {
 		void setNotSelectedCourses(List<CourseId> courses);
 
 		void setFaculties(List<String> faculties);
+		
+		void setHoveredRow(int row);
+		
+		void setHoveredCourseDetail(String detail);
 
 		int getSelectedCourseRow(CellPreviewEvent<CourseId> event); // pass -1 if none
 
@@ -126,7 +130,7 @@ public class CourseListPresenter implements Presenter {
 		});
 
 		// define selected courses list functionality
-		((HasCellPreviewHandlers<CourseId>)display.getSelectedCoursesList()).addCellPreviewHandler(new Handler<CourseId>() {
+		display.getSelectedCoursesList().addCellPreviewHandler(new Handler<CourseId>() {
 
 			@Override
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
@@ -176,7 +180,7 @@ public class CourseListPresenter implements Presenter {
 		});
 
 		// define not selected courses list functionality
-		((HasCellPreviewHandlers<CourseId>)display.getNotSelectedCoursesList()).addCellPreviewHandler(new Handler<CourseId>() {
+		display.getNotSelectedCoursesList().addCellPreviewHandler(new Handler<CourseId>() {
 
 			@Override
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
@@ -234,62 +238,6 @@ public class CourseListPresenter implements Presenter {
 			}
 		});
 		
-		//Course Tooltip functionality
-    	TooltipOptions selectedOptions = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
-			
-			@Override
-			public String getContent(Element element) {
-				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
-				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-				  final String c = "Loading...";
-				  rpcService.getCourseDetails(selectedCourses.get(absoluteRowIndex), new AsyncCallback<Course>() {
-					
-					@Override
-					public void onSuccess(Course result) {
-						//c = result;
-						
-					}
-					
-					@Override
-					public void onFailure(Throwable caught) {
-						Log.error("Error while loading course details.");
-						
-					}
-				});
-	              return c;
-			}
-		});
-    	selectedOptions.withSelector("tbody tr");
-    	
-    	TooltipOptions notSelectedOptions = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
-			
-			@Override
-			public String getContent(Element element) {
-				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
-				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-				  final String courseDetail = "Loading...";
-				  rpcService.getCourseDetails(notSelectedCourses.get(absoluteRowIndex), new AsyncCallback<Course>() {
-					
-					@Override
-					public void onSuccess(Course result) {
-						//courseDetail = result.toString();
-						
-					}
-					
-					@Override
-					public void onFailure(Throwable caught) {
-						Log.error("Error while loading course details.");
-						//courseDetail = "Error loading course details";
-						
-					}
-				});
-	              return courseDetail;
-			}
-		});
-
-    	notSelectedOptions.withSelector("tbody tr");
-    	$(display.getNotSelectedCoursesList().asWidget()).as(Tooltip).tooltip(notSelectedOptions);
-    	$(display.getSelectedCoursesList().asWidget()).as(Tooltip).tooltip(selectedOptions);
 	}
 
 	@Override
