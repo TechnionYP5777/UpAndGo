@@ -114,8 +114,10 @@ public class SchedulerPresenter implements Presenter {
 				int res = view.isMinWindowsChecked(event);
 				if (res == 1) {
 					isBlankSpaceCount = true;
+					Log.info("minWindows button was selected");
 				} else {
 					isBlankSpaceCount = false;
+					Log.info("minWindows button was deselected");
 				}
 				
 			}
