@@ -31,7 +31,7 @@ public class NavBarGUI extends FlowPanel{
 
 	      public MyDialog() {
 	         // Set the dialog box's caption.
-	         setText("Login\Signup");
+	         setText("Login\\Signup");
 
 	         // Enable animation.
 	         setAnimationEnabled(true);
