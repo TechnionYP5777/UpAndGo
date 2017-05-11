@@ -23,6 +23,7 @@ import upandgo.client.event.nextScheduleEvent;
 import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Schedule;
@@ -41,6 +42,12 @@ public class SchedulerPresenter implements Presenter {
 	private final Display view;
 	private final EventBus eventBus;
 	CoursesServiceAsync rpcService;
+	
+	//constraints fields
+	protected boolean isDaysoffCount;
+	protected boolean isBlankSpaceCount;
+	protected LocalTime minStartTime;
+	protected LocalTime maxEndTime;
 	
 	private List<CourseId> selectedCourses;
 	private List<TimeConstraint> constraintsList;
@@ -86,7 +93,19 @@ public class SchedulerPresenter implements Presenter {
 	
 	@Override
 	public void bind() {
-
+		
+		view.getDaysOffValue().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int res = view.isDayOffChecked(event);
+				if (res == 1) {
+					isDaysoffCount = true;
+				} else {
+					isDaysoffCount = false;
+				}
+			}
+		});	
+		
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
