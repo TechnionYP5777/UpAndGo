@@ -11,6 +11,7 @@ import org.gwtbootstrap3.client.ui.SuggestBox;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiField;
@@ -21,12 +22,16 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.inject.Binder;
 
 import upandgo.client.Resources.NavBarStyle;
 
 public class NavBarGUI extends FlowPanel{
 	
 	
+	
+	
+	/*
 	 private static class MyDialog extends DialogBox {
 
 	      public MyDialog() {
@@ -50,7 +55,7 @@ public class NavBarGUI extends FlowPanel{
 	         });
 
 	         Label label = new Label("Please enter username and password");
-
+	         
 	         VerticalPanel panel = new VerticalPanel();
 	         panel.setHeight("20em");
 	         panel.setWidth("300");
@@ -61,7 +66,7 @@ public class NavBarGUI extends FlowPanel{
 
 	         setWidget(panel);
 	      }
-	   }
+	   }*/
 	
 	
 	private NavBarStyle nvStyle = Resources.INSTANCE.navBarStyle();
@@ -103,7 +108,7 @@ public class NavBarGUI extends FlowPanel{
 			@Override
 			public void onClick(ClickEvent arg0) {
 				// TODO Auto-generated method stub
-				MyDialog myDialog = new MyDialog();
+				LoginDialog myDialog = new LoginDialog();
 
 	            int left = Window.getClientWidth()/ 2;
 	            int top = Window.getClientHeight()/ 2;
