@@ -26,6 +26,7 @@ import upandgo.shared.entities.WeekTime;
 import upandgo.shared.model.scedule.Schedule;
 import upandgo.client.presenter.SchedulerPresenter;
 
+
 public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.Display{ 
 	
 	private final int DAYS_IN_WEEK = 7;
@@ -416,9 +417,9 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	}
 
 	@Override
-	public int isStartTimeChecked(ClickEvent event) {
+	public upandgo.shared.entities.LocalTime isStartTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -434,9 +435,9 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	}
 
 	@Override
-	public int isFinishTimeChecked(ClickEvent event) {
+	public upandgo.shared.entities.LocalTime isFinishTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
