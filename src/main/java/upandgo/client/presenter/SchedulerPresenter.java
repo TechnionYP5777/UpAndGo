@@ -84,6 +84,9 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus = eventBus; 
 		this.view = view;
 		this.rpcService = rpc;
+		this.isBlankSpaceCount = this.isDaysoffCount = false;
+		this.minStartTime = null;
+		this.maxEndTime = null;
 		this.constraintsList = new ArrayList<>();
 		this.selectedCourses = new ArrayList<>();
 		this.schedule = new Schedule();
