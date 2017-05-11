@@ -137,6 +137,21 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
+		view.getFinishTimeValue().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				int res = view.isFinishTimeChecked(event);
+				if (res == 1) {
+					maxEndTime = view.getReqFinishTime();
+					Log.info("End time value was selected");
+				} else {
+					maxEndTime = null;
+					Log.info("Start time value was deselected");
+				}
+			}
+		});
+		
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
