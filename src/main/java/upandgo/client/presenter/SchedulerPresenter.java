@@ -106,6 +106,18 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 		
+		view.getMinWindowsValue().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int res = view.isMinWindowsChecked(event);
+				if (res == 1) {
+					isBlankSpaceCount = true;
+				} else {
+					isBlankSpaceCount = false;
+				}
+				
+			}
+		});
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
