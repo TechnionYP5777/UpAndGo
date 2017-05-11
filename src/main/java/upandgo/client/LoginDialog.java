@@ -19,8 +19,8 @@ public class LoginDialog extends DialogBox {
     public LoginDialog() {
         setWidget(binder.createAndBindUi(this));
         setAutoHideEnabled(true);
-        setText("My Title");
-        setGlassEnabled(true);
+        //setText("My Title");
+        //setGlassEnabled(true);
         center();
         
         label1.setText("okok");

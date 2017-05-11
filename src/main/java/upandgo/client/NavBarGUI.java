@@ -110,8 +110,8 @@ public class NavBarGUI extends FlowPanel{
 				// TODO Auto-generated method stub
 				LoginDialog myDialog = new LoginDialog();
 
-	            int left = Window.getClientWidth()/ 2;
-	            int top = Window.getClientHeight()/ 2;
+	            int left = Window.getClientWidth()/ 3;
+	            int top = Window.getClientHeight()/ 3;
 	            myDialog.setPopupPosition(left, top);
 	            myDialog.show();
 			}

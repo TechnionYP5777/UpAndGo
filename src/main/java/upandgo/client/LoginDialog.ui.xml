@@ -8,11 +8,18 @@
     <ui:style>
         .panel {
             background-color: ivory;
+            width: 15em;
+            height: 10em;
+            border: none;
         }
+        
+        
     </ui:style>
     <g:VerticalPanel styleName="{style.panel}">
     <g:Label ui:field="label1">Dialog Content</g:Label>
-    <b:Button type="DEFAULT" text="login"/>
-    <b:Button type="PRIMARY" text="login with facebook"/>
+    <b:FormGroup>
+      <b:FormLabel for="formName">Name</b:FormLabel>
+      <b:TextBox placeholder="blabla" b:id="formName"/>
+    </b:FormGroup>
     </g:VerticalPanel>
 </ui:UiBinder>
