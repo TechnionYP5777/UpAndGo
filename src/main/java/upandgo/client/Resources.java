@@ -12,6 +12,7 @@ public interface Resources extends ClientBundle {
 	 }
 	 
 	 interface DialogBoxStyle extends CssResource {	 
+		 String timeTable();
 		 
 		 
 	 }

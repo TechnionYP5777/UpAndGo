@@ -18,8 +18,8 @@
     <g:VerticalPanel styleName="{style.panel}">
     <g:Label ui:field="label1">Dialog Content</g:Label>
     <b:FormGroup>
-      <b:FormLabel for="formName">Name</b:FormLabel>
-      <b:TextBox placeholder="blabla" b:id="formName"/>
+      <b:FormLabel for="formName">שם משתמש</b:FormLabel>
+      <b:TextBox placeholder="שם משתמש" b:id="formName"/>
     </b:FormGroup>
     <b:Button ui:field="okButton" type="DEFAULT" text="ok"/>
     </g:VerticalPanel>

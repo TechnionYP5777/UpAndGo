@@ -22,7 +22,7 @@ public class LoginDialog extends DialogBox {
 	
     private static final Binder binder = GWT.create(Binder.class);
     
-    //private DialogBoxStyle diaStyle = Resources.INSTANCE.dialogBoxStyle();
+    private DialogBoxStyle diaStyle = Resources.INSTANCE.dialogBoxStyle();
 	
     interface Binder extends UiBinder<Widget, LoginDialog> {
     }
@@ -31,12 +31,12 @@ public class LoginDialog extends DialogBox {
         setWidget(binder.createAndBindUi(this));
         setAutoHideEnabled(true);
         //setText("My Title");
-        //setGlassEnabled(true);
+        setGlassEnabled(true);
         center();
         
         label1.setText("okok");
         
-        //diaStyle.ensureInjected();
+        diaStyle.ensureInjected();
     } 
     
     @UiHandler("okButton")
