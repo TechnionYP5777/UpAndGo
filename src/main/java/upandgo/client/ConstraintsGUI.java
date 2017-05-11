@@ -130,13 +130,13 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	}
 
 	@Override
-	public LocalTime isStartTimeChecked(ClickEvent event) {
+	public int isStartTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public String getReqStartTime() {
+	public LocalTime getReqStartTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -148,13 +148,13 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	}
 
 	@Override
-	public LocalTime isFinishTimeChecked(ClickEvent event) {
+	public int isFinishTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public String getReqFinishTime() {
+	public LocalTime getReqFinishTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}

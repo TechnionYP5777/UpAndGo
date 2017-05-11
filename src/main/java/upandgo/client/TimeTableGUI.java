@@ -417,13 +417,13 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	}
 
 	@Override
-	public upandgo.shared.entities.LocalTime isStartTimeChecked(ClickEvent event) {
+	public int isStartTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public String getReqStartTime() {
+	public upandgo.shared.entities.LocalTime getReqStartTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -435,13 +435,13 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
 	}
 
 	@Override
-	public upandgo.shared.entities.LocalTime isFinishTimeChecked(ClickEvent event) {
+	public int isFinishTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public String getReqFinishTime() {
+	public upandgo.shared.entities.LocalTime getReqFinishTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
