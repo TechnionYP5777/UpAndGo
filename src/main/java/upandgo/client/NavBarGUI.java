@@ -30,45 +30,6 @@ public class NavBarGUI extends FlowPanel{
 	
 	
 	
-	
-	/*
-	 private static class MyDialog extends DialogBox {
-
-	      public MyDialog() {
-	         // Set the dialog box's caption.
-	         setText("Login\\Signup");
-
-	         // Enable animation.
-	         setAnimationEnabled(true);
-
-	         // Enable glass background.
-	         setGlassEnabled(true);
-
-	         // DialogBox is a SimplePanel, so you have to set its widget 
-	         // property to whatever you want its contents to be.
-	         Button ok = new Button("OK");
-	         ok.addClickHandler(new ClickHandler() {
-	            @Override
-				public void onClick(ClickEvent event) {
-	               MyDialog.this.hide();
-	            }
-	         });
-
-	         Label label = new Label("Please enter username and password");
-	         
-	         VerticalPanel panel = new VerticalPanel();
-	         panel.setHeight("20em");
-	         panel.setWidth("300");
-	         panel.setSpacing(10);
-	         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-	         panel.add(label);
-	         panel.add(ok);
-
-	         setWidget(panel);
-	      }
-	   }*/
-	
-	
 	private NavBarStyle nvStyle = Resources.INSTANCE.navBarStyle();
 	
 	Navbar navbar = new Navbar();

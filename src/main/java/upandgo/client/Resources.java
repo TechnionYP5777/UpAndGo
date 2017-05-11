@@ -11,6 +11,11 @@ public interface Resources extends ClientBundle {
 		   String ChosenCourses();
 	 }
 	 
+	 interface DialogBoxStyle extends CssResource {	 
+		 
+		 
+	 }
+	 
 	 interface TimeTableStyle extends CssResource {	 
 		 String timeTable();
 		 
@@ -70,5 +75,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/NavBarStyle.css")
 	public NavBarStyle navBarStyle();
+	
+	@Source("resources/DialogBoxStyle.css")
+	public DialogBoxStyle dialogBoxStyle();
+	
 
 }
