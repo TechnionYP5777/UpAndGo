@@ -70,11 +70,11 @@ public class SchedulerPresenter implements Presenter {
 		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
 		
 		public <T extends HasClickHandlers> T getStartTimeValue();
-		public int isStartTimeChecked(ClickEvent event);
+		public LocalTime isStartTimeChecked(ClickEvent event);
 		public String getReqStartTime(); // result in format HH:MM
 		
 		public <T extends HasClickHandlers> T getFinishTimeValue();
-		public int isFinishTimeChecked(ClickEvent event);
+		public LocalTime isFinishTimeChecked(ClickEvent event);
 		public String getReqFinishTime(); // result in format HH:MM
 		
 		public Widget asWidget();
@@ -100,8 +100,10 @@ public class SchedulerPresenter implements Presenter {
 				int res = view.isDayOffChecked(event);
 				if (res == 1) {
 					isDaysoffCount = true;
+					Log.info("daysOff button was selected");
 				} else {
 					isDaysoffCount = false;
+					Log.info("daysOff button was deselected");
 				}
 			}
 		});	
@@ -118,6 +120,7 @@ public class SchedulerPresenter implements Presenter {
 				
 			}
 		});
+		
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

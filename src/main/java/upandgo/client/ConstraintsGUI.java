@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.ListBox;
 
 import upandgo.client.Resources.ConstraintsStyle;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.model.scedule.Schedule;
 
 
@@ -129,9 +130,9 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	}
 
 	@Override
-	public int isStartTimeChecked(ClickEvent event) {
+	public LocalTime isStartTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -147,9 +148,9 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	}
 
 	@Override
-	public int isFinishTimeChecked(ClickEvent event) {
+	public LocalTime isFinishTimeChecked(ClickEvent event) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
