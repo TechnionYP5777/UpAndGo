@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+@external .gwt-CheckBox .gwt-Label .gwt-ListBox;
+
+.constraintsPanel{
+	background-color: WhiteSmoke;
+	
+}
+
+.constraintsPanel td{
+	align: right;	
+}
+
+.constraintsPanel .gwt-Label{
+	margin-left: 20px;
+}
+
+.constraintsPanel select{
+	margin-left: 20px;
+}
+
+.onlyCheckBox{
+	margin-left: 20px;
+}
+
+
+.timeCheckBox{
+	margin-left: 10px;
+}
+
+.gwt-CheckBox{
+	cursor: pointer;
+}
+
+.gwt-CheckBox input{
+	vertical-align: bottom;
+
+
+ }
+ 
+.gwt-CheckBox label{
+  padding-right: 5px;
+  display: inline;
+}
+
+.gwt-ListBox{
+	height: auto;
+	width: auto;
+	padding: 0;
+}
+
+

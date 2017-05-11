@@ -3,30 +3,49 @@
 .timeTable{
 	
     width: 100%;
-    height: 100%;
+    height: 99%;
+    
+    
 }
 
-.timeTable, th, td{
-	border: 1px solid #d3d7cf;
+.timeTable>tbody>tr>td{
+	border: 2px solid #d3d7cf;
 
+}
+
+
+.dayTable{
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+	
+}
+
+.dayTable tr{
+	height:1.5em;
+	
 }
 
 .tableRow td {
-	height:12px;
+	
+}
+
+.tableRow tr {
+}
+
+.headerRow{
 	
 }
 
 .headerRow td{
 	text-align: center;
-	padding: 0.6em;
 	font-weight: bold;
 	color:  #555753;
+	background: #d3d7cf;
+
 }
 
 .arciCol {
-	
-	background: #577F92;
-	
 }
 
 .arciCol2 {
@@ -35,19 +54,29 @@
 	
 }
 
-.hoursCol{
+.hoursTable{
+		width: 5em;
+	height: 100%;
+	
+}
+
+.hoursTable tr{
+	height:1.5em;
+
 }
 
 .hoursCell{
 	text-align: center;
-	padding: 1em;
+	vertical-align: text-top;
 	font-weight: bold;
-		color:  #555753;
+	color:  #555753;
+	width: 1em;
+
 }
 
 .dayCol{	
-	width:20%;
-}
+
+	}
 
 .hasEvent{
 	position: relative; 
@@ -69,7 +98,7 @@
 }
 
 .hasEvent:hover{
-  background: #618da1;
+  color: yellow;
 }
 
 .hasEventWrap{

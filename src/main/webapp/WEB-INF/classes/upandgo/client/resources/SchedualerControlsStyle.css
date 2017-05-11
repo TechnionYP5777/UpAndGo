@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+@external .btn;
+
+.btn{
+	cursor:pointer;
+}
+
+.SchedualerControlsPanel{
+	background-color: WhiteSmoke;
+	width: 100%
+}
+
