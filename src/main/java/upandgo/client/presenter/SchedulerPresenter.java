@@ -70,12 +70,12 @@ public class SchedulerPresenter implements Presenter {
 		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
 		
 		public <T extends HasClickHandlers> T getStartTimeValue();
-		public LocalTime isStartTimeChecked(ClickEvent event);
-		public String getReqStartTime(); // result in format HH:MM
+		public int isStartTimeChecked(ClickEvent event);
+		public LocalTime getReqStartTime(); // result in format HH:MM
 		
 		public <T extends HasClickHandlers> T getFinishTimeValue();
-		public LocalTime isFinishTimeChecked(ClickEvent event);
-		public String getReqFinishTime(); // result in format HH:MM
+		public int isFinishTimeChecked(ClickEvent event);
+		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
 		public Widget asWidget();
 	}
@@ -84,6 +84,9 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus = eventBus; 
 		this.view = view;
 		this.rpcService = rpc;
+		this.isBlankSpaceCount = this.isDaysoffCount = false;
+		this.minStartTime = null;
+		this.maxEndTime = null;
 		this.constraintsList = new ArrayList<>();
 		this.selectedCourses = new ArrayList<>();
 		this.schedule = new Schedule();
@@ -120,6 +123,35 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("minWindows button was deselected");
 				}
 				
+			}
+		});
+		
+		view.getStartTimeValue().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				int res = view.isStartTimeChecked(event);
+				if (res == 1) {
+					minStartTime = view.getReqStartTime();
+					Log.info("Start time value was selected");
+				} else {
+					minStartTime = null;
+					Log.info("Start time value was deselected");
+				}
+			}
+		});
+		
+		view.getFinishTimeValue().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				int res = view.isFinishTimeChecked(event);
+				if (res == 1) {
+					maxEndTime = view.getReqFinishTime();
+					Log.info("End time value was selected");
+				} else {
+					maxEndTime = null;
+					Log.info("Start time value was deselected");
+				}
 			}
 		});
 		
