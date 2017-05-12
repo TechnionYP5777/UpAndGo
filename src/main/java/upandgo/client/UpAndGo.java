@@ -52,11 +52,13 @@ public class UpAndGo implements EntryPoint {
 		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
 		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
-		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+/*		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
 		ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
 		SchedualerControlsGUI schedualerControlsView = new SchedualerControlsGUI();
 		ConstraintsGUI constraintsView = new ConstraintsGUI();
+*/
+		SchedualerView schedualerView = new SchedualerView();
 		NavBarGUI navBarView = new NavBarGUI();
 		
 		mainView.add(navBarView);
@@ -66,7 +68,12 @@ public class UpAndGo implements EntryPoint {
 		mainView.add(courseSelectionView);
 		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
 		mainView.setWidgetTopBottom(courseSelectionView, 4.5, Unit.EM, 1, Unit.EM);
-		mainView.add(scrollableTimeTable);
+		
+		mainView.add(schedualerView);
+		mainView.setWidgetLeftWidth(schedualerView, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopBottom(schedualerView, 4.5, Unit.EM, 1, Unit.EM);
+
+/*		mainView.add(scrollableTimeTable);
 		mainView.setWidgetLeftWidth(scrollableTimeTable, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 10, Unit.EM);
 		mainView.add(schedualerControlsView);
@@ -75,7 +82,7 @@ public class UpAndGo implements EntryPoint {
 		mainView.add(constraintsView);
 		mainView.setWidgetLeftWidth(constraintsView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetBottomHeight(constraintsView, 2, Unit.EM, 3, Unit.EM);
-		
+*/		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		
 		CourseListPresenter clp = new CourseListPresenter(rpc, eventBus, courseSelectionView);

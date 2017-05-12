@@ -27,7 +27,7 @@ import upandgo.shared.model.scedule.Schedule;
 import upandgo.client.presenter.SchedulerPresenter;
 
 
-public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.Display{ 
+public class TimeTableGUI extends HorizontalPanel { 
 	
 	private final int DAYS_IN_WEEK = 7;
 	
@@ -333,106 +333,6 @@ public class TimeTableGUI extends HorizontalPanel implements SchedulerPresenter.
  		
  	}
 
-	@Override
-	public <T extends HasClickHandlers> T clearSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public <T extends HasClickHandlers> T buildSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T nextSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T prevSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T saveSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
- 	
-	@Override
-	public Widget asWidget() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getDaysOffValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isDayOffChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getMinWindowsValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isMinWindowsChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getStartTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isStartTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public upandgo.shared.entities.LocalTime getReqStartTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getFinishTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isFinishTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public upandgo.shared.entities.LocalTime getReqFinishTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
  	
 }
