@@ -43,7 +43,7 @@ import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import static com.google.gwt.query.client.GQuery.$;
-public class CourseSelectionGUI extends LayoutPanel implements CourseListPresenter.Display {
+public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
     private CellTable<CourseId> scl = new CellTable<>(); //all courses list
@@ -55,7 +55,7 @@ public class CourseSelectionGUI extends LayoutPanel implements CourseListPresent
     private ScrollPanel sclp = new ScrollPanel();
     String hoveredCourseDetail = "Loading...";
     int rowNum = -1; //help verify that hoveredCourseDetail is relevant
-    public CourseSelectionGUI(){
+    public CourseSelectionView(){
     	courses = new ArrayList<>();
     	courses.add(new CourseId("1234", "חישביות"));
     	courses.add(new CourseId("1234", "הסתברות"));

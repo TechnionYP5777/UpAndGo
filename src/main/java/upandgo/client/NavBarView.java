@@ -26,7 +26,7 @@ import com.google.inject.Binder;
 
 import upandgo.client.Resources.NavBarStyle;
 
-public class NavBarGUI extends FlowPanel{
+public class NavBarView extends FlowPanel{
 	
 	
 	
@@ -39,7 +39,7 @@ public class NavBarGUI extends FlowPanel{
 	NavbarText text = new NavbarText();
 	NavbarLink signIn = new NavbarLink();
 	
-	public NavBarGUI(){
+	public NavBarView(){
     	InitializePanel();
     	nvStyle.ensureInjected();
     }

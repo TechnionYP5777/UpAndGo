@@ -22,15 +22,19 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
+import upandgo.client.Resources.MainStyle;
+import upandgo.client.Resources.TimeTableStyle;
 import upandgo.client.presenter.CourseListPresenter;
 
 public class UpAndGo implements EntryPoint {
 	
 	public static SimpleEventBus eventBus = new SimpleEventBus();
 	public static CoursesServiceAsync rpc = GWT.create(CoursesService.class);
-	
+	private MainStyle style = Resources.INSTANCE.mainStyle();
+
 	@Override
 	public void onModuleLoad() {
 		
@@ -47,11 +51,15 @@ public class UpAndGo implements EntryPoint {
 		//Log.warn("message");
 		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
-		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
-		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		CourseSelectionView courseSelectionView = new CourseSelectionView();// needs to be injected
+/*		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
+		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
 		SchedualerControlsGUI schedualerControlsView = new SchedualerControlsGUI();
 		ConstraintsGUI constraintsView = new ConstraintsGUI();
-		NavBarGUI navBarView = new NavBarGUI();
+*/
+		SchedualerView schedualerView = new SchedualerView();
+		NavBarView navBarView = new NavBarView();
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
@@ -60,17 +68,22 @@ public class UpAndGo implements EntryPoint {
 		mainView.add(courseSelectionView);
 		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
 		mainView.setWidgetTopBottom(courseSelectionView, 4.5, Unit.EM, 1, Unit.EM);
-		mainView.add(timeTableView);
-		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopBottom(timeTableView, 4.5, Unit.EM, 10, Unit.EM);
+		
+		mainView.add(schedualerView);
+		mainView.setWidgetLeftWidth(schedualerView, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopBottom(schedualerView, 4.5, Unit.EM, 1, Unit.EM);
+
+/*		mainView.add(scrollableTimeTable);
+		mainView.setWidgetLeftWidth(scrollableTimeTable, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 10, Unit.EM);
 		mainView.add(schedualerControlsView);
 		mainView.setWidgetLeftWidth(schedualerControlsView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetBottomHeight(schedualerControlsView, 6, Unit.EM, 3, Unit.EM);
 		mainView.add(constraintsView);
 		mainView.setWidgetLeftWidth(constraintsView, 1, Unit.EM, 77, Unit.PCT);
 		mainView.setWidgetBottomHeight(constraintsView, 2, Unit.EM, 3, Unit.EM);
-		
-		Resources.INSTANCE.mainCss().ensureInjected();
+*/		
+		Resources.INSTANCE.mainStyle().ensureInjected();
 		
 		CourseListPresenter clp = new CourseListPresenter(rpc, eventBus, courseSelectionView);
 		//clp.go(RootLayoutPanel.get());

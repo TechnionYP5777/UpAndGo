@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 
 import upandgo.client.Resources.SchedualerControlsStyle;
 
-public class SchedualerControlsGUI extends HorizontalPanel{
+public class SchedualerControlsView extends HorizontalPanel{
 
 	private SchedualerControlsStyle scStyle = Resources.INSTANCE.schedualerControlsStyle();
 
@@ -19,7 +19,7 @@ public class SchedualerControlsGUI extends HorizontalPanel{
 	Button prevSchedule = new Button("למערכת הקודמת&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 
-	public SchedualerControlsGUI(){
+	public SchedualerControlsView(){
     	InitializePanel();
     	scStyle.ensureInjected();
     }

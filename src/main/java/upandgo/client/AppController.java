@@ -50,7 +50,7 @@ class AppController implements Presenter {
 	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
 		panel.add(getMainView());
-		Resources.INSTANCE.mainCss().ensureInjected();
+		Resources.INSTANCE.mainStyle().ensureInjected();
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 		bind();
@@ -144,8 +144,8 @@ class AppController implements Presenter {
 
 	public LayoutPanel getMainView(){
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
-		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
-		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
+		CourseSelectionView courseSelectionView = new CourseSelectionView();// needs to be injected
+		TimeTableView timeTableView = new TimeTableView();// needs to be injected
 		
 		Injector injector = Guice.createInjector(new PresentersModule());
 		CourseListPresenter clPresenter = injector.getInstance(CourseListPresenter.class);
