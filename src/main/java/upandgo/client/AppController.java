@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.EventBus;
 
 import upandgo.client.event.GetCourseDetailsEvent;
 import upandgo.client.event.GetCourseDetailsEventHandler;
@@ -44,11 +44,11 @@ class AppController implements Presenter {
 
 	private EventBus eventBus;
 	private CoursesServiceAsync rpcService;
+	private LayoutPanel mainView;
 	
 	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
-		panel.add(getMainView());
-		Resources.INSTANCE.mainStyle().ensureInjected();
+		initMainView();
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 		bind();
@@ -135,40 +135,40 @@ class AppController implements Presenter {
 	}
 
 	@Override
-	public void go(Panel panel) {
+	public void go(LayoutPanel panel) {
 		this.panel = panel;
+		panel.add(mainView);
 
 	}
 
-	public LayoutPanel getMainView(){
+	public void initMainView(){
 		final Injector injector = Injector.INSTANCE;
-		LayoutPanel mainView = new LayoutPanel();
+		mainView = new LayoutPanel();
 		NavBarView navBarView = new NavBarView();
 		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
 		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
-		Widget courseSelectionViewW = courseSelectionView.asWidget(), schedualerViewW = schedualerView.asWidget();
 		
-		CourseListPresenter clPresenter = injector.getCourseListPresenter();
+		CourseListPresenter clPresenter = new CourseListPresenter(rpcService,eventBus,courseSelectionView);
 		
-		SchedulerPresenter sPresenter = injector.getSchedulerPresenter();
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
 		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);
-
-		mainView.add(courseSelectionViewW);
-		mainView.setWidgetRightWidth(courseSelectionViewW, 1, Unit.EM, 20, Unit.PCT);
-		mainView.setWidgetTopBottom(courseSelectionViewW, 4.5, Unit.EM, 1, Unit.EM);
 		
-		mainView.add(schedualerViewW);
-		mainView.setWidgetLeftWidth(schedualerViewW, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopBottom(schedualerViewW, 4.5, Unit.EM, 1, Unit.EM);
+		mainView.add(courseSelectionView.asWidget());
+		mainView.setWidgetRightWidth(courseSelectionView.asWidget(), 1, Unit.EM, 20, Unit.PCT);
+		mainView.setWidgetTopBottom(courseSelectionView.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
+		
+		
+		mainView.add(schedualerView.asWidget());
+		mainView.setWidgetLeftWidth(schedualerView.asWidget(), 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopBottom(schedualerView.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		
-		clPresenter.go(panel);
-		sPresenter.go(panel);
+		clPresenter.go(mainView);
+		sPresenter.go(mainView);
 		
-		return mainView;
 	}
 }

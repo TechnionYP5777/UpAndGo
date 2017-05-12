@@ -1,17 +1,18 @@
 package upandgo.client.presenter;
 
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
@@ -239,10 +240,12 @@ public class SchedulerPresenter implements Presenter {
 	}
 	
 	@Override
-	public void go(Panel panel) {
+	public void go(LayoutPanel panel) {
 		bind();
-		panel.clear();
+		//panel.clear();
 		panel.add(view.asWidget());
+		panel.setWidgetLeftWidth(view.asWidget(), 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetTopBottom(view.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
 	}
 	
 	public void setSelectedCourses(List<CourseId> selectedCourses) {

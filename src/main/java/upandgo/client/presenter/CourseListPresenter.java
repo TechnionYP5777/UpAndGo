@@ -6,10 +6,11 @@ import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.List;
 
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.EventBus;
 import com.google.common.base.Optional;
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -20,7 +21,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.CellPreviewEvent.Handler;
@@ -246,12 +247,14 @@ public class CourseListPresenter implements Presenter {
 	}
 
 	@Override
-	public void go(Panel panel) {
+	public void go(LayoutPanel panel) {
 		bind();
 
-		panel.clear();
+		//panel.clear();
 		panel.add(display.asWidget());
-
+		panel.setWidgetRightWidth(display.asWidget(), 1, Unit.EM, 20, Unit.PCT);
+		panel.setWidgetTopBottom(display.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
+		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
