@@ -27,7 +27,7 @@ import upandgo.shared.model.scedule.Schedule;
 import upandgo.client.presenter.SchedulerPresenter;
 
 
-public class TimeTableGUI extends HorizontalPanel { 
+public class TimeTableView extends HorizontalPanel { 
 	
 	private final int DAYS_IN_WEEK = 7;
 	
@@ -47,7 +47,7 @@ public class TimeTableGUI extends HorizontalPanel {
 	
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
-	public TimeTableGUI(){
+	public TimeTableView(){
     	InitializePanel();
     	ttStyle.ensureInjected();
     }

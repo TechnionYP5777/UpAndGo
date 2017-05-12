@@ -20,7 +20,7 @@ import upandgo.shared.model.scedule.Schedule;
  *
  */
 
-public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresenter.Display{
+public class ConstraintsView extends HorizontalPanel{
 
 	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
 	
@@ -39,7 +39,7 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 	
 	private ConstraintsStyle cStyle = Resources.INSTANCE.constraintsStyle();
 
-	public ConstraintsGUI(){
+	public ConstraintsView(){
 	    InitializeTimeLBs();
     	InitializePanel();
     	cStyle.ensureInjected();
@@ -99,100 +99,5 @@ public class ConstraintsGUI extends HorizontalPanel implements SchedulerPresente
 
     }
 	
-	@Override
-	public <T extends HasClickHandlers> T getDaysOffValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isDayOffChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getMinWindowsValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isMinWindowsChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getStartTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isStartTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public LocalTime getReqStartTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T getFinishTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int isFinishTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public LocalTime getReqFinishTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T clearSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T buildSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T nextSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T prevSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends HasClickHandlers> T saveSchedule() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

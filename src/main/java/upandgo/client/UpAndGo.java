@@ -51,7 +51,7 @@ public class UpAndGo implements EntryPoint {
 		//Log.warn("message");
 		
 		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
-		CourseSelectionGUI courseSelectionView = new CourseSelectionGUI();// needs to be injected
+		CourseSelectionView courseSelectionView = new CourseSelectionView();// needs to be injected
 /*		TimeTableGUI timeTableView = new TimeTableGUI();// needs to be injected
 		ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
@@ -59,7 +59,7 @@ public class UpAndGo implements EntryPoint {
 		ConstraintsGUI constraintsView = new ConstraintsGUI();
 */
 		SchedualerView schedualerView = new SchedualerView();
-		NavBarGUI navBarView = new NavBarGUI();
+		NavBarView navBarView = new NavBarView();
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
