@@ -270,6 +270,7 @@ public class TimeTableView extends HorizontalPanel {
  		int differenceInMinutes;
  		int currentCell = 1;
  		int span;
+ 		int eventsCount = 0;
  		
 		LocalTime startTime;
 		LocalTime endTime = LocalTime.of(8, 30);
@@ -309,10 +310,12 @@ public class TimeTableView extends HorizontalPanel {
 			SimplePanel eventCell = new SimplePanel();
 			eventCell.add(new Label(displayString));
 			eventCell.addStyleName(ttStyle.hasEventWrap());
+			eventCell.getElement().setAttribute("eventNum", String.valueOf(eventsCount++));
 			t.setWidget(currentCell, day, eventCell);
 			//t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.hasEvent());
+			
 			currentCell += span;
 		}
  		
