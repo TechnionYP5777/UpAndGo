@@ -3,3 +3,19 @@
 body{
 	background: WhiteSmoke;
 }
+
+.scrollableTimeTable > div{
+	height: 100%;
+}
+
+@external .gwt-ListBox;
+.gwt-ListBox{
+}
+
+.gwt-ListBox option:nth-child\(even\) { background-color:#f5f5f5; }
+
+
+.gwt-ListBox:disabled{
+	background-color: #babdb6;
+}
+

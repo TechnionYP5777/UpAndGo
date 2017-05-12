@@ -4,9 +4,8 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.inject.Guice;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.web.bindery.event.shared.EventBus;
 
 import upandgo.client.event.GetCourseDetailsEvent;
@@ -28,7 +27,6 @@ import upandgo.client.event.saveScheduleEventHandler;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
-import upandgo.client.presenter.SchedulerPresenter.Display;
 
 /**
  * 
@@ -143,22 +141,30 @@ class AppController implements Presenter {
 	}
 
 	public LayoutPanel getMainView(){
-		LayoutPanel mainView = new LayoutPanel(); // needs to be injected
-		CourseSelectionView courseSelectionView = new CourseSelectionView();// needs to be injected
-		TimeTableView timeTableView = new TimeTableView();// needs to be injected
+		final Injector injector = Injector.INSTANCE;
+		LayoutPanel mainView = new LayoutPanel();
+		NavBarView navBarView = new NavBarView();
+		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
+		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
+		Widget courseSelectionViewW = courseSelectionView.asWidget(), schedualerViewW = schedualerView.asWidget();
 		
-		Injector injector = Guice.createInjector(new PresentersModule());
-		CourseListPresenter clPresenter = injector.getInstance(CourseListPresenter.class);
+		CourseListPresenter clPresenter = injector.getCourseListPresenter();
 		
-		SchedulerPresenter sPresenter =injector.getInstance(SchedulerPresenter.class);
+		SchedulerPresenter sPresenter = injector.getSchedulerPresenter();
 		
-		timeTableView.getElement().getStyle().setMarginBottom(2, Unit.EM);
-		mainView.add(courseSelectionView);
-		mainView.setWidgetRightWidth(courseSelectionView, 1, Unit.EM, 20, Unit.PCT);
-		mainView.setWidgetTopHeight(courseSelectionView, 1, Unit.EM, 100, Unit.PCT);
-		mainView.add(timeTableView);
-		mainView.setWidgetLeftWidth(timeTableView, 1, Unit.EM, 77, Unit.PCT);
-		mainView.setWidgetTopHeight(timeTableView, 1, Unit.EM, 100, Unit.PCT);
+		mainView.add(navBarView);
+		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
+		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);
+
+		mainView.add(courseSelectionViewW);
+		mainView.setWidgetRightWidth(courseSelectionViewW, 1, Unit.EM, 20, Unit.PCT);
+		mainView.setWidgetTopBottom(courseSelectionViewW, 4.5, Unit.EM, 1, Unit.EM);
+		
+		mainView.add(schedualerViewW);
+		mainView.setWidgetLeftWidth(schedualerViewW, 1, Unit.EM, 77, Unit.PCT);
+		mainView.setWidgetTopBottom(schedualerViewW, 4.5, Unit.EM, 1, Unit.EM);
+		
+		Resources.INSTANCE.mainStyle().ensureInjected();
 		
 		clPresenter.go(panel);
 		sPresenter.go(panel);
