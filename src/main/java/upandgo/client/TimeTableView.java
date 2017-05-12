@@ -105,6 +105,8 @@ public class TimeTableView extends HorizontalPanel {
 	    		"אישים בתנך");
 	    lessons.add(l);
 	    drawDay(lessons, mondayTable);
+	    drawDay(new ArrayList<>(), wednesdayTable);
+	    drawDay(new ArrayList<>(), thursdayTable);
 
 	    
 	    this.setStyleName(ttStyle.timeTable());
@@ -162,7 +164,8 @@ public class TimeTableView extends HorizontalPanel {
     	t.getRowFormatter().addStyleName(0, ttStyle.headerRow());
 
     	t.setText(25, 0, "");
-    	
+		t.getCellFormatter().addStyleName(25,0, ttStyle.noEvent());
+
 	    t.addStyleName(ttStyle.dayTable());
 	    
 	}
@@ -263,12 +266,6 @@ public class TimeTableView extends HorizontalPanel {
  	//gets a group of lessond and a day and draw the schedule for that day.
  	private void drawDay(ArrayList<Lesson> lessons, FlexTable t){
  		int day = LESSONS_COL;
- 		if(lessons.isEmpty()){
- 			t.setText(1, day, "");
- 			t.getFlexCellFormatter().setRowSpan(1, day, 22);
- 			t.getCellFormatter().addStyleName(1, day, ttStyle.noEvent());
- 			return;
- 		}
 
  		int differenceInMinutes;
  		int currentCell = 1;
@@ -287,11 +284,18 @@ public class TimeTableView extends HorizontalPanel {
 			span = differenceInMinutes/30;
 			Log.info("blank_span: " + span);
 			
-			if(span > 0){
+/*			if(span > 0){
 				t.setText(currentCell, day, "");
 				t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 				t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
 				currentCell += span;
+			}*/
+			
+			while (span > 0){
+				t.setText(currentCell, day, "");
+				t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
+				currentCell++;
+				span--;
 			}
 			
 			Log.info("currentCell: " + currentCell);
@@ -316,11 +320,11 @@ public class TimeTableView extends HorizontalPanel {
 		span = differenceInMinutes/30;
 		Log.info("blank_span: " + span);
  		
-		if(span > 0){
+		while (span > 0){
 			t.setText(currentCell, day, "");
-			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
 			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
-			currentCell += span;
+			currentCell++;
+			span--;
 		}
  		
  	}

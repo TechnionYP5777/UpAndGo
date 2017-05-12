@@ -3,18 +3,17 @@
 .timeTable{
 	
     width: 100%;
-    height: 99%;    
+    height: 99%;
 }
 
 .timeTable tr{
-	height:2.6ch;
+	height:1.5em;
 
 }
 
 
 .timeTable>tbody>tr>td{
-	border: 2px solid #d3d7cf;
-
+	/*border: 2px solid #d3d7cf;*/
 }
 
 
@@ -51,6 +50,7 @@
 .hoursTable{
 	width: 5em;
 	height: 100%;
+	border: 1px solid #d3d7cf
 }
 
 .hoursTable tr{
@@ -68,7 +68,7 @@
 	color:  #555753;
 	width: 1em;
 	height:1em;
-
+	border: 1px solid #d3d7cf
 }
 
 .dayCol{	
@@ -117,5 +117,5 @@
 
 
 .noEvent{
-	
+	border: 1px solid #d3d7cf
 }
