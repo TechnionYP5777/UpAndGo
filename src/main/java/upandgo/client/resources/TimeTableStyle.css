@@ -3,10 +3,14 @@
 .timeTable{
 	
     width: 100%;
-    height: 99%;
-    
-    
+    height: 99%;    
 }
+
+.timeTable tr{
+	height:2.6ch;
+
+}
+
 
 .timeTable>tbody>tr>td{
 	border: 2px solid #d3d7cf;
@@ -18,11 +22,9 @@
 	width: 100%;
 	height: 100%;
 	table-layout: fixed;
-	
 }
 
 .dayTable tr{
-	height:1.5em;
 	
 }
 
@@ -34,7 +36,6 @@
 }
 
 .headerRow{
-	
 }
 
 .headerRow td{
@@ -42,26 +43,21 @@
 	font-weight: bold;
 	color:  #555753;
 	background: #d3d7cf;
-
-}
-
-.arciCol {
-}
-
-.arciCol2 {
 	
-	background: #ef2929;
-	
+
 }
+
 
 .hoursTable{
-		width: 5em;
+	width: 5em;
 	height: 100%;
-	
 }
 
 .hoursTable tr{
-	height:1.5em;
+}
+
+.hoursTable td{
+
 
 }
 
@@ -71,6 +67,7 @@
 	font-weight: bold;
 	color:  #555753;
 	width: 1em;
+	height:1em;
 
 }
 

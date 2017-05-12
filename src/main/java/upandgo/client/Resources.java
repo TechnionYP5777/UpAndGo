@@ -7,13 +7,16 @@ import com.google.gwt.resources.client.CssResource;
 public interface Resources extends ClientBundle {
 	public static final Resources INSTANCE =  GWT.create(Resources.class);
 	
+	 interface MainStyle extends CssResource {
+		   String scrollableTimeTable();
+	 }
+	 
 	 interface CourseListStyle extends CssResource {
 		   String ChosenCourses();
 	 }
 	 
 	 interface DialogBoxStyle extends CssResource {	 
 		 String timeTable();
-		 
 		 
 	 }
 	 
@@ -25,10 +28,6 @@ public interface Resources extends ClientBundle {
 		 String headerRow();
 		 
 		 String tableRow();
-		 
-		 String arciCol();
-		 
-		 String arciCol2();
 		 
 		 String hoursTable();
 		 
@@ -60,7 +59,7 @@ public interface Resources extends ClientBundle {
 	 }
 	 
 	@Source("resources/upandgo.css")
-	public CssResource mainCss();
+	public MainStyle mainStyle();
 
 	@Source("resources/CourseListStyle.css")
 	public CourseListStyle courseListStyle();
