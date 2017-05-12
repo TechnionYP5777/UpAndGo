@@ -3,6 +3,7 @@ package upandgo.client;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.layout.client.Layout;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,14 +31,14 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 9, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 8, Unit.EM);
 		this.add(schedualerControlsView);
 		this.setWidgetLeftRight(schedualerControlsView, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(schedualerControlsView, 5, Unit.EM, 3, Unit.EM);
+		this.setWidgetBottomHeight(schedualerControlsView, 4, Unit.EM, 3, Unit.EM);
 		this.add(constraintsView);
 		this.setWidgetLeftRight(constraintsView, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(constraintsView, 1, Unit.EM, 3, Unit.EM);
-
+		this.setWidgetBottomHeight(constraintsView, 0, Unit.EM, 3, Unit.EM);
+		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
 		
 		}
 	@Override

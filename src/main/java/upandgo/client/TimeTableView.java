@@ -6,16 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
@@ -23,8 +17,6 @@ import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
-import upandgo.shared.model.scedule.Schedule;
-import upandgo.client.presenter.SchedulerPresenter;
 
 
 public class TimeTableView extends HorizontalPanel { 
@@ -63,7 +55,7 @@ public class TimeTableView extends HorizontalPanel {
     	
     	
 	    
-	    ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+	    ArrayList<Lesson> lessons = new ArrayList<>();
 	    Lesson l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(8, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(9, 30)),
@@ -102,7 +94,7 @@ public class TimeTableView extends HorizontalPanel {
 	    drawDay(lessons, tuesdayTable);
 	    //drawDay(lessons, thursdayTable);
 	    
-	    lessons = new ArrayList<Lesson>();
+	    lessons = new ArrayList<>();
 	    l = new Lesson(null,
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
 	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 30)),
@@ -127,7 +119,7 @@ public class TimeTableView extends HorizontalPanel {
 	    //clearTable();
     }
     
-    private void clearTable(){
+/*    private void clearTable(){
     	this.remove(hoursTable1);
  	    this.remove(sundayTable);
  	    this.remove(mondayTable);
@@ -161,7 +153,7 @@ public class TimeTableView extends HorizontalPanel {
 	    this.add(thursdayTable);
 	    //this.add(hoursTable2); 		
  		
-    }
+    }*/
     
     
     private void drawDayTable(FlexTable t, String header) {
@@ -193,13 +185,13 @@ public class TimeTableView extends HorizontalPanel {
 	    
 	}
     
-    private void drawCell(FlexTable t, int row, int col, String text, int span, String styleName) {
+/*    private void drawCell(FlexTable t, int row, int col, String text, int span, String styleName) {
     	
     	//Log.info("row: " + row + " col: " + col + " text: " + text);
     	t.setText(row, col, text);
 		t.getFlexCellFormatter().setRowSpan(row, col, span);
 		t.getCellFormatter().addStyleName(row, col, styleName);
-	}
+	}*/
 
 /*	private void drawArciCol(FlexTable t) {
     	for(int i = 1; i<12; i++){

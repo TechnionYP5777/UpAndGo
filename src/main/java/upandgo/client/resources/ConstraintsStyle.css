@@ -1,51 +1,43 @@
 @CHARSET "UTF-8";
-@external .gwt-CheckBox .gwt-Label .gwt-ListBox;
 
 .constraintsPanel{
 	background-color: WhiteSmoke;
-	
 }
 
 .constraintsPanel td{
 	align: right;	
 }
 
-.constraintsPanel .gwt-Label{
-	margin-left: 20px;
-}
-
 .constraintsPanel select{
 	margin-left: 20px;
 }
 
-.onlyCheckBox{
-	margin-left: 20px;
+
+.constraintsLabel{
+	padding-left: 20px;
 }
 
 
-.timeCheckBox{
-	margin-left: 10px;
+.onlyCheckBox span{
+	padding-right: 20px;
 }
 
-.gwt-CheckBox{
-	cursor: pointer;
+.onlyCheckBox input{
+	top: -2px;
 }
 
-.gwt-CheckBox input{
-	vertical-align: bottom;
 
-
- }
- 
-.gwt-CheckBox label{
-  padding-right: 5px;
-  display: inline;
+.timeCheckBox {
+	padding-left: 10px;
 }
 
-.gwt-ListBox{
-	height: auto;
-	width: auto;
-	padding: 0;
+.timeCheckBox span{
+	padding-right: 20px;
 }
+
+.timeCheckBox input{
+	top: -2px;
+}
+
 
 

@@ -1,18 +1,14 @@
 package upandgo.client;
 
-import com.google.gwt.dom.client.Style.Unit;
+import org.gwtbootstrap3.client.ui.InlineCheckBox;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 
 import upandgo.client.Resources.ConstraintsStyle;
-import upandgo.client.presenter.SchedulerPresenter;
-import upandgo.shared.entities.LocalTime;
-import upandgo.shared.model.scedule.Schedule;
 
 
 /**
@@ -24,15 +20,15 @@ public class ConstraintsView extends HorizontalPanel{
 
 	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
 	
-	CheckBox daysOffCB = new CheckBox("ימי חופש");
+	InlineCheckBox daysOffCB = new InlineCheckBox("ימי חופש");
 
-	CheckBox minWindowsCB = new CheckBox("מספר מינימלי של חלונות");
+	InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות");
 
-	CheckBox startTimeCB = new CheckBox("שעת התחלה");
+	InlineCheckBox startTimeCB = new InlineCheckBox("שעת התחלה");
 	
 	ListBox startTimeLB = new ListBox();
 
-	CheckBox finishTimeCB = new CheckBox("שעת סיום");
+	InlineCheckBox finishTimeCB = new InlineCheckBox("שעת סיום");
 
 	ListBox finishTimeLB = new ListBox();
 
@@ -56,8 +52,6 @@ public class ConstraintsView extends HorizontalPanel{
 	}
 	    
     private void InitializePanel(){
-    	this.setHorizontalAlignment(ALIGN_RIGHT);
-    	//this.setVerticalAlignment(ALIGN_BOTTOM);
 
     	this.add(constraintsTitle);
     	this.add(daysOffCB);
@@ -67,6 +61,7 @@ public class ConstraintsView extends HorizontalPanel{
     	this.add(finishTimeCB);
     	this.add(finishTimeLB);
     	
+    	constraintsTitle.addStyleName(cStyle.constraintsLabel());
     	daysOffCB.addStyleName(cStyle.onlyCheckBox());
     	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
 
@@ -77,8 +72,8 @@ public class ConstraintsView extends HorizontalPanel{
 
 			@Override
 			public void onClick(ClickEvent event) {
-		        boolean checked = ((CheckBox) event.getSource()).getValue();
-		        startTimeLB.setEnabled(checked);
+		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+		        startTimeLB.setEnabled(checked.booleanValue());
 			}
     		
     	});
@@ -87,8 +82,8 @@ public class ConstraintsView extends HorizontalPanel{
 
 			@Override
 			public void onClick(ClickEvent event) {
-		        boolean checked = ((CheckBox) event.getSource()).getValue();
-		        finishTimeLB.setEnabled(checked);
+		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+		        finishTimeLB.setEnabled(checked.booleanValue());
 			}
     		
     	});

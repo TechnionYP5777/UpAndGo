@@ -49,6 +49,8 @@ public interface Resources extends ClientBundle {
 	 interface ConstraintsStyle extends CssResource {	 
 		 String constraintsPanel();
 		 
+		 String constraintsLabel();
+		 
 		 String onlyCheckBox();
 		 
 		 String timeCheckBox();
