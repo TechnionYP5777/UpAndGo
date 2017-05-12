@@ -30,7 +30,7 @@ public class LoginDialog extends DialogBox {
     public LoginDialog() {
         setWidget(binder.createAndBindUi(this));
         setAutoHideEnabled(true);
-        //setText("My Title");
+        setText("My Title");
         setGlassEnabled(true);
         center();
         
