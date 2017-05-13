@@ -79,21 +79,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public Schedule getSchedule(List<CourseId> selectedCourses, List<TimeConstraint> constraintsList) {
+	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Schedule getNextSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Schedule getPreviousSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

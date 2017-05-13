@@ -2,10 +2,12 @@ package upandgo.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -24,10 +26,13 @@ import upandgo.client.event.nextScheduleEvent;
 import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
-import upandgo.shared.entities.LocalTime;
+import upandgo.server.logic.Scheduler;
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.constraint.TimeConstraint;
+import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Schedule;
+import upandgo.shared.model.scedule.Timetable;
 
 /**
  * 
@@ -51,8 +56,8 @@ public class SchedulerPresenter implements Presenter {
 	protected LocalTime maxEndTime;
 	
 	private List<CourseId> selectedCourses;
-	private List<TimeConstraint> constraintsList;
-	Schedule schedule;
+	protected List<List<LessonGroup>> lessonGroupsList;
+	protected int sched_index;
 	
 	public interface Display {
 		
@@ -62,7 +67,7 @@ public class SchedulerPresenter implements Presenter {
 		public <T extends HasClickHandlers> T prevSchedule();
 		public <T extends HasClickHandlers> T saveSchedule();
 		
-		public void setSchedule(Schedule schedule); // if (schedule = null) then clear schedule
+		public void setSchedule(List<LessonGroup> schedule); // if (schedule = null) then clear schedule
 				
 		public <T extends HasClickHandlers> T getDaysOffValue();
 		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
@@ -88,9 +93,9 @@ public class SchedulerPresenter implements Presenter {
 		this.isBlankSpaceCount = this.isDaysoffCount = false;
 		this.minStartTime = null;
 		this.maxEndTime = null;
-		this.constraintsList = new ArrayList<>();
 		this.selectedCourses = new ArrayList<>();
-		this.schedule = new Schedule();
+		lessonGroupsList = new ArrayList<>();
+		sched_index = 0;
 		bind();
 	}
 	
@@ -165,21 +170,47 @@ public class SchedulerPresenter implements Presenter {
 		});
 		
 		view.buildSchedule().addClickHandler(new ClickHandler() {
-			@SuppressWarnings("synthetic-access")
 			@Override
 			public void onClick(ClickEvent event) {
-				rpcService.getSchedule(selectedCourses, constraintsList, new AsyncCallback<Schedule>() {
+				rpcService.getSelectedCourses(new AsyncCallback<List<CourseId>>() {
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Error while building schedule.");
-						Log.error("Error while building schedule.");
+						Window.alert("Error while retrieving selected courses by ID.");
+						Log.error("Error while retrieving selected courses by ID.");
 					}
-						
 					@Override
-					public void onSuccess(Schedule result) {
-						schedule = result;
-						eventBus.fireEvent(new buildScheduleEvent());
+					public void onSuccess(List<CourseId> result) {
+						rpcService.getCoursesByCourseID(result, new AsyncCallback<List<Course>>() {
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Error while retrieving selected courses.");
+								Log.error("Error while retrieving selected courses.");
+								
+							}
+							@Override
+							public void onSuccess(List<Course> result) {
+								if (result.isEmpty()) {
+									view.setSchedule(null);
+									return;
+								}
+								final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
+										isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+								if (tables.isEmpty()) {
+									Window.alert("Error - There are no possible schedule.");
+									Log.error("Error - There are no possible schedule.");
+								} else {
+									lessonGroupsList.clear();
+									sched_index = 0;
+									tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
+									Log.info("A schedule was build");
+									view.setSchedule(lessonGroupsList.get(sched_index));
+								}
+								
+							}
+							
+						}); 
 					}
+					
 				});
 			}
 		});
@@ -187,7 +218,7 @@ public class SchedulerPresenter implements Presenter {
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(ClickEvent event) {/*
 				rpcService.getNextSchedule(schedule , new AsyncCallback<Schedule>() {
 					@Override
 					public void onFailure(Throwable caught) {
@@ -201,13 +232,13 @@ public class SchedulerPresenter implements Presenter {
 						eventBus.fireEvent(new nextScheduleEvent());
 					}
 				});
-			}
+			*/}
 		});
 		
 		view.prevSchedule().addClickHandler(new ClickHandler() {
 			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(ClickEvent event) {/*
 				rpcService.getPreviousSchedule(schedule , new AsyncCallback<Schedule>() {
 					@Override
 					public void onFailure(Throwable caught) {
@@ -221,7 +252,7 @@ public class SchedulerPresenter implements Presenter {
 						eventBus.fireEvent(new prevScheduleEvent());
 					}
 				});
-			}
+			*/}
 		});
 		
 		view.saveSchedule().addClickHandler(new ClickHandler() {
@@ -252,8 +283,4 @@ public class SchedulerPresenter implements Presenter {
 	    this.selectedCourses = selectedCourses;
 	}
 	
-	public void setSelectedConstraints(List<TimeConstraint> constraintsList) {
-	    this.constraintsList = constraintsList;
-	}
-
 }

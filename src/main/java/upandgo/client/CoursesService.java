@@ -2,6 +2,7 @@ package upandgo.client;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -34,9 +35,5 @@ public interface CoursesService extends RemoteService {
 
 	public void unselectCourse(CourseId id);
 	
-	public Schedule getSchedule(List<CourseId> selectedCourses, List<TimeConstraint> constraintsList);
-
-	public Schedule getNextSchedule(Schedule schedule);
-
-	public Schedule getPreviousSchedule(Schedule schedule);
+	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses);
 }
