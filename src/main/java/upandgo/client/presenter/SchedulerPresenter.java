@@ -214,31 +214,25 @@ public class SchedulerPresenter implements Presenter {
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				if (lessonGroupsList.size() <= sched_index + 1)
+				if (lessonGroupsList.size() <= sched_index + 1) {
 					return;
+				}
 				++sched_index;
+				Log.info("Next schedule was requested");
 				view.setSchedule(lessonGroupsList.get(sched_index));
 			}
 		});
 		
 		view.prevSchedule().addClickHandler(new ClickHandler() {
-			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onClick(ClickEvent event) {/*
-				rpcService.getPreviousSchedule(schedule , new AsyncCallback<Schedule>() {
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Error while retrieving previous schedule.");
-						Log.error("Error while retrieving previous schedule.");
-					}
-						
-					@Override
-					public void onSuccess(Schedule result) {
-						schedule = result;
-						eventBus.fireEvent(new prevScheduleEvent());
-					}
-				});
-			*/}
+			public void onClick(ClickEvent event) {
+				if (sched_index <= 0) {
+					return;
+				}
+				--sched_index;
+				Log.info("Previous schedule was requested");
+				view.setSchedule(lessonGroupsList.get(sched_index));
+			}
 		});
 		
 		view.saveSchedule().addClickHandler(new ClickHandler() {
