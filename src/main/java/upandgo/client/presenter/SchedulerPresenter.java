@@ -185,7 +185,6 @@ public class SchedulerPresenter implements Presenter {
 							public void onFailure(Throwable caught) {
 								Window.alert("Error while retrieving selected courses.");
 								Log.error("Error while retrieving selected courses.");
-								
 							}
 							@Override
 							public void onSuccess(List<Course> result) {
@@ -205,34 +204,21 @@ public class SchedulerPresenter implements Presenter {
 									Log.info("A schedule was build");
 									view.setSchedule(lessonGroupsList.get(sched_index));
 								}
-								
 							}
-							
 						}); 
 					}
-					
 				});
 			}
 		});
 		
 		view.nextSchedule().addClickHandler(new ClickHandler() {
-			@SuppressWarnings("synthetic-access")
 			@Override
-			public void onClick(ClickEvent event) {/*
-				rpcService.getNextSchedule(schedule , new AsyncCallback<Schedule>() {
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Error while retrieving next schedule.");
-						Log.error("Error while retrieving next schedule.");
-					}
-						
-					@Override
-					public void onSuccess(Schedule result) {
-						schedule = result;
-						eventBus.fireEvent(new nextScheduleEvent());
-					}
-				});
-			*/}
+			public void onClick(ClickEvent event) {
+				if (lessonGroupsList.size() <= sched_index + 1)
+					return;
+				++sched_index;
+				view.setSchedule(lessonGroupsList.get(sched_index));
+			}
 		});
 		
 		view.prevSchedule().addClickHandler(new ClickHandler() {
