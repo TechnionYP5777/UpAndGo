@@ -13,6 +13,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
+import upandgo.server.model.loader.XmlCourseLoader;
+
 
 
 public class UpAndGo implements EntryPoint {
@@ -24,7 +26,7 @@ public class UpAndGo implements EntryPoint {
 		Log.warn("aaaaaaaaaaaaaaaaaaaaaaaa");
 		final Injector injector = Injector.INSTANCE;
 
-		AppController appViewer = new AppController(GWT.create(CoursesService.class), injector.getEventBus());
+		AppController appViewer = new AppController(GWT.create(CoursesService.class), injector.getEventBus(), new XmlCourseLoader("./resources/testXML/REP.XML"));
 
 		appViewer.go(RootLayoutPanel.get());
 			

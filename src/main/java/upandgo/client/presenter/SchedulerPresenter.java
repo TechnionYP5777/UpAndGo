@@ -27,6 +27,7 @@ import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.view.CourseListView;
 import upandgo.server.logic.Scheduler;
+import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
@@ -59,6 +60,8 @@ public class SchedulerPresenter implements Presenter {
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
 	
+	protected CourseLoader loader;
+	
 	public interface Display {
 		
 		public <T extends HasClickHandlers> T clearSchedule();
@@ -86,7 +89,7 @@ public class SchedulerPresenter implements Presenter {
 		public Widget asWidget();
 	}
 	@Inject
-	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
+	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc, CourseLoader loader) {
 		this.eventBus = eventBus; 
 		this.view = view;
 		this.rpcService = rpc;
@@ -96,6 +99,7 @@ public class SchedulerPresenter implements Presenter {
 		this.selectedCourses = new ArrayList<>();
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
+		this.loader = loader;
 		bind();
 	}
 	
@@ -236,9 +240,9 @@ public class SchedulerPresenter implements Presenter {
 		});
 		
 		view.saveSchedule().addClickHandler(new ClickHandler() {
-			@SuppressWarnings("synthetic-access")
 			@Override
 			public void onClick(ClickEvent event) {
+				loader.saveChosenLessonGroups(lessonGroupsList.get(sched_index));
 				eventBus.fireEvent(new saveScheduleEvent());
 			}
 		});
