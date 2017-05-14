@@ -26,7 +26,7 @@ public class UpAndGo implements EntryPoint {
 		Log.warn("aaaaaaaaaaaaaaaaaaaaaaaa");
 		final Injector injector = Injector.INSTANCE;
 
-		AppController appViewer = new AppController(GWT.create(CoursesService.class), injector.getEventBus(), new XmlCourseLoader("./resources/testXML/REP.XML"));
+		AppController appViewer = new AppController(GWT.create(CoursesService.class), injector.getEventBus());
 
 		appViewer.go(RootLayoutPanel.get());
 			

@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -35,6 +36,8 @@ public interface CoursesService extends RemoteService {
 	public void unselectCourse(CourseId id);
 	
 	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses);
+	
+	public void saveSchedule (List<LessonGroup> sched);
 	
 	public String getSomeString();
 }

@@ -48,11 +48,10 @@ class AppController implements Presenter {
 	private CourseLoader loader;
 	
 	@Inject
-	public AppController(CoursesServiceAsync rpcService, EventBus eventBus, CourseLoader loader) {
+	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
 		initMainView();
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
-		this.loader = loader;
 		bind();
 	}
 
@@ -152,7 +151,7 @@ class AppController implements Presenter {
 		
 		CourseListPresenter clPresenter = new CourseListPresenter(rpcService,eventBus,courseSelectionView);
 		
-		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService, loader);
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);

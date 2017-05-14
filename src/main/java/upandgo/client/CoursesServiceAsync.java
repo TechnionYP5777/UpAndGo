@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -31,6 +32,8 @@ public interface CoursesServiceAsync {
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
 	
 	public void getCoursesByCourseID(List<CourseId> selectedCourses, AsyncCallback<List<Course>> callback);
+	
+	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 	
 	public void getSomeString(AsyncCallback<String> asyncCallback);
 }

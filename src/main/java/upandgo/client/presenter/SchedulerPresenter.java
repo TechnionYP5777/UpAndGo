@@ -59,8 +59,6 @@ public class SchedulerPresenter implements Presenter {
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
 	
-	protected CourseLoader loader;
-	
 	public interface Display {
 		
 		public <T extends HasClickHandlers> T clearSchedule();
@@ -88,7 +86,7 @@ public class SchedulerPresenter implements Presenter {
 		public Widget asWidget();
 	}
 	@Inject
-	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc, CourseLoader loader) {
+	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
 		this.eventBus = eventBus; 
 		this.view = view;
 		this.rpcService = rpc;
@@ -98,7 +96,6 @@ public class SchedulerPresenter implements Presenter {
 		this.selectedCourses = new ArrayList<>();
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
-		this.loader = loader;
 		bind();
 	}
 	
@@ -241,8 +238,17 @@ public class SchedulerPresenter implements Presenter {
 		view.saveSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				loader.saveChosenLessonGroups(lessonGroupsList.get(sched_index));
-				eventBus.fireEvent(new saveScheduleEvent());
+				rpcService.saveSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Error while saving schedule.");
+						Log.error("Error while saving schedule.");
+					}
+					@Override
+					public void onSuccess(Void result) {
+						Log.info("schedule was saved successfully");
+					}
+				});
 			}
 		});
 	}

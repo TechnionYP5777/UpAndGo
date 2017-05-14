@@ -9,6 +9,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import upandgo.client.CoursesService;
 import upandgo.server.model.CourseModel;
 import upandgo.server.model.loader.XmlCourseLoader;
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -85,5 +86,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	public String getSomeString() {
 		Log.warn("check-check");
 		return "paparapa " + someString;
+	}
+
+	@Override
+	public void saveSchedule(List<LessonGroup> sched) {
+		// TODO Auto-generated method stub
+		
 	}
 }
