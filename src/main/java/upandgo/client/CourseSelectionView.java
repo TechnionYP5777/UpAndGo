@@ -4,7 +4,6 @@ import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
@@ -28,21 +27,20 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
-import com.google.gwt.view.client.HasCellPreviewHandlers;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.presenter.CourseListPresenter;
-import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import static com.google.gwt.query.client.GQuery.$;
+
+
 public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
@@ -82,10 +80,13 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
+    	
+    	
 
     }
     private void InitializePanel(){
     	// chosen course list initialization
+    	ccl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
     	TextColumn<CourseId> course = new TextColumn<CourseId>(){
@@ -111,6 +112,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    cclp.getElement().getStyle().setBorderColor("LightGray");
 
     	//all courses list initialization
+		scl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	scl.setWidth("100%");
     	scl.addColumn(course1);
         scl.setRowCount(courses.size(), true);
@@ -149,7 +151,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			@Override
 			public String getContent(Element element) {
 				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
-				  int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+				  @SuppressWarnings("boxing")
+				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
 				  if(rowNum == absoluteRowIndex)
 					  return hoveredCourseDetail;
 				  return "Loading...";
@@ -178,11 +181,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     
     // Implementation of Display
 	@Override
-	public HasCellPreviewHandlers<CourseId> getSelectedCoursesList() {
+	public Widget getSelectedCoursesList() {
 		return ccl;
 	}
 	@Override
-	public HasCellPreviewHandlers<CourseId> getNotSelectedCoursesList() {
+	public Widget getNotSelectedCoursesList() {
 		return scl;
 	}
 	@Override
@@ -203,8 +206,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setNotSelectedCourses(List<CourseId> is) {
-
-		Window.alert(is.get(0).getTitle());
 		scl.setRowCount(is.size(), true);
         scl.setVisibleRange(0, is.size());
 	    scl.setRowData(0,is);
@@ -216,13 +217,15 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			this.faculties.addItem(s);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public int getSelectedCourseRow(CellPreviewEvent<CourseId> i) {
-		return i.getIndex();
+	public CourseId getSelectedCourse() {
+		return ((SingleSelectionModel<CourseId>) scl.getSelectionModel()).getSelectedObject();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public int getUnselectedCourseRow(CellPreviewEvent<CourseId> i) {
-		return i.getIndex();
+	public CourseId getUnselectedCourse() {
+		return ((SingleSelectionModel<CourseId>) ccl.getSelectionModel()).getSelectedObject();
 	}
 	@Override
 	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i) {

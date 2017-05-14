@@ -1,24 +1,17 @@
 package upandgo.server.model;
 
-//import java.beans.PropertyChangeEvent;
-//import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.allen_sauer.gwt.log.client.Log;
-
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-//import com.google.common.collect.HashMultimap;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
-//import upandgo.shared.property.CourseProperty;
 
 /**
  * 
@@ -33,13 +26,11 @@ public class CourseModel { // implements Model {
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	protected List<Course> pickedCourseList;
-//	protected HashMultimap<String, PropertyChangeListener> listenersMap;
 	protected CourseLoader loader;
 	protected List<Faculty> facultyList;
 
 	public CourseModel(final CourseLoader loader) {
 		pickedCourseList = new ArrayList<>();
-//		listenersMap = HashMultimap.create();
 		this.loader = loader;
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
@@ -63,10 +54,6 @@ public class CourseModel { // implements Model {
 			pickedList.add(new CourseId(λ.getId(), λ.getName()));
 			pickedIds.add(λ.getId());
 		});
-
-		// notify listeners
-//		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
 
 	public void addCourse(final String name) {
@@ -77,10 +64,6 @@ public class CourseModel { // implements Model {
 
 		final List<String> curCourseList = new ArrayList<>(prevCourseList);
 		curCourseList.remove(name);
-
-		// notify listeners
-//		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, prevCourseList, curCourseList)));
 	}
 
 	public List<String> getCoursesNames() {
@@ -98,21 +81,7 @@ public class CourseModel { // implements Model {
 		final TreeSet<CourseId> pickedList = new TreeSet<>();
 		pickedCourseList.remove(droppedCourse);
 		pickedCourseList.forEach(λ -> pickedList.add(new CourseId(λ.getId(), λ.getName())));
-
-		// notify listeners
-//		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 	}
-
-	/*
-	 * expose course to listeners for "course_list" property
-	 */
-//	public void exposeCourse(final String name) {
-//		if (name == null)
-//			throw new NullPointerException();
-//		listenersMap.get(CourseProperty.DETAILS).forEach(λ -> λ
-//				.propertyChange(new PropertyChangeEvent(this, CourseProperty.DETAILS, null, getCourseById(name))));
-//	}
 
 	public Course getCourseByName(final String name) {
 		if (name == null)
@@ -142,10 +111,6 @@ public class CourseModel { // implements Model {
 		// save picking in DB
 		final HashSet<CourseId> pickedList = new HashSet<>();
 		pickedCourseList.forEach(λ -> pickedList.add(new CourseId(λ.getId(), λ.getName())));
-
-		// notify listeners
-//		listenersMap.get(CourseProperty.CHOSEN_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST, null, new ArrayList<>(pickedList))));
 		
 		return new ArrayList<>(pickedList);
 	}
@@ -155,49 +120,58 @@ public class CourseModel { // implements Model {
 	}
 
 	/*
-	 * load needed courses (by name / subname) from DB if empty, load all of
-	 * them
+	 * load needed courses from DB if empty, except those that are already chosen.
 	 */
 	public List<CourseId> loadQuery(final String query) {
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
-		Log.warn("***************" + coursesById.get(0).getName());
 		if (query.isEmpty())
-			coursesById.forEach((key, course) -> matchingIds.add(new CourseId(course.getId(), course.getName())));
-		else {
 			coursesById.forEach((key, course) -> {
-				if (key.contains(query))
+				if(!pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+				});
+		else {			
+			coursesById.forEach((key, course) -> {
+				if (key.contains(query) && !pickedCourseList.contains(course))
 					matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});
 			coursesByName.forEach((key, course) -> {
-				if (key.toLowerCase().contains(query.toLowerCase()))
+				if (key.toLowerCase().contains(query.toLowerCase()) && !pickedCourseList.contains(course))
 					matchingIds.add(new CourseId(course.getId(), course.getName()));
 			});
 		}
-
-//		listenersMap.get(CourseProperty.COURSE_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
 		
 		return new ArrayList<>(matchingIds);
 	}
 
 	/*
-	 * load needed courses (by name / subname) from DB if empty, load all of
-	 * them
+	 * load needed courses from DB if empty, except those that are already chosen.
 	 */
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
 		if(faculty.isEmpty())
 			return loadQuery(query);
-		final TreeSet<CourseId> matchingIds = new TreeSet<>();
-		coursesById.forEach(query.isEmpty() ? (key, course) -> {
-			if (course.getFaculty().equals(faculty))
-				matchingIds.add(new CourseId(course.getId(), course.getName()));
-		} : (key, course) -> {
-			if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty))
-				matchingIds.add(new CourseId(course.getId(), course.getName()));
-		});
 		
-//		listenersMap.get(CourseProperty.COURSE_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.COURSE_LIST, null, new ArrayList<>(matchingIds))));
+		final TreeSet<CourseId> matchingIds = new TreeSet<>();
+		if (query.isEmpty())
+			coursesById.forEach((key, course) -> {
+				if(course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+				});
+		else {
+			coursesById.forEach(query.isEmpty() ? (key, course) -> {
+				if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			} : (key, course) -> {
+				if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			});
+			coursesById.forEach(query.isEmpty() ? (key, course) -> {
+				if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			} : (key, course) -> {
+				if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			});
+		}
 		
 		return new ArrayList<>(matchingIds);
 	}
@@ -209,16 +183,10 @@ public class CourseModel { // implements Model {
 		final TreeSet<String> faculties = new TreeSet<>();
 		facultyList.forEach(λ -> faculties.add(λ.getName()));
 		
-//		listenersMap.get(CourseProperty.FACULTY_LIST).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.FACULTY_LIST, null, new ArrayList<>(faculties))));
-		
 		return new ArrayList<>(faculties);
 	}
 
 	public List<Course> loadChosenCoursesDetails() {
-//		listenersMap.get(CourseProperty.CHOSEN_LIST_DETAILS).forEach(λ -> λ.propertyChange(
-//				new PropertyChangeEvent(this, CourseProperty.CHOSEN_LIST_DETAILS, null, pickedCourseList)));
-		
 		return pickedCourseList;
 	}
 
@@ -229,18 +197,4 @@ public class CourseModel { // implements Model {
 	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
-
-//	@Override
-//	public void addPropertyChangeListener(final String property, final PropertyChangeListener l) {
-//		if (property == null || l == null)
-//			throw new NullPointerException();
-//		listenersMap.put(property, l);
-//	}
-//
-//	@Override
-//	public void removePropertyChangeListener(final String property, final PropertyChangeListener l) {
-//		if (property != null && l != null && listenersMap.containsKey(property))
-//			listenersMap.remove(property, l);
-//
-//	}
 }

@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -22,11 +23,11 @@ import upandgo.shared.model.scedule.Schedule;
 @RemoteServiceRelativePath("coursesManipulations")
 public interface CoursesService extends RemoteService {
 	
-	public List<CourseId> getSelectedCourses();
+	public ArrayList<CourseId> getSelectedCourses();
 
-	public List<CourseId> getNotSelectedCourses(String query, String faculty);
+	public ArrayList<CourseId> getNotSelectedCourses(String query, String faculty);
 	
-	public List<String> getFaculties();
+	public ArrayList<String> getFaculties();
 
 	public Course getCourseDetails(CourseId id);
 
@@ -39,4 +40,6 @@ public interface CoursesService extends RemoteService {
 	public Schedule getNextSchedule(Schedule schedule);
 
 	public Schedule getPreviousSchedule(Schedule schedule);
+	
+	public String getSomeString();
 }

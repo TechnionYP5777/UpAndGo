@@ -1,6 +1,5 @@
 package upandgo.shared.entities.course;
-
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * 
@@ -10,12 +9,7 @@ import java.io.Serializable;
  * A small class for storing course name and number, without specifying all other details.
  * 
  */
-public class CourseId implements Comparable<CourseId>, Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6764877847352075970L;
+public class CourseId implements Comparable<CourseId>, IsSerializable {
 
 	@SuppressWarnings("unused")
 	private CourseId() {
@@ -48,8 +42,8 @@ public class CourseId implements Comparable<CourseId>, Serializable {
 		return true;
 	}
 
-	public final String name;
-	public final String number;
+	private String name;
+	private String number;
 
 	public CourseId(final String cNum, final String cName) {
 		name = cName;
@@ -60,6 +54,13 @@ public class CourseId implements Comparable<CourseId>, Serializable {
 		return name + " - " + number;
 	}
 
+	public String name() {
+		return name;
+	}
+	public String number() {
+		return number;
+	}
+	
 	@Override
 	public int compareTo(final CourseId xxx) {
 		return number.compareTo(xxx.number);

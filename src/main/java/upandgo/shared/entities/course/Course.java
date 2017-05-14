@@ -1,6 +1,5 @@
 package upandgo.shared.entities.course;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
  * @author nikita
@@ -10,8 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import upandgo.server.model.loader.CourseBuilder;
-import upandgo.server.model.loader.CourseLoader;
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
 
@@ -23,12 +22,7 @@ import upandgo.shared.entities.StuffMember;
  * Class that holds information about specific course.
  * 
  */
-public class Course implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2572698212840839164L;
+public class Course implements IsSerializable {
 	
 	protected final String name;
 	protected final String id;

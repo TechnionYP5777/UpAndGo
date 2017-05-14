@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -19,11 +20,11 @@ import upandgo.shared.model.scedule.Schedule;
  */
 
 public interface CoursesServiceAsync {
-	public void getSelectedCourses(AsyncCallback<List<CourseId>> callback);
+	public void getSelectedCourses(AsyncCallback<ArrayList<CourseId>> callback);
 
-	public void getNotSelectedCourses(String query, String faculty, AsyncCallback<List<CourseId>> callback);
+	public void getNotSelectedCourses(String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
 	
-	public void getFaculties(AsyncCallback<List<String>> callback);
+	public void getFaculties(AsyncCallback<ArrayList<String>> callback);
 
 	public void getCourseDetails(CourseId id,AsyncCallback<Course> callback);
 
@@ -36,4 +37,6 @@ public interface CoursesServiceAsync {
 	public void getNextSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
 
 	public void getPreviousSchedule(Schedule schedule, AsyncCallback<Schedule> asyncCallback);
+	
+	public void getSomeString(AsyncCallback<String> asyncCallback);
 }

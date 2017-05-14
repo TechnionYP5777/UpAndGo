@@ -36,4 +36,14 @@
 		  <servlet-name>gwt-log-remote-logger-servlet</servlet-name>
 		  <url-pattern>/upandgo/gwt-log</url-pattern>
 		</servlet-mapping>
+		
+		<servlet>
+		    <servlet-name>CoursesServiceImpl</servlet-name>
+		    <servlet-class>upandgo.server.CoursesServiceImpl</servlet-class>
+	  	</servlet>
+	
+	  	<servlet-mapping>
+		    <servlet-name>CoursesServiceImpl</servlet-name>
+		    <url-pattern>/upandgo/coursesManipulations</url-pattern>
+	  	</servlet-mapping>
 </web-app>
