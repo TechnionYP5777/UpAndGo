@@ -118,7 +118,11 @@ public class CourseModel { // implements Model {
 	public void saveChosenCourses(final List<String> names) {
 		loader.saveChosenCourseNames(names);
 	}
-
+	
+	public List<Course> getPickedCoursesList () {
+		return pickedCourseList;
+	}
+	
 	/*
 	 * load needed courses from DB if empty, except those that are already chosen.
 	 */

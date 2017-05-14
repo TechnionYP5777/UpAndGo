@@ -75,9 +75,8 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Course> getChosenCoursesList() {
+		return model.getPickedCoursesList();
 	}
 
 	static public String someString = "empty";

@@ -35,7 +35,7 @@ public interface CoursesService extends RemoteService {
 
 	public void unselectCourse(CourseId id);
 	
-	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses);
+	public List<Course> getChosenCoursesList();
 	
 	public void saveSchedule (List<LessonGroup> sched);
 	

@@ -172,45 +172,35 @@ public class SchedulerPresenter implements Presenter {
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+				rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Error while retrieving selected courses by ID.");
-						Log.error("Error while retrieving selected courses by ID.");
+						Window.alert("Error while retrieving selected courses.");
+						Log.error("Error while retrieving selected courses.");
 					}
 					@Override
-					public void onSuccess(ArrayList<CourseId> result) {
-						rpcService.getCoursesByCourseID(result, new AsyncCallback<List<Course>>() {
-							@Override
-							public void onFailure(Throwable caught) {
-								Window.alert("Error while retrieving selected courses.");
-								Log.error("Error while retrieving selected courses.");
-							}
-							@Override
-							public void onSuccess(List<Course> result) {
-								if (result.isEmpty()) {
-									view.setSchedule(null);
-									return;
-								}
-								final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
-										isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
-								if (tables.isEmpty()) {
-									Window.alert("Error - There are no possible schedule.");
-									Log.error("Error - There are no possible schedule.");
-								} else {
-									lessonGroupsList.clear();
-									sched_index = 0;
-									tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
-									Log.info("A schedule was build");
-									view.setSchedule(lessonGroupsList.get(sched_index));
-								}
-							}
-						}); 
+					public void onSuccess(List<Course> result) {
+						if (result.isEmpty()) {
+							view.setSchedule(null);
+							return;
+						}
+						final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
+								isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+						if (tables.isEmpty()) {
+							Window.alert("Error - There are no possible schedule.");
+							Log.error("Error - There are no possible schedule.");
+						} else {
+							lessonGroupsList.clear();
+							sched_index = 0;
+							tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
+							Log.info("A schedule was build");
+							view.setSchedule(lessonGroupsList.get(sched_index));
+						}
 					}
-				});
+				}); 
 			}
 		});
-		
+				
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
