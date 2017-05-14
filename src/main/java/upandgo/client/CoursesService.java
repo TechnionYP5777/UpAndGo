@@ -3,6 +3,7 @@ package upandgo.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -34,6 +35,9 @@ public interface CoursesService extends RemoteService {
 	public void unselectCourse(CourseId id);
 	
 	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses);
+<<<<<<< HEAD
 	
 	public String getSomeString();
+=======
+>>>>>>> branch 'master' of https://github.com/TechnionYP5777/UpAndGo.git
 }

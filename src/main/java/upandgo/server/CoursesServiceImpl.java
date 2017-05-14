@@ -80,6 +80,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	
+<<<<<<< HEAD
 	static public String someString = "empty";
 	
 	@Override
@@ -88,4 +89,6 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		return "paparapa " + someString;
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/TechnionYP5777/UpAndGo.git
 }
