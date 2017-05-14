@@ -4,7 +4,6 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.gwt.event.shared.EventBus;
 
@@ -27,6 +26,7 @@ import upandgo.client.event.saveScheduleEventHandler;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.server.model.loader.CourseLoader;
 
 /**
  * 
@@ -45,12 +45,14 @@ class AppController implements Presenter {
 	private EventBus eventBus;
 	private CoursesServiceAsync rpcService;
 	private LayoutPanel mainView;
+	private CourseLoader loader;
 	
 	@Inject
-	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
+	public AppController(CoursesServiceAsync rpcService, EventBus eventBus, CourseLoader loader) {
 		initMainView();
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
+		this.loader = loader;
 		bind();
 	}
 
@@ -150,7 +152,7 @@ class AppController implements Presenter {
 		
 		CourseListPresenter clPresenter = new CourseListPresenter(rpcService,eventBus,courseSelectionView);
 		
-		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService, loader);
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);

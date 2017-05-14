@@ -1,7 +1,5 @@
 package upandgo.server;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +9,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import upandgo.client.CoursesService;
 import upandgo.server.model.CourseModel;
 import upandgo.server.model.loader.XmlCourseLoader;
-import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
-import upandgo.shared.model.scedule.Schedule;
 
 /**
  * 
@@ -78,23 +74,12 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public Schedule getSchedule(List<CourseId> selectedCourses, List<TimeConstraint> constraintsList) {
+	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Schedule getNextSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Schedule getPreviousSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	static public String someString = "empty";
 	
 	@Override

@@ -1,5 +1,8 @@
 package upandgo.client;
 
+import java.time.LocalTime;
+import java.util.List;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -10,6 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources.MainStyle;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.model.scedule.Schedule;
 
 public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Display{
@@ -78,7 +82,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public void setSchedule(Schedule schedule) {
+	public void setSchedule(List<LessonGroup> schedule) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -120,7 +124,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public upandgo.shared.entities.LocalTime getReqStartTime() {
+	public LocalTime getReqStartTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -138,7 +142,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public upandgo.shared.entities.LocalTime getReqFinishTime() {
+	public LocalTime getReqFinishTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
