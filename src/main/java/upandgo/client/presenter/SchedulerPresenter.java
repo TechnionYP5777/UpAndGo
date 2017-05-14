@@ -25,7 +25,6 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.nextScheduleEvent;
 import upandgo.client.event.prevScheduleEvent;
 import upandgo.client.event.saveScheduleEvent;
-import upandgo.client.view.CourseListView;
 import upandgo.server.logic.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.LessonGroup;
@@ -176,14 +175,14 @@ public class SchedulerPresenter implements Presenter {
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				rpcService.getSelectedCourses(new AsyncCallback<List<CourseId>>() {
+				rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						Window.alert("Error while retrieving selected courses by ID.");
 						Log.error("Error while retrieving selected courses by ID.");
 					}
 					@Override
-					public void onSuccess(List<CourseId> result) {
+					public void onSuccess(ArrayList<CourseId> result) {
 						rpcService.getCoursesByCourseID(result, new AsyncCallback<List<Course>>() {
 							@Override
 							public void onFailure(Throwable caught) {

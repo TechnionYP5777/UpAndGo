@@ -79,8 +79,6 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		return null;
 	}
 
-	
-<<<<<<< HEAD
 	static public String someString = "empty";
 	
 	@Override
@@ -88,7 +86,4 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		Log.warn("check-check");
 		return "paparapa " + someString;
 	}
-
-=======
->>>>>>> branch 'master' of https://github.com/TechnionYP5777/UpAndGo.git
 }

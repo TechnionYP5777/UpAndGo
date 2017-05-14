@@ -31,9 +31,6 @@ public interface CoursesServiceAsync {
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
 	
 	public void getCoursesByCourseID(List<CourseId> selectedCourses, AsyncCallback<List<Course>> callback);
-<<<<<<< HEAD
 	
 	public void getSomeString(AsyncCallback<String> asyncCallback);
-=======
->>>>>>> branch 'master' of https://github.com/TechnionYP5777/UpAndGo.git
 }

@@ -35,9 +35,6 @@ public interface CoursesService extends RemoteService {
 	public void unselectCourse(CourseId id);
 	
 	public List<Course> getCoursesByCourseID(List<CourseId> selectedCourses);
-<<<<<<< HEAD
 	
 	public String getSomeString();
-=======
->>>>>>> branch 'master' of https://github.com/TechnionYP5777/UpAndGo.git
 }
