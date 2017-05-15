@@ -5,7 +5,6 @@ com.google.gwt.user.client.rpc.XsrfToken, false, false, true, true, com.google.g
 java.lang.Exception, true, false, true, false, java.lang.Exception/1920171873, 1920171873
 java.lang.RuntimeException, true, false, true, false, java.lang.RuntimeException/515124647, 515124647
 java.lang.String, true, true, true, true, java.lang.String/2004016611, 2004016611
-[Ljava.lang.String;, true, true, false, false, [Ljava.lang.String;/2600011424, 2600011424
 java.lang.Throwable, true, false, true, false, java.lang.Throwable/2953622131, 2953622131
 java.util.ArrayList, true, true, true, true, java.util.ArrayList/4159755760, 4159755760
 java.util.Arrays$ArrayList, true, true, true, true, java.util.Arrays$ArrayList/2507071751, 2507071751
@@ -15,9 +14,8 @@ java.util.LinkedList, true, true, true, true, java.util.LinkedList/3953877921, 3
 java.util.Stack, true, true, true, true, java.util.Stack/1346942793, 1346942793
 java.util.Vector, true, true, true, true, java.util.Vector/3057315478, 3057315478
 upandgo.client.CoursesService, false, false, false, false, _, 3113584189
-upandgo.shared.entities.LessonGroup, true, true, false, false, upandgo.shared.entities.LessonGroup/613417440, 613417440
-[Lupandgo.shared.entities.LessonGroup;, true, true, false, false, [Lupandgo.shared.entities.LessonGroup;/752504771, 752504771
+upandgo.shared.entities.LessonGroup, true, true, true, true, upandgo.shared.entities.LessonGroup/613417440, 613417440
+[Lupandgo.shared.entities.LessonGroup;, true, true, true, true, [Lupandgo.shared.entities.LessonGroup;/752504771, 752504771
 upandgo.shared.entities.course.Course, true, true, false, false, upandgo.shared.entities.course.Course/1837012719, 1837012719
-upandgo.shared.entities.course.CourseId, true, true, true, true, upandgo.shared.entities.course.CourseId/1577615664, 1577615664
-[Lupandgo.shared.entities.course.CourseId;, true, true, true, true, [Lupandgo.shared.entities.course.CourseId;/3718079804, 3718079804
-upandgo.shared.model.scedule.Schedule, true, true, true, true, upandgo.shared.model.scedule.Schedule/2702162033, 2702162033
+upandgo.shared.entities.course.CourseId, true, true, true, true, upandgo.shared.entities.course.CourseId/3080578200, 3080578200
+[Lupandgo.shared.entities.course.Course;, true, true, false, false, [Lupandgo.shared.entities.course.Course;/1985339056, 1985339056

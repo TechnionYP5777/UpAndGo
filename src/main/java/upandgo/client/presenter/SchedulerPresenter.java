@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.common.collect.Lists;
+//import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -19,19 +19,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 import upandgo.client.CoursesServiceAsync;
-import upandgo.client.event.UnselectCourseEvent;
-import upandgo.client.event.buildScheduleEvent;
 import upandgo.client.event.clearScheduleEvent;
-import upandgo.client.event.nextScheduleEvent;
-import upandgo.client.event.prevScheduleEvent;
-import upandgo.client.event.saveScheduleEvent;
 import upandgo.server.logic.Scheduler;
-import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.LessonGroup;
-import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
-import upandgo.shared.entities.course.CourseId;
-import upandgo.shared.model.scedule.Schedule;
 import upandgo.shared.model.scedule.Timetable;
 
 /**
@@ -55,7 +46,7 @@ public class SchedulerPresenter implements Presenter {
 	protected LocalTime minStartTime;
 	protected LocalTime maxEndTime;
 	
-	private List<CourseId> selectedCourses;
+	private List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
 	
@@ -183,7 +174,8 @@ public class SchedulerPresenter implements Presenter {
 						if (result.isEmpty()) {
 							view.setSchedule(null);
 							return;
-						}
+						}/*
+						selectedCourses = new ArrayList<Course>(result);
 						final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
 								isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 						if (tables.isEmpty()) {
@@ -195,7 +187,7 @@ public class SchedulerPresenter implements Presenter {
 							tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
 							Log.info("A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
-						}
+						}*/
 					}
 				}); 
 			}
@@ -256,10 +248,6 @@ public class SchedulerPresenter implements Presenter {
 		panel.add(view.asWidget());
 		panel.setWidgetLeftWidth(view.asWidget(), 1, Unit.EM, 77, Unit.PCT);
 		panel.setWidgetTopBottom(view.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
-	}
-	
-	public void setSelectedCourses(List<CourseId> selectedCourses) {
-	    this.selectedCourses = selectedCourses;
 	}
 	
 }

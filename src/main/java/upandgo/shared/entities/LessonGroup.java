@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import upandgo.shared.entities.constraint.TimeConstraint;
 
 /**
@@ -14,7 +16,7 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  * Class that holds information about specific lesson group.
  * 
  */
-public class LessonGroup implements Serializable {
+public class LessonGroup implements IsSerializable {
 
 	private static final long serialVersionUID = 4547987607914277140L;
 

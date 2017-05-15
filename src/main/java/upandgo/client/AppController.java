@@ -45,8 +45,7 @@ class AppController implements Presenter {
 	private EventBus eventBus;
 	private CoursesServiceAsync rpcService;
 	private LayoutPanel mainView;
-	private CourseLoader loader;
-	
+		
 	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
 		initMainView();

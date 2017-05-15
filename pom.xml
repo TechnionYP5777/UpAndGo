@@ -62,6 +62,11 @@
       <artifactId>gwt-dev</artifactId>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>21.0</version>
+	</dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>

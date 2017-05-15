@@ -1,0 +1,2 @@
+serviceClass: upandgo.client.CoursesService
+path: 83EF98A2F02590DCA4FE796EBBC0F5F1.gwt.rpc
