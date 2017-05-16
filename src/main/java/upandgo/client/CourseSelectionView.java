@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.HasCellPreviewHandlers;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.presenter.CourseListPresenter;
@@ -181,11 +182,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     
     // Implementation of Display
 	@Override
-	public Widget getSelectedCoursesList() {
+	public CellTable<CourseId> getSelectedCoursesList() {
 		return ccl;
 	}
 	@Override
-	public Widget getNotSelectedCoursesList() {
+	public CellTable<CourseId> getNotSelectedCoursesList() {
 		return scl;
 	}
 	@Override
