@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
@@ -18,7 +20,7 @@ import upandgo.shared.entities.WeekTime;
  * 
  */
 
-public class Timetable {
+public class Timetable implements IsSerializable {
 	private final int DAYS_IN_WEEK = 7;
 	private final double MAX_BLANKSPACE_RANK = 2;
 	private final double BLANKSPACE_PENALTY_PER_HOUR = 0.25;
@@ -35,7 +37,13 @@ public class Timetable {
 	private double rankFreeTuesday;
 	private double rankFreeWednesday;
 	private double rankFreeThursday;
-
+	
+	public Timetable() {
+		lessonGroups = new ArrayList<>();
+		rankDaysoff = rankDaysoff();
+		rankBlankSpace = rankBlankSpace();
+	}
+	
 	public Timetable(final List<LessonGroup> lessons) {
 		lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
