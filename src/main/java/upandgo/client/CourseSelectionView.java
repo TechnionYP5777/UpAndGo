@@ -71,7 +71,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	courses.add(new CourseId("1234", "מערכות מסדי נתונים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
+    	courses.add(new CourseId("1234", "ewrw"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
@@ -160,6 +160,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			}
 		});
     	options.withSelector("tbody tr");
+    	options.withContainer("element");
     	
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);

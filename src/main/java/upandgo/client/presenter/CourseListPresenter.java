@@ -88,7 +88,6 @@ public class CourseListPresenter implements Presenter {
 		this.rpcService = rpc;
 		this.display = display;
 		this.eventBus = eventBus;
-		bind();
 	}
 
 	CoursesServiceAsync rpcService;
@@ -262,9 +261,9 @@ public class CourseListPresenter implements Presenter {
 		panel.setWidgetRightWidth(display.asWidget(), 1, Unit.EM, 20, Unit.PCT);
 		panel.setWidgetTopBottom(display.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
 		
-		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
-		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+	//	rpcService.getFaculties(new FetchFacultiesAsyncCallback());
+	//	rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+	//	rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
 	@Deprecated

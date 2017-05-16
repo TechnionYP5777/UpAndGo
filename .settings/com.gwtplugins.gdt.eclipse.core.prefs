@@ -2,6 +2,6 @@ eclipse.preferences.version=1
 gwtMavenModuleName=upandgo.UpAndGo
 gwtMavenModuleShortName=UpAndGo
 jarsExcludedFromWebInfLib=
-lastWarOutDir=C\:/Users/Omri Ben- Shmuel/Documents/GitHub/UpAndGo/src/main/webapp
+lastWarOutDir=/home/dan635z/Desktop/eclipse-installer
 warSrcDir=src/main/webapp
 warSrcDirIsOutput=false
