@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.HasCellPreviewHandlers;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.presenter.CourseListPresenter;
@@ -70,7 +71,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	courses.add(new CourseId("1234", "מערכות מסדי נתונים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
+    	courses.add(new CourseId("1234", "ewrw"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
     	courses.add(new CourseId("1234", "אלגוריתמים"));
@@ -159,6 +160,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			}
 		});
     	options.withSelector("tbody tr");
+    	options.withContainer("element");
     	
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);
@@ -181,11 +183,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     
     // Implementation of Display
 	@Override
-	public Widget getSelectedCoursesList() {
+	public CellTable<CourseId> getSelectedCoursesList() {
 		return ccl;
 	}
 	@Override
-	public Widget getNotSelectedCoursesList() {
+	public CellTable<CourseId> getNotSelectedCoursesList() {
 		return scl;
 	}
 	@Override

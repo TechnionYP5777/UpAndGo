@@ -24,10 +24,10 @@ import upandgo.shared.entities.StuffMember;
  */
 public class Course implements IsSerializable {
 	
-	protected final String name;
-	protected final String id;
-	protected final String faculty;
-	protected final double points;
+	protected String name;
+	protected String id;
+	protected String faculty;
+	protected double points;
 	protected final LocalDateTime aTerm;
 	protected final LocalDateTime bTerm;
 

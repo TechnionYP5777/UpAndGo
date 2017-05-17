@@ -87,7 +87,6 @@ public class SchedulerPresenter implements Presenter {
 		this.selectedCourses = new ArrayList<>();
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
-		bind();
 	}
 	
 	
