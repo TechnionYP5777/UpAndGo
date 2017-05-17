@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.common.collect.Lists;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -173,7 +172,7 @@ public class SchedulerPresenter implements Presenter {
 						if (result.isEmpty()) {
 							view.setSchedule(null);
 							return;
-						}
+						}/*
 						selectedCourses = new ArrayList<Course>(result);
 						final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
 								isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
@@ -186,7 +185,7 @@ public class SchedulerPresenter implements Presenter {
 							tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
 							Log.info("A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
-						}
+						}*/
 					}
 				}); 
 			}
