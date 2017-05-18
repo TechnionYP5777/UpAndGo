@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import upandgo.server.logic.Scheduler;
+import upandgo.shared.model.scedule.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.constraint.TimeConstraint;

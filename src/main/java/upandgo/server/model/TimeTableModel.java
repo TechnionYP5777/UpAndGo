@@ -9,10 +9,10 @@ import java.util.List;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 
-import upandgo.server.logic.Scheduler;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 import upandgo.shared.property.TimeTableProperty;
 

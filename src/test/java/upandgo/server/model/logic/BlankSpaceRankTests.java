@@ -14,10 +14,11 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Test;
 
-import upandgo.server.logic.Scheduler;
+
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 
 @SuppressWarnings("static-method")

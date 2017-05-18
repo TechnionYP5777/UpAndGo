@@ -4,6 +4,7 @@ import com.google.gwt.event.shared.EventBus;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -19,9 +20,9 @@ import com.google.inject.Inject;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.clearScheduleEvent;
-import upandgo.server.logic.Scheduler;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 
 /**
@@ -172,9 +173,9 @@ public class SchedulerPresenter implements Presenter {
 						if (result.isEmpty()) {
 							view.setSchedule(null);
 							return;
-						}/*
+						}
 						selectedCourses = new ArrayList<Course>(result);
-						final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
+						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
 								isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 						if (tables.isEmpty()) {
 							Window.alert("Error - There are no possible schedule.");
@@ -185,7 +186,10 @@ public class SchedulerPresenter implements Presenter {
 							tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
 							Log.info("A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
-						}*/
+						}
+					}
+					private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
+					    return new ArrayList<>();
 					}
 				}); 
 			}
