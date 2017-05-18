@@ -26,6 +26,7 @@ import upandgo.client.event.saveScheduleEventHandler;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.client.view.NavBarView;
 import upandgo.server.model.loader.CourseLoader;
 
 /**

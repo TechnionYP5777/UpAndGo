@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;

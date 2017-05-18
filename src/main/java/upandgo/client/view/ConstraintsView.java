@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 
@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 
+import upandgo.client.Resources;
 import upandgo.client.Resources.ConstraintsStyle;
 
 

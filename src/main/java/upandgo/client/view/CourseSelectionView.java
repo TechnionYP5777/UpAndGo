@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 
 import java.util.ArrayList;
@@ -37,6 +37,7 @@ import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.HasCellPreviewHandlers;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import upandgo.client.Resources;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.CourseId;
 import static com.google.gwt.query.client.GQuery.$;

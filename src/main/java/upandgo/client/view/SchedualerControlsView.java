@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -6,6 +6,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
+import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 
 public class SchedualerControlsView extends HorizontalPanel{

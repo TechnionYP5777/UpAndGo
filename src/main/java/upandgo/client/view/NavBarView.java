@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 
 
 
@@ -18,6 +18,8 @@ import com.github.gwtbootstrap.client.ui.Modal;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
+import upandgo.client.LoginDialog;
+import upandgo.client.Resources;
 import upandgo.client.Resources.NavBarStyle;
 
 public class NavBarView extends FlowPanel{

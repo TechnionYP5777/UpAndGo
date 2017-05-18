@@ -8,6 +8,8 @@ import com.google.inject.Singleton;
 
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.client.view.CourseSelectionView;
+import upandgo.client.view.SchedualerView;
 
 public class InjectorModule extends AbstractGinModule {
 

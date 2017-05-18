@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.view;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 
+import upandgo.client.Resources;
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
