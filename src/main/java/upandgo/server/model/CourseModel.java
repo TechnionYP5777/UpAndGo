@@ -3,10 +3,13 @@ package upandgo.server.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
@@ -50,9 +53,12 @@ public class CourseModel { // implements Model {
 		final TreeSet<CourseId> pickedList = new TreeSet<>();
 		final List<String> pickedIds = new ArrayList<>();
 		pickedCourseList.add(pickedCourse);
-		pickedCourseList.forEach(λ -> {
-			pickedList.add(new CourseId(λ.getId(), λ.getName()));
-			pickedIds.add(λ.getId());
+		pickedCourseList.forEach(new Consumer<Course>() {
+			@Override
+			public void accept(Course λ) {
+				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+				pickedIds.add(λ.getId());
+			}
 		});
 	}
 
@@ -80,7 +86,12 @@ public class CourseModel { // implements Model {
 		// save picking in DB
 		final TreeSet<CourseId> pickedList = new TreeSet<>();
 		pickedCourseList.remove(droppedCourse);
-		pickedCourseList.forEach(λ -> pickedList.add(new CourseId(λ.getId(), λ.getName())));
+		pickedCourseList.forEach(new Consumer<Course>() {
+			@Override
+			public void accept(Course λ) {
+				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+			}
+		});
 	}
 
 	public Course getCourseByName(final String name) {
@@ -103,14 +114,24 @@ public class CourseModel { // implements Model {
 
 	public List<String> getChosenCourseNames() {
 		final List<String> $ = new ArrayList<>();
-		pickedCourseList.forEach(λ -> $.add(λ.getId()));
+		pickedCourseList.forEach(new Consumer<Course>() {
+			@Override
+			public void accept(Course λ) {
+				$.add(λ.getId());
+			}
+		});
 		return $;
 	}
 
 	public List<CourseId> loadChosenCourses() {
 		// save picking in DB
 		final HashSet<CourseId> pickedList = new HashSet<>();
-		pickedCourseList.forEach(λ -> pickedList.add(new CourseId(λ.getId(), λ.getName())));
+		pickedCourseList.forEach(new Consumer<Course>() {
+			@Override
+			public void accept(Course λ) {
+				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+			}
+		});
 		
 		return new ArrayList<>(pickedList);
 	}
@@ -129,18 +150,27 @@ public class CourseModel { // implements Model {
 	public List<CourseId> loadQuery(final String query) {
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
 		if (query.isEmpty())
-			coursesById.forEach((key, course) -> {
-				if(!pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-				});
-		else {			
-			coursesById.forEach((key, course) -> {
-				if (key.contains(query) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
+			coursesById.forEach(new BiConsumer<String, Course>() {
+				@Override
+				public void accept(String key, Course course) {
+					if(!pickedCourseList.contains(course))
+						matchingIds.add(new CourseId(course.getId(), course.getName()));
+					}
 			});
-			coursesByName.forEach((key, course) -> {
-				if (key.toLowerCase().contains(query.toLowerCase()) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
+		else {			
+			coursesById.forEach(new BiConsumer<String, Course>() {
+				@Override
+				public void accept(String key, Course course) {
+					if (key.contains(query) && !pickedCourseList.contains(course))
+						matchingIds.add(new CourseId(course.getId(), course.getName()));
+				}
+			});
+			coursesByName.forEach(new BiConsumer<String, Course>() {
+				@Override
+				public void accept(String key, Course course) {
+					if (key.toLowerCase().contains(query.toLowerCase()) && !pickedCourseList.contains(course))
+						matchingIds.add(new CourseId(course.getId(), course.getName()));
+				}
 			});
 		}
 		
@@ -156,25 +186,36 @@ public class CourseModel { // implements Model {
 		
 		final TreeSet<CourseId> matchingIds = new TreeSet<>();
 		if (query.isEmpty())
-			coursesById.forEach((key, course) -> {
-				if(course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-				});
+			coursesById.forEach(new BiConsumer<String, Course>() {
+				@Override
+				public void accept(String key, Course course) {
+					if(course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+						matchingIds.add(new CourseId(course.getId(), course.getName()));
+					}
+			});
 		else {
-			coursesById.forEach(query.isEmpty() ? (key, course) -> {
-				if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-			} : (key, course) -> {
-				if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-			});
-			coursesById.forEach(query.isEmpty() ? (key, course) -> {
-				if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-			} : (key, course) -> {
-				if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-					matchingIds.add(new CourseId(course.getId(), course.getName()));
-			});
+			 for (Map.Entry<String, Course> entry : coursesById.entrySet()) {
+				 Course course = entry.getValue();
+				 String key = entry.getKey();
+				 if (query.isEmpty()) {
+					 if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+							matchingIds.add(new CourseId(course.getId(), course.getName())); 
+				 } else {
+					 if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+							matchingIds.add(new CourseId(course.getId(), course.getName()));
+				 }
+			 }
+			 for (Map.Entry<String, Course> entry : coursesById.entrySet()) {
+				 Course course = entry.getValue();
+				 String key = entry.getKey();
+				 if (query.isEmpty()) {
+					 if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+							matchingIds.add(new CourseId(course.getId(), course.getName())); 
+				 } else {
+					 if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
+							matchingIds.add(new CourseId(course.getId(), course.getName())); 
+				 }
+			 }
 		}
 		
 		return new ArrayList<>(matchingIds);
@@ -185,7 +226,12 @@ public class CourseModel { // implements Model {
 	 */
 	public List<String> loadFacultyNames() {
 		final TreeSet<String> faculties = new TreeSet<>();
-		facultyList.forEach(λ -> faculties.add(λ.getName()));
+		facultyList.forEach(new Consumer<Faculty>() {
+			@Override
+			public void accept(Faculty λ) {
+				faculties.add(λ.getName());
+			}
+		});
 		
 		return new ArrayList<>(faculties);
 	}

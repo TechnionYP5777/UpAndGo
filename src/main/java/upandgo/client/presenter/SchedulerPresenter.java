@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
@@ -183,7 +184,12 @@ public class SchedulerPresenter implements Presenter {
 						} else {
 							lessonGroupsList.clear();
 							sched_index = 0;
-							tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
+							tables.forEach(new Consumer<Timetable>() {
+								@Override
+								public void accept(Timetable λ) {
+									lessonGroupsList.add(λ.getLessonGroups());
+								}
+							});
 							Log.info("A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
 						}

@@ -3,6 +3,7 @@ package upandgo.client;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -105,8 +106,8 @@ public class TimeTableView extends HorizontalPanel {
 	    		"אישים בתנך");
 	    lessons.add(l);
 	    drawDay(lessons, mondayTable);
-	    drawDay(new ArrayList<>(), wednesdayTable);
-	    drawDay(new ArrayList<>(), thursdayTable);
+	    drawDay(new ArrayList<Lesson>(), wednesdayTable);
+	    drawDay(new ArrayList<Lesson>(), thursdayTable);
 
 	    
 	    this.setStyleName(ttStyle.timeTable());
@@ -242,7 +243,12 @@ public class TimeTableView extends HorizontalPanel {
  		
  		for(int day = 0; day < DAYS_IN_WEEK; day++){
  			final ArrayList<Lesson> daySchedule = lessonsOfDay.get(day);
- 			Collections.sort(daySchedule, (t1, t2) -> t1.getStartTime().compareTo(t2.getStartTime()));
+ 			Collections.sort(daySchedule, new Comparator<Lesson>() {
+				@Override
+				public int compare(Lesson t1, Lesson t2) {
+					return t1.getStartTime().compareTo(t2.getStartTime());
+				}
+			});
 			//drawDay(daySchedule, day);
  		}
  	}
@@ -251,9 +257,9 @@ public class TimeTableView extends HorizontalPanel {
  		final ArrayList<ArrayList<Lesson>> lessonsOfDay = new ArrayList<>();
  		
  		for (int i = 0; i < DAYS_IN_WEEK; ++i)
- 			lessonsOfDay.add(new ArrayList<>());
+ 			lessonsOfDay.add(new ArrayList<Lesson>());
  		
- 		lessonsOfDay.add(new ArrayList<>());
+ 		lessonsOfDay.add(new ArrayList<Lesson>());
  		for (final LessonGroup lg : schedule){
 			for (final Lesson l : lg.getLessons()) {
 				lessonsOfDay.get(l.getDay()).add(l);

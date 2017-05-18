@@ -3,6 +3,7 @@ package upandgo.shared.model.scedule;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class Scheduler implements IsSerializable{
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
-	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		final List<Timetable> result = new ArrayList<>();
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
@@ -228,26 +228,29 @@ public class Scheduler implements IsSerializable{
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff,
 			final boolean byBlankSpace, final LocalTime byStartTime, final LocalTime byEndTime) {
 		final List<Timetable> $ = new ArrayList<>(orig);
-		Collections.sort($, (t1, t2) -> {
-			Double rank1 = 0.0, rank2 = 0.0;
-			if (byDaysoff) {
-				rank1 += t1.getRankOfDaysoff();
-				rank2 += t2.getRankOfDaysoff();
-			}
-			if (byBlankSpace) {
-				rank1 += t1.getRankOfBlankSpace();
-				rank2 += t2.getRankOfBlankSpace();
-			}
-			if (byStartTime != null) {
-				rank1 += t1.getRankOfStartTime(byStartTime);
-				rank2 += t2.getRankOfStartTime(byStartTime);
-			}
-			if (byEndTime != null) {
-				rank1 += t1.getRankOfEndTime(byEndTime);
-				rank2 += t2.getRankOfEndTime(byEndTime);
-			}
+		Collections.sort($, new Comparator<Timetable>() {
+			@Override
+			public int compare(Timetable t1, Timetable t2) {
+				Double rank1 = 0.0, rank2 = 0.0;
+				if (byDaysoff) {
+					rank1 += t1.getRankOfDaysoff();
+					rank2 += t2.getRankOfDaysoff();
+				}
+				if (byBlankSpace) {
+					rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();
+				}
+				if (byStartTime != null) {
+					rank1 += t1.getRankOfStartTime(byStartTime);
+					rank2 += t2.getRankOfStartTime(byStartTime);
+				}
+				if (byEndTime != null) {
+					rank1 += t1.getRankOfEndTime(byEndTime);
+					rank2 += t2.getRankOfEndTime(byEndTime);
+				}
 
-			return -rank1.compareTo(rank2);
+				return -rank1.compareTo(rank2);
+			}
 		});
 		return $.iterator();
 	}
@@ -264,18 +267,21 @@ public class Scheduler implements IsSerializable{
 	public static Iterator<Timetable> sortedBy(final List<Timetable> orig, final boolean byDaysoff,
 			final boolean byBlankSpace) {
 		final List<Timetable> $ = new ArrayList<>(orig);
-		Collections.sort($, (t1, t2) -> {
-			Double rank1 = 0.0, rank2 = 0.0;
-			if (byDaysoff) {
-				rank1 += t1.getRankOfDaysoff();
-				rank2 += t2.getRankOfDaysoff();
-			}
-			if (byBlankSpace) {
-				rank1 += t1.getRankOfBlankSpace();
-				rank2 += t2.getRankOfBlankSpace();
-			}
+		Collections.sort($, new Comparator<Timetable>() {
+			@Override
+			public int compare(Timetable t1, Timetable t2) {
+				Double rank1 = 0.0, rank2 = 0.0;
+				if (byDaysoff) {
+					rank1 += t1.getRankOfDaysoff();
+					rank2 += t2.getRankOfDaysoff();
+				}
+				if (byBlankSpace) {
+					rank1 += t1.getRankOfBlankSpace();
+					rank2 += t2.getRankOfBlankSpace();
+				}
 
-			return -rank1.compareTo(rank2);
+				return -rank1.compareTo(rank2);
+			}
 		});
 		return $.iterator();
 	}

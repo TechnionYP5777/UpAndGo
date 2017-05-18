@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
@@ -76,7 +77,12 @@ public class TimeTableModel implements Model {
 		else {
 			lessonGroupsList.clear();
 			sched_index = 0;
-			tables.forEach(λ -> lessonGroupsList.add(λ.getLessonGroups()));
+			tables.forEach(new Consumer<Timetable>() {
+				@Override
+				public void accept(Timetable λ) {
+					lessonGroupsList.add(λ.getLessonGroups());
+				}
+			});
 			notifySchedListeners();
 		}
 	}
@@ -97,25 +103,45 @@ public class TimeTableModel implements Model {
 	}
 
 	private void notifySchedListeners() {
-		listenersMap.get(TimeTableProperty.SCHEDULE).forEach(λ -> λ.propertyChange(
-				new PropertyChangeEvent(this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index))));
-		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(λ -> λ.propertyChange(new PropertyChangeEvent(this,
-				TimeTableProperty.SCHEDULE_INDEX, null, sched_index + 1 + "/" + lessonGroupsList.size())));
+		listenersMap.get(TimeTableProperty.SCHEDULE).forEach(new Consumer<PropertyChangeListener>() {
+			@Override
+			public void accept(PropertyChangeListener λ) {
+				λ.propertyChange(
+						new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)));
+			}
+		});
+		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(new Consumer<PropertyChangeListener>() {
+			@Override
+			public void accept(PropertyChangeListener λ) {
+				λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this,
+						TimeTableProperty.SCHEDULE_INDEX, null, sched_index + 1 + "/" + lessonGroupsList.size()));
+			}
+		});
 	}
 
 	private void notifySchedListenersNoSched() {
 		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(
-				λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_SCHEDULE, null, null)));
+				new Consumer<PropertyChangeListener>() {
+					@Override
+					public void accept(PropertyChangeListener λ) {
+						λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.NO_SCHEDULE, null, null));
+					}
+				});
 	}
 
 	private void notifySchedListenersNoCourses() {
 		listenersMap.get(TimeTableProperty.NO_COURSES).forEach(
-				λ -> λ.propertyChange(new PropertyChangeEvent(this, TimeTableProperty.NO_COURSES, null, null)));
+				new Consumer<PropertyChangeListener>() {
+					@Override
+					public void accept(PropertyChangeListener λ) {
+						λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.NO_COURSES, null, null));
+					}
+				});
 	}
 
 	public List<LessonGroup> getChosenLessonGroups() {
-		return lessonGroupsList.size() <= sched_index + 1 ? new ArrayList<>()
-				: lessonGroupsList.get(sched_index);
+		return (List<LessonGroup>) (lessonGroupsList.size() <= sched_index + 1 ? new ArrayList<>()
+				: lessonGroupsList.get(sched_index));
 	}
 
 	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {

@@ -3,6 +3,7 @@ package upandgo.shared.model.scedule;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -67,7 +68,7 @@ public class Timetable implements IsSerializable {
 		// create an histogram which holds a list of lessons times of each day
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
 		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
-			histogram.add(new ArrayList<>());
+			histogram.add(new ArrayList<WeekTime>());
 
 		for (final LessonGroup lg : lessonGroups)
 			for (final Lesson xxx : lg.getLessons()) {
@@ -78,7 +79,12 @@ public class Timetable implements IsSerializable {
 		for (final ArrayList<WeekTime> daySchedule : histogram) {
 			// sort them such that the first start time of each day will be
 			// first in the list too
-			Collections.sort(daySchedule, (t1, t2) -> t1.compareTo(t2));
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
 			// add 0.5 points if daySchedule start time is greater than wanted
 			// start time
 			if (!daySchedule.isEmpty() && daySchedule.get(0).getTime().compareTo(startTime) >= 0)
@@ -101,7 +107,7 @@ public class Timetable implements IsSerializable {
 		// create an histogram which holds a list of lessons times of each day
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
 		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
-			histogram.add(new ArrayList<>());
+			histogram.add(new ArrayList<WeekTime>());
 
 		for (final LessonGroup lg : lessonGroups)
 			for (final Lesson xxx : lg.getLessons()) {
@@ -112,7 +118,12 @@ public class Timetable implements IsSerializable {
 		for (final ArrayList<WeekTime> daySchedule : histogram) {
 			// sort them such that the first start time of each day will be
 			// first in the list too
-			Collections.sort(daySchedule, (t1, t2) -> t1.compareTo(t2));
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
 			// add 0.5 points if daySchedule start time is greater than wanted
 			// start time
 			if (!daySchedule.isEmpty() && daySchedule.get(daySchedule.size() - 1).getTime().compareTo(endTime) <= 0)
@@ -131,7 +142,7 @@ public class Timetable implements IsSerializable {
 
 		final ArrayList<ArrayList<WeekTime>> histogram = new ArrayList<>();
 		for (int xxx = 0; xxx < DAYS_IN_WEEK; ++xxx)
-			histogram.add(new ArrayList<>());
+			histogram.add(new ArrayList<WeekTime>());
 
 		for (final LessonGroup lg : lessonGroups)
 			for (final Lesson xxx : lg.getLessons()) {
@@ -141,7 +152,12 @@ public class Timetable implements IsSerializable {
 
 		int blankMinutesSum = 0;
 		for (final ArrayList<WeekTime> daySchedule : histogram) {
-			Collections.sort(daySchedule, (t1, t2) -> t1.compareTo(t2));
+			Collections.sort(daySchedule, new Comparator<WeekTime>() {
+				@Override
+				public int compare(WeekTime t1, WeekTime t2) {
+					return t1.compareTo(t2);
+				}
+			});
 			blankMinutesSum += sumBlank(daySchedule);
 		}
 

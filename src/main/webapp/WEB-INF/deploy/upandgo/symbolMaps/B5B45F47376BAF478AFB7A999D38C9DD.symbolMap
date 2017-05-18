@@ -2468,7 +2468,7 @@ XQ,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_SchedualerControlsVie
 YQ,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_SchedualerControlsView$1_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_SchedualerControlsView$1_2_classLit,upandgo/client/SchedualerControlsView.java,47,-1
 ZQ,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_SchedualerControlsView_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_SchedualerControlsView_2_classLit,upandgo/client/SchedualerControlsView.java,11,-1
 $Q,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_SchedualerView_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_SchedualerView_2_classLit,upandgo/client/SchedualerView.java,19,-1
-_Q,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_TimeTableView_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_TimeTableView_2_classLit,upandgo/client/TimeTableView.java,22,-1
+_Q,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_TimeTableView_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_TimeTableView_2_classLit,upandgo/client/TimeTableView.java,23,-1
 aR,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_event_GetCourseDetailsEvent_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_event_GetCourseDetailsEvent_2_classLit,upandgo/client/event/GetCourseDetailsEvent.java,16,-1
 bR,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_event_SelectCourseEvent_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_event_SelectCourseEvent_2_classLit,upandgo/client/event/SelectCourseEvent.java,16,-1
 cR,com.google.gwt.lang.ClassLiteralHolder::Lupandgo_client_event_UnselectCourseEvent_2_classLit,com.google.gwt.lang.ClassLiteralHolder,Lupandgo_client_event_UnselectCourseEvent_2_classLit,upandgo/client/event/UnselectCourseEvent.java,16,-1
@@ -7289,20 +7289,20 @@ SchedualerView,,upandgo.client.SchedualerView,,upandgo/client/SchedualerView.jav
 jNb,upandgo.client.SchedualerView::SchedualerView() <init>,upandgo.client.SchedualerView,SchedualerView,upandgo/client/SchedualerView.java,23,0
 kNb,upandgo.client.SchedualerView::asWidget()Lcom/google/gwt/user/client/ui/Widget;,upandgo.client.SchedualerView,asWidget,upandgo/client/SchedualerView.java,79,0
 a,upandgo.client.SchedualerView::style,upandgo.client.SchedualerView,style,upandgo/client/SchedualerView.java,21,-1
-TimeTableView,,upandgo.client.TimeTableView,,upandgo/client/TimeTableView.java,22,-1
-lNb,upandgo.client.TimeTableView::$InitializePanel(Lupandgo/client/TimeTableView;)V,upandgo.client.TimeTableView,$InitializePanel,upandgo/client/TimeTableView.java,47,0
-mNb,upandgo.client.TimeTableView::$drawDay(Lupandgo/client/TimeTableView;Ljava/util/ArrayList;Lcom/google/gwt/user/client/ui/FlexTable;)V,upandgo.client.TimeTableView,$drawDay,upandgo/client/TimeTableView.java,267,0
-nNb,upandgo.client.TimeTableView::$drawDayTable(Lupandgo/client/TimeTableView;Lcom/google/gwt/user/client/ui/FlexTable;Ljava/lang/String;)V,upandgo.client.TimeTableView,$drawDayTable,upandgo/client/TimeTableView.java,161,0
-oNb,upandgo.client.TimeTableView::$drawHoursTable(Lupandgo/client/TimeTableView;Lcom/google/gwt/user/client/ui/FlexTable;)V,upandgo.client.TimeTableView,$drawHoursTable,upandgo/client/TimeTableView.java,174,0
-pNb,upandgo.client.TimeTableView::TimeTableView() <init>,upandgo.client.TimeTableView,TimeTableView,upandgo/client/TimeTableView.java,42,0
-a,upandgo.client.TimeTableView::hoursTable1,upandgo.client.TimeTableView,hoursTable1,upandgo/client/TimeTableView.java,30,-1
-b,upandgo.client.TimeTableView::hoursTable2,upandgo.client.TimeTableView,hoursTable2,upandgo/client/TimeTableView.java,31,-1
-c,upandgo.client.TimeTableView::mondayTable,upandgo.client.TimeTableView,mondayTable,upandgo/client/TimeTableView.java,33,-1
-d,upandgo.client.TimeTableView::sundayTable,upandgo.client.TimeTableView,sundayTable,upandgo/client/TimeTableView.java,32,-1
-e,upandgo.client.TimeTableView::thursdayTable,upandgo.client.TimeTableView,thursdayTable,upandgo/client/TimeTableView.java,36,-1
-f,upandgo.client.TimeTableView::ttStyle,upandgo.client.TimeTableView,ttStyle,upandgo/client/TimeTableView.java,40,-1
-g,upandgo.client.TimeTableView::tuesdayTable,upandgo.client.TimeTableView,tuesdayTable,upandgo/client/TimeTableView.java,34,-1
-i,upandgo.client.TimeTableView::wednesdayTable,upandgo.client.TimeTableView,wednesdayTable,upandgo/client/TimeTableView.java,35,-1
+TimeTableView,,upandgo.client.TimeTableView,,upandgo/client/TimeTableView.java,23,-1
+lNb,upandgo.client.TimeTableView::$InitializePanel(Lupandgo/client/TimeTableView;)V,upandgo.client.TimeTableView,$InitializePanel,upandgo/client/TimeTableView.java,48,0
+mNb,upandgo.client.TimeTableView::$drawDay(Lupandgo/client/TimeTableView;Ljava/util/ArrayList;Lcom/google/gwt/user/client/ui/FlexTable;)V,upandgo.client.TimeTableView,$drawDay,upandgo/client/TimeTableView.java,273,0
+nNb,upandgo.client.TimeTableView::$drawDayTable(Lupandgo/client/TimeTableView;Lcom/google/gwt/user/client/ui/FlexTable;Ljava/lang/String;)V,upandgo.client.TimeTableView,$drawDayTable,upandgo/client/TimeTableView.java,162,0
+oNb,upandgo.client.TimeTableView::$drawHoursTable(Lupandgo/client/TimeTableView;Lcom/google/gwt/user/client/ui/FlexTable;)V,upandgo.client.TimeTableView,$drawHoursTable,upandgo/client/TimeTableView.java,175,0
+pNb,upandgo.client.TimeTableView::TimeTableView() <init>,upandgo.client.TimeTableView,TimeTableView,upandgo/client/TimeTableView.java,43,0
+a,upandgo.client.TimeTableView::hoursTable1,upandgo.client.TimeTableView,hoursTable1,upandgo/client/TimeTableView.java,31,-1
+b,upandgo.client.TimeTableView::hoursTable2,upandgo.client.TimeTableView,hoursTable2,upandgo/client/TimeTableView.java,32,-1
+c,upandgo.client.TimeTableView::mondayTable,upandgo.client.TimeTableView,mondayTable,upandgo/client/TimeTableView.java,34,-1
+d,upandgo.client.TimeTableView::sundayTable,upandgo.client.TimeTableView,sundayTable,upandgo/client/TimeTableView.java,33,-1
+e,upandgo.client.TimeTableView::thursdayTable,upandgo.client.TimeTableView,thursdayTable,upandgo/client/TimeTableView.java,37,-1
+f,upandgo.client.TimeTableView::ttStyle,upandgo.client.TimeTableView,ttStyle,upandgo/client/TimeTableView.java,41,-1
+g,upandgo.client.TimeTableView::tuesdayTable,upandgo.client.TimeTableView,tuesdayTable,upandgo/client/TimeTableView.java,35,-1
+i,upandgo.client.TimeTableView::wednesdayTable,upandgo.client.TimeTableView,wednesdayTable,upandgo/client/TimeTableView.java,36,-1
 GetCourseDetailsEvent,,upandgo.client.event.GetCourseDetailsEvent,,upandgo/client/event/GetCourseDetailsEvent.java,16,-1
 rNb,upandgo.client.event.GetCourseDetailsEvent::$clinit()V,upandgo.client.event.GetCourseDetailsEvent,$clinit,upandgo/client/event/GetCourseDetailsEvent.java,16,0
 sNb,upandgo.client.event.GetCourseDetailsEvent::GetCourseDetailsEvent(Lupandgo/shared/entities/course/CourseId;) <init>,upandgo.client.event.GetCourseDetailsEvent,GetCourseDetailsEvent,upandgo/client/event/GetCourseDetailsEvent.java,20,0

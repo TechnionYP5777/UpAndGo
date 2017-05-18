@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -119,10 +120,13 @@ public class XmlCourseLoader extends CourseLoader {
 			final Element rootElement = doc.createElement("ChosenCourses");
 			doc.appendChild(rootElement);
 
-			names.forEach(name -> {
-				final Element course = doc.createElement("Course");
-				course.appendChild(doc.createTextNode(name));
-				rootElement.appendChild(course);
+			names.forEach(new Consumer<String>() {
+				@Override
+				public void accept(String name) {
+					final Element course = doc.createElement("Course");
+					course.appendChild(doc.createTextNode(name));
+					rootElement.appendChild(course);
+				}
 			});
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -163,11 +167,14 @@ public class XmlCourseLoader extends CourseLoader {
 			final Element rootElement = doc.createElement("ChosenLessonGroups");
 			doc.appendChild(rootElement);
 
-			gs.forEach(group -> {
-				final Element groupElement = doc.createElement("lessonGroup");
-				groupElement.setAttribute("courseID", group.getCourseID());
-				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
-				rootElement.appendChild(groupElement);
+			gs.forEach(new Consumer<LessonGroup>() {
+				@Override
+				public void accept(LessonGroup group) {
+					final Element groupElement = doc.createElement("lessonGroup");
+					groupElement.setAttribute("courseID", group.getCourseID());
+					groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+					rootElement.appendChild(groupElement);
+				}
 			});
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -247,26 +254,29 @@ public class XmlCourseLoader extends CourseLoader {
 			final NodeList labList = courseElement.getElementsByTagName("lab");
 			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
 				lessonGroupList.add(labList.item(xxx));
-			lessonGroupList.forEach(groupNode -> {
-				if (((Element) groupNode).getAttribute("group").equals(groupNum))
-					try {
-						final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
-						for (int f = 0; f < lessonList.getLength(); ++f) {
-							final Node h = lessonList.item(f);
-							if (h.getNodeType() == Node.ELEMENT_NODE)
-								g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
-										convertStrToDay(((Element) h).getAttribute("day")),
-										LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
-												: ((Element) h).getAttribute("timeStart"))),
-										new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
-												.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
-														: ((Element) h).getAttribute("timeEnd"))),
-										"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
-										courseElement.getAttribute("id"), courseElement.getAttribute("name")));
+			lessonGroupList.forEach(new Consumer<Node>() {
+				@Override
+				public void accept(Node groupNode) {
+					if (((Element) groupNode).getAttribute("group").equals(groupNum))
+						try {
+							final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
+							for (int f = 0; f < lessonList.getLength(); ++f) {
+								final Node h = lessonList.item(f);
+								if (h.getNodeType() == Node.ELEMENT_NODE)
+									g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
+											convertStrToDay(((Element) h).getAttribute("day")),
+											LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+													: ((Element) h).getAttribute("timeStart"))),
+											new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
+													.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+															: ((Element) h).getAttribute("timeEnd"))),
+											"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
+											courseElement.getAttribute("id"), courseElement.getAttribute("name")));
+							}
+						} catch (final XPathExpressionException xxx) {
+							xxx.printStackTrace();
 						}
-					} catch (final XPathExpressionException xxx) {
-						xxx.printStackTrace();
-					}
+				}
 			});
 			System.out.println(g.getLessons().size());
 		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {

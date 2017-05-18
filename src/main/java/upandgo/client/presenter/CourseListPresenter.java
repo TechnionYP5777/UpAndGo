@@ -127,7 +127,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				CourseId $ = display.getUnselectedCourse();
+				final CourseId $ = display.getUnselectedCourse();
 				if ($ != null) {
 					rpcService.unselectCourse($, new AsyncCallback<Void>() {
 						@Override
@@ -183,7 +183,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				CourseId $ = display.getSelectedCourse();
+				final CourseId $ = display.getSelectedCourse();
 				if ($ != null) {
 					rpcService.selectCourse($, new AsyncCallback<Void>() {
 						@Override
