@@ -147,7 +147,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setColor("Red");
     	
 		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withContent(new TooltipContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
@@ -160,8 +160,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			}
 		});
     	options.withSelector("tbody tr");
-    	options.withContainer("element");
-    	options.withPlacement(TooltipPlacement.LEFT);
+    	options.withAutoClose(true);
+    	
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);
     	
