@@ -17,7 +17,7 @@ public class InjectorModule extends AbstractGinModule {
 	protected void configure() {
 		bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 		bind(CourseListPresenter.Display.class).to(CourseSelectionView.class).in(Singleton.class);
-		bind(SchedulerPresenter.Display.class).to(SchedualerView.class).in(Singleton.class);
+		bind(SchedulerPresenter.Display.class).to(SchedualerView.class);
 
 	}
 

@@ -1,15 +1,5 @@
 package upandgo.client.view;
-import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.BorderStyle;
-import com.google.gwt.dom.client.Style.FontStyle;
 
 /**
  * 
@@ -19,7 +9,18 @@ import com.google.gwt.dom.client.Style.FontStyle;
  * GUI class for list of courses and course selection 
  * 
  */
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+import static com.google.gwt.query.client.GQuery.$;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.BorderStyle;
+import com.google.gwt.dom.client.Style.FontStyle;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -34,16 +35,14 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
-import com.google.gwt.view.client.HasCellPreviewHandlers;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.CourseId;
-import static com.google.gwt.query.client.GQuery.$;
 
 
-public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display {
+public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display  {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
     private Label cc = new Label("קורסים שנבחרו:");
     private CellTable<CourseId> scl = new CellTable<>(); //all courses list
@@ -148,7 +147,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setColor("Red");
     	
 		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.TOP).withContent(new TooltipContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
@@ -162,7 +161,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		});
     	options.withSelector("tbody tr");
     	options.withContainer("element");
-    	
+    	options.withPlacement(TooltipPlacement.LEFT);
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);
     	
@@ -255,6 +254,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	public void setHoveredCourseDetail(String detail) {
 		hoveredCourseDetail = detail;
 		
+	}
+	@Override
+	public Widget getAsWidget() {
+		return this.asWidget();
 	} 
     
 }

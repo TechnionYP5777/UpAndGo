@@ -77,9 +77,8 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
  	
 	@Override
-	public Widget asWidget() {
-		// TODO Auto-generated method stub
-		return null;
+	public Widget getAsWidget() {
+		return this.asWidget();
 	}
 
 	@Override

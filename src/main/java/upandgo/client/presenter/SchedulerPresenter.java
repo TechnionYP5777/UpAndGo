@@ -75,7 +75,7 @@ public class SchedulerPresenter implements Presenter {
 		public int isFinishTimeChecked(ClickEvent event);
 		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
-		public Widget asWidget();
+		public Widget getAsWidget();
 	}
 	@Inject
 	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
@@ -251,11 +251,11 @@ public class SchedulerPresenter implements Presenter {
 	
 	@Override
 	public void go(LayoutPanel panel) {
-		bind();
+		//bind();
 		//panel.clear();
-		panel.add(view.asWidget());
-		panel.setWidgetLeftWidth(view.asWidget(), 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetTopBottom(view.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
+		panel.add(view.getAsWidget());
+		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 	}
 	
 }

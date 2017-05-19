@@ -151,19 +151,18 @@ class AppController implements Presenter {
 		
 		CourseListPresenter clPresenter = new CourseListPresenter(rpcService,eventBus,courseSelectionView);
 		
-		//SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
 		
 		mainView.add(navBarView);
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
 		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);
 		
-//		mainView.add(courseSelectionView.asWidget());
-		
+	
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
-		
+		sPresenter.go(mainView);
 		clPresenter.go(mainView);
-		//sPresenter.go(mainView);
+			
 		
 	}
 }

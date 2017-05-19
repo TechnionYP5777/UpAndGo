@@ -63,6 +63,7 @@ public class CourseListPresenter implements Presenter {
 		
 		void setHoveredRow(int row);
 		
+		
 		void setHoveredCourseDetail(String detail);
 
 		CourseId getSelectedCourse();
@@ -77,7 +78,7 @@ public class CourseListPresenter implements Presenter {
 
 		String getCourseQuery(KeyUpEvent event);
 
-		Widget asWidget();
+		Widget getAsWidget();
 	}
 	
 	final int courseDetailsExposingDelay = 2000;
@@ -257,13 +258,13 @@ public class CourseListPresenter implements Presenter {
 		bind();
 
 		//panel.clear();
-		panel.add(display.asWidget());
-		panel.setWidgetRightWidth(display.asWidget(), 1, Unit.EM, 20, Unit.PCT);
-		panel.setWidgetTopBottom(display.asWidget(), 4.5, Unit.EM, 1, Unit.EM);
+		panel.add(display.getAsWidget());
+		panel.setWidgetRightWidth(display.getAsWidget(), 1, Unit.EM, 20, Unit.PCT);
+		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 		
-	//	rpcService.getFaculties(new FetchFacultiesAsyncCallback());
-	//	rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-	//	rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+		//rpcService.getFaculties(new FetchFacultiesAsyncCallback());
+		//rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+		//rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
 	@Deprecated
