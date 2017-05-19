@@ -1,6 +1,7 @@
 package upandgo.server.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.TreeSet;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
@@ -144,81 +146,37 @@ public class CourseModel { // implements Model {
 		return pickedCourseList;
 	}
 	
-	/*
-	 * load needed courses from DB if empty, except those that are already chosen.
-	 */
-	public List<CourseId> loadQuery(final String query) {
-		final TreeSet<CourseId> matchingIds = new TreeSet<>();
-		if (query.isEmpty())
-			coursesById.forEach(new BiConsumer<String, Course>() {
-				@Override
-				public void accept(String key, Course course) {
-					if(!pickedCourseList.contains(course))
-						matchingIds.add(new CourseId(course.getId(), course.getName()));
-					}
-			});
-		else {			
-			coursesById.forEach(new BiConsumer<String, Course>() {
-				@Override
-				public void accept(String key, Course course) {
-					if (key.contains(query) && !pickedCourseList.contains(course))
-						matchingIds.add(new CourseId(course.getId(), course.getName()));
-				}
-			});
-			coursesByName.forEach(new BiConsumer<String, Course>() {
-				@Override
-				public void accept(String key, Course course) {
-					if (key.toLowerCase().contains(query.toLowerCase()) && !pickedCourseList.contains(course))
-						matchingIds.add(new CourseId(course.getId(), course.getName()));
-				}
-			});
+	private List<CourseId> getNotSelectedCoursesByFaculty(final String faculty){
+		List<CourseId> res = new ArrayList<>();
+		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
+			Course c = entry.getValue();
+			if(c.getFaculty().equals(faculty) && !pickedCourseList.contains(c))
+				res.add(new CourseId(c.getId(), c.getName()));
+			
 		}
+		return res;
 		
-		return new ArrayList<>(matchingIds);
 	}
 
 	/*
 	 * load needed courses from DB if empty, except those that are already chosen.
+	 * the returned course are sorted by their fuzzy search score
 	 */
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
-		if(faculty.isEmpty())
-			return loadQuery(query);
-		
-		final TreeSet<CourseId> matchingIds = new TreeSet<>();
-		if (query.isEmpty())
-			coursesById.forEach(new BiConsumer<String, Course>() {
-				@Override
-				public void accept(String key, Course course) {
-					if(course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-						matchingIds.add(new CourseId(course.getId(), course.getName()));
-					}
-			});
-		else {
-			 for (Map.Entry<String, Course> entry : coursesById.entrySet()) {
-				 Course course = entry.getValue();
-				 String key = entry.getKey();
-				 if (query.isEmpty()) {
-					 if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-							matchingIds.add(new CourseId(course.getId(), course.getName())); 
-				 } else {
-					 if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-							matchingIds.add(new CourseId(course.getId(), course.getName()));
-				 }
-			 }
-			 for (Map.Entry<String, Course> entry : coursesById.entrySet()) {
-				 Course course = entry.getValue();
-				 String key = entry.getKey();
-				 if (query.isEmpty()) {
-					 if (course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-							matchingIds.add(new CourseId(course.getId(), course.getName())); 
-				 } else {
-					 if (key.toLowerCase().contains(query.toLowerCase()) && course.getFaculty().equals(faculty) && !pickedCourseList.contains(course))
-							matchingIds.add(new CourseId(course.getId(), course.getName())); 
-				 }
-			 }
+		List<CourseId> relevantCourses = getNotSelectedCoursesByFaculty(faculty);
+		for(CourseId c : relevantCourses){
+			if(FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) <= 50) // we remove courses below a certain score
+				relevantCourses.remove(c);
 		}
-		
-		return new ArrayList<>(matchingIds);
+		relevantCourses.sort(new Comparator<CourseId>() {
+
+			@Override
+			public int compare(CourseId o1, CourseId o2) {
+				return FuzzySearch.tokenSortPartialRatio(query, o1.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o2.getTitle());
+			}
+			
+		});
+		return relevantCourses;
 	}
 
 	/*
