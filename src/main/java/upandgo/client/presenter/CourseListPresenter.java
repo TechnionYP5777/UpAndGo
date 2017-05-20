@@ -63,12 +63,11 @@ public class CourseListPresenter implements Presenter {
 		
 		void setHoveredRow(int row);
 		
-		
 		void setHoveredCourseDetail(String detail);
 
-		CourseId getSelectedCourse();
+		CourseId getSelectedCourse(int row);
 
-		CourseId getUnselectedCourse();
+		CourseId getUnselectedCourse(int row);
 
 		int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> event); // pass -1 if none
 
@@ -103,6 +102,9 @@ public class CourseListPresenter implements Presenter {
 	String selectedFaculty = "";
 	Optional<CourseId> hoveredCourse = Optional.absent();
 	int hoveredRow = -1;
+	
+	int selectedClickedRow = -1;
+	int unselectedClickedRow = -1;
 
 
 	@Override
@@ -128,7 +130,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				final CourseId $ = display.getUnselectedCourse();
+				final CourseId $ = display.getSelectedCourse(selectedClickedRow);
 				if ($ != null) {
 					rpcService.unselectCourse($, new AsyncCallback<Void>() {
 						@Override
@@ -156,9 +158,10 @@ public class CourseListPresenter implements Presenter {
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
 				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(event.getNativeEvent().getType());
 				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(event.getNativeEvent().getType());
+				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 				
 				if (isMouseOver) {
-					hoveredRow = display.getHoveredNotSelectedCourseRow(event);
+					hoveredRow = display.getHoveredSelectedCourseRow(event);
 					if (hoveredRow < 0) {
 						return;
 					}
@@ -176,6 +179,10 @@ public class CourseListPresenter implements Presenter {
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
 				}
+				if(isClick){
+					selectedClickedRow = event.getIndex();
+					event.setCanceled(true);
+				}
 			}
 		});
 
@@ -184,7 +191,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				final CourseId $ = display.getSelectedCourse();
+				final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
 				if ($ != null) {
 					rpcService.selectCourse($, new AsyncCallback<Void>() {
 						@Override
@@ -213,6 +220,7 @@ public class CourseListPresenter implements Presenter {
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
 				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(event.getNativeEvent().getType());
 				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(event.getNativeEvent().getType());
+				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 
 				if (isMouseOver) {
 					hoveredRow = display.getHoveredNotSelectedCourseRow(event);
@@ -232,6 +240,10 @@ public class CourseListPresenter implements Presenter {
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
+				}
+				if(isClick){
+					unselectedClickedRow = event.getIndex();
+					event.setCanceled(true);
 				}
 
 			}

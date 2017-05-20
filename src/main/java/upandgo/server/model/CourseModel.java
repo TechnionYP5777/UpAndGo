@@ -156,7 +156,7 @@ public class CourseModel { // implements Model {
 		List<CourseId> res = new ArrayList<>();
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
-			if(faculty.isEmpty() || (c.getFaculty().equals(faculty)) && !pickedCourseList.contains(c))
+			if((faculty.isEmpty() && !pickedCourseList.contains(c)) || (c.getFaculty().equals(faculty)) && !pickedCourseList.contains(c))
 				res.add(new CourseId(c.getId(), c.getName()));
 			
 		}

@@ -12,7 +12,6 @@ package upandgo.client.view;
 import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 import static com.google.gwt.query.client.GQuery.$;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
@@ -35,6 +34,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
@@ -63,19 +63,20 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	ccl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
-    	TextColumn<CourseId> course = new TextColumn<CourseId>(){
-    	      @Override
-    	      public String getValue(CourseId object) {
-    	        return object.getTitle();
-    	      }
+    	TextColumn<CourseId> course = new TextColumn<CourseId>() {
+			@Override
+			public String getValue(CourseId object) {
+				return object.getTitle();
+			}
+		}, course1 = new TextColumn<CourseId>() {
+			@Override
+			public String getValue(CourseId object) {
+				return object.getTitle();
+			}
 		};
-		TextColumn<CourseId> course1 = new TextColumn<CourseId>(){
-  	      @Override
-  	      public String getValue(CourseId object) {
-  	        return object.getTitle();
-  	      }
-		};
-	    ccl.addColumn(course);
+		ccl.addColumn(course);
+	    DefaultSelectionEventManager<CourseId> selectionEventManager1 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
+	    ccl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager1);
 	    cclp.add(ccl);
 	    cclp.setHeight("25em");
 	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
@@ -83,7 +84,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    cclp.getElement().getStyle().setBorderColor("LightGray");
 
     	//all courses list initialization
-		scl.setSelectionModel(new SingleSelectionModel<CourseId>());
+	    DefaultSelectionEventManager<CourseId> selectionEventManager2 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
+	    scl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager2);
     	scl.setWidth("100%");
     	scl.addColumn(course1);
 	    sclp.add(scl);
@@ -94,12 +96,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	//initializing faculty selection
     	faculties.setWidth("100%");
     	faculties.setHeight("2em");
-    	faculties.addItem("פקולטה");
-    	faculties.addItem("מדעי המחשב");
-    	faculties.addItem("חשמל");
-    	faculties.addItem("פיזיקה");
-    	faculties.addItem("מתמטיקה");
-    	
+ 
     	//search course text field initialization
     	searchCourse.setHeight("2em");
     	searchCourse.setWidth("100%");
@@ -114,20 +111,18 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setColor("Red");
     	
 		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(600).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayShow(300).withDelayHide(100).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
-				//add here the content of the tooltip - can be anything (also HTML), can apply CSS. read more at the links at Issue #241
-				  @SuppressWarnings("boxing")
+				@SuppressWarnings("boxing")
 				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-				  if(rowNum == absoluteRowIndex)
-					  return hoveredCourseDetail;
-				  return "Loading...";
+				return rowNum != absoluteRowIndex ? "Loading..." : hoveredCourseDetail;
 			}
 		});
+    	//options.withContainer("element");
     	options.withSelector("tbody tr");
-    	options.withAutoClose(true);
+    	
     	
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);
@@ -186,15 +181,13 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			this.faculties.addItem(s);
 		
 	}
-	@SuppressWarnings("unchecked")
 	@Override
-	public CourseId getSelectedCourse() {
-		return ((SingleSelectionModel<CourseId>) scl.getSelectionModel()).getSelectedObject();
+	public CourseId getSelectedCourse(int row) {
+		return ccl.getVisibleItem(row);
 	}
-	@SuppressWarnings("unchecked")
 	@Override
-	public CourseId getUnselectedCourse() {
-		return ((SingleSelectionModel<CourseId>) ccl.getSelectionModel()).getSelectedObject();
+	public CourseId getUnselectedCourse(int row) {
+		return scl.getVisibleItem(row);
 	}
 	@Override
 	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i) {
