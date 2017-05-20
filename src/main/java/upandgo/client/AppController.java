@@ -27,7 +27,6 @@ import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.client.view.NavBarView;
-import upandgo.server.model.loader.CourseLoader;
 
 /**
  * 
@@ -49,10 +48,10 @@ class AppController implements Presenter {
 		
 	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
-		initMainView();
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
-		bind();
+		
+		initMainView();
 	}
 
 	@Override
@@ -113,7 +112,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(SelectCourseEvent.TYPE, new SelectCourseEventHandler() {
 
 			@Override
-			public void onSelectCourse(@SuppressWarnings("unused") SelectCourseEvent event) {
+			public void onSelectCourse(SelectCourseEvent event) {
 				Log.info("Course " + event.getId().getTitle() + " Selected");
 				
 			}
@@ -122,7 +121,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(UnselectCourseEvent.TYPE, new UnselectCourseEventHandler() {
 
 			@Override
-			public void onUnselectCourse(@SuppressWarnings("unused") UnselectCourseEvent event) {
+			public void onUnselectCourse(UnselectCourseEvent event) {
 				Log.info("Course " + event.getId().getTitle() + " Unselected");
 				
 			}
@@ -136,8 +135,10 @@ class AppController implements Presenter {
 	}
 
 	@Override
-	public void go(LayoutPanel panel) {
-		this.panel = panel;
+	public void go(LayoutPanel pnl) {
+		bind();
+		
+		panel = pnl;
 		panel.add(mainView);
 
 	}

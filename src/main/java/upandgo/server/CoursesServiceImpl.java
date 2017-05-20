@@ -34,6 +34,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private final CourseModel model;
 	
 	public CoursesServiceImpl() {
+		Log.info("entered c'tor of CourseServiceImple");
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
 	}
@@ -88,7 +89,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public void saveSchedule(List<LessonGroup> sched) {
+	public void saveSchedule(@SuppressWarnings("unused") List<LessonGroup> sched) {
 		// TODO Auto-generated method stub
 		
 	}

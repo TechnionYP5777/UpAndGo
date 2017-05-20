@@ -262,9 +262,9 @@ public class CourseListPresenter implements Presenter {
 		panel.setWidgetRightWidth(display.getAsWidget(), 1, Unit.EM, 20, Unit.PCT);
 		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 		
-		//rpcService.getFaculties(new FetchFacultiesAsyncCallback());
-		//rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-		//rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
+		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
 	@Deprecated
@@ -330,7 +330,7 @@ public class CourseListPresenter implements Presenter {
 		}
 	}
 	
-	class GetSomeStringCallback implements AsyncCallback<String> {
+	class GetSomeStringAsyncCallback implements AsyncCallback<String> {
 		@Override
 		public void onSuccess(String result) {
 			Window.alert(result);
