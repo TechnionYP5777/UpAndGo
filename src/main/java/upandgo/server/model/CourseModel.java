@@ -175,14 +175,14 @@ public class CourseModel { // implements Model {
 		List<CourseId> relevantCourses = Lists.newArrayList(Collections2.filter(getNotSelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
 			@Override
 			public boolean apply(CourseId c) {
-				return FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 50; 	// we remove courses below a certain score
+				return FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70; 	// we remove courses below a certain score
 			}
 		}));
 		
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
 			public int compare(CourseId o1, CourseId o2) {
-				return FuzzySearch.tokenSortPartialRatio(query, o1.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o2.getTitle());
+				return FuzzySearch.tokenSortPartialRatio(query, o2.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o1.getTitle());
 			}
 			
 		});
