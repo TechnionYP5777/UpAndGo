@@ -163,7 +163,7 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 
-					Optional<CourseId> newCourseId = Optional.of(notSelectedCourses.get(hoveredRow));
+					Optional<CourseId> newCourseId = Optional.of(selectedCourses.get(hoveredRow));
 					if(!hoveredCourse.equals(newCourseId)) {
 						hoveredCourse = newCourseId;
 						rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
