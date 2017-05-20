@@ -49,40 +49,13 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private Label sc = new Label("בחר קורסים:");
     private ListBox faculties = new ListBox(); //faculties
     private TextBox searchCourse = new TextBox();
-    private List<CourseId> courses; //all the courses that user didn't choose yet
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
     String hoveredCourseDetail = "Loading...";
     int rowNum = -1; //help verify that hoveredCourseDetail is relevant
     public CourseSelectionView(){
-    	courses = new ArrayList<>();
-    	courses.add(new CourseId("1234", "חישביות"));
-    	courses.add(new CourseId("1234", "הסתברות"));
-    	courses.add(new CourseId("1234", "סיבוכיות"));
-    	courses.add(new CourseId("1234", "פרויקט שנתי חלק א"));
-    	courses.add(new CourseId("1234", "פרויקט שנתי חלק ב"));
-    	courses.add(new CourseId("1234", "אוטומטים ושפות פורמליות"));
-    	courses.add(new CourseId("1234", "לוגיקה"));
-    	courses.add(new CourseId("1234", "קומבינטוריקה למדעי המחשב"));
-    	courses.add(new CourseId("1234", "שפות תכנות"));
-    	courses.add(new CourseId("1234", "מבני נתונים"));
-    	courses.add(new CourseId("1234", "מבנה מחשבים ספרתיים"));
-    	courses.add(new CourseId("1234", "תכנות מקביליו מבוזר"));
-    	courses.add(new CourseId("1234", "מערכות מסדי נתונים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "ewrw"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-    	courses.add(new CourseId("1234", "אלגוריתמים"));
-
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
-    	
-    	
 
     }
     private void InitializePanel(){
@@ -103,9 +76,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
   	      }
 		};
 	    ccl.addColumn(course);
-        ccl.setRowCount(0, true);
-        ccl.setVisibleRange(0, courses.size());
-	    ccl.setRowData(0,courses);
 	    cclp.add(ccl);
 	    cclp.setHeight("25em");
 	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
@@ -116,9 +86,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		scl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	scl.setWidth("100%");
     	scl.addColumn(course1);
-        scl.setRowCount(courses.size(), true);
-        scl.setVisibleRange(0, courses.size());
-	    scl.setRowData(0,courses);
 	    sclp.add(scl);
 	    sclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 	    sclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
@@ -147,7 +114,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setColor("Red");
     	
 		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(200).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayHide(100).withDelayShow(600).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
 			
 			@Override
 			public String getContent(Element element) {
