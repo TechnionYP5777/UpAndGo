@@ -32,6 +32,7 @@
   <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
   <inherits name="com.github.gwtbootstrap.BootstrapNoResources" />
   <inherits name="com.arcbees.gquery.tooltip.Tooltip"/>
+  <inherits name="com.firebase.Firebase"/>
   
   
   <!-- Specify the app entry point class.                         -->
