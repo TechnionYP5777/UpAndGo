@@ -20,7 +20,7 @@ public class UpAndGo implements EntryPoint {
 	public void onModuleLoad() {
 		final Injector injector = Injector.INSTANCE;
 
-		AppController appViewer = new AppController(GWT.create(CoursesService.class), injector.getEventBus());
+		AppController appViewer = new AppController((CoursesServiceAsync)GWT.create(CoursesService.class), injector.getEventBus());
 
 		appViewer.go(RootLayoutPanel.get());
 			

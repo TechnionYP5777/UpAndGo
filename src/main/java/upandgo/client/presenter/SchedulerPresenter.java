@@ -184,12 +184,12 @@ public class SchedulerPresenter implements Presenter {
 						} else {
 							lessonGroupsList.clear();
 							sched_index = 0;
-							tables.forEach(new Consumer<Timetable>() {
+							/*tables.forEach(new Consumer<Timetable>() {
 								@Override
 								public void accept(Timetable λ) {
 									lessonGroupsList.add(λ.getLessonGroups());
 								}
-							});
+							});*/
 							Log.info("A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
 						}

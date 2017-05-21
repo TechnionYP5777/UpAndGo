@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="UpAndGo-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="janino-2.5.16.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/codehaus/janino/janino/2.5.16/janino-2.5.16.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gwt-log-3.3.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.3.2/gwt-log-3.3.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gwt-servlet-2.8.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/gwt/gwt-servlet/2.8.0/gwt-servlet-2.8.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="guava-20.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/guava/guava/20.0/guava-20.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="guava-gwt-20.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/guava/guava-gwt/20.0/guava-gwt-20.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jsr305-1.3.9.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="error_prone_annotations-2.0.12.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/errorprone/error_prone_annotations/2.0.12/error_prone_annotations-2.0.12.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="j2objc-annotations-1.1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gin-2.1.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/gwt/inject/gin/2.1.2/gin-2.1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="guice-3.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/inject/guice/3.0/guice-3.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.inject-1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="aopalliance-1.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="guice-assistedinject-3.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/inject/extensions/guice-assistedinject/3.0/guice-assistedinject-3.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gwtquery-1.5-beta1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/googlecode/gwtquery/gwtquery/1.5-beta1/gwtquery-1.5-beta1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gwt-elemental-2.8.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/google/gwt/gwt-elemental/2.8.0/gwt-elemental-2.8.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="tooltip-1.2-SNAPSHOT.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/arcbees/gquery/tooltip/1.2-SNAPSHOT/tooltip-1.2-SNAPSHOT.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang3-3.5.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-2.5.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/commons-io/commons-io/2.5/commons-io-2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="junit-4.12.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/junit/junit/4.12/junit-4.12.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="hamcrest-core-1.3.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jsoup-1.10.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/jsoup/jsoup/1.10.2/jsoup-1.10.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="logback-classic-1.2.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/ch/qos/logback/logback-classic/1.2.2/logback-classic-1.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="logback-core-1.2.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/ch/qos/logback/logback-core/1.2.2/logback-core-1.2.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-api-1.7.25.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gwtbootstrap3-0.9.4.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/gwtbootstrap3/gwtbootstrap3/0.9.4/gwtbootstrap3-0.9.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="fuzzywuzzy-1.1.7.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/me/xdrop/fuzzywuzzy/1.1.7/fuzzywuzzy-1.1.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/Internet-Browser-Plugin/target/classes"/>
+        <property name="context-root" value="UpAndGo"/>
+    </wb-module>
+</project-modules>

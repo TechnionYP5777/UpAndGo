@@ -1,0 +1,4 @@
+coverage:
+  ignore: 
+    - "src/main/java/property/*"
+    - "src/main/java/command/*"

@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.base.Predicate;
-import com.google.gwt.resources.gss.CollectAndRemoveConstantDefinitions;
+//import com.google.gwt.resources.gss.CollectAndRemoveConstantDefinitions;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import upandgo.server.model.loader.CourseLoader;
