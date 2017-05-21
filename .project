@@ -51,6 +51,11 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>com.google.cloud.tools.eclipse.appengine.standard.java8.appengineWeb</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>

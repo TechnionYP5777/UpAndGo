@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--  sol : http://stackoverflow.com/questions/19909747/how-to-resolve-the-content-of-element-type-application-is-incomplete-it-must -->
+
 <!DOCTYPE application PUBLIC
 	"-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN"
 	"http://java.sun.com/dtd/application_1_3.dtd">
 <application>
   <display-name>UpAndGo</display-name>
+  <module>
+	  <web>
+	  <web-uri>UpAndGo.webapp</web-uri>
+	  <context-root>UpAndGo</context-root>
+	</web>
+</module>
 </application>

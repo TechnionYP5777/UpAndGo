@@ -152,8 +152,8 @@
   				<artifactId>maven-compiler-plugin</artifactId>
   				<version>3.6.0</version>	
   				<configuration>
-  					<source>1.8</source>
-  					<target>1.8</target>
+  					<source>1.7</source>
+  					<target>1.7</target>
   				</configuration>  				
   			</plugin>
   			
@@ -200,7 +200,7 @@
 		          <failOnError>true</failOnError>
 		          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
 		               a different source language for java compilation -->
-		          <sourceLevel>1.8</sourceLevel>
+		          <sourceLevel>1.7</sourceLevel>
 		          <!-- Compiler configuration -->
 		          <compilerArgs>
 		            <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
