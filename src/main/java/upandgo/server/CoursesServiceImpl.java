@@ -82,11 +82,6 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	static public String someString = "empty";
 	
-	@Override
-	public String getSomeString() {
-		Log.warn("check-check");
-		return "paparapa " + someString;
-	}
 
 	@Override
 	public void saveSchedule(@SuppressWarnings("unused") List<LessonGroup> sched) {

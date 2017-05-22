@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.common.base.Optional;
+
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -100,7 +100,7 @@ public class CourseListPresenter implements Presenter {
 	String courseQuery = "";
 
 	String selectedFaculty = "";
-	Optional<CourseId> hoveredCourse = Optional.absent();
+	CourseId hoveredCourse = null;
 	int hoveredRow = -1;
 	
 	int selectedClickedRow = -1;
@@ -166,15 +166,15 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 
-					Optional<CourseId> newCourseId = Optional.of(selectedCourses.get(hoveredRow));
+					CourseId newCourseId = null;
 					if(!hoveredCourse.equals(newCourseId)) {
 						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
+						//rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
 					}
 				}
 
 				if (isMouseOut) {
-					hoveredCourse = Optional.absent();
+					//hoveredCourse = Optional.absent();
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
@@ -228,15 +228,16 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 
-					Optional<CourseId> newCourseId = Optional.of(notSelectedCourses.get(hoveredRow));
+					CourseId newCourseId = null;
+					//Optional<CourseId> newCourseId = Optional.of(notSelectedCourses.get(hoveredRow));
 					if(!hoveredCourse.equals(newCourseId)) {
 						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
+						//rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
 					}
 				}
 
 				if (isMouseOut) {
-					hoveredCourse = Optional.absent();
+					//hoveredCourse = Optional.absent();
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
@@ -282,7 +283,7 @@ public class CourseListPresenter implements Presenter {
 	@Deprecated
 	void stopHoveredTimer() {
 		courseDetailsTimer.cancel();
-		hoveredCourse = Optional.absent();
+		//hoveredCourse = Optional.absent();
 	}
 
 	class FetchSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
@@ -361,7 +362,7 @@ public class CourseListPresenter implements Presenter {
 	class CourseDetailsTimer extends Timer {
 		@Override
 		public void run() {
-			eventBus.fireEvent(new GetCourseDetailsEvent(hoveredCourse.get()));
+			//eventBus.fireEvent(new GetCourseDetailsEvent(hoveredCourse.get()));
 		}
 	}
 	

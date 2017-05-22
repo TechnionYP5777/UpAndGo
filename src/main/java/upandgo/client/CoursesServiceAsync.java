@@ -35,5 +35,4 @@ public interface CoursesServiceAsync {
 	
 	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 	
-	public void getSomeString(AsyncCallback<String> asyncCallback);
 }

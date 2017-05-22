@@ -10,15 +10,13 @@ import java.util.Map.Entry;
 
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.function.BiConsumer;
+
 import java.util.function.Consumer;
 
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
-import com.google.common.base.Predicate;
+
 //import com.google.gwt.resources.gss.CollectAndRemoveConstantDefinitions;
 
-import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
@@ -171,23 +169,24 @@ public class CourseModel { // implements Model {
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
 		if(query.isEmpty())
 			return getNotSelectedCoursesByFaculty(faculty);
-		
-		List<CourseId> relevantCourses = Lists.newArrayList(Collections2.filter(getNotSelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
+		/*
+		List<CourseId> relevantCourses = SelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
 			@Override
 			public boolean apply(CourseId c) {
 				return FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70; 	// we remove courses below a certain score
 			}
 		}));
-		
+		*/
+		/*
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
 			public int compare(CourseId o1, CourseId o2) {
 				return FuzzySearch.tokenSortPartialRatio(query, o2.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o1.getTitle());
 			}
 			
-		});
+		});*/
 
-		return relevantCourses;
+		return new ArrayList<>();
 	}
 
 	/*
