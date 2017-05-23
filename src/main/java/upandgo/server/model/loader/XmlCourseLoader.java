@@ -37,6 +37,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 import upandgo.server.parse.RepFile;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Faculty;

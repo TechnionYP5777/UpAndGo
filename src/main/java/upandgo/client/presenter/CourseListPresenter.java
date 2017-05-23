@@ -16,7 +16,6 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -79,9 +78,6 @@ public class CourseListPresenter implements Presenter {
 
 		Widget getAsWidget();
 	}
-	
-	final int courseDetailsExposingDelay = 2000;
-	final CourseDetailsTimer courseDetailsTimer = new CourseDetailsTimer();
 
 	@Inject
 	public CourseListPresenter(CoursesServiceAsync rpc, EventBus eventBus, Display display) {
@@ -166,15 +162,15 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 
-					CourseId newCourseId = null;
-					if(!hoveredCourse.equals(newCourseId)) {
+					CourseId newCourseId = selectedCourses.get(hoveredRow);
+					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						//rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
+						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
 					}
 				}
 
 				if (isMouseOut) {
-					//hoveredCourse = Optional.absent();
+					hoveredCourse = null;
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
@@ -228,16 +224,15 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 
-					CourseId newCourseId = null;
-					//Optional<CourseId> newCourseId = Optional.of(notSelectedCourses.get(hoveredRow));
-					if(!hoveredCourse.equals(newCourseId)) {
+					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
+					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						//rpcService.getCourseDetails(hoveredCourse.get(), new GetCourseDetailsCallback());
+						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
 					}
 				}
 
 				if (isMouseOut) {
-					//hoveredCourse = Optional.absent();
+					hoveredCourse = null;
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
@@ -278,12 +273,6 @@ public class CourseListPresenter implements Presenter {
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
-	}
-
-	@Deprecated
-	void stopHoveredTimer() {
-		courseDetailsTimer.cancel();
-		//hoveredCourse = Optional.absent();
 	}
 
 	class FetchSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
@@ -355,14 +344,6 @@ public class CourseListPresenter implements Presenter {
 			Window.alert("Cthulhu has awoken");
 			Log.error("Cthulhu has awoken");
 			
-		}
-	}
-
-	@Deprecated
-	class CourseDetailsTimer extends Timer {
-		@Override
-		public void run() {
-			//eventBus.fireEvent(new GetCourseDetailsEvent(hoveredCourse.get()));
 		}
 	}
 	

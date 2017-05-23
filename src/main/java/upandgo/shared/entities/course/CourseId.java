@@ -1,12 +1,15 @@
 package upandgo.shared.entities.course;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.util.Date;
 
 /**
  * 
  * @author Nikita Dizhur
  * @since 11-01-17
  * 
- * A small class for storing course name and number, without specifying all other details.
+ *        A small class for storing course name and number, without specifying
+ *        all other details.
  * 
  */
 public class CourseId implements Comparable<CourseId>, IsSerializable {
@@ -16,7 +19,7 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 		// here because GWT needs it
 		name = number = "";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return 31 * ((name == null ? 0 : name.hashCode()) + 31) + (number == null ? 0 : number.hashCode());
@@ -45,25 +48,37 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	private String name;
 	private String number;
 
-	public CourseId(final String cNum, final String cName) {
+	private Date aTerm;
+	private Date bTerm;
+
+	public CourseId(final String cNum, final String cName, Date cATerm, Date cBTerm) {
 		name = cName;
 		number = cNum;
 	}
-	
-	public String getTitle(){
+
+	public String getTitle() {
 		return name + " - " + number;
 	}
 
 	public String name() {
 		return name;
 	}
+
 	public String number() {
 		return number;
 	}
-	
+
 	@Override
 	public int compareTo(final CourseId xxx) {
 		return number.compareTo(xxx.number);
+	}
+
+	public Date aTerm() {
+		return aTerm;
+	}
+
+	public Date bTerm() {
+		return bTerm;
 	}
 
 }

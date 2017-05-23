@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.google.common.collect.HashMultimap;		 
 import org.apache.commons.collections.map.HashedMap;
+import com.google.common.collect.Lists;
 
 
 
@@ -40,8 +42,8 @@ public class TimeTableModel implements Model {
 	protected List<List<LessonGroup>> lessonGroupsList = new ArrayList<>();
 	protected int sched_index;
 
-	//protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
-	protected Map listenersMap = new HashedMap();
+	protected HashMultimap<String, PropertyChangeListener> listenersMap = HashMultimap.create();
+	
 
 	public TimeTableModel(final CourseLoader loader) {
 		this.loader = loader;
@@ -73,7 +75,7 @@ public class TimeTableModel implements Model {
 
 			return;
 		}
-		final List<Timetable> tables = new ArrayList<>();
+		final List<Timetable> tables = Lists.newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null),isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
 		if (tables.isEmpty())
 			notifySchedListenersNoSched();
 		else {
@@ -105,40 +107,40 @@ public class TimeTableModel implements Model {
 	}
 
 	private void notifySchedListeners() {
-		/*listenersMap.get(TimeTableProperty.SCHEDULE).forEach(new Consumer<PropertyChangeListener>() {
+		listenersMap.get(TimeTableProperty.SCHEDULE).forEach(new Consumer<PropertyChangeListener>() {
 			@Override
 			public void accept(PropertyChangeListener λ) {
 				λ.propertyChange(
 						new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.SCHEDULE, null, lessonGroupsList.get(sched_index)));
 			}
-		});*/
-		/*listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(new Consumer<PropertyChangeListener>() {
+		});
+		listenersMap.get(TimeTableProperty.SCHEDULE_INDEX).forEach(new Consumer<PropertyChangeListener>() {
 			@Override
 			public void accept(PropertyChangeListener λ) {
 				λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this,
 						TimeTableProperty.SCHEDULE_INDEX, null, sched_index + 1 + "/" + lessonGroupsList.size()));
 			}
-		});*/
+		});
 	}
 
 	private void notifySchedListenersNoSched() {
-		/*listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(
+		listenersMap.get(TimeTableProperty.NO_SCHEDULE).forEach(
 				new Consumer<PropertyChangeListener>() {
 					@Override
 					public void accept(PropertyChangeListener λ) {
 						λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.NO_SCHEDULE, null, null));
 					}
-				});*/
+				});
 	}
 
 	private void notifySchedListenersNoCourses() {
-		/*listenersMap.get(TimeTableProperty.NO_COURSES).forEach(
+		listenersMap.get(TimeTableProperty.NO_COURSES).forEach(
 				new Consumer<PropertyChangeListener>() {
 					@Override
 					public void accept(PropertyChangeListener λ) {
 						λ.propertyChange(new PropertyChangeEvent(TimeTableModel.this, TimeTableProperty.NO_COURSES, null, null));
 					}
-				});*/
+				});
 	}
 
 	public List<LessonGroup> getChosenLessonGroups() {

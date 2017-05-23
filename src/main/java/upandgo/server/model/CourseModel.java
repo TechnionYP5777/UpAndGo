@@ -3,6 +3,11 @@ package upandgo.server.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.BiConsumer;
+import com.google.common.collect.Collections2;		 
+import com.google.common.collect.Lists;		
+import com.google.common.base.Predicate;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +18,7 @@ import java.util.TreeSet;
 
 import java.util.function.Consumer;
 
-
-//import com.google.gwt.resources.gss.CollectAndRemoveConstantDefinitions;
-
+import upandgo.server.DateFormatConverter;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
@@ -62,7 +65,9 @@ public class CourseModel { // implements Model {
 		pickedCourseList.forEach(new Consumer<Course>() {
 			@Override
 			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+				pickedList.add(new CourseId(λ.getId(), λ.getName(),
+						DateFormatConverter.convert(λ.getaTerm()),
+						DateFormatConverter.convert(λ.getbTerm())));
 				pickedIds.add(λ.getId());
 			}
 		});
@@ -95,7 +100,9 @@ public class CourseModel { // implements Model {
 		pickedCourseList.forEach(new Consumer<Course>() {
 			@Override
 			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+				pickedList.add(new CourseId(λ.getId(), λ.getName(),
+						DateFormatConverter.convert(λ.getaTerm()),
+						DateFormatConverter.convert(λ.getbTerm())));
 			}
 		});
 	}
@@ -135,7 +142,9 @@ public class CourseModel { // implements Model {
 		pickedCourseList.forEach(new Consumer<Course>() {
 			@Override
 			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName()));
+				pickedList.add(new CourseId(λ.getId(), λ.getName(),
+						DateFormatConverter.convert(λ.getaTerm()),
+						DateFormatConverter.convert(λ.getbTerm())));
 			}
 		});
 		
@@ -155,7 +164,9 @@ public class CourseModel { // implements Model {
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
 			if((faculty.isEmpty() && !pickedCourseList.contains(c)) || (c.getFaculty().equals(faculty)) && !pickedCourseList.contains(c))
-				res.add(new CourseId(c.getId(), c.getName()));
+				res.add(new CourseId(c.getId(), c.getName(),
+						DateFormatConverter.convert(c.getaTerm()),
+						DateFormatConverter.convert(c.getbTerm())));
 			
 		}
 		return res;
@@ -169,24 +180,23 @@ public class CourseModel { // implements Model {
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
 		if(query.isEmpty())
 			return getNotSelectedCoursesByFaculty(faculty);
-		/*
-		List<CourseId> relevantCourses = SelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
+		
+		List<CourseId> relevantCourses = Lists.newArrayList(Collections2.filter(getNotSelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
 			@Override
 			public boolean apply(CourseId c) {
 				return FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70; 	// we remove courses below a certain score
 			}
 		}));
-		*/
-		/*
+		
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
 			public int compare(CourseId o1, CourseId o2) {
 				return FuzzySearch.tokenSortPartialRatio(query, o2.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o1.getTitle());
 			}
 			
-		});*/
+		});
 
-		return new ArrayList<>();
+		return relevantCourses;
 	}
 
 	/*

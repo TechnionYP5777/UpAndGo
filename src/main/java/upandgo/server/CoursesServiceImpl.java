@@ -29,12 +29,12 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
-	private String REP_XML_PATH = "./../../../resources/testXML/test.XML";
+	private String REP_XML_PATH = "WEB-INF/test.XML";
 	
 	private final CourseModel model;
 	
 	public CoursesServiceImpl() {
-		Log.info("entered c'tor of CourseServiceImple");
+//		Log.info("entered c'tor of CourseServiceImple");
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
 	}
