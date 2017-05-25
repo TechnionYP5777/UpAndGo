@@ -1,6 +1,5 @@
 package upandgo.shared.model.scedule;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,6 +9,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Schedule;

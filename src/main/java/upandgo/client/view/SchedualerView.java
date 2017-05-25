@@ -1,6 +1,6 @@
 package upandgo.client.view;
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import java.util.List;
 
 import com.google.gwt.dom.client.Style.Unit;

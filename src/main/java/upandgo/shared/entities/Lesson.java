@@ -30,10 +30,10 @@ public class Lesson implements Serializable {
 	protected final String courseId;
 	protected final String courseName;
 
-	public Lesson(final StuffMember repr, final WeekTime theStartTime, final WeekTime endTime, final String place1,
+	public Lesson(final StuffMember repr, WeekTime theStartTime, WeekTime endTime, final String place1,
 			final Type t, final int g, final String c, final String n) {
-		if (theStartTime == null || place1 == null)
-			throw new NullPointerException();
+//		if (theStartTime == null || place1 == null)
+//			throw new NullPointerException();
 
 		representer = repr;
 		startTime = theStartTime;

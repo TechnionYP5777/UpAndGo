@@ -5,7 +5,6 @@ import java.io.Serializable;
  * @author kobybs
  * @since 25-12-16
  */
-import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -27,9 +26,9 @@ public class WeekTime implements Serializable {
 	private final Day day;
 	private final LocalTime time; // = LocalTime.of(22, 15);
 
-	public WeekTime(final Day day, final LocalTime time) {
+	public WeekTime(final Day day, final LocalTime localTime) {
 		this.day = day;
-		this.time = time;
+		this.time = localTime;
 	}
 
 	public Day getDay() {

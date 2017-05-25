@@ -39,4 +39,9 @@ public class LocalTime implements Comparable<LocalTime> {
 	public int getMinute(){
 		return minute;
 	}
+
+	public static LocalTime parse(String string) {
+		String[] parts = string.split(":");
+		return new LocalTime(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+	}
 }

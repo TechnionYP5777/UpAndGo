@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<property name="DEV_HOME" value="." />
-
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>
@@ -11,35 +9,13 @@
 		</layout>
 	</appender>
 
-	<appender name="FILE-AUDIT"
-		class="ch.qos.logback.core.FileAppender">
-		<file>${DEV_HOME}/upandgo_logging.log</file>
-		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
-      	<evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
-        	<expression>
-        	return !(logger.startsWith("com.allen"));
-			</expression>
-      	</evaluator>
-       <OnMismatch>NEUTRAL</OnMismatch>
-      <OnMatch>DENY</OnMatch>
-    </filter>
-		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern>
-				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-			</Pattern>
-		</encoder>
-
-	</appender>
-
 	<!-- Send logs to both console and file audit -->
-	<logger name="upandgo" level="DEBUG"
+	 <logger name="upandgo" level="DEBUG"
 		additivity="false">
-		<appender-ref ref="FILE-AUDIT" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<root level="DEBUG">
-		<appender-ref ref="FILE-AUDIT" />
 		<appender-ref ref="STDOUT" />
 	</root>
 

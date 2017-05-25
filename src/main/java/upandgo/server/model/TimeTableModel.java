@@ -2,7 +2,7 @@ package upandgo.server.model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package upandgo.server.model.course;
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 
 import org.junit.Test;
 
@@ -20,8 +20,8 @@ public class TimeConstraintTests {
 		@SuppressWarnings("unused")
 		final Course c = new CourseBuilder().setId("1234").setName("first")
 				.addLesson(
-						new Lesson(new StuffMember("koby", "bs"), new WeekTime(Day.SUNDAY, LocalTime.of(10, 30)),
-								new WeekTime(Day.SUNDAY, LocalTime.of(10, 30)), "Taub", Type.LECTURE, 21, "1234",
+						new Lesson(new StuffMember("koby", "bs"), new WeekTime(Day.SUNDAY, LocalTime.parse("10:30")),
+								new WeekTime(Day.SUNDAY, LocalTime.parse("10:30")), "Taub", Type.LECTURE, 21, "1234",
 								"first"))
 				.build();
 

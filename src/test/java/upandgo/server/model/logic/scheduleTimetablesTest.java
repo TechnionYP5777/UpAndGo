@@ -4,7 +4,7 @@ package upandgo.server.model.logic;
  * @since 2-1-17
  */
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +42,13 @@ public class scheduleTimetablesTest {
 		System.out.println("Schedule: " + s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("13:00")));
 		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("14:00")));
 
 	}
 

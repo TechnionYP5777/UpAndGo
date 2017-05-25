@@ -4,7 +4,7 @@ package upandgo.server.model.logic;
  * @since 2-1-17
  */
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class BlankSpaceRankTests {
 			final Timetable currentTable = it.next();
 			System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
 			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
-			System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.of(10, 00)));
+			System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.parse("10:00")));
 			System.out.println("time table: " + currentTable);
 		}
 
@@ -78,40 +78,40 @@ public class BlankSpaceRankTests {
 		System.out.println(courses);
 
 		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses, null);
-		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.of(10, 00), null);
+		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.parse("10:00"), null);
 		Timetable currentTable = it.next();
 		assertTrue(currentTable.getRankOfDaysoff() == 4);
 		assert currentTable.getRankOfBlankSpace() == 1.75;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 0.5;
 
 		currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 3;
 		assert currentTable.getRankOfBlankSpace() == 2.0;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 1;
 
-		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.of(10, 00), null);
+		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.parse("10:00"), null);
 
 		currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 3;
 		assert currentTable.getRankOfBlankSpace() == 2.0;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 1;
 
 		currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 4;
 		assert currentTable.getRankOfBlankSpace() == 1.75;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 0.5;
 
-		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.of(10, 00), null);
+		it = Scheduler.sortedBy(tablesList, false, true, LocalTime.parse("10:00"), null);
 
 		currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 3;
 		assert currentTable.getRankOfBlankSpace() == 2.0;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 1;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 1;
 
 		currentTable = it.next();
 		assert currentTable.getRankOfDaysoff() == 4;
 		assert currentTable.getRankOfBlankSpace() == 1.75;
-		assert currentTable.getRankOfStartTime(LocalTime.of(10, 00)) == 0.5;
+		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 0.5;
 
 		/*
 		 * it = Scheduler.sortedBy(tablesList, false, true); assert

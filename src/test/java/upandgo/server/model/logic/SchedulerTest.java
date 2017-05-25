@@ -7,7 +7,7 @@ package upandgo.server.model.logic;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +46,13 @@ public class SchedulerTest {
 		System.out.println(s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("13:00")));
 		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("14:00")));
 
 	}
 	
@@ -67,13 +67,13 @@ public class SchedulerTest {
 		System.out.println(s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("13:00")));
 		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("14:00")));
 
 	}
 
@@ -89,13 +89,13 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("14:00")));
 
 	}
 
@@ -110,9 +110,9 @@ public class SchedulerTest {
 		System.out.println(s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(12, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("12:00")));
 
 	}
 
@@ -126,9 +126,9 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(12, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("12:00")));
 
 	}
 
@@ -143,9 +143,9 @@ public class SchedulerTest {
 		System.out.println(s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(12, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("12:00")));
 
 	}
 
@@ -159,9 +159,9 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(12, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("12:00")));
 
 	}
 
@@ -200,13 +200,13 @@ public class SchedulerTest {
 		System.out.println(s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert s.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert s.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
 	}
@@ -221,13 +221,13 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
 	}
@@ -241,18 +241,18 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"))));
 		final Timetable t = Scheduler.getTimetablesList(courses, null).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
 	}
@@ -266,18 +266,18 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 30))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"))));
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
 	}
@@ -291,18 +291,18 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("09:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:00"))));
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10;00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
 	}
@@ -316,18 +316,18 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 01))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("09:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:01"))));
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assertTrue( t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(10, 00))) );
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("10:00"))) );
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 
 		// assertNull(s);
@@ -342,11 +342,11 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 01))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("09:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:01"))));
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 05))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:05"))));
 		
 		assertTrue ( Scheduler.getTimetablesList(courses, constraints).isEmpty() );
 		
@@ -363,21 +363,21 @@ public class SchedulerTest {
 
 		final List<TimeConstraint> constraints = new ArrayList<>();
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(9, 00)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 01))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("09:00")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:01"))));
 		constraints.add(new TimeConstraint(
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 05)),
-				new WeekTime(Day.SUNDAY, LocalTime.of(10, 50))));
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:05")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("10:50"))));
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assertTrue( t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.TUESDAY, LocalTime.of(10, 00))) );
+				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("10:00"))) );
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 00)));
+				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(11, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.of(14, 00)));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 
 		// assertNull(s);

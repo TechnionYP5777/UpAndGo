@@ -6,9 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+//import java.time.LocalDateTime;
+//import java.time.LocalTime;
+//import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,6 +44,7 @@ import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.Lesson.Type;
@@ -72,13 +73,13 @@ public class XmlCourseLoader extends CourseLoader {
 		super(REP_XML_PATH);
 		XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
 
-		if (!new File(path).exists())
-			RepFile.getCoursesNamesAndIds();
+		//if (!new File(path).exists())
+		//	RepFile.getCoursesNamesAndIds();
 
 		// Create a data dir for saving changes if it does not exists
-		final File dataDir = new File(DATA_DIR_PATH);
-		if (!dataDir.exists() || !dataDir.isDirectory())
-			dataDir.mkdir();
+		//final File dataDir = new File(DATA_DIR_PATH);
+		//if (!dataDir.exists() || !dataDir.isDirectory())
+		//	dataDir.mkdir();
 
 		// coursesList = xmlParser.getCourses(path);
 		// Get data from REP XML file.
@@ -307,7 +308,18 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private void getCourses() {
 		try {
-			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH)
+			if (new File(REP_XML_PATH).exists()) {
+				Log.warn("*******************************************");
+			} else {
+				Log.warn("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+				Log.warn(new File(".").getAbsolutePath());
+				Log.warn(new File(".").getCanonicalPath());
+				Log.warn(new File(".").getPath());
+				Log.warn(new File(".").getParent());
+				Log.warn(new File(".").getName());
+				Log.warn("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			}
+			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(new File(REP_XML_PATH)))
 					.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
@@ -324,7 +336,7 @@ public class XmlCourseLoader extends CourseLoader {
 						// get course points
 						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 						// get course exam's A date and time
-						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
+						/*cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
 								: LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 												.getNamedItem("year").getNodeValue()
@@ -352,7 +364,7 @@ public class XmlCourseLoader extends CourseLoader {
 												+ " "
 												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
 														.getNamedItem("time").getNodeValue(),
-										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));*/
 						// get course staff
 						setStaffList(cb, p, "teacherInCharge");
 						setStaffList(cb, p, "lecturer");

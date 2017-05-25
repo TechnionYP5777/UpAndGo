@@ -2,7 +2,7 @@ package upandgo.client.presenter;
 
 import com.google.gwt.event.shared.EventBus;
 
-import java.time.LocalTime;
+import upandgo.shared.entities.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

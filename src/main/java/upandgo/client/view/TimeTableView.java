@@ -1,6 +1,6 @@
 package upandgo.client.view;
 
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
-
+import upandgo.shared.entities.LocalTime;
 import upandgo.client.Resources;
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
@@ -59,8 +59,8 @@ public class TimeTableView extends HorizontalPanel {
 	    
 	    ArrayList<Lesson> lessons = new ArrayList<>();
 	    Lesson l = new Lesson(null,
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(8, 30)),
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(9, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("08:30")),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("09:30")),
 	    		"טאוב 5",
 	    		Type.LECTURE,
 	    		3,
@@ -68,8 +68,8 @@ public class TimeTableView extends HorizontalPanel {
 	    		"אישים בתנך");
 	    lessons.add(l);
 	    l = new Lesson(null,
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(10, 30)),
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("10:30")),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("12:30")),
 	    		"טאוב 7",
 	    		Type.LECTURE,
 	    		3,
@@ -77,8 +77,8 @@ public class TimeTableView extends HorizontalPanel {
 	    		"OOP");
 	    lessons.add(l);
 	    l = new Lesson(null,
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 30)),
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(15, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:30")),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("15:30")),
 	    		"טאוב 8",
 	    		Type.LECTURE,
 	    		3,
@@ -98,8 +98,8 @@ public class TimeTableView extends HorizontalPanel {
 	    
 	    lessons = new ArrayList<>();
 	    l = new Lesson(null,
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(12, 30)),
-	    		new WeekTime(Day.WEDNESDAY, LocalTime.of(13, 30)),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("12:30")),
+	    		new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:30")),
 	    		"טאוב 5",
 	    		Type.LECTURE,
 	    		3,
@@ -280,8 +280,8 @@ public class TimeTableView extends HorizontalPanel {
  		int eventsCount = 0;
  		
 		LocalTime startTime;
-		LocalTime endTime = LocalTime.of(8, 30);
-		LocalTime previousEndTime = LocalTime.of(8, 30);
+		LocalTime endTime = LocalTime.parse("08:30");
+		LocalTime previousEndTime = LocalTime.parse("08:30");
 		
  		for(Lesson l : lessons){
  			startTime = l.getStartTime().getTime();
@@ -326,7 +326,7 @@ public class TimeTableView extends HorizontalPanel {
 			currentCell += span;
 		}
  		
-		differenceInMinutes = WeekTime.difference(LocalTime.of(20, 30), endTime);
+		differenceInMinutes = WeekTime.difference(LocalTime.parse("20:30"), endTime);
 		span = differenceInMinutes/30;
 		Log.info("blank_span: " + span);
  		
