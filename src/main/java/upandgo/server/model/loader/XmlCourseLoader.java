@@ -41,10 +41,12 @@ import com.allen_sauer.gwt.log.client.Log;
 
 import upandgo.server.parse.RepFile;
 import upandgo.shared.entities.Day;
+import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.Month;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.Lesson.Type;
@@ -308,17 +310,6 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private void getCourses() {
 		try {
-			if (new File(REP_XML_PATH).exists()) {
-				Log.warn("*******************************************");
-			} else {
-				Log.warn("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-				Log.warn(new File(".").getAbsolutePath());
-				Log.warn(new File(".").getCanonicalPath());
-				Log.warn(new File(".").getPath());
-				Log.warn(new File(".").getParent());
-				Log.warn(new File(".").getName());
-				Log.warn("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-			}
 			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(new File(REP_XML_PATH)))
 					.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
@@ -336,8 +327,9 @@ public class XmlCourseLoader extends CourseLoader {
 						// get course points
 						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 						// get course exam's A date and time
-						/*cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
-								: LocalDateTime.parse(
+						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
+								: createExam(p, "moedA"));
+									/*LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 												.getNamedItem("year").getNodeValue()
 												+ "-"
@@ -349,10 +341,11 @@ public class XmlCourseLoader extends CourseLoader {
 												+ " "
 												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
 														.getNamedItem("time").getNodeValue(),
-										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));*/
 						// get course exam's B date and time
 						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
-								: LocalDateTime.parse(
+								: createExam(p, "moedB"));
+									/*LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
 												.getNamedItem("year").getNodeValue()
 												+ "-"
@@ -410,6 +403,17 @@ public class XmlCourseLoader extends CourseLoader {
 		} catch (IOException | SAXException | ParserConfigurationException xxx) {
 			xxx.printStackTrace();
 		}
+	}
+
+	private Exam createExam(Node p, String examType) {
+		return new Exam(LocalTime.parse(((Element) p).getElementsByTagName(examType).item(0).getAttributes()
+						.getNamedItem("time").getNodeValue()), 
+				convertStrToMonth(((Element) p).getElementsByTagName(examType).item(0).getAttributes()
+						.getNamedItem("month").getNodeValue()),
+				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
+				.getNamedItem("day").getNodeValue(),
+				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
+				.getNamedItem("time").getNodeValue());
 	}
 
 	private void sportParsing(final CourseBuilder b, final Node p) {
@@ -526,6 +530,35 @@ public class XmlCourseLoader extends CourseLoader {
 			return Day.FRIDAY;
 		default:
 			return Day.SATURDAY;
+		}
+	}
+	
+	private static Month convertStrToMonth(final String xxx) {
+		switch (xxx) {
+		case "01":
+			return Month.JANUARY;
+		case "02":
+			return Month.FEBRUARY;
+		case "03":
+			return Month.MARCH;
+		case "04":
+			return Month.APRIL;
+		case "05":
+			return Month.MAY;
+		case "06":
+			return Month.JUNE;
+		case "07":
+			return Month.JULY; 
+		case "08":
+			return Month.AUGUST;
+		case "09":
+			return Month.SEPTEMBER;
+		case "10":
+			return Month.OCTOBER;
+		case "11":
+			return Month.NOVEMBER;
+		default:
+			return Month.DECEMBER;
 		}
 	}
 

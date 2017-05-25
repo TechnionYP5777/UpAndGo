@@ -66,8 +66,7 @@ public class CourseModel { // implements Model {
 			@Override
 			public void accept(Course λ) {
 				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						DateFormatConverter.convert(λ.getaTerm()),
-						DateFormatConverter.convert(λ.getbTerm())));
+						λ.getaTerm(), λ.getbTerm()));
 				pickedIds.add(λ.getId());
 			}
 		});
@@ -101,8 +100,7 @@ public class CourseModel { // implements Model {
 			@Override
 			public void accept(Course λ) {
 				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						DateFormatConverter.convert(λ.getaTerm()),
-						DateFormatConverter.convert(λ.getbTerm())));
+						λ.getaTerm(), λ.getbTerm()));
 			}
 		});
 	}
@@ -143,8 +141,7 @@ public class CourseModel { // implements Model {
 			@Override
 			public void accept(Course λ) {
 				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						DateFormatConverter.convert(λ.getaTerm()),
-						DateFormatConverter.convert(λ.getbTerm())));
+						λ.getaTerm(), λ.getbTerm()));
 			}
 		});
 		
@@ -165,8 +162,7 @@ public class CourseModel { // implements Model {
 			Course c = entry.getValue();
 			if((faculty.isEmpty() && !pickedCourseList.contains(c)) || (c.getFaculty().equals(faculty)) && !pickedCourseList.contains(c))
 				res.add(new CourseId(c.getId(), c.getName(),
-						DateFormatConverter.convert(c.getaTerm()),
-						DateFormatConverter.convert(c.getbTerm())));
+						c.getaTerm(), c.getbTerm()));
 			
 		}
 		return res;

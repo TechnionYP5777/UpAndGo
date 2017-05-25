@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
@@ -16,8 +17,8 @@ public class CourseBuilder {
 	protected String id = "";
 	protected String faculty = "";
 	protected double points;
-	protected LocalDateTime aTerm;
-	protected LocalDateTime bTerm;
+	protected Exam aTerm;
+	protected Exam bTerm;
 
 	protected final List<StuffMember> stuff = new ArrayList<>();
 	protected final List<Lesson> lessons = new ArrayList<>();
@@ -48,12 +49,12 @@ public class CourseBuilder {
 		return this;
 	}
 
-	public CourseBuilder setATerm(final LocalDateTime xxx) {
+	public CourseBuilder setATerm(final Exam xxx) {
 		aTerm = xxx;
 		return this;
 	}
 
-	public CourseBuilder setBTerm(final LocalDateTime xxx) {
+	public CourseBuilder setBTerm(final Exam xxx) {
 		bTerm = xxx;
 		return this;
 	}

@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
 
@@ -28,8 +29,8 @@ public class Course implements IsSerializable {
 	protected String id;
 	protected String faculty;
 	protected double points;
-	protected final LocalDateTime aTerm;
-	protected final LocalDateTime bTerm;
+	protected final Exam aTerm;
+	protected final Exam bTerm;
 
 	protected final List<StuffMember> stuff;
 
@@ -62,7 +63,7 @@ public class Course implements IsSerializable {
 	}
 	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,
-			final double acPoints, final LocalDateTime aT, final LocalDateTime bT, final List<Course> prerequisitesList,
+			final double acPoints, final Exam aT, final Exam bT, final List<Course> prerequisitesList,
 			final List<Course> corequisitesList) {
 
 		if (name1 == null || faculty1 == null)
@@ -127,11 +128,11 @@ public class Course implements IsSerializable {
 		return points;
 	}
 
-	public LocalDateTime getaTerm() {
+	public Exam getaTerm() {
 		return aTerm;
 	}
 
-	public LocalDateTime getbTerm() {
+	public Exam getbTerm() {
 		return bTerm;
 	}
 
