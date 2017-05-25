@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.BiConsumer;
 import com.google.common.collect.Collections2;		 
-import com.google.common.collect.Lists;		
+import com.google.common.collect.Lists;
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.common.base.Predicate;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import java.util.HashSet;
@@ -174,9 +175,10 @@ public class CourseModel { // implements Model {
 	 * the returned course are sorted by their fuzzy search score
 	 */
 	public List<CourseId> loadQueryByFaculty(final String query, final String faculty) {
-		if(query.isEmpty())
+		if(query.isEmpty()) {
+			Log.info("2222222222222222222222222222");
 			return getNotSelectedCoursesByFaculty(faculty);
-		
+		}
 		List<CourseId> relevantCourses = Lists.newArrayList(Collections2.filter(getNotSelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
 			@Override
 			public boolean apply(CourseId c) {

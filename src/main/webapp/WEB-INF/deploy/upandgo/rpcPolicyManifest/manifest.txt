@@ -1,4 +1,4 @@
 # Module upandgo
 # RPC service class, partial path of RPC policy file
-upandgo.client.CoursesService, CD75F47D03C9288F3D6AFCC37819AAAF.gwt.rpc
 com.allen_sauer.gwt.log.client.RemoteLoggerService, 9395117A7B8A08800A042BDFFE48FE8C.gwt.rpc
+upandgo.client.CoursesService, A41EFA2C579676BDF7A3C05A2E8223F6.gwt.rpc
