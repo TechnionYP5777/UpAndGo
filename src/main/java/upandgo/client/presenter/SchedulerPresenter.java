@@ -53,25 +53,25 @@ public class SchedulerPresenter implements Presenter {
 	
 	public interface Display {
 		
-		public <T extends HasClickHandlers> T clearSchedule();
-		public <T extends HasClickHandlers> T buildSchedule();
-		public <T extends HasClickHandlers> T nextSchedule();
-		public <T extends HasClickHandlers> T prevSchedule();
-		public <T extends HasClickHandlers> T saveSchedule();
+		public HasClickHandlers clearSchedule();
+		public HasClickHandlers buildSchedule();
+		public HasClickHandlers nextSchedule();
+		public HasClickHandlers prevSchedule();
+		public HasClickHandlers saveSchedule();
 		
 		public void setSchedule(List<LessonGroup> schedule); // if (schedule = null) then clear schedule
 				
-		public <T extends HasClickHandlers> T getDaysOffValue();
+		public HasClickHandlers getDaysOffValue();
 		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
 		
-		public <T extends HasClickHandlers> T getMinWindowsValue();
+		public HasClickHandlers getMinWindowsValue();
 		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
 		
-		public <T extends HasClickHandlers> T getStartTimeValue();
+		public HasClickHandlers getStartTimeValue();
 		public int isStartTimeChecked(ClickEvent event);
 		public LocalTime getReqStartTime(); // result in format HH:MM
 		
-		public <T extends HasClickHandlers> T getFinishTimeValue();
+		public HasClickHandlers getFinishTimeValue();
 		public int isFinishTimeChecked(ClickEvent event);
 		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
@@ -88,13 +88,14 @@ public class SchedulerPresenter implements Presenter {
 		this.selectedCourses = new ArrayList<>();
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
+		bind();
 	}
 	
 	
 	@Override
 	public void bind() {
 		
-		view.getDaysOffValue().addClickHandler(new ClickHandler() {
+/*		view.getDaysOffValue().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				int res = view.isDayOffChecked(event);
@@ -150,7 +151,7 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("Start time value was deselected");
 				}
 			}
-		});
+		});*/
 		
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
@@ -163,6 +164,7 @@ public class SchedulerPresenter implements Presenter {
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				Log.info("Build schedule was requested");
 				rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
 					@Override
 					public void onFailure(Throwable caught) {
@@ -184,7 +186,8 @@ public class SchedulerPresenter implements Presenter {
 						} else {
 							lessonGroupsList.clear();
 							sched_index = 0;
-							/*tables.forEach(new Consumer<Timetable>() {
+							//TODO: Consumer can't compile on client side
+/*							tables.forEach(new Consumer<Timetable>() {
 								@Override
 								public void accept(Timetable λ) {
 									lessonGroupsList.add(λ.getLessonGroups());
@@ -204,11 +207,11 @@ public class SchedulerPresenter implements Presenter {
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				Log.info("Next schedule was requested");
 				if (lessonGroupsList.size() <= sched_index + 1) {
 					return;
 				}
 				++sched_index;
-				Log.info("Next schedule was requested");
 				view.setSchedule(lessonGroupsList.get(sched_index));
 			}
 		});
@@ -216,11 +219,11 @@ public class SchedulerPresenter implements Presenter {
 		view.prevSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				Log.info("Previous schedule was requested");
 				if (sched_index <= 0) {
 					return;
 				}
 				--sched_index;
-				Log.info("Previous schedule was requested");
 				view.setSchedule(lessonGroupsList.get(sched_index));
 			}
 		});
@@ -228,6 +231,7 @@ public class SchedulerPresenter implements Presenter {
 		view.saveSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				Log.info("Save schedule was requested");
 				rpcService.saveSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
