@@ -1,6 +1,10 @@
 package upandgo.shared.entities;
 
-public enum Month {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum Month implements IsSerializable{
 	JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
-	JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+	JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
+	
+	Month(){}
 }
