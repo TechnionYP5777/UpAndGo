@@ -14,9 +14,11 @@ java.util.LinkedList, true, true, true, true, java.util.LinkedList/3953877921, 3
 java.util.Stack, true, true, true, true, java.util.Stack/1346942793, 1346942793
 java.util.Vector, true, true, true, true, java.util.Vector/3057315478, 3057315478
 upandgo.client.CoursesService, false, false, false, false, _, 3113584189
-upandgo.shared.entities.Exam, true, true, true, true, upandgo.shared.entities.Exam/3729020131, 3729020131
-upandgo.shared.entities.LessonGroup, true, true, true, true, upandgo.shared.entities.LessonGroup/613417440, 613417440
-[Lupandgo.shared.entities.LessonGroup;, true, true, true, true, [Lupandgo.shared.entities.LessonGroup;/752504771, 752504771
-upandgo.shared.entities.course.Course, true, true, false, false, upandgo.shared.entities.course.Course/1377109341, 1377109341
+upandgo.shared.entities.Exam, true, true, true, true, upandgo.shared.entities.Exam/3389280712, 3389280712
+upandgo.shared.entities.LessonGroup, true, true, true, true, upandgo.shared.entities.LessonGroup/1946651732, 1946651732
+[Lupandgo.shared.entities.LessonGroup;, true, true, true, true, [Lupandgo.shared.entities.LessonGroup;/2476579150, 2476579150
+upandgo.shared.entities.LocalTime, true, true, true, true, upandgo.shared.entities.LocalTime/2996944028, 2996944028
+upandgo.shared.entities.Month, true, true, true, true, upandgo.shared.entities.Month/1913463095, 1913463095
+upandgo.shared.entities.course.Course, true, true, false, false, upandgo.shared.entities.course.Course/3391633004, 3391633004
 upandgo.shared.entities.course.CourseId, true, true, true, true, upandgo.shared.entities.course.CourseId/2185835567, 2185835567
-[Lupandgo.shared.entities.course.Course;, true, true, false, false, [Lupandgo.shared.entities.course.Course;/1173295524, 1173295524
+[Lupandgo.shared.entities.course.Course;, true, true, false, false, [Lupandgo.shared.entities.course.Course;/3794533203, 3794533203

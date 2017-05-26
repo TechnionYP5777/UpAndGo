@@ -1,5 +1,6 @@
 package upandgo.shared.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class LessonGroup implements IsSerializable {
 	public static final int UNINITIALIZED_GROUP_NUM = -1;
 
 	private int groupNum;
-	private final List<Lesson> lessons;
+	private List<Lesson> lessons;
 
 	public LessonGroup() {
 		groupNum = UNINITIALIZED_GROUP_NUM;

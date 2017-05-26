@@ -29,10 +29,10 @@ public class Course implements IsSerializable {
 	protected String id;
 	protected String faculty;
 	protected double points;
-	protected final Exam aTerm;
-	protected final Exam bTerm;
+	protected Exam aTerm;
+	protected Exam bTerm;
 
-	protected final List<StuffMember> stuff;
+	protected List<StuffMember> stuff;
 
 	protected List<LessonGroup> lectures;
 	protected List<LessonGroup> tutorials;
@@ -42,10 +42,10 @@ public class Course implements IsSerializable {
 	protected int laboratoryHours;
 	protected int projectHours;
 
-	protected final List<CourseListener> listeners;
+	protected List<CourseListener> listeners;
 
-	protected final List<Course> prerequisites;
-	protected final List<Course> corequisites;
+	protected List<Course> prerequisites;
+	protected List<Course> corequisites;
 	protected boolean done;
 	protected boolean passThisSemester;
 

@@ -3,10 +3,8 @@ package upandgo.client.view;
 import upandgo.shared.entities.LocalTime;
 import java.util.List;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.layout.client.Layout;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -15,7 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
-import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.model.scedule.Schedule;
@@ -23,10 +20,6 @@ import upandgo.shared.model.scedule.Schedule;
 public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Display{
 
 	private MainStyle style = Resources.INSTANCE.mainStyle();
-	TimeTableView timeTableView = new TimeTableView();
-	ConstraintsView constraintsView = new ConstraintsView();
-	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
-	SchedualerControlsView schedualerControlsView = new SchedualerControlsView();
 
 	public SchedualerView(){
 		InitializePanel();
@@ -34,10 +27,11 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 	
 	private void InitializePanel(){
-		// needs to be injected
-		
+		TimeTableView timeTableView = new TimeTableView();// needs to be injected
+		ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
-		
+		SchedualerControlsView schedualerControlsView = new SchedualerControlsView();
+		ConstraintsView constraintsView = new ConstraintsView();
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
@@ -53,28 +47,33 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 		
 		}
 	@Override
-	public HasClickHandlers clearSchedule() {
-		return schedualerControlsView.clearSchedule;
+	public <T extends HasClickHandlers> T clearSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HasClickHandlers buildSchedule() {
-		return schedualerControlsView.buildSchedule;
+	public <T extends HasClickHandlers> T buildSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HasClickHandlers nextSchedule() {
-		return schedualerControlsView.nextSchedule;
+	public <T extends HasClickHandlers> T nextSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HasClickHandlers prevSchedule() {
-		return schedualerControlsView.prevSchedule;
+	public <T extends HasClickHandlers> T prevSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HasClickHandlers saveSchedule() {
-		return schedualerControlsView.saveSchedule;
+	public <T extends HasClickHandlers> T saveSchedule() {
+		// TODO Auto-generated method stub
+		return null;
 	}
  	
 	@Override
@@ -89,7 +88,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public HasClickHandlers getDaysOffValue() {
+	public <T extends HasClickHandlers> T getDaysOffValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -101,7 +100,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public HasClickHandlers getMinWindowsValue() {
+	public <T extends HasClickHandlers> T getMinWindowsValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -113,7 +112,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public HasClickHandlers getStartTimeValue() {
+	public <T extends HasClickHandlers> T getStartTimeValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -131,7 +130,7 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	}
 
 	@Override
-	public HasClickHandlers getFinishTimeValue() {
+	public <T extends HasClickHandlers> T getFinishTimeValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}

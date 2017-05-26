@@ -1,8 +1,15 @@
 package upandgo.shared.entities;
 
-public class LocalTime implements Comparable<LocalTime> {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	private int hour;
 	private int minute;
+	
+	private LocalTime(){
+		this.hour = 0;
+		this.minute = 0;
+	}
 	
 	private LocalTime(int hour, int minute){
 		this.hour = hour;

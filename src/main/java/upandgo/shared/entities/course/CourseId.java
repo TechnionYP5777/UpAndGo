@@ -4,8 +4,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import upandgo.shared.entities.Exam;
 
-import java.util.Date;
-
 /**
  * 
  * @author Nikita Dizhur
@@ -21,6 +19,9 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	private CourseId() {
 		// here because GWT needs it
 		name = number = "";
+		aTerm = null;
+		bTerm = null;
+		
 	}
 
 	@Override
@@ -57,6 +58,8 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	public CourseId(final String cNum, final String cName, Exam cATerm, Exam cBTerm) {
 		name = cName;
 		number = cNum;
+		aTerm = cATerm;
+		bTerm = cBTerm;
 	}
 
 	public String getTitle() {

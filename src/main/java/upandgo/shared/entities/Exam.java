@@ -1,22 +1,21 @@
 package upandgo.shared.entities;
 
-import java.util.Date;
+
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class Exam  implements IsSerializable {
+
+public class Exam implements IsSerializable{
 	
-	private final LocalTime time;
-	private final Month month;
-	private final String dayOfMonth;
-	private final String year;
+	private LocalTime time;
+	private Month month;
+	private String dayOfMonth;
+	private String year;
 	
-	
-	public Exam() {
-		this.time = null;
-		this.dayOfMonth = ""; 
-		this.month = Month.JANUARY;
-		this.year = "";
+	private Exam() {
+		time = null;
+		month = Month.JANUARY;
+		dayOfMonth = year = "";
 	}
 	
 	public Exam(LocalTime time, Month month, String dayOfMonth, String year) {
