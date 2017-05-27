@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 //import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -563,11 +564,19 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public List<Faculty> loadFaculties() {
 		final List<Faculty> $ = new ArrayList<>();
+		$.add(new Faculty("00", "כל הפקולטות"));
 		for (final Entry<String, Course> xxx : coursesById.entrySet()) {
 			final Faculty faculty = new Faculty(xxx.getKey().substring(0, 2), xxx.getValue().getFaculty());
 			if (!$.contains(faculty))
 				$.add(faculty);
 		}
+		$.subList(1, $.size()).sort(new Comparator<Faculty>() {
+
+			@Override
+			public int compare(Faculty o1, Faculty o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
 		return $;
 	}
 

@@ -1,6 +1,7 @@
 package upandgo.client.presenter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.event.shared.EventBus;
@@ -114,8 +115,11 @@ public class CourseListPresenter implements Presenter {
 				int $ = display.getSelectedFacultyRow(event);
 				if ($ < 0)
 					return;
-				selectedFaculty = faculties.get($);
-				Log.info("5555555555555555555555555555555555555555555");
+				if($ == 0)	// if it's "all faculties" option
+					selectedFaculty = "";
+				else
+					selectedFaculty = faculties.get($);
+
 				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 

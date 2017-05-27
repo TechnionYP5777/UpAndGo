@@ -17,6 +17,10 @@ import java.util.TreeSet;
 
 import java.util.function.Consumer;
 
+import org.apache.jasper.tagplugins.jstl.ForEach;
+
+import upandgo.server.DateFormatConverter;
+
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
@@ -196,7 +200,7 @@ public class CourseModel { // implements Model {
 	 * load faculty names
 	 */
 	public List<String> loadFacultyNames() {
-		final TreeSet<String> faculties = new TreeSet<>();
+		final List<String> faculties = new ArrayList<>();
 		facultyList.forEach(new Consumer<Faculty>() {
 			@Override
 			public void accept(Faculty λ) {
@@ -204,7 +208,7 @@ public class CourseModel { // implements Model {
 			}
 		});
 		
-		return new ArrayList<>(faculties);
+		return faculties;
 	}
 
 	public List<Course> loadChosenCoursesDetails() {
