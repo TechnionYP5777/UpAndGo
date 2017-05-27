@@ -29,8 +29,8 @@ public class Course implements IsSerializable {
 	protected String id;
 	protected String faculty;
 	protected double points;
-	protected Exam aTerm;
-	protected Exam bTerm;
+	protected String aTerm;
+	protected String bTerm;
 
 	protected List<StuffMember> stuff;
 
@@ -54,7 +54,7 @@ public class Course implements IsSerializable {
 		// here because GWT needs it
 		name = id = faculty = "";
 		points = 0;
-		aTerm = bTerm = null;
+		aTerm = bTerm = "";
 
 		stuff = null;
 		listeners = null;
@@ -63,7 +63,7 @@ public class Course implements IsSerializable {
 	}
 	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,
-			final double acPoints, final Exam aT, final Exam bT, final List<Course> prerequisitesList,
+			final double acPoints, String aT, String bT, final List<Course> prerequisitesList,
 			final List<Course> corequisitesList) {
 
 		if (name1 == null || faculty1 == null)
@@ -128,11 +128,11 @@ public class Course implements IsSerializable {
 		return points;
 	}
 
-	public Exam getaTerm() {
+	public String getaTerm() {
 		return aTerm;
 	}
 
-	public Exam getbTerm() {
+	public String getbTerm() {
 		return bTerm;
 	}
 

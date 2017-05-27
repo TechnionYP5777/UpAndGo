@@ -327,7 +327,7 @@ public class XmlCourseLoader extends CourseLoader {
 						// get course points
 						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 						// get course exam's A date and time
-						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
+						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? ""
 								: createExam(p, "moedA"));
 									/*LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
@@ -343,7 +343,7 @@ public class XmlCourseLoader extends CourseLoader {
 														.getNamedItem("time").getNodeValue(),
 										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));*/
 						// get course exam's B date and time
-						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
+						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? ""
 								: createExam(p, "moedB"));
 									/*LocalDateTime.parse(
 										((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
@@ -405,15 +405,13 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private Exam createExam(Node p, String examType) {
-		return new Exam(LocalTime.parse(((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-						.getNamedItem("time").getNodeValue()), 
-				convertStrToMonth(((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-						.getNamedItem("month").getNodeValue()),
+	private String createExam(Node p, String examType) {
+		return ((((Element) p).getElementsByTagName(examType).item(0).getAttributes()
+						.getNamedItem("month").getNodeValue()) + "-" +
 				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-				.getNamedItem("day").getNodeValue(),
+				.getNamedItem("day").getNodeValue() + "-" +
 				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-				.getNamedItem("time").getNodeValue());
+				.getNamedItem("year").getNodeValue());
 	}
 
 	private void sportParsing(final CourseBuilder b, final Node p) {

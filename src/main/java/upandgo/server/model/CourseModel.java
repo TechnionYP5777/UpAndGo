@@ -3,7 +3,6 @@ package upandgo.server.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.function.BiConsumer;
 import com.google.common.collect.Collections2;		 
 import com.google.common.collect.Lists;		
 import com.google.common.base.Predicate;
@@ -17,8 +16,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import java.util.function.Consumer;
-
-import upandgo.server.DateFormatConverter;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;

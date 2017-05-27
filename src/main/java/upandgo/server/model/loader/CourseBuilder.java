@@ -1,6 +1,5 @@
 package upandgo.server.model.loader;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,8 @@ public class CourseBuilder {
 	protected String id = "";
 	protected String faculty = "";
 	protected double points;
-	protected Exam aTerm;
-	protected Exam bTerm;
+	protected String aTerm = "";
+	protected String bTerm = "";
 
 	protected final List<StuffMember> stuff = new ArrayList<>();
 	protected final List<Lesson> lessons = new ArrayList<>();
@@ -49,12 +48,12 @@ public class CourseBuilder {
 		return this;
 	}
 
-	public CourseBuilder setATerm(final Exam xxx) {
+	public CourseBuilder setATerm(String xxx) {
 		aTerm = xxx;
 		return this;
 	}
 
-	public CourseBuilder setBTerm(final Exam xxx) {
+	public CourseBuilder setBTerm(String xxx) {
 		bTerm = xxx;
 		return this;
 	}

@@ -115,6 +115,7 @@ public class CourseListPresenter implements Presenter {
 				if ($ < 0)
 					return;
 				selectedFaculty = faculties.get($);
+				Log.info("5555555555555555555555555555555555555555555");
 				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 
@@ -138,6 +139,7 @@ public class CourseListPresenter implements Presenter {
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
 							rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+							Log.info("444444444444444444444444444444444444444444444444");
 							rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 									new FetchNotSelectedCoursesAsyncCallback());
 
@@ -199,6 +201,7 @@ public class CourseListPresenter implements Presenter {
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
 							rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+							Log.info("333333333333333333333333333333333333333333333");
 							rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 									new FetchNotSelectedCoursesAsyncCallback());
 
@@ -249,6 +252,7 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				courseQuery = display.getCourseQuery(event);
+				Log.info("22222222222222222222222222222222222222222");
 				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 			}
@@ -272,6 +276,7 @@ public class CourseListPresenter implements Presenter {
 		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+		Log.info("11111111111111111111111111111111111111111111");
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
@@ -298,6 +303,7 @@ public class CourseListPresenter implements Presenter {
 
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+			Log.info("*********************************************");
 			Window.alert("Error fetching not selected courses.");
 			Log.error("Error fetching not selected courses.");
 		}

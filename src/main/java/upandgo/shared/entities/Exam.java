@@ -7,19 +7,16 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Exam implements IsSerializable{
 	
-	private LocalTime time;
 	private Month month;
 	private String dayOfMonth;
 	private String year;
 	
-	private Exam() {
-		time = null;
+	public Exam() {
 		month = Month.JANUARY;
 		dayOfMonth = year = "";
 	}
 	
-	public Exam(LocalTime time, Month month, String dayOfMonth, String year) {
-		this.time = time;
+	public Exam(Month month, String dayOfMonth, String year) {
 		this.dayOfMonth = dayOfMonth; 
 		this.month = month;
 		this.year = year;
@@ -28,10 +25,6 @@ public class Exam implements IsSerializable{
 	
 	public String getDay() {
 		return dayOfMonth;
-	}
-	
-	public LocalTime getTime() {
-		return time;
 	}
 	
 	public Month getMonth() {

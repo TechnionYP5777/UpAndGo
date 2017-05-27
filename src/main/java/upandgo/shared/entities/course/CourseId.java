@@ -16,11 +16,11 @@ import upandgo.shared.entities.Exam;
 public class CourseId implements Comparable<CourseId>, IsSerializable {
 
 	@SuppressWarnings("unused")
-	private CourseId() {
+	public CourseId() {
 		// here because GWT needs it
 		name = number = "";
-		aTerm = null;
-		bTerm = null;
+		aTerm = "";
+		bTerm = "";
 		
 	}
 
@@ -52,10 +52,10 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	private String name;
 	private String number;
 
-	private Exam aTerm;
-	private Exam bTerm;
+	private String aTerm;
+	private String bTerm;
 
-	public CourseId(final String cNum, final String cName, Exam cATerm, Exam cBTerm) {
+	public CourseId(final String cNum, final String cName, String cATerm, String cBTerm) {
 		name = cName;
 		number = cNum;
 		aTerm = cATerm;
@@ -79,11 +79,11 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 		return number.compareTo(xxx.number);
 	}
 
-	public Exam aTerm() {
+	public String aTerm() {
 		return aTerm;
 	}
 
-	public Exam bTerm() {
+	public String bTerm() {
 		return bTerm;
 	}
 
