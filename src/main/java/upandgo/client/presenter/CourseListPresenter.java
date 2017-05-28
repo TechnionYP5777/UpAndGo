@@ -1,7 +1,6 @@
 package upandgo.client.presenter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.event.shared.EventBus;
@@ -25,7 +24,6 @@ import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
 
 import upandgo.client.CoursesServiceAsync;
-import upandgo.client.event.GetCourseDetailsEvent;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import com.allen_sauer.gwt.log.client.Log;

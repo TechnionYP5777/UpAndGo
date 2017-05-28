@@ -8,18 +8,13 @@ import com.google.common.collect.Lists;
 import com.google.common.base.Predicate;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import java.util.function.Consumer;
-
-import org.apache.jasper.tagplugins.jstl.ForEach;
-
-import upandgo.server.DateFormatConverter;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
@@ -61,16 +56,15 @@ public class CourseModel { // implements Model {
 
 		// save picking in DB
 		final TreeSet<CourseId> pickedList = new TreeSet<>();
-		final List<String> pickedIds = new ArrayList<>();
 		pickedCourseList.add(pickedCourse);
-		pickedCourseList.forEach(new Consumer<Course>() {
-			@Override
-			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						λ.getaTerm(), λ.getbTerm()));
-				pickedIds.add(λ.getId());
-			}
-		});
+		
+		Iterator<Course> it = pickedCourseList.iterator();
+		while(it.hasNext()) {
+			Course λ = it.next();
+			pickedList.add(new CourseId(λ.getId(), λ.getName(),
+					λ.getaTerm(), λ.getbTerm()));
+		}
+		
 	}
 
 	public void addCourse(final String name) {
@@ -97,13 +91,14 @@ public class CourseModel { // implements Model {
 		// save picking in DB
 		final TreeSet<CourseId> pickedList = new TreeSet<>();
 		pickedCourseList.remove(droppedCourse);
-		pickedCourseList.forEach(new Consumer<Course>() {
-			@Override
-			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						λ.getaTerm(), λ.getbTerm()));
-			}
-		});
+		
+		Iterator<Course> it = pickedCourseList.iterator();
+		while(it.hasNext()) {
+			Course λ = it.next();
+			pickedList.add(new CourseId(λ.getId(), λ.getName(),
+					λ.getaTerm(), λ.getbTerm()));
+		}
+		
 	}
 
 	public Course getCourseByName(final String name) {
@@ -126,25 +121,22 @@ public class CourseModel { // implements Model {
 
 	public List<String> getChosenCourseNames() {
 		final List<String> $ = new ArrayList<>();
-		pickedCourseList.forEach(new Consumer<Course>() {
-			@Override
-			public void accept(Course λ) {
-				$.add(λ.getId());
-			}
-		});
+		Iterator<Course> it = pickedCourseList.iterator();
+		while(it.hasNext())
+			$.add(it.next().getId());
+		
 		return $;
 	}
 
 	public List<CourseId> loadChosenCourses() {
 		// save picking in DB
 		final HashSet<CourseId> pickedList = new HashSet<>();
-		pickedCourseList.forEach(new Consumer<Course>() {
-			@Override
-			public void accept(Course λ) {
-				pickedList.add(new CourseId(λ.getId(), λ.getName(),
-						λ.getaTerm(), λ.getbTerm()));
-			}
-		});
+		Iterator<Course> it = pickedCourseList.iterator();
+		while(it.hasNext()) {
+			Course λ = it.next();
+			pickedList.add(new CourseId(λ.getId(), λ.getName(),
+					λ.getaTerm(), λ.getbTerm()));
+		}
 		
 		return new ArrayList<>(pickedList);
 	}
@@ -201,12 +193,9 @@ public class CourseModel { // implements Model {
 	 */
 	public List<String> loadFacultyNames() {
 		final List<String> faculties = new ArrayList<>();
-		facultyList.forEach(new Consumer<Faculty>() {
-			@Override
-			public void accept(Faculty λ) {
-				faculties.add(λ.getName());
-			}
-		});
+		Iterator<Faculty> it = facultyList.iterator();
+		while(it.hasNext())
+			faculties.add(it.next().getName());
 		
 		return faculties;
 	}

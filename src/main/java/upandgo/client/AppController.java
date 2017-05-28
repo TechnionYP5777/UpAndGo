@@ -2,6 +2,7 @@ package upandgo.client;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
@@ -45,6 +46,8 @@ class AppController implements Presenter {
 	private EventBus eventBus;
 	private CoursesServiceAsync rpcService;
 	private LayoutPanel mainView;
+
+	private Anchor signOutLink = new Anchor("Sign Out");
 		
 	@Inject
 	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
@@ -158,7 +161,8 @@ class AppController implements Presenter {
 		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
 		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);
 		
-	
+
+		mainView.add(signOutLink);
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		sPresenter.go(mainView);
