@@ -1,4 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<module>
-  <source path="" excludes="Ser.java,*/Ser.java,ZoneRegion.java,chrono/global/*,format/DateTimeFormat*,format/DateTime*Context*,format/DateTimeTextProvider.java,format/Simple*,zone/Ser.java,zone/StandardZoneRules.java,zone/Tzdb*,zone/ZoneOffset*,zone/ZoneRulesBuilder.java,zone/Exception.java,zone/ZoneRulesProvider.java,jdk8/*Era*.java"/>
-</module>
