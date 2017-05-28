@@ -5,4 +5,4 @@ jarsExcludedFromWebInfLib=
 lastWarOutDir=C\:/Users/Omri Ben- Shmuel/Documents/GitHub/UpAndGo/src/main/webapp
 launchConfigExternalUrlPrefix=
 warSrcDir=src/main/webapp
-warSrcDirIsOutput=true
+warSrcDirIsOutput=false
