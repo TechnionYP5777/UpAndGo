@@ -3,22 +3,17 @@ package upandgo.client.view;
 import upandgo.shared.entities.LocalTime;
 import java.util.List;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.layout.client.Layout;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
-import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
-import upandgo.shared.model.scedule.Schedule;
 
 public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Display{
 

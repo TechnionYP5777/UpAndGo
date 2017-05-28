@@ -65,7 +65,7 @@ public class NavBarView extends FlowPanel{
 		signInButton.addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
 
 				Modal loginBox = new Modal();
 				loginBox.setFade(true);

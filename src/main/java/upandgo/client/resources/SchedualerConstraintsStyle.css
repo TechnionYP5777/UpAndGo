@@ -1,18 +1,18 @@
 @CHARSET "UTF-8";
 
-.constraintsPanel td{
-	align: right;	
+.constraintsPanel {
 }
 
-.constraintsPanel select{
-	margin-left: 20px;
+.constraintsPanel tr{
 }
 
 
 .constraintsLabel{
-	padding-left: 20px;
 }
 
+.onlyCheckBox{
+	margin: 1em;
+}
 
 .onlyCheckBox span{
 	padding-right: 20px;
@@ -24,7 +24,8 @@
 
 
 .timeCheckBox {
-	padding-left: 10px;
+	margin: 1em;
+	padding-left: 0px;
 }
 
 .timeCheckBox span{
@@ -35,3 +36,6 @@
 	top: -2px;
 }
 
+.timeListBox{
+		margin: 1em;
+}

@@ -54,6 +54,9 @@ public interface Resources extends ClientBundle {
 		 String onlyCheckBox();
 		 
 		 String timeCheckBox();
+		 
+		 String timeListBox();
+
 	 }
 
 	 

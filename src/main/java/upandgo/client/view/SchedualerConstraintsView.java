@@ -6,12 +6,10 @@ import org.gwtbootstrap3.client.ui.ModalComponent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
-import upandgo.client.Resources.ConstraintsStyle;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
 
 
@@ -54,19 +52,30 @@ public class SchedualerConstraintsView extends VerticalPanel implements ModalCom
 	}
 	    
     private void InitializePanel(){
+    	this.setHorizontalAlignment(ALIGN_RIGHT);
 
     	this.add(daysOffCB);
     	this.add(minWindowsCB);
-    	this.add(startTimeCB);
-    	this.add(startTimeLB);
-    	this.add(finishTimeCB);
-    	this.add(finishTimeLB);
+    	
+    	HorizontalPanel startTimePanel = new HorizontalPanel();
+    	startTimePanel.add(startTimeCB);
+    	startTimePanel.add(startTimeLB);
+    	
+    	HorizontalPanel finishTimePanel = new HorizontalPanel();
+    	finishTimePanel.add(finishTimeCB);
+    	finishTimePanel.add(finishTimeLB);
+
+    	this.add(startTimePanel);
+    	this.add(finishTimePanel);
     	
     	daysOffCB.addStyleName(cStyle.onlyCheckBox());
     	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
 
     	startTimeCB.addStyleName(cStyle.timeCheckBox());
     	finishTimeCB.addStyleName(cStyle.timeCheckBox());
+    	
+    	startTimeLB.addStyleName(cStyle.timeListBox());
+    	finishTimeLB.addStyleName(cStyle.timeListBox());
     	
     	startTimeCB.addClickHandler(new ClickHandler(){
 
