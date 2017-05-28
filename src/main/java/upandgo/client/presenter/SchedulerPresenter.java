@@ -62,17 +62,17 @@ public class SchedulerPresenter implements Presenter {
 		public void setSchedule(List<LessonGroup> schedule); // if (schedule = null) then clear schedule
 				
 		public HasClickHandlers getDaysOffValue();
-		public int isDayOffChecked(ClickEvent event); // 1- if selected. 0- if not
+		public boolean isDayOffChecked(ClickEvent event); 
 		
 		public HasClickHandlers getMinWindowsValue();
-		public int isMinWindowsChecked(ClickEvent event); // 1- if selected. 0- if not
+		public boolean isMinWindowsChecked(ClickEvent event); 
 		
 		public HasClickHandlers getStartTimeValue();
-		public int isStartTimeChecked(ClickEvent event);
+		public boolean isStartTimeChecked(ClickEvent event);
 		public LocalTime getReqStartTime(); // result in format HH:MM
 		
 		public HasClickHandlers getFinishTimeValue();
-		public int isFinishTimeChecked(ClickEvent event);
+		public boolean isFinishTimeChecked(ClickEvent event);
 		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
 		public Widget getAsWidget();
@@ -94,11 +94,10 @@ public class SchedulerPresenter implements Presenter {
 	@Override
 	public void bind() {
 		
-/*		view.getDaysOffValue().addClickHandler(new ClickHandler() {
+		view.getDaysOffValue().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				int res = view.isDayOffChecked(event);
-				if (res == 1) {
+				if (view.isDayOffChecked(event)) {
 					isDaysoffCount = true;
 					Log.info("daysOff button was selected");
 				} else {
@@ -111,8 +110,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getMinWindowsValue().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				int res = view.isMinWindowsChecked(event);
-				if (res == 1) {
+				if (view.isMinWindowsChecked(event)) {
 					isBlankSpaceCount = true;
 					Log.info("minWindows button was selected");
 				} else {
@@ -126,8 +124,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getStartTimeValue().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				int res = view.isStartTimeChecked(event);
-				if (res == 1) {
+				if (view.isStartTimeChecked(event)) {
 					minStartTime = view.getReqStartTime();
 					Log.info("Start time value was selected");
 				} else {
@@ -141,8 +138,7 @@ public class SchedulerPresenter implements Presenter {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				int res = view.isFinishTimeChecked(event);
-				if (res == 1) {
+				if (view.isFinishTimeChecked(event)) {
 					maxEndTime = view.getReqFinishTime();
 					Log.info("End time value was selected");
 				} else {
@@ -150,7 +146,7 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("Start time value was deselected");
 				}
 			}
-		});*/
+		});
 		
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override

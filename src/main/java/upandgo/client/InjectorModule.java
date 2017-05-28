@@ -9,7 +9,7 @@ import com.google.inject.Singleton;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.client.view.CourseSelectionView;
-import upandgo.client.view.SchedualerView;
+import upandgo.client.view.SchedulerView;
 
 public class InjectorModule extends AbstractGinModule {
 
@@ -17,7 +17,7 @@ public class InjectorModule extends AbstractGinModule {
 	protected void configure() {
 		bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 		bind(CourseListPresenter.Display.class).to(CourseSelectionView.class).in(Singleton.class);
-		bind(SchedulerPresenter.Display.class).to(SchedualerView.class);
+		bind(SchedulerPresenter.Display.class).to(SchedulerView.class);
 
 	}
 

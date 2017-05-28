@@ -18,7 +18,7 @@ import upandgo.client.Resources.SchedualerConstraintsStyle;
  *
  */
 
-public class SchedualerConstraintsView extends VerticalPanel implements ModalComponent{
+public class SchedulerConstraintsView extends VerticalPanel implements ModalComponent{
 	
 	InlineCheckBox daysOffCB = new InlineCheckBox("ימי חופש");
 
@@ -35,7 +35,7 @@ public class SchedualerConstraintsView extends VerticalPanel implements ModalCom
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
-	public SchedualerConstraintsView(){
+	public SchedulerConstraintsView(){
 	    InitializeTimeLBs();
     	InitializePanel();
     	cStyle.ensureInjected();

@@ -3,6 +3,8 @@ package upandgo.client.view;
 import upandgo.shared.entities.LocalTime;
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.InlineCheckBox;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -12,19 +14,18 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
-import upandgo.client.common.UserContraints;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
 
-public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Display{
+public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Display{
 
 	private MainStyle style = Resources.INSTANCE.mainStyle();
 	TimeTableView timeTableView = new TimeTableView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
-	SchedualerConstraintsView schedualerConstraintsView = new SchedualerConstraintsView();
-	SchedualerControlsView schedualerControlsView = new SchedualerControlsView(schedualerConstraintsView);
+	SchedulerConstraintsView schedualerConstraintsView = new SchedulerConstraintsView();
+	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
 
-	public SchedualerView(){
+	public SchedulerView(){
 		InitializePanel();
 		style.ensureInjected();
 	}
@@ -88,38 +89,32 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 
 	@Override
 	public HasClickHandlers getDaysOffValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return schedualerConstraintsView.daysOffCB;
 	}
 
 	@Override
-	public int isDayOffChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean isDayOffChecked(ClickEvent event) {
+		return ((InlineCheckBox) event.getSource()).getValue();
 	}
 
 	@Override
 	public HasClickHandlers getMinWindowsValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return schedualerConstraintsView.minWindowsCB;
 	}
 
 	@Override
-	public int isMinWindowsChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean isMinWindowsChecked(ClickEvent event) {
+		return ((InlineCheckBox) event.getSource()).getValue();
 	}
 
 	@Override
 	public HasClickHandlers getStartTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return schedualerConstraintsView.startTimeCB;
 	}
 
 	@Override
-	public int isStartTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean isStartTimeChecked(ClickEvent event) {
+		return ((InlineCheckBox) event.getSource()).getValue();
 	}
 
 	@Override
@@ -130,14 +125,12 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 
 	@Override
 	public HasClickHandlers getFinishTimeValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return schedualerConstraintsView.finishTimeLB;
 	}
 
 	@Override
-	public int isFinishTimeChecked(ClickEvent event) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean isFinishTimeChecked(ClickEvent event) {
+		return ((InlineCheckBox) event.getSource()).getValue();
 	}
 
 	@Override
