@@ -22,8 +22,17 @@ public class SchedualerControlsView extends HorizontalPanel{
 	Button nextSchedule = new Button("<i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>&nbsp;&nbsp;למערכת הבאה");
 	Button prevSchedule = new Button("למערכת הקודמת&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
+	
+	SchedualerConstraintsView schedualerConstraintsView;
 
 	public SchedualerControlsView(){
+		this.schedualerConstraintsView = new SchedualerConstraintsView();
+    	InitializePanel();
+    	scStyle.ensureInjected();
+    }
+	
+	public SchedualerControlsView(SchedualerConstraintsView scv){
+		this.schedualerConstraintsView = scv;
     	InitializePanel();
     	scStyle.ensureInjected();
     }
@@ -70,7 +79,7 @@ public class SchedualerControlsView extends HorizontalPanel{
 				Modal constraintsBox = new Modal();
 				constraintsBox.setFade(true);
 				constraintsBox.setTitle("הגדרת אילוצים");
-				constraintsBox.add(new SchedualerConstraintsView());
+				constraintsBox.add(schedualerConstraintsView);
 				constraintsBox.show();
 				
 			}

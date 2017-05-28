@@ -98,8 +98,6 @@ public class SchedualerConstraintsView extends VerticalPanel implements ModalCom
     	});
     	
     	this.setStyleName(cStyle.constraintsPanel());
-    	//this.getElement().getStyle().setBackgroundColor("WhiteSmoke");
-    	//this.getElement().getStyle().setWidth(100, Unit.PCT);
 
     }
 	

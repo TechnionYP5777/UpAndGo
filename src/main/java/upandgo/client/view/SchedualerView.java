@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
+import upandgo.client.common.UserContraints;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
 
@@ -20,7 +21,8 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 	private MainStyle style = Resources.INSTANCE.mainStyle();
 	TimeTableView timeTableView = new TimeTableView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
-	SchedualerControlsView schedualerControlsView = new SchedualerControlsView();
+	SchedualerConstraintsView schedualerConstraintsView = new SchedualerConstraintsView();
+	SchedualerControlsView schedualerControlsView = new SchedualerControlsView(schedualerConstraintsView);
 
 	public SchedualerView(){
 		InitializePanel();
@@ -46,6 +48,8 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
 */		
 		}
+	
+	
 	@Override
 	public HasClickHandlers clearSchedule() {
 		return schedualerControlsView.clearSchedule;
