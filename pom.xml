@@ -147,6 +147,12 @@
 			<version>2.3.2.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.allen-sauer.gwt.log/gwt-log -->
+		<dependency>
+		    <groupId>com.allen-sauer.gwt.log</groupId>
+		    <artifactId>gwt-log</artifactId>
+		    <version>3.3.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
