@@ -1,6 +1,7 @@
 package upandgo.client.view;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.ModalComponent;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -17,7 +18,7 @@ import upandgo.client.Resources.ConstraintsStyle;
  *
  */
 
-public class ConstraintsView extends HorizontalPanel{
+public class ConstraintsView extends HorizontalPanel implements ModalComponent{
 
 	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
 	

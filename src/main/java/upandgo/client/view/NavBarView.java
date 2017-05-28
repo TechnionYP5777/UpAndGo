@@ -3,6 +3,7 @@ package upandgo.client.view;
 
 
 import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.Navbar;
 import org.gwtbootstrap3.client.ui.NavbarBrand;
 import org.gwtbootstrap3.client.ui.NavbarCollapse;
@@ -14,7 +15,6 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
 
-import com.github.gwtbootstrap.client.ui.Modal;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -67,7 +67,8 @@ public class NavBarView extends FlowPanel{
 			@Override
 			public void onClick(ClickEvent arg0) {
 
-				Modal loginBox = new Modal(true);
+				Modal loginBox = new Modal();
+				loginBox.setFade(true);
 				loginBox.setTitle("כניסה / הרשמה");
 				loginBox.setId("login");
 				loginBox.add(new LoginDialog());

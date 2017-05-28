@@ -1,5 +1,7 @@
 package upandgo.client;
 
+import org.gwtbootstrap3.client.ui.ModalComponent;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -14,7 +16,7 @@ import upandgo.client.Resources.DialogBoxStyle;
 import upandgo.client.Resources.NavBarStyle;
 
 // sol found here: http://stackoverflow.com/questions/6913081/gwt-popup-and-uibinder-panel-or-dialogbox
-public class LoginDialog extends DialogBox {
+public class LoginDialog extends DialogBox implements ModalComponent{
 	@UiField
 	Label label1;
 	

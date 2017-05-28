@@ -1,11 +1,15 @@
 package upandgo.client.view;
 
+
+import org.gwtbootstrap3.client.ui.Modal;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
+import upandgo.client.LoginDialog;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 
@@ -15,6 +19,7 @@ public class SchedualerControlsView extends HorizontalPanel{
 
 	Button buildSchedule = new Button("<i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
 	Button clearSchedule = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;נקה מערכת");
+	Button setConstrains = new Button("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הגדר אילוצים");
 	Button nextSchedule = new Button("<i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>&nbsp;&nbsp;למערכת הבאה");
 	Button prevSchedule = new Button("למערכת הקודמת&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
@@ -30,20 +35,18 @@ public class SchedualerControlsView extends HorizontalPanel{
 		this.setStyleName(scStyle.SchedualerControlsPanel());
 		this.add(buildSchedule);
 		this.add(clearSchedule);
+		this.add(setConstrains);
 		this.add(nextSchedule);
 		this.add(prevSchedule);
 		this.add(saveSchedule);
+		//this.add(new SchedualerConstraintsView());
 		
-		buildSchedule.removeStyleName("gwt-Button");
-		buildSchedule.addStyleName("btn btn-success");
-		clearSchedule.removeStyleName("gwt-Button");
-		clearSchedule.addStyleName("btn btn-danger");
-		nextSchedule.removeStyleName("gwt-Button");
-		nextSchedule.addStyleName("btn btn-primary");
-		prevSchedule.removeStyleName("gwt-Button");
-		prevSchedule.addStyleName("btn btn-primary");
-		saveSchedule.removeStyleName("gwt-Button");
-		saveSchedule.addStyleName("btn btn-info");
+		buildSchedule.setStyleName("btn btn-success");
+		clearSchedule.setStyleName("btn btn-danger");
+		setConstrains.setStyleName("btn btn-warning");
+		nextSchedule.setStyleName("btn btn-primary");
+		prevSchedule.setStyleName("btn btn-primary");
+		saveSchedule.setStyleName("btn btn-info");
 		
 		buildSchedule.addClickHandler(new ClickHandler(){
 
@@ -60,6 +63,19 @@ public class SchedualerControlsView extends HorizontalPanel{
 			}
     		
     	});
+		
+		setConstrains.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent arg0) {
+				Modal constraintsBox = new Modal();
+				constraintsBox.setFade(true);
+				constraintsBox.setTitle("הגדרת אילוצים");
+				constraintsBox.add(new ConstraintsView());
+				constraintsBox.show();
+				
+			}
+		});
 
 	}
 	
