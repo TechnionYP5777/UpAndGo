@@ -46,6 +46,11 @@ public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	public int getMinute(){
 		return minute;
 	}
+	
+	@Override
+	public String toString(){
+		return hour + ":" + minute;
+	}
 
 	public static LocalTime parse(String string) {
 		String[] parts = string.split(":");

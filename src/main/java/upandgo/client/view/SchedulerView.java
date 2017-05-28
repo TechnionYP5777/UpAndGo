@@ -7,6 +7,7 @@ import org.gwtbootstrap3.client.ui.InlineCheckBox;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -88,7 +89,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public HasClickHandlers getDaysOffValue() {
+	public HasClickHandlers getDaysOffElement() {
 		return schedualerConstraintsView.daysOffCB;
 	}
 
@@ -98,7 +99,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public HasClickHandlers getMinWindowsValue() {
+	public HasClickHandlers getMinWindowsElement() {
 		return schedualerConstraintsView.minWindowsCB;
 	}
 
@@ -108,7 +109,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public HasClickHandlers getStartTimeValue() {
+	public HasClickHandlers getStartTimeElement() {
 		return schedualerConstraintsView.startTimeCB;
 	}
 
@@ -119,12 +120,12 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public LocalTime getReqStartTime() {
-		// TODO Auto-generated method stub
-		return null;
+		int index = schedualerConstraintsView.startTimeLB.getSelectedIndex();
+		return LocalTime.of(index+8, 30);
 	}
 
 	@Override
-	public HasClickHandlers getFinishTimeValue() {
+	public HasClickHandlers getFinishTimeElement() {
 		return schedualerConstraintsView.finishTimeLB;
 	}
 
@@ -135,7 +136,17 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public LocalTime getReqFinishTime() {
-		// TODO Auto-generated method stub
-		return null;
+		int index = schedualerConstraintsView.finishTimeLB.getSelectedIndex();
+		return LocalTime.of(index+8, 30);
+	}
+
+	@Override
+	public HasChangeHandlers getStartTimeList() {
+		return schedualerConstraintsView.startTimeLB;
+	}
+
+	@Override
+	public HasChangeHandlers getFinishTimeList() {
+		return schedualerConstraintsView.finishTimeLB;
 	}
 }

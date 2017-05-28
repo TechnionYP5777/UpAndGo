@@ -10,8 +10,11 @@ import java.util.function.Consumer;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -45,7 +48,7 @@ public class SchedulerPresenter implements Presenter {
 	protected boolean isDaysoffCount;
 	protected boolean isBlankSpaceCount;
 	protected LocalTime minStartTime;
-	protected LocalTime maxEndTime;
+	protected LocalTime maxFinishTime;
 	
 	private List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
@@ -61,17 +64,19 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void setSchedule(List<LessonGroup> schedule); // if (schedule = null) then clear schedule
 				
-		public HasClickHandlers getDaysOffValue();
+		public HasClickHandlers getDaysOffElement();
 		public boolean isDayOffChecked(ClickEvent event); 
 		
-		public HasClickHandlers getMinWindowsValue();
+		public HasClickHandlers getMinWindowsElement();
 		public boolean isMinWindowsChecked(ClickEvent event); 
 		
-		public HasClickHandlers getStartTimeValue();
+		public HasClickHandlers getStartTimeElement();
+		public HasChangeHandlers getStartTimeList();
 		public boolean isStartTimeChecked(ClickEvent event);
 		public LocalTime getReqStartTime(); // result in format HH:MM
 		
-		public HasClickHandlers getFinishTimeValue();
+		public HasClickHandlers getFinishTimeElement();
+		public HasChangeHandlers getFinishTimeList();
 		public boolean isFinishTimeChecked(ClickEvent event);
 		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
@@ -84,7 +89,7 @@ public class SchedulerPresenter implements Presenter {
 		this.rpcService = rpc;
 		this.isBlankSpaceCount = this.isDaysoffCount = false;
 		this.minStartTime = null;
-		this.maxEndTime = null;
+		this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
@@ -94,7 +99,7 @@ public class SchedulerPresenter implements Presenter {
 	@Override
 	public void bind() {
 		
-		view.getDaysOffValue().addClickHandler(new ClickHandler() {
+		view.getDaysOffElement().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isDayOffChecked(event)) {
@@ -107,7 +112,7 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 		
-		view.getMinWindowsValue().addClickHandler(new ClickHandler() {
+		view.getMinWindowsElement().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isMinWindowsChecked(event)) {
@@ -121,12 +126,12 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
-		view.getStartTimeValue().addClickHandler(new ClickHandler() {
+		view.getStartTimeElement().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isStartTimeChecked(event)) {
 					minStartTime = view.getReqStartTime();
-					Log.info("Start time value was selected");
+					Log.info("Start time value was selected and it is "+ minStartTime.toString());
 				} else {
 					minStartTime = null;
 					Log.info("Start time value was deselected");
@@ -134,17 +139,35 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
-		view.getFinishTimeValue().addClickHandler(new ClickHandler() {
+		view.getStartTimeList().addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent arg0) {
+				minStartTime = view.getReqStartTime();
+				Log.info("Start time value was changed to "+ minStartTime.toString());	
+			}
+		});
+		
+		view.getFinishTimeElement().addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isFinishTimeChecked(event)) {
-					maxEndTime = view.getReqFinishTime();
-					Log.info("End time value was selected");
+					maxFinishTime = view.getReqFinishTime();
+					Log.info("End time value was selected and it is "+ maxFinishTime.toString());
 				} else {
-					maxEndTime = null;
+					maxFinishTime = null;
 					Log.info("Start time value was deselected");
 				}
+			}
+		});
+		
+		view.getFinishTimeList().addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent arg0) {
+				maxFinishTime = view.getReqFinishTime();
+				Log.info("Finish time value was changed to "+ maxFinishTime.toString());	
 			}
 		});
 		
@@ -174,7 +197,7 @@ public class SchedulerPresenter implements Presenter {
 						}
 						selectedCourses = new ArrayList<Course>(result);
 						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
-								isDaysoffCount, isBlankSpaceCount, minStartTime, maxEndTime));
+								isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
 						if (tables.isEmpty()) {
 							Window.alert("Error - There are no possible schedule.");
 							Log.error("Error - There are no possible schedule.");
