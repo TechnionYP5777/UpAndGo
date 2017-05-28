@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+.constraintsPanel{
+	background-color: WhiteSmoke;
+}
+
+.constraintsPanel td{
+	align: right;	
+}
+
+.constraintsPanel select{
+	margin-left: 20px;
+}
+
+
+.constraintsLabel{
+	padding-left: 20px;
+}
+
+
+.onlyCheckBox span{
+	padding-right: 20px;
+}
+
+.onlyCheckBox input{
+	top: -2px;
+}
+
+
+.timeCheckBox {
+	padding-left: 10px;
+}
+
+.timeCheckBox span{
+	padding-right: 20px;
+}
+
+.timeCheckBox input{
+	top: -2px;
+}
+
