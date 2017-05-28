@@ -45,8 +45,8 @@ public interface Resources extends ClientBundle {
 	 interface SchedualerControlsStyle extends CssResource {	 
 		 String SchedualerControlsPanel();
 	 }
-
-	 interface ConstraintsStyle extends CssResource {	 
+	 
+	 interface SchedualerConstraintsStyle extends CssResource {	 		 
 		 String constraintsPanel();
 		 
 		 String constraintsLabel();
@@ -55,6 +55,7 @@ public interface Resources extends ClientBundle {
 		 
 		 String timeCheckBox();
 	 }
+
 	 
 	 interface NavBarStyle extends CssResource {	 
 		 String NavBarPanel();
@@ -72,8 +73,8 @@ public interface Resources extends ClientBundle {
 	@Source("resources/SchedualerControlsStyle.css")
 	public SchedualerControlsStyle schedualerControlsStyle();
 	
-	@Source("resources/ConstraintsStyle.css")
-	public ConstraintsStyle constraintsStyle();
+	@Source("resources/SchedualerConstraintsStyle.css")
+	public SchedualerConstraintsStyle schedualerConstraintsStyle();
 	
 	@Source("resources/NavBarStyle.css")
 	public NavBarStyle navBarStyle();

@@ -1,9 +1,5 @@
 @CHARSET "UTF-8";
 
-.constraintsPanel{
-	background-color: WhiteSmoke;
-}
-
 .constraintsPanel td{
 	align: right;	
 }

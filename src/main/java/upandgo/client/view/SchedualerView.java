@@ -24,7 +24,6 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 
 	private MainStyle style = Resources.INSTANCE.mainStyle();
 	TimeTableView timeTableView = new TimeTableView();
-	ConstraintsView constraintsView = new ConstraintsView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 	SchedualerControlsView schedualerControlsView = new SchedualerControlsView();
 
@@ -45,12 +44,12 @@ public class SchedualerView extends LayoutPanel implements SchedulerPresenter.Di
 		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 8, Unit.EM);
 		this.add(schedualerControlsView);
 		this.setWidgetLeftRight(schedualerControlsView, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(schedualerControlsView, 4, Unit.EM, 3, Unit.EM);
-		this.add(constraintsView);
+		this.setWidgetBottomHeight(schedualerControlsView, 1, Unit.EM, 3, Unit.EM);
+/*		this.add(constraintsView);
 		this.setWidgetLeftRight(constraintsView, 1, Unit.EM, 1, Unit.EM);
 		this.setWidgetBottomHeight(constraintsView, 0, Unit.EM, 3, Unit.EM);
 		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
-		
+*/		
 		}
 	@Override
 	public HasClickHandlers clearSchedule() {

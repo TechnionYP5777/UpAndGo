@@ -71,7 +71,7 @@ public class SchedualerControlsView extends HorizontalPanel{
 				Modal constraintsBox = new Modal();
 				constraintsBox.setFade(true);
 				constraintsBox.setTitle("הגדרת אילוצים");
-				constraintsBox.add(new ConstraintsView());
+				constraintsBox.add(new SchedualerConstraintsView());
 				constraintsBox.show();
 				
 			}

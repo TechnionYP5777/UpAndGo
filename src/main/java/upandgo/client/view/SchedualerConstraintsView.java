@@ -8,9 +8,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.ConstraintsStyle;
+import upandgo.client.Resources.SchedualerConstraintsStyle;
 
 
 /**
@@ -18,9 +20,7 @@ import upandgo.client.Resources.ConstraintsStyle;
  *
  */
 
-public class ConstraintsView extends HorizontalPanel implements ModalComponent{
-
-	Label constraintsTitle = new Label("העדפות לבניית המערכת:");
+public class SchedualerConstraintsView extends VerticalPanel implements ModalComponent{
 	
 	InlineCheckBox daysOffCB = new InlineCheckBox("ימי חופש");
 
@@ -35,9 +35,9 @@ public class ConstraintsView extends HorizontalPanel implements ModalComponent{
 	ListBox finishTimeLB = new ListBox();
 
 	
-	private ConstraintsStyle cStyle = Resources.INSTANCE.constraintsStyle();
+	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
-	public ConstraintsView(){
+	public SchedualerConstraintsView(){
 	    InitializeTimeLBs();
     	InitializePanel();
     	cStyle.ensureInjected();
@@ -55,7 +55,6 @@ public class ConstraintsView extends HorizontalPanel implements ModalComponent{
 	    
     private void InitializePanel(){
 
-    	this.add(constraintsTitle);
     	this.add(daysOffCB);
     	this.add(minWindowsCB);
     	this.add(startTimeCB);
@@ -63,7 +62,6 @@ public class ConstraintsView extends HorizontalPanel implements ModalComponent{
     	this.add(finishTimeCB);
     	this.add(finishTimeLB);
     	
-    	constraintsTitle.addStyleName(cStyle.constraintsLabel());
     	daysOffCB.addStyleName(cStyle.onlyCheckBox());
     	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
 
