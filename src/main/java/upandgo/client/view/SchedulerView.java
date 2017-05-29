@@ -10,6 +10,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,11 +37,26 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
 		
+		String htmlString = "<div class=\"frame\">"
+							+"<ul class=\"slidee\">"
+							+"<li>1</li>"
+							+"<li>2</li>"
+							+"<li>3</li>"
+							+"</ul>"
+							+"</div>";
+		
+		HTMLPanel examsPanel = new HTMLPanel(htmlString);
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 1, Unit.EM, 1, Unit.EM);
 		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 8, Unit.EM);
+		
+		this.add(examsPanel);
+		this.setWidgetLeftRight(examsPanel, 1, Unit.EM, 1, Unit.EM);
+		this.setWidgetBottomHeight(examsPanel, 4, Unit.EM, 4, Unit.EM);
+
+		
 		this.add(schedualerControlsView);
 		this.setWidgetLeftRight(schedualerControlsView, 1, Unit.EM, 1, Unit.EM);
 		this.setWidgetBottomHeight(schedualerControlsView, 1, Unit.EM, 3, Unit.EM);
