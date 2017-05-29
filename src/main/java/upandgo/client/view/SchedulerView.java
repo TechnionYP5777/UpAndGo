@@ -100,7 +100,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void setSchedule(List<LessonGroup> schedule) {
-		// TODO Auto-generated method stub
+		timeTableView.displaySchedule(schedule);
 		
 	}
 

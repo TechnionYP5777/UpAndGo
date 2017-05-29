@@ -38,7 +38,6 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable thursdayTable = new FlexTable();
 	
 	
-	
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
 	public TimeTableView(){
@@ -239,6 +238,14 @@ public class TimeTableView extends HorizontalPanel {
  	// displays the schedule in the GUI
  	public void displaySchedule(final List<LessonGroup> schedule) {
  		//resetTable();
+ 		if (schedule==null){
+ 		    drawDay(new ArrayList<Lesson>(), sundayTable);
+ 		    drawDay(new ArrayList<Lesson>(), mondayTable);
+ 		    drawDay(new ArrayList<Lesson>(), tuesdayTable);
+ 		    drawDay(new ArrayList<Lesson>(), wednesdayTable);
+ 		    drawDay(new ArrayList<Lesson>(), thursdayTable);
+
+ 	 	}
  		
  		final ArrayList<ArrayList<Lesson>> lessonsOfDay = seperateLessonsByDay(schedule);
  		
@@ -332,7 +339,8 @@ public class TimeTableView extends HorizontalPanel {
  		
 		while (span > 0){
 			t.setText(currentCell, day, "");
-			t.getCellFormatter().addStyleName(currentCell, day, ttStyle.noEvent());
+			t.getFlexCellFormatter().setRowSpan(currentCell, day, 1);
+			t.getCellFormatter().setStyleName(currentCell, day, ttStyle.noEvent());
 			currentCell++;
 			span--;
 		}
