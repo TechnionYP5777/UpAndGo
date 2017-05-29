@@ -7,3 +7,5 @@
 /src/main/gwt-unitCache/
 /get-unitCache/
 /src/main/webapp/WEB-INF/classes
+/src/main/webapp/WEB-INF/deploy
+/src/main/webapp/WEB-INF/lib
