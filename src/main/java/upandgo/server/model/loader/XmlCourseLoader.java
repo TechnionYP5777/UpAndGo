@@ -1,9 +1,11 @@
 package upandgo.server.model.loader;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 //import java.time.LocalDateTime;
@@ -38,11 +40,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.allen_sauer.gwt.log.client.Log;
+//import com.allen_sauer.gwt.log.client.Log;
 
-import upandgo.server.parse.RepFile;
+//import upandgo.server.parse.RepFile;
 import upandgo.shared.entities.Day;
-import upandgo.shared.entities.Exam;
+//import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
@@ -53,17 +55,26 @@ import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.course.Course;
 
+import com.google.cloud.ReadChannel;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+
+import java.nio.ByteBuffer;
+import java.io.SequenceInputStream;
+
 /**
  * 
  * @author kobybs
  * @since 12-12-16
  * 
- * Class for loading courses data from xml file.
+ *        Class for loading courses data from xml file.
  * 
  */
 public class XmlCourseLoader extends CourseLoader {
-	private static String REP_XML_PATH; // = "REPFILE/REP.XML"
-	private static final String DATA_DIR_PATH = "data";
+//	private static String REP_XML_PATH; // = "REPFILE/REP.XML"
+//	private static final String DATA_DIR_PATH = "data";
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
 	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
 	private static final String CHOSEN_LESSON_GROUPS_SER = "data/ChosenLessonGroups.ser";
@@ -72,20 +83,31 @@ public class XmlCourseLoader extends CourseLoader {
 	TreeMap<String, Course> coursesById;
 	TreeMap<String, Course> coursesByName;
 
+	private static InputStream coursesInfo = null;
+	private static String projectId = "upandgo-168508";
+	private static String bucketId = "upandgo-168508.appspot.com";
+	private static String coursesInfoFilename = "test.XML";
+	
 	public XmlCourseLoader(final String REP_XML_PATH) {
 		super(REP_XML_PATH);
-		XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
+//		XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
 
-		//if (!new File(path).exists())
-		//	RepFile.getCoursesNamesAndIds();
+		// if (!new File(path).exists())
+		// RepFile.getCoursesNamesAndIds();
 
 		// Create a data dir for saving changes if it does not exists
-		//final File dataDir = new File(DATA_DIR_PATH);
-		//if (!dataDir.exists() || !dataDir.isDirectory())
-		//	dataDir.mkdir();
+		// final File dataDir = new File(DATA_DIR_PATH);
+		// if (!dataDir.exists() || !dataDir.isDirectory())
+		// dataDir.mkdir();
 
 		// coursesList = xmlParser.getCourses(path);
 		// Get data from REP XML file.
+		
+		StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
+		optionsBuilder.setProjectId(projectId);
+		Storage storage = optionsBuilder.build().getService();
+		loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
+		
 		coursesById = new TreeMap<>();
 		coursesByName = new TreeMap<>();
 		getCourses();
@@ -243,7 +265,13 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
 		try {
-			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
+			if(coursesInfo == null) {
+				System.out.println("Can't download DB: No such object");
+				return;
+			}
+
+			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(coursesInfo);
+//			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(REP_XML_PATH);
 			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
 			final Element courseElement = (Element) ((NodeList) XPathFactory.newInstance().newXPath()
 					.compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
@@ -265,7 +293,8 @@ public class XmlCourseLoader extends CourseLoader {
 				public void accept(Node groupNode) {
 					if (((Element) groupNode).getAttribute("group").equals(groupNum))
 						try {
-							final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
+							final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode,
+									XPathConstants.NODESET);
 							for (int f = 0; f < lessonList.getLength(); ++f) {
 								final Node h = lessonList.item(f);
 								if (h.getNodeType() == Node.ELEMENT_NODE)
@@ -311,8 +340,10 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private void getCourses() {
 		try {
-			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(new File(REP_XML_PATH)))
-					.getElementsByTagName("course");
+//			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+//					.parse(new FileInputStream(new File(REP_XML_PATH))).getElementsByTagName("course");
+			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(coursesInfo).getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
@@ -330,35 +361,39 @@ public class XmlCourseLoader extends CourseLoader {
 						// get course exam's A date and time
 						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? ""
 								: createExam(p, "moedA"));
-									/*LocalDateTime.parse(
-										((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-												.getNamedItem("year").getNodeValue()
-												+ "-"
-												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-														.getNamedItem("month").getNodeValue()
-												+ "-"
-												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-														.getNamedItem("day").getNodeValue()
-												+ " "
-												+ ((Element) p).getElementsByTagName("moedA").item(0).getAttributes()
-														.getNamedItem("time").getNodeValue(),
-										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));*/
+						/*
+						 * LocalDateTime.parse( ((Element)
+						 * p).getElementsByTagName("moedA").item(0).
+						 * getAttributes() .getNamedItem("year").getNodeValue()
+						 * + "-" + ((Element)
+						 * p).getElementsByTagName("moedA").item(0).
+						 * getAttributes() .getNamedItem("month").getNodeValue()
+						 * + "-" + ((Element)
+						 * p).getElementsByTagName("moedA").item(0).
+						 * getAttributes() .getNamedItem("day").getNodeValue() +
+						 * " " + ((Element)
+						 * p).getElementsByTagName("moedA").item(0).
+						 * getAttributes() .getNamedItem("time").getNodeValue(),
+						 * DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+						 */
 						// get course exam's B date and time
 						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? ""
 								: createExam(p, "moedB"));
-									/*LocalDateTime.parse(
-										((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-												.getNamedItem("year").getNodeValue()
-												+ "-"
-												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-														.getNamedItem("month").getNodeValue()
-												+ "-"
-												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-														.getNamedItem("day").getNodeValue()
-												+ " "
-												+ ((Element) p).getElementsByTagName("moedB").item(0).getAttributes()
-														.getNamedItem("time").getNodeValue(),
-										DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));*/
+						/*
+						 * LocalDateTime.parse( ((Element)
+						 * p).getElementsByTagName("moedB").item(0).
+						 * getAttributes() .getNamedItem("year").getNodeValue()
+						 * + "-" + ((Element)
+						 * p).getElementsByTagName("moedB").item(0).
+						 * getAttributes() .getNamedItem("month").getNodeValue()
+						 * + "-" + ((Element)
+						 * p).getElementsByTagName("moedB").item(0).
+						 * getAttributes() .getNamedItem("day").getNodeValue() +
+						 * " " + ((Element)
+						 * p).getElementsByTagName("moedB").item(0).
+						 * getAttributes() .getNamedItem("time").getNodeValue(),
+						 * DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+						 */
 						// get course staff
 						setStaffList(cb, p, "teacherInCharge");
 						setStaffList(cb, p, "lecturer");
@@ -407,12 +442,13 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	private String createExam(Node p, String examType) {
-		return ((((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-						.getNamedItem("month").getNodeValue()) + "-" +
-				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-				.getNamedItem("day").getNodeValue() + "-" +
-				((Element) p).getElementsByTagName(examType).item(0).getAttributes()
-				.getNamedItem("year").getNodeValue());
+		return ((((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("month")
+				.getNodeValue())
+				+ "-"
+				+ ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day")
+						.getNodeValue()
+				+ "-" + ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("year")
+						.getNodeValue());
 	}
 
 	private void sportParsing(final CourseBuilder b, final Node p) {
@@ -531,7 +567,7 @@ public class XmlCourseLoader extends CourseLoader {
 			return Day.SATURDAY;
 		}
 	}
-	
+
 	private static Month convertStrToMonth(final String xxx) {
 		switch (xxx) {
 		case "01":
@@ -547,7 +583,7 @@ public class XmlCourseLoader extends CourseLoader {
 		case "06":
 			return Month.JUNE;
 		case "07":
-			return Month.JULY; 
+			return Month.JULY;
 		case "08":
 			return Month.AUGUST;
 		case "09":
@@ -583,5 +619,38 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public Course loadCourse(final String name) {
 		return !coursesById.containsKey(name) ? null : coursesById.get(name);
+	}
+
+	private static void loadCoursesInfo(Storage storage, BlobId blobId) {
+		Blob blob = storage.get(blobId);
+
+		if (blob == null) {
+			System.out.println("Can't download DB: No such object");
+			return;
+		}
+
+		List<InputStream> streams = new ArrayList<>();
+
+		if (blob.getSize().longValue() < 1_000_000) {
+			// Blob is small read all its content in one request
+			byte[] content = blob.getContent();
+			streams.add(new ByteArrayInputStream(content));
+		} else {
+			// When Blob size is big or unknown use the blob's channel
+			// reader.
+			try (ReadChannel reader = blob.reader()) {
+				ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
+				while (reader.read(bytes) > 0) {
+					bytes.flip();
+					streams.add(new ByteArrayInputStream(bytes.array()));
+					bytes.clear();
+				}
+			} catch(@SuppressWarnings("unused") IOException e) {
+				System.out.println("Can't download DB: read error");
+				return;
+			}
+		}
+
+		coursesInfo = new SequenceInputStream(Collections.enumeration(streams));
 	}
 }

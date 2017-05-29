@@ -52,7 +52,9 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public ArrayList<CourseId> getNotSelectedCourses(String query, String faculty) {
-		return (ArrayList<CourseId>) model.loadQueryByFaculty(query, faculty);
+		ArrayList<CourseId> res = (ArrayList<CourseId>) model.loadQueryByFaculty(query, faculty);
+		Log.warn("CourseServiceImple got: " + res.get(0).getTitle()+"*"+res.get(0).aTerm()+"*"+res.get(0).bTerm());
+		return res;
 	}
 
 	@Override

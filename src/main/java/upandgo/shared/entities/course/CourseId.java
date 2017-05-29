@@ -2,7 +2,7 @@ package upandgo.shared.entities.course;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import upandgo.shared.entities.Exam;
+//import upandgo.shared.entities.Exam;
 
 /**
  * 
@@ -15,7 +15,6 @@ import upandgo.shared.entities.Exam;
  */
 public class CourseId implements Comparable<CourseId>, IsSerializable {
 
-	@SuppressWarnings("unused")
 	public CourseId() {
 		// here because GWT needs it
 		name = number = "";

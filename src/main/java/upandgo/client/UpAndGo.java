@@ -27,23 +27,23 @@ public class UpAndGo implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		// Check login status using login service.
-		LoginServiceAsync loginService = GWT.create(LoginService.class);
-		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-			@Override
-			public void onFailure(@SuppressWarnings("unused") Throwable error) {
-				loadUpAndGo();
-			}
-
-			@Override
-			public void onSuccess(LoginInfo result) {
-				loginInfo = result;
-				if (loginInfo.isLoggedIn()) {
+//		LoginServiceAsync loginService = GWT.create(LoginService.class);
+//		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//			@Override
+//			public void onFailure(@SuppressWarnings("unused") Throwable error) {
+//				//TODO: add some backup logic
+//			}
+//
+//			@Override
+//			public void onSuccess(LoginInfo result) {
+//				loginInfo = result;
+//				if (loginInfo.isLoggedIn()) {
 					loadUpAndGo();
-				} else {
-					loadLogin();
-				}
-			}
-		});
+//				} else {
+//					loadLogin();
+//				}
+//			}
+//		});
 	}
 
 	@SuppressWarnings("static-method") void loadUpAndGo() {

@@ -299,13 +299,18 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
+
+			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + result.get(0).getTitle()+"*"+result.get(0).aTerm()+"*"+result.get(0).bTerm());
 			notSelectedCourses = result;
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 
 		@Override
-		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Log.info("*********************************************");
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage()+"*"+caught.getMessage()+"&&"+
+								(caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "")+"*"+
+								(caught.getCause() != null ? caught.getCause().getMessage(): "*")+"end");
 			Window.alert("Error fetching not selected courses.");
 			Log.error("Error fetching not selected courses.");
 		}
