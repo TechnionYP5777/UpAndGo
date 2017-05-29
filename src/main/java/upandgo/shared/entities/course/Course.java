@@ -32,20 +32,20 @@ public class Course implements IsSerializable {
 	protected String aTerm;
 	protected String bTerm;
 
-	protected List<StuffMember> stuff;
+	final protected List<StuffMember> stuff;
 
-	protected List<LessonGroup> lectures;
-	protected List<LessonGroup> tutorials;
+	final protected List<LessonGroup> lectures;
+	final protected List<LessonGroup> tutorials;
 
 	protected int lectureHours;
 	protected int tutorialHours;
 	protected int laboratoryHours;
 	protected int projectHours;
 
-	protected List<CourseListener> listeners;
+	final protected List<CourseListener> listeners;
 
-	protected List<Course> prerequisites;
-	protected List<Course> corequisites;
+	final protected List<Course> prerequisites;
+	final protected List<Course> corequisites;
 	protected boolean done;
 	protected boolean passThisSemester;
 
@@ -60,6 +60,9 @@ public class Course implements IsSerializable {
 		listeners = null;
 		prerequisites = null;
 		corequisites = null;
+		
+		lectures = null;
+		tutorials = null;
 	}
 	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,

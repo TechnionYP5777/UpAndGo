@@ -104,19 +104,13 @@ public class CourseModel { // implements Model {
 	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
-		for (final Entry<String, Course> $ : coursesByName.entrySet())
-			if (name.equals($.getValue().getName()))
-				return $.getValue();
-		return null;
+		return coursesByName.get(name);
 	}
 
 	public Course getCourseById(final String id) {
 		if (id == null)
 			throw new NullPointerException();
-		for (final Entry<String, Course> $ : coursesById.entrySet())
-			if (id.equals($.getValue().getId()))
-				return $.getValue();
-		return null;
+		return coursesById.get(id);
 	}
 
 	public List<String> getChosenCourseNames() {

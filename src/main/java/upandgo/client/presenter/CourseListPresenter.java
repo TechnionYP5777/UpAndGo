@@ -299,8 +299,6 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
-
-			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + result.get(0).getTitle()+"*"+result.get(0).aTerm()+"*"+result.get(0).bTerm());
 			notSelectedCourses = result;
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
