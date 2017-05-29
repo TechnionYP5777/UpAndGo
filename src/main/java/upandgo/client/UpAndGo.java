@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import com.allen_sauer.gwt.log.client.Log;
 /**
  * 
  * @author danabra
@@ -12,6 +13,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -28,14 +30,17 @@ public class UpAndGo implements EntryPoint {
 	public void onModuleLoad() {
 		// Check login status using login service.
 //		LoginServiceAsync loginService = GWT.create(LoginService.class);
+//		Log.warn("here2222");
 //		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 //			@Override
 //			public void onFailure(@SuppressWarnings("unused") Throwable error) {
+//				Log.warn("here333"+error.getLocalizedMessage());
 //				//TODO: add some backup logic
 //			}
 //
 //			@Override
 //			public void onSuccess(LoginInfo result) {
+//				Log.warn("here1111");
 //				loginInfo = result;
 //				if (loginInfo.isLoggedIn()) {
 					loadUpAndGo();
@@ -57,9 +62,10 @@ public class UpAndGo implements EntryPoint {
 
 	void loadLogin() {
 		// Assemble login panel.
+		Log.warn("here1111");
 		signInLink.setHref(loginInfo.getLoginUrl());
 		loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
-		RootPanel.get("stockList").add(loginPanel);
+		RootLayoutPanel.get().add(new Button("dfef"));
 	}
 }
