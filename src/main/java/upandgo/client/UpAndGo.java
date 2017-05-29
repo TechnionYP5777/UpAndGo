@@ -31,7 +31,7 @@ public class UpAndGo implements EntryPoint {
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 			@Override
 			public void onFailure(@SuppressWarnings("unused") Throwable error) {
-				//TODO: add some backup logic
+				loadUpAndGo();
 			}
 
 			@Override
