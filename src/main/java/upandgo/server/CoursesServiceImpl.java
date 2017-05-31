@@ -8,6 +8,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import upandgo.client.CoursesService;
 import upandgo.server.model.CourseModel;
+import upandgo.server.model.TimeTableModel;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
@@ -32,17 +33,20 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private String REP_XML_PATH = "test.XML";
 	
 	private final CourseModel model;
+	private final TimeTableModel scheduleModel;
 	
 	public CoursesServiceImpl() {
 //		Log.info("entered c'tor of CourseServiceImple");
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
+		scheduleModel = new TimeTableModel(loader);
 	}
 	
 	public CoursesServiceImpl(String path) {
 		REP_XML_PATH = path;
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
+		scheduleModel = new TimeTableModel(loader);
 	}
 	
 	@Override
@@ -87,7 +91,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public void saveSchedule(@SuppressWarnings("unused") List<LessonGroup> sched) {
-		// TODO Auto-generated method stub
+		scheduleModel.saveChosenLessonGroups(sched);
 		
 	}
 }
