@@ -1,7 +1,6 @@
 package upandgo.shared.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +21,7 @@ public class StuffMember implements Serializable {
 	public String title;
 	public String email;
 	public String office;
-	public final List<LocalDateTime> officeHours;
+	public final List<LocalTime> officeHours;
 
 	public StuffMember(final String fName1, final String lName1) {
 		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
@@ -53,7 +52,7 @@ public class StuffMember implements Serializable {
 	}
 
 	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml,
-			final String office1, final List<LocalDateTime> ofHours) {
+			final String office1, final List<LocalTime> ofHours) {
 		fName = fName1;
 		lName = lName1;
 		title = ttl;

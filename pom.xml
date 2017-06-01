@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>UpAndGo</groupId>
 	<artifactId>UpAndGo</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<repositories>
 		<repository>
 			<id>sonatype-snapshots</id>
@@ -17,19 +17,17 @@
 		</repository>
 	</repositories>
 	<properties>
-		<!-- Setting maven.compiler.source to something different to 1.8 needs 
-			that you configure the sourceLevel in gwt-maven-plugin since GWT compiler 
-			2.8 requires 1.8 (see gwt-maven-plugin block below) -->
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
 
 		<!-- Don't let your Mac use a crazy non-standard encoding -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+
+
 		<app.id>UpAndGoRebase</app.id>
 		<app.version>1</app.version>
-		<appengine.version>1.9.49</appengine.version>
+		<appengine.version>1.9.52</appengine.version>
 		<appengine.maven.plugin.version>1.0.0</appengine.maven.plugin.version>
 
 		<objectify.version>5.1.13</objectify.version>
@@ -37,32 +35,18 @@
 
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<archiveClasses>true</archiveClasses>
+		
+		<gwtVersion>2.8.0</gwtVersion>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- ensure all GWT deps use the same version (unless overridden) -->
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt</artifactId>
-				<version>2.7.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${appengine.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
@@ -90,23 +74,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.allen-sauer.gwt.log</groupId>
-			<artifactId>gwt-log</artifactId>
-			<version>3.3.2</version>
-		</dependency>
-		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
+			<version>2.8.1</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
+			<version>2.8.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
+			<version>2.8.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -183,12 +165,7 @@
 			<artifactId>guava-gwt</artifactId>
 			<version>20.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.gwtbootstrap</groupId>
-			<artifactId>gwt-bootstrap</artifactId>
-			<version>2.3.2.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.allen-sauer.gwt.log/gwt-log -->
 		<dependency>
 		    <groupId>com.allen-sauer.gwt.log</groupId>
@@ -207,6 +184,51 @@
 		<sourceDirectory>src/main/java</sourceDirectory>
 
 		<plugins>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>3.1.0</version>
+		      </plugin>		
+		
+		    <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                	<strict>true</strict>
+                	<style>PRETTY</style>
+                    <hostedWebapp>${basedir}/src/main/webapp</hostedWebapp>
+                	<module>upandgo.UpAndGo</module>
+                	<copyWebapp>true</copyWebapp>
+                    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+			        <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+                	<force>true</force>
+                	<appEngineVersion>${appengine.version}</appEngineVersion>
+                	<runTarget>upandgo.html</runTarget>
+                </configuration>
+                <executions>
+			        <execution>
+			        	<id>execution1</id>
+			        	<configuration>
+			            </configuration>
+			            <goals>
+			            	<goal>compile</goal>
+			            </goals>
+			        </execution>
+			       	<execution>
+			       		<id>execution2</id>
+			        	<configuration>
+			        		<superDevMode>false</superDevMode>
+			        		<webappDirectory>${basedir}/src/main/webapp</webappDirectory>
+			            </configuration>
+			            <goals>
+			            	<goal>run</goal>
+			            </goals>
+			        </execution>
+		        </executions>
+            </plugin>
+            
+            
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -230,52 +252,33 @@
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
-				<version>3.0.0</version> <configuration> </configuration> </plugin> -->
 
-			<plugin>
-				<groupId>net.ltgt.gwt.maven</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.0-rc-6</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>import-sources</goal>
-							<goal>compile</goal>
-							<goal>import-test-sources</goal>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<moduleName>upandgo.UpAndGo</moduleName>
-					<moduleShortName>UpAndGo</moduleShortName>
-					<failOnError>true</failOnError>
-					<!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if 
-						you use a different source language for java compilation -->
-					<sourceLevel>1.7</sourceLevel>
-					<!-- Compiler configuration -->
-					<compilerArgs>
-						<!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
-						<arg>-compileReport</arg>
-						<arg>-XcompilerMetrics</arg>
-					</compilerArgs>
-					<!-- DevMode configuration -->
-					<warDir>${project.build.directory}/${project.build.finalName}</warDir>
-					<classpathScope>compile+runtime</classpathScope>
-					<!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
-					<startupUrls>
-						<startupUrl>upandgo.html</startupUrl>
-					</startupUrls>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>1.3.1</version>
+                <configuration>
+                	<appId>upandgo-168508</appId>
+                	<version>1</version>
+                </configuration>
+            </plugin>
+            
+<!--              <plugin>
+            	<groupId>com.google.cloud.tools</groupId>
+            	<artifactId>appengine-maven-plugin</artifactId>
+            	<version>1.3.1</version>
+            	<configuration>
+	                <project>upandgotest-169303</project>
+                	<version>1</version>
+            	</configuration>
+        	</plugin> -->
 
 			<!-- Skip normal test execution, we use gwt:test instead -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.17</version>
 				<configuration>
-					<!-- <skip>true</skip> -->
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>

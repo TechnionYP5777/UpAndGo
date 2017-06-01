@@ -1,4 +1,6 @@
 /target/
+/war
+/gwt-unitCache
 /REPFILE.zip
 /REPFILE
 /data
