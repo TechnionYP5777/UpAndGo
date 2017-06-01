@@ -2,8 +2,6 @@ package upandgo.shared.entities;
 
 
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
