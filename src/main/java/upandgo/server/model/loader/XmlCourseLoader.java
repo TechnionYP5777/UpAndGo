@@ -19,7 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.function.Consumer;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,6 +39,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import upandgo.server.CoursesServiceImpl;
+
 //import com.allen_sauer.gwt.log.client.Log;
 
 //import upandgo.server.parse.RepFile;
@@ -55,6 +56,8 @@ import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.course.Course;
 
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.ReadChannel;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
@@ -88,30 +91,45 @@ public class XmlCourseLoader extends CourseLoader {
 	private static String bucketId = "upandgo-168508.appspot.com";
 	private static String coursesInfoFilename = "test.XML";
 	
-	public XmlCourseLoader(final String REP_XML_PATH) {
-		super(REP_XML_PATH);
-//		XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
+	private static String googleStorageCredentials = "upandgo-bf957bbe2318.json";
+	  
+	  public XmlCourseLoader(final String REP_XML_PATH) {
+	    super(REP_XML_PATH);
+//	    XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
 
-		// if (!new File(path).exists())
-		// RepFile.getCoursesNamesAndIds();
+	    // if (!new File(path).exists())
+	    // RepFile.getCoursesNamesAndIds();
 
-		// Create a data dir for saving changes if it does not exists
-		// final File dataDir = new File(DATA_DIR_PATH);
-		// if (!dataDir.exists() || !dataDir.isDirectory())
-		// dataDir.mkdir();
+	    // Create a data dir for saving changes if it does not exists
+	    // final File dataDir = new File(DATA_DIR_PATH);
+	    // if (!dataDir.exists() || !dataDir.isDirectory())
+	    // dataDir.mkdir();
 
-		// coursesList = xmlParser.getCourses(path);
-		// Get data from REP XML file.
-		
-		StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
-		optionsBuilder.setProjectId(projectId);
-		Storage storage = optionsBuilder.build().getService();
-		loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
-		
-		coursesById = new TreeMap<>();
-		coursesByName = new TreeMap<>();
-		getCourses();
-	}
+	    // coursesList = xmlParser.getCourses(path);
+	    // Get data from REP XML file.
+	    Log.warn(new File(".").getAbsolutePath() + "&&&&&&&&&");
+	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
+//	    try {
+//	      ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+//	      try (InputStream credStream = classloader.getResourceAsStream(googleStorageCredentials)) {
+//	        
+//	        optionsBuilder.setCredentials(ServiceAccountCredentials.fromStream(credStream));
+//	      }
+//	    } catch (IOException e) {
+//	      // TODO Auto-generated catch block
+//	      e.printStackTrace();
+//	    }
+	    
+	    CoursesServiceImpl.someString = "We have got our credentials!";
+	    
+	    optionsBuilder.setProjectId(projectId);
+	    Storage storage = optionsBuilder.build().getService();
+	    loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
+	    
+	    coursesById = new TreeMap<>();
+	    coursesByName = new TreeMap<>();
+	    getCourses();
+	  }
 
 	@Override
 	public HashMap<String, Course> loadCourses(@SuppressWarnings("unused") final List<String> names) {
@@ -148,14 +166,14 @@ public class XmlCourseLoader extends CourseLoader {
 			final Element rootElement = doc.createElement("ChosenCourses");
 			doc.appendChild(rootElement);
 
-			names.forEach(new Consumer<String>() {
-				@Override
-				public void accept(String name) {
-					final Element course = doc.createElement("Course");
-					course.appendChild(doc.createTextNode(name));
-					rootElement.appendChild(course);
-				}
-			});
+//			names.forEach(new Consumer<String>() {
+//				@Override
+//				public void accept(String name) {
+//					final Element course = doc.createElement("Course");
+//					course.appendChild(doc.createTextNode(name));
+//					rootElement.appendChild(course);
+//				}
+//			});
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -195,15 +213,15 @@ public class XmlCourseLoader extends CourseLoader {
 			final Element rootElement = doc.createElement("ChosenLessonGroups");
 			doc.appendChild(rootElement);
 
-			gs.forEach(new Consumer<LessonGroup>() {
-				@Override
-				public void accept(LessonGroup group) {
-					final Element groupElement = doc.createElement("lessonGroup");
-					groupElement.setAttribute("courseID", group.getCourseID());
-					groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
-					rootElement.appendChild(groupElement);
-				}
-			});
+//			gs.forEach(new Consumer<LessonGroup>() {
+//				@Override
+//				public void accept(LessonGroup group) {
+//					final Element groupElement = doc.createElement("lessonGroup");
+//					groupElement.setAttribute("courseID", group.getCourseID());
+//					groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+//					rootElement.appendChild(groupElement);
+//				}
+//			});
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -288,31 +306,31 @@ public class XmlCourseLoader extends CourseLoader {
 			final NodeList labList = courseElement.getElementsByTagName("lab");
 			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
 				lessonGroupList.add(labList.item(xxx));
-			lessonGroupList.forEach(new Consumer<Node>() {
-				@Override
-				public void accept(Node groupNode) {
-					if (((Element) groupNode).getAttribute("group").equals(groupNum))
-						try {
-							final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode,
-									XPathConstants.NODESET);
-							for (int f = 0; f < lessonList.getLength(); ++f) {
-								final Node h = lessonList.item(f);
-								if (h.getNodeType() == Node.ELEMENT_NODE)
-									g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
-											convertStrToDay(((Element) h).getAttribute("day")),
-											LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
-													: ((Element) h).getAttribute("timeStart"))),
-											new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
-													.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
-															: ((Element) h).getAttribute("timeEnd"))),
-											"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
-											courseElement.getAttribute("id"), courseElement.getAttribute("name")));
-							}
-						} catch (final XPathExpressionException xxx) {
-							xxx.printStackTrace();
-						}
-				}
-			});
+//			lessonGroupList.forEach(new Consumer<Node>() {
+//				@Override
+//				public void accept(Node groupNode) {
+//					if (((Element) groupNode).getAttribute("group").equals(groupNum))
+//						try {
+//							final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode,
+//									XPathConstants.NODESET);
+//							for (int f = 0; f < lessonList.getLength(); ++f) {
+//								final Node h = lessonList.item(f);
+//								if (h.getNodeType() == Node.ELEMENT_NODE)
+//									g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
+//											convertStrToDay(((Element) h).getAttribute("day")),
+//											LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+//													: ((Element) h).getAttribute("timeStart"))),
+//											new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
+//													.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+//															: ((Element) h).getAttribute("timeEnd"))),
+//											"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
+//											courseElement.getAttribute("id"), courseElement.getAttribute("name")));
+//							}
+//						} catch (final XPathExpressionException xxx) {
+//							xxx.printStackTrace();
+//						}
+//				}
+//			});
 			System.out.println(g.getLessons().size());
 		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
 			xxx.printStackTrace();
@@ -606,7 +624,7 @@ public class XmlCourseLoader extends CourseLoader {
 			if (!$.contains(faculty))
 				$.add(faculty);
 		}
-		$.subList(1, $.size()).sort(new Comparator<Faculty>() {
+		Collections.sort($.subList(1, $.size()), new Comparator<Faculty>() {
 
 			@Override
 			public int compare(Faculty o1, Faculty o2) {

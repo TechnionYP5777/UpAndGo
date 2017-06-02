@@ -36,6 +36,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private final TimeTableModel scheduleModel;
 	
 	public CoursesServiceImpl() {
+		Log.warn("in course service constractor");
 //		Log.info("entered c'tor of CourseServiceImple");
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
@@ -87,7 +88,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	static public String someString = "empty";
-	
+	@Override
+	public String getSomeString() {
+		return someString;
+	}
 
 	@Override
 	public void saveSchedule(@SuppressWarnings("unused") List<LessonGroup> sched) {
