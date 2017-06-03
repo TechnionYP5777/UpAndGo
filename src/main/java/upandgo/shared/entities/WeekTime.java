@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 import java.util.Objects;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * 
  * @author kobybs
@@ -19,13 +21,19 @@ import java.util.Objects;
 
 
 
-public class WeekTime implements Serializable {
+public class WeekTime implements IsSerializable {
 	
 	private static final long serialVersionUID = -7431131009009123098L;
 
-	private final Day day;
-	private final LocalTime time; // = LocalTime.of(22, 15);
+	private Day day;
+	private LocalTime time; // = LocalTime.of(22, 15);
 
+	public WeekTime() {
+		this.day = null;
+		this.time = null;
+	}
+	
+	
 	public WeekTime(final Day day, final LocalTime localTime) {
 		this.day = day;
 		this.time = localTime;

@@ -171,6 +171,7 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
+						Log.info("1hoveres is: " + hoveredCourse.getTitle());
 						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
 					}
 				}
@@ -234,6 +235,7 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
+						Log.info("2hoveres is: " + hoveredCourse.getTitle());
 						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
 					}
 				}

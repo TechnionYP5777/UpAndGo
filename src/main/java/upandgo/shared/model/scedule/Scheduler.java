@@ -57,6 +57,7 @@ public class Scheduler implements IsSerializable{
 			int lastAdded = 0;
 			for (lastAdded = 0; lastAdded < lessons.size(); ++lastAdded) {
 				b = $.addLesson(lessons.get(lastAdded));
+				Log.info("current list: " + $);
 				// if you can't add that lesson than all combination including
 				// him are not valid
 				// therefore there is no use to check the rest of them -
@@ -71,6 +72,7 @@ public class Scheduler implements IsSerializable{
 			}
 			if (b) {
 				System.out.println("^found");
+				Log.info("Found");
 				result.add($.getTimetable()); // return $;
 			}
 
@@ -199,7 +201,7 @@ public class Scheduler implements IsSerializable{
 			Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
-			Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().isEmpty());
+			Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

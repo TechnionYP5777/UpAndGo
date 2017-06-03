@@ -3,6 +3,8 @@ package upandgo.shared.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import upandgo.shared.entities.constraint.TimeConstraint;
 
 /**
@@ -13,23 +15,36 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  * Class that holds information about specific lesson.
  * 
  */
-public class Lesson implements Serializable {
+public class Lesson implements IsSerializable {
 	private static final long serialVersionUID = 903076596050490635L;
 
 	public enum Type {
 		LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT
 	}
 
-	protected final StuffMember representer;
-	protected final WeekTime startTime;
-	protected final WeekTime endTime;
-	protected final String place;
-	protected final Type type;
-	protected final int group;
+	protected StuffMember representer;
+	protected WeekTime startTime;
+	protected WeekTime endTime;
+	protected String place;
+	protected Type type;
+	protected int group;
 	// protected int day;
-	protected final String courseId;
-	protected final String courseName;
+	protected String courseId;
+	protected String courseName;
 
+	public Lesson() {
+		representer = null;
+		startTime = null;
+		endTime = null;
+		place = null;
+		//type = t;
+		group = 0;
+		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
+		courseId = null;
+		courseName = null;
+	}
+	
+	
 	public Lesson(final StuffMember repr, WeekTime theStartTime, WeekTime endTime, final String place1,
 			final Type t, final int g, final String c, final String n) {
 //		if (theStartTime == null || place1 == null)
