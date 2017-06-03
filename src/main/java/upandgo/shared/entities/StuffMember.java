@@ -1,9 +1,10 @@
 package upandgo.shared.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * 
@@ -13,16 +14,25 @@ import java.util.Objects;
  * Class that holds information about specific staff member.
  * 
  */
-public class StuffMember implements Serializable {
-	private static final long serialVersionUID = 7103892149028991099L;
+public class StuffMember implements IsSerializable {
+	//private static final long serialVersionUID = 7103892149028991099L;
 
 	public String fName;
 	public String lName;
 	public String title;
 	public String email;
 	public String office;
-	public final List<LocalTime> officeHours;
+	public List<LocalTime> officeHours;
 
+	public StuffMember(){
+		fName = null;
+		lName = null;
+		title = null;
+		email = null;
+		office = null;
+		officeHours = null;
+	}
+	
 	public StuffMember(final String fName1, final String lName1) {
 		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
 		fName = fName1;
