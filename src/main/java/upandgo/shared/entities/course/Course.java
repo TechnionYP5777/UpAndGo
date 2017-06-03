@@ -35,7 +35,7 @@ public class Course implements IsSerializable {
 	final protected List<StuffMember> stuff;
 
 	protected List<LessonGroup> lectures;
-	final protected List<LessonGroup> tutorials;
+	protected List<LessonGroup> tutorials;
 
 	protected int lectureHours;
 	protected int tutorialHours;

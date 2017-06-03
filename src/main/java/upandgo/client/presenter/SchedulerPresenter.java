@@ -201,8 +201,13 @@ public class SchedulerPresenter implements Presenter {
 
 						Log.info("Build schedule: before Scheduler.getTimetablesList");
 						final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
+						Log.info("unsorted tables size: " + unsortedTables.size());
+						Log.info("unsorted tables: " + unsortedTables);
 						Log.info("Build schedule: before Scheduler.sortedBy");
 						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
+						Log.info("sorted tables size: " + tables.size());
+						Log.info("sorted tables: " + tables);
+						
 						Log.info("Build schedule: after Scheduler.sortedBy");
 						if (tables.isEmpty()) {
 							Window.alert("Error - There are no possible schedule.");
