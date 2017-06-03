@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 //import java.time.LocalTime;
 //import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -45,6 +46,7 @@ import upandgo.server.CoursesServiceImpl;
 
 //import upandgo.server.parse.RepFile;
 import upandgo.shared.entities.Day;
+import upandgo.shared.entities.Exam;
 //import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.Lesson;
@@ -65,6 +67,9 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.SequenceInputStream;
 
 /**
@@ -377,7 +382,7 @@ public class XmlCourseLoader extends CourseLoader {
 						// get course points
 						cb.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 						// get course exam's A date and time
-						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? ""
+						cb.setATerm(((Element) p).getElementsByTagName("moedA").getLength() == 0 ? null
 								: createExam(p, "moedA"));
 						/*
 						 * LocalDateTime.parse( ((Element)
@@ -395,7 +400,7 @@ public class XmlCourseLoader extends CourseLoader {
 						 * DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 						 */
 						// get course exam's B date and time
-						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? ""
+						cb.setBTerm(((Element) p).getElementsByTagName("moedB").getLength() == 0 ? null
 								: createExam(p, "moedB"));
 						/*
 						 * LocalDateTime.parse( ((Element)
@@ -459,14 +464,31 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private String createExam(Node p, String examType) {
-		return ((((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("month")
-				.getNodeValue())
-				+ "-"
-				+ ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day")
-						.getNodeValue()
-				+ "-" + ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("year")
-						.getNodeValue());
+	private Exam createExam(Node p, String examType) {
+		String examTime = ((Element)p).getElementsByTagName(examType).item(0).getAttributes() .getNamedItem("time").getNodeValue();
+		String examDayOfMonth = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day").getNodeValue();
+		String examMonth = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("month").getNodeValue();
+		String examYear = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("year")	.getNodeValue();
+		
+		String format = examTime + " " + examDayOfMonth + "." + examMonth + "." + examYear;
+		
+		DateFormat df = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+		Calendar cal  = Calendar.getInstance();
+		try {
+			cal.setTime(df.parse(format));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		int examDay = cal.get(Calendar.DAY_OF_WEEK); 
+		return new Exam(examTime + " " + examDayOfMonth + " " + examMonth + " " + examYear + " " + examDay);
+//		return ((((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("month")
+//				.getNodeValue())
+//				+ "-"
+//				+ ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day")
+//						.getNodeValue()
+//				+ "-" + ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("year")
+//						.getNodeValue());
 	}
 
 	private void sportParsing(final CourseBuilder b, final Node p) {

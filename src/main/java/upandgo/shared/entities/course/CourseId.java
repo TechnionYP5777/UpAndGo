@@ -2,6 +2,8 @@ package upandgo.shared.entities.course;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+import upandgo.shared.entities.Exam;
+
 //import upandgo.shared.entities.Exam;
 
 /**
@@ -18,8 +20,8 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	public CourseId() {
 		// here because GWT needs it
 		name = number = "";
-		aTerm = "";
-		bTerm = "";
+		aTerm = null;
+		bTerm = null;
 		
 	}
 
@@ -51,10 +53,10 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	private String name;
 	private String number;
 
-	private String aTerm;
-	private String bTerm;
+	private Exam aTerm;
+	private Exam bTerm;
 
-	public CourseId(final String cNum, final String cName, String cATerm, String cBTerm) {
+	public CourseId(final String cNum, final String cName, Exam cATerm, Exam cBTerm) {
 		name = cName;
 		number = cNum;
 		aTerm = cATerm;
@@ -78,11 +80,11 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 		return number.compareTo(xxx.number);
 	}
 
-	public String aTerm() {
+	public Exam aTerm() {
 		return aTerm;
 	}
 
-	public String bTerm() {
+	public Exam bTerm() {
 		return bTerm;
 	}
 

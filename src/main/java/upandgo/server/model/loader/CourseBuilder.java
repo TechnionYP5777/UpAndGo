@@ -16,8 +16,8 @@ public class CourseBuilder {
 	protected String id = "";
 	protected String faculty = "";
 	protected double points;
-	protected String aTerm = "";
-	protected String bTerm = "";
+	protected Exam aTerm = new Exam();
+	protected Exam bTerm = new Exam();
 
 	protected final List<StuffMember> stuff = new ArrayList<>();
 	protected final List<Lesson> lessons = new ArrayList<>();
@@ -48,12 +48,12 @@ public class CourseBuilder {
 		return this;
 	}
 
-	public CourseBuilder setATerm(String xxx) {
+	public CourseBuilder setATerm(Exam xxx) {
 		aTerm = xxx;
 		return this;
 	}
 
-	public CourseBuilder setBTerm(String xxx) {
+	public CourseBuilder setBTerm(Exam xxx) {
 		bTerm = xxx;
 		return this;
 	}

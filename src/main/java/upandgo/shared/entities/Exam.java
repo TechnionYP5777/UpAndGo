@@ -7,29 +7,40 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Exam implements IsSerializable{
 	
-	private Month month;
+	private String month;
 	private String dayOfMonth;
 	private String year;
+	private String day;
+	private String time;
 	
 	private int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		
 	public Exam() {
-		month = Month.JANUARY;
-		dayOfMonth = year = "";
+		time = day = month = dayOfMonth = year = "";
 	}
 	
-	public Exam(Month month, String dayOfMonth, String year) {
-		this.dayOfMonth = dayOfMonth; 
-		this.month = month;
-		this.year = year;
+	public Exam(String format) {
+		time = day = month = dayOfMonth = year = "";
+		String[] splited = format.split(" ");
+		if (splited.length == 5) {
+			this.time = splited[0];
+			this.dayOfMonth = splited[1];
+			this.month = splited[2];
+			this.year = splited[3];
+			this.day = splited[4];
+		}
+		
 	}
-	
 	
 	public String getDay() {
+		return day;
+	}
+	
+	public String getDayOfMonth() {
 		return dayOfMonth;
 	}
 	
-	public Month getMonth() {
+	public String getMonth() {
 		return month;
 	}
 	
@@ -37,10 +48,19 @@ public class Exam implements IsSerializable{
 		return year;
 	}
 	
+	public String getTime() {
+		return time;
+	}
+	
+	public String getDate() {
+		return dayOfMonth + "." + month;
+	}
+	
 	private String compareString() {
 		return year + month.toString() + dayOfMonth;
 	}
 	
+	@SuppressWarnings("boxing")
 	private static Boolean isLeap(String year) {
 		int yearnum = Integer.parseInt(year);
 		if (((yearnum % 4 == 0) && (yearnum % 100 != 0)) || (yearnum % 400 == 0)) {
@@ -48,23 +68,29 @@ public class Exam implements IsSerializable{
 		}
 		return false;
 	}
+	
 	public int compare(Exam exam) {
 		return this.compareString().compareTo(exam.compareString());
 	}
 	
 	//the exams should be in order, exama must be early then examb
 	// both exams must be in the same year - for now
+	@SuppressWarnings("boxing")
 	public int daysBetweenExams (Exam exama, Exam examb) {
 		int res = 0;
 		if (isLeap(exama.getYear())) {
 			monthDays[1] = 29;
 		}
-		for (int i = month.toInt(exama.getMonth()); i < (month.toInt(examb.getMonth()) -1 ); i++) {
+		if (exama.getMonth().equals(examb.getMonth())) {
+			monthDays[1] = 28;
+			return Integer.parseInt(exama.getDayOfMonth()) - Integer.parseInt(examb.getDayOfMonth()) + 1;
+		}
+		for (int i = Integer.parseInt(exama.getMonth()); i < Integer.parseInt(examb.getMonth()) -1 ; i++) {
 			res += monthDays[i];
 		}
-		res += (monthDays[month.toInt(exama.getMonth()) -1 ] - Integer.parseInt(exama.getDay())) + Integer.parseInt(examb.getDay());
+		res += (monthDays[Integer.parseInt(exama.getMonth()) -1 ] - Integer.parseInt(exama.getDayOfMonth())) + Integer.parseInt(examb.getDayOfMonth()) - 1;
 		monthDays[1] = 28;
 		return res;
 	}
-	
+
 }
