@@ -47,7 +47,7 @@ public class NavBarView extends FlowPanel{
 		//this.add(appTitle);
 		
 		//navbar.setPosition(NavbarPosition.FIXED_TOP);
-		brand.setText("Up&Go");
+		brand.setText("Up&Go test");
 		text.setPull(Pull.RIGHT);
 		text.setPaddingRight(15);
 		text.add(signInButton);

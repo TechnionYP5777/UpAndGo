@@ -179,6 +179,11 @@ public class XmlCourseLoader extends CourseLoader {
 //					rootElement.appendChild(course);
 //				}
 //			});
+			for(String name : names){
+				final Element course = doc.createElement("Course");
+				course.appendChild(doc.createTextNode(name));
+				rootElement.appendChild(course);
+			}
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -227,6 +232,12 @@ public class XmlCourseLoader extends CourseLoader {
 //					rootElement.appendChild(groupElement);
 //				}
 //			});
+			for (LessonGroup group : gs){
+				final Element groupElement = doc.createElement("lessonGroup");
+				groupElement.setAttribute("courseID", group.getCourseID());
+				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+				rootElement.appendChild(groupElement);
+			}
 
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -336,6 +347,28 @@ public class XmlCourseLoader extends CourseLoader {
 //						}
 //				}
 //			});
+			for(Node groupNode : lessonGroupList){
+				if (((Element) groupNode).getAttribute("group").equals(groupNum))
+				try {
+					final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode,
+							XPathConstants.NODESET);
+					for (int f = 0; f < lessonList.getLength(); ++f) {
+						final Node h = lessonList.item(f);
+						if (h.getNodeType() == Node.ELEMENT_NODE)
+							g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
+									convertStrToDay(((Element) h).getAttribute("day")),
+									LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+											: ((Element) h).getAttribute("timeStart"))),
+									new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
+											.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+													: ((Element) h).getAttribute("timeEnd"))),
+									"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
+									courseElement.getAttribute("id"), courseElement.getAttribute("name")));
+					}
+				} catch (final XPathExpressionException xxx) {
+					xxx.printStackTrace();
+				}
+			}
 			System.out.println(g.getLessons().size());
 		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
 			xxx.printStackTrace();
@@ -660,6 +693,11 @@ public class XmlCourseLoader extends CourseLoader {
 	public Course loadCourse(final String name) {
 		return !coursesById.containsKey(name) ? null : coursesById.get(name);
 	}
+	
+	public Course loadCourseByID(final String id) {
+		return !coursesById.containsKey(id) ? null : coursesById.get(id);
+	}
+
 
 	private static void loadCoursesInfo(Storage storage, BlobId blobId) {
 		Blob blob = storage.get(blobId);

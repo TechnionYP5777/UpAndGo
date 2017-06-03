@@ -9,12 +9,14 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
   
-<!-- For development, a default of `DEBUG` is recommended -->
-<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+  <!-- For development, a default of `DEBUG` is recommended -->
+  <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
 
 
-<!-- Send client logging to server -->
-<inherits name="com.allen_sauer.gwt.log.gwt-log-RemoteLogger" />
+  <!-- Send client logging to server -->
+  <inherits name="com.allen_sauer.gwt.log.gwt-log-RemoteLogger" />
+  
+  
 
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->

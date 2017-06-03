@@ -30,6 +30,8 @@ public interface CoursesService extends RemoteService {
 	public ArrayList<String> getFaculties();
 
 	public Course getCourseDetails(CourseId id);
+	
+	public List<LessonGroup> getCourseLectures(String id);
 
 	public void selectCourse(CourseId id);
 

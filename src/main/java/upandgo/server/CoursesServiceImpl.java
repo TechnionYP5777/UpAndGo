@@ -71,6 +71,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	public Course getCourseDetails(CourseId id) {
 		return model.getCourseById(id.number());
 	}
+	
+	@Override
+	public List<LessonGroup> getCourseLectures(String id) {
+		return model.getCourseLectures(id);
+	}
 
 	@Override
 	public void selectCourse(CourseId id) {

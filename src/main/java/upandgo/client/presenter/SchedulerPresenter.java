@@ -182,7 +182,7 @@ public class SchedulerPresenter implements Presenter {
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("Build schedule was requested");
+				Log.info("Build schedule: requested");
 				rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
 					@Override
 					public void onFailure(Throwable caught) {
@@ -191,19 +191,28 @@ public class SchedulerPresenter implements Presenter {
 					}
 					@Override
 					public void onSuccess(List<Course> result) {
+						Log.info("Build schedule: getChosenCoursesList success");
 						if (result.isEmpty()) {
+							Log.info("Build schedule: no chosen courses");
 							view.setSchedule(null);
 							return;
 						}
 						selectedCourses = new ArrayList<Course>(result);
-						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(Scheduler.getTimetablesList(result, null),
-								isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
+
+						Log.info("Build schedule: before Scheduler.getTimetablesList");
+						final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
+						Log.info("Build schedule: before Scheduler.sortedBy");
+						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
+						Log.info("Build schedule: after Scheduler.sortedBy");
 						if (tables.isEmpty()) {
 							Window.alert("Error - There are no possible schedule.");
 							Log.error("Error - There are no possible schedule.");
 						} else {
 							lessonGroupsList.clear();
 							sched_index = 0;
+							for (Timetable table : tables){
+								lessonGroupsList.add(table.getLessonGroups());
+							}
 							//TODO: Consumer can't compile on client side
 /*							tables.forEach(new Consumer<Timetable>() {
 								@Override
@@ -211,7 +220,7 @@ public class SchedulerPresenter implements Presenter {
 									lessonGroupsList.add(λ.getLessonGroups());
 								}
 							});*/
-							Log.info("A schedule was build");
+							Log.info("Build schedule: A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
 						}
 					}

@@ -7,7 +7,7 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp-deploy"/>
-        <property name="java-output-path" value="/Internet-Browser-Plugin/target/classes"/>
+        <property name="java-output-path" value="/UpAndGo/target/classes"/>
         <property name="context-root" value="UpAndGo"/>
     </wb-module>
 </project-modules>

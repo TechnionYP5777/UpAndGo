@@ -18,6 +18,7 @@ import java.util.TreeSet;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -111,6 +112,12 @@ public class CourseModel { // implements Model {
 		if (id == null)
 			throw new NullPointerException();
 		return coursesById.get(id);
+	}
+	
+	public List<LessonGroup> getCourseLectures(final String id) {
+		if (id == null)
+			throw new NullPointerException();
+		return coursesById.get(id).getLectures();
 	}
 
 	public List<String> getChosenCourseNames() {

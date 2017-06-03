@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import upandgo.shared.entities.LessonGroup;
@@ -33,12 +34,20 @@ public class Scheduler implements IsSerializable{
 	 * TimeConstraints for now.
 	 */
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
+		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
 		final List<Timetable> result = new ArrayList<>();
+		Log.info("Scheduler: here");
+
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
+		Log.info("Scheduler: here");
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
+		Log.info("Scheduler: here");
+
 		for (int last = indexes.size() - 1, msb;;) {
-			System.out.println(indexes);
+			
+			Log.info("Scheduler: in for with indexes " + indexes);
+
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 			if(!$.addConstraintsList(cs))
@@ -182,10 +191,15 @@ public class Scheduler implements IsSerializable{
 
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
+		Log.info("Scheduler: in initMainArr with "+ lcourse.size() + " courses");
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
 		for (final Course xxx : lcourse) {
+			Log.info("Scheduler: in initMainArr course " + xxx.getId());
+			Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
+			Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
+			Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().isEmpty());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

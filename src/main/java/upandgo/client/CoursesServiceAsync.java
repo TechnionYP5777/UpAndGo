@@ -27,6 +27,8 @@ public interface CoursesServiceAsync {
 
 	public void getCourseDetails(CourseId id,AsyncCallback<Course> callback);
 
+	public void getCourseLectures(String id,AsyncCallback<List<LessonGroup>> callback);
+	
 	public void selectCourse(CourseId id, AsyncCallback<Void> callback);
 
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);

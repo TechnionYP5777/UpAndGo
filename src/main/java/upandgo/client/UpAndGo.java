@@ -27,33 +27,33 @@ public class UpAndGo implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-		// Check login status using login service.
-		LoginServiceAsync loginService = GWT.create(LoginService.class);
-		Log.warn("here2222");
-		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
-			@Override
-			public void onFailure(Throwable error) {
-				Log.warn("here333"+error.getLocalizedMessage());
-				//TODO: add some backup logic
-			}
-
-			@Override
-			public void onSuccess(LoginInfo result) {
-				Log.warn("here1111");
-				loginInfo = result;
-				if (loginInfo.isLoggedIn()) {
+//		// Check login status using login service.
+//		LoginServiceAsync loginService = GWT.create(LoginService.class);
+//		Log.warn("here2222");
+//		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+//			@Override
+//			public void onFailure(Throwable error) {
+//				Log.warn("here333"+error.getLocalizedMessage());
+//				//TODO: add some backup logic
+//			}
+//
+//			@Override
+//			public void onSuccess(LoginInfo result) {
+//				Log.warn("here1111");
+//				loginInfo = result;
+//				if (loginInfo.isLoggedIn()) {
 					loadUpAndGo();
-				} else {
-					loadLogin();
-				}
-			}
-		});
+//				} else {
+//					loadLogin();
+//				}
+//			}
+//		});
 	}
 
 	void loadUpAndGo() {
 	    // Set up sign out hyperlink.
-	    signOutLink.setHref(loginInfo.getLogoutUrl());
-		RootLayoutPanel.get().add(signOutLink);
+//	    signOutLink.setHref(loginInfo.getLogoutUrl());
+		//RootLayoutPanel.get().add(signOutLink);
 		
 		final Injector injector = Injector.INSTANCE;
 

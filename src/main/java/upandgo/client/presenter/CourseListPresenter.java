@@ -348,8 +348,8 @@ public class CourseListPresenter implements Presenter {
 	class GetSomeStringAsyncCallback implements AsyncCallback<String> {
 		@Override
 		public void onSuccess(String result) {
-			Window.alert(result);
-			Log.error(result);
+			//Window.alert(result);
+			Log.info(result);
 		}
 
 		@Override
