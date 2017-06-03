@@ -64,6 +64,10 @@ public interface Resources extends ClientBundle {
 		 String NavBarPanel();
 	 }
 	 
+	 interface examsBarStyle extends CssResource{
+		 String examBarPanel();
+	 }
+	 
 	@Source("resources/upandgo.css")
 	public MainStyle mainStyle();
 
@@ -84,6 +88,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/DialogBoxStyle.css")
 	public DialogBoxStyle dialogBoxStyle();
+	
+	@Source("resources/examsBarStyle.css")
+	public examsBarStyle examsBarStyle();
 	
 
 }
