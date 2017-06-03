@@ -276,7 +276,7 @@ public class CourseListPresenter implements Presenter {
 		panel.setWidgetRightWidth(display.getAsWidget(), 1, Unit.EM, 20, Unit.PCT);
 		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 		
-		rpcService.getSomeString(new GetSomeStringAsyncCallback());
+//		rpcService.getSomeString(new GetSomeStringAsyncCallback());
 		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
