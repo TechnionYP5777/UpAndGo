@@ -376,12 +376,24 @@ public class TimeTableView extends HorizontalPanel {
 			span = differenceInMinutes/30;
 			Log.info("lesson_span: " + span);
 			
-			String displayString = l.getCourseName() + " " + l.getCourseId() + " " + l.getPlace();
+			String type = "";
+			if(l.getType() == Type.LECTURE){
+				type = "הרצאה";
+			}else if(l.getType() == Type.TUTORIAL){
+				type = "תרגול";
+			}
+			String displayString = l.getCourseName() + " " + type + ". " + l.getCourseId() + " " + l.getPlace();
 			
 			SimplePanel eventCell = new SimplePanel();
 			eventCell.add(new Label(displayString));
 			eventCell.addStyleName(ttStyle.hasEventWrap());
-			eventCell.getElement().setAttribute("eventNum", String.valueOf(eventsCount++));
+			if(colorMap != null){
+				Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
+				eventCell.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
+				
+			}else{
+				eventCell.getElement().setAttribute("eventNum", "ORANGERED");
+ 			}
 			t.setWidget(currentCell, day, eventCell);
 			//t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
