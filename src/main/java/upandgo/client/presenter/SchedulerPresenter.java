@@ -204,18 +204,24 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("unsorted tables size: " + unsortedTables.size());
 						Log.info("unsorted tables: " + unsortedTables);
 						Log.info("Build schedule: before Scheduler.sortedBy");
-						final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
+						final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime);
+						Log.info("corrrect sorted tables size: " + sorted.size());
+						Log.info("correct sorted tables: " + sorted);
+						
+						/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
 						Log.info("sorted tables size: " + tables.size());
 						Log.info("sorted tables: " + tables);
+						*/
 						
 						Log.info("Build schedule: after Scheduler.sortedBy");
-						if (tables.isEmpty()) {
+						if (sorted.isEmpty()) {
 							Window.alert("Error - There are no possible schedule.");
 							Log.error("Error - There are no possible schedule.");
 						} else {
 							lessonGroupsList.clear();
+							//lessonGroupsList = sorted;
 							sched_index = 0;
-							for (Timetable table : tables){
+							for (Timetable table : sorted){
 								lessonGroupsList.add(table.getLessonGroups());
 							}
 							//TODO: Consumer can't compile on client side

@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
+
 import upandgo.shared.entities.LocalTime;
 import upandgo.client.Resources;
 import upandgo.client.Resources.TimeTableStyle;
@@ -37,6 +39,8 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
 	
+	private List<FlexTable> tablesArray = new ArrayList<FlexTable>();
+	
 	
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
@@ -53,6 +57,12 @@ public class TimeTableView extends HorizontalPanel {
     	drawDayTable(tuesdayTable, "שלישי");
     	drawDayTable(wednesdayTable, "רביעי");
     	drawDayTable(thursdayTable, "חמישי");
+    	
+    	tablesArray.add(sundayTable);
+    	tablesArray.add(mondayTable);
+    	tablesArray.add(tuesdayTable);
+    	tablesArray.add(wednesdayTable);
+    	tablesArray.add(thursdayTable);
     	
     	
 	    
@@ -108,7 +118,20 @@ public class TimeTableView extends HorizontalPanel {
 	    drawDay(lessons, mondayTable);
 	    drawDay(new ArrayList<Lesson>(), wednesdayTable);
 	    drawDay(new ArrayList<Lesson>(), thursdayTable);
-
+	    clearTable();
+	    
+	    drawDay(new ArrayList<Lesson>(), sundayTable);
+	    drawDay(new ArrayList<Lesson>(), mondayTable);
+	    drawDay(new ArrayList<Lesson>(), tuesdayTable);
+    	drawDay(new ArrayList<Lesson>(), wednesdayTable);
+	    drawDay(new ArrayList<Lesson>(), thursdayTable);
+	    
+	    //drawDay(new ArrayList<Lesson>(), mondayTable);
+	    //drawDay(lessons, mondayTable);
+	    //clearTable();
+	    //drawDay(lessons, mondayTable);
+	    /*drawDay(new ArrayList<Lesson>(), mondayTable);
+	    drawDay(lessons, mondayTable);*/
 	    
 	    this.setStyleName(ttStyle.timeTable());
 	    this.add(hoursTable1);
@@ -122,7 +145,7 @@ public class TimeTableView extends HorizontalPanel {
 	    //clearTable();
     }
     
-/*    private void clearTable(){
+    private void clearTable(){
     	this.remove(hoursTable1);
  	    this.remove(sundayTable);
  	    this.remove(mondayTable);
@@ -147,7 +170,21 @@ public class TimeTableView extends HorizontalPanel {
     	drawDayTable(tuesdayTable, "שלישי");
     	drawDayTable(wednesdayTable, "רביעי");
     	drawDayTable(thursdayTable, "חמישי");
-	    
+    	
+    	tablesArray.clear();
+    	tablesArray.add(sundayTable);
+    	tablesArray.add(mondayTable);
+    	tablesArray.add(tuesdayTable);
+    	tablesArray.add(wednesdayTable);
+    	tablesArray.add(thursdayTable);
+    	
+    	/*drawDay(new ArrayList<Lesson>(), sundayTable);
+	    drawDay(new ArrayList<Lesson>(), mondayTable);
+	    drawDay(new ArrayList<Lesson>(), tuesdayTable);
+    	drawDay(new ArrayList<Lesson>(), wednesdayTable);
+	    drawDay(new ArrayList<Lesson>(), thursdayTable);
+	    */
+    	
 	    this.add(hoursTable1);
 	    this.add(sundayTable);
 	    this.add(mondayTable);
@@ -156,7 +193,7 @@ public class TimeTableView extends HorizontalPanel {
 	    this.add(thursdayTable);
 	    //this.add(hoursTable2); 		
  		
-    }*/
+    }
     
     
     private void drawDayTable(FlexTable t, String header) {
@@ -237,6 +274,8 @@ public class TimeTableView extends HorizontalPanel {
 	// this function receives a list of LessonGroup(which is a schedule) and
  	// displays the schedule in the GUI
  	public void displaySchedule(final List<LessonGroup> schedule) {
+ 		clearTable();
+ 		Log.info("TimeTableView: display was called with: " + schedule);
  		//resetTable();
  		if (schedule==null){
  		    drawDay(new ArrayList<Lesson>(), sundayTable);
@@ -257,7 +296,19 @@ public class TimeTableView extends HorizontalPanel {
 					return t1.getStartTime().compareTo(t2.getStartTime());
 				}
 			});
-			//drawDay(daySchedule, day);
+ 			Log.info("TimeTableView: Day: " + day + " sched is : " + daySchedule);
+			
+ 			
+ 		    //drawDay(new ArrayList<Lesson>(), thursdayTable);
+ 			if(day <= 4){
+ 				if(daySchedule.isEmpty()){
+ 					drawDay(new ArrayList<Lesson>(), tablesArray.get(day));
+ 				}else{
+ 					drawDay(daySchedule, tablesArray.get(day));
+ 				}
+ 	 		}
+ 			
+ 			
  		}
  	}
  	
