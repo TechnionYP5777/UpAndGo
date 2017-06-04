@@ -82,6 +82,7 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void setPrevEnable(boolean enable);
 		public void setNextEnable(boolean enable);
+		public void scheduleBuilt();
 		
 		public Widget getAsWidget();
 	}
@@ -240,6 +241,7 @@ public class SchedulerPresenter implements Presenter {
 								view.setNextEnable(true);
 							}
 						}
+						view.scheduleBuilt();
 					}
 					private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
 					    return new ArrayList<>();

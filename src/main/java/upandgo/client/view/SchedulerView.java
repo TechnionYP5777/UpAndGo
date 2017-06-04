@@ -161,4 +161,9 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	public void setNextEnable(boolean enable){
 		schedualerControlsView.setNextEnable(enable);
 	}
+	
+	@Override
+	public void scheduleBuilt(){
+		schedualerControlsView.scheduleBuilt();
+	}
 }
