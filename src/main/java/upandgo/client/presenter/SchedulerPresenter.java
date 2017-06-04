@@ -291,7 +291,7 @@ public class SchedulerPresenter implements Presenter {
 		//panel.clear();
 		panel.add(view.getAsWidget());
 		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 10, Unit.PCT);
+		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.PCT);
 	}
 	
 }

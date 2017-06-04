@@ -146,6 +146,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	examsScrollPanel.setScrollingEnabledY(false);
     	examsScrollPanel.setShowVerticalScrollBar(false);
     	examsScrollPanel.setWidget(examsBar);
+    	examsScrollPanel.addStyleName(ebStyle.examBarPanel());
     	examsBar.addStyleName("horizontal-scroll-wrapper");
 		
     	this.getElement().getStyle().setMargin(10, Unit.PX);
