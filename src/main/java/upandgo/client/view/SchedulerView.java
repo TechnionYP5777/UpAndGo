@@ -89,7 +89,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void setSchedule(List<LessonGroup> schedule, Map<Course, Color> map) {
+	public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map) {
 		timeTableView.displaySchedule(schedule, map);
 		
 	}

@@ -55,7 +55,7 @@ public class SchedulerPresenter implements Presenter {
 	private List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
-	protected Map<Course, Color> colorMap;
+	protected Map<String, Color> colorMap;
 	
 	public interface Display {
 		
@@ -65,7 +65,7 @@ public class SchedulerPresenter implements Presenter {
 		public HasClickHandlers prevSchedule();
 		public HasClickHandlers saveSchedule();
 		
-		public void setSchedule(List<LessonGroup> schedule, Map<Course, Color> map); // if (schedule = null) then clear schedule
+		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if (schedule = null) then clear schedule
 				
 		public HasClickHandlers getDaysOffElement();
 		public boolean isDayOffChecked(ClickEvent event); 

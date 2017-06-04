@@ -30,14 +30,14 @@ import upandgo.shared.model.scedule.Timetable;
 
 @SuppressWarnings("boxing")
 public class Scheduler implements IsSerializable{
-	private static Map<Course, Color> colorMap;
+	private static Map<String, Color> colorMap;
 	/**
 	 * gets a list of courses and a list of constraints and return a possible
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
 	
-	public static Map<Course, Color> getColorMap(){
+	public static Map<String, Color> getColorMap(){
 		return colorMap;
 	}
 	
@@ -128,10 +128,10 @@ public class Scheduler implements IsSerializable{
 		return result;
 	}
 	
-	public static Map<Course, Color> mapCoursesToColors(final List<Course> lcourse){
-		Map<Course, Color> colorsMap = new HashMap();
+	public static Map<String, Color> mapCoursesToColors(final List<Course> lcourse){
+		Map<String, Color> colorsMap = new HashMap();
 		for(int c = 0; c < lcourse.size(); c++){
-			colorsMap.put(lcourse.get(c), Color.valueOf(c));
+			colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
 		}
 		
 		return colorsMap;

@@ -41,7 +41,7 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable tuesdayTable = new FlexTable();
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
-	private Map<Course, Color> colorMap;
+	private Map<String, Color> colorMap;
 	
 	private List<FlexTable> tablesArray = new ArrayList<FlexTable>();
 	
@@ -277,7 +277,7 @@ public class TimeTableView extends HorizontalPanel {
 
 	// this function receives a list of LessonGroup(which is a schedule) and
  	// displays the schedule in the GUI
- 	public void displaySchedule(final List<LessonGroup> schedule, Map<Course, Color> map) {
+ 	public void displaySchedule(final List<LessonGroup> schedule, Map<String, Color> map) {
  		colorMap = map;
  		
  		clearTable();
@@ -381,7 +381,7 @@ public class TimeTableView extends HorizontalPanel {
 			SimplePanel eventCell = new SimplePanel();
 			eventCell.add(new Label(displayString));
 			eventCell.addStyleName(ttStyle.hasEventWrap());
-			eventCell.getElement().setAttribute("eventNum", l.getCourseId());
+			eventCell.getElement().setAttribute("eventNum", String.valueOf(eventsCount++));
 			t.setWidget(currentCell, day, eventCell);
 			//t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
