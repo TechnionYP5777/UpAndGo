@@ -40,12 +40,11 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		// needs to be injected
 		
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
-		
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 9, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 12, Unit.EM);
 
 		
 		this.add(schedualerControlsView);
@@ -155,5 +154,20 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public HasChangeHandlers getFinishTimeList() {
 		return schedualerConstraintsView.finishTimeLB;
+	}
+	
+	@Override
+	public void setPrevEnable(boolean enable){
+		schedualerControlsView.setPrevEnable(enable);
+	}
+	
+	@Override
+	public void setNextEnable(boolean enable){
+		schedualerControlsView.setNextEnable(enable);
+	}
+	
+	@Override
+	public void scheduleBuilt(){
+		schedualerControlsView.scheduleBuilt();
 	}
 }

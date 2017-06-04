@@ -56,18 +56,14 @@ public class SchedulerControlsView extends HorizontalPanel{
 		prevSchedule.setStyleName("btn btn-primary");
 		saveSchedule.setStyleName("btn btn-info");
 		
+		nextSchedule.setEnabled(false);
+		prevSchedule.setEnabled(false);
+
 		buildSchedule.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				buildSchedule.setHTML("<i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
-				Timer timer = new Timer() {
-					@Override
-				    public void run() {
-						buildSchedule.setHTML("<i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
-				    }
-				};
-				timer.schedule(2000);
 			}
     		
     	});
@@ -87,5 +83,15 @@ public class SchedulerControlsView extends HorizontalPanel{
 
 	}
 	
+	public void setPrevEnable(boolean enable){
+		prevSchedule.setEnabled(enable);;
+	}
 	
+	public void setNextEnable(boolean enable){
+		nextSchedule.setEnabled(enable);
+	}
+	
+	public void scheduleBuilt(){
+		buildSchedule.setHTML("<i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
+	}
 }

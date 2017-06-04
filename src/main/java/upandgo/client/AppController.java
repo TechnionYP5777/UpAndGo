@@ -25,6 +25,7 @@ import upandgo.client.event.prevScheduleEventHandler;
 import upandgo.client.event.saveScheduleEvent;
 import upandgo.client.event.saveScheduleEventHandler;
 import upandgo.client.presenter.CourseListPresenter;
+import upandgo.client.presenter.NavBarPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.client.view.NavBarView;
@@ -44,13 +45,15 @@ class AppController implements Presenter {
 	Panel panel;
 
 	private EventBus eventBus;
-	private CoursesServiceAsync rpcService;
+	private CoursesServiceAsync coursesService;
+	private LoginServiceAsync loginService;
 	private LayoutPanel mainView;
 		
 	@Inject
-	public AppController(CoursesServiceAsync rpcService, EventBus eventBus) {
+	public AppController(CoursesServiceAsync coursesService, LoginServiceAsync loginService, EventBus eventBus) {
 		this.eventBus = eventBus;
-		this.rpcService = rpcService;
+		this.coursesService = coursesService;
+		this.loginService = loginService;
 		
 		initMainView();
 	}
@@ -147,21 +150,21 @@ class AppController implements Presenter {
 	public void initMainView(){
 		final Injector injector = Injector.INSTANCE;
 		mainView = new LayoutPanel();
-		NavBarView navBarView = new NavBarView();
+		
+		NavBarPresenter.Display navBarView = injector.getNavBarPresenterDisplay();
 		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
 		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
 		
-		CourseListPresenter clPresenter = new CourseListPresenter(rpcService,eventBus,courseSelectionView);
+		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, eventBus, navBarView);
 		
-		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, rpcService);
+		CourseListPresenter clPresenter = new CourseListPresenter(coursesService,eventBus,courseSelectionView);
 		
-		mainView.add(navBarView);
-		mainView.setWidgetLeftRight(navBarView, 0, Unit.EM, 0, Unit.EM);
-		mainView.setWidgetTopHeight(navBarView, 0, Unit.EM, 4, Unit.EM);
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, coursesService);
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		sPresenter.go(mainView);
 		clPresenter.go(mainView);
+		nbPresenter.go(mainView);
 			
 		
 	}

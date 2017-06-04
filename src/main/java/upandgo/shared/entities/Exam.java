@@ -2,6 +2,9 @@ package upandgo.shared.entities;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
@@ -96,6 +99,33 @@ public class Exam implements IsSerializable{
 		}
 		res += monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth())
 				+ Integer.parseInt(examb.getDayOfMonth());
+		monthDays[1] = 28;
+		return res;
+	}
+	
+	//the exams should be in order, exama must be early then examb
+	public List<String> datesBetweenExams (Exam examb) {
+		int examMonthA = Integer.parseInt(month);
+		int examMonthB = Integer.parseInt(examb.getMonth());
+		int dayIndex = Integer.parseInt(dayOfMonth) + 1;
+		int monthIndex;
+		List<String> res = new ArrayList<>();
+		if (isLeap(year)) {
+			monthDays[1] = 29;
+		}
+		while (examMonthA <= examMonthB) {
+			if (examMonthA == examMonthB) {
+				monthIndex = Integer.parseInt(examb.getDayOfMonth()) - 1;
+			} else {
+				monthIndex = monthDays[examMonthA -1];
+			}
+			while (dayIndex <= monthIndex) {
+				res.add(dayIndex + "." +  examMonthA);		
+				dayIndex++;
+			}
+			dayIndex = 1;
+			examMonthA++;
+		}
 		monthDays[1] = 28;
 		return res;
 	}
