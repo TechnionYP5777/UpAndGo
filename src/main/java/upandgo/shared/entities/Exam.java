@@ -116,12 +116,18 @@ public class Exam implements IsSerializable{
 	
 	//the exams should be in order, exama must be early then examb
 	public List<String> datesBetweenExams (Exam examb) {
-		int examMonthA = Integer.parseInt(month);
+		Exam exama = this;
+		if (exama.compare(examb) > 0) {
+			Exam temp = exama;
+			exama = examb;
+			examb = temp;
+		}
+		int examMonthA = Integer.parseInt(exama.getMonth());
 		int examMonthB = Integer.parseInt(examb.getMonth());
-		int dayIndex = Integer.parseInt(dayOfMonth) + 1;
+		int dayIndex = Integer.parseInt(exama.getDayOfMonth()) + 1;
 		int monthIndex;
 		List<String> res = new ArrayList<>();
-		if (isLeap(year)) {
+		if (isLeap(exama.getYear())) {
 			monthDays[1] = 29;
 		}
 		while (examMonthA <= examMonthB) {
