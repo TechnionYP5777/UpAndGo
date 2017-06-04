@@ -56,6 +56,9 @@ public class SchedulerControlsView extends HorizontalPanel{
 		prevSchedule.setStyleName("btn btn-primary");
 		saveSchedule.setStyleName("btn btn-info");
 		
+		nextSchedule.setEnabled(false);
+		prevSchedule.setEnabled(false);
+
 		buildSchedule.addClickHandler(new ClickHandler(){
 
 			@Override
@@ -87,5 +90,11 @@ public class SchedulerControlsView extends HorizontalPanel{
 
 	}
 	
+	public void setPrevEnable(boolean enable){
+		prevSchedule.setEnabled(enable);;
+	}
 	
+	public void setNextEnable(boolean enable){
+		nextSchedule.setEnabled(enable);
+	}
 }

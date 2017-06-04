@@ -80,6 +80,9 @@ public class SchedulerPresenter implements Presenter {
 		public boolean isFinishTimeChecked(ClickEvent event);
 		public LocalTime getReqFinishTime(); // result in format HH:MM
 		
+		public void setPrevEnable(boolean enable);
+		public void setNextEnable(boolean enable);
+		
 		public Widget getAsWidget();
 	}
 	@Inject
@@ -233,6 +236,9 @@ public class SchedulerPresenter implements Presenter {
 							});*/
 							Log.info("Build schedule: A schedule was build");
 							view.setSchedule(lessonGroupsList.get(sched_index));
+							if (lessonGroupsList.size()>1){
+								view.setNextEnable(true);
+							}
 						}
 					}
 					private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
@@ -251,6 +257,10 @@ public class SchedulerPresenter implements Presenter {
 				}
 				++sched_index;
 				view.setSchedule(lessonGroupsList.get(sched_index));
+				if (lessonGroupsList.size() <= sched_index + 1) {
+					view.setNextEnable(false);
+				}
+				view.setPrevEnable(true);
 			}
 		});
 		
@@ -263,6 +273,10 @@ public class SchedulerPresenter implements Presenter {
 				}
 				--sched_index;
 				view.setSchedule(lessonGroupsList.get(sched_index));
+				if (sched_index <= 0) {
+					view.setPrevEnable(false);
+				}
+				view.setNextEnable(true);
 			}
 		});
 		
