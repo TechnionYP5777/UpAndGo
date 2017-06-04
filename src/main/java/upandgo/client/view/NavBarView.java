@@ -1,7 +1,5 @@
 package upandgo.client.view;
 
-
-
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.Navbar;
@@ -17,12 +15,17 @@ import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.LoginDialog;
 import upandgo.client.Resources;
 import upandgo.client.Resources.NavBarStyle;
 
-public class NavBarView extends FlowPanel{
+import upandgo.client.presenter.NavBarPresenter;
+
+public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	
 	
 	
@@ -62,28 +65,39 @@ public class NavBarView extends FlowPanel{
 		this.addStyleName(nvStyle.NavBarPanel());
 		
 		
-		signInButton.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
-
-				Modal loginBox = new Modal();
-				loginBox.setFade(true);
-				loginBox.setTitle("כניסה / הרשמה");
-				loginBox.setId("login");
-				loginBox.add(new LoginDialog());
-				loginBox.show();
-
-/*				// TODO Auto-generated method stub
-				LoginDialog myDialog = new LoginDialog();
-
-	            int left = Window.getClientWidth()/ 3;
-	            int top = Window.getClientHeight()/ 3;
-	            myDialog.setPopupPosition(left, top);
-	            myDialog.show();*/
-			}
-		});
+//		signInButton.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
+//
+//				Modal loginBox = new Modal();
+//				loginBox.setFade(true);
+//				loginBox.setTitle("כניסה / הרשמה");
+//				loginBox.setId("login");
+//				loginBox.add(new LoginDialog());
+//				loginBox.show();
+//
+///*				// TODO Auto-generated method stub
+//				LoginDialog myDialog = new LoginDialog();
+//
+//	            int left = Window.getClientWidth()/ 3;
+//	            int top = Window.getClientHeight()/ 3;
+//	            myDialog.setPopupPosition(left, top);
+//	            myDialog.show();*/
+//			}
+//		});
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends HasClickHandlers & HasText> T getSignInOutButton() {
+		return (T) signInButton;
+	}
+
+	@Override
+	public Widget getAsWidget() {
+		return this.asWidget();
 	}
 
 }
