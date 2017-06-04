@@ -4,10 +4,12 @@
 /REPFILE.zip
 /REPFILE
 /data
-/.settings/org.eclipse.jdt.ui.prefs
+/.settings
 /spartanizer.xml
 /src/main/gwt-unitCache/
 /get-unitCache/
+/src/main/webapp/upandgo
+/src/main/webapp/META-INF
 /src/main/webapp/WEB-INF/classes
 /src/main/webapp/WEB-INF/deploy
 /src/main/webapp/WEB-INF/lib
