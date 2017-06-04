@@ -12,8 +12,14 @@ package upandgo.client.view;
 import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 import static com.google.gwt.query.client.GQuery.$;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
@@ -27,6 +33,7 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -38,6 +45,7 @@ import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
+import upandgo.client.Resources.examsBarStyle;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.CourseId;
 
@@ -51,8 +59,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private TextBox searchCourse = new TextBox();
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
+    private HTML examsBar;
+    private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
     String hoveredCourseDetail = "Loading...";
-    int rowNum = -1; //help verify that hoveredCourseDetail is relevant
+    int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
     public CourseSelectionView(){
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
@@ -78,7 +88,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    DefaultSelectionEventManager<CourseId> selectionEventManager1 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
 	    ccl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager1);
 	    cclp.add(ccl);
-	    cclp.setHeight("25em");
+	    cclp.setHeight("15em");
 	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 	    cclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
 	    cclp.getElement().getStyle().setBorderColor("LightGray");
@@ -127,7 +137,18 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	$(ccl).as(Tooltip).tooltip(options);
     	$(scl).as(Tooltip).tooltip(options);
     	
-    	//adding widgets to panel
+    	//initializing exams bar inside a mgwt scroll panel
+		examsBarStyle ebStyle = Resources.INSTANCE.examsBarStyle();
+		ebStyle.ensureInjected();
+		HTML examsBar = new HTML("");
+    	examsScrollPanel = new com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel();
+    	examsScrollPanel.setScrollingEnabledX(true);
+    	examsScrollPanel.setScrollingEnabledY(false);
+    	examsScrollPanel.setShowVerticalScrollBar(false);
+    	examsScrollPanel.setWidget(examsBar);
+    	examsScrollPanel.addStyleName(ebStyle.examBarPanel());
+    	examsBar.addStyleName("horizontal-scroll-wrapper");
+		
     	this.getElement().getStyle().setMargin(10, Unit.PX);
     	this.add(cc);
 	    this.add(cclp);
@@ -137,10 +158,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    this.add(sclp);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sc, 29.3,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(faculties, 31.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(searchCourse, 34.5,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sclp, 37.5,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(sc, 17,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(faculties, 20,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(searchCourse, 23,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(sclp, 26,  Unit.EM, 0, Unit.EM);
     }
     
     // Implementation of Display
@@ -161,11 +182,66 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		return searchCourse;
 	}
 	@Override
-	public void setSelectedCourses(List<CourseId> is) {
+	public void setSelectedCourses(List<CourseId> courses) {
 		
-        ccl.setRowCount(is.size(), true);
-        ccl.setVisibleRange(0, is.size());
-	    ccl.setRowData(0,is);
+        ccl.setRowCount(courses.size(), true);
+        ccl.setVisibleRange(0, courses.size());
+	    ccl.setRowData(0,courses);
+	    List<CourseId> is = new ArrayList<>();
+	    for(CourseId c : courses){
+	    	if(c.aTerm()!=null)
+	    		is.add(c);
+	    }
+	    Collections.sort(is,(new Comparator<CourseId>() { //sort courses by their final exam date
+
+			@Override
+			public int compare(CourseId o1, CourseId o2) {
+				return o1.aTerm().compare(o2.aTerm());
+			}
+		}));
+	    long width=0;
+		String examsBarHTML = "";
+		int i;
+		for(i=0; i < is.size(); i++){
+			if(i == is.size()-1){
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle() + "</div> ";
+				width+=275;
+				break;
+			}
+			int daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
+			Log.info("$$#$#$#" + daysBetween);
+			if(daysBetween == 0 ){			
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle();
+				width+=275;
+				while(daysBetween == 0 &&  i < is.size()-1){
+					i++;
+					examsBarHTML+="<br>" + is.get(i).getTitle();
+					daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
+				}
+				examsBarHTML+="</div>";
+				if(daysBetween > 0 ){
+					for(int k = 0 ; k < daysBetween-1; k++){
+						examsBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
+						width+=85;
+					}
+				}
+				
+			}
+			else{
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle() + "</div> ";
+				width+=275;
+				for(int k = 0 ; k < daysBetween-1; k++){
+					examsBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
+					width+=85;
+				}
+			}
+		}
+		examsBar = new HTML(examsBarHTML);
+		examsBar.addStyleName("horizontal-scroll-wrapper");
+		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
+		examsScrollPanel.setWidget(examsBar);
+
+		
 		
 	}
 	@Override
@@ -218,6 +294,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	@Override
 	public Widget getAsWidget() {
 		return this.asWidget();
+	}
+	@Override
+	public Widget getExamsBar() {
+		return examsScrollPanel;
 	} 
     
 }

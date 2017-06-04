@@ -1,0 +1,49 @@
+
+@external .horizontal-scroll-wrapper .child .big-child ;
+.examBarPanel{
+	
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-button {
+  width: 1px;
+  height: 1px;
+}
+
+
+.examBarPanel{
+
+	border: 1px solid #d3d7cf;
+}
+
+.horizontal-scroll-wrapper {
+  white-space: nowrap;
+	display: inline-block;
+  position: absolute;
+  width: 20000px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding-top: 1px;
+  background: whitesmoke;
+}
+
+.child {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 0 2.5px ;
+}
+.big-child {
+	display: inline-block;
+  float: left;
+    width: 270px;
+  height: 80px;
+  margin: 0 2.5px 
+}

@@ -56,6 +56,11 @@ public class Exam implements IsSerializable{
 		return dayOfMonth + "." + month;
 	}
 	
+	@Override
+	public String toString(){
+		return getDate() + " בשעה"  + time;
+	}
+	
 	private String compareString() {
 		return year + month.toString() + dayOfMonth;
 	}
@@ -76,21 +81,42 @@ public class Exam implements IsSerializable{
 	//the exams should be in order, exama must be early then examb
 	// both exams must be in the same year - for now
 	@SuppressWarnings("boxing")
-	public int daysBetweenExams (Exam exama, Exam examb) {
+	public int daysBetweenExams (Exam examb) {
+		Exam exama = this;
 		int res = 0;
 		if (isLeap(exama.getYear())) {
 			monthDays[1] = 29;
 		}
 		if (exama.getMonth().equals(examb.getMonth())) {
 			monthDays[1] = 28;
-			return Integer.parseInt(exama.getDayOfMonth()) - Integer.parseInt(examb.getDayOfMonth()) + 1;
+			return Integer.parseInt(exama.getDayOfMonth()) - Integer.parseInt(examb.getDayOfMonth());
 		}
 		for (int i = Integer.parseInt(exama.getMonth()); i < Integer.parseInt(examb.getMonth()) -1 ; i++) {
 			res += monthDays[i];
 		}
-		res += (monthDays[Integer.parseInt(exama.getMonth()) -1 ] - Integer.parseInt(exama.getDayOfMonth())) + Integer.parseInt(examb.getDayOfMonth()) - 1;
+		res += monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth())
+				+ Integer.parseInt(examb.getDayOfMonth());
 		monthDays[1] = 28;
 		return res;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

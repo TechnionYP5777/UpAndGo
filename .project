@@ -6,6 +6,11 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.wst.common.project.facet.core.builder</name>
 			<arguments>
 			</arguments>
@@ -46,11 +51,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.google.cloud.tools.eclipse.appengine.standard.java8.appengineWeb</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
@@ -65,5 +65,6 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>com.gwtplugins.gwt.eclipse.core.gwtNature</nature>
 		<nature>il.org.spartan.nature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>

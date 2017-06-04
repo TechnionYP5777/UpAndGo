@@ -31,6 +31,7 @@
   <inherits name="com.google.gwt.inject.Inject" />
   <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
   <inherits name="com.arcbees.gquery.tooltip.Tooltip"/>
+  <inherits name='com.googlecode.mgwt.MGWT'/>
   
   
   <!-- Specify the app entry point class.                         -->
