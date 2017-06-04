@@ -3,9 +3,11 @@ package upandgo.shared.model.scedule;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.constraint.TimeConstraint;
+import upandgo.shared.entities.course.Course;
 
 /**
  * @author kobybs

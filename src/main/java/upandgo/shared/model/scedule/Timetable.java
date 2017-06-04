@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -11,6 +12,7 @@ import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.WeekTime;
+import upandgo.shared.entities.course.Course;
 
 /**
  * 
@@ -38,7 +40,9 @@ public class Timetable implements IsSerializable {
 	private double rankFreeTuesday;
 	private double rankFreeWednesday;
 	private double rankFreeThursday;
+	private Map<Course,Color> colorsMap;
 	
+	// don't use, only for gwt
 	public Timetable() {
 		lessonGroups = new ArrayList<>();
 		rankDaysoff = rankDaysoff();
@@ -49,6 +53,11 @@ public class Timetable implements IsSerializable {
 		lessonGroups = new ArrayList<>(lessons);
 		rankDaysoff = rankDaysoff();
 		rankBlankSpace = rankBlankSpace();
+	}
+
+	
+	public Map<Course, Color> getColorMap(){
+		return colorsMap;
 	}
 
 	public List<LessonGroup> getLessonGroups() {

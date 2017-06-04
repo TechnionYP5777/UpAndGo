@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 //import java.util.function.Consumer;
+import java.util.Map;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
@@ -26,6 +27,7 @@ import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.clearScheduleEvent;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 
@@ -53,6 +55,7 @@ public class SchedulerPresenter implements Presenter {
 	private List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
+	protected Map<Course, Color> colorMap;
 	
 	public interface Display {
 		
@@ -62,7 +65,7 @@ public class SchedulerPresenter implements Presenter {
 		public HasClickHandlers prevSchedule();
 		public HasClickHandlers saveSchedule();
 		
-		public void setSchedule(List<LessonGroup> schedule); // if (schedule = null) then clear schedule
+		public void setSchedule(List<LessonGroup> schedule, Map<Course, Color> map); // if (schedule = null) then clear schedule
 				
 		public HasClickHandlers getDaysOffElement();
 		public boolean isDayOffChecked(ClickEvent event); 
@@ -174,7 +177,7 @@ public class SchedulerPresenter implements Presenter {
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				view.setSchedule(null);
+				view.setSchedule(null, colorMap);
 				eventBus.fireEvent(new clearScheduleEvent());
 			}
 		});
@@ -194,13 +197,16 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("Build schedule: getChosenCoursesList success");
 						if (result.isEmpty()) {
 							Log.info("Build schedule: no chosen courses");
-							view.setSchedule(null);
+							view.setSchedule(null, colorMap);
 							return;
 						}
 						selectedCourses = new ArrayList<Course>(result);
 
 						Log.info("Build schedule: before Scheduler.getTimetablesList");
 						final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
+						//Map<Course, Color> colorMap = Scheduler.getColorMap();
+						colorMap = Scheduler.getColorMap();
+						
 						Log.info("unsorted tables size: " + unsortedTables.size());
 						Log.info("unsorted tables: " + unsortedTables);
 						Log.info("Build schedule: before Scheduler.sortedBy");
@@ -232,7 +238,7 @@ public class SchedulerPresenter implements Presenter {
 								}
 							});*/
 							Log.info("Build schedule: A schedule was build");
-							view.setSchedule(lessonGroupsList.get(sched_index));
+							view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
 						}
 					}
 					private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
@@ -250,7 +256,7 @@ public class SchedulerPresenter implements Presenter {
 					return;
 				}
 				++sched_index;
-				view.setSchedule(lessonGroupsList.get(sched_index));
+				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
 			}
 		});
 		
@@ -262,7 +268,7 @@ public class SchedulerPresenter implements Presenter {
 					return;
 				}
 				--sched_index;
-				view.setSchedule(lessonGroupsList.get(sched_index));
+				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
 			}
 		});
 		

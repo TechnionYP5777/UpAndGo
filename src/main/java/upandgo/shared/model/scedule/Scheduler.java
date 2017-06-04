@@ -3,8 +3,11 @@ package upandgo.shared.model.scedule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -27,13 +30,22 @@ import upandgo.shared.model.scedule.Timetable;
 
 @SuppressWarnings("boxing")
 public class Scheduler implements IsSerializable{
-
+	private static Map<Course, Color> colorMap;
 	/**
 	 * gets a list of courses and a list of constraints and return a possible
 	 * schedule of them which doesn't break the constraints. it works for
 	 * TimeConstraints for now.
 	 */
+	
+	public static Map<Course, Color> getColorMap(){
+		return colorMap;
+	}
+	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
+		//Map<Course, Color> colorsMap = new HashMap();
+		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
+		colorMap = mapCoursesToColors(lcourse);
+				
 		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
 		final List<Timetable> result = new ArrayList<>();
 		Log.info("Scheduler: here");
@@ -114,6 +126,15 @@ public class Scheduler implements IsSerializable{
 			}
 		}
 		return result;
+	}
+	
+	public static Map<Course, Color> mapCoursesToColors(final List<Course> lcourse){
+		Map<Course, Color> colorsMap = new HashMap();
+		for(int c = 0; c < lcourse.size(); c++){
+			colorsMap.put(lcourse.get(c), Color.valueOf(c));
+		}
+		
+		return colorsMap;
 	}
 
 	/**

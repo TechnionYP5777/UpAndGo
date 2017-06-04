@@ -61,7 +61,7 @@ public class Lesson implements IsSerializable {
 		courseName = n;
 	}
 
-	public String getCourse() {
+	public String getCourseId() {
 		return courseId;
 	}
 
@@ -118,7 +118,7 @@ public class Lesson implements IsSerializable {
 			return false;
 		final Lesson $ = (Lesson) l;
 		return place.equals($.getPlace()) && type == $.getType() && group == $.getGroup()
-				&& courseId.equals($.getCourse()) && startTime.equals($.getStartTime())
+				&& courseId.equals($.getCourseId()) && startTime.equals($.getStartTime())
 				&& endTime.equals($.getEndTime());
 	}
 

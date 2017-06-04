@@ -48,7 +48,7 @@ public class LessonGroup implements IsSerializable {
 	}
 
 	public String getCourseID() {
-		return lessons.isEmpty() ? "000000" : lessons.get(0).getCourse();
+		return lessons.isEmpty() ? "000000" : lessons.get(0).getCourseId();
 	}
 
 	public void addLesson(final Lesson xxx) {

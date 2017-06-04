@@ -110,25 +110,50 @@
 
 }
 
+
 .hasEventWrap[eventNum="0"]{
-    background: #577F92;
+    background: #FF4500;
 }
 
 .hasEventWrap[eventNum="1"]{
-	background: #443453;
+	background: #FFD700;
 }
 
 .hasEventWrap[eventNum="2"]{
-	background: #A2B9B2;
+	background: #E6E6FA;
 }
 
 .hasEventWrap[eventNum="3"]{
-    background: #f6b067;
+    background: #6A5ACD;
 }
 
 .hasEventWrap[eventNum="4"]{
-	background: #ad7fa8;
+	background: #32CD32;
 }
+
+
+
+
+.hasEventWrap[eventNum="ORANGERED"]{
+    background: #FF4500;
+}
+
+.hasEventWrap[eventNum="GOLD"]{
+	background: #FFD700;
+}
+
+.hasEventWrap[eventNum="LAVENDER"]{
+	background: #E6E6FA;
+}
+
+.hasEventWrap[eventNum="SLATEBLUE"]{
+    background: #6A5ACD;
+}
+
+.hasEventWrap[eventNum="LIMEGREEN"]{
+	background: #32CD32;
+}
+
 
 .hasEventWrap[eventNum="5"]{
 	background: #8ae234;

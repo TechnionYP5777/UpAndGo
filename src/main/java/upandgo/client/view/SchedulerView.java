@@ -1,7 +1,11 @@
 package upandgo.client.view;
 
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Color;
+
 import java.util.List;
+import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 
@@ -86,8 +90,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void setSchedule(List<LessonGroup> schedule) {
-		timeTableView.displaySchedule(schedule);
+	public void setSchedule(List<LessonGroup> schedule, Map<Course, Color> map) {
+		timeTableView.displaySchedule(schedule, map);
 		
 	}
 

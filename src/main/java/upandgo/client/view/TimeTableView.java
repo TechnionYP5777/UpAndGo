@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -21,6 +22,8 @@ import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
+import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.Color;
 
 
 public class TimeTableView extends HorizontalPanel { 
@@ -38,6 +41,7 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable tuesdayTable = new FlexTable();
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
+	private Map<Course, Color> colorMap;
 	
 	private List<FlexTable> tablesArray = new ArrayList<FlexTable>();
 	
@@ -273,7 +277,9 @@ public class TimeTableView extends HorizontalPanel {
 
 	// this function receives a list of LessonGroup(which is a schedule) and
  	// displays the schedule in the GUI
- 	public void displaySchedule(final List<LessonGroup> schedule) {
+ 	public void displaySchedule(final List<LessonGroup> schedule, Map<Course, Color> map) {
+ 		colorMap = map;
+ 		
  		clearTable();
  		Log.info("TimeTableView: display was called with: " + schedule);
  		//resetTable();
@@ -370,12 +376,12 @@ public class TimeTableView extends HorizontalPanel {
 			span = differenceInMinutes/30;
 			Log.info("lesson_span: " + span);
 			
-			String displayString = l.getCourseName() + " " + l.getCourse() + " " + l.getPlace();
+			String displayString = l.getCourseName() + " " + l.getCourseId() + " " + l.getPlace();
 			
 			SimplePanel eventCell = new SimplePanel();
 			eventCell.add(new Label(displayString));
 			eventCell.addStyleName(ttStyle.hasEventWrap());
-			eventCell.getElement().setAttribute("eventNum", String.valueOf(eventsCount++));
+			eventCell.getElement().setAttribute("eventNum", l.getCourseId());
 			t.setWidget(currentCell, day, eventCell);
 			//t.setText(currentCell, day, displayString);
 			t.getFlexCellFormatter().setRowSpan(currentCell, day, span);
