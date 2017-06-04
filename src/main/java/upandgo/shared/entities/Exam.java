@@ -78,7 +78,13 @@ public class Exam implements IsSerializable{
 	}
 	
 	public int compare(Exam exam) {
-		return this.compareString().compareTo(exam.compareString());
+		if (Integer.parseInt(this.compareString()) > Integer.parseInt(exam.compareString())) {
+			return 1;
+		}
+		if (Integer.parseInt(this.compareString()) == Integer.parseInt(exam.compareString())) {
+			return 0;
+		} 
+		return -1;
 	}
 	
 	//the exams should be in order, exama must be early then examb
@@ -86,6 +92,11 @@ public class Exam implements IsSerializable{
 	@SuppressWarnings("boxing")
 	public int daysBetweenExams (Exam examb) {
 		Exam exama = this;
+		if (exama.compare(examb) > 0) {
+			Exam temp = exama;
+			exama = examb;
+			examb = temp;
+		}
 		int res = 0;
 		if (isLeap(exama.getYear())) {
 			monthDays[1] = 29;
