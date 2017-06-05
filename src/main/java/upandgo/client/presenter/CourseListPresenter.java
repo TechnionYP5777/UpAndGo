@@ -316,6 +316,7 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
+			result.remove(new CourseId());
 			notSelectedCourses = result;
 			display.setNotSelectedCourses(notSelectedCourses);
 		}

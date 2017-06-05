@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import com.google.common.collect.Collections2;		 
-import com.google.common.collect.Lists;		
+import com.google.common.collect.Lists;
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.common.base.Predicate;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import java.util.HashSet;
@@ -171,12 +172,13 @@ public class CourseModel { // implements Model {
 		if(query.isEmpty())
 			return getNotSelectedCoursesByFaculty(faculty);
 		
-		List<CourseId> relevantCourses = Lists.newArrayList(Collections2.filter(getNotSelectedCoursesByFaculty(faculty), new Predicate<CourseId>() {
-			@Override
-			public boolean apply(CourseId c) {
-				return FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70; 	// we remove courses below a certain score
-			}
-		}));
+		List<CourseId> relevantCourses = new ArrayList<>();
+		relevantCourses.add(new CourseId());
+		for(CourseId c : getNotSelectedCoursesByFaculty(faculty)){
+			Log.warn("!!!!!!!!" + " " + FuzzySearch.tokenSortPartialRatio(query, c.getTitle()));
+			if(FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70)
+				relevantCourses.add(c);
+		}
 		
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
@@ -188,6 +190,7 @@ public class CourseModel { // implements Model {
 
 		return relevantCourses;
 	}
+
 
 	/*
 	 * load faculty names
