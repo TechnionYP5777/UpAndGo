@@ -132,6 +132,12 @@
 }
 
 
+.hasEventWrap[eventNum="5"]{
+	background: #8ae234;
+}
+
+
+
 
 
 .hasEventWrap[eventNum="ORANGERED"]{
@@ -142,8 +148,8 @@
 	background: #FFD700;
 }
 
-.hasEventWrap[eventNum="LAVENDER"]{
-	background: #E6E6FA;
+.hasEventWrap[eventNum="PALETURQUOISE"]{
+	background: #AFEEEE;
 }
 
 .hasEventWrap[eventNum="SLATEBLUE"]{
@@ -154,10 +160,14 @@
 	background: #32CD32;
 }
 
-
-.hasEventWrap[eventNum="5"]{
-	background: #8ae234;
+.hasEventWrap[eventNum="GOLDENROD"]{
+	background: #DAA520;
 }
+
+
+
+
+
 
 
 .hasEventWrap[eventNum="0"]:after{

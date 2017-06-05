@@ -6,9 +6,10 @@ import java.util.Map;
 public enum Color {
 	ORANGERED("ORANGERED"),
 	GOLD("GOLD"),
-	LAVENDER("LAVENDER"),
+	PALETURQUOISE("PALETURQUOISE"),
 	SLATEBLUE("SLATEBLUE"),
-	LIMEGREEN("LIMEGREEN");
+	LIMEGREEN("LIMEGREEN"),
+	GOLDENROD("GOLDENROD");
 	
 	private static Map<Integer, Color> map = new HashMap<Integer, Color>();
 	private String name;  

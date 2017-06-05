@@ -15,6 +15,7 @@
 
   <!-- Send client logging to server -->
   <inherits name="com.allen_sauer.gwt.log.gwt-log-RemoteLogger" />
+  <set-property name="log_DivLogger" value="DISABLED" />
   
   
 
