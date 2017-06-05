@@ -201,7 +201,9 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("Build schedule: getChosenCoursesList success");
 						if (result.isEmpty()) {
 							Log.info("Build schedule: no chosen courses");
+							lessonGroupsList.clear();
 							view.setSchedule(null, colorMap);
+							view.scheduleBuilt();
 							return;
 						}
 						selectedCourses = new ArrayList<Course>(result);
