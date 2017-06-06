@@ -30,11 +30,30 @@ public class Exam implements IsSerializable{
 			this.dayOfMonth = splited[1];
 			this.month = splited[2];
 			this.year = splited[3];
-			this.day = splited[4];
+			this.day = hebDayConverter(splited[4]);
 		}
 		
 	}
 	
+	private static String hebDayConverter(String intDay) {
+		switch (intDay) {
+		case "1":
+			return "א'";
+		case "2":
+			return "ב'";
+		case "3":
+			return "ג'";
+		case "4":
+			return "ד'";
+		case "5":
+			return "ה'";
+		case "6":
+			return "ו'";
+		default:
+			return "ש'";
+		}
+	}
+
 	public String getDay() {
 		return day;
 	}
@@ -55,13 +74,20 @@ public class Exam implements IsSerializable{
 		return time;
 	}
 	
+	public String getTimeToDisplay() {
+		if ("00:00".equals(time)) {
+			return "";
+		}
+		return time + " - ";
+	}
+	
 	public String getDate() {
 		return dayOfMonth + "." + month;
 	}
 	
 	@Override
 	public String toString(){
-		return getDate() + " בשעה"  + time;
+		return getDate() + " יום " + day;
 	}
 	
 	public String compareString() {
