@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+@external .course .course-name .cell-button ;
+.courseListCellPanel{
+	
+}
+
+.course{
+	cursor: default;
+	user-select: none;
+}
+
+.course-name{
+	margin-left: 2px;
+	max-width: 63%; 
+	overflow: hidden;
+	white-space: nowrap; 
+	float:right;
+}
+
+.cell-button{
+	font-size:10px; 
+	float:left; 
+	padding: 1px 3px;
+}

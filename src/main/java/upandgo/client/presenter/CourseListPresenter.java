@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.gwt.event.shared.EventBus;
 
 import com.google.gwt.dom.client.BrowserEvents;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -23,6 +25,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
 
+import upandgo.client.view.NotSelectedCourseCell;
+import upandgo.client.view.SelectedCourseCell;
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
@@ -99,6 +103,10 @@ public class CourseListPresenter implements Presenter {
 	String selectedFaculty = "";
 	CourseId hoveredCourse = null;
 	int hoveredRow = -1;
+	int lastHoveredRow = -1;
+	short numBtns =0;
+	
+	
 	
 	int selectedClickedRow = -1;
 	int unselectedClickedRow = -1;
@@ -131,26 +139,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				final CourseId $ = display.getSelectedCourse(selectedClickedRow);
-				if ($ != null) {
-					rpcService.unselectCourse($, new AsyncCallback<Void>() {
-						@Override
-						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-							Window.alert("Error while unselecting course.");
-							Log.error("Error while unselecting course.");
-						}
-
-						@Override
-						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-							Log.info("444444444444444444444444444444444444444444444444");
-							rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-									new FetchNotSelectedCoursesAsyncCallback());
-
-							eventBus.fireEvent(new UnselectCourseEvent($));
-						}
-					});
-				}
+				deselectCourse();
 	        }
 	    }, DoubleClickEvent.getType());
 		
@@ -158,33 +147,55 @@ public class CourseListPresenter implements Presenter {
 
 			@Override
 			public void onCellPreview(CellPreviewEvent<CourseId> event) {
+
 				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(event.getNativeEvent().getType());
 				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(event.getNativeEvent().getType());
 				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 				
 				if (isMouseOver) {
-					hoveredRow = display.getHoveredSelectedCourseRow(event);
+					
+					hoveredRow = event.getIndex();
 					if (hoveredRow < 0) {
 						return;
 					}
-
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
-					if(!newCourseId.equals(hoveredCourse)) {
-						hoveredCourse = newCourseId;
-						Log.info("1hoveres is: " + hoveredCourse.getTitle());
-						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
+					if(lastHoveredRow != hoveredRow ){
+						hoveredCourse = newCourseId;					
+						if(numBtns==0){
+							lastHoveredRow=hoveredRow;
+							numBtns++;
+							((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).drawButton();
+							display.getSelectedCoursesList().redrawRow(hoveredRow);
+						}
 					}
+					
+					
+					//if(!newCourseId.equals(hoveredCourse)) {
+						
+						//rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
+					//}
+					display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
-					hoveredCourse = null;
-					hoveredRow = -1;
-					display.setHoveredRow(-1);
-					display.setHoveredCourseDetail("");
+					if(event.getNativeEvent().getEventTarget().toString().equals("[object HTMLTableCellElement]")){
+						
+						((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).dontDrawButton();
+						display.getSelectedCoursesList().redrawRow(lastHoveredRow);
+						numBtns = 0;
+						hoveredCourse = null;
+						lastHoveredRow=hoveredRow = -1;
+						display.setHoveredRow(-1);
+						display.setHoveredCourseDetail("");
+					}
 				}
-				if(isClick){
+				if(isClick ){
+					
 					selectedClickedRow = event.getIndex();
-					event.setCanceled(true);
+					 EventTarget eventTarget = event.getNativeEvent().getEventTarget();
+				        if (eventTarget.toString().equals("[object HTMLButtonElement]") || eventTarget.toString().equals("[object HTMLElement]")) {
+				        	deselectCourse();
+				        }
 				}
 			}
 		});
@@ -194,26 +205,7 @@ public class CourseListPresenter implements Presenter {
 
 	        @Override
 	        public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
-				if ($ != null) {
-					rpcService.selectCourse($, new AsyncCallback<Void>() {
-						@Override
-						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-							Window.alert("Error while selecting course.");
-							Log.error("Error while selecting course.");
-						}
-
-						@Override
-						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-							Log.info("333333333333333333333333333333333333333333333");
-							rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-									new FetchNotSelectedCoursesAsyncCallback());
-
-							eventBus.fireEvent(new SelectCourseEvent($));
-						}
-					});
-				}
+				selectCourse();
 	        }
 	    }, DoubleClickEvent.getType());
 		
@@ -231,24 +223,26 @@ public class CourseListPresenter implements Presenter {
 					if (hoveredRow < 0) {
 						return;
 					}
-
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						Log.info("2hoveres is: " + hoveredCourse.getTitle());
-						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
-					}
+					//	rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
+				}
+					display.getNotSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
 					hoveredCourse = null;
-					hoveredRow = -1;
+					hoveredRow = lastHoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
 				}
 				if(isClick){
 					unselectedClickedRow = event.getIndex();
-					event.setCanceled(true);
+					 EventTarget eventTarget = event.getNativeEvent().getEventTarget();
+				        if (eventTarget.toString().equals("[object HTMLButtonElement]") || eventTarget.toString().equals("[object HTMLElement]")) {
+				        	selectCourse();
+				        }
 				}
 
 			}
@@ -258,7 +252,6 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				courseQuery = display.getCourseQuery(event);
-				Log.info("22222222222222222222222222222222222222222");
 				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 			}
@@ -295,7 +288,6 @@ public class CourseListPresenter implements Presenter {
 		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-		Log.info("11111111111111111111111111111111111111111111");
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
@@ -374,6 +366,67 @@ public class CourseListPresenter implements Presenter {
 			Log.error("Cthulhu has awoken!!!!!!!!");
 			Log.error("**+++++++++++"+caught.getLocalizedMessage()+"**+++++++++++"+caught.getMessage());
 			
+		}
+	}
+	
+	String getElementValue(
+		    Element element)
+		{
+		    Element child = element.getFirstChildElement().cast();
+		    while (child != null)
+		    {
+		        element = child;
+		        child = element.getFirstChildElement().cast();
+		    }
+		    return element.getFirstChild().getNodeValue();
+		}
+
+	void deselectCourse() {
+		
+		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
+		if ($ != null) {
+			rpcService.unselectCourse($, new AsyncCallback<Void>() {
+				@Override
+				public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+					Window.alert("Error while unselecting course.");
+					Log.error("Error while unselecting course.");
+				}
+
+				@Override
+				public void onSuccess(@SuppressWarnings("unused") Void result) {
+					rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+					Log.info("444444444444444444444444444444444444444444444444");
+					rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
+							new FetchNotSelectedCoursesAsyncCallback());
+
+					eventBus.fireEvent(new UnselectCourseEvent($));
+				}
+			});
+			numBtns = 0;
+			lastHoveredRow = -1;
+		}
+	}
+
+	void selectCourse() {
+		final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
+		if ($ != null) {
+			rpcService.selectCourse($, new AsyncCallback<Void>() {
+				@Override
+				public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+					Window.alert("Error while selecting course.");
+					Log.error("Error while selecting course.");
+				}
+
+				@Override
+				public void onSuccess(@SuppressWarnings("unused") Void result) {
+					rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+					Log.info("333333333333333333333333333333333333333333333");
+					rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
+							new FetchNotSelectedCoursesAsyncCallback());
+
+					eventBus.fireEvent(new SelectCourseEvent($));
+				}
+			});
 		}
 	}
 	

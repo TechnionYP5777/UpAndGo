@@ -68,6 +68,10 @@ public interface Resources extends ClientBundle {
 		 String examBarPanel();
 	 }
 	 
+	 interface CourseListCellStyle extends CssResource{
+		 String courseListCellPanel();
+	 }
+	 
 	@Source("resources/upandgo.css")
 	public MainStyle mainStyle();
 
@@ -91,6 +95,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/examsBarStyle.css")
 	public examsBarStyle examsBarStyle();
+	
+	@Source("resources/CourseListCellStyle.css")
+	public CourseListCellStyle courseListCellStyle();
 	
 
 }
