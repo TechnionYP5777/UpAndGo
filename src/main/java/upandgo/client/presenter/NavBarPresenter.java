@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasText;
@@ -34,10 +35,10 @@ public class NavBarPresenter implements Presenter {
 	protected EventBus eventBus;
 
 	protected LoginInfo loginInfo = null;
-	Anchor signInLink = new Anchor(signInMessage);
-	Anchor signOutLink = new Anchor(signOutMessage);
+	String signInHref = "";
+	String signOutHref = "";
 	
-	protected HandlerRegistration handler = null;
+	protected HandlerRegistration signInOutHandler = null;
 
 	@Inject
 	public NavBarPresenter(LoginServiceAsync rpc, EventBus eventBus, Display display) {
@@ -72,10 +73,14 @@ public class NavBarPresenter implements Presenter {
 
 		@Override
 		public void onClick(@SuppressWarnings("unused") ClickEvent event) {
-			if(handler != null)
-				handler.removeHandler();
-			signOutLink.getElement().scrollIntoView();
-			refreshUser();
+			Log.warn("entered LogInClickHandler onClick");
+			if(signInOutHandler != null)
+				signInOutHandler.removeHandler();
+			Log.warn("user's info: " + loginInfo.isLoggedIn() + " " + loginInfo.getNickname());
+			display.getSignInOutButton().setText(signOutMessage);
+			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
+			Window.Location.assign(signInHref);
+//			refreshUser();
 		}
 	}
 
@@ -83,13 +88,16 @@ public class NavBarPresenter implements Presenter {
 
 		@Override
 		public void onClick(@SuppressWarnings("unused") ClickEvent event) {
-			if(handler != null)
-				handler.removeHandler();
-			signInLink.getElement().scrollIntoView();
-			Log.warn("user have logged-out");
-			signInLink.setHref(loginInfo.getLoginUrl());
+			Log.warn("entered LogOutClickHandler onClick");
+			if(signInOutHandler != null)
+				signInOutHandler.removeHandler();
+			Log.warn("user's info: " + loginInfo.isLoggedIn() + " " + loginInfo.getNickname());
+//			Log.warn("user have logged-out");
+//			signInLink.setHref(loginInfo.getLoginUrl());
 			display.getSignInOutButton().setText(signInMessage);
-			handler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+			Window.Location.assign(signOutHref);
+//			refreshUser();
 		}
 	}
 
@@ -105,19 +113,19 @@ public class NavBarPresenter implements Presenter {
 			public void onSuccess(LoginInfo result) {
 				loginInfo = result;
 				if (result.isLoggedIn()) {
-					if(handler != null)
-						handler.removeHandler();
+					if(signInOutHandler != null)
+						signInOutHandler.removeHandler();
 					Log.warn("user have logged-in");
-					signOutLink.setHref(loginInfo.getLogoutUrl());
+					signOutHref = loginInfo.getLogoutUrl();
 					display.getSignInOutButton().setText(signOutMessage);
-					handler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
+					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
 				} else {
-					if(handler != null)
-						handler.removeHandler();
+					if(signInOutHandler != null)
+						signInOutHandler.removeHandler();
 					Log.warn("user haven't logged-in");
-					signInLink.setHref(loginInfo.getLoginUrl());
+					signInHref = loginInfo.getLoginUrl();
 					display.getSignInOutButton().setText(signInMessage);
-					handler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
 				}
 			}
 		});
