@@ -221,18 +221,18 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		int i;
 		for(i=0; i < is.size(); i++){
 			if(i == is.size()-1){
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
 				width+=275;
 				break;
 			}
 			int daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
 			Log.info("$$#$#$#" + daysBetween);
 			if(daysBetween == 0 ){			
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle();
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
 				width+=275;
 				while(daysBetween == 0 &&  i < is.size()-1){
 					i++;
-					examsBarHTML+="<br>" + is.get(i).getTitle();
+					examsBarHTML+="<br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
 					daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
 				}
 				examsBarHTML+="</div>";
@@ -245,7 +245,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				
 			}
 			else{
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().getDate() + "</u></b><br>" + is.get(i).getTitle() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
 				width+=275;
 				for(int k = 0 ; k < daysBetween-1; k++){
 					examsBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";

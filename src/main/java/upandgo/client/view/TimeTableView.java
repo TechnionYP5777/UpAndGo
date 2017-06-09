@@ -289,7 +289,7 @@ public class TimeTableView extends HorizontalPanel {
  		    drawDay(new ArrayList<Lesson>(), tuesdayTable);
  		    drawDay(new ArrayList<Lesson>(), wednesdayTable);
  		    drawDay(new ArrayList<Lesson>(), thursdayTable);
-
+ 		    return;
  	 	}
  		
  		final ArrayList<ArrayList<Lesson>> lessonsOfDay = seperateLessonsByDay(schedule);

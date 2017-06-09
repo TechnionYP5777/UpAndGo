@@ -30,11 +30,30 @@ public class Exam implements IsSerializable{
 			this.dayOfMonth = splited[1];
 			this.month = splited[2];
 			this.year = splited[3];
-			this.day = splited[4];
+			this.day = hebDayConverter(splited[4]);
 		}
 		
 	}
 	
+	private static String hebDayConverter(String intDay) {
+		switch (intDay) {
+		case "1":
+			return "א'";
+		case "2":
+			return "ב'";
+		case "3":
+			return "ג'";
+		case "4":
+			return "ד'";
+		case "5":
+			return "ה'";
+		case "6":
+			return "ו'";
+		default:
+			return "ש'";
+		}
+	}
+
 	public String getDay() {
 		return day;
 	}
@@ -55,17 +74,24 @@ public class Exam implements IsSerializable{
 		return time;
 	}
 	
+	public String getTimeToDisplay() {
+		if ("00:00".equals(time)) {
+			return "";
+		}
+		return time + " - ";
+	}
+	
 	public String getDate() {
 		return dayOfMonth + "." + month;
 	}
 	
 	@Override
 	public String toString(){
-		return getDate() + " בשעה"  + time;
+		return getDate() + " יום " + day;
 	}
 	
-	private String compareString() {
-		return year + month.toString() + dayOfMonth;
+	public String compareString() {
+		return year + month + dayOfMonth;
 	}
 	
 	@SuppressWarnings("boxing")
@@ -78,10 +104,12 @@ public class Exam implements IsSerializable{
 	}
 	
 	public int compare(Exam exam) {
-		if (Integer.parseInt(this.compareString()) > Integer.parseInt(exam.compareString())) {
+		int examA = Integer.parseInt(this.compareString());
+		int examB = Integer.parseInt(exam.compareString());
+		if (examA > examB) {
 			return 1;
 		}
-		if (Integer.parseInt(this.compareString()) == Integer.parseInt(exam.compareString())) {
+		if (examA == examB) {
 			return 0;
 		} 
 		return -1;
@@ -103,12 +131,12 @@ public class Exam implements IsSerializable{
 		}
 		if (exama.getMonth().equals(examb.getMonth())) {
 			monthDays[1] = 28;
-			return Integer.parseInt(exama.getDayOfMonth()) - Integer.parseInt(examb.getDayOfMonth());
+			return Integer.parseInt(examb.getDayOfMonth()) - Integer.parseInt(exama.getDayOfMonth());
 		}
 		for (int i = Integer.parseInt(exama.getMonth()); i < Integer.parseInt(examb.getMonth()) -1 ; i++) {
 			res += monthDays[i];
 		}
-		res += monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth())
+		res += (monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth()))
 				+ Integer.parseInt(examb.getDayOfMonth());
 		monthDays[1] = 28;
 		return res;
@@ -148,22 +176,3 @@ public class Exam implements IsSerializable{
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
