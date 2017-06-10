@@ -3,8 +3,7 @@ package upandgo.client.presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.event.shared.EventBus;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
@@ -17,6 +16,7 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -25,13 +25,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
 
-import upandgo.client.view.NotSelectedCourseCell;
-import upandgo.client.view.SelectedCourseCell;
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
-import com.allen_sauer.gwt.log.client.Log;
-
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -103,8 +99,6 @@ public class CourseListPresenter implements Presenter {
 	String selectedFaculty = "";
 	CourseId hoveredCourse = null;
 	int hoveredRow = -1;
-	int lastHoveredRow = -1;
-	short numBtns =0;
 	
 	
 	
@@ -158,33 +152,18 @@ public class CourseListPresenter implements Presenter {
 					if (hoveredRow < 0) {
 						return;
 					}
+					
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
-					if(lastHoveredRow != hoveredRow ){
-						hoveredCourse = newCourseId;					
-						if(numBtns==0){
-							lastHoveredRow=hoveredRow;
-							numBtns++;
-							//((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).drawButton();
-							//display.getSelectedCoursesList().redrawRow(hoveredRow);
-						}
-					}
-					
-					
-					//if(!newCourseId.equals(hoveredCourse)) {
-						
+					if(!newCourseId.equals(hoveredCourse)) {
+						hoveredCourse = newCourseId;
 						//rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
 					//}
 					display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
-					if(event.getNativeEvent().getEventTarget().toString().equals("[object HTMLTableCellElement]")){
-						
-						//((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).dontDrawButton();
-						//display.getSelectedCoursesList().redrawRow(lastHoveredRow);
-						numBtns = 0;
 						hoveredCourse = null;
-						lastHoveredRow=hoveredRow = -1;
+						hoveredRow = -1;
 						display.setHoveredRow(-1);
 						display.setHoveredCourseDetail("");
 					}
@@ -233,7 +212,7 @@ public class CourseListPresenter implements Presenter {
 
 				if (isMouseOut) {
 					hoveredCourse = null;
-					hoveredRow = lastHoveredRow = -1;
+					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail("");
 				}
@@ -368,19 +347,6 @@ public class CourseListPresenter implements Presenter {
 			
 		}
 	}
-	
-	String getElementValue(
-		    Element element)
-		{
-		    Element child = element.getFirstChildElement().cast();
-		    while (child != null)
-		    {
-		        element = child;
-		        child = element.getFirstChildElement().cast();
-		    }
-		    return element.getFirstChild().getNodeValue();
-		}
-
 	void deselectCourse() {
 		
 		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
@@ -402,8 +368,6 @@ public class CourseListPresenter implements Presenter {
 					eventBus.fireEvent(new UnselectCourseEvent($));
 				}
 			});
-			numBtns = 0;
-			lastHoveredRow = -1;
 		}
 	}
 

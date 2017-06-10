@@ -1,34 +1,12 @@
 package upandgo.client.view;
 
 
-/**
- * 
- * @author danabra
- * @since 7-04-17
- * 
- * GUI class for list of courses and course selection 
- * 
- */
-import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
-import static com.google.gwt.query.client.GQuery.$;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.google.gwt.cell.client.AbstractSafeHtmlCell;
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.Cell;
-import com.google.gwt.cell.client.CompositeCell;
-import com.google.gwt.cell.client.HasCell;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.FontStyle;
 import com.google.gwt.dom.client.Style.Unit;
@@ -36,14 +14,10 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.text.shared.SafeHtmlRenderer;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -212,7 +186,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setSelectedCourses(List<CourseId> courses) {
-		((SelectedCourseCell) ccl.getColumn(0).getCell()).dontDrawButton();
         ccl.setRowCount(courses.size(), true);
         ccl.setVisibleRange(0, courses.size());
 	    ccl.setRowData(0,courses);
