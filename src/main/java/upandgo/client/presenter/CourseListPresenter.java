@@ -284,7 +284,7 @@ public class CourseListPresenter implements Presenter {
 		
 		panel.add(examsBarPanel);
 		panel.setWidgetLeftWidth(examsBarPanel, 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 6, Unit.EM);
+		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 5, Unit.EM);
 		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
