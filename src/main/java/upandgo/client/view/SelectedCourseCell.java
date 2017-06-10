@@ -4,7 +4,6 @@ import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 import upandgo.client.Resources;
-import upandgo.client.Resources.CourseListCellStyle;
 
 public class SelectedCourseCell extends AbstractCell<String> {
 	
