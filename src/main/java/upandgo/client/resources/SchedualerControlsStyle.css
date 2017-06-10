@@ -2,13 +2,19 @@
 
 @external .btn;
 
-.SchedualerControlsPanel .btn{
+.SchedulerControlsPanel .btn{
 	cursor:pointer;
 	width: 10em;
 	margin-bottom: 2em;
 }
 
-.SchedualerControlsPanel{
+.SchedulerIndexWell{
+	width: 11em;
+	height: 3em;
+	margin-bottom: 2em;
+}
+
+.SchedulerControlsPanel{
 	background-color: WhiteSmoke;
 	width: 100%
 }

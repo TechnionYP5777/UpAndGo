@@ -2,6 +2,9 @@ package upandgo.client.view;
 
 
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.Well;
+import org.gwtbootstrap3.client.ui.constants.WellSize;
+import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -20,6 +23,8 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button buildSchedule = new Button("<i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
 	Button clearSchedule = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;נקה מערכת");
 	Button setConstrains = new Button("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הגדר אילוצים");
+	
+	Well scheduleWell = new Well();
 	Button nextSchedule = new Button("מערכת באה&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
 	Button prevSchedule = new Button("<i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מערכת קודמת");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
@@ -41,10 +46,12 @@ public class SchedulerControlsView extends VerticalPanel{
 
 	private void InitializePanel() {
 		this.setHorizontalAlignment(ALIGN_CENTER);
-		this.setStyleName(scStyle.SchedualerControlsPanel());
+		this.setStyleName(scStyle.SchedulerControlsPanel());
 		this.add(buildSchedule);
 		this.add(clearSchedule);
 		this.add(setConstrains);
+		
+		this.add(scheduleWell);
 		this.add(nextSchedule);
 		this.add(prevSchedule);
 		this.add(saveSchedule);
@@ -57,6 +64,11 @@ public class SchedulerControlsView extends VerticalPanel{
 		prevSchedule.setStyleName("btn btn-primary");
 		saveSchedule.setStyleName("btn btn-info");
 		
+		scheduleWell.addStyleName(scStyle.SchedulerIndexWell());
+		scheduleWell.setSize(WellSize.SMALL);
+		scheduleWell.add(new Text(" "));
+	
+
 		nextSchedule.setEnabled(false);
 		prevSchedule.setEnabled(false);
 
@@ -92,7 +104,16 @@ public class SchedulerControlsView extends VerticalPanel{
 		nextSchedule.setEnabled(enable);
 	}
 	
+	public void setCurrentScheduleIndex(int index, int max){
+		scheduleWell.clear();
+		if (index!=0){
+			scheduleWell.add(new Text(max + " / " + index));
+		}
+		
+	}
+	
 	public void scheduleBuilt(){
 		buildSchedule.setHTML("<i class=\"fa fa-calendar-check-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
 	}
+	
 }

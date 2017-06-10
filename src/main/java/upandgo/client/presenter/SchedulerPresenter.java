@@ -85,6 +85,7 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void setPrevEnable(boolean enable);
 		public void setNextEnable(boolean enable);
+		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 		
 		public Widget getAsWidget();
@@ -183,6 +184,8 @@ public class SchedulerPresenter implements Presenter {
 			public void onClick(ClickEvent event) {
 				view.setSchedule(null, colorMap);
 				eventBus.fireEvent(new clearScheduleEvent());
+				view.setCurrentScheduleIndex(0, 0);
+
 			}
 		});
 		
@@ -252,6 +255,8 @@ public class SchedulerPresenter implements Presenter {
 							}
 						}
 						view.scheduleBuilt();
+						view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+
 					}
 					private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
 					    return new ArrayList<>();
@@ -274,6 +279,7 @@ public class SchedulerPresenter implements Presenter {
 					view.setNextEnable(false);
 				}
 				view.setPrevEnable(true);
+				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
 			}
 		});
 		
@@ -291,6 +297,8 @@ public class SchedulerPresenter implements Presenter {
 					view.setPrevEnable(false);
 				}
 				view.setNextEnable(true);
+				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+
 			}
 		});
 		

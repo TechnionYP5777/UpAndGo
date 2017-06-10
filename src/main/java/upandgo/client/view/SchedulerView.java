@@ -166,6 +166,10 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		schedualerControlsView.setNextEnable(enable);
 	}
 	
+	public void setCurrentScheduleIndex(int index, int max){
+		schedualerControlsView.setCurrentScheduleIndex(index,max);
+	}
+	
 	@Override
 	public void scheduleBuilt(){
 		schedualerControlsView.scheduleBuilt();

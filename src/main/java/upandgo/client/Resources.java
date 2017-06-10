@@ -43,7 +43,9 @@ public interface Resources extends ClientBundle {
 	 }
 	 
 	 interface SchedualerControlsStyle extends CssResource {	 
-		 String SchedualerControlsPanel();
+		 String SchedulerControlsPanel();
+		 
+		 String SchedulerIndexWell();
 	 }
 	 
 	 interface SchedualerConstraintsStyle extends CssResource {	 		 
