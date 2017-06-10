@@ -1,7 +1,12 @@
 @CHARSET "UTF-8";
 
+@external .cell-button .courseSelectionRow;
 
 
+.courseSelectionRow:hover .cell-button{
+	display: inline;
+	
+}
 .ChosenCourses{
 
 

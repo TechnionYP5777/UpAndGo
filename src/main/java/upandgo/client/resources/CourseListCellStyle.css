@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-@external .course .course-name .cell-button ;
+@external .course .course-name .cell-button .courseSelectionRow;
 .courseListCellPanel{
 	
 }
@@ -19,6 +19,7 @@
 }
 
 .cell-button{
+	display: none;
 	font-size:10px; 
 	float:left; 
 	padding: 1px 3px;

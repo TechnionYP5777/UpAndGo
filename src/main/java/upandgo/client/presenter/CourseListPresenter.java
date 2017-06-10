@@ -164,8 +164,8 @@ public class CourseListPresenter implements Presenter {
 						if(numBtns==0){
 							lastHoveredRow=hoveredRow;
 							numBtns++;
-							((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).drawButton();
-							display.getSelectedCoursesList().redrawRow(hoveredRow);
+							//((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).drawButton();
+							//display.getSelectedCoursesList().redrawRow(hoveredRow);
 						}
 					}
 					
@@ -180,8 +180,8 @@ public class CourseListPresenter implements Presenter {
 				if (isMouseOut) {
 					if(event.getNativeEvent().getEventTarget().toString().equals("[object HTMLTableCellElement]")){
 						
-						((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).dontDrawButton();
-						display.getSelectedCoursesList().redrawRow(lastHoveredRow);
+						//((SelectedCourseCell) display.getSelectedCoursesList().getColumn(0).getCell()).dontDrawButton();
+						//display.getSelectedCoursesList().redrawRow(lastHoveredRow);
 						numBtns = 0;
 						hoveredCourse = null;
 						lastHoveredRow=hoveredRow = -1;

@@ -41,6 +41,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.text.shared.SafeHtmlRenderer;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.HTML;
@@ -102,6 +103,12 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    DefaultSelectionEventManager<CourseId> selectionEventManager1 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
 	    ccl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager1);
 	    ccl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.DISABLED);
+	    ccl.setRowStyles(new RowStyles<CourseId>() {
+			@Override
+			public String getStyleNames(CourseId row, int rowIndex) {
+				return "courseSelectionRow";
+			}
+		});
 	    cclp.add(ccl);
 	    cclp.setHeight("15em");
 	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
@@ -114,6 +121,12 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    scl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.DISABLED);
     	scl.setWidth("100%");
     	scl.addColumn(notSelectedCOurseColumn);
+    	scl.setRowStyles(new RowStyles<CourseId>() {
+			@Override
+			public String getStyleNames(CourseId row, int rowIndex) {
+				return "courseSelectionRow";
+			}
+		});
 	    sclp.add(scl);
 	    sclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 	    sclp.getElement().getStyle().setBorderWidth(1, Unit.PX);

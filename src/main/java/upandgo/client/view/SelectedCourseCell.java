@@ -31,13 +31,13 @@ public class SelectedCourseCell extends AbstractCell<String> {
 	    }
 	    String parts[] = value.split(" - ");
 	    sb.appendHtmlConstant("<div class=\"course\"><div class=\"course-name\">" + parts[0] + "</div> -" + parts[1]);
-		if (drawButton == Boolean.TRUE) {
+		//if (drawButton == Boolean.TRUE) {
 					sb.appendHtmlConstant(
 					"<button type=\"button\" class=\"btn btn-danger cell-button\" >"
 							+ "<i class=\"fa fa-times\" aria-hidden=\"true\"></i>" + "&nbsp;&nbsp;הסר" + "</button>"
 							+ "</div>");
-		} else
-			sb.appendHtmlConstant("</div>");
+		//} else
+			//sb.appendHtmlConstant("</div>");
 		
 	}
 	public void dontDrawButton(){

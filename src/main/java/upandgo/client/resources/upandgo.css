@@ -24,7 +24,6 @@ body:click {
 .gwt-ListBox{
 }
 
-.gwt-ListBox option:nth-child\(even\) { background-color:#f5f5f5; }
 
 
 .gwt-ListBox:disabled{
