@@ -2,8 +2,10 @@
 
 @external .btn;
 
-.btn{
+.SchedualerControlsPanel .btn{
 	cursor:pointer;
+	width: 10em;
+	margin-bottom: 2em;
 }
 
 .SchedualerControlsPanel{
