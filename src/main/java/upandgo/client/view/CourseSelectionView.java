@@ -14,10 +14,12 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.query.client.css.UnicodeBidiProperty.UnicodeBidi;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.RowStyles;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
@@ -45,6 +47,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
     private HTML examsBar;
+    private Button clearCourses = new Button("<i class=\"fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
     private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
     String hoveredCourseDetail = "Loading...";
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
@@ -151,7 +154,17 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	examsScrollPanel.setWidget(examsBar);
     	examsScrollPanel.addStyleName(ebStyle.examBarPanel());
     	examsBar.addStyleName("horizontal-scroll-wrapper");
-		
+    	
+    	
+    	//initializing clear course button
+    	clearCourses.setStyleName("btn btn-primary");
+    	//clearCourses.removeStyleName("style");
+    	clearCourses.getElement().getStyle().setHeight(2, Unit.EM);
+    	clearCourses.getElement().getStyle().setWidth(7, Unit.EM);
+    	clearCourses.getElement().getStyle().setFontSize(12, Unit.PX);
+    	clearCourses.getElement().getStyle().setLeft(0,	Unit.PX);
+    	
+    	
     	this.getElement().getStyle().setMargin(10, Unit.PX);
     	this.add(cc);
 	    this.add(cclp);
@@ -159,9 +172,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    this.add(faculties);
 	    this.add(searchCourse);
 	    this.add(sclp);
+	    this.add(clearCourses);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sc, 18,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 20,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 23,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sclp, 26,  Unit.EM, 0, Unit.EM);
