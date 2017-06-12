@@ -296,7 +296,7 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10;00")));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
