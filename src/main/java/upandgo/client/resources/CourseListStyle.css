@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-@external .cell-button .courseSelectionRow;
+@external .cell-button .courseSelectionRow .clear-button;
 
 
 .courseSelectionRow:hover .cell-button{
@@ -10,4 +10,12 @@
 .ChosenCourses{
 
 
+}
+
+.clear-button{
+	height: 2.5em;
+    width: 7em;
+    font-size: 12px;
+    right: auto !important;
+    position: absolute;
 }

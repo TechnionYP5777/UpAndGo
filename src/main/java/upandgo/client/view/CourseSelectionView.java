@@ -157,13 +157,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	
     	
     	//initializing clear course button
-    	clearCourses.setStyleName("btn btn-primary");
-    	//clearCourses.removeStyleName("style");
-    	clearCourses.getElement().getStyle().setHeight(2, Unit.EM);
-    	clearCourses.getElement().getStyle().setWidth(7, Unit.EM);
-    	clearCourses.getElement().getStyle().setFontSize(12, Unit.PX);
-    	clearCourses.getElement().getStyle().setLeft(0,	Unit.PX);
-    	
+    	clearCourses.setStyleName("btn btn-primary clear-button");
+   
     	
     	this.getElement().getStyle().setMargin(10, Unit.PX);
     	this.add(cc);
@@ -175,8 +170,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    this.add(clearCourses);
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 44, Unit.EM);
 	    this.setWidgetTopBottom(sc, 18,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 20,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 23,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sclp, 26,  Unit.EM, 0, Unit.EM);
