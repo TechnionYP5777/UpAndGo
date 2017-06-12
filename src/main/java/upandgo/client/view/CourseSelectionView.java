@@ -12,9 +12,9 @@ import com.google.gwt.dom.client.Style.FontStyle;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.query.client.css.UnicodeBidiProperty.UnicodeBidi;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
@@ -55,6 +55,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     public CourseSelectionView(){
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
+
 
     }
     private void InitializePanel(){
@@ -363,6 +364,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	@Override
 	public Widget getExamsBar() {
 		return examsScrollPanel;
+	}
+	@Override
+	public HasClickHandlers getClearCoursesButton() {
+		return clearCourses;
 	} 
     
 }

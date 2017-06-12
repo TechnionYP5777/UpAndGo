@@ -113,4 +113,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		scheduleModel.saveChosenLessonGroups(sched);
 
 	}
+
+	@Override
+	public void unselectAllCourses() {
+		model.UnselectAllCourses();
+		
+	}
 }

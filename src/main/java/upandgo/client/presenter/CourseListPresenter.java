@@ -9,9 +9,12 @@ import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -63,6 +66,8 @@ public class CourseListPresenter implements Presenter {
 		void setHoveredRow(int row);
 
 		void setHoveredCourseDetail(String detail);
+		
+		HasClickHandlers getClearCoursesButton();
 
 		CourseId getSelectedCourse(int row);
 
@@ -256,6 +261,30 @@ public class CourseListPresenter implements Presenter {
 						new FetchNotSelectedCoursesAsyncCallback());
 			}
 		});
+		
+		display.getClearCoursesButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rpcService.unselectAllCourses(new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+						Window.alert("Error while selecting course.");
+						Log.error("Error while selecting course.");
+					}
+
+					@Override
+					public void onSuccess(@SuppressWarnings("unused") Void result) {
+						rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+						Log.info("333333333333333333333333333333333333333333333");
+						rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
+								new FetchNotSelectedCoursesAsyncCallback());
+					}
+				});
+				
+			}
+		});
+		
 
 	}
 

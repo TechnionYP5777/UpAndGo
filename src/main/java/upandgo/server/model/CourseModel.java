@@ -57,15 +57,15 @@ public class CourseModel { // implements Model {
 			return;
 
 		// save picking in DB
-		final TreeSet<CourseId> pickedList = new TreeSet<>();
+		//final TreeSet<CourseId> pickedList = new TreeSet<>();
 		pickedCourseList.add(pickedCourse);
 		
-		Iterator<Course> it = pickedCourseList.iterator();
-		while(it.hasNext()) {
-			Course λ = it.next();
-			pickedList.add(new CourseId(λ.getId(), λ.getName(),
-					λ.getaTerm(), λ.getbTerm()));
-		}
+//		Iterator<Course> it = pickedCourseList.iterator();
+//		while(it.hasNext()) {
+//			Course λ = it.next();
+//			pickedList.add(new CourseId(λ.getId(), λ.getName(),
+//					λ.getaTerm(), λ.getbTerm()));
+//		}
 		
 	}
 
@@ -91,15 +91,15 @@ public class CourseModel { // implements Model {
 			return;
 
 		// save picking in DB
-		final TreeSet<CourseId> pickedList = new TreeSet<>();
+		//final TreeSet<CourseId> pickedList = new TreeSet<>();
 		pickedCourseList.remove(droppedCourse);
 		
-		Iterator<Course> it = pickedCourseList.iterator();
-		while(it.hasNext()) {
-			Course λ = it.next();
-			pickedList.add(new CourseId(λ.getId(), λ.getName(),
-					λ.getaTerm(), λ.getbTerm()));
-		}
+//		Iterator<Course> it = pickedCourseList.iterator();
+//		while(it.hasNext()) {
+//			Course λ = it.next();
+//			pickedList.add(new CourseId(λ.getId(), λ.getName(),
+//					λ.getaTerm(), λ.getbTerm()));
+//		}
 		
 	}
 
@@ -213,5 +213,10 @@ public class CourseModel { // implements Model {
 
 	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
+	}
+
+	public void UnselectAllCourses() {
+		pickedCourseList.clear();
+		
 	}
 }

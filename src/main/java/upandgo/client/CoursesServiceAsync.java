@@ -33,6 +33,8 @@ public interface CoursesServiceAsync {
 
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
 	
+	public void unselectAllCourses(AsyncCallback<Void> callback);
+	
 	public void getChosenCoursesList(AsyncCallback<List<Course>> callback);
 	
 	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
