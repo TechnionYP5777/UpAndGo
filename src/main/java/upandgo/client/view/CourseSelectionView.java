@@ -165,13 +165,14 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	this.add(cc);
 	    this.add(cclp);
 	    this.add(sc);
+	    this.add(clearCourses);
 	    this.add(faculties);
 	    this.add(searchCourse);
 	    this.add(sclp);
-	    this.add(clearCourses);
+	 
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 44, Unit.EM);
+	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sc, 18,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 20,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 23,  Unit.EM, 0, Unit.EM);
