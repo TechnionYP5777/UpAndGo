@@ -390,8 +390,6 @@ public class CourseListPresenter implements Presenter {
 						eventBus.fireEvent(new UnselectCourseEvent($));
 					}
 				});
-				numBtns = 0;
-				lastHoveredRow = -1;
 			} else {
 				notSelectedCourses.add($);
 				display.setNotSelectedCourses(notSelectedCourses);
