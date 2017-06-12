@@ -20,9 +20,9 @@ import upandgo.client.Resources.SchedualerConstraintsStyle;
 
 public class SchedulerConstraintsView extends VerticalPanel implements ModalComponent{
 	
-	InlineCheckBox daysOffCB = new InlineCheckBox("ימי חופש");
+	InlineCheckBox daysOffCB = new InlineCheckBox("מספר מקסימלי של ימים חופשיים");
 
-	InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות");
+	InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות בין שיעורים");
 
 	InlineCheckBox startTimeCB = new InlineCheckBox("שעת התחלה");
 	

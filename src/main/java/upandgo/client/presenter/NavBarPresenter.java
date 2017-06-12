@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 
 import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
+import upandgo.client.event.AuthenticationEvent;
 
 public class NavBarPresenter implements Presenter {
 
@@ -80,6 +81,7 @@ public class NavBarPresenter implements Presenter {
 			display.getSignInOutButton().setText(signOutMessage);
 			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
 			Window.Location.assign(signInHref);
+			eventBus.fireEvent(new AuthenticationEvent(true));
 //			refreshUser();
 		}
 	}
@@ -96,6 +98,7 @@ public class NavBarPresenter implements Presenter {
 //			signInLink.setHref(loginInfo.getLoginUrl());
 			display.getSignInOutButton().setText(signInMessage);
 			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+			eventBus.fireEvent(new AuthenticationEvent(false));
 			Window.Location.assign(signOutHref);
 //			refreshUser();
 		}
@@ -115,17 +118,19 @@ public class NavBarPresenter implements Presenter {
 				if (result.isLoggedIn()) {
 					if(signInOutHandler != null)
 						signInOutHandler.removeHandler();
-					Log.warn("user have logged-in");
+					Log.warn("user have signed in");
 					signOutHref = loginInfo.getLogoutUrl();
 					display.getSignInOutButton().setText(signOutMessage);
 					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
+					eventBus.fireEvent(new AuthenticationEvent(true));
 				} else {
 					if(signInOutHandler != null)
 						signInOutHandler.removeHandler();
-					Log.warn("user haven't logged-in");
+					Log.warn("user haven't signed in");
 					signInHref = loginInfo.getLoginUrl();
 					display.getSignInOutButton().setText(signInMessage);
 					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+					eventBus.fireEvent(new AuthenticationEvent(false));
 				}
 			}
 		});
