@@ -37,7 +37,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_a() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -58,7 +58,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_a111() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -79,7 +79,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_a2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -101,7 +101,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
+		cr = new XmlCourseLoader("schedulerTest2.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -118,7 +118,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_b2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest2.XML");
+		cr = new XmlCourseLoader("schedulerTest2.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -134,7 +134,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_c() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
+		cr = new XmlCourseLoader("schedulerTest3.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -151,7 +151,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_c2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest3.XML");
+		cr = new XmlCourseLoader("schedulerTest3.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -167,7 +167,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_d() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
+		cr = new XmlCourseLoader("schedulerTest4.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -180,7 +180,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_d2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest4.XML");
+		cr = new XmlCourseLoader("schedulerTest4.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -191,7 +191,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_e() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -213,7 +213,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_e2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -234,7 +234,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints1() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -259,7 +259,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints2() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -284,7 +284,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints3() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -296,7 +296,7 @@ public class SchedulerTest {
 		final Timetable t = Scheduler.getTimetablesList(courses, constraints).get(0);
 
 		assert t.getLessonGroups().get(0).getLessons().get(0).getStartTime()
-				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10;00")));
+				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.WEDNESDAY, LocalTime.parse("13:00")));
 		assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
@@ -309,7 +309,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints4() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -335,7 +335,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints5() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -356,7 +356,7 @@ public class SchedulerTest {
 	
 	@Test
 	public void test_constraints6() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest7.XML");
+		cr = new XmlCourseLoader("schedulerTest7.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -386,7 +386,7 @@ public class SchedulerTest {
 
 	@Test
 	public void test_scheduleTimetable1() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);

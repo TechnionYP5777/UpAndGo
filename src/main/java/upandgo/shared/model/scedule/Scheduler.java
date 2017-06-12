@@ -46,19 +46,19 @@ public class Scheduler implements IsSerializable{
 		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
 		colorMap = mapCoursesToColors(lcourse);
 				
-		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
+		//Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
 		final List<Timetable> result = new ArrayList<>();
-		Log.info("Scheduler: here");
+		//Log.info("Scheduler: here");
 
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
-		Log.info("Scheduler: here");
+		//Log.info("Scheduler: here");
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
-		Log.info("Scheduler: here");
+		//Log.info("Scheduler: here");
 
 		for (int last = indexes.size() - 1, msb;;) {
 			
-			Log.info("Scheduler: in for with indexes " + indexes);
+			//Log.info("Scheduler: in for with indexes " + indexes);
 
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
@@ -69,7 +69,7 @@ public class Scheduler implements IsSerializable{
 			int lastAdded = 0;
 			for (lastAdded = 0; lastAdded < lessons.size(); ++lastAdded) {
 				b = $.addLesson(lessons.get(lastAdded));
-				Log.info("current list: " + $);
+				//Log.info("************current list: " + $ + "************");
 				// if you can't add that lesson than all combination including
 				// him are not valid
 				// therefore there is no use to check the rest of them -
@@ -214,15 +214,15 @@ public class Scheduler implements IsSerializable{
 
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
-		Log.info("Scheduler: in initMainArr with "+ lcourse.size() + " courses");
+		//Log.info("Scheduler: in initMainArr with "+ lcourse.size() + " courses");
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
 		for (final Course xxx : lcourse) {
-			Log.info("Scheduler: in initMainArr course " + xxx.getId());
-			Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
-			Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
+			//Log.info("Scheduler: in initMainArr course " + xxx.getId());
+			//Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
+			//Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
-			Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
+			//Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

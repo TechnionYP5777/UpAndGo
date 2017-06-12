@@ -47,6 +47,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
     private HTML examsBar;
+    private HTML examsBarB;
     private Button clearCourses = new Button("<i class=\"fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
     private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
     String hoveredCourseDetail = "Loading...";
@@ -201,9 +202,12 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    ccl.setRowData(0,courses);
 	    
 	    List<CourseId> is = new ArrayList<>();
+	    List<CourseId> isB = new ArrayList<>();
 	    for(CourseId c : courses){
 	    	if(c.aTerm()!=null)
 	    		is.add(c);
+	    	if(c.bTerm()!=null)
+	    		isB.add(c);
 	    }
 	    Collections.sort(is,(new Comparator<CourseId>() { //sort courses by their final exam date
 
@@ -212,47 +216,93 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				return o1.aTerm().compare(o2.aTerm());
 			}
 		}));
+	    Collections.sort(isB,(new Comparator<CourseId>() { //sort courses by their final exam date
+
+			@Override
+			public int compare(CourseId o1, CourseId o2) {
+				return o1.bTerm().compare(o2.bTerm());
+			}
+		}));
 	    long width=0;
-		String examsBarHTML = "";
-		int i;
-		for(i=0; i < is.size(); i++){
+		String examsAlephBarHTML = "";
+		for(int i=0; i < is.size(); i++){
 			if(i == is.size()-1){
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
 				width+=275;
 				break;
 			}
 			int daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
 			Log.info("$$#$#$#" + daysBetween);
 			if(daysBetween == 0 ){			
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
 				width+=275;
 				while(daysBetween == 0 &&  i < is.size()-1){
 					i++;
-					examsBarHTML+="<br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
+					examsAlephBarHTML+="<br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
 					daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
 				}
-				examsBarHTML+="</div>";
+				examsAlephBarHTML+="</div>";
 				if(daysBetween > 0 ){
 					for(int k = 0 ; k < daysBetween-1; k++){
-						examsBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
+						examsAlephBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
 						width+=85;
 					}
 				}
 				
 			}
 			else{
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name() + "</div> ";
 				width+=275;
 				for(int k = 0 ; k < daysBetween-1; k++){
-					examsBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
+					examsAlephBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
 					width+=85;
 				}
 			}
 		}
-		examsBar = new HTML(examsBarHTML);
+		long widthb=0;
+		String examsBetBarHTML = "";
+		for(int i=0; i < isB.size(); i++){
+			if(i == isB.size()-1){
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).bTerm().toString() + "</u></b><br>" + isB.get(i).bTerm().getTimeToDisplay() + isB.get(i).name() + "</div> ";
+				widthb+=275;
+				break;
+			}
+			int daysBetween = isB.get(i+1).bTerm().daysBetweenExams(isB.get(i).bTerm());
+			Log.info("$$#$#$#" + daysBetween);
+			if(daysBetween == 0 ){			
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + isB.get(i).bTerm().toString() + "</u></b><br>" + isB.get(i).bTerm().getTimeToDisplay() + isB.get(i).name();
+				widthb+=275;
+				while(daysBetween == 0 &&  i < isB.size()-1){
+					i++;
+					examsBetBarHTML+="<br>" + isB.get(i).bTerm().getTimeToDisplay() + isB.get(i).name();
+					daysBetween = isB.get(i+1).bTerm().daysBetweenExams(isB.get(i).bTerm());
+				}
+				examsBetBarHTML+="</div>";
+				if(daysBetween > 0 ){
+					for(int k = 0 ; k < daysBetween-1; k++){
+						examsBetBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
+						widthb+=85;
+					}
+				}
+				
+			}
+			else{
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).bTerm().toString() + "</u></b><br>" + isB.get(i).bTerm().getTimeToDisplay() + isB.get(i).name() + "</div> ";
+				widthb+=275;
+				for(int k = 0 ; k < daysBetween-1; k++){
+					examsBetBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
+					widthb+=85;
+				}
+			}
+		}
+		examsBar = new HTML(examsAlephBarHTML);
 		examsBar.addStyleName("horizontal-scroll-wrapper");
 		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
 		examsScrollPanel.setWidget(examsBar);
+//		examsBarB = new HTML(examsBetBarHTML);
+//		examsBarB.addStyleName("horizontal-scroll-wrapper");
+//		examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
+//		examsScrollPanel.setWidget(examsBarB);
 
 		
 		

@@ -29,7 +29,7 @@ public class SchedulerIteratorTest {
 
 	@Test
 	public void test_a() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -60,7 +60,7 @@ public class SchedulerIteratorTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_b() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -78,7 +78,7 @@ public class SchedulerIteratorTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_c() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);

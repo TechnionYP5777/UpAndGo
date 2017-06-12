@@ -54,7 +54,7 @@ public class BlankSpaceRankTests {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_a() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest9.XML");
+		cr = new XmlCourseLoader("schedulerTest9.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -72,7 +72,7 @@ public class BlankSpaceRankTests {
 
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("resources/testXML/schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
