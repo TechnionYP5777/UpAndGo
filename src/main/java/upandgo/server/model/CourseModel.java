@@ -175,7 +175,7 @@ public class CourseModel { // implements Model {
 		List<CourseId> relevantCourses = new ArrayList<>();
 		relevantCourses.add(new CourseId());
 		for(CourseId c : getNotSelectedCoursesByFaculty(faculty)){
-			if(FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 70)
+			if(FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 50)
 				relevantCourses.add(c);
 		}
 		
