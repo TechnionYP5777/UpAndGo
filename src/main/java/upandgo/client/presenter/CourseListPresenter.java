@@ -67,6 +67,8 @@ public class CourseListPresenter implements Presenter {
 
 		void setHoveredCourseDetail(String detail);
 		
+		void updateLists();
+		
 		HasClickHandlers getClearCoursesButton();
 
 		CourseId getSelectedCourse(int row);
@@ -115,6 +117,7 @@ public class CourseListPresenter implements Presenter {
 
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;
+	List<CourseId> allCourses;
 	List<String> faculties;
 	String courseQuery = "";
 
@@ -266,6 +269,10 @@ public class CourseListPresenter implements Presenter {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				selectedCourses.clear();
+				notSelectedCourses.clear();
+				notSelectedCourses.addAll(allCourses);
+				display.updateLists();
 				rpcService.unselectAllCourses(new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -275,10 +282,7 @@ public class CourseListPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-						Log.info("333333333333333333333333333333333333333333333");
-						rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-								new FetchNotSelectedCoursesAsyncCallback());
+						
 					}
 				});
 				
@@ -336,8 +340,8 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
-			// result.remove(new CourseId()); //???
-			notSelectedCourses = result;
+			notSelectedCourses =result;
+			allCourses = new ArrayList<>(result);
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 
@@ -401,7 +405,15 @@ public class CourseListPresenter implements Presenter {
 
 		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
-			if (isSignedIn) {
+			if (!isSignedIn) {
+				selectedCourses.remove($);
+				notSelectedCourses.clear();
+				for(CourseId c : allCourses){
+					if(!selectedCourses.contains(c)){
+						notSelectedCourses.add(c);
+					}
+				}
+				display.updateLists();
 				rpcService.unselectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -411,20 +423,23 @@ public class CourseListPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-						Log.info("444444444444444444444444444444444444444444444444");
-						rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-								new FetchNotSelectedCoursesAsyncCallback());
 
 						eventBus.fireEvent(new UnselectCourseEvent($));
 					}
 				});
 			} else {
-				notSelectedCourses.add($);
-				display.setNotSelectedCourses(notSelectedCourses);
+
 				selectedCourses.remove($);
-				display.setSelectedCourses(selectedCourses);
-				eventBus.fireEvent(new UnselectCourseEvent($));
+				notSelectedCourses.clear();
+				for(CourseId c : allCourses){
+					if(!selectedCourses.contains(c)){
+						notSelectedCourses.add(c);
+					}
+				}
+			
+				
+				display.updateLists();
+//				eventBus.fireEvent(new UnselectCourseEvent($));
 			}
 		}
 	}
@@ -433,6 +448,10 @@ public class CourseListPresenter implements Presenter {
 		final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
 		if ($ != null) {
 			if (isSignedIn) {
+				notSelectedCourses.remove($);
+				selectedCourses.add($);
+				display.updateLists();
+
 				rpcService.selectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -442,20 +461,14 @@ public class CourseListPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
-						Log.info("333333333333333333333333333333333333333333333");
-						rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-								new FetchNotSelectedCoursesAsyncCallback());
-
+						
 						eventBus.fireEvent(new SelectCourseEvent($));
 					}
 				});
 			} else {
 				notSelectedCourses.remove($);
-				display.setNotSelectedCourses(notSelectedCourses);
 				selectedCourses.add($);
-				display.setSelectedCourses(selectedCourses);
-				eventBus.fireEvent(new SelectCourseEvent($));
+				display.updateLists();
 			}
 		}
 	}

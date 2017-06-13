@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
@@ -39,8 +40,10 @@ import upandgo.shared.entities.course.CourseId;
 
 public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display  {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
+    private ListDataProvider<CourseId> selectedModel;
     private Label cc = new Label("קורסים שנבחרו:");
     private CellTable<CourseId> scl = new CellTable<>(); //all courses list
+    private ListDataProvider<CourseId> deselectedModel;
     private Label sc = new Label("בחר קורסים:");
     private ListBox faculties = new ListBox(); //faculties
     private TextBox searchCourse = new TextBox();
@@ -60,6 +63,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     }
     private void InitializePanel(){
     	// chosen course list initialization
+    	selectedModel = new ListDataProvider<>();
+    	selectedModel.addDataDisplay(ccl);
     	ccl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%"); 	
@@ -71,13 +76,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			}
 		};
 		
-		Column<CourseId, String> notSelectedCOurseColumn = new Column<CourseId, String>(new NotSelectedCourseCell()) {
-			
-    		@Override
-			public String getValue(CourseId object) {
-				return object.getTitle();
-			}
-		};
 		ccl.addColumn(selectedCourseColumn);
 	    DefaultSelectionEventManager<CourseId> selectionEventManager1 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
 	    ccl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager1);
@@ -93,8 +91,17 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    cclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 	    cclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
 	    cclp.getElement().getStyle().setBorderColor("LightGray");
-
+	    
+	    Column<CourseId, String> notSelectedCOurseColumn = new Column<CourseId, String>(new NotSelectedCourseCell()) {
+			
+    		@Override
+			public String getValue(CourseId object) {
+				return object.getTitle();
+			}
+		};
     	//all courses list initialization
+		deselectedModel = new ListDataProvider<>();
+		deselectedModel.addDataDisplay(scl);
 	    DefaultSelectionEventManager<CourseId> selectionEventManager2 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
 	    scl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager2);
 	    scl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.DISABLED);
@@ -199,10 +206,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setSelectedCourses(List<CourseId> courses) {
-        ccl.setRowCount(courses.size(), true);
-        ccl.setVisibleRange(0, courses.size());
-	    ccl.setRowData(0,courses);
-	    
+		Log.info("dsfsfsfsfsfsfsdfsfsfsfsdfsdfsfsd");
+		selectedModel.setList(courses);
+		ccl.setRowCount(selectedModel.getList().size(), true);
+		ccl.setVisibleRange(0, courses.size());
+		
 	    List<CourseId> is = new ArrayList<>();
 	    List<CourseId> isB = new ArrayList<>();
 	    for(CourseId c : courses){
@@ -234,7 +242,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				break;
 			}
 			int daysBetween = is.get(i+1).aTerm().daysBetweenExams(is.get(i).aTerm());
-			Log.info("$$#$#$#" + daysBetween);
 			if(daysBetween == 0 ){			
 				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + is.get(i).aTerm().toString() + "</u></b><br>" + is.get(i).aTerm().getTimeToDisplay() + is.get(i).name();
 				width+=275;
@@ -311,9 +318,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setNotSelectedCourses(List<CourseId> is) {
+		deselectedModel.setList(is);
 		scl.setRowCount(is.size(), true);
-        scl.setVisibleRange(0, is.size());
-	    scl.setRowData(0,is);
+		scl.setVisibleRange(0, is.size());
+		Log.info("csfscscsd  " + is.size());
 		
 	}
 	@Override
@@ -368,6 +376,17 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	@Override
 	public HasClickHandlers getClearCoursesButton() {
 		return clearCourses;
+	}
+	@Override
+	public void updateLists() {
+		deselectedModel.refresh();
+		selectedModel.refresh();
+		scl.setVisibleRange(0, deselectedModel.getList().size());
+		scl.setRowCount(deselectedModel.getList().size(), true);
+		
+		ccl.setVisibleRange(0, selectedModel.getList().size());
+		ccl.setRowCount(selectedModel.getList().size(), true);
+		
 	} 
     
 }

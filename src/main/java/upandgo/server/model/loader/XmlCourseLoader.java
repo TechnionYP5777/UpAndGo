@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -60,16 +59,12 @@ import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.course.Course;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.ReadChannel;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
-import com.googlecode.objectify.ObjectifyService;
 
 import java.nio.ByteBuffer;
 import java.text.DateFormat;
@@ -172,22 +167,11 @@ public class XmlCourseLoader extends CourseLoader {
 
 	@Override
 	public void saveChosenCourseNames(final List<String> names) {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be saved!");
-			return;
-		}
-		
-		CoursesEntity ce = new CoursesEntity(user.getUserId(), names);
-		ObjectifyService.ofy().defer().save().entity(ce);
-		
-//		try {
-//			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-//			final Element rootElement = doc.createElement("ChosenCourses");
-//			doc.appendChild(rootElement);
-//
+		try {
+			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			final Element rootElement = doc.createElement("ChosenCourses");
+			doc.appendChild(rootElement);
+
 //			names.forEach(new Consumer<String>() {
 //				@Override
 //				public void accept(String name) {
@@ -196,150 +180,104 @@ public class XmlCourseLoader extends CourseLoader {
 //					rootElement.appendChild(course);
 //				}
 //			});
-//			for(String name : names){
-//				final Element course = doc.createElement("Course");
-//				course.appendChild(doc.createTextNode(name));
-//				rootElement.appendChild(course);
-//			}
-//
-//			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//
-//			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_COURSES_PATH)));
-//
-//		} catch (ParserConfigurationException | TransformerException xxx) {
-//			xxx.printStackTrace();
-//		}
+			for(String name : names){
+				final Element course = doc.createElement("Course");
+				course.appendChild(doc.createTextNode(name));
+				rootElement.appendChild(course);
+			}
+
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_COURSES_PATH)));
+
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public List<String> loadChosenCourseNames() {
+		if (!new File(CHOSEN_COURSES_PATH).exists())
+			return Collections.emptyList();
 		final List<String> $ = new LinkedList<>();
-		
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be loaded!");
-			return $;
+		// TODO use try-with-resource
+		try {
+			final NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(CHOSEN_COURSES_PATH).getElementsByTagName("Course");
+			for (int i = 0; i < chosenList.getLength(); ++i) {
+				final Node p = chosenList.item(i);
+				if (p.getNodeType() == Node.ELEMENT_NODE)
+					$.add(((Element) p).getTextContent());
+			}
+		} catch (IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
-		
-		CoursesEntity ce = ObjectifyService.ofy().load().type(CoursesEntity.class).id(user.getUserId()).now();
-		return ce.courses;
-//		
-//		if (!new File(CHOSEN_COURSES_PATH).exists())
-//			return Collections.emptyList();
-//		final List<String> $ = new LinkedList<>();
-//		// TODO use try-with-resource
-//		try {
-//			final NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-//					.parse(CHOSEN_COURSES_PATH).getElementsByTagName("Course");
-//			for (int i = 0; i < chosenList.getLength(); ++i) {
-//				final Node p = chosenList.item(i);
-//				if (p.getNodeType() == Node.ELEMENT_NODE)
-//					$.add(((Element) p).getTextContent());
-//			}
-//		} catch (IOException | SAXException | ParserConfigurationException xxx) {
-//			xxx.printStackTrace();
-//		}
-//		return $;
+		return $;
 	}
 
 	@Override
 	public void saveChosenLessonGroups(final List<LessonGroup> gs) {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was signed in. schedule could not be saved!");
-			return;
+		try {
+			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			final Element rootElement = doc.createElement("ChosenLessonGroups");
+			doc.appendChild(rootElement);
+
+//			gs.forEach(new Consumer<LessonGroup>() {
+//				@Override
+//				public void accept(LessonGroup group) {
+//					final Element groupElement = doc.createElement("lessonGroup");
+//					groupElement.setAttribute("courseID", group.getCourseID());
+//					groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+//					rootElement.appendChild(groupElement);
+//				}
+//			});
+			for (LessonGroup group : gs){
+				final Element groupElement = doc.createElement("lessonGroup");
+				groupElement.setAttribute("courseID", group.getCourseID());
+				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
+				rootElement.appendChild(groupElement);
+			}
+
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_LESSON_GROUPS)));
+
+		} catch (ParserConfigurationException | TransformerException xxx) {
+			xxx.printStackTrace();
 		}
-		
-		List<ScheduleEntity.Lesson> lessons = new ArrayList<>();
-		for (LessonGroup group : gs){
-			lessons.add(new ScheduleEntity.Lesson(group.getGroupNum(), group.getCourseID()));
+		// TODO Use try with resource
+		try {
+			final FileOutputStream fileOut = new FileOutputStream(CHOSEN_LESSON_GROUPS_SER);
+			final ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(gs);
+			out.close();
+			fileOut.close();
+		} catch (final IOException xxx) {
+			xxx.printStackTrace();
 		}
-		
-		ScheduleEntity se = new ScheduleEntity(user.getUserId(), lessons);
-		ObjectifyService.ofy().defer().save().entity(se);
-		
-//		try {
-//			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-//			final Element rootElement = doc.createElement("ChosenLessonGroups");
-//			doc.appendChild(rootElement);
-//
-////			gs.forEach(new Consumer<LessonGroup>() {
-////				@Override
-////				public void accept(LessonGroup group) {
-////					final Element groupElement = doc.createElement("lessonGroup");
-////					groupElement.setAttribute("courseID", group.getCourseID());
-////					groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
-////					rootElement.appendChild(groupElement);
-////				}
-////			});
-//			for (LessonGroup group : gs){
-//				final Element groupElement = doc.createElement("lessonGroup");
-//				groupElement.setAttribute("courseID", group.getCourseID());
-//				groupElement.setAttribute("groupNum", String.valueOf(group.getGroupNum()));
-//				rootElement.appendChild(groupElement);
-//			}
-//
-//			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//
-//			transformer.transform(new DOMSource(doc), new StreamResult(new File(CHOSEN_LESSON_GROUPS)));
-//
-//		} catch (ParserConfigurationException | TransformerException xxx) {
-//			xxx.printStackTrace();
-//		}
-//		// TODO Use try with resource
-//		try {
-//			final FileOutputStream fileOut = new FileOutputStream(CHOSEN_LESSON_GROUPS_SER);
-//			final ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//			out.writeObject(gs);
-//			out.close();
-//			fileOut.close();
-//		} catch (final IOException xxx) {
-//			xxx.printStackTrace();
-//		}
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<LessonGroup> loadChosenLessonGroups() {
+		if (!new File(CHOSEN_LESSON_GROUPS).exists())
+			return Collections.emptyList();
 		List<LessonGroup> $ = new LinkedList<>();
-		
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was not signed in. schedule could not be loaded!");
-			return $;
+		try {
+			final NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(CHOSEN_LESSON_GROUPS).getElementsByTagName("lessonGroup");
+			for (int i = 0; i < chosenList.getLength(); ++i) {
+				final Node p = chosenList.item(i);
+				if (p.getNodeType() == Node.ELEMENT_NODE)
+					addLessonsToLessonGroup(new LessonGroup(Integer.parseInt(((Element) p).getAttribute("groupNum"))),
+							((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
+			}
+		} catch (IOException | SAXException | ParserConfigurationException xxx) {
+			xxx.printStackTrace();
 		}
-		
-		ScheduleEntity ce = ObjectifyService.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
-		Iterator<ScheduleEntity.Lesson> it = ce.lessons.iterator();
-		while (it.hasNext()) {
-			ScheduleEntity.Lesson lesson = it.next();
-			addLessonsToLessonGroup(new LessonGroup(lesson.groupNum), lesson.courseId, String.valueOf(lesson.groupNum));
-		}
-		
-//		if (!new File(CHOSEN_LESSON_GROUPS).exists())
-//			return Collections.emptyList();
-//		List<LessonGroup> $ = new LinkedList<>();
-//		try {
-//			final NodeList chosenList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-//					.parse(CHOSEN_LESSON_GROUPS).getElementsByTagName("lessonGroup");
-//			for (int i = 0; i < chosenList.getLength(); ++i) {
-//				final Node p = chosenList.item(i);
-//				if (p.getNodeType() == Node.ELEMENT_NODE)
-//					addLessonsToLessonGroup(new LessonGroup(Integer.parseInt(((Element) p).getAttribute("groupNum"))),
-//							((Element) p).getAttribute("courseID"), ((Element) p).getAttribute("groupNum"));
-//			}
-//		} catch (IOException | SAXException | ParserConfigurationException xxx) {
-//			xxx.printStackTrace();
-//		}
 		// TODO: Use try-with-resources, and enable this warning --yg
 		try {
 			final FileInputStream fileIn = new FileInputStream(CHOSEN_LESSON_GROUPS_SER);
