@@ -273,6 +273,7 @@ public class SchedulerPresenter implements Presenter {
 
 						@Override
 						public void onSuccess(List<Course> result) {
+							Log.info("build request with list of chosen courses: " + result);
 							buildSchedule(result);
 						}
 
@@ -363,7 +364,7 @@ public class SchedulerPresenter implements Presenter {
 	}
 
 	void buildSchedule(List<Course> result) {
-		Log.info("Build schedule: getChosenCoursesList success");
+		//Log.info("Build schedule: getChosenCoursesList success");
 		if (result.isEmpty()) {
 			Log.info("Build schedule: no chosen courses");
 			lessonGroupsList.clear();
@@ -373,17 +374,17 @@ public class SchedulerPresenter implements Presenter {
 		}
 		selectedCourses = new ArrayList<Course>(result);
 
-		Log.info("Build schedule: before Scheduler.getTimetablesList");
+		//Log.info("Build schedule: before Scheduler.getTimetablesList");
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
 		
-		Log.info("unsorted tables size: " + unsortedTables.size());
-		Log.info("unsorted tables: " + unsortedTables);
-		Log.info("Build schedule: before Scheduler.sortedBy");
+		//Log.info("unsorted tables size: " + unsortedTables.size());
+		//Log.info("unsorted tables: " + unsortedTables);
+		//Log.info("Build schedule: before Scheduler.sortedBy");
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime);
-		Log.info("corrrect sorted tables size: " + sorted.size());
-		Log.info("correct sorted tables: " + sorted);
+		//Log.info("corrrect sorted tables size: " + sorted.size());
+		//Log.info("correct sorted tables: " + sorted);
 		
 		/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
 		Log.info("sorted tables size: " + tables.size());
