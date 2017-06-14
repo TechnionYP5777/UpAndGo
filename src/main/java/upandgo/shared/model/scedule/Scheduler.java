@@ -84,7 +84,7 @@ public class Scheduler implements IsSerializable{
 			}
 			if (b) {
 				System.out.println("^found");
-				Log.info("Found");
+				//Log.info("Found");
 				result.add($.getTimetable()); // return $;
 			}
 
@@ -125,6 +125,7 @@ public class Scheduler implements IsSerializable{
 					indexes.set(xxx, 0);
 			}
 		}
+		Log.info("Found " + result.size() + " correct results");
 		return result;
 	}
 	

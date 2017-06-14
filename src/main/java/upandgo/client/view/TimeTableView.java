@@ -281,7 +281,7 @@ public class TimeTableView extends HorizontalPanel {
  		colorMap = map;
  		
  		clearTable();
- 		Log.info("TimeTableView: display was called with: " + schedule);
+ 		Log.info("TimeTableView: display was called with: *set schedule on debug mode");
  		//resetTable();
  		if (schedule==null){
  		    drawDay(new ArrayList<Lesson>(), sundayTable);
@@ -302,7 +302,7 @@ public class TimeTableView extends HorizontalPanel {
 					return t1.getStartTime().compareTo(t2.getStartTime());
 				}
 			});
- 			Log.info("TimeTableView: Day: " + day + " sched is : " + daySchedule);
+ 			//Log.info("TimeTableView: Day: " + day + " sched is : " + daySchedule);
 			
  			
  		    //drawDay(new ArrayList<Lesson>(), thursdayTable);
@@ -354,7 +354,7 @@ public class TimeTableView extends HorizontalPanel {
 			differenceInMinutes = WeekTime.difference(startTime, previousEndTime);
 			previousEndTime = endTime;
 			span = differenceInMinutes/30;
-			Log.info("blank_span: " + span);
+			//Log.info("blank_span: " + span);
 			
 /*			if(span > 0){
 				t.setText(currentCell, day, "");
@@ -370,11 +370,11 @@ public class TimeTableView extends HorizontalPanel {
 				span--;
 			}
 			
-			Log.info("currentCell: " + currentCell);
+			//Log.info("currentCell: " + currentCell);
 			
 			differenceInMinutes = WeekTime.difference(endTime, startTime);
 			span = differenceInMinutes/30;
-			Log.info("lesson_span: " + span);
+			//Log.info("lesson_span: " + span);
 			
 			String type = "";
 			if(l.getType() == Type.LECTURE){
@@ -388,7 +388,7 @@ public class TimeTableView extends HorizontalPanel {
 			eventCell.add(new Label(displayString));
 			eventCell.addStyleName(ttStyle.hasEventWrap());
 			if(colorMap != null){
-				Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
+				//Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
 				eventCell.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
 				
 			}else{
@@ -404,7 +404,7 @@ public class TimeTableView extends HorizontalPanel {
  		
 		differenceInMinutes = WeekTime.difference(LocalTime.parse("20:30"), endTime);
 		span = differenceInMinutes/30;
-		Log.info("blank_span: " + span);
+		//Log.info("blank_span: " + span);
  		
 		while (span > 0){
 			t.setText(currentCell, day, "");
