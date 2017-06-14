@@ -279,7 +279,9 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void updateLists() {
+
 		Log.info("begin of updateLists");
+
 		deselectedModel.refresh();
 		selectedModel.refresh();
 		scl.setVisibleRange(0, deselectedModel.getList().size());
@@ -287,7 +289,9 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		
 		ccl.setVisibleRange(0, selectedModel.getList().size());
 		ccl.setRowCount(selectedModel.getList().size(), true);
+
 		Log.info("begin of updateLists/2");
+
 		List<CourseId> is = new ArrayList<>(), isB = new ArrayList<>(), courses = selectedModel.getList();
 	    for(CourseId c : courses){
 	    	if(c.aTerm()!=null)
@@ -393,7 +397,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 //			examsBarB.addStyleName("horizontal-scroll-wrapper");
 //			examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
 //			examsScrollPanel.setWidget(examsBarB);
-		Log.info("begin of updateLists/8");
+
 		
 	} 
     
