@@ -211,8 +211,83 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		ccl.setRowCount(selectedModel.getList().size(), true);
 		ccl.setVisibleRange(0, courses.size());
 		
-	    List<CourseId> is = new ArrayList<>();
-	    List<CourseId> isB = new ArrayList<>();
+	   
+
+		
+		
+	}
+	@Override
+	public void setNotSelectedCourses(List<CourseId> is) {
+		deselectedModel.setList(is);
+		scl.setRowCount(is.size(), true);
+		scl.setVisibleRange(0, is.size());
+		Log.info("csfscscsd  " + is.size());
+		
+	}
+	@Override
+	public void setFaculties(List<String> faculties) {
+		for(String s : faculties)
+			this.faculties.addItem(s);
+		
+	}
+	@Override
+	public CourseId getSelectedCourse(int row) {
+		return ccl.getVisibleItem(row);
+	}
+	@Override
+	public CourseId getUnselectedCourse(int row) {
+		return scl.getVisibleItem(row);
+	}
+	@Override
+	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i) {
+		return i.getIndex();
+	}
+	@Override
+	public int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> i) {
+		
+		return i.getIndex();
+	}
+	@Override
+	public int getSelectedFacultyRow(@SuppressWarnings("unused") ChangeEvent e) {
+		return this.faculties.getSelectedIndex();
+	}
+	@Override
+	public String getCourseQuery(@SuppressWarnings("unused") KeyUpEvent e) {
+		return this.searchCourse.getValue();
+	}
+	@Override
+	public void setHoveredRow(int row) {
+		rowNum = row;
+		
+	}
+	@Override
+	public void setHoveredCourseDetail(String detail) {
+		hoveredCourseDetail = detail;
+		
+	}
+	@Override
+	public Widget getAsWidget() {
+		return this.asWidget();
+	}
+	@Override
+	public Widget getExamsBar() {
+		return examsScrollPanel;
+	}
+	@Override
+	public HasClickHandlers getClearCoursesButton() {
+		return clearCourses;
+	}
+	@Override
+	public void updateLists() {
+		deselectedModel.refresh();
+		selectedModel.refresh();
+		scl.setVisibleRange(0, deselectedModel.getList().size());
+		scl.setRowCount(deselectedModel.getList().size(), true);
+		
+		ccl.setVisibleRange(0, selectedModel.getList().size());
+		ccl.setRowCount(selectedModel.getList().size(), true);
+		
+		List<CourseId> is = new ArrayList<>(), isB = new ArrayList<>(), courses = selectedModel.getList();
 	    for(CourseId c : courses){
 	    	if(c.aTerm()!=null)
 	    		is.add(c);
@@ -308,84 +383,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		examsBar.addStyleName("horizontal-scroll-wrapper");
 		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
 		examsScrollPanel.setWidget(examsBar);
-//		examsBarB = new HTML(examsBetBarHTML);
-//		examsBarB.addStyleName("horizontal-scroll-wrapper");
-//		examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
-//		examsScrollPanel.setWidget(examsBarB);
-
-		
-		
-	}
-	@Override
-	public void setNotSelectedCourses(List<CourseId> is) {
-		deselectedModel.setList(is);
-		scl.setRowCount(is.size(), true);
-		scl.setVisibleRange(0, is.size());
-		Log.info("csfscscsd  " + is.size());
-		
-	}
-	@Override
-	public void setFaculties(List<String> faculties) {
-		for(String s : faculties)
-			this.faculties.addItem(s);
-		
-	}
-	@Override
-	public CourseId getSelectedCourse(int row) {
-		return ccl.getVisibleItem(row);
-	}
-	@Override
-	public CourseId getUnselectedCourse(int row) {
-		return scl.getVisibleItem(row);
-	}
-	@Override
-	public int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i) {
-		return i.getIndex();
-	}
-	@Override
-	public int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> i) {
-		
-		return i.getIndex();
-	}
-	@Override
-	public int getSelectedFacultyRow(@SuppressWarnings("unused") ChangeEvent e) {
-		return this.faculties.getSelectedIndex();
-	}
-	@Override
-	public String getCourseQuery(@SuppressWarnings("unused") KeyUpEvent e) {
-		return this.searchCourse.getValue();
-	}
-	@Override
-	public void setHoveredRow(int row) {
-		rowNum = row;
-		
-	}
-	@Override
-	public void setHoveredCourseDetail(String detail) {
-		hoveredCourseDetail = detail;
-		
-	}
-	@Override
-	public Widget getAsWidget() {
-		return this.asWidget();
-	}
-	@Override
-	public Widget getExamsBar() {
-		return examsScrollPanel;
-	}
-	@Override
-	public HasClickHandlers getClearCoursesButton() {
-		return clearCourses;
-	}
-	@Override
-	public void updateLists() {
-		deselectedModel.refresh();
-		selectedModel.refresh();
-		scl.setVisibleRange(0, deselectedModel.getList().size());
-		scl.setRowCount(deselectedModel.getList().size(), true);
-		
-		ccl.setVisibleRange(0, selectedModel.getList().size());
-		ccl.setRowCount(selectedModel.getList().size(), true);
+//			examsBarB = new HTML(examsBetBarHTML);
+//			examsBarB.addStyleName("horizontal-scroll-wrapper");
+//			examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
+//			examsScrollPanel.setWidget(examsBarB);
 		
 	} 
     

@@ -406,7 +406,7 @@ public class CourseListPresenter implements Presenter {
 
 		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
-			if (!isSignedIn) {
+			if (isSignedIn) {
 				selectedCourses.remove($);
 				notSelectedCourses.clear();
 				for(CourseId c : allCourses){
