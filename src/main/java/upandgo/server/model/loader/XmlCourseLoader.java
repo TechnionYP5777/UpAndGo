@@ -100,7 +100,7 @@ public class XmlCourseLoader extends CourseLoader {
 	  
 	  public XmlCourseLoader(final String REP_XML_PATH) {
 	    super(REP_XML_PATH);
-	    coursesInfoFilename = "loadOf6CoursesTest.XML";
+	    coursesInfoFilename = REP_XML_PATH;
 //	    XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
 
 	    // if (!new File(path).exists())

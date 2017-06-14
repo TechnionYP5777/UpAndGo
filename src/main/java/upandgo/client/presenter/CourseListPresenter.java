@@ -446,13 +446,16 @@ public class CourseListPresenter implements Presenter {
 	}
 
 	void selectCourse() {
+		Log.info("CourseListPresenter: request to select course");
 		final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
+		Log.info("CourseListPresenter: course id is:" + $.number());
 		if ($ != null) {
+			Log.info("CourseListPresenter: isSignedIn is: " + isSignedIn);
 			if (isSignedIn) {
 				notSelectedCourses.remove($);
 				selectedCourses.add($);
 				display.updateLists();
-
+				Log.info("CourseListPresenter: upadted localy, now call rpc" );
 				rpcService.selectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -462,11 +465,12 @@ public class CourseListPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						
+						Log.info("CourseListPresenter: got onSuccuess from server");
 						eventBus.fireEvent(new SelectCourseEvent($));
 					}
 				});
 			} else {
+				Log.error("CourseListPresenter: is not signed in");
 				notSelectedCourses.remove($);
 				selectedCourses.add($);
 				display.updateLists();

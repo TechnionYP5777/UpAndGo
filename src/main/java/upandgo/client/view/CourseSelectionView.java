@@ -279,6 +279,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void updateLists() {
+		Log.info("begin of updateLists");
 		deselectedModel.refresh();
 		selectedModel.refresh();
 		scl.setVisibleRange(0, deselectedModel.getList().size());
@@ -286,7 +287,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		
 		ccl.setVisibleRange(0, selectedModel.getList().size());
 		ccl.setRowCount(selectedModel.getList().size(), true);
-		
+		Log.info("begin of updateLists/2");
 		List<CourseId> is = new ArrayList<>(), isB = new ArrayList<>(), courses = selectedModel.getList();
 	    for(CourseId c : courses){
 	    	if(c.aTerm()!=null)
@@ -294,6 +295,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    	if(c.bTerm()!=null)
 	    		isB.add(c);
 	    }
+	    Log.info("begin of updateLists/3");
 	    Collections.sort(is,(new Comparator<CourseId>() { //sort courses by their final exam date
 
 			@Override
@@ -301,6 +303,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				return o1.aTerm().compare(o2.aTerm());
 			}
 		}));
+	    Log.info("begin of updateLists/4");
 	    Collections.sort(isB,(new Comparator<CourseId>() { //sort courses by their final exam date
 
 			@Override
@@ -308,6 +311,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				return o1.bTerm().compare(o2.bTerm());
 			}
 		}));
+	    Log.info("begin of updateLists/5");
 	    long width=0;
 		String examsAlephBarHTML = "";
 		for(int i=0; i < is.size(); i++){
@@ -343,6 +347,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				}
 			}
 		}
+		Log.info("begin of updateLists/6");
 		long widthb=0;
 		String examsBetBarHTML = "";
 		for(int i=0; i < isB.size(); i++){
@@ -379,6 +384,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 				}
 			}
 		}
+		Log.info("begin of updateLists/7");
 		examsBar = new HTML(examsAlephBarHTML);
 		examsBar.addStyleName("horizontal-scroll-wrapper");
 		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
@@ -387,6 +393,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 //			examsBarB.addStyleName("horizontal-scroll-wrapper");
 //			examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
 //			examsScrollPanel.setWidget(examsBarB);
+		Log.info("begin of updateLists/8");
 		
 	} 
     
