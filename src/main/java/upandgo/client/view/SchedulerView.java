@@ -14,6 +14,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -94,10 +95,11 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 	}
 
+	/*
 	@Override
 	public HasClickHandlers getDaysOffElement() {
 		return schedualerConstraintsView.daysOffCB;
-	}
+	}*/
 
 	@Override
 	public boolean isDayOffChecked(ClickEvent event) {
@@ -107,6 +109,23 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public HasClickHandlers getMinWindowsElement() {
 		return schedualerConstraintsView.minWindowsCB;
+		//return null;
+	}
+	@Override
+	public CheckBox getSundayCheckbox(){
+		return schedualerConstraintsView.sundayBox;
+	}
+	public CheckBox getMondayCheckbox(){
+		return schedualerConstraintsView.mondayBox;
+	}
+	public CheckBox getTuesdayCheckbox(){
+		return schedualerConstraintsView.tuesdayBox;
+	}
+	public CheckBox getWednesdayCheckbox(){
+		return schedualerConstraintsView.wednesdayBox;
+	}
+	public CheckBox getThursdayCheckbox(){
+		return schedualerConstraintsView.thursdayBox;
 	}
 
 	@Override
