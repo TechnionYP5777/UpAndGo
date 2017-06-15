@@ -42,7 +42,7 @@
                           </m:ScrollPanel>
         </b:PanelBody>
     </b:PanelCollapse>
-        <v:SchedulerView></v:SchedulerView>
+        <v:SchedulerView ui:field="sv"></v:SchedulerView>
 	</g:HTMLPanel>
 	
 </ui:UiBinder> 

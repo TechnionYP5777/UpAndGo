@@ -38,6 +38,7 @@ import upandgo.client.event.getExamsBarEvent;
 import upandgo.client.event.getExamsBarEventHandler;
 import upandgo.client.view.CourseSelectionView;
 import upandgo.client.view.LeftSideView;
+import upandgo.client.view.SchedulerView;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
@@ -386,7 +387,7 @@ public class SchedulerPresenter implements Presenter {
 		bind();
 		// panel.clear();
 		
-		final LeftSideView e = new LeftSideView(examsBar);
+		final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
 		panel.add(e);
 		panel.setWidgetLeftWidth(e, 1, Unit.EM, 77, Unit.PCT);
 		panel.setWidgetTopBottom(e, 4.5, Unit.EM, 1, Unit.EM);

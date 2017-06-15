@@ -28,14 +28,18 @@ public class LeftSideView extends Composite {
 	}
 	
 	@UiField(provided=true)
-	com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsBar;
+	ScrollPanel examsBar;
+	
+	@UiField(provided=true)
+	SchedulerView sv;
 
-	public LeftSideView(com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsBar) {
+	public LeftSideView(ScrollPanel examsBar, SchedulerView sv) {
 		if(examsBar != null)
 			this.examsBar = examsBar;
 		else{
 			this.examsBar = new ScrollPanel();
 		}
+		this.sv = sv;
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 }
