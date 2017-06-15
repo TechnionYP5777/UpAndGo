@@ -38,8 +38,8 @@
 	<course id="222222" name="ק2" points="3">
 		<teacherInCharge name="ריק" title="ריק"/>
 		<exams>
-			<moedA day="29" month="06" year="2016" time="09:00"/>
-			<moedB day="12" month="09" year="2016" time="09:00"/>
+			<moedA day="28" month="06" year="2016" time="09:00"/>
+			<moedB day="13" month="09" year="2016" time="09:00"/>
 		</exams>
 		<lecture>
 			<lesson building="ריק" day="ב" roomNumber="3" timeEnd="11:00" timeStart="10:00"/>
@@ -74,8 +74,8 @@
 	<course id="333333" name="ק3" points="3">
 		<teacherInCharge name="ריק" title="ריק"/>
 		<exams>
-			<moedA day="29" month="06" year="2016" time="09:00"/>
-			<moedB day="12" month="09" year="2016" time="09:00"/>
+			<moedA day="27" month="06" year="2016" time="09:00"/>
+			<moedB day="14" month="09" year="2016" time="09:00"/>
 		</exams>
 		<lecture>
 			<lesson building="ריק" day="ג" roomNumber="3" timeEnd="11:00" timeStart="10:00"/>
@@ -102,6 +102,114 @@
 		</lecture>
 		<lecture>
 			<lesson building="ריק" day="ג" roomNumber="3" timeEnd="13:00" timeStart="12:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<notes></notes>
+	</course>
+	<course id="444444" name="ק4" points="3">
+		<teacherInCharge name="ריק" title="ריק"/>
+		<exams>
+			<moedA day="26" month="06" year="2016" time="09:00"/>
+			<moedB day="15" month="09" year="2016" time="09:00"/>
+		</exams>
+		<lecture>
+			<lesson building="ריק" day="ד" roomNumber="3" timeEnd="11:00" timeStart="10:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials>
+				<tutorial group="11">
+					<lesson building="ריק" day="ד" roomNumber="407" timeEnd="14:00" timeStart="13:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="12">
+					<lesson building="ריק" day="ד" roomNumber="407" timeEnd="15:00" timeStart="14:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="13">
+					<lesson building="ריק" day="ד" roomNumber="407" timeEnd="16:00" timeStart="15:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+			</tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ד" roomNumber="3" timeEnd="12:00" timeStart="11:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ד" roomNumber="3" timeEnd="13:00" timeStart="12:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<notes></notes>
+	</course>
+	<course id="555555" name="ק5" points="3">
+		<teacherInCharge name="ריק" title="ריק"/>
+		<exams>
+			<moedA day="25" month="06" year="2016" time="09:00"/>
+			<moedB day="16" month="09" year="2016" time="09:00"/>
+		</exams>
+		<lecture>
+			<lesson building="ריק" day="ה" roomNumber="3" timeEnd="11:00" timeStart="10:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials>
+				<tutorial group="11">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="14:00" timeStart="13:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="12">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="15:00" timeStart="14:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="13">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="16:00" timeStart="15:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+			</tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ה" roomNumber="3" timeEnd="12:00" timeStart="11:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ה" roomNumber="3" timeEnd="13:00" timeStart="12:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<notes></notes>
+	</course>
+	<course id="666666" name="ק6" points="3">
+		<teacherInCharge name="ריק" title="ריק"/>
+		<exams>
+			<moedA day="24" month="06" year="2016" time="09:00"/>
+			<moedB day="17" month="09" year="2016" time="09:00"/>
+		</exams>
+		<lecture>
+			<lesson building="ריק" day="ה" roomNumber="3" timeEnd="10:00" timeStart="9:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials>
+				<tutorial group="11">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="17:00" timeStart="16:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="12">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="18:00" timeStart="17:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+				<tutorial group="13">
+					<lesson building="ריק" day="ה" roomNumber="407" timeEnd="19:00" timeStart="18:00"/>
+					<assistant name="ריק" title="ריק"/>
+				</tutorial>
+			</tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ה" roomNumber="3" timeEnd="10:00" timeStart="9:00"/>
+			<lecturer name="ריק" title="ריק"/>
+			<tutorials></tutorials>
+		</lecture>
+		<lecture>
+			<lesson building="ריק" day="ד" roomNumber="3" timeEnd="10:00" timeStart="9:00"/>
 			<lecturer name="ריק" title="ריק"/>
 			<tutorials></tutorials>
 		</lecture>

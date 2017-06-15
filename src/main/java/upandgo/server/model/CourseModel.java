@@ -53,8 +53,12 @@ public class CourseModel { // implements Model {
 		if (id == null)
 			throw new NullPointerException();
 		final Course pickedCourse = getCourseById(id);
-		if (pickedCourseList.contains(pickedCourse))
+		Log.info("current picked list: " + pickedCourseList);
+		if (pickedCourseList.contains(pickedCourse)){
+			Log.info("1/already have: " + id);
+			Log.info("2/already have: " + pickedCourse);
 			return;
+		}
 
 		// save picking in DB
 		//final TreeSet<CourseId> pickedList = new TreeSet<>();

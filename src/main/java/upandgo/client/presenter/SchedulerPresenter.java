@@ -20,6 +20,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -63,6 +64,7 @@ public class SchedulerPresenter implements Presenter {
 	protected boolean isBlankSpaceCount;
 	protected LocalTime minStartTime;
 	protected LocalTime maxFinishTime;
+	protected List<Boolean> vectorDaysOff;
 
 	List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
@@ -93,11 +95,16 @@ public class SchedulerPresenter implements Presenter {
 																						// clear
 																						// schedule
 
-		public HasClickHandlers getDaysOffElement();
+		//public HasClickHandlers getDaysOffElement();
 
 		public boolean isDayOffChecked(ClickEvent event);
 
 		public HasClickHandlers getMinWindowsElement();
+		public CheckBox getSundayCheckbox();
+		public CheckBox getMondayCheckbox();
+		public CheckBox getTuesdayCheckbox();
+		public CheckBox getWednesdayCheckbox();
+		public CheckBox getThursdayCheckbox();
 
 		public boolean isMinWindowsChecked(ClickEvent event);
 
@@ -194,7 +201,7 @@ public class SchedulerPresenter implements Presenter {
 	@Override
 	public void bind() {
 
-		view.getDaysOffElement().addClickHandler(new ClickHandler() {
+		/*view.getDaysOffElement().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isDayOffChecked(event)) {
@@ -205,7 +212,7 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("daysOff button was deselected");
 				}
 			}
-		});
+		});*/
 
 		view.getMinWindowsElement().addClickHandler(new ClickHandler() {
 			@Override
@@ -404,7 +411,14 @@ public class SchedulerPresenter implements Presenter {
 		//Log.info("unsorted tables size: " + unsortedTables.size());
 		//Log.info("unsorted tables: " + unsortedTables);
 		//Log.info("Build schedule: before Scheduler.sortedBy");
-		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime);
+		vectorDaysOff = new ArrayList();
+		vectorDaysOff.add(view.getSundayCheckbox().getValue());
+		vectorDaysOff.add(view.getMondayCheckbox().getValue());
+		vectorDaysOff.add(view.getTuesdayCheckbox().getValue());
+		vectorDaysOff.add(view.getWednesdayCheckbox().getValue());
+		vectorDaysOff.add(view.getThursdayCheckbox().getValue());
+		Log.info("days off vector: " + vectorDaysOff);
+		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime, vectorDaysOff);
 		//Log.info("corrrect sorted tables size: " + sorted.size());
 		//Log.info("correct sorted tables: " + sorted);
 		

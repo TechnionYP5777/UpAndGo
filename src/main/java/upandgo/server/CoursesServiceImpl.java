@@ -88,6 +88,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public void selectCourse(CourseId id) {
+		Log.info("picked course: " + id.number());
 		model.pickCourse(id.number());
 	}
 

@@ -265,15 +265,16 @@ public class Scheduler implements IsSerializable{
 	 */
 	
 	public static List<Timetable> ListSortedBy(final List<Timetable> orig, final boolean byDaysoff,
-			final boolean byBlankSpace, final LocalTime byStartTime, final LocalTime byEndTime) {
+			final boolean byBlankSpace, final LocalTime byStartTime, final LocalTime byEndTime, final List<Boolean> vectorDaysOff) {
 		final List<Timetable> $ = new ArrayList<>(orig);
 		Collections.sort($, new Comparator<Timetable>() {
 			@Override
 			public int compare(Timetable t1, Timetable t2) {
 				Double rank1 = 0.0, rank2 = 0.0;
 				if (byDaysoff) {
-					rank1 += t1.getRankOfDaysoff();
-					rank2 += t2.getRankOfDaysoff();
+					//probably irrevelant now when we use seperate days.
+					//rank1 += t1.getRankOfDaysoff();
+					//rank2 += t2.getRankOfDaysoff();
 				}
 				if (byBlankSpace) {
 					rank1 += t1.getRankOfBlankSpace();
@@ -287,7 +288,27 @@ public class Scheduler implements IsSerializable{
 					rank1 += t1.getRankOfEndTime(byEndTime);
 					rank2 += t2.getRankOfEndTime(byEndTime);
 				}
-
+				
+				if (vectorDaysOff.get(0)) {
+					rank1 += t1.getRankOfFreeSunday();
+					rank2 += t2.getRankOfFreeSunday();
+				}
+				if (vectorDaysOff.get(1)) {
+					rank1 += t1.getRankOfFreeMonday();
+					rank2 += t2.getRankOfFreeMonday();
+				}
+				if (vectorDaysOff.get(2)) {
+					rank1 += t1.getRankOfFreeTuesday();
+					rank2 += t2.getRankOfFreeTuesday();
+				}
+				if (vectorDaysOff.get(3)) {
+					rank1 += t1.getRankOfFreeWednesday();
+					rank2 += t2.getRankOfFreeWednesday();
+				}
+				if (vectorDaysOff.get(4)) {
+					rank1 += t1.getRankOfFreeThursday();
+					rank2 += t2.getRankOfFreeThursday();
+				}
 				return -rank1.compareTo(rank2);
 			}
 		});
