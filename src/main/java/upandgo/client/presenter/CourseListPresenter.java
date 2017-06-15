@@ -1,6 +1,7 @@
 package upandgo.client.presenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -112,6 +113,8 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onAuthenticationChanged(AuthenticationEvent event) {
 				isSignedIn = event.isSignedIn();
+				if (isSignedIn)
+					rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
 			}
 		});
 	}
@@ -122,7 +125,7 @@ public class CourseListPresenter implements Presenter {
 
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;
-	List<CourseId> allCourses;
+//	List<CourseId> allCourses;
 	List<String> faculties;
 	String courseQuery = "";
 
@@ -278,22 +281,25 @@ public class CourseListPresenter implements Presenter {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				notSelectedCourses.addAll(selectedCourses);
+				Collections.sort(notSelectedCourses);
 				selectedCourses.clear();
-				notSelectedCourses.clear();
-				notSelectedCourses.addAll(allCourses);
+//				notSelectedCourses.clear();
+//				notSelectedCourses.addAll(allCourses);
 				display.updateLists();
-				rpcService.unselectAllCourses(new AsyncCallback<Void>() {
-					@Override
-					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-						Window.alert("Error while selecting course.");
-						Log.error("Error while selecting course.");
-					}
-
-					@Override
-					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						
-					}
-				});
+				if(isSignedIn)
+					rpcService.unselectAllCourses(new AsyncCallback<Void>() {
+						@Override
+						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+							Window.alert("Error while selecting course.");
+							Log.error("Error while selecting course.");
+						}
+	
+						@Override
+						public void onSuccess(@SuppressWarnings("unused") Void result) {
+							
+						}
+					});
 				
 			}
 		});
@@ -328,7 +334,12 @@ public class CourseListPresenter implements Presenter {
 //		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 5, Unit.EM);
 //		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
-		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+		if (isSignedIn)
+			rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+		else {
+			selectedCourses = new ArrayList<>();
+			display.setSelectedCourses(selectedCourses);
+		}
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 	}
 
@@ -349,9 +360,8 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
-			result.remove(new CourseId());
 			notSelectedCourses =result;
-			allCourses = new ArrayList<>(result);
+//			allCourses = new ArrayList<>(result);
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 
@@ -415,15 +425,18 @@ public class CourseListPresenter implements Presenter {
 
 		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
+			selectedCourses.remove($);
+			notSelectedCourses.add($);
+			Collections.sort(notSelectedCourses);
+			display.updateLists();
 			if (isSignedIn) {
-				selectedCourses.remove($);
-				notSelectedCourses.clear();
-				for(CourseId c : allCourses){
-					if(!selectedCourses.contains(c)){
-						notSelectedCourses.add(c);
-					}
-				}
-				display.updateLists();
+//				notSelectedCourses.clear();
+//				for(CourseId c : allCourses){
+//					if(!selectedCourses.contains(c)){
+//						notSelectedCourses.add(c);
+//					}
+//				}
+//				display.updateLists();
 				rpcService.unselectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -437,20 +450,16 @@ public class CourseListPresenter implements Presenter {
 						eventBus.fireEvent(new UnselectCourseEvent($));
 					}
 				});
-			} else {
-
-				selectedCourses.remove($);
-				notSelectedCourses.clear();
-				for(CourseId c : allCourses){
-					if(!selectedCourses.contains(c)){
-						notSelectedCourses.add(c);
-					}
-				}
+			}
+//				notSelectedCourses.clear();
+//				for(CourseId c : allCourses){
+//					if(!selectedCourses.contains(c)){
+//						notSelectedCourses.add(c);
+//					}
+//				}
 			
 				
-				display.updateLists();
 //				eventBus.fireEvent(new UnselectCourseEvent($));
-			}
 		}
 	}
 
@@ -460,10 +469,10 @@ public class CourseListPresenter implements Presenter {
 		Log.info("CourseListPresenter: course id is:" + $.number());
 		if ($ != null) {
 			Log.info("CourseListPresenter: isSignedIn is: " + isSignedIn);
+			notSelectedCourses.remove($);
+			selectedCourses.add($);
+			display.updateLists();
 			if (isSignedIn) {
-				notSelectedCourses.remove($);
-				selectedCourses.add($);
-				display.updateLists();
 				Log.info("CourseListPresenter: upadted localy, now call rpc" );
 				rpcService.selectCourse($, new AsyncCallback<Void>() {
 					@Override
@@ -479,10 +488,10 @@ public class CourseListPresenter implements Presenter {
 					}
 				});
 			} else {
-				Log.error("CourseListPresenter: is not signed in");
-				notSelectedCourses.remove($);
-				selectedCourses.add($);
-				display.updateLists();
+				Log.info("CourseListPresenter: is not signed in");
+//				notSelectedCourses.remove($);
+//				selectedCourses.add($);
+//				display.updateLists();
 			}
 		}
 	}
