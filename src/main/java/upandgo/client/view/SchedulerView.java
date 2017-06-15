@@ -43,13 +43,12 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
-		this.setWidgetLeftRight(scrollableTimeTable, 13, Unit.EM, 1, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 7, Unit.EM);
-
+		this.setWidgetLeftRight(scrollableTimeTable, 13, Unit.EM, 0, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 0.5, Unit.EM, 0, Unit.EM);
 		
 		this.add(schedualerControlsView);
-		this.setWidgetLeftWidth(schedualerControlsView, 1, Unit.EM, 11, Unit.EM);
-		this.setWidgetTopBottom(schedualerControlsView, 1, Unit.EM, 7, Unit.EM);
+		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 11, Unit.EM);
+		this.setWidgetTopBottom(schedualerControlsView, 0.5, Unit.EM, 0, Unit.EM);
 /*		this.add(constraintsView);
 		this.setWidgetLeftRight(constraintsView, 1, Unit.EM, 1, Unit.EM);
 		this.setWidgetBottomHeight(constraintsView, 0, Unit.EM, 3, Unit.EM);

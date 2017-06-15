@@ -26,12 +26,15 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
+import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
+import upandgo.client.event.getExamsBarEvent;
+import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -102,6 +105,8 @@ public class CourseListPresenter implements Presenter {
 		this.display = display;
 		this.eventBus = eventBus;
 		
+		eventBus.fireEvent(new getExamsBarEvent((ScrollPanel)display.getExamsBar()));
+		
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
 			
 			@Override
@@ -131,7 +136,11 @@ public class CourseListPresenter implements Presenter {
 	int unselectedClickedRow = -1;
 
 	boolean isSignedIn = false;
-
+	
+	
+	public ScrollPanel getEB(){
+		return (ScrollPanel)display.getExamsBar();
+	}
 	@Override
 	public void bind() {
 
@@ -308,16 +317,16 @@ public class CourseListPresenter implements Presenter {
 
 		// rpcService.getSomeString(new GetSomeStringAsyncCallback());
 
-		LayoutPanel examsBarPanel = new LayoutPanel();
-		Widget examsBar = display.getExamsBar();
-		examsBarPanel.add(examsBar);
-		examsBarPanel.setWidgetLeftRight(examsBar, 1, Unit.EM, 1, Unit.EM);
-		examsBarPanel.setWidgetTopBottom(examsBar, 0, Unit.EM, 0, Unit.EM);
-
-		panel.add(examsBarPanel);
-		panel.setWidgetLeftWidth(examsBarPanel, 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 5, Unit.EM);
-		
+//		LayoutPanel examsBarPanel = new LayoutPanel();
+//		Widget examsBar =new Exams();
+//		examsBarPanel.add(examsBar);
+//		examsBarPanel.setWidgetLeftRight(examsBar, 1, Unit.EM, 1, Unit.EM);
+//		examsBarPanel.setWidgetTopBottom(examsBar, 0, Unit.EM, 0, Unit.EM);
+//
+//		panel.add(examsBarPanel);
+//		panel.setWidgetLeftWidth(examsBarPanel, 1, Unit.EM, 77, Unit.PCT);
+//		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 5, Unit.EM);
+//		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
@@ -452,7 +461,6 @@ public class CourseListPresenter implements Presenter {
 				notSelectedCourses.remove($);
 				selectedCourses.add($);
 				display.updateLists();
-
 				rpcService.selectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -473,5 +481,7 @@ public class CourseListPresenter implements Presenter {
 			}
 		}
 	}
+	
+	
 
 }

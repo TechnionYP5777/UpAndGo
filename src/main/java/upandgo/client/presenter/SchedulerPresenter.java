@@ -19,9 +19,11 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
@@ -31,6 +33,10 @@ import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
+import upandgo.client.event.getExamsBarEvent;
+import upandgo.client.event.getExamsBarEventHandler;
+import upandgo.client.view.CourseSelectionView;
+import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
@@ -64,6 +70,8 @@ public class SchedulerPresenter implements Presenter {
 	protected Map<String, Color> colorMap;
 
 	protected boolean isSignedIn = false;
+	
+	ScrollPanel examsBar;
 
 	public interface Display {
 
@@ -127,6 +135,15 @@ public class SchedulerPresenter implements Presenter {
 		this.minStartTime = null;
 		this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
+		
+		eventBus.addHandler(getExamsBarEvent.TYPE, new getExamsBarEventHandler() {
+			
+			@Override
+			public void getExamsBar(ScrollPanel eb) {
+				examsBar = eb;
+				
+			}
+		});
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
 
@@ -353,14 +370,19 @@ public class SchedulerPresenter implements Presenter {
 		// TODO Auto-generated method stub
 
 	}
+	public void setEB(ScrollPanel eb){
+		examsBar = eb;
+	}
 
 	@Override
 	public void go(LayoutPanel panel) {
 		bind();
 		// panel.clear();
-		panel.add(view.getAsWidget());
-		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.PCT);
+		
+		final LeftSideView e = new LeftSideView(examsBar);
+		panel.add(e);
+		panel.setWidgetLeftWidth(e, 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetTopBottom(e, 4.5, Unit.EM, 1, Unit.EM);
 	}
 
 	void buildSchedule(List<Course> result) {

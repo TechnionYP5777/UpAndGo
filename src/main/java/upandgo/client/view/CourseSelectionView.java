@@ -1,6 +1,15 @@
 package upandgo.client.view;
 
 
+/**
+ * 
+ * @author danabra
+ * @since 7-04-17
+ * 
+ * GUI class for list of courses and course selection 
+ * 
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,7 +60,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private ScrollPanel sclp = new ScrollPanel();
     private HTML examsBar;
     private HTML examsBarB;
-    private Button clearCourses = new Button("<i class=\"fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
+    private Button clearCourses = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
     private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
     String hoveredCourseDetail = "Loading...";
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant

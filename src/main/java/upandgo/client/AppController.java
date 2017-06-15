@@ -162,8 +162,10 @@ class AppController implements Presenter {
 		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, coursesService);
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
-		sPresenter.go(mainView);
+		
 		clPresenter.go(mainView);
+		sPresenter.setEB(clPresenter.getEB());
+		sPresenter.go(mainView);
 		nbPresenter.go(mainView);
 			
 		
