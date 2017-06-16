@@ -38,6 +38,8 @@ public interface CoursesServiceAsync {
 	public void getChosenCoursesList(AsyncCallback<List<Course>> callback);
 	
 	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
+
+	public void getSchedule(AsyncCallback<List<LessonGroup>> callback);
 	
 	public void getSomeString(AsyncCallback<String> callback);
 	

@@ -56,8 +56,8 @@ import upandgo.shared.model.scedule.Timetable;
 
 public class SchedulerPresenter implements Presenter {
 
-	private final Display view;
-	private final EventBus eventBus;
+	Display view;
+	EventBus eventBus;
 	CoursesServiceAsync rpcService;
 
 	// constraints fields
@@ -160,6 +160,9 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onAuthenticationChanged(AuthenticationEvent event) {
 				isSignedIn = event.isSignedIn();
+				if (isSignedIn) {
+					updateScheduleAndChosenLessons();
+				}
 			}
 		});
 
@@ -288,27 +291,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				Log.info("Build schedule: requested");
-				if (isSignedIn) {
-					rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Error while retrieving selected courses.");
-							Log.error("Error while retrieving selected courses.");
-						}
-
-						@Override
-						public void onSuccess(List<Course> result) {
-							Log.info("build request with list of chosen courses: " + result);
-							buildSchedule(result);
-						}
-
-						private <E> ArrayList<E> newArrayList(Iterator<Timetable> iterator) {
-							return new ArrayList<>();
-						}
-					});
-				} else {
-					buildSchedule(selectedCourses);
-				}
+				buildSchedule(selectedCourses);
 			}
 		});
 
@@ -391,6 +374,9 @@ public class SchedulerPresenter implements Presenter {
 		panel.add(e);
 		panel.setWidgetLeftWidth(e, 1, Unit.EM, 77, Unit.PCT);
 		panel.setWidgetTopBottom(e, 4.5, Unit.EM, 1, Unit.EM);
+		if (isSignedIn) {
+			updateScheduleAndChosenLessons();
+		}
 	}
 
 	void buildSchedule(List<Course> result) {
@@ -456,6 +442,42 @@ public class SchedulerPresenter implements Presenter {
 		}
 		view.scheduleBuilt();
 		view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+	}
+	
+	void updateScheduleAndChosenLessons() {
+		Log.info("updating schedule and chosen lessons...");
+		rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
+			
+			@Override
+			public void onSuccess(List<Course> result) {
+				selectedCourses = result;
+				Log.info("chosen lessons were updated.");
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Log.warn("Uh-oh, couldn't load selected courses into scheduler!");
+			}
+		});
+
+		rpcService.getSchedule(new AsyncCallback<List<LessonGroup>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Log.warn("Uh-oh, couldn't load schedule!");
+			}
+
+			@Override
+			public void onSuccess(List<LessonGroup> result) {
+				lessonGroupsList.clear();
+				lessonGroupsList.add(result);
+				sched_index = 0;
+				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
+				view.scheduleBuilt();
+				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				Log.info("schedule was updated. it has " + String.valueOf(result.size()) + " LessonGroups.");
+			}
+		});
 	}
 	
 }

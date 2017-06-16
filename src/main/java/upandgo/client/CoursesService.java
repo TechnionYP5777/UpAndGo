@@ -43,6 +43,8 @@ public interface CoursesService extends RemoteService {
 	
 	public void saveSchedule (List<LessonGroup> sched);
 	
+	public List<LessonGroup> getSchedule();
+	
 	public String getSomeString();
 	
 }

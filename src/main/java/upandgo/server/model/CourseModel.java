@@ -223,4 +223,12 @@ public class CourseModel { // implements Model {
 		pickedCourseList.clear();
 		
 	}
+	
+	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
+		loader.saveChosenLessonGroups(xxx);
+	}
+	
+	public List<LessonGroup> loadChosenLessonGroups() {
+		return loader.loadChosenLessonGroups();
+	}
 }

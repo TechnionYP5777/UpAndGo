@@ -13,6 +13,11 @@ public class ScheduleEntity {
 		public int groupNum;
 		public String courseId;
 		
+		public Lesson() {
+			groupNum = -1;
+			courseId = "";
+		}
+		
 		public Lesson(int gn, String cid) {
 			groupNum = gn;
 			courseId = cid;

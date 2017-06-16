@@ -5,11 +5,14 @@ import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
 import upandgo.client.CoursesService;
 import upandgo.server.model.CourseModel;
 import upandgo.server.model.TimeTableModel;
+import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
@@ -34,28 +37,28 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	 */
 	private static final long serialVersionUID = 1193922002939188572L;
 
+	static {
+		// register Objectify-classes
+		ObjectifyService.register(ScheduleEntity.class);
+		ObjectifyService.register(CoursesEntity.class);
+	}
+	
 	private String REP_XML_PATH = "test.XML";
 
 	private final CourseModel model;
-	private final TimeTableModel scheduleModel;
 
 	public CoursesServiceImpl() {
 		Log.warn("in course service constractor");
 		// Log.info("entered c'tor of CourseServiceImple");
-		
-		// register Objectify-classes
-		ObjectifyService.register(ScheduleEntity.class);
 
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
-		scheduleModel = new TimeTableModel(loader);
 	}
 
 	public CoursesServiceImpl(String path) {
 		REP_XML_PATH = path;
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
 		model = new CourseModel(loader);
-		scheduleModel = new TimeTableModel(loader);
 	}
 
 	@Override
@@ -89,12 +92,15 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	@Override
 	public void selectCourse(CourseId id) {
 		Log.info("picked course: " + id.number());
+		someString = "here0";
 		model.pickCourse(id.number());
+		model.saveChosenCourses(model.getChosenCourseNames());
 	}
 
 	@Override
 	public void unselectCourse(CourseId id) {
 		model.dropCourse(id.number());
+		model.saveChosenCourses(model.getChosenCourseNames());
 	}
 
 	@Override
@@ -110,14 +116,28 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public void saveSchedule(@SuppressWarnings("unused") List<LessonGroup> sched) {
-		scheduleModel.saveChosenLessonGroups(sched);
+	public void saveSchedule(List<LessonGroup> sched) {
+		model.saveChosenLessonGroups(sched);
 
 	}
 
 	@Override
 	public void unselectAllCourses() {
 		model.UnselectAllCourses();
+		model.saveChosenCourses(model.getChosenCourseNames());
 		
+	}
+	
+	public static Objectify ofy() {
+		return ObjectifyService.ofy();
+	}
+	
+	public static ObjectifyFactory factory() {
+        return ObjectifyService.factory();
+    }
+
+	@Override
+	public List<LessonGroup> getSchedule() {
+		return model.loadChosenLessonGroups();
 	}
 }
