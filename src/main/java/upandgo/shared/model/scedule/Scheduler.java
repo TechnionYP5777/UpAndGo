@@ -31,6 +31,7 @@ import upandgo.shared.model.scedule.Timetable;
 @SuppressWarnings("boxing")
 public class Scheduler implements IsSerializable{
 	private static Map<String, Color> colorMap;
+	private static List<Collision> collisions;
 	/**
 	 * gets a list of courses and a list of constraints and return a possible
 	 * schedule of them which doesn't break the constraints. it works for
@@ -41,10 +42,15 @@ public class Scheduler implements IsSerializable{
 		return colorMap;
 	}
 	
+	public static List<Collision> getCollisions(){
+		return collisions;
+	}
+	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		//Map<Course, Color> colorsMap = new HashMap();
 		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
 		colorMap = mapCoursesToColors(lcourse);
+		collisions = new ArrayList<>();
 				
 		//Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
 		final List<Timetable> result = new ArrayList<>();
@@ -69,6 +75,7 @@ public class Scheduler implements IsSerializable{
 			int lastAdded = 0;
 			for (lastAdded = 0; lastAdded < lessons.size(); ++lastAdded) {
 				b = $.addLesson(lessons.get(lastAdded));
+
 				//Log.info("************current list: " + $ + "************");
 				// if you can't add that lesson than all combination including
 				// him are not valid
@@ -85,7 +92,10 @@ public class Scheduler implements IsSerializable{
 			if (b) {
 				System.out.println("^found");
 				//Log.info("Found");
-				result.add($.getTimetable()); // return $;
+				if($.getCollisionsCount() == 0)
+					result.add($.getTimetable()); // return $;
+				else
+					collisions.add($.getLastCollision());
 			}
 
 			if (!b) {

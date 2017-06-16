@@ -25,10 +25,18 @@ public class Schedule implements Serializable {
 	
 	private final List<LessonGroup> lessons;
 	private final List<TimeConstraint> constraints;
+	private int collisions;
+	private Collision lastCollisionFound;
 
 	public Schedule() {
 		lessons = new ArrayList<>();
 		constraints = new ArrayList<>();
+		collisions = 0;
+		
+	}
+	
+	public int getCollisionsCount(){
+		return collisions;
 	}
 	
 	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
@@ -47,11 +55,12 @@ public class Schedule implements Serializable {
 		}
 		return true;
 	}
+	
 	/**
 	 * 
 	 * @param xxx
 	 * @return true if lessonGroup can be added to lessond without causing a
-	 *         collision
+	 *         collision && if first cllision already happend, else - seting firstCo.. to true
 	 */
 	public boolean addLesson(final LessonGroup xxx) {
 		/*
@@ -63,17 +72,58 @@ public class Schedule implements Serializable {
 			return true;
 		}*/
 		
-		
 		for (final TimeConstraint c : constraints)
 			if (c.isClashWith(xxx))
-				return false;
+				collisions++;
+				//return false;
 		
 		for (final LessonGroup l : lessons)
-			if (l.isClashWith(xxx))
-				return false;
+			if (l.isClashWith(xxx)){
+				collisions++;
+				lastCollisionFound = new Collision(l.getCourseID(), xxx.getCourseID());
+		
+				//l.getCourseID()
+			}
+		
+		
+		if(collisions > 1)
+			return false;
 		lessons.add(xxx);
 		return true;
 	}
+	
+	public Collision getLastCollision(){
+		return lastCollisionFound;
+	}
+	
+	/*
+	/**
+	 * 
+	 * @param xxx
+	 * @return true if lessonGroup can be added to lessond without causing a
+	 *         collision
+	 */
+//	public boolean addLesson(final LessonGroup xxx) {
+//		/*
+//		 * if(!lessons.contains(xxx)) // add equals to lessonsgroup
+//		 * lessons.add(xxx);
+//		 */
+//		/*if (lessons.isEmpty()) {
+//			lessons.add(xxx);
+//			return true;
+//		}*/
+//		
+//		
+//		for (final TimeConstraint c : constraints)
+//			if (c.isClashWith(xxx))
+//				return false;
+//		
+//		for (final LessonGroup l : lessons)
+//			if (l.isClashWith(xxx))
+//				return false;
+//		lessons.add(xxx);
+//		return true;
+//	}*/
 	
 	public Timetable getTimetable() {
 		return new Timetable(lessons);

@@ -14,6 +14,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
+import upandgo.shared.model.scedule.Collision;
 
 /**
  * 
@@ -216,6 +217,16 @@ public class Course implements IsSerializable {
 	@Override
 	public String toString() {
 		return name + " " + id;
+	}
+	
+	
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof Course))return false;
+	    Course otherCourse = (Course)other;
+	    return this.getId().equals(otherCourse.getId());
 	}
 
 
