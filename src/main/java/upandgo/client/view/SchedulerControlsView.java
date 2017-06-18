@@ -7,13 +7,16 @@ import org.gwtbootstrap3.client.ui.Well;
 import org.gwtbootstrap3.client.ui.constants.WellSize;
 import org.gwtbootstrap3.client.ui.html.Text;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import elemental.css.CSSStyleDeclaration.Unit;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 
@@ -31,7 +34,7 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 	
 	final Modal constraintsBox = new Modal();
-	
+		
 	SchedulerConstraintsView schedualerConstraintsView;
 
 	public SchedulerControlsView(){

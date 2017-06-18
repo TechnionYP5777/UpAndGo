@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
+import org.gwtbootstrap3.client.ui.Collapse;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
@@ -28,6 +29,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
@@ -72,6 +74,8 @@ public class SchedulerPresenter implements Presenter {
 	protected LocalTime minStartTime;
 	protected LocalTime maxFinishTime;
 	protected List<Boolean> vectorDaysOff;
+	
+	protected boolean examBarVisable;		
 
 	List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
@@ -138,6 +142,8 @@ public class SchedulerPresenter implements Presenter {
 		public void setNextEnable(boolean enable);
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
+		
+		public HasClickHandlers getExamButton();
 
 		public Widget getAsWidget();
 	}
@@ -371,6 +377,8 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 		
+
+		
 	}
 
 	@Override
@@ -383,14 +391,42 @@ public class SchedulerPresenter implements Presenter {
 	}
 
 	@Override
-	public void go(LayoutPanel panel) {
+	public void go(final LayoutPanel panel) {
 		bind();
 		// panel.clear();
+				
+		examBarVisable = false;			
 		
-		final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
-		panel.add(e);
-		panel.setWidgetLeftWidth(e, 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetTopBottom(e, 4.5, Unit.EM, 1, Unit.EM);
+		//final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
+		panel.add(view.getAsWidget());
+		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);		
+		panel.getWidgetContainerElement(view.getAsWidget()).getStyle().setProperty("transition", "bottom 1s linear 0s");
+		
+		panel.add(examsBar);
+		panel.setWidgetLeftWidth(examsBar, 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 0, Unit.EM);
+		panel.getWidgetContainerElement(examsBar).getStyle().setProperty("transition", "height 1s linear 0s");		
+
+		view.getExamButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				if (examBarVisable){
+					panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+					panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
+					panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 0, Unit.EM);
+					examBarVisable = false;
+				} else {
+					panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+					panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 8, Unit.EM);
+					panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 5, Unit.EM);
+					examBarVisable = true;
+				}
+			}
+		});	
+
+
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
 		}

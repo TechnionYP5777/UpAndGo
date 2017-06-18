@@ -34,6 +34,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 	SchedulerConstraintsView schedualerConstraintsView = new SchedulerConstraintsView();
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
+	ExamsControlsView examsControlsView = new ExamsControlsView();
 
 	public SchedulerView(){
 		InitializePanel();
@@ -47,17 +48,18 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
-		this.setWidgetLeftRight(scrollableTimeTable, 13, Unit.EM, 0, Unit.EM);
+		this.setWidgetLeftRight(scrollableTimeTable, 12, Unit.EM, 0, Unit.EM);
 		this.setWidgetTopBottom(scrollableTimeTable, 0.5, Unit.EM, 0, Unit.EM);
 		
 		this.add(schedualerControlsView);
 		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 11, Unit.EM);
 		this.setWidgetTopBottom(schedualerControlsView, 0.5, Unit.EM, 0, Unit.EM);
-/*		this.add(constraintsView);
-		this.setWidgetLeftRight(constraintsView, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(constraintsView, 0, Unit.EM, 3, Unit.EM);
-		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
-*/		
+		
+		this.add(examsControlsView);
+		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 11, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 3, Unit.EM);
+
+		
 		}
 	
 	
@@ -203,5 +205,10 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void scheduleBuilt(){
 		schedualerControlsView.scheduleBuilt();
+	}
+	
+	@Override
+	public HasClickHandlers getExamButton(){
+		return examsControlsView.examsButton;
 	}
 }
