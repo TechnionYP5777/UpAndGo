@@ -9,6 +9,8 @@ import java.util.List;
 //import java.util.function.Consumer;
 import java.util.Map;
 
+import org.gwtbootstrap3.client.ui.InlineCheckBox;
+
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -101,11 +103,11 @@ public class SchedulerPresenter implements Presenter {
 		public boolean isDayOffChecked(ClickEvent event);
 
 		public HasClickHandlers getMinWindowsElement();
-		public CheckBox getSundayCheckbox();
-		public CheckBox getMondayCheckbox();
-		public CheckBox getTuesdayCheckbox();
-		public CheckBox getWednesdayCheckbox();
-		public CheckBox getThursdayCheckbox();
+		public InlineCheckBox getSundayCheckbox();
+		public InlineCheckBox getMondayCheckbox();
+		public InlineCheckBox getTuesdayCheckbox();
+		public InlineCheckBox getWednesdayCheckbox();
+		public InlineCheckBox getThursdayCheckbox();
 
 		public boolean isMinWindowsChecked(ClickEvent event);
 

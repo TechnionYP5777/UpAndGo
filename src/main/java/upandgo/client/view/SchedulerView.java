@@ -111,19 +111,19 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		//return null;
 	}
 	@Override
-	public CheckBox getSundayCheckbox(){
+	public InlineCheckBox getSundayCheckbox(){
 		return schedualerConstraintsView.sundayBox;
 	}
-	public CheckBox getMondayCheckbox(){
+	public InlineCheckBox getMondayCheckbox(){
 		return schedualerConstraintsView.mondayBox;
 	}
-	public CheckBox getTuesdayCheckbox(){
+	public InlineCheckBox getTuesdayCheckbox(){
 		return schedualerConstraintsView.tuesdayBox;
 	}
-	public CheckBox getWednesdayCheckbox(){
+	public InlineCheckBox getWednesdayCheckbox(){
 		return schedualerConstraintsView.wednesdayBox;
 	}
-	public CheckBox getThursdayCheckbox(){
+	public InlineCheckBox getThursdayCheckbox(){
 		return schedualerConstraintsView.thursdayBox;
 	}
 

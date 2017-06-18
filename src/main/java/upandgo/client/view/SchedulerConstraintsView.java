@@ -26,11 +26,11 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("עפ\"י ימי חופש:");
-	CheckBox sundayBox = new CheckBox("א'"); 
-	CheckBox mondayBox = new CheckBox("ב'"); 
-	CheckBox tuesdayBox = new CheckBox("ג'"); 
-	CheckBox wednesdayBox = new CheckBox("ד'"); 
-	CheckBox thursdayBox = new CheckBox("ה'"); 
+	InlineCheckBox sundayBox = new InlineCheckBox("ראשון"); 
+	InlineCheckBox mondayBox = new InlineCheckBox("שני"); 
+	InlineCheckBox tuesdayBox = new InlineCheckBox("שלישי"); 
+	InlineCheckBox wednesdayBox = new InlineCheckBox("רביעי"); 
+	InlineCheckBox thursdayBox = new InlineCheckBox("חמישי"); 
 	InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות בין שיעורים");
 	
 	//InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות בין שיעורים");
@@ -89,9 +89,15 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	this.add(startTimePanel);
     	this.add(finishTimePanel);
     	
+    	freeDaysLabel.addStyleName(cStyle.onlyCheckBox());
+    	sundayBox.addStyleName(cStyle.onlyCheckBox());
+    	mondayBox.addStyleName(cStyle.onlyCheckBox());
+    	tuesdayBox.addStyleName(cStyle.onlyCheckBox());
+    	wednesdayBox.addStyleName(cStyle.onlyCheckBox());
+    	thursdayBox.addStyleName(cStyle.onlyCheckBox());
+    	
     	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
-    	freeDaysPanel.addStyleName(cStyle.onlyCheckBox());
-
+    	
     	startTimeCB.addStyleName(cStyle.timeCheckBox());
     	finishTimeCB.addStyleName(cStyle.timeCheckBox());
     	
