@@ -4,11 +4,13 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -34,6 +36,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	SchedulerCollisionsView schedulerCollisionsView = new SchedulerCollisionsView();
 	
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
+	ExamsControlsView examsControlsView = new ExamsControlsView();
 
 	public SchedulerView(){
 		InitializePanel();
@@ -47,17 +50,18 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 		this.setHeight("100%");
 		this.add(scrollableTimeTable);
-		this.setWidgetLeftRight(scrollableTimeTable, 13, Unit.EM, 0, Unit.EM);
+		this.setWidgetLeftRight(scrollableTimeTable, 12, Unit.EM, 0, Unit.EM);
 		this.setWidgetTopBottom(scrollableTimeTable, 0.5, Unit.EM, 0, Unit.EM);
 		
 		this.add(schedualerControlsView);
 		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 11, Unit.EM);
 		this.setWidgetTopBottom(schedualerControlsView, 0.5, Unit.EM, 0, Unit.EM);
-/*		this.add(constraintsView);
-		this.setWidgetLeftRight(constraintsView, 1, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(constraintsView, 0, Unit.EM, 3, Unit.EM);
-		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
-*/		
+		
+		this.add(examsControlsView);
+		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 11, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 3, Unit.EM);
+
+		
 		}
 	
 	@Override
@@ -105,6 +109,15 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		timeTableView.displaySchedule(schedule, map);
 		
 	}
+	
+	@Override
+	public void setSelectedCourses(List<Course> selectedCourses){
+		schedualerConstraintsView.displayCoursesConstraints(selectedCourses);
+	}
+	
+	public Modal getContraintsModal(){
+		return schedualerControlsView.constraintsBox;
+	}
 
 	/*
 	@Override
@@ -123,19 +136,19 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		//return null;
 	}
 	@Override
-	public CheckBox getSundayCheckbox(){
+	public InlineCheckBox getSundayCheckbox(){
 		return schedualerConstraintsView.sundayBox;
 	}
-	public CheckBox getMondayCheckbox(){
+	public InlineCheckBox getMondayCheckbox(){
 		return schedualerConstraintsView.mondayBox;
 	}
-	public CheckBox getTuesdayCheckbox(){
+	public InlineCheckBox getTuesdayCheckbox(){
 		return schedualerConstraintsView.tuesdayBox;
 	}
-	public CheckBox getWednesdayCheckbox(){
+	public InlineCheckBox getWednesdayCheckbox(){
 		return schedualerConstraintsView.wednesdayBox;
 	}
-	public CheckBox getThursdayCheckbox(){
+	public InlineCheckBox getThursdayCheckbox(){
 		return schedualerConstraintsView.thursdayBox;
 	}
 
@@ -203,5 +216,10 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void scheduleBuilt(){
 		schedualerControlsView.scheduleBuilt();
+	}
+	
+	@Override
+	public HasClickHandlers getExamButton(){
+		return examsControlsView.examsButton;
 	}
 }

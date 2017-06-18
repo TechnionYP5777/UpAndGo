@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+@external .btn;
+
+.examsControlsPanel{
+	background-color: WhiteSmoke;
+	width: 100%
+}
+
+.examsControlsPanel .btn{
+	cursor:pointer;
+	width: 10em;
+	margin-bottom: 2em;
+}
+
+

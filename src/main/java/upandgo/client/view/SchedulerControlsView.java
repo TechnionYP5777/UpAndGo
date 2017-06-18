@@ -2,17 +2,21 @@ package upandgo.client.view;
 
 
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.Well;
 import org.gwtbootstrap3.client.ui.constants.WellSize;
 import org.gwtbootstrap3.client.ui.html.Text;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import elemental.css.CSSStyleDeclaration.Unit;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 
@@ -29,6 +33,8 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button prevSchedule = new Button("<i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מערכת קודמת");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 	
+	final Modal constraintsBox = new Modal();
+		
 	SchedulerConstraintsView schedualerConstraintsView;
 
 	public SchedulerControlsView(){
@@ -40,6 +46,7 @@ public class SchedulerControlsView extends VerticalPanel{
 	public SchedulerControlsView(SchedulerConstraintsView scv){
 		this.schedualerConstraintsView = scv;
     	InitializePanel();
+    	InitializeConstraintsBox();
     	scStyle.ensureInjected();
     }
 
@@ -73,7 +80,6 @@ public class SchedulerControlsView extends VerticalPanel{
 		prevSchedule.setEnabled(false);
 
 		buildSchedule.addClickHandler(new ClickHandler(){
-
 			@Override
 			public void onClick(ClickEvent event) {
 				buildSchedule.setHTML("<i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
@@ -82,18 +88,29 @@ public class SchedulerControlsView extends VerticalPanel{
     	});
 		
 		setConstrains.addClickHandler(new ClickHandler() {
-			
 			@Override
 			public void onClick(ClickEvent arg0) {
-				Modal constraintsBox = new Modal();
-				constraintsBox.setFade(true);
-				constraintsBox.setTitle("הגדרת אילוצים");
-				constraintsBox.add(schedualerConstraintsView);
 				constraintsBox.show();
-				
 			}
 		});
 
+	}
+	
+	private void InitializeConstraintsBox(){
+		ModalFooter constraintsBoxFooter = new ModalFooter();
+		Button constraintsBoxButton = new Button("שמור וסגור", new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				constraintsBox.hide();
+				
+			}
+		});
+		constraintsBoxFooter.add(constraintsBoxButton);
+		constraintsBox.setFade(true);
+		constraintsBox.setTitle("הגדרת אילוצים");
+		constraintsBox.add(schedualerConstraintsView);
+		constraintsBox.add(constraintsBoxFooter);
 	}
 	
 	public void setPrevEnable(boolean enable){

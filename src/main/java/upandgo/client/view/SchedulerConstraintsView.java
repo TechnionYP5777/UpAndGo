@@ -1,5 +1,8 @@
 package upandgo.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
@@ -13,6 +16,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
+import upandgo.shared.entities.course.Course;
 
 
 /**
@@ -26,11 +30,11 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("עפ\"י ימי חופש:");
-	CheckBox sundayBox = new CheckBox("א'"); 
-	CheckBox mondayBox = new CheckBox("ב'"); 
-	CheckBox tuesdayBox = new CheckBox("ג'"); 
-	CheckBox wednesdayBox = new CheckBox("ד'"); 
-	CheckBox thursdayBox = new CheckBox("ה'"); 
+	InlineCheckBox sundayBox = new InlineCheckBox("ראשון"); 
+	InlineCheckBox mondayBox = new InlineCheckBox("שני"); 
+	InlineCheckBox tuesdayBox = new InlineCheckBox("שלישי"); 
+	InlineCheckBox wednesdayBox = new InlineCheckBox("רביעי"); 
+	InlineCheckBox thursdayBox = new InlineCheckBox("חמישי"); 
 	InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות בין שיעורים");
 	
 	//InlineCheckBox minWindowsCB = new InlineCheckBox("מספר מינימלי של חלונות בין שיעורים");
@@ -43,6 +47,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	ListBox finishTimeLB = new ListBox();
 
+	VerticalPanel courseConstraintsPanel = new VerticalPanel();
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
@@ -89,9 +94,15 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	this.add(startTimePanel);
     	this.add(finishTimePanel);
     	
+    	freeDaysLabel.addStyleName(cStyle.onlyCheckBox());
+    	sundayBox.addStyleName(cStyle.onlyCheckBox());
+    	mondayBox.addStyleName(cStyle.onlyCheckBox());
+    	tuesdayBox.addStyleName(cStyle.onlyCheckBox());
+    	wednesdayBox.addStyleName(cStyle.onlyCheckBox());
+    	thursdayBox.addStyleName(cStyle.onlyCheckBox());
+    	
     	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
-    	freeDaysPanel.addStyleName(cStyle.onlyCheckBox());
-
+    	
     	startTimeCB.addStyleName(cStyle.timeCheckBox());
     	finishTimeCB.addStyleName(cStyle.timeCheckBox());
     	
@@ -120,6 +131,13 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	
     	this.setStyleName(cStyle.constraintsPanel());
 
+    }
+    
+    public void displayCoursesConstraints(List<Course> selectedCourses){
+    	for (Course course : selectedCourses){
+    		Label courseName = new Label(course.getName());
+    		courseConstraintsPanel.add(courseName);
+    	}
     }
 	
 

@@ -48,6 +48,10 @@ public interface Resources extends ClientBundle {
 		 String SchedulerIndexWell();
 	 }
 	 
+	 interface ExamsControlsStyle extends CssResource {	 
+		 String examsControlsPanel();
+	 }
+	 
 	 interface SchedualerConstraintsStyle extends CssResource {	 		 
 		 String constraintsPanel();
 		 
@@ -85,6 +89,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/SchedualerControlsStyle.css")
 	public SchedualerControlsStyle schedualerControlsStyle();
+	
+	@Source("resources/ExamsControlsStyle.css")
+	public ExamsControlsStyle examsControlsStyle();
 	
 	@Source("resources/SchedualerConstraintsStyle.css")
 	public SchedualerConstraintsStyle schedualerConstraintsStyle();
