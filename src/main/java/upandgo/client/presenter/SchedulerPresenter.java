@@ -90,7 +90,7 @@ public class SchedulerPresenter implements Presenter {
 
 		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if
 																						// (schedule
-																						// =
+		public void drawCollisionView();																				// =
 																						// null)
 																						// then
 																						// clear
@@ -416,8 +416,9 @@ public class SchedulerPresenter implements Presenter {
 		
 		Log.info("Build schedule: after Scheduler.sortedBy");
 		if (sorted.isEmpty()) {
-			Window.alert("Error - There are no possible schedule.");
-			Log.error("Error - There are no possible schedule.");
+			//Window.alert("Error - There are no possible schedule.");
+			//Log.error("Error - There are no possible schedule.");
+			view.drawCollisionView();
 		} else {
 			lessonGroupsList.clear();
 			//lessonGroupsList = sorted;

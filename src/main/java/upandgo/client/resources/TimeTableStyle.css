@@ -164,7 +164,57 @@
 	background: #DAA520;
 }
 
+.hasEventWrap[eventNum="BLUEVIOLET"]{
+	background: #8A2BE2;
+}
 
+.hasEventWrap[eventNum="BROWN"]{
+	background: #A52A2A;
+}
+
+.hasEventWrap[eventNum="CORAL"]{
+	background: #FF7F50;
+}
+
+.hasEventWrap[eventNum="CHARTREUSE"]{
+	background: #7FFF00;
+}
+
+.hasEventWrap[eventNum="CORNFLOWERBLUE"]{
+	background: #6495ED;
+}
+
+.hasEventWrap[eventNum="DARKORANGE"]{
+	background: #FF8C00;
+}
+
+.hasEventWrap[eventNum="DARKSLATEGRAY"]{
+	background: #2F4F4F;
+}
+
+.hasEventWrap[eventNum="FUCHSIA"]{
+	background: #FF00FF;
+}
+
+.hasEventWrap[eventNum="OLIVEDRAB"]{
+	background: #6B8E23;
+}
+
+.hasEventWrap[eventNum="SEAGREEN"]{
+	background: #2E8B57;
+}
+ 
+.hasEventWrap[eventNum="TURQUOISE"]{
+	background: #40E0D0;
+}
+
+.hasEventWrap[eventNum="NAVY"]{
+	background: #000080;
+}
+
+.hasEventWrap[eventNum="CRIMSON"]{
+	background: #DC143C;
+}
 
 
 

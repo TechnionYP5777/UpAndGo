@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.Modal;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,6 +31,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	TimeTableView timeTableView = new TimeTableView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 	SchedulerConstraintsView schedualerConstraintsView = new SchedulerConstraintsView();
+	SchedulerCollisionsView schedulerCollisionsView = new SchedulerCollisionsView();
+	
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
 
 	public SchedulerView(){
@@ -56,6 +59,15 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		this.setWidgetHorizontalPosition(constraintsView, Layout.Alignment.END);
 */		
 		}
+	
+	@Override
+	public void drawCollisionView(){
+		Modal constraintsBox = new Modal();
+		constraintsBox.setFade(true);
+		constraintsBox.setTitle("פתרון התנגשויות");
+		constraintsBox.add(schedulerCollisionsView);
+		constraintsBox.show();
+	}
 	
 	
 	@Override

@@ -90,7 +90,7 @@ public class Scheduler implements IsSerializable{
 
 			}
 			if (b) {
-				System.out.println("^found");
+				//System.out.println("^found");
 				//Log.info("Found");
 				if($.getCollisionsCount() == 0)
 					result.add($.getTimetable()); // return $;
@@ -180,7 +180,7 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
-			if (b)
+			if (b && $.getCollisionsCount() == 0)
 				return $;
 
 			if (!b) {

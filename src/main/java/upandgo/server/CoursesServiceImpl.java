@@ -44,6 +44,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	private String REP_XML_PATH = "test.XML";
+	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
 	private final CourseModel model;
 
@@ -55,6 +56,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		model = new CourseModel(loader);
 	}
 
+	// this one doesn't seem to be in use
 	public CoursesServiceImpl(String path) {
 		REP_XML_PATH = path;
 		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);

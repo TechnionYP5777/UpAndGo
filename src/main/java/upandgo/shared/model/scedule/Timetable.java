@@ -172,9 +172,10 @@ public class Timetable implements IsSerializable {
 
 		final double $ = 1. * BLANKSPACE_PENALTY_PER_HOUR * blankMinutesSum / 60;
 
-		System.out.println("hist: " + histogram);
-		System.out.println("sum: " + blankMinutesSum);
-		System.out.println("penalty: " + $);
+		//System.out.println("hist: " + histogram);
+		//System.out.println("sum: " + blankMinutesSum);
+		//System.out.println("penalty: " + $);
+		
 		// System.out.println("histover");
 		// histogram[xxx.getDay()] = 1;
 		// don't give any value for free friday or saturday since it's usual

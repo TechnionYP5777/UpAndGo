@@ -45,8 +45,10 @@ public class CourseModel { // implements Model {
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
 		facultyList = loader.loadFaculties();
-		for (final String id : this.loader.loadChosenCourseNames())
-			pickedCourseList.add(coursesById.get(id));
+		for (final String id : this.loader.loadChosenCourseNames()){
+			if(coursesById.get(id) != null)
+				pickedCourseList.add(coursesById.get(id));
+		}
 	}
 
 	public void pickCourse(final String id) {
