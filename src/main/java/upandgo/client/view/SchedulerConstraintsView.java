@@ -1,5 +1,8 @@
 package upandgo.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
@@ -13,6 +16,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
+import upandgo.shared.entities.course.Course;
 
 
 /**
@@ -43,6 +47,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	ListBox finishTimeLB = new ListBox();
 
+	VerticalPanel courseConstraintsPanel = new VerticalPanel();
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
@@ -126,6 +131,13 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	
     	this.setStyleName(cStyle.constraintsPanel());
 
+    }
+    
+    public void displayCoursesConstraints(List<Course> selectedCourses){
+    	for (Course course : selectedCourses){
+    		Label courseName = new Label(course.getName());
+    		courseConstraintsPanel.add(courseName);
+    	}
     }
 	
 

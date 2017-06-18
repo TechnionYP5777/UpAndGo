@@ -4,10 +4,13 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -92,6 +95,15 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map) {
 		timeTableView.displaySchedule(schedule, map);
 		
+	}
+	
+	@Override
+	public void setSelectedCourses(List<Course> selectedCourses){
+		schedualerConstraintsView.displayCoursesConstraints(selectedCourses);
+	}
+	
+	public Modal getContraintsModal(){
+		return schedualerControlsView.constraintsBox;
 	}
 
 	/*

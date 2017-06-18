@@ -9,7 +9,11 @@ import java.util.List;
 //import java.util.function.Consumer;
 import java.util.Map;
 
+import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
+import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
@@ -98,7 +102,9 @@ public class SchedulerPresenter implements Presenter {
 																						// clear
 																						// schedule
 
-		//public HasClickHandlers getDaysOffElement();
+		public void setSelectedCourses(List<Course> selectedCourses);
+		
+		public Modal getContraintsModal();
 
 		public boolean isDayOffChecked(ClickEvent event);
 
@@ -356,6 +362,15 @@ public class SchedulerPresenter implements Presenter {
 				});
 			}
 		});
+		
+		view.getContraintsModal().addShowHandler(new ModalShowHandler(){
+			@Override
+			public void onShow(ModalShowEvent evt) {
+				Log.info("Constraints modal show event");
+				view.setSelectedCourses(selectedCourses);
+			}
+		});	
+		
 	}
 
 	@Override
