@@ -80,6 +80,27 @@ public class WeekTime implements IsSerializable {
 		 * ((this.time).equals(((WeekTime) d).getTime())));
 		 */
 	}
+	
+	public String toHebrewString(){
+		switch (day){
+			case FRIDAY:
+				return "שישי " + time;
+			case MONDAY:
+				return "שני " + time;
+			case SATURDAY:
+				return "שבת " + time;
+			case SUNDAY:
+				return "ראשון " + time;
+			case THURSDAY:
+				return "חמישי " + time;
+			case TUESDAY:
+				return "שלישי " + time;
+			case WEDNESDAY:
+				return "רביעי " + time;
+			default:
+				return "יום טוב";
+		}
+	}
 
 	@Override
 	public String toString() {
