@@ -34,7 +34,7 @@ import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
-import upandgo.client.event.getExamsBarEvent;
+import upandgo.client.event.CourseSelectionChangedEvent;
 import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -106,7 +106,7 @@ public class CourseListPresenter implements Presenter {
 		this.display = display;
 		this.eventBus = eventBus;
 		
-		eventBus.fireEvent(new getExamsBarEvent((ScrollPanel)display.getExamsBar()));
+		
 		
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
 			
@@ -140,10 +140,6 @@ public class CourseListPresenter implements Presenter {
 
 	boolean isSignedIn = false;
 	
-	
-	public ScrollPanel getEB(){
-		return (ScrollPanel)display.getExamsBar();
-	}
 	@Override
 	public void bind() {
 
@@ -297,7 +293,7 @@ public class CourseListPresenter implements Presenter {
 	
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							
+							eventBus.fireEvent(new CourseSelectionChangedEvent());
 						}
 					});
 				
@@ -448,6 +444,7 @@ public class CourseListPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 
 						eventBus.fireEvent(new UnselectCourseEvent($));
+						eventBus.fireEvent(new CourseSelectionChangedEvent());
 					}
 				});
 			}
@@ -485,6 +482,7 @@ public class CourseListPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 						Log.info("CourseListPresenter: got onSuccuess from server");
 						eventBus.fireEvent(new SelectCourseEvent($));
+						eventBus.fireEvent(new CourseSelectionChangedEvent());
 					}
 				});
 			} else {
