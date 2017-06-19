@@ -21,7 +21,8 @@ public class Collision {
 	    if (other == this) return true;
 	    if (!(other instanceof Collision))return false;
 	    Collision otherCollsion = (Collision)other;
-	    return c1.equals(otherCollsion.c1) && c2.equals(otherCollsion.c2);
+	    return (c1.equals(otherCollsion.c1) && c2.equals(otherCollsion.c2) ||
+	    		c1.equals(otherCollsion.c2) && c2.equals(otherCollsion.c1));
 	}
 	
 }

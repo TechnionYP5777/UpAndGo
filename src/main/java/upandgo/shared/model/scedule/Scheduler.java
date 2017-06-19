@@ -31,7 +31,7 @@ import upandgo.shared.model.scedule.Timetable;
 @SuppressWarnings("boxing")
 public class Scheduler implements IsSerializable{
 	private static Map<String, Color> colorMap;
-	private static List<Collision> collisions;
+	private static List<String> collisionSolvers;
 	/**
 	 * gets a list of courses and a list of constraints and return a possible
 	 * schedule of them which doesn't break the constraints. it works for
@@ -42,17 +42,19 @@ public class Scheduler implements IsSerializable{
 		return colorMap;
 	}
 	
-	public static List<Collision> getCollisions(){
-		return collisions;
+	public static List<String> getCollisionSolvers(){
+		return collisionSolvers;
 	}
 	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		//Map<Course, Color> colorsMap = new HashMap();
 		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
 		colorMap = mapCoursesToColors(lcourse);
-		collisions = new ArrayList<>();
+		collisionSolvers = new ArrayList<>();
 				
-		//Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses");
+		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses:" + lcourse);
+		if(lcourse.get(0) != null)
+			Log.info(lcourse.get(0).toString());
 		final List<Timetable> result = new ArrayList<>();
 		//Log.info("Scheduler: here");
 
@@ -60,22 +62,24 @@ public class Scheduler implements IsSerializable{
 		//Log.info("Scheduler: here");
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
-		//Log.info("Scheduler: here");
+		Log.info("max indexes:" + max);
 
 		for (int last = indexes.size() - 1, msb;;) {
 			
 			//Log.info("Scheduler: in for with indexes " + indexes);
-
+			System.out.println("*** NEW ROUND ***");
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 			if(!$.addConstraintsList(cs))
 				return result;
 
-			boolean b = false;
+			boolean b = true;
 			int lastAdded = 0;
 			for (lastAdded = 0; lastAdded < lessons.size(); ++lastAdded) {
-				b = $.addLesson(lessons.get(lastAdded));
-
+				$.addLesson(lessons.get(lastAdded));
+				if(lastAdded > 5 || lastAdded == lessons.size()-1)
+					b = $.collisionSolver();
+				
 				//Log.info("************current list: " + $ + "************");
 				// if you can't add that lesson than all combination including
 				// him are not valid
@@ -89,13 +93,20 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
+			System.out.println("lessons: " + $.getLessonGroups());
+			//b = $.collisionSolver();
 			if (b) {
 				//System.out.println("^found");
 				//Log.info("Found");
-				if($.getCollisionsCount() == 0)
+				$.collisionSolver();
+				if(!$.hasCollision())
 					result.add($.getTimetable()); // return $;
 				else
-					collisions.add($.getLastCollision());
+					collisionSolvers.add($.getCollisionSolver());
+				/*if($.getCollisionsCount() == 0)
+					result.add($.getTimetable()); // return $;
+				else
+					collisions.add($.getLastCollision());*/
 			}
 
 			if (!b) {
@@ -164,10 +175,15 @@ public class Scheduler implements IsSerializable{
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 
-			boolean b = false;
+			boolean b = true;
 			int lastAdded = 0;
 			for (lastAdded = 0; lastAdded < lessons.size(); ++lastAdded) {
-				b = $.addLesson(lessons.get(lastAdded));
+				$.addLesson(lessons.get(lastAdded));
+				if(lastAdded > 5 || lastAdded == lessons.size()-1)
+					b = $.collisionSolver();
+				
+				
+				
 				// if you can't add that lesson than all combination including
 				// him are not valid
 				// therefore there is no use to check the rest of them -
@@ -180,9 +196,12 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
-			if (b && $.getCollisionsCount() == 0)
+			//b = $.collisionSolver();
+			
+			if (b && !$.hasCollision())
 				return $;
 
+			
 			if (!b) {
 				indexes.set(lastAdded, indexes.get(lastAdded) + 1);
 				if (indexes.get(lastAdded) > max.get(lastAdded)) {
@@ -231,9 +250,11 @@ public class Scheduler implements IsSerializable{
 			//Log.info("Scheduler: in initMainArr course " + xxx.getId());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
+			Log.info("getLectures: " + xxx.getLectures());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
+			Log.info("getLuts: " + xxx.getTutorials());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

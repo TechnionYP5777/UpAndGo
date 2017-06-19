@@ -281,7 +281,7 @@ public class TimeTableView extends HorizontalPanel {
  		colorMap = map;
  		
  		clearTable();
- 		Log.info("TimeTableView: display was called with: *set schedule on debug mode");
+ 		Log.info("TimeTableView: display was called with: " + schedule);
  		//resetTable();
  		if (schedule==null){
  		    drawDay(new ArrayList<Lesson>(), sundayTable);
@@ -291,9 +291,10 @@ public class TimeTableView extends HorizontalPanel {
  		    drawDay(new ArrayList<Lesson>(), thursdayTable);
  		    return;
  	 	}
- 		
+ 		Log.info("TimeTableView/1");
  		final ArrayList<ArrayList<Lesson>> lessonsOfDay = seperateLessonsByDay(schedule);
- 		
+ 		Log.info("lessonsOfDay: " + lessonsOfDay);
+ 		Log.info("TimeTableView/2");
  		for(int day = 0; day < DAYS_IN_WEEK; day++){
  			final ArrayList<Lesson> daySchedule = lessonsOfDay.get(day);
  			Collections.sort(daySchedule, new Comparator<Lesson>() {

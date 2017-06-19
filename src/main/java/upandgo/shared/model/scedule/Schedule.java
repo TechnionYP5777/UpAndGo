@@ -2,6 +2,7 @@ package upandgo.shared.model.scedule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +26,29 @@ public class Schedule implements Serializable {
 	
 	private final List<LessonGroup> lessons;
 	private final List<TimeConstraint> constraints;
-	private int collisions;
-	private Collision lastCollisionFound;
+	//private int collisions;
+	//private Collision lastCollisionFound;
+	private List<Collision> collisions;
+	private Map<String, Integer> edgeCounter;
+	private String collisionSolver;
 
 	public Schedule() {
 		lessons = new ArrayList<>();
 		constraints = new ArrayList<>();
-		collisions = 0;
+		
+		collisions = new ArrayList<>();
+		edgeCounter = new HashMap<>();
+		
+		collisionSolver = null;
+		//collisions = 0;
 		
 	}
 	
+	/*
 	public int getCollisionsCount(){
 		return collisions;
 	}
+	*/
 	
 	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
 		if(constraintsList == null)
@@ -71,30 +82,100 @@ public class Schedule implements Serializable {
 			lessons.add(xxx);
 			return true;
 		}*/
+		System.out.println("addLesson: " + xxx);
 		
-		for (final TimeConstraint c : constraints)
+		
+		edgeCounter.put(xxx.getCourseID(), 0);
+		
+		/*for (final TimeConstraint c : constraints)
 			if (c.isClashWith(xxx))
-				collisions++;
-				//return false;
+				
+				//collisions.add
+				//collisions++;
+				//return false;*/
 		
-		for (final LessonGroup l : lessons)
+		for (final LessonGroup l : lessons){
+			System.out.println("check of " + l + " against " + xxx);
 			if (l.isClashWith(xxx)){
-				collisions++;
-				lastCollisionFound = new Collision(l.getCourseID(), xxx.getCourseID());
+				collisions.add(new Collision(l.getCourseID(), xxx.getCourseID()));
+				edgeCounter.put(l.getCourseID(), edgeCounter.get(l.getCourseID())+1);
+				edgeCounter.put(xxx.getCourseID(), edgeCounter.get(xxx.getCourseID())+1);
+				
+				//collisions++;
+				//lastCollisionFound = new Collision(l.getCourseID(), xxx.getCourseID());
 		
 				//l.getCourseID()
 			}
+		}
 		
 		
-		if(collisions > 1)
-			return false;
+		//if(lessons.size() > 1)
+		//	return false;
 		lessons.add(xxx);
 		return true;
 	}
 	
+	
+	/**
+	 * 
+	 * @return true if there are no collisions or if there is one course that
+	 * removing him can solve all collisions. in that case this function will update
+	 * the collision variable to be that course.
+	 */
+	public boolean collisionSolver(){
+		// this code is equivalent of finding a vertex cover of size 1. 
+		System.out.println("collisions: " + collisions);
+		// step 0: if there are no collisions(edges) so there is no conflict 
+		// 			and there is no need to solve it. 
+		if(collisions.isEmpty())
+			return true;
+		
+		// step 1: find the vertex with the highest degree
+		String maxID = null;
+		int max = 0;
+		for(String key : edgeCounter.keySet()){
+			if(edgeCounter.get(key) > max || maxID == null){
+				maxID = key;
+				max = edgeCounter.get(key);
+			}
+		}
+		
+		// step 2: remove all edges of that vertex.
+		/*List<Collision> remove = new ArrayList<>();
+		for(Collision c : collisions){
+			if(c.c1.equals(maxID) || c.c2.equals(maxID))
+				remove.add(c);
+		}
+		List<Collision> collisionDup = new ArrayList<>(collisions);
+		for(Collision c : remove){
+			collisionDup.remove(c);
+		}
+		
+		// step 3: if there are any more edges than conflict cannot be resolved.
+		if(collisionDup.isEmpty()){
+			collisionSolver = maxID;
+			return true;
+		}*/
+		if(collisions.size() == max){
+			collisionSolver = maxID;
+			return true;
+		}
+		
+		
+		return false;
+	}
+	
+	public boolean hasCollision(){
+		return collisions.size() > 0;
+	}
+	
+	public String getCollisionSolver(){
+		return collisionSolver;
+	}
+	/*
 	public Collision getLastCollision(){
 		return lastCollisionFound;
-	}
+	}*/
 	
 	/*
 	/**
