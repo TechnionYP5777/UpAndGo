@@ -1,35 +1,40 @@
 package upandgo.client.view;
 
-import upandgo.shared.entities.LocalTime;
-import upandgo.shared.entities.course.Course;
-import upandgo.shared.model.scedule.Color;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
+import upandgo.client.Resources.examsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.course.Course;
+import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Color;
 
 public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Display{
 
 	private MainStyle style = Resources.INSTANCE.mainStyle();
+    private HTML examsBar;
+    private HTML examsBarB;
+    private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
 	TimeTableView timeTableView = new TimeTableView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 	SchedulerConstraintsView schedualerConstraintsView = new SchedulerConstraintsView();
@@ -44,18 +49,41 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 	
 	private void InitializePanel(){
+		
+		
+		//initializing exams bar inside a mgwt scroll panel
+		examsBarStyle ebStyle = Resources.INSTANCE.examsBarStyle();
+		ebStyle.ensureInjected();
+		examsBar = new HTML("");
+    	examsScrollPanel = new com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel();
+    	examsScrollPanel.setScrollingEnabledX(true);
+    	examsScrollPanel.setScrollingEnabledY(false);
+    	examsScrollPanel.setShowVerticalScrollBar(false);
+    	examsScrollPanel.setShowHorizontalScrollBar(false);
+    	examsScrollPanel.setWidget(examsBar);
+    	examsScrollPanel.addStyleName(ebStyle.examBarPanel());
+    	examsBar.addStyleName("horizontal-scroll-wrapper");
+		
+		
 		// needs to be injected
 		
 		scrollableTimeTable.addStyleName(style.scrollableTimeTable());
 
 		this.setHeight("100%");
+		
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 12, Unit.EM, 0, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 0.5, Unit.EM, 0, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 1, Unit.EM);
+		this.getWidgetContainerElement(scrollableTimeTable).getStyle().setProperty("transition", "bottom 0.3s linear 0s");
+		
+		this.add(examsScrollPanel);
+		this.setWidgetLeftRight(examsScrollPanel, 12, Unit.EM, 0, Unit.EM);
+		this.setWidgetBottomHeight(examsScrollPanel, 0, Unit.EM, 0, Unit.EM);
+		this.getWidgetContainerElement(examsScrollPanel).getStyle().setProperty("transition", "height 0.3s linear 0s");	
 		
 		this.add(schedualerControlsView);
 		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 11, Unit.EM);
-		this.setWidgetTopBottom(schedualerControlsView, 0.5, Unit.EM, 0, Unit.EM);
+		this.setWidgetTopBottom(schedualerControlsView, 4.5, Unit.EM, 0, Unit.EM);
 		
 		this.add(examsControlsView);
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 11, Unit.EM);
@@ -115,6 +143,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		schedualerConstraintsView.displayCoursesConstraints(selectedCourses);
 	}
 	
+	@Override
 	public Modal getContraintsModal(){
 		return schedualerControlsView.constraintsBox;
 	}
@@ -209,6 +238,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		schedualerControlsView.setNextEnable(enable);
 	}
 	
+	@Override
 	public void setCurrentScheduleIndex(int index, int max){
 		schedualerControlsView.setCurrentScheduleIndex(index,max);
 	}
@@ -221,5 +251,134 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public HasClickHandlers getExamButton(){
 		return examsControlsView.examsButton;
+	}
+
+	@Override
+	public void updateExamsBar(List<Course> courses) {
+		List<Course> is = new ArrayList<>(), isB = new ArrayList<>();
+		List<String> courseColors = new ArrayList<>();
+		int idx = 0;
+	    for(Course c : courses){
+	    	if(c.getaTerm()!=null){
+	    		is.add(c);
+	    		courseColors.add(Color.valueOf(idx).toString());
+	    	}
+	    	if(c.getaTerm()!=null)
+	    		isB.add(c);
+	    	idx++;
+	    }
+	    Log.info("updating exams");
+	    Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
+
+			@Override
+			public int compare(Course o1, Course o2) {
+				return o1.getaTerm().compare(o2.getaTerm());
+			}
+		}));
+	    Collections.sort(isB,(new Comparator<Course>() { //sort courses by their final exam date
+
+			@Override
+			public int compare(Course o1, Course o2) {
+				return o1.getbTerm().compare(o2.getbTerm());
+			}
+		}));
+	    long width=0;
+		String examsAlephBarHTML = "";
+		for(int i=0; i < is.size(); i++){
+			if(i == is.size()-1){
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(i) +";\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				width+=275;
+				break;
+			}
+			int daysBetween = is.get(i+1).getaTerm().daysBetweenExams(is.get(i).getaTerm());
+			if(daysBetween == 0 ){			
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#f44336;\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
+				width+=275;
+				while(daysBetween == 0 &&  i < is.size()-1){
+					i++;
+					examsAlephBarHTML+="<br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
+					daysBetween = is.get(i+1).getaTerm().daysBetweenExams(is.get(i).getaTerm());
+				}
+				examsAlephBarHTML+="</div>";
+				if(daysBetween > 0 ){
+					for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
+						examsAlephBarHTML+="<div align=\"center\" class=\"child\" style=\"background-color:#4CAF50;\"><b><u>" + k + "</u></b></div>";
+						width+=85;
+					}
+				}
+				
+			}
+			else{
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(i) +"\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				width+=275;
+				for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
+					examsAlephBarHTML+="<div align=\"center\" class=\"child\" style=\"background-color:#4CAF50;\"><b><u>" + k + "</u></b></div>";
+					width+=85;
+				}
+			}
+		}
+		long widthb=0;
+		String examsBetBarHTML = "";
+		for(int i=0; i < isB.size(); i++){
+			if(i == isB.size()-1){
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</div> ";
+				widthb+=275;
+				break;
+			}
+			int daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
+			Log.info("$$#$#$#" + daysBetween);
+			if(daysBetween == 0 ){			
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName();
+				widthb+=275;
+				while(daysBetween == 0 &&  i < isB.size()-1){
+					i++;
+					examsBetBarHTML+="<br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName();
+					daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
+				}
+				examsBetBarHTML+="</div>";
+				if(daysBetween > 0 ){
+					for(int k = 0 ; k < daysBetween-1; k++){
+						examsBetBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
+						widthb+=85;
+					}
+				}
+				
+			}
+			else{
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</div> ";
+				widthb+=275;
+				for(int k = 0 ; k < daysBetween-1; k++){
+					examsBetBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
+					widthb+=85;
+				}
+			}
+		}
+		Log.info("begin of updateLists/7");
+		examsBar = new HTML(examsAlephBarHTML);
+		examsBar.addStyleName("horizontal-scroll-wrapper");
+		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
+		examsScrollPanel.setWidget(examsBar);
+//			examsBarB = new HTML(examsBetBarHTML);
+//			examsBarB.addStyleName("horizontal-scroll-wrapper");
+//			examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
+//			examsScrollPanel.setWidget(examsBarB);
+
+		
+		
+	}
+
+	@Override
+	public void collapseExamsBar() {
+		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 1, Unit.EM);
+		this.setWidgetBottomHeight(examsScrollPanel, 2, Unit.EM, 0, Unit.EM);
+		
+		
+	}
+
+	@Override
+	public void openExamsBar() {
+		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 7, Unit.EM);
+		this.setWidgetBottomHeight(examsScrollPanel, 2, Unit.EM, 5, Unit.EM);
+		
 	}
 }

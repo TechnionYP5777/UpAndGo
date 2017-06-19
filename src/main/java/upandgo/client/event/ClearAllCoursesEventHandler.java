@@ -13,7 +13,7 @@ package upandgo.client.event;
 import com.google.gwt.event.shared.EventHandler;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
-public interface getExamsBarEventHandler extends EventHandler {
-	void getExamsBar(ScrollPanel eb);
+public interface ClearAllCoursesEventHandler extends EventHandler {
+	void onClearAllCourses();
 
 }

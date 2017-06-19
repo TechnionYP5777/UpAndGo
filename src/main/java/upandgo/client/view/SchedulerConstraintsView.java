@@ -6,6 +6,7 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -16,6 +17,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
+import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 
 
@@ -47,7 +50,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	ListBox finishTimeLB = new ListBox();
 
-	VerticalPanel courseConstraintsPanel = new VerticalPanel();
+	VerticalPanel coursesConstraintsPanel = new VerticalPanel();
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
@@ -129,14 +132,66 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     		
     	});
     	
+    	coursesConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
+    	this.add(coursesConstraintsPanel);
     	this.setStyleName(cStyle.constraintsPanel());
 
     }
     
     public void displayCoursesConstraints(List<Course> selectedCourses){
+    	coursesConstraintsPanel.clear();
     	for (Course course : selectedCourses){
     		Label courseName = new Label(course.getName());
+    		courseName.addStyleName(cStyle.onlyCheckBox());
+    		HorizontalPanel courseConstraintsPanel = new HorizontalPanel();
+    		courseConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
+    		InlineCheckBox courseLectureCB = new InlineCheckBox("הרצאה");
+    		courseLectureCB.addStyleName(cStyle.timeCheckBox());
+    		final ListBox lectureOptions = new ListBox();
+    		lectureOptions.addStyleName(cStyle.timeListBox());
+    		for (LessonGroup lessonGroup : course.getLectures()){
+    			for (Lesson lesson : lessonGroup.getLessons()){
+    				lectureOptions.addItem(lesson.getStartTime().toHebrewString());
+    			}
+    		}
+    		lectureOptions.setEnabled(false);
+    		InlineCheckBox courseTutorialsCB = new InlineCheckBox("תרגול");
+    		courseTutorialsCB.addStyleName(cStyle.timeCheckBox());
+    		final ListBox tutorialsOptions = new ListBox();
+    		tutorialsOptions.addStyleName(cStyle.timeListBox());
+    		for (LessonGroup lessonGroup : course.getTutorials()){
+    			for (Lesson lesson : lessonGroup.getLessons()){
+    				tutorialsOptions.addItem(lesson.getStartTime().toHebrewString());
+    			}
+    		}
+    		tutorialsOptions.setEnabled(false);
+    		courseLectureCB.addClickHandler(new ClickHandler(){
+
+    			@Override
+    			public void onClick(ClickEvent event) {
+    		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+    		        lectureOptions.setEnabled(checked.booleanValue());
+    			}
+        		
+        	});
+    		
+    		courseTutorialsCB.addClickHandler(new ClickHandler(){
+
+    			@Override
+    			public void onClick(ClickEvent event) {
+    		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+    		        tutorialsOptions.setEnabled(checked.booleanValue());
+    			}
+        		
+        	});
+
     		courseConstraintsPanel.add(courseName);
+    		courseConstraintsPanel.add(courseLectureCB);
+    		courseConstraintsPanel.add(lectureOptions);
+    		courseConstraintsPanel.add(courseTutorialsCB);
+    		courseConstraintsPanel.add(tutorialsOptions);
+
+    		coursesConstraintsPanel.add(courseConstraintsPanel);
     	}
     }
 	

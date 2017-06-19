@@ -34,7 +34,7 @@ import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
-import upandgo.client.event.getExamsBarEvent;
+import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -106,7 +106,7 @@ public class CourseListPresenter implements Presenter {
 		this.display = display;
 		this.eventBus = eventBus;
 		
-		eventBus.fireEvent(new getExamsBarEvent((ScrollPanel)display.getExamsBar()));
+		
 		
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
 			
@@ -140,10 +140,6 @@ public class CourseListPresenter implements Presenter {
 
 	boolean isSignedIn = false;
 	
-	
-	public ScrollPanel getEB(){
-		return (ScrollPanel)display.getExamsBar();
-	}
 	@Override
 	public void bind() {
 
@@ -287,20 +283,23 @@ public class CourseListPresenter implements Presenter {
 //				notSelectedCourses.clear();
 //				notSelectedCourses.addAll(allCourses);
 				display.updateLists();
-				if(isSignedIn)
+				if(isSignedIn){
 					rpcService.unselectAllCourses(new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-							Window.alert("Error while selecting course.");
-							Log.error("Error while selecting course.");
+							Window.alert("Error while unselecting all course.");
+							Log.error("Error while unselecting all course.");
 						}
 	
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							
+							Log.info("CourseListPresenter: got onSuccuess from server");
+							eventBus.fireEvent(new ClearAllCoursesEvent());
 						}
 					});
-				
+				} else {
+					eventBus.fireEvent(new ClearAllCoursesEvent());
+				}
 			}
 		});
 		
@@ -360,6 +359,7 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
+			result.remove(new CourseId());
 			notSelectedCourses =result;
 //			allCourses = new ArrayList<>(result);
 			display.setNotSelectedCourses(notSelectedCourses);
@@ -448,8 +448,11 @@ public class CourseListPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 
 						eventBus.fireEvent(new UnselectCourseEvent($));
+						
 					}
 				});
+			} else {
+				eventBus.fireEvent(new UnselectCourseEvent($));
 			}
 //				notSelectedCourses.clear();
 //				for(CourseId c : allCourses){
@@ -489,6 +492,7 @@ public class CourseListPresenter implements Presenter {
 				});
 			} else {
 				Log.info("CourseListPresenter: is not signed in");
+				eventBus.fireEvent(new SelectCourseEvent($));
 //				notSelectedCourses.remove($);
 //				selectedCourses.add($);
 //				display.updateLists();

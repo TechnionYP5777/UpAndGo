@@ -42,13 +42,14 @@ import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
-import upandgo.client.event.getExamsBarEvent;
-import upandgo.client.event.getExamsBarEventHandler;
+import upandgo.client.event.ClearAllCoursesEvent;
+import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.view.CourseSelectionView;
 import upandgo.client.view.LeftSideView;
 import upandgo.client.view.SchedulerView;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
@@ -143,28 +144,37 @@ public class SchedulerPresenter implements Presenter {
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 		
+		public void updateExamsBar(List<Course> courses);
+		
 		public HasClickHandlers getExamButton();
 
 		public Widget getAsWidget();
+		
+		public void collapseExamsBar();
+		
+		public void openExamsBar();
+		
 	}
 
 	@Inject
-	public SchedulerPresenter(Display view, EventBus eventBus, CoursesServiceAsync rpc) {
+	public SchedulerPresenter( Display display, EventBus eventBus, CoursesServiceAsync rpc) {
 		this.eventBus = eventBus;
-		this.view = view;
+		this.view = display;
 		this.rpcService = rpc;
 		this.isBlankSpaceCount = this.isDaysoffCount = false;
 		this.minStartTime = null;
 		this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
 		
-		eventBus.addHandler(getExamsBarEvent.TYPE, new getExamsBarEventHandler() {
-			
+		
+		eventBus.addHandler(ClearAllCoursesEvent.TYPE, new ClearAllCoursesEventHandler() {
+
 			@Override
-			public void getExamsBar(ScrollPanel eb) {
-				examsBar = eb;
-				
+			public void onClearAllCourses() {
+				selectedCourses.clear();
+				view.updateExamsBar(selectedCourses);
 			}
+			
 		});
 		lessonGroupsList = new ArrayList<>();
 		sched_index = 0;
@@ -192,6 +202,7 @@ public class SchedulerPresenter implements Presenter {
 						break;
 					}
 				}
+				view.updateExamsBar(selectedCourses);
 			}
 		});
 
@@ -204,6 +215,7 @@ public class SchedulerPresenter implements Presenter {
 					@Override
 					public void onSuccess(Course result) {
 						selectedCourses.add(result);
+						view.updateExamsBar(selectedCourses);
 					}
 
 					@Override
@@ -386,10 +398,6 @@ public class SchedulerPresenter implements Presenter {
 		// TODO Auto-generated method stub
 
 	}
-	public void setEB(ScrollPanel eb){
-		examsBar = eb;
-	}
-
 	@Override
 	public void go(final LayoutPanel panel) {
 		bind();
@@ -400,28 +408,20 @@ public class SchedulerPresenter implements Presenter {
 		//final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
 		panel.add(view.getAsWidget());
 		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);		
-		panel.getWidgetContainerElement(view.getAsWidget()).getStyle().setProperty("transition", "bottom 1s linear 0s");
-		
-		panel.add(examsBar);
-		panel.setWidgetLeftWidth(examsBar, 1, Unit.EM, 77, Unit.PCT);
-		panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 0, Unit.EM);
-		panel.getWidgetContainerElement(examsBar).getStyle().setProperty("transition", "height 1s linear 0s");		
+//		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);		
+//		panel.getWidgetContainerElement(view.getAsWidget()).getStyle().setProperty("transition", "bottom 1s linear 0s");
+	
 
 		view.getExamButton().addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				if (examBarVisable){
-					panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-					panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
-					panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 0, Unit.EM);
 					examBarVisable = false;
+					view.collapseExamsBar();
 				} else {
-					panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-					panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 8, Unit.EM);
-					panel.setWidgetBottomHeight(examsBar, 2, Unit.EM, 5, Unit.EM);
 					examBarVisable = true;
+					view.openExamsBar();
 				}
 			}
 		});	
@@ -430,6 +430,22 @@ public class SchedulerPresenter implements Presenter {
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
 		}
+		
+		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error while getting courses for exams bar");
+				Log.error("Error while getting courses for exams bar");
+				
+			}
+
+			@Override
+			public void onSuccess(ArrayList<CourseId> result) {
+				//view.updateExamsBar(result);
+				
+			}
+		});
 	}
 
 	void buildSchedule(List<Course> result) {

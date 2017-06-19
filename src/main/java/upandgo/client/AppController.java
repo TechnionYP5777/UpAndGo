@@ -164,7 +164,6 @@ class AppController implements Presenter {
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		
 		clPresenter.go(mainView);
-		sPresenter.setEB(clPresenter.getEB());
 		sPresenter.go(mainView);
 		nbPresenter.go(mainView);
 			
