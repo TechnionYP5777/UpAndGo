@@ -297,6 +297,8 @@ public class CourseListPresenter implements Presenter {
 							eventBus.fireEvent(new ClearAllCoursesEvent());
 						}
 					});
+				} else {
+					eventBus.fireEvent(new ClearAllCoursesEvent());
 				}
 			}
 		});
@@ -449,6 +451,8 @@ public class CourseListPresenter implements Presenter {
 						
 					}
 				});
+			} else {
+				eventBus.fireEvent(new UnselectCourseEvent($));
 			}
 //				notSelectedCourses.clear();
 //				for(CourseId c : allCourses){
@@ -488,6 +492,7 @@ public class CourseListPresenter implements Presenter {
 				});
 			} else {
 				Log.info("CourseListPresenter: is not signed in");
+				eventBus.fireEvent(new SelectCourseEvent($));
 //				notSelectedCourses.remove($);
 //				selectedCourses.add($);
 //				display.updateLists();

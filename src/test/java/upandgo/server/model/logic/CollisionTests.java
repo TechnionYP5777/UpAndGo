@@ -40,8 +40,10 @@ public class CollisionTests {
 				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert t.getLessonGroups().get(1).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("16:00")));
-		assert Scheduler.getCollisions().size() == 1;
-		assert Scheduler.getCollisions().get(0).equals(new Collision("111111", "222222"));
+		assert Scheduler.getCollisionSolvers().size() == 1;
+		assert Scheduler.getCollisionSolvers().get(0).equals("111111");
+		
+		
 		/*assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()
@@ -60,8 +62,9 @@ public class CollisionTests {
 
 		final List<Timetable> tlist = Scheduler.getTimetablesList(courses, null);
 		assert (tlist.isEmpty());
-		assert Scheduler.getCollisions().size() == 1;
-		assert Scheduler.getCollisions().get(0).equals(new Collision("111111", "222222"));
+		assert Scheduler.getCollisionSolvers().size() == 1;
+		assert Scheduler.getCollisionSolvers().get(0).equals("111111");
+		
 		/*assert t.getLessonGroups().get(2).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.TUESDAY, LocalTime.parse("11:00")));
 		assert t.getLessonGroups().get(3).getLessons().get(0).getStartTime()

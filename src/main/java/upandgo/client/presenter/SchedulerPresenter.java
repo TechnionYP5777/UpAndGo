@@ -448,7 +448,7 @@ public class SchedulerPresenter implements Presenter {
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
-		
+		Log.info("color map: " + colorMap);
 		//Log.info("unsorted tables size: " + unsortedTables.size());
 		//Log.info("unsorted tables: " + unsortedTables);
 		//Log.info("Build schedule: before Scheduler.sortedBy");
@@ -460,7 +460,8 @@ public class SchedulerPresenter implements Presenter {
 		vectorDaysOff.add(view.getThursdayCheckbox().getValue());
 		Log.info("days off vector: " + vectorDaysOff);
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime, vectorDaysOff);
-		//Log.info("corrrect sorted tables size: " + sorted.size());
+		Log.info("corrrect sorted tables size: " + sorted.size());
+		Log.info("*** found time table: " + sorted.get(0) + " ***");
 		//Log.info("correct sorted tables: " + sorted);
 		
 		/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
