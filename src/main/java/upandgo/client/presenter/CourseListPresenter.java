@@ -34,7 +34,7 @@ import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
-import upandgo.client.event.CourseSelectionChangedEvent;
+import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -283,20 +283,21 @@ public class CourseListPresenter implements Presenter {
 //				notSelectedCourses.clear();
 //				notSelectedCourses.addAll(allCourses);
 				display.updateLists();
-				if(isSignedIn)
+				if(isSignedIn){
 					rpcService.unselectAllCourses(new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-							Window.alert("Error while selecting course.");
-							Log.error("Error while selecting course.");
+							Window.alert("Error while unselecting all course.");
+							Log.error("Error while unselecting all course.");
 						}
 	
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							eventBus.fireEvent(new CourseSelectionChangedEvent());
+							Log.info("CourseListPresenter: got onSuccuess from server");
+							eventBus.fireEvent(new ClearAllCoursesEvent());
 						}
 					});
-				
+				}
 			}
 		});
 		
@@ -356,6 +357,7 @@ public class CourseListPresenter implements Presenter {
 	class FetchNotSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
+			result.remove(new CourseId());
 			notSelectedCourses =result;
 //			allCourses = new ArrayList<>(result);
 			display.setNotSelectedCourses(notSelectedCourses);
@@ -444,7 +446,7 @@ public class CourseListPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 
 						eventBus.fireEvent(new UnselectCourseEvent($));
-						eventBus.fireEvent(new CourseSelectionChangedEvent());
+						
 					}
 				});
 			}
@@ -482,7 +484,6 @@ public class CourseListPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 						Log.info("CourseListPresenter: got onSuccuess from server");
 						eventBus.fireEvent(new SelectCourseEvent($));
-						eventBus.fireEvent(new CourseSelectionChangedEvent());
 					}
 				});
 			} else {

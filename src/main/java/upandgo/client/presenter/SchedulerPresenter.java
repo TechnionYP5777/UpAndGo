@@ -42,8 +42,8 @@ import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
-import upandgo.client.event.CourseSelectionChangedEvent;
-import upandgo.client.event.CourseSelectionChangedEventHandler;
+import upandgo.client.event.ClearAllCoursesEvent;
+import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.view.CourseSelectionView;
 import upandgo.client.view.LeftSideView;
 import upandgo.client.view.SchedulerView;
@@ -167,27 +167,12 @@ public class SchedulerPresenter implements Presenter {
 		this.selectedCourses = new ArrayList<>();
 		
 		
-		eventBus.addHandler(CourseSelectionChangedEvent.TYPE, new CourseSelectionChangedEventHandler() {
+		eventBus.addHandler(ClearAllCoursesEvent.TYPE, new ClearAllCoursesEventHandler() {
 
 			@Override
-			public void go() {
-				rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Error while getting courses for exams bar");
-						Log.error("Error while getting courses for exams bar");
-						
-					}
-
-					@Override
-					public void onSuccess(ArrayList<CourseId> result) {
-						
-						
-					}
-					
-				});
-				
+			public void onClearAllCourses() {
+				selectedCourses.clear();
+				view.updateExamsBar(selectedCourses);
 			}
 			
 		});

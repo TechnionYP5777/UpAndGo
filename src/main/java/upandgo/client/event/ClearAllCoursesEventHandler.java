@@ -13,7 +13,7 @@ package upandgo.client.event;
 import com.google.gwt.event.shared.EventHandler;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
-public interface CourseSelectionChangedEventHandler extends EventHandler {
-	void go();
+public interface ClearAllCoursesEventHandler extends EventHandler {
+	void onClearAllCourses();
 
 }
