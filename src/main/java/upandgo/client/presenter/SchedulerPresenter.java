@@ -429,23 +429,8 @@ public class SchedulerPresenter implements Presenter {
 
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
+			
 		}
-		
-		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Error while getting courses for exams bar");
-				Log.error("Error while getting courses for exams bar");
-				
-			}
-
-			@Override
-			public void onSuccess(ArrayList<CourseId> result) {
-				//view.updateExamsBar(result);
-				
-			}
-		});
 	}
 
 	void buildSchedule(List<Course> result) {
@@ -521,6 +506,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSuccess(List<Course> result) {
 				selectedCourses = result;
+				view.updateExamsBar(selectedCourses);
 				Log.info("chosen lessons were updated.");
 			}
 			

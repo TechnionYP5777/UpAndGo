@@ -3,6 +3,7 @@ package upandgo.client.view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -256,16 +257,15 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void updateExamsBar(List<Course> courses) {
 		List<Course> is = new ArrayList<>(), isB = new ArrayList<>();
-		List<String> courseColors = new ArrayList<>();
-		int idx = 0;
-	    for(Course c : courses){
+		Map<Course, String> courseColors = new HashMap<>();
+	    for(int i = 0; i < courses.size(); i++){
+	    	Course c = courses.get(i);
 	    	if(c.getaTerm()!=null){
 	    		is.add(c);
-	    		courseColors.add(Color.valueOf(idx).toString());
+	    		courseColors.put(c,Color.valueOf(i).toString());
 	    	}
 	    	if(c.getaTerm()!=null)
 	    		isB.add(c);
-	    	idx++;
 	    }
 	    Log.info("updating exams");
 	    Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
@@ -286,13 +286,13 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		String examsAlephBarHTML = "";
 		for(int i=0; i < is.size(); i++){
 			if(i == is.size()-1){
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(i) +";\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				break;
 			}
 			int daysBetween = is.get(i+1).getaTerm().daysBetweenExams(is.get(i).getaTerm());
 			if(daysBetween == 0 ){			
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#f44336;\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff0000;\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
 				width+=275;
 				while(daysBetween == 0 &&  i < is.size()-1){
 					i++;
@@ -302,17 +302,17 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 				examsAlephBarHTML+="</div>";
 				if(daysBetween > 0 ){
 					for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
-						examsAlephBarHTML+="<div align=\"center\" class=\"child\" style=\"background-color:#4CAF50;\"><b><u>" + k + "</u></b></div>";
+						examsAlephBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
 						width+=85;
 					}
 				}
 				
 			}
 			else{
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(i) +"\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
-					examsAlephBarHTML+="<div align=\"center\" class=\"child\" style=\"background-color:#4CAF50;\"><b><u>" + k + "</u></b></div>";
+					examsAlephBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
 					width+=85;
 				}
 			}
@@ -328,11 +328,11 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 			int daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
 			Log.info("$$#$#$#" + daysBetween);
 			if(daysBetween == 0 ){			
-				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName();
+				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br><b>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName()+"</b>";
 				widthb+=275;
 				while(daysBetween == 0 &&  i < isB.size()-1){
 					i++;
-					examsBetBarHTML+="<br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName();
+					examsBetBarHTML+="<br><b>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</b>";
 					daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
 				}
 				examsBetBarHTML+="</div>";
