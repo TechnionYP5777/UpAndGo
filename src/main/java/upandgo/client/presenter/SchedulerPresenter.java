@@ -144,7 +144,7 @@ public class SchedulerPresenter implements Presenter {
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 		
-		public void updateExamsBar(List<CourseId> courses);
+		public void updateExamsBar(List<Course> courses);
 		
 		public HasClickHandlers getExamButton();
 
@@ -157,20 +157,21 @@ public class SchedulerPresenter implements Presenter {
 	}
 
 	@Inject
-	public SchedulerPresenter(final Display view, EventBus eventBus, final CoursesServiceAsync rpc) {
+	public SchedulerPresenter( Display display, EventBus eventBus, CoursesServiceAsync rpc) {
 		this.eventBus = eventBus;
-		this.view = view;
+		this.view = display;
 		this.rpcService = rpc;
 		this.isBlankSpaceCount = this.isDaysoffCount = false;
 		this.minStartTime = null;
 		this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
 		
+		
 		eventBus.addHandler(CourseSelectionChangedEvent.TYPE, new CourseSelectionChangedEventHandler() {
 
 			@Override
 			public void go() {
-				rpc.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+				rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -181,7 +182,7 @@ public class SchedulerPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(ArrayList<CourseId> result) {
-						view.updateExamsBar(result);
+						
 						
 					}
 					
@@ -216,6 +217,7 @@ public class SchedulerPresenter implements Presenter {
 						break;
 					}
 				}
+				view.updateExamsBar(selectedCourses);
 			}
 		});
 
@@ -228,6 +230,7 @@ public class SchedulerPresenter implements Presenter {
 					@Override
 					public void onSuccess(Course result) {
 						selectedCourses.add(result);
+						view.updateExamsBar(selectedCourses);
 					}
 
 					@Override
@@ -442,6 +445,22 @@ public class SchedulerPresenter implements Presenter {
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
 		}
+		
+		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error while getting courses for exams bar");
+				Log.error("Error while getting courses for exams bar");
+				
+			}
+
+			@Override
+			public void onSuccess(ArrayList<CourseId> result) {
+				//view.updateExamsBar(result);
+				
+			}
+		});
 	}
 
 	void buildSchedule(List<Course> result) {
