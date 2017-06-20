@@ -2,6 +2,7 @@ package upandgo.client.presenter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -38,6 +39,7 @@ import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.utils.FuzzySearch;
 
 /**
  * 
@@ -125,7 +127,7 @@ public class CourseListPresenter implements Presenter {
 
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;
-//	List<CourseId> allCourses;
+	List<CourseId> allCourses;
 	List<String> faculties;
 	String courseQuery = "";
 
@@ -268,20 +270,38 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				courseQuery = display.getCourseQuery(event);
-				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
-						new FetchNotSelectedCoursesAsyncCallback());
+				if(courseQuery.isEmpty()){
+					notSelectedCourses.clear();
+					notSelectedCourses.addAll(allCourses);
+					display.updateLists();
+					return;
+				}
+				
+				notSelectedCourses.clear();
+				for(CourseId c : allCourses){
+					if(FuzzySearch.similarity(courseQuery, c.getTitle()) > 50)
+						notSelectedCourses.add(c);
+				}
+				
+				Collections.sort(notSelectedCourses, new Comparator<CourseId>() {
+					@Override
+					public int compare(CourseId o1, CourseId o2) {
+						return (FuzzySearch.similarity(courseQuery, o2.getTitle()) - FuzzySearch.similarity(courseQuery, o1.getTitle()));
+					}
+					
+				});
+				display.updateLists();
 			}
+			
 		});
 		
 		display.getClearCoursesButton().addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				notSelectedCourses.addAll(selectedCourses);
-				Collections.sort(notSelectedCourses);
 				selectedCourses.clear();
-//				notSelectedCourses.clear();
-//				notSelectedCourses.addAll(allCourses);
+				notSelectedCourses.clear();
+				notSelectedCourses.addAll(allCourses);
 				display.updateLists();
 				if(isSignedIn){
 					rpcService.unselectAllCourses(new AsyncCallback<Void>() {
@@ -321,17 +341,7 @@ public class CourseListPresenter implements Presenter {
 		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 
 		// rpcService.getSomeString(new GetSomeStringAsyncCallback());
-
-//		LayoutPanel examsBarPanel = new LayoutPanel();
-//		Widget examsBar =new Exams();
-//		examsBarPanel.add(examsBar);
-//		examsBarPanel.setWidgetLeftRight(examsBar, 1, Unit.EM, 1, Unit.EM);
-//		examsBarPanel.setWidgetTopBottom(examsBar, 0, Unit.EM, 0, Unit.EM);
-//
-//		panel.add(examsBarPanel);
-//		panel.setWidgetLeftWidth(examsBarPanel, 1, Unit.EM, 77, Unit.PCT);
-//		panel.setWidgetBottomHeight(examsBarPanel, 2, Unit.EM, 5, Unit.EM);
-//		
+		
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		if (isSignedIn)
 			rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
@@ -361,7 +371,7 @@ public class CourseListPresenter implements Presenter {
 		public void onSuccess(ArrayList<CourseId> result) {
 			result.remove(new CourseId());
 			notSelectedCourses =result;
-//			allCourses = new ArrayList<>(result);
+			allCourses = new ArrayList<>(result);
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 
@@ -426,17 +436,14 @@ public class CourseListPresenter implements Presenter {
 		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
 			selectedCourses.remove($);
-			notSelectedCourses.add($);
-			Collections.sort(notSelectedCourses);
+			notSelectedCourses.clear();
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c)){
+					notSelectedCourses.add(c);
+				}
+			}
 			display.updateLists();
 			if (isSignedIn) {
-//				notSelectedCourses.clear();
-//				for(CourseId c : allCourses){
-//					if(!selectedCourses.contains(c)){
-//						notSelectedCourses.add(c);
-//					}
-//				}
-//				display.updateLists();
 				rpcService.unselectCourse($, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -454,15 +461,6 @@ public class CourseListPresenter implements Presenter {
 			} else {
 				eventBus.fireEvent(new UnselectCourseEvent($));
 			}
-//				notSelectedCourses.clear();
-//				for(CourseId c : allCourses){
-//					if(!selectedCourses.contains(c)){
-//						notSelectedCourses.add(c);
-//					}
-//				}
-			
-				
-//				eventBus.fireEvent(new UnselectCourseEvent($));
 		}
 	}
 
@@ -493,9 +491,6 @@ public class CourseListPresenter implements Presenter {
 			} else {
 				Log.info("CourseListPresenter: is not signed in");
 				eventBus.fireEvent(new SelectCourseEvent($));
-//				notSelectedCourses.remove($);
-//				selectedCourses.add($);
-//				display.updateLists();
 			}
 		}
 	}

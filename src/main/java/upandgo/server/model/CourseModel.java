@@ -7,7 +7,6 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.common.base.Predicate;
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +21,7 @@ import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.utils.FuzzySearch;
 
 /**
  * 
@@ -181,14 +181,14 @@ public class CourseModel { // implements Model {
 		List<CourseId> relevantCourses = new ArrayList<>();
 		relevantCourses.add(new CourseId());
 		for(CourseId c : getNotSelectedCoursesByFaculty(faculty)){
-			if(FuzzySearch.tokenSortPartialRatio(query, c.getTitle()) > 50)
+			if(FuzzySearch.similarity(query, c.getTitle()) > 50)
 				relevantCourses.add(c);
 		}
 		
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
 			public int compare(CourseId o1, CourseId o2) {
-				return FuzzySearch.tokenSortPartialRatio(query, o2.getTitle()) - FuzzySearch.tokenSortPartialRatio(query, o1.getTitle());
+				return FuzzySearch.similarity(query, o2.getTitle()) - FuzzySearch.similarity(query, o1.getTitle());
 			}
 			
 		});

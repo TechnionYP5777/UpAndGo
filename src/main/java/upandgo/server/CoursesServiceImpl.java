@@ -43,8 +43,8 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		ObjectifyService.register(CoursesEntity.class);
 	}
 	
-	//private String REP_XML_PATH = "test.XML";
-	private String REP_XML_PATH = "loadOf6CoursesTest.XML";
+	private String REP_XML_PATH = "test.XML";
+	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
 	private final CourseModel model;
 

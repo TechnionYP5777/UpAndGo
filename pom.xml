@@ -185,6 +185,11 @@
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.9.53</version>
 		</dependency>
+		    <dependency>
+      <groupId>de.knightsoft-net</groupId>
+      <artifactId>gwt-commons-lang3</artifactId>
+      <version>3.5-1</version>
+    </dependency>
 
 	</dependencies>
 
