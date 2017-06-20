@@ -9,14 +9,19 @@ import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.ModalFooter;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,6 +33,7 @@ import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
+import upandgo.shared.model.scedule.CourseTuple;
 
 public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Display{
 
@@ -42,11 +48,18 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
 	ExamsControlsView examsControlsView = new ExamsControlsView();
+	Modal collisionBox = new Modal();
+	Button collisionBoxButton = new Button("הסר קורס");
+	List<RadioButton> radios;
+	List<CourseTuple> solversTuples;
+	
 
 	public SchedulerView(){
 		InitializePanel();
+		InitializeCollisionBox();
 		style.ensureInjected();
 	}
+	
 	
 	private void InitializePanel(){
 		
@@ -92,15 +105,69 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		}
 	
+	
+
+	private void InitializeCollisionBox(){
+		ModalFooter collisionBoxFooter = new ModalFooter();
+		//collisionBoxButton = new Button("הסר קורס");
+		/*Button collisionBoxButton = new Button("שמור וסגור", new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				collisionBox.hide();
+				
+			}
+		});*/
+		
+		
+		
+		
+		
+		collisionBoxFooter.add(collisionBoxButton);
+		collisionBox.setFade(true);
+		collisionBox.setTitle("פתרון התנגשויות");
+		//schedulerCollisionsView.updateList(solvers);
+		
+		ModalBody collisionBoxBody = new ModalBody();
+		collisionBoxBody.add(schedulerCollisionsView);
+		collisionBox.add(collisionBoxBody);
+		
+		//collisionBox.add(schedulerCollisionsView);
+		collisionBox.add(collisionBoxFooter);
+		
+		
+		
+	}
+	
 	@Override
-	public void drawCollisionView(List<String> solvers){
-		Modal constraintsBox = new Modal();
+	public void drawCollisionView(List<CourseTuple> solvers){
+		schedulerCollisionsView.updateList(solvers);
+		radios = schedulerCollisionsView.getRadios();
+		solversTuples = schedulerCollisionsView.getSolversTuples();
+		collisionBox.show();
+		/*Modal constraintsBox = new Modal();
 		constraintsBox.setFade(true);
 		constraintsBox.setTitle("פתרון התנגשויות");
+		Log.info("SchedCol/x0");
 		schedulerCollisionsView.updateList(solvers);
+		Log.info("SchedCol/x1");
 		constraintsBox.add(schedulerCollisionsView);
+		Log.info("SchedCol/x2");
+		
+		ModalFooter constraintsBoxFooter = new ModalFooter();
+		Button constraintsBoxButton = new Button("הסר קורס", new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				constraintsBox.hide();
+				
+			}
+		});
+		constraintsBoxFooter.add(constraintsBoxButton);
+		constraintsBox.add(constraintsBoxFooter);
+		
 		constraintsBox.show();
-		Log.info("was here/1");
+		Log.info("was here/1");*/
 	}
 	
 	
@@ -148,6 +215,26 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public Modal getContraintsModal(){
 		return schedualerControlsView.constraintsBox;
+	}
+	
+	@Override
+	public Modal getCollisionModal(){
+		return collisionBox;
+	}
+	
+	@Override
+	public Button getCollisionModalButton(){
+		return collisionBoxButton;
+	}
+	
+	@Override
+	public List<RadioButton> getCollisionRadios(){
+		return radios;
+	}
+	
+	@Override
+	public List<CourseTuple> getCollisionSolversTuples(){
+		return solversTuples;
 	}
 
 	/*

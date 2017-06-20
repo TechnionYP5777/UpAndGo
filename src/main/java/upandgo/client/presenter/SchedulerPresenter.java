@@ -23,7 +23,9 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
@@ -41,6 +43,7 @@ import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
+import upandgo.shared.model.scedule.CourseTuple;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 
@@ -91,8 +94,9 @@ public class SchedulerPresenter implements Presenter {
 
 		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if
 																						// (schedule
-		public void drawCollisionView(List<String> solvers);																				// =
-																						// null)
+		public void drawCollisionView(List<CourseTuple> solvers);																				// =
+		//void drawCollisionView(List<upandgo.client.view.CourseTuple> solvers);
+		// null)
 																						// then
 																						// clear
 																						// schedule
@@ -115,7 +119,13 @@ public class SchedulerPresenter implements Presenter {
 		public HasClickHandlers getStartTimeElement();
 
 		public HasChangeHandlers getStartTimeList();
-
+		
+		public Modal getCollisionModal();
+		
+		public Button getCollisionModalButton();
+		public List<RadioButton> getCollisionRadios();
+		public List<CourseTuple> getCollisionSolversTuples();
+		
 		public boolean isStartTimeChecked(ClickEvent event);
 
 		public LocalTime getReqStartTime(); // result in format HH:MM
@@ -134,6 +144,7 @@ public class SchedulerPresenter implements Presenter {
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 		
+		
 		public void updateExamsBar(List<Course> courses);
 		
 		public HasClickHandlers getExamButton();
@@ -143,6 +154,8 @@ public class SchedulerPresenter implements Presenter {
 		public void collapseExamsBar();
 		
 		public void openExamsBar();
+
+		
 		
 	}
 
@@ -378,6 +391,34 @@ public class SchedulerPresenter implements Presenter {
 				view.setSelectedCourses(selectedCourses);
 			}
 		});	
+		
+		view.getCollisionModalButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Log.info("god damn1");
+				Log.info("radios: " + view.getCollisionRadios());
+				
+				/*for(RadioButton r : view.getCollisionRadios()){
+					//if()
+					Log.info(r.getText() + " " + r.getValue());
+				}*/
+				
+				// find choosen course to drop
+				List<RadioButton> radios = view.getCollisionRadios();
+				String dropId = null;
+				for(int i = 0; i < radios.size(); i++){
+					Log.info(radios.get(i).getText() + " " + radios.get(i).getValue());
+					if(radios.get(i).getValue())
+						dropId = view.getCollisionSolversTuples().get(i).getCourseId();
+				}
+				if(dropId == null)
+					Log.error("Drop id is null");
+				
+				Log.info("Asked to drop course id: " + dropId);
+				view.getCollisionModal().hide();
+			}
+		});
 		
 		view.getExamButton().addClickHandler(new ClickHandler() {
 			

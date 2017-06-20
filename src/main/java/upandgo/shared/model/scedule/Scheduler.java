@@ -31,6 +31,7 @@ import upandgo.shared.model.scedule.Timetable;
 @SuppressWarnings("boxing")
 public class Scheduler implements IsSerializable{
 	private static Map<String, Color> colorMap;
+	private static Map<String, String> idToNameMap;
 	private static List<String> collisionSolvers;
 	/**
 	 * gets a list of courses and a list of constraints and return a possible
@@ -42,14 +43,27 @@ public class Scheduler implements IsSerializable{
 		return colorMap;
 	}
 	
-	public static List<String> getCollisionSolvers(){
+	/*
+	public static Map<String, Color> namesMap(){
+		return namesMap;
+	}*/
+	
+	/*public static List<String> getCollisionSolvers(){
 		return collisionSolvers;
+	}*/
+	public static List<CourseTuple> getCollisionSolvers(){
+		List<CourseTuple> res = new ArrayList<>();
+		for(String s : collisionSolvers){
+			res.add(new CourseTuple(s, idToNameMap.get(s)));
+		}
+		return res;
 	}
 	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
 		//Map<Course, Color> colorsMap = new HashMap();
 		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
 		colorMap = mapCoursesToColors(lcourse);
+		idToNameMap = mapCoursesToNames(lcourse);
 		collisionSolvers = new ArrayList<>();
 				
 		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses:" + lcourse);
@@ -101,7 +115,7 @@ public class Scheduler implements IsSerializable{
 			if (b) {
 				//System.out.println("^found");
 				//Log.info("Found");
-				$.collisionSolver();
+				//$.collisionSolver();  - was here but seems unnececary to me, return if any problems appear
 				if(!$.hasCollision())
 					result.add($.getTimetable()); // return $;
 				else{
@@ -155,8 +169,24 @@ public class Scheduler implements IsSerializable{
 		return result;
 	}
 	
+	
+	
+	public static Map<String, String> mapCoursesToNames(final List<Course> lcourse){
+		Map<String, String> nameMap = new HashMap<>();
+		//for(int c = 0; c < lcourse.size(); c++){
+			//colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
+		//}
+		for(Course c : lcourse){
+			nameMap.put(c.getId(), c.getName());
+		}
+		
+		return nameMap;
+	}
+
+	
+	
 	public static Map<String, Color> mapCoursesToColors(final List<Course> lcourse){
-		Map<String, Color> colorsMap = new HashMap();
+		Map<String, Color> colorsMap = new HashMap<>();
 		for(int c = 0; c < lcourse.size(); c++){
 			colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
 		}
