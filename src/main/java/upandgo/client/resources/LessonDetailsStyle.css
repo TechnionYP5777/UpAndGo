@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.lessonDetailsPanel {
+}
+
+
+@external a;
+.lessonDetailsPanel a {
+	font-size: large;
+	margin-top: 10px;
+	display: inline-block;	
+}
+

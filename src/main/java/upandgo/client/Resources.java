@@ -40,6 +40,9 @@ public interface Resources extends ClientBundle {
 		 String hasEvent();
 		 
 		 String hasEventWrap();
+		 
+		 String hasEventContent();
+
 	 }
 	 
 	 interface SchedualerControlsStyle extends CssResource {	 
@@ -78,6 +81,10 @@ public interface Resources extends ClientBundle {
 		 String courseListCellPanel();
 	 }
 	 
+	 interface LessonDetailsStyle extends CssResource{
+		 String lessonDetailsPanel();
+	 }
+	 
 	@Source("resources/upandgo.css")
 	public MainStyle mainStyle();
 
@@ -107,6 +114,9 @@ public interface Resources extends ClientBundle {
 	
 	@Source("resources/CourseListCellStyle.css")
 	public CourseListCellStyle courseListCellStyle();
+	
+	@Source("resources/LessonDetailsStyle.css")
+	public LessonDetailsStyle lessonDetailsStyle();
 	
 
 }
