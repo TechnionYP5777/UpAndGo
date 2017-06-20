@@ -498,7 +498,7 @@ public class RepFile {
 	private static void setGroupAttr(final Element lectureElement, final Element hasGroupElement, final String group) {
 		hasGroupElement.setAttribute("group", group);
 		if (lectureElement != null && !lectureElement.hasAttribute("group"))
-			lectureElement.setAttribute("group", String.valueOf(10 * (Integer.parseInt(group) % 10)));
+			lectureElement.setAttribute("group", String.valueOf(10 * (Integer.parseInt(group) / 10)));
 	}
 
 }

@@ -28,7 +28,6 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
-import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
@@ -36,7 +35,6 @@ import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
-import upandgo.client.view.LeftSideView;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;

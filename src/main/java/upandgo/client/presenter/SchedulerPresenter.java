@@ -11,11 +11,8 @@ import java.util.Map;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
-import org.gwtbootstrap3.client.ui.Collapse;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
-
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -26,10 +23,9 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
@@ -44,13 +40,10 @@ import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
-import upandgo.client.view.CourseSelectionView;
-import upandgo.client.view.LeftSideView;
-import upandgo.client.view.SchedulerView;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
-import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
+import upandgo.shared.model.scedule.CourseTuple;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
 
@@ -101,8 +94,9 @@ public class SchedulerPresenter implements Presenter {
 
 		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if
 																						// (schedule
-		public void drawCollisionView();																				// =
-																						// null)
+		public void drawCollisionView(List<CourseTuple> solvers);																				// =
+		//void drawCollisionView(List<upandgo.client.view.CourseTuple> solvers);
+		// null)
 																						// then
 																						// clear
 																						// schedule
@@ -125,7 +119,13 @@ public class SchedulerPresenter implements Presenter {
 		public HasClickHandlers getStartTimeElement();
 
 		public HasChangeHandlers getStartTimeList();
-
+		
+		public Modal getCollisionModal();
+		
+		public Button getCollisionModalButton();
+		public List<RadioButton> getCollisionRadios();
+		public List<CourseTuple> getCollisionSolversTuples();
+		
 		public boolean isStartTimeChecked(ClickEvent event);
 
 		public LocalTime getReqStartTime(); // result in format HH:MM
@@ -144,6 +144,7 @@ public class SchedulerPresenter implements Presenter {
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 		
+		
 		public void updateExamsBar(List<Course> courses);
 		
 		public HasClickHandlers getExamButton();
@@ -153,6 +154,8 @@ public class SchedulerPresenter implements Presenter {
 		public void collapseExamsBar();
 		
 		public void openExamsBar();
+
+		
 		
 	}
 
@@ -389,29 +392,34 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 		
-
-		
-	}
-
-	@Override
-	public void unbind() {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void go(final LayoutPanel panel) {
-		bind();
-		// panel.clear();
+		view.getCollisionModalButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Log.info("god damn1");
+				Log.info("radios: " + view.getCollisionRadios());
 				
-		examBarVisable = false;			
+				/*for(RadioButton r : view.getCollisionRadios()){
+					//if()
+					Log.info(r.getText() + " " + r.getValue());
+				}*/
+				
+				// find choosen course to drop
+				List<RadioButton> radios = view.getCollisionRadios();
+				String dropId = null;
+				for(int i = 0; i < radios.size(); i++){
+					Log.info(radios.get(i).getText() + " " + radios.get(i).getValue());
+					if(radios.get(i).getValue())
+						dropId = view.getCollisionSolversTuples().get(i).getCourseId();
+				}
+				if(dropId == null)
+					Log.error("Drop id is null");
+				
+				Log.info("Asked to drop course id: " + dropId);
+				view.getCollisionModal().hide();
+			}
+		});
 		
-		//final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
-		panel.add(view.getAsWidget());
-		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-//		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);		
-//		panel.getWidgetContainerElement(view.getAsWidget()).getStyle().setProperty("transition", "bottom 1s linear 0s");
-	
-
 		view.getExamButton().addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -426,6 +434,22 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 
+		
+	}
+
+	@Override
+	public void unbind() {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void go(final LayoutPanel panel) {
+		bind();
+				
+		examBarVisable = false;			
+		
+		panel.add(view.getAsWidget());
+		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
 
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
@@ -442,7 +466,7 @@ public class SchedulerPresenter implements Presenter {
 			view.scheduleBuilt();
 			return;
 		}
-		selectedCourses = new ArrayList<Course>(result);
+		selectedCourses = new ArrayList<>(result);
 
 		//Log.info("Build schedule: before Scheduler.getTimetablesList");
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
@@ -461,7 +485,7 @@ public class SchedulerPresenter implements Presenter {
 		Log.info("days off vector: " + vectorDaysOff);
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime, vectorDaysOff);
 		Log.info("corrrect sorted tables size: " + sorted.size());
-		Log.info("*** found time table: " + sorted.get(0) + " ***");
+		//Log.info("*** found time table: " + sorted.get(0) + " ***");
 		//Log.info("correct sorted tables: " + sorted);
 		
 		/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
@@ -473,7 +497,14 @@ public class SchedulerPresenter implements Presenter {
 		if (sorted.isEmpty()) {
 			//Window.alert("Error - There are no possible schedule.");
 			//Log.error("Error - There are no possible schedule.");
-			view.drawCollisionView();
+			Log.info("check if can solve it");
+			if(!Scheduler.getCollisionSolvers().isEmpty()){
+				Log.info("Draw Collision View");
+				Log.info("Col solvers: " + Scheduler.getCollisionSolvers());
+			view.drawCollisionView(Scheduler.getCollisionSolvers());
+			}else{
+				Log.info("cannot solver it");
+			}
 		} else {
 			lessonGroupsList.clear();
 			//lessonGroupsList = sorted;

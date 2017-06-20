@@ -94,11 +94,16 @@
   color: yellow;
 }
 
+.hasEventContent{
+	width:100%;
+	
+}
+
 .hasEventWrap{
 	position: absolute;  top: 0; left: 0; width: 100%; height: 100%;	
 	overflow: hidden;
     padding: 0.8em;
-    
+    cursor: pointer;
 }
 
 .hasEventWrap:after{
@@ -109,33 +114,6 @@
   height: 2em;
 
 }
-
-
-.hasEventWrap[eventNum="0"]{
-    background: #FF4500;
-}
-
-.hasEventWrap[eventNum="1"]{
-	background: #FFD700;
-}
-
-.hasEventWrap[eventNum="2"]{
-	background: #E6E6FA;
-}
-
-.hasEventWrap[eventNum="3"]{
-    background: #6A5ACD;
-}
-
-.hasEventWrap[eventNum="4"]{
-	background: #32CD32;
-}
-
-
-.hasEventWrap[eventNum="5"]{
-	background: #8ae234;
-}
-
 
 
 
@@ -218,31 +196,83 @@
 
 
 
-
-
-.hasEventWrap[eventNum="0"]:after{
-	background: linear-gradient(transparent, #577F92);
+.hasEventWrap[eventNum="ORANGERED"]:after{
+    background: linear-gradient(transparent, #FF4500);
 }
 
-.hasEventWrap[eventNum="1"]:after{
-	background: linear-gradient(transparent, #443453);
+.hasEventWrap[eventNum="GOLD"]:after{
+	background: linear-gradient(transparent, #FFD700);
 }
 
-.hasEventWrap[eventNum="2"]:after{
-	background: linear-gradient(transparent, #A2B9B2);
+.hasEventWrap[eventNum="PALETURQUOISE"]:after{
+	background: linear-gradient(transparent, #AFEEEE);
 }
 
-.hasEventWrap[eventNum="3"]:after{
-	background: linear-gradient(transparent, #f6b067);
+.hasEventWrap[eventNum="SLATEBLUE"]:after{
+    background: linear-gradient(transparent, #6A5ACD);
 }
 
-.hasEventWrap[eventNum="4"]:after{
-	background: linear-gradient(transparent, #ad7fa8);
+.hasEventWrap[eventNum="LIMEGREEN"]:after{
+	background: linear-gradient(transparent, #32CD32);
 }
 
-.hasEventWrap[eventNum="5"]:after{
-	background: linear-gradient(transparent, #8ae234);
+.hasEventWrap[eventNum="GOLDENROD"]:after{
+	background: linear-gradient(transparent, #DAA520);
 }
+
+.hasEventWrap[eventNum="BLUEVIOLET"]:after{
+	background: linear-gradient(transparent, #8A2BE2);
+}
+
+.hasEventWrap[eventNum="BROWN"]:after{
+	background: linear-gradient(transparent, #A52A2A);
+}
+
+.hasEventWrap[eventNum="CORAL"]:after{
+	background: linear-gradient(transparent, #FF7F50);
+}
+
+.hasEventWrap[eventNum="CHARTREUSE"]:after{
+	background: linear-gradient(transparent, #7FFF00);
+}
+
+.hasEventWrap[eventNum="CORNFLOWERBLUE"]:after{
+	background: linear-gradient(transparent, #6495ED);
+}
+
+.hasEventWrap[eventNum="DARKORANGE"]:after{
+	background: linear-gradient(transparent, #FF8C00);
+}
+
+.hasEventWrap[eventNum="DARKSLATEGRAY"]:after{
+	background: linear-gradient(transparent, #2F4F4F);
+}
+
+.hasEventWrap[eventNum="FUCHSIA"]:after{
+	background: linear-gradient(transparent, #FF00FF);
+}
+
+.hasEventWrap[eventNum="OLIVEDRAB"]:after{
+	background: linear-gradient(transparent, #6B8E23);
+}
+
+.hasEventWrap[eventNum="SEAGREEN"]:after{
+	background: linear-gradient(transparent, #2E8B57);
+}
+ 
+.hasEventWrap[eventNum="TURQUOISE"]:after{
+	background: linear-gradient(transparent, #40E0D0);
+}
+
+.hasEventWrap[eventNum="NAVY"]:after{
+	background: linear-gradient(transparent, #000080);
+}
+
+.hasEventWrap[eventNum="CRIMSON"]:after{
+	background: linear-gradient(transparent, #DC143C);
+}
+
+
 
 
 
