@@ -150,8 +150,10 @@ public class TimeTableView extends HorizontalPanel {
 				int span = WeekTime.difference(endTime, startTime)/30;
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
+					Log.info("TimeTableView: cell in  " + startTime + " is empty");
 					SimplePanel eventWrap = createEventPanel(l);
-					
+					//Log.info("TimeTableView: event panel created");
+
 					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
 					daysTables.get(l.getDay()).getCellFormatter().setStyleName(startCell, 0, ttStyle.hasEvent());
@@ -176,6 +178,8 @@ public class TimeTableView extends HorizontalPanel {
 		}else if(l.getType() == Type.TUTORIAL){
 			eventContent.add(new Label("תרגול - "  + l.getCourseId()));
 		}
+		Log.info("TimeTableView: eventContent: " + l.getCourseName() + " " + l.getPlace() + " " + String.valueOf(l.getGroup()));
+
 		eventContent.setHorizontalAlignment(ALIGN_RIGHT);
 		Grid eventContentGrid = new Grid(4,2);
 		eventContentGrid.getCellFormatter().setHorizontalAlignment(0, 0, ALIGN_CENTER);
@@ -188,8 +192,10 @@ public class TimeTableView extends HorizontalPanel {
 		eventContentGrid.setHTML(1, 1, l.getPlace());
 		eventContentGrid.setHTML(2, 0, "<i class=\"fa fa-users\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
 		eventContentGrid.setHTML(2, 1, "קבוצה&nbsp;" + String.valueOf(l.getGroup()));
-		eventContentGrid.setHTML(3, 0, "<i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-		eventContentGrid.setHTML(3, 1, l.getRepresenter().getTitle() + "&nbsp;" + l.getRepresenter().getLastName() + "&nbsp;" + l.getRepresenter().getFirstName());
+		if (l.getRepresenter()!=null){
+			eventContentGrid.setHTML(3, 0, "<i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
+			eventContentGrid.setHTML(3, 1, l.getRepresenter().getTitle() + "&nbsp;" + l.getRepresenter().getLastName() + "&nbsp;" + l.getRepresenter().getFirstName());
+		}
 		
 		eventContent.add(eventContentGrid);
 		
