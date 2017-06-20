@@ -11,11 +11,8 @@ import java.util.Map;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
-import org.gwtbootstrap3.client.ui.Collapse;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.extras.select.client.ui.event.HasShowHandlers;
-
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -26,10 +23,7 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
@@ -44,12 +38,8 @@ import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
-import upandgo.client.view.CourseSelectionView;
-import upandgo.client.view.LeftSideView;
-import upandgo.client.view.SchedulerView;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
-import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
@@ -389,29 +379,6 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 		
-
-		
-	}
-
-	@Override
-	public void unbind() {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void go(final LayoutPanel panel) {
-		bind();
-		// panel.clear();
-				
-		examBarVisable = false;			
-		
-		//final LeftSideView e = new LeftSideView(examsBar, (SchedulerView)view);
-		panel.add(view.getAsWidget());
-		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
-//		panel.setWidgetTopBottom(view.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);		
-//		panel.getWidgetContainerElement(view.getAsWidget()).getStyle().setProperty("transition", "bottom 1s linear 0s");
-	
-
 		view.getExamButton().addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -426,26 +393,27 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 
+		
+	}
+
+	@Override
+	public void unbind() {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void go(final LayoutPanel panel) {
+		bind();
+				
+		examBarVisable = false;			
+		
+		panel.add(view.getAsWidget());
+		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
 
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
+			
 		}
-		
-		rpcService.getSelectedCourses(new AsyncCallback<ArrayList<CourseId>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Error while getting courses for exams bar");
-				Log.error("Error while getting courses for exams bar");
-				
-			}
-
-			@Override
-			public void onSuccess(ArrayList<CourseId> result) {
-				//view.updateExamsBar(result);
-				
-			}
-		});
 	}
 
 	void buildSchedule(List<Course> result) {
@@ -457,7 +425,7 @@ public class SchedulerPresenter implements Presenter {
 			view.scheduleBuilt();
 			return;
 		}
-		selectedCourses = new ArrayList<Course>(result);
+		selectedCourses = new ArrayList<>(result);
 
 		//Log.info("Build schedule: before Scheduler.getTimetablesList");
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
@@ -529,6 +497,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSuccess(List<Course> result) {
 				selectedCourses = result;
+				view.updateExamsBar(selectedCourses);
 				Log.info("chosen lessons were updated.");
 			}
 			

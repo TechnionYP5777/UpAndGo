@@ -35,16 +35,18 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
-	public SchedulerCollisionsView(List<String> solvers){
+	public SchedulerCollisionsView(){
 		
 	    //InitializeTimeLBs();
-		this.solvers = solvers;
+
     	InitializePanel();
     	cStyle.ensureInjected();
     	
     }
 	
 	public void updateList(List<String> solvers){
+		this.solvers = solvers;
+		
 		for(RadioButton r : radios){
 			this.remove(r);
 		}
