@@ -49,7 +49,7 @@ public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	
 	@Override
 	public String toString(){
-		return hour + ":" + minute;
+		return hour + ":" + ((minute < 10) ? "0"+minute : ""+minute);
 	}
 
 	public static LocalTime parse(String string) {

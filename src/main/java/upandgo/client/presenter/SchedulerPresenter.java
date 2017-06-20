@@ -219,6 +219,7 @@ public class SchedulerPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(Course result) {
+						Log.info("SchedulerPresenter: SelectCourseEvent getCourseDetails getGroupNum " + result.getTutorials().get(0).getGroupNum());
 						selectedCourses.add(result);
 						view.updateExamsBar(selectedCourses);
 					}
@@ -477,7 +478,7 @@ public class SchedulerPresenter implements Presenter {
 	}
 
 	void buildSchedule(List<Course> result) {
-		//Log.info("Build schedule: getChosenCoursesList success");
+		Log.info("Build schedule: getChosenCoursesList success");
 		if (result.isEmpty()) {
 			Log.info("Build schedule: no chosen courses");
 			lessonGroupsList.clear();

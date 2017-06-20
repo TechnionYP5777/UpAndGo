@@ -138,8 +138,10 @@ public class TimeTableView extends HorizontalPanel {
  		colorMap = map;
  		
  		clearTable();
- 		Log.info("TimeTableView: display was called with: " + schedule);
-
+ 		
+ 		if (schedule==null){
+ 			return;
+ 		}
  		
  		for (final LessonGroup lg : schedule){
 			for (final Lesson l : lg.getLessons()) {
@@ -148,11 +150,10 @@ public class TimeTableView extends HorizontalPanel {
 				LocalTime endTime = l.getEndTime().getTime();
 				int startCell = (WeekTime.difference(startTime, LocalTime.parse("08:30"))/30) + 1;
 				int span = WeekTime.difference(endTime, startTime)/30;
+				Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
-					Log.info("TimeTableView: cell in  " + startTime + " is empty");
 					SimplePanel eventWrap = createEventPanel(l);
-					//Log.info("TimeTableView: event panel created");
 
 					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
@@ -172,13 +173,27 @@ public class TimeTableView extends HorizontalPanel {
 		VerticalPanel eventContent = new VerticalPanel();
 		eventContent.setStyleName(ttStyle.hasEventContent());
 		eventContent.setHorizontalAlignment(ALIGN_CENTER);
-
-		if(l.getType() == Type.LECTURE){
-			eventContent.add(new Label("הרצאה - "  + l.getCourseId()));
-		}else if(l.getType() == Type.TUTORIAL){
-			eventContent.add(new Label("תרגול - "  + l.getCourseId()));
+		
+		switch (l.getType()) {
+			case LABORATORY:
+				eventContent.add(new Label("מעבדה - "  + l.getCourseId()));
+				break;
+			case LECTURE:
+				eventContent.add(new Label("הרצאה - "  + l.getCourseId()));
+				break;
+			case PROJECT:
+				eventContent.add(new Label("פרויקט - "  + l.getCourseId()));
+				break;
+			case SPORT:
+				eventContent.add(new Label("ספורט - "  + l.getCourseId()));
+				break;
+			case TUTORIAL:
+				eventContent.add(new Label("תרגול - "  + l.getCourseId()));
+				break;
+			default:
+				eventContent.add(new Label(l.getCourseId()));
+				break;
 		}
-		Log.info("TimeTableView: eventContent: " + l.getCourseName() + " " + l.getPlace() + " " + String.valueOf(l.getGroup()));
 
 		eventContent.setHorizontalAlignment(ALIGN_RIGHT);
 		Grid eventContentGrid = new Grid(4,2);
@@ -202,14 +217,13 @@ public class TimeTableView extends HorizontalPanel {
 		SimplePanel eventWrap = new SimplePanel();
 		eventWrap.add(eventContent);
 		eventWrap.addStyleName(ttStyle.hasEventWrap());
-		if(colorMap != null){
+		if(colorMap != null && colorMap.containsKey(l.getCourseId())){
 			//Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
 			eventWrap.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
-			
 		}else{
 			eventWrap.getElement().setAttribute("eventNum", "ORANGERED");
-			}
-
+		}
+		
 		final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
 		eventWrap.sinkEvents(Event.ONCLICK);
 		eventWrap.addHandler(new ClickHandler() {
@@ -220,6 +234,7 @@ public class TimeTableView extends HorizontalPanel {
 				
 			}
 		}, ClickEvent.getType());
+		
 		
 		return eventWrap;
  	}
@@ -238,10 +253,26 @@ public class TimeTableView extends HorizontalPanel {
 		});
 		lessonDetailsBoxFooter.add(lessonDetailsBoxButton);
 		lessonDetailsBox.setFade(true);
-		if(lesson.getType() == Type.LECTURE){
-			lessonDetailsBox.setTitle("הרצאה - "  + lesson.getCourseId());
-		}else if(lesson.getType() == Type.TUTORIAL){
-			lessonDetailsBox.setTitle("תרגול - "  + lesson.getCourseId());
+		
+		switch (lesson.getType()) {
+			case LABORATORY:
+				lessonDetailsBox.setTitle("מעבדה - "  + lesson.getCourseId());
+				break;
+			case LECTURE:
+				lessonDetailsBox.setTitle("הרצאה - "  + lesson.getCourseId());
+				break;
+			case PROJECT:
+				lessonDetailsBox.setTitle("פרויקט - "  + lesson.getCourseId());
+				break;
+			case SPORT:
+				lessonDetailsBox.setTitle("ספורט - "  + lesson.getCourseId());
+				break;
+			case TUTORIAL:
+				lessonDetailsBox.setTitle("תרגול - "  + lesson.getCourseId());
+				break;
+			default:
+				lessonDetailsBox.setTitle(lesson.getCourseId());
+				break;
 		}
 		ModalBody lessonDetailsBoxBody = new ModalBody();
 		lessonDetailsBoxBody.add(new LessonDetailsView(lesson));

@@ -285,11 +285,11 @@ public class Scheduler implements IsSerializable{
 			//Log.info("Scheduler: in initMainArr course " + xxx.getId());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
-			Log.info("getLectures: " + xxx.getLectures());
+			Log.info("Scheduler: course: " + xxx.getId() + " getLectures: " + xxx.getLectures());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
-			Log.info("getLuts: " + xxx.getTutorials());
+			Log.info("Scheduler: course: " + xxx.getId() + " getLuts: " + xxx.getTutorials());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

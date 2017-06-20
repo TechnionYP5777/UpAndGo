@@ -596,10 +596,25 @@ public class XmlCourseLoader extends CourseLoader {
 		for (int i = 0; i < sportsList.getLength(); ++i) {
 			final Node n = sportsList.item(i);
 			b.setName(((Element) n).getAttribute("name"));
-			b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
-			createLessonGroup(b, p, p, "sport");
-			coursesById.put(((Element) p).getAttribute("id") + "-" + ((Element) n).getAttribute("group"), cb.build());
-			cb.cleartutorialGroup();
+			int sportGroupNum = 99;  // should change later
+			if (((Element) n).hasAttribute("group")){
+				b.setId(courseNum + "-" + ((Element) n).getAttribute("group"));
+				sportGroupNum = Integer.parseInt(((Element) n).getAttribute("group"));
+			}
+			//createLessonGroup(b, p, p, "sport");
+			final NodeList sportLessonsList = ((Element) n).getElementsByTagName("lesson");
+			for (int f = 0; f < sportLessonsList.getLength() ; ++f){
+				final Node h = sportLessonsList.item(f);
+				if (h.getNodeType() == Node.ELEMENT_NODE){
+					String place = ((Element) h).getAttribute("building");
+					if (convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
+						b.addTutorialGroup(sportGroupNum).addLessonToGroup(sportGroupNum,
+								createLesson(n, h, p, i, convertStrToDay(((Element) h).getAttribute("day")),
+										sportGroupNum, place, Type.SPORT, "assistant"));
+				}
+			}
+			coursesById.put(((Element) p).getAttribute("id") + "-" + ((Element) n).getAttribute("group"), b.build());
+			b.cleartutorialGroup();
 		}
 	}
 
