@@ -73,7 +73,7 @@ public interface Resources extends ClientBundle {
 		 String NavBarPanel();
 	 }
 	 
-	 interface examsBarStyle extends CssResource{
+	 interface ExamsBarStyle extends CssResource{
 		 String examBarPanel();
 	 }
 	 
@@ -109,8 +109,8 @@ public interface Resources extends ClientBundle {
 	@Source("resources/DialogBoxStyle.css")
 	public DialogBoxStyle dialogBoxStyle();
 	
-	@Source("resources/examsBarStyle.css")
-	public examsBarStyle examsBarStyle();
+	@Source("resources/ExamsBarStyle.css")
+	public ExamsBarStyle examsBarStyle();
 	
 	@Source("resources/CourseListCellStyle.css")
 	public CourseListCellStyle courseListCellStyle();

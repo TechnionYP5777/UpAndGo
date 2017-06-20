@@ -148,53 +148,7 @@ public class TimeTableView extends HorizontalPanel {
 				int startCell = (WeekTime.difference(startTime, LocalTime.parse("08:30"))/30) + 1;
 				int span = WeekTime.difference(endTime, startTime)/30;
 
-				VerticalPanel eventContent = new VerticalPanel();
-				eventContent.setStyleName(ttStyle.hasEventContent());
-				eventContent.setHorizontalAlignment(ALIGN_CENTER);
-
-				if(l.getType() == Type.LECTURE){
-					eventContent.add(new Label("הרצאה - "  + l.getCourseId()));
-				}else if(l.getType() == Type.TUTORIAL){
-					eventContent.add(new Label("תרגול - "  + l.getCourseId()));
-				}
-				eventContent.setHorizontalAlignment(ALIGN_RIGHT);
-				Grid eventContentGrid = new Grid(4,2);
-				eventContentGrid.getCellFormatter().setHorizontalAlignment(0, 0, ALIGN_CENTER);
-				eventContentGrid.getCellFormatter().setHorizontalAlignment(1, 0, ALIGN_CENTER);
-				eventContentGrid.getCellFormatter().setHorizontalAlignment(2, 0, ALIGN_CENTER);
-				eventContentGrid.getCellFormatter().setHorizontalAlignment(3, 0, ALIGN_CENTER);
-				eventContentGrid.setHTML(0, 0, "<i class=\"fa fa-book\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-				eventContentGrid.setHTML(0, 1, l.getCourseName());
-				eventContentGrid.setHTML(1, 0, "<i class=\"fa fa-building-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-				eventContentGrid.setHTML(1, 1, l.getPlace());
-				eventContentGrid.setHTML(2, 0, "<i class=\"fa fa-users\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-				eventContentGrid.setHTML(2, 1, "קבוצה&nbsp;" + String.valueOf(l.getGroup()));
-				eventContentGrid.setHTML(3, 0, "<i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-				eventContentGrid.setHTML(3, 1, l.getRepresenter().getTitle() + "&nbsp;" + l.getRepresenter().getLastName() + "&nbsp;" + l.getRepresenter().getFirstName());
-				
-				eventContent.add(eventContentGrid);
-				
-				SimplePanel eventWrap = new SimplePanel();
-				eventWrap.add(eventContent);
-				eventWrap.addStyleName(ttStyle.hasEventWrap());
-				if(colorMap != null){
-					//Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
-					eventWrap.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
-					
-				}else{
-					eventWrap.getElement().setAttribute("eventNum", "ORANGERED");
-	 			}
-
-				final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
-				eventWrap.sinkEvents(Event.ONCLICK);
-				eventWrap.addHandler(new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
-						lessonDetailsBox.show();
-						
-					}
-				}, ClickEvent.getType());
+				SimplePanel eventWrap = createEventPanel(l);
 				
 				daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 				daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
@@ -210,7 +164,60 @@ public class TimeTableView extends HorizontalPanel {
  		
  	}
  	
-	private Modal InitializeLessonDetailsBox(Lesson lesson){
+ 	private SimplePanel createEventPanel(Lesson l){
+		VerticalPanel eventContent = new VerticalPanel();
+		eventContent.setStyleName(ttStyle.hasEventContent());
+		eventContent.setHorizontalAlignment(ALIGN_CENTER);
+
+		if(l.getType() == Type.LECTURE){
+			eventContent.add(new Label("הרצאה - "  + l.getCourseId()));
+		}else if(l.getType() == Type.TUTORIAL){
+			eventContent.add(new Label("תרגול - "  + l.getCourseId()));
+		}
+		eventContent.setHorizontalAlignment(ALIGN_RIGHT);
+		Grid eventContentGrid = new Grid(4,2);
+		eventContentGrid.getCellFormatter().setHorizontalAlignment(0, 0, ALIGN_CENTER);
+		eventContentGrid.getCellFormatter().setHorizontalAlignment(1, 0, ALIGN_CENTER);
+		eventContentGrid.getCellFormatter().setHorizontalAlignment(2, 0, ALIGN_CENTER);
+		eventContentGrid.getCellFormatter().setHorizontalAlignment(3, 0, ALIGN_CENTER);
+		eventContentGrid.setHTML(0, 0, "<i class=\"fa fa-book\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
+		eventContentGrid.setHTML(0, 1, l.getCourseName());
+		eventContentGrid.setHTML(1, 0, "<i class=\"fa fa-building-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
+		eventContentGrid.setHTML(1, 1, l.getPlace());
+		eventContentGrid.setHTML(2, 0, "<i class=\"fa fa-users\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
+		eventContentGrid.setHTML(2, 1, "קבוצה&nbsp;" + String.valueOf(l.getGroup()));
+		eventContentGrid.setHTML(3, 0, "<i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
+		eventContentGrid.setHTML(3, 1, l.getRepresenter().getTitle() + "&nbsp;" + l.getRepresenter().getLastName() + "&nbsp;" + l.getRepresenter().getFirstName());
+		
+		eventContent.add(eventContentGrid);
+		
+		SimplePanel eventWrap = new SimplePanel();
+		eventWrap.add(eventContent);
+		eventWrap.addStyleName(ttStyle.hasEventWrap());
+		if(colorMap != null){
+			//Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
+			eventWrap.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
+			
+		}else{
+			eventWrap.getElement().setAttribute("eventNum", "ORANGERED");
+			}
+
+		final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
+		eventWrap.sinkEvents(Event.ONCLICK);
+		eventWrap.addHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				lessonDetailsBox.show();
+				
+			}
+		}, ClickEvent.getType());
+		
+		return eventWrap;
+ 	}
+ 	
+ 	
+	private static Modal InitializeLessonDetailsBox(Lesson lesson){
 		final Modal lessonDetailsBox = new Modal();
 		ModalFooter lessonDetailsBoxFooter = new ModalFooter();
 		Button lessonDetailsBoxButton = new Button("סגור", new ClickHandler() {

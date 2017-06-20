@@ -22,12 +22,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
-import upandgo.client.Resources.examsBarStyle;
+import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
-import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
 
 public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Display{
@@ -53,7 +52,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		
 		//initializing exams bar inside a mgwt scroll panel
-		examsBarStyle ebStyle = Resources.INSTANCE.examsBarStyle();
+		ExamsBarStyle ebStyle = Resources.INSTANCE.examsBarStyle();
 		ebStyle.ensureInjected();
 		examsBar = new HTML("");
     	examsScrollPanel = new com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel();

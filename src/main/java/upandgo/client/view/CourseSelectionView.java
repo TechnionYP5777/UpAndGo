@@ -10,9 +10,6 @@ package upandgo.client.view;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -42,7 +39,6 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
-import upandgo.client.Resources.examsBarStyle;
 import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.course.CourseId;
 

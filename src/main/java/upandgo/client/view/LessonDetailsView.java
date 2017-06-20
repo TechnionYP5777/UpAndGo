@@ -1,22 +1,14 @@
 package upandgo.client.view;
 
 import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Heading;
-import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.ModalComponent;
-import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.LessonDetailsStyle;
-import upandgo.client.Resources.SchedualerConstraintsStyle;
 import upandgo.shared.entities.Lesson;
 
 public class LessonDetailsView extends VerticalPanel implements ModalComponent{
