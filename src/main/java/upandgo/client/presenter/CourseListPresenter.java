@@ -35,6 +35,8 @@ import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
+import upandgo.client.event.CollidingCourseDeselectedEvent;
+import upandgo.client.event.CollidingCourseDeselectedEventHandler;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;
@@ -117,6 +119,15 @@ public class CourseListPresenter implements Presenter {
 					rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
 			}
 		});
+		
+		this.eventBus.addHandler(CollidingCourseDeselectedEvent.TYPE, new CollidingCourseDeselectedEventHandler() {
+			
+			@Override
+			public void onCollidedCourseDeselected(CourseId c) {
+				deselectCourse(c);
+				
+			}
+		});
 	}
 
 	CoursesServiceAsync rpcService;
@@ -167,7 +178,7 @@ public class CourseListPresenter implements Presenter {
 
 			@Override
 			public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
-				deselectCourse();
+				deselectCourse(null);
 			}
 		}, DoubleClickEvent.getType());
 
@@ -208,7 +219,7 @@ public class CourseListPresenter implements Presenter {
 					EventTarget eventTarget = event.getNativeEvent().getEventTarget();
 					if (eventTarget.toString().equals("[object HTMLButtonElement]")
 							|| eventTarget.toString().equals("[object HTMLElement]")) {
-						deselectCourse();
+						deselectCourse(null);
 					}
 				}
 			}
@@ -429,9 +440,9 @@ public class CourseListPresenter implements Presenter {
 
 		}
 	}
-	void deselectCourse() {
-
-		final CourseId $ = display.getSelectedCourse(selectedClickedRow);
+	void deselectCourse(CourseId deselectedCourse) {
+		final CourseId $;
+		$ = deselectedCourse != null ? deselectedCourse : display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
 			selectedCourses.remove($);
 			notSelectedCourses.clear();

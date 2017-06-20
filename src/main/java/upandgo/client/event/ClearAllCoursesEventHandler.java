@@ -5,7 +5,7 @@ package upandgo.client.event;
  * @author danabra
  * @since 15-06-17
  * 
- * A handler for getExamsBarEvent
+ * A handler for ClearAllCoursesEvent
  * 
  */
 

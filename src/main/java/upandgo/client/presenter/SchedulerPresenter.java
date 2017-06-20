@@ -40,8 +40,10 @@ import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
+import upandgo.client.event.CollidingCourseDeselectedEvent;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.CourseTuple;
 import upandgo.shared.model.scedule.Scheduler;
@@ -416,7 +418,24 @@ public class SchedulerPresenter implements Presenter {
 					Log.error("Drop id is null");
 				
 				Log.info("Asked to drop course id: " + dropId);
+				
+				Course droppedCourse = null;
+				
+				for(Course c : selectedCourses){
+					if(c.getId().equals(dropId)){
+						droppedCourse = c;
+						selectedCourses.remove(c);
+						break;
+					}
+				}
+				
+				eventBus.fireEvent(new CollidingCourseDeselectedEvent(new CourseId(droppedCourse.getId(), droppedCourse.getName(), droppedCourse.getaTerm(), droppedCourse.getbTerm())));
+				
 				view.getCollisionModal().hide();
+				
+				buildSchedule(selectedCourses);
+				
+				
 			}
 		});
 		

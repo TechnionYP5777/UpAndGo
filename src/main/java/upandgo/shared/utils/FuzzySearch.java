@@ -1,5 +1,13 @@
 package upandgo.shared.utils;
 
+/**
+ * 
+ * @author danabra
+ * @since 20-06-17
+ * 
+ * A Class for calculating similarity between two strings (each string can contains more than one word)
+ * 
+ */
 
 public class FuzzySearch {
 	private FuzzySearch(){
@@ -38,7 +46,8 @@ public class FuzzySearch {
 
 	  }
 	
-// this is a java implementation for calculating Levenshtein Distance. code is taken from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Java
+// this is a java implementation for calculating Levenshtein Distance between two strings. 
+//code is taken from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Java
 	 
 	private static int minimum(int a, int b, int c) {                            
 	      return Math.min(Math.min(a, b), c);                                      

@@ -93,7 +93,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public void selectCourse(CourseId id) {
-		Log.info("picked course: " + id.number());
+		Log.info("^&^&^&^&&^&&^&&^picked course: " + id.number());
 		someString = "here0";
 		model.pickCourse(id.number());
 		model.saveChosenCourses(model.getChosenCourseNames());
