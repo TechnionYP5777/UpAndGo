@@ -32,7 +32,6 @@
   <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
   <inherits name="com.arcbees.gquery.tooltip.Tooltip"/>
   <inherits name='com.googlecode.mgwt.MGWT'/>
-  <inherits name="org.apache.commons.GWTCommonsLang3" />
   
   <!-- Specify the app entry point class.                         -->
   <entry-point class='upandgo.client.UpAndGo'/>

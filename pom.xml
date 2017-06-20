@@ -152,11 +152,7 @@
 			<version>0.9.3</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>me.xdrop</groupId>
-			<artifactId>fuzzywuzzy</artifactId>
-			<version>1.1.7</version>
-		</dependency>
+	
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
@@ -185,11 +181,6 @@
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.9.53</version>
 		</dependency>
-		    <dependency>
-      <groupId>de.knightsoft-net</groupId>
-      <artifactId>gwt-commons-lang3</artifactId>
-      <version>3.5-1</version>
-    </dependency>
 
 	</dependencies>
 
