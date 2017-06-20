@@ -53,8 +53,11 @@ public class Scheduler implements IsSerializable{
 		collisionSolvers = new ArrayList<>();
 				
 		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses:" + lcourse);
+		
+		// TO REMOVE
 		if(lcourse.get(0) != null)
 			Log.info(lcourse.get(0).toString());
+		
 		final List<Timetable> result = new ArrayList<>();
 		//Log.info("Scheduler: here");
 
@@ -101,8 +104,10 @@ public class Scheduler implements IsSerializable{
 				$.collisionSolver();
 				if(!$.hasCollision())
 					result.add($.getTimetable()); // return $;
-				else
-					collisionSolvers.add($.getCollisionSolver());
+				else{
+					if(!collisionSolvers.contains($.getCollisionSolver()))
+						collisionSolvers.add($.getCollisionSolver());
+				}
 				/*if($.getCollisionsCount() == 0)
 					result.add($.getTimetable()); // return $;
 				else

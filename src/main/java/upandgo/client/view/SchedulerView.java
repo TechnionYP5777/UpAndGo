@@ -93,12 +93,14 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		}
 	
 	@Override
-	public void drawCollisionView(){
+	public void drawCollisionView(List<String> solvers){
 		Modal constraintsBox = new Modal();
 		constraintsBox.setFade(true);
 		constraintsBox.setTitle("פתרון התנגשויות");
+		schedulerCollisionsView.updateList(solvers);
 		constraintsBox.add(schedulerCollisionsView);
 		constraintsBox.show();
+		Log.info("was here/1");
 	}
 	
 	

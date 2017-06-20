@@ -101,7 +101,7 @@ public class SchedulerPresenter implements Presenter {
 
 		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if
 																						// (schedule
-		public void drawCollisionView();																				// =
+		public void drawCollisionView(List<String> solvers);																				// =
 																						// null)
 																						// then
 																						// clear
@@ -476,7 +476,7 @@ public class SchedulerPresenter implements Presenter {
 		Log.info("days off vector: " + vectorDaysOff);
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime, vectorDaysOff);
 		Log.info("corrrect sorted tables size: " + sorted.size());
-		Log.info("*** found time table: " + sorted.get(0) + " ***");
+		//Log.info("*** found time table: " + sorted.get(0) + " ***");
 		//Log.info("correct sorted tables: " + sorted);
 		
 		/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
@@ -488,7 +488,14 @@ public class SchedulerPresenter implements Presenter {
 		if (sorted.isEmpty()) {
 			//Window.alert("Error - There are no possible schedule.");
 			//Log.error("Error - There are no possible schedule.");
-			view.drawCollisionView();
+			Log.info("check if can solve it");
+			if(!Scheduler.getCollisionSolvers().isEmpty()){
+				Log.info("Draw Collision View");
+				Log.info("Col solvers: " + Scheduler.getCollisionSolvers());
+			view.drawCollisionView(Scheduler.getCollisionSolvers());
+			}else{
+				Log.info("cannot solver it");
+			}
 		} else {
 			lessonGroupsList.clear();
 			//lessonGroupsList = sorted;

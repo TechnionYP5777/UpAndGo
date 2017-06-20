@@ -1,5 +1,7 @@
 package upandgo.client.view;
 
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
@@ -9,6 +11,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
@@ -26,18 +29,33 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 
 	//HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("קיימות התנגשויות שלא מאפשרות להשלים את בניית המערכת. אנא וותר על אחד מהקורסים הבאים על מנת לפתור אותן:");
-
+	List<String> solvers;
+	List<RadioButton> radios;
 
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
 
-	public SchedulerCollisionsView(){
+	public SchedulerCollisionsView(List<String> solvers){
 		
 	    //InitializeTimeLBs();
+		this.solvers = solvers;
     	InitializePanel();
     	cStyle.ensureInjected();
     	
     }
+	
+	public void updateList(List<String> solvers){
+		for(RadioButton r : radios){
+			this.remove(r);
+		}
+		radios.clear();
+		
+		for(String s : solvers){
+    		RadioButton r = new RadioButton("radioGroup", s);
+    		radios.add(r);
+    		this.add(r);
+    	}
+	}
 
 	    
     private void InitializePanel(){
@@ -53,6 +71,7 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
     	freeDaysPanel.add(thursdayBox);
     	this.add(freeDaysPanel);*/
     	this.add(freeDaysLabel);
+    	
     	
     	/*
     	HorizontalPanel startTimePanel = new HorizontalPanel();
