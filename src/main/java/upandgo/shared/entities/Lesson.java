@@ -154,7 +154,7 @@ public class Lesson implements IsSerializable {
 
 	@Override
 	public String toString() {
-		return "representer: " + representer + " start time: " + startTime + " end time: " + endTime;
+		return "courseID: " + courseId + " start time: " + startTime + " end time: " + endTime;
 	}
 
 	@Override

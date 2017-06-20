@@ -143,22 +143,24 @@ public class TimeTableView extends HorizontalPanel {
  		
  		for (final LessonGroup lg : schedule){
 			for (final Lesson l : lg.getLessons()) {
+				Log.info("TimeTableView: displaying lesson " + l.toString());
 				LocalTime startTime = l.getStartTime().getTime();
 				LocalTime endTime = l.getEndTime().getTime();
 				int startCell = (WeekTime.difference(startTime, LocalTime.parse("08:30"))/30) + 1;
 				int span = WeekTime.difference(endTime, startTime)/30;
 
-				SimplePanel eventWrap = createEventPanel(l);
-				
-				daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
-				daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
-				daysTables.get(l.getDay()).getCellFormatter().setStyleName(startCell, 0, ttStyle.hasEvent());
-				
-				while (span > 1){
-					daysTables.get(l.getDay()).removeCell(startCell+span-1, 0);
-					span--;
+				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
+					SimplePanel eventWrap = createEventPanel(l);
+					
+					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
+					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
+					daysTables.get(l.getDay()).getCellFormatter().setStyleName(startCell, 0, ttStyle.hasEvent());
+					
+					while (span > 1){
+						daysTables.get(l.getDay()).removeCell(startCell+span-1, 0);
+						span--;
+					}
 				}
-				
 			}
  		}
  		
