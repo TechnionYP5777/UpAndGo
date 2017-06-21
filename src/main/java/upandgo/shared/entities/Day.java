@@ -1,6 +1,8 @@
 package upandgo.shared.entities;
 
-public enum Day {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum Day implements IsSerializable{
 	SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
 	THURSDAY, FRIDAY, SATURDAY 
 }

@@ -13,6 +13,7 @@ import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
+
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -73,7 +74,7 @@ public class SchedulerPresenter implements Presenter {
 	
 	protected boolean examBarVisable;		
 
-	List<Course> selectedCourses;
+	protected List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected int sched_index;
 	protected Map<String, Color> colorMap;
@@ -106,6 +107,8 @@ public class SchedulerPresenter implements Presenter {
 		public void setSelectedCourses(List<Course> selectedCourses);
 		
 		public Modal getContraintsModal();
+		
+		public void setNotesOnLessonModal(String courseId, List<String> courseNotes);
 
 		public boolean isDayOffChecked(ClickEvent event);
 
@@ -157,8 +160,6 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void openExamsBar();
 
-		
-		
 	}
 
 	@Inject
@@ -215,11 +216,11 @@ public class SchedulerPresenter implements Presenter {
 
 			@Override
 			public void onSelectCourse(SelectCourseEvent event) {
+				Log.info("SchedulerPresenter: SelectCourseEvent: " + event.getId().number());
 				rpcService.getCourseDetails(event.getId(), new AsyncCallback<Course>() {
 
 					@Override
 					public void onSuccess(Course result) {
-						Log.info("SchedulerPresenter: SelectCourseEvent getCourseDetails getGroupNum " + result.getTutorials().get(0).getGroupNum());
 						selectedCourses.add(result);
 						view.updateExamsBar(selectedCourses);
 					}
@@ -323,7 +324,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				Log.info("Build schedule: requested");
-				buildSchedule(selectedCourses);
+				buildSchedule();
 			}
 		});
 
@@ -337,6 +338,8 @@ public class SchedulerPresenter implements Presenter {
 				++sched_index;
 
 				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
+				setNotesOnLessonsModals();
+				
 				if (lessonGroupsList.size() <= sched_index + 1) {
 					view.setNextEnable(false);
 				}
@@ -355,6 +358,8 @@ public class SchedulerPresenter implements Presenter {
 				--sched_index;
 
 				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
+				setNotesOnLessonsModals();
+				
 				if (sched_index <= 0) {
 					view.setPrevEnable(false);
 				}
@@ -434,7 +439,7 @@ public class SchedulerPresenter implements Presenter {
 				
 				view.getCollisionModal().hide();
 				
-				buildSchedule(selectedCourses);
+				buildSchedule();
 				
 				
 			}
@@ -477,19 +482,17 @@ public class SchedulerPresenter implements Presenter {
 		}
 	}
 
-	void buildSchedule(List<Course> result) {
+	void buildSchedule() {
 		Log.info("Build schedule: getChosenCoursesList success");
-		if (result.isEmpty()) {
+		if (selectedCourses.isEmpty()) {
 			Log.info("Build schedule: no chosen courses");
 			lessonGroupsList.clear();
 			view.setSchedule(null, colorMap);
 			view.scheduleBuilt();
 			return;
 		}
-		selectedCourses = new ArrayList<>(result);
-
 		//Log.info("Build schedule: before Scheduler.getTimetablesList");
-		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(result, null);
+		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCourses, null);
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
 		Log.info("color map: " + colorMap);
@@ -549,6 +552,7 @@ public class SchedulerPresenter implements Presenter {
 		}
 		view.scheduleBuilt();
 		view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+		setNotesOnLessonsModals();
 	}
 	
 	void updateScheduleAndChosenLessons() {
@@ -557,7 +561,9 @@ public class SchedulerPresenter implements Presenter {
 			
 			@Override
 			public void onSuccess(List<Course> result) {
-				selectedCourses = result;
+				for (Course course : result){
+					selectedCourses.add(course);
+				}
 				view.updateExamsBar(selectedCourses);
 				Log.info("chosen lessons were updated.");
 			}
@@ -586,6 +592,14 @@ public class SchedulerPresenter implements Presenter {
 				Log.info("schedule was updated. it has " + String.valueOf(result.size()) + " LessonGroups.");
 			}
 		});
+	}
+	
+	
+	void setNotesOnLessonsModals(){
+		for(Course course : selectedCourses){
+			//Log.info("SchedulerPresenter: course " + course.getId() + " has " + course.getNotes().size() + " notes");
+			view.setNotesOnLessonModal(course.getId(), course.getNotes());
+		}
 	}
 	
 }

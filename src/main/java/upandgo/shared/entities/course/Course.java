@@ -45,6 +45,8 @@ public class Course implements IsSerializable {
 
 	final protected List<CourseListener> listeners;
 
+	protected List<String> notes;
+	
 	final protected List<Course> prerequisites;
 	final protected List<Course> corequisites;
 	protected boolean done;
@@ -65,11 +67,12 @@ public class Course implements IsSerializable {
 		
 		lectures = null;
 		tutorials = null;
+		
+		notes = null;
 	}
 	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,
-			final double acPoints, Exam aT, Exam bT, final List<Course> prerequisitesList,
-			final List<Course> corequisitesList) {
+			final double acPoints, Exam aT, Exam bT, final List<Course> prerequisitesList, final List<Course> corequisitesList) {
 
 		if (name1 == null || faculty1 == null)
 			throw new NullPointerException();
@@ -93,6 +96,8 @@ public class Course implements IsSerializable {
 		listeners = new ArrayList<>();
 
 		projectHours = laboratoryHours = tutorialHours = lectureHours = 0;
+		
+		notes = new ArrayList<>();
 
 		prerequisites = new ArrayList<>(prerequisitesList);
 		corequisites = new ArrayList<>(corequisitesList);
@@ -204,6 +209,14 @@ public class Course implements IsSerializable {
 
 	public void markAsNotPass() {
 		passThisSemester = false;
+	}
+	
+	public void addNote(final String note){
+		notes.add(note);
+	}
+	
+	public List<String> getNotes() {
+		return notes;
 	}
 
 	public List<Course> getPrerequisites() {

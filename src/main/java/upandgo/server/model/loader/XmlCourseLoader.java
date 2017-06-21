@@ -544,6 +544,14 @@ public class XmlCourseLoader extends CourseLoader {
 									}
 								}
 							}
+						}	
+						final NodeList notesList = ((Element) p).getElementsByTagName("note");
+						for (int n = 0 ; n < notesList.getLength() ; ++n){
+							final Node note = notesList.item(n);
+							if (note.getNodeType() == Node.ELEMENT_NODE){
+								//Log.info(note.getTextContent());
+								cb.addNote(note.getTextContent());
+							}
 						}
 						final Course c = cb.build();
 						coursesById.put(c.getId(), c);
@@ -553,7 +561,7 @@ public class XmlCourseLoader extends CourseLoader {
 
 				cb.clearStaffMembers();
 				cb.clearlecturesGroups();
-
+				cb.clearNotes();
 			}
 		} catch (IOException | SAXException | ParserConfigurationException xxx) {
 			xxx.printStackTrace();
@@ -592,6 +600,13 @@ public class XmlCourseLoader extends CourseLoader {
 		b.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 		final String courseNum = ((Element) p).getAttribute("id");
 		setStaffList(b, p, "teacherInCharge");
+		final NodeList notesList = ((Element) p).getElementsByTagName("note");
+		for (int n = 0 ; n < notesList.getLength() ; ++n){
+			final Node note = notesList.item(n);
+			if (note.getNodeType() == Node.ELEMENT_NODE){
+				b.addNote(note.getTextContent());
+			}
+		}
 		final NodeList sportsList = ((Element) p).getElementsByTagName("sport");
 		for (int i = 0; i < sportsList.getLength(); ++i) {
 			final Node n = sportsList.item(i);
@@ -616,6 +631,7 @@ public class XmlCourseLoader extends CourseLoader {
 			coursesById.put(((Element) p).getAttribute("id") + "-" + ((Element) n).getAttribute("group"), b.build());
 			b.cleartutorialGroup();
 		}
+		b.clearNotes();
 	}
 
 	private void createLessonGroup(final CourseBuilder b, final Node n, final Node p, final String s) {

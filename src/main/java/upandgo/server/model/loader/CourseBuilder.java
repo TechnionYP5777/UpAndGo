@@ -25,6 +25,8 @@ public class CourseBuilder {
 	protected List<LessonGroup> lectures = new ArrayList<>();
 	protected List<LessonGroup> tutorials = new ArrayList<>();
 
+	protected final List<String> notes = new ArrayList<>();
+
 	protected final List<Course> prerequisites = new ArrayList<>();
 	protected final List<Course> corequisites = new ArrayList<>();
 
@@ -108,6 +110,10 @@ public class CourseBuilder {
 	public void cleartutorialGroup() {
 		tutorials.clear();
 	}
+	
+	public void clearNotes() {
+		notes.clear();
+	}
 
 	public List<StuffMember> getStaffList() {
 		return stuff;
@@ -120,6 +126,13 @@ public class CourseBuilder {
 		return this;
 	}
 
+	public CourseBuilder addNote(final String note){
+		if (!notes.contains(note)){
+			notes.add(note);			
+		}
+		return this;
+	}
+	
 	public CourseBuilder addPrerequisitesCourse(final Course xxx) {
 		if (!prerequisites.contains(xxx))
 			prerequisites.add(xxx);
@@ -138,6 +151,8 @@ public class CourseBuilder {
 			$.addLecturesLessonGroup(xxx);
 		for (final LessonGroup xxx : tutorials)
 			$.addTutorialLessonGroup(xxx);
+		for (final String xxx : notes)
+			$.addNote(xxx);
 		return $;
 	}
 }

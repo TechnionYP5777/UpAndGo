@@ -2,8 +2,10 @@ package upandgo.client.view;
 
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.ListItem;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 import org.gwtbootstrap3.client.ui.constants.HeadingSize;
+import org.gwtbootstrap3.client.ui.html.UnorderedList;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -14,6 +16,8 @@ import upandgo.shared.entities.Lesson;
 public class LessonDetailsView extends VerticalPanel implements ModalComponent{
 	
 	private Lesson lesson;
+	
+	private UnorderedList notesList = new UnorderedList();
 	
 	private LessonDetailsStyle ldStyle = Resources.INSTANCE.lessonDetailsStyle();
 
@@ -38,9 +42,22 @@ public class LessonDetailsView extends VerticalPanel implements ModalComponent{
 		
 		Anchor ugLink = new Anchor("קישור ל-UG", "https://ug3.technion.ac.il/rishum/course?MK=" + lesson.getCourseId() + "&CATINFO=&SEM=201602");
 		ugLink.setTarget("_blank");
+				
+		this.add(new Heading(HeadingSize.H4, "הערות על הקורס: "));
+
+		this.add(notesList);
 		
 		this.add(ugLink);
 
 
+
+	}
+	
+	public String getCourseId(){
+		return lesson.getCourseId();
+	}
+	
+	public void addNote(String note){
+		notesList.add(new ListItem(note));
 	}
 }

@@ -8,6 +8,7 @@
 .lessonDetailsPanel a {
 	font-size: large;
 	margin-top: 10px;
+	margin-bottom: 10px;
 	display: inline-block;	
 }
 

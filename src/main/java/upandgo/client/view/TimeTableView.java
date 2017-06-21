@@ -16,9 +16,6 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -28,7 +25,6 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.client.Resources;
 import upandgo.client.Resources.TimeTableStyle;
 import upandgo.shared.entities.Lesson;
-import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
 import upandgo.shared.model.scedule.Color;
@@ -51,6 +47,7 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
 	private List<FlexTable> daysTables = new ArrayList<>();
+	private List<LessonDetailsView> lessonsDetailsViews = new ArrayList<>();
 	private Map<String, Color> colorMap;
 		
 	
@@ -138,6 +135,7 @@ public class TimeTableView extends HorizontalPanel {
  		colorMap = map;
  		
  		clearTable();
+ 		lessonsDetailsViews.clear();
  		
  		if (schedule==null){
  			return;
@@ -225,6 +223,7 @@ public class TimeTableView extends HorizontalPanel {
 		}
 		
 		final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
+		
 		eventWrap.sinkEvents(Event.ONCLICK);
 		eventWrap.addHandler(new ClickHandler() {
 			
@@ -240,7 +239,7 @@ public class TimeTableView extends HorizontalPanel {
  	}
  	
  	
-	private static Modal InitializeLessonDetailsBox(Lesson lesson){
+	private Modal InitializeLessonDetailsBox(Lesson lesson){
 		final Modal lessonDetailsBox = new Modal();
 		ModalFooter lessonDetailsBoxFooter = new ModalFooter();
 		Button lessonDetailsBoxButton = new Button("סגור", new ClickHandler() {
@@ -274,10 +273,29 @@ public class TimeTableView extends HorizontalPanel {
 				lessonDetailsBox.setTitle(lesson.getCourseId());
 				break;
 		}
+		
+		LessonDetailsView lessonDetailsView = new LessonDetailsView(lesson);
+		lessonsDetailsViews.add(lessonDetailsView);
+
 		ModalBody lessonDetailsBoxBody = new ModalBody();
-		lessonDetailsBoxBody.add(new LessonDetailsView(lesson));
+		lessonDetailsBoxBody.add(lessonDetailsView);
 		lessonDetailsBox.add(lessonDetailsBoxBody);
+/*		ModalBody lessonDetailsBoxBody2 = new ModalBody();
+		lessonDetailsBoxBody2.add(new Text("NOTESSSSSSS1"));
+		lessonDetailsBox.add(lessonDetailsBoxBody2);*/
 		lessonDetailsBox.add(lessonDetailsBoxFooter);
 		return lessonDetailsBox;
+	}
+	
+	public void setNotesOnLessonModal(String courseId, List<String> courseNotes){
+		for (LessonDetailsView lessonDetailsView : lessonsDetailsViews){
+			if (courseId.contains(lessonDetailsView.getCourseId())){
+				for (String note : courseNotes){
+					//Log.info("TimeTableView: putting note " + note);
+					lessonDetailsView.addNote(note);
+				}
+			}
+		}
+
 	}
 }

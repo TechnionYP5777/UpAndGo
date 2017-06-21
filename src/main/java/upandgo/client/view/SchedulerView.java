@@ -469,4 +469,14 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		this.setWidgetBottomHeight(examsScrollPanel, 2, Unit.EM, 5, Unit.EM);
 		
 	}
+
+
+	@Override
+	public void setNotesOnLessonModal(String courseId, List<String> courseNotes) {
+		timeTableView.setNotesOnLessonModal(courseId, courseNotes);
+		
+	}
+
+
+
 }

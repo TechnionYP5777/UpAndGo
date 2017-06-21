@@ -18,7 +18,7 @@ import upandgo.shared.entities.constraint.TimeConstraint;
 public class Lesson implements IsSerializable {
 	private static final long serialVersionUID = 903076596050490635L;
 
-	public enum Type {
+	public enum Type implements IsSerializable{
 		LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT
 	}
 
