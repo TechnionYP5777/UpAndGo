@@ -79,7 +79,7 @@ public class StuffMember implements IsSerializable {
 
 	@Override
 	public String toString() {
-		return fName + " " + lName;
+		return fName + "-" + lName;
 	}
 
 	@Override

@@ -1,5 +1,15 @@
 package upandgo.client.view;
 
+/**
+ * 
+ * @author danabra
+ * @since 8-06-17
+ * 
+ * this class represents a single cell in the selected courses' table 
+ * 
+ */
+
+
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 

@@ -71,7 +71,7 @@ public class CourseListPresenter implements Presenter {
 
 		void setHoveredRow(int row);
 
-		void setHoveredCourseDetail(String detail);
+		void setHoveredCourseDetail(Course detail);
 		
 		void updateLists();
 		
@@ -96,8 +96,6 @@ public class CourseListPresenter implements Presenter {
 														// chosen
 
 		String getCourseQuery(KeyUpEvent event);
-
-		Widget getExamsBar();
 
 		Widget getAsWidget();
 	}
@@ -151,6 +149,7 @@ public class CourseListPresenter implements Presenter {
 
 	boolean isSignedIn = false;
 	
+	
 	@Override
 	public void bind() {
 
@@ -192,7 +191,6 @@ public class CourseListPresenter implements Presenter {
 				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 
 				if (isMouseOver) {
-
 					hoveredRow = event.getIndex();
 					if (hoveredRow < 0) {
 						return;
@@ -201,17 +199,16 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						//rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
-					//}
-					display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
+						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
+					}
+					//display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
 						hoveredCourse = null;
 						hoveredRow = -1;
 						display.setHoveredRow(-1);
-						display.setHoveredCourseDetail("");
-					}
+						display.setHoveredCourseDetail(null);
 				}
 				if (isClick) {
 
@@ -243,6 +240,7 @@ public class CourseListPresenter implements Presenter {
 				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 
 				if (isMouseOver) {
+					
 					hoveredRow = display.getHoveredNotSelectedCourseRow(event);
 					if (hoveredRow < 0) {
 						return;
@@ -250,18 +248,18 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
 					if (!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						// rpcService.getCourseDetails(hoveredCourse, new
-						// GetCourseDetailsCallback());
+						rpcService.getCourseDetails(hoveredCourse, new
+								GetCourseDetailsCallback());
 					}
-					display.getNotSelectedCoursesList().getRowElement(event.getIndex()).getCells()
-							.getItem(event.getColumn()).setTitle(newCourseId.getTitle());
+//					display.getNotSelectedCoursesList().getRowElement(event.getIndex()).getCells()
+//							.getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
 					hoveredCourse = null;
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
-					display.setHoveredCourseDetail("");
+					display.setHoveredCourseDetail(null);
 				}
 				if (isClick) {
 					unselectedClickedRow = event.getIndex();
@@ -421,7 +419,7 @@ public class CourseListPresenter implements Presenter {
 		@Override
 		public void onSuccess(Course result) {
 			display.setHoveredRow(hoveredRow);
-			display.setHoveredCourseDetail(result.toString());
+			display.setHoveredCourseDetail(result);
 		}
 	}
 
