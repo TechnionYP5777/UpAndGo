@@ -85,22 +85,22 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		this.setHeight("100%");
 		
 		this.add(scrollableTimeTable);
-		this.setWidgetLeftRight(scrollableTimeTable, 12, Unit.EM, 0, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 1, Unit.EM);
+		this.setWidgetLeftRight(scrollableTimeTable, 11, Unit.EM, 0, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 1, Unit.EM);
 		this.getWidgetContainerElement(scrollableTimeTable).getStyle().setProperty("transition", "bottom 0.3s linear 0s");
 		
 		this.add(examsScrollPanel);
-		this.setWidgetLeftRight(examsScrollPanel, 12, Unit.EM, 0, Unit.EM);
+		this.setWidgetLeftRight(examsScrollPanel, 11, Unit.EM, 0, Unit.EM);
 		this.setWidgetBottomHeight(examsScrollPanel, 0, Unit.EM, 0, Unit.EM);
 		this.getWidgetContainerElement(examsScrollPanel).getStyle().setProperty("transition", "height 0.3s linear 0s");	
 		
 		this.add(schedualerControlsView);
-		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 11, Unit.EM);
-		this.setWidgetTopBottom(schedualerControlsView, 4.5, Unit.EM, 0, Unit.EM);
+		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 10, Unit.EM);
+		this.setWidgetTopBottom(schedualerControlsView, 5, Unit.EM, 1, Unit.EM);
 		
 		this.add(examsControlsView);
-		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 11, Unit.EM);
-		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 3, Unit.EM);
+		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 2.5, Unit.EM);
 
 		
 		}
@@ -457,16 +457,16 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void collapseExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 1, Unit.EM);
-		this.setWidgetBottomHeight(examsScrollPanel, 2, Unit.EM, 0, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 1, Unit.EM);
+		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 0, Unit.EM);
 		
 		
 	}
 
 	@Override
 	public void openExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 4.5, Unit.EM, 7, Unit.EM);
-		this.setWidgetBottomHeight(examsScrollPanel, 2, Unit.EM, 5, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 7, Unit.EM);
+		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 5, Unit.EM);
 		
 	}
 

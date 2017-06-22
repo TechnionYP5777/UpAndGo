@@ -474,7 +474,7 @@ public class SchedulerPresenter implements Presenter {
 		examBarVisable = false;			
 		
 		panel.add(view.getAsWidget());
-		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetLeftRight(view.getAsWidget(), 1, Unit.EM, 22, Unit.PCT);
 
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
