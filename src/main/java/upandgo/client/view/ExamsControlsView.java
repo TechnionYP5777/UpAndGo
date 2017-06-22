@@ -21,6 +21,7 @@ public class ExamsControlsView extends VerticalPanel{
 	private void InitializePanel() {
 		this.setStyleName(ecStyle.examsControlsPanel());
 
+		this.setVerticalAlignment(ALIGN_BOTTOM);
 		this.setHorizontalAlignment(ALIGN_CENTER);
 		//this.setStyleName(scStyle.SchedulerControlsPanel());
 		examsButton.setStyleName("btn btn-warning");

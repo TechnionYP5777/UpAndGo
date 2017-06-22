@@ -204,7 +204,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	clearCourses.setStyleName("btn btn-primary clear-button");
    
     	
-    	this.getElement().getStyle().setMargin(10, Unit.PX);
+    	//this.getElement().getStyle().setMargin(10, Unit.PX);  I think it looks better without it, everything the same height. Yaniv
     	this.add(cc);
 	    this.add(cclp);
 	    this.add(sc);

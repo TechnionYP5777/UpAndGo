@@ -3,6 +3,11 @@ package upandgo.client.presenter;
 import com.google.gwt.event.shared.EventBus;
 
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.StuffMember;
+import upandgo.shared.entities.UserEvent;
+import upandgo.shared.entities.WeekTime;
+import upandgo.shared.entities.constraint.TimeConstraint;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,6 +47,9 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
+import upandgo.shared.entities.Day;
+import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -76,6 +84,7 @@ public class SchedulerPresenter implements Presenter {
 
 	protected List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
+	protected List<UserEvent> userEvents;
 	protected int sched_index;
 	protected Map<String, Color> colorMap;
 
@@ -159,6 +168,8 @@ public class SchedulerPresenter implements Presenter {
 		public void collapseExamsBar();
 		
 		public void openExamsBar();
+		
+		public List<UserEvent> getUserEvents();
 
 	}
 
@@ -474,7 +485,7 @@ public class SchedulerPresenter implements Presenter {
 		examBarVisable = false;			
 		
 		panel.add(view.getAsWidget());
-		panel.setWidgetLeftWidth(view.getAsWidget(), 1, Unit.EM, 77, Unit.PCT);
+		panel.setWidgetLeftRight(view.getAsWidget(), 1, Unit.EM, 22, Unit.PCT);
 
 		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
@@ -491,8 +502,35 @@ public class SchedulerPresenter implements Presenter {
 			view.scheduleBuilt();
 			return;
 		}
-		//Log.info("Build schedule: before Scheduler.getTimetablesList");
+		
+/*		TimeConstraint tc = new TimeConstraint(new WeekTime(Day.SUNDAY,LocalTime.of(10, 00)),new WeekTime(Day.SUNDAY,LocalTime.of(13, 00)));
+		List<TimeConstraint> tcList = new ArrayList<>();
+		tcList.add(tc);*/
+
+		Log.info("Build schedule: before userEventLesson");
+		//UserEvent userEvent = new UserEvent(new WeekTime(Day.TUESDAY,LocalTime.of(8, 30)), "blablabla", LocalTime.of(1, 30));
+		//Lesson userEventLesson = new Lesson(null,new WeekTime(Day.TUESDAY,LocalTime.of(8, 30)),new WeekTime(Day.TUESDAY,LocalTime.of(10, 30)),"testt",Type.LECTURE,10,"999999","user events");
+		//Lesson userEventLesson = userEvent.getAsLesson();
+		Log.info("Build schedule: before userEventsLessonGroup");
+		LessonGroup userEventsLessonGroup = new LessonGroup(10);
+		for (UserEvent userEvent : view.getUserEvents()){
+			userEventsLessonGroup.addLesson(userEvent.getAsLesson());
+		}
+		//userEventsLessonGroup.addLesson(userEventLesson);
+		Log.info("Build schedule: before userEventCourse");
+		Course userEventCourse = new Course("user events","999999","user events",new ArrayList<StuffMember>(),0.0,null,null,new ArrayList<Course>(),new ArrayList<Course>());
+		userEventCourse.addLecturesLessonGroup(userEventsLessonGroup);
+		userEventCourse.addTutorialLessonGroup(new LessonGroup(10));
+
+		Log.info("Build schedule: before selectedCoursesAndEvents");
+		List<Course> selectedCoursesAndEvents = new ArrayList<Course>(selectedCourses);
+		selectedCoursesAndEvents.add(userEventCourse);
+		
+		
+		Log.info("Build schedule: before Scheduler.getTimetablesList");
+		//final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCourses, null);
+		
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
 		Log.info("color map: " + colorMap);

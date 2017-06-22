@@ -203,9 +203,11 @@ public class CourseModel { // implements Model {
 	public List<String> loadFacultyNames() {
 		final List<String> faculties = new ArrayList<>();
 		Iterator<Faculty> it = facultyList.iterator();
-		while(it.hasNext())
-			faculties.add(it.next().getName());
-		
+		while(it.hasNext()) {
+			String facultyName = it.next().getName();
+			if (!faculties.contains(facultyName))
+				faculties.add(facultyName);
+		}
 		return faculties;
 	}
 

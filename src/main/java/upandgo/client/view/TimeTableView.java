@@ -2,12 +2,16 @@ package upandgo.client.view;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
+import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -16,14 +20,17 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.UserEvent;
 import upandgo.client.Resources;
 import upandgo.client.Resources.TimeTableStyle;
+import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.WeekTime;
@@ -32,6 +39,9 @@ import upandgo.shared.model.scedule.Color;
 
 public class TimeTableView extends HorizontalPanel { 
 	
+	static final int FIRST_HOUR = 8;
+	static final int LAST_HOUR = 20;
+	static final int HOUR_CHUNKS = 2;
 	static final int MAX_TABLE_SIZE = 25;
 	
 	static final int EMPTY_COL = 0;
@@ -46,6 +56,15 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable tuesdayTable = new FlexTable();
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
+	
+	Map<WeekTime,UserEvent> userEvents = new HashMap<>();
+	Modal userEventBox = null;
+	WeekTime userEventTime = new WeekTime();
+	TextBox userEventDescBox = new TextBox();
+	ListBox userEventDurationListBox = new ListBox();
+	private Button userEventBoxSaveButton = new Button("שמור");
+	private Button userEventBoxDeleteButton = new Button("מחק");
+
 	private List<FlexTable> daysTables = new ArrayList<>();
 	private List<LessonDetailsView> lessonsDetailsViews = new ArrayList<>();
 	private Map<String, Color> colorMap;
@@ -55,6 +74,7 @@ public class TimeTableView extends HorizontalPanel {
 	
 	public TimeTableView(){
     	InitializePanel();
+    	InitializeUserEventBox();
     	ttStyle.ensureInjected();
     }
 	
@@ -100,15 +120,83 @@ public class TimeTableView extends HorizontalPanel {
 	    this.add(daysTables.get(4));
     }
     
+    static LocalTime rowIndexToLocalTime (int rowIndex){
+    	return LocalTime.of((rowIndex/HOUR_CHUNKS)+FIRST_HOUR, (rowIndex%HOUR_CHUNKS)*(60/HOUR_CHUNKS));
+    }
+    
+    static LocalTime spanToLocalTime (int span){
+    	return LocalTime.of(span/HOUR_CHUNKS,(span%HOUR_CHUNKS)*(60/HOUR_CHUNKS));
+    }
+    
+    static int localTimeToRowIndex (LocalTime time){
+    	return ((time.getHour()-FIRST_HOUR)*HOUR_CHUNKS)+(time.getMinute()/(60/HOUR_CHUNKS));
+    }
+    
+    static int localTimeToSpan (LocalTime time){
+    	return (time.getHour()*HOUR_CHUNKS)+(time.getMinute()/(60/HOUR_CHUNKS));
+    }
+    
+    void setUserEventDurationListBox(LocalTime userEventTime, LocalTime userEventDuration, FlexTable dayTable){
+        userEventDurationListBox.clear();
+        int availableSpans = WeekTime.difference(userEventDuration,LocalTime.of(00,00))/(60/HOUR_CHUNKS);
+        for (int i = 1 ; i <= availableSpans ; i++){
+        	LocalTime spanTime = spanToLocalTime(i);
+        	userEventDurationListBox.addItem(spanTime.toString());
+        }
+        int spanIndex = availableSpans+1;
+        int tableIndex = localTimeToRowIndex(userEventTime)+localTimeToSpan(userEventDuration);
+        while (dayTable.getCellFormatter().getStyleName(tableIndex++, 0).contains(ttStyle.noEvent()) && tableIndex <= MAX_TABLE_SIZE){
+        	LocalTime spanTime = spanToLocalTime(spanIndex++);
+        	userEventDurationListBox.addItem(spanTime.toString());
+        }
+        
+    }
+    
     private void drawDaysTable(List<FlexTable> tables) {
     	for(int day = 0; day < 5; day++){
-    		tables.get(day).setText(0, 0, daysHebrew[day]);
+    		final FlexTable dayTable = tables.get(day);
+    		final Day dayFinal = Day.values()[day];
+    		dayTable.setText(0, 0, daysHebrew[day]);
     		for (int timeSlot = 1; timeSlot <= MAX_TABLE_SIZE; timeSlot++){
-            	tables.get(day).setText(timeSlot, 0, "");
-        		tables.get(day).getCellFormatter().addStyleName(timeSlot,0, ttStyle.noEvent());
+    			dayTable.setText(timeSlot, 0, "");
+    			dayTable.getCellFormatter().addStyleName(timeSlot,0, ttStyle.noEvent());
     		}
-        	tables.get(day).getRowFormatter().addStyleName(0, ttStyle.headerRow());
-    	    tables.get(day).addStyleName(ttStyle.dayTable());
+    		dayTable.getRowFormatter().addStyleName(0, ttStyle.headerRow());
+    		dayTable.addStyleName(ttStyle.dayTable());
+    		dayTable.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+		            //gets the index of the cell you clicked on
+					Cell cell = dayTable.getCellForEvent(event);
+		            int rowIndex = cell.getRowIndex();
+		            userEventTime = new WeekTime(dayFinal,rowIndexToLocalTime(rowIndex));
+
+					if (cell.getElement().hasClassName(ttStyle.noEvent())){
+			            Log.info("TimeTableView clicked on " + dayFinal + " " + rowIndex);
+			            userEventBox.setTitle("הוספת אירוע ב" + userEventTime.toHebrewString());
+			            
+			            userEventDescBox.clear();
+			            setUserEventDurationListBox(userEventTime.getTime(),LocalTime.of(0,0),dayTable);
+			            
+			            userEventBox.show();
+					} else if (cell.getElement().hasClassName(ttStyle.userEvent())){
+						UserEvent userEvent = userEvents.get(userEventTime);
+						if (userEvent!=null){
+							Log.info("TimeTableView clicked on user event cell " + userEvent.getDescription());
+				            userEventBox.setTitle("עריכת אירוע ב" + userEventTime.toHebrewString());
+							userEventDescBox.setText(userEvent.getDescription());
+							setUserEventDurationListBox(userEvent.getWeekTime().getTime(),userEvent.getDuration(),dayTable);
+							userEventDurationListBox.setSelectedIndex(localTimeToSpan(userEvent.getDuration())-1);
+							userEventBox.show();
+						}				
+						
+					} else {
+			            Log.info("TimeTableView clicked on event cell");
+					}
+					
+				}
+			});
     	}
 	}
     
@@ -127,6 +215,38 @@ public class TimeTableView extends HorizontalPanel {
     	
 	    t.addStyleName(ttStyle.hoursTable());
 	}
+    
+    public void displayUserEvents(){
+    	clearTable();
+    	for (UserEvent userEvent : userEvents.values()){
+			Log.info("TimeTableView: displaying event " + userEvent.getDescription());
+			int startCell = localTimeToRowIndex(userEvent.getWeekTime().getTime());
+			int span = localTimeToSpan(userEvent.getDuration());
+			FlexTable dayTable = daysTables.get(userEvent.getWeekTime().getDay().ordinal());
+			if (dayTable.getText(startCell, 0).equals("")){
+				VerticalPanel eventContent = new VerticalPanel();
+				eventContent.setStyleName(ttStyle.hasEventContent());
+				eventContent.setHorizontalAlignment(ALIGN_CENTER);
+				eventContent.add(new Label("אירוע"));
+				eventContent.add(new Label(userEvent.getDescription()));
+				
+				SimplePanel eventWrap = new SimplePanel();
+				eventWrap.add(eventContent);
+				eventWrap.addStyleName(ttStyle.hasEventWrap());
+
+				dayTable.setWidget(startCell, 0, eventWrap);
+				dayTable.getFlexCellFormatter().setRowSpan(startCell, 0, span);
+				dayTable.getCellFormatter().setStyleName(startCell, 0, ttStyle.hasEvent());
+				dayTable.getCellFormatter().addStyleName(startCell, 0, ttStyle.userEvent());
+		
+				
+				while (span > 1){
+					dayTable.removeCell(startCell+span-1, 0);
+					span--;
+				}
+			}
+    	}
+    }
     
     
 	// this function receives a list of LessonGroup(which is a schedule) and
@@ -280,9 +400,6 @@ public class TimeTableView extends HorizontalPanel {
 		ModalBody lessonDetailsBoxBody = new ModalBody();
 		lessonDetailsBoxBody.add(lessonDetailsView);
 		lessonDetailsBox.add(lessonDetailsBoxBody);
-/*		ModalBody lessonDetailsBoxBody2 = new ModalBody();
-		lessonDetailsBoxBody2.add(new Text("NOTESSSSSSS1"));
-		lessonDetailsBox.add(lessonDetailsBoxBody2);*/
 		lessonDetailsBox.add(lessonDetailsBoxFooter);
 		return lessonDetailsBox;
 	}
@@ -298,4 +415,64 @@ public class TimeTableView extends HorizontalPanel {
 		}
 
 	}
+	
+	private Modal InitializeUserEventBox(){
+		userEventBox = new Modal();
+		ModalFooter userEventBoxFooter = new ModalFooter();
+		userEventBoxFooter.add(userEventBoxSaveButton);
+		userEventBoxFooter.add(userEventBoxDeleteButton);
+		userEventBox.setFade(true);
+		
+		userEventBoxSaveButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				userEvents.put(userEventTime, getUserEvent());
+				Log.info("TimeTableView: saved user event on " + userEventTime.toString());
+				//daysTables.get(userEventTime.getDay().ordinal()).getCellFormatter().setStyleName(localTimeToRowIndex(userEventTime.getTime()), 0, ttStyle.userEvent());
+				displayUserEvents();
+				userEventBox.hide();
+			}
+		});
+		
+		userEventBoxDeleteButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				userEvents.remove(userEventTime);
+				Log.info("TimeTableView: removed user event on " + userEventTime.toString());
+				displayUserEvents();
+				userEventBox.hide();
+			}
+		});
+		
+		userEventBox.setTitle("הוספת אירוע");
+		
+		ModalBody userEventBoxBody = new ModalBody();
+		Grid userEventBoxBodyGrid = new Grid(2,2);
+		userEventBoxBodyGrid.setWidget(0, 0, new Text("תיאור"));
+		userEventBoxBodyGrid.setWidget(0, 1, userEventDescBox);
+		userEventBoxBodyGrid.setWidget(1, 0, new Text("משך"));
+		userEventBoxBodyGrid.setWidget(1, 1, userEventDurationListBox);
+
+		userEventBoxBody.add(userEventBoxBodyGrid);
+		
+		userEventBox.add(userEventBoxBody);
+		userEventBox.add(userEventBoxFooter);
+
+		return userEventBox;
+	}
+	
+	public UserEvent getUserEvent(){
+		return new UserEvent(userEventTime, userEventDescBox.getText(), spanToLocalTime(userEventDurationListBox.getSelectedIndex()+1));
+	}
+	
+	public Button getUserEventSaveButton(){
+		return userEventBoxSaveButton;
+	}
+	
+	public List<UserEvent> getUserEvents(){
+		return new ArrayList<UserEvent>(userEvents.values());
+	}
+	
 }
