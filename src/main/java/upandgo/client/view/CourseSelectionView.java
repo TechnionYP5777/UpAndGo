@@ -169,20 +169,26 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 
 				String html = "<div>";
 				if(rowNum == absoluteRowIndex && hoveredCourse!=null){
-					html+= "<b>" + hoveredCourse.getName() + "</b><br/><br/>";
+					html+= "<b>" + hoveredCourse.getName() + "</b><br/>";
 					html+="<div align=right>";
 					html+="<u>" + "מספר הקורס:" + "</u>" + " " +hoveredCourse.getId() + "<br/>";
 					html+="<u>" + "נקודות:" +"</u>" + " " + hoveredCourse.getPoints() + "<br/>";
 					html+="<u>" + "סגל הקורס:" + "</u>" + " " ;
 					if(!hoveredCourse.getStuff().isEmpty()){
 						for(StuffMember sm : hoveredCourse.getStuff()){
-							html+= sm.getTitle()+ " " + sm.getFirstName()+ " " + sm.getLastName() + ", ";
+							html+= sm.getTitle()+ " " + sm.getFirstName()+ " "  + sm.getLastName() + ", ";
 						}
 						html = html.substring(0, html.length()-3);
 						html+=".";
 					}
+					html+="<br/>";
+					html+="<u>" + "הערות:" + "</u><ul>";
+					for(String s : hoveredCourse.getNotes()){
+						html+="<li>" + s + "</li>";
+					}
+					html+="</ul>";
 						
-					html+="<br/><br/>";
+					//html+="<br/>";
 					html+="<a href=\"https://ug3.technion.ac.il/rishum/course?MK=" + hoveredCourse.getId() + "&CATINFO=&SEM=201602\">קישור לאתר הקורס</a>";
 				}
 				html += "</div></div>";
