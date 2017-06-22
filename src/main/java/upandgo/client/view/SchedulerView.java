@@ -31,6 +31,7 @@ import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.CourseTuple;
@@ -474,6 +475,12 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void setNotesOnLessonModal(String courseId, List<String> courseNotes) {
 		timeTableView.setNotesOnLessonModal(courseId, courseNotes);
+		
+	}
+	
+	@Override
+	public List<UserEvent> getUserEvents() {
+		return timeTableView.getUserEvents();
 		
 	}
 
