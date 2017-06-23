@@ -2,28 +2,21 @@ package upandgo.client.view;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.Well;
 import org.gwtbootstrap3.client.ui.constants.WellSize;
 import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
-import elemental.css.CSSStyleDeclaration.Unit;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 import upandgo.shared.entities.LocalTime;
@@ -146,7 +139,10 @@ public class SchedulerControlsView extends VerticalPanel{
 		constraintsBoxFooter.add(constraintsBoxButton);
 		constraintsBox.setFade(true);
 		constraintsBox.setTitle("הגדרת אילוצים");
-		constraintsBox.add(schedualerConstraintsView);
+		ModalBody schedualerConstraintsViewModalBody = new ModalBody();
+		schedualerConstraintsViewModalBody.add(schedualerConstraintsView);
+		//constraintsBox.add(schedualerConstraintsView);
+		constraintsBox.add(schedualerConstraintsViewModalBody);
 		constraintsBox.add(constraintsBoxFooter);
 	}
 	

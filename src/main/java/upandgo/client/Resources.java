@@ -68,11 +68,25 @@ public interface Resources extends ClientBundle {
 		 
 		 String constraintsLabel();
 		 
+		 String timeStartEndPanel();
+		 
+		 String spacerPanel();
+		 
+		 String horizontalLine();
+		 
+		 String coursesConstraintsPanel();
+		 
+		 String courseConstraintsPanel();
+		 
 		 String onlyCheckBox();
 		 
 		 String timeCheckBox();
 		 
 		 String timeListBox();
+		 
+		 String courseCheckBox();
+		 
+		 String courseListBox();
 
 	 }
 

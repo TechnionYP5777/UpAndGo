@@ -2,7 +2,9 @@ package upandgo.client.view;
 
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -10,14 +12,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
-import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 
 
@@ -46,10 +47,12 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 	InlineCheckBox startTimeCB = new InlineCheckBox("שעת התחלה");
 	
 	ListBox startTimeLB = new ListBox();
-
+	
 	InlineCheckBox finishTimeCB = new InlineCheckBox("שעת סיום");
 
 	ListBox finishTimeLB = new ListBox();
+	
+	Label coursesConstraintsLabel = new Label("בחירת שיעורים ידנית");
 
 	VerticalPanel coursesConstraintsPanel = new VerticalPanel();
 	
@@ -78,6 +81,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
     	//this.add(daysOffCB);
     	
+    	freeDaysPanel.setVerticalAlignment(ALIGN_MIDDLE);
     	freeDaysPanel.add(freeDaysLabel);
     	freeDaysPanel.add(sundayBox);
     	freeDaysPanel.add(mondayBox);
@@ -87,16 +91,17 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	this.add(freeDaysPanel);
     	this.add(minWindowsCB);
     	
-    	HorizontalPanel startTimePanel = new HorizontalPanel();
-    	startTimePanel.add(startTimeCB);
-    	startTimePanel.add(startTimeLB);
-    	
-    	HorizontalPanel finishTimePanel = new HorizontalPanel();
-    	finishTimePanel.add(finishTimeCB);
-    	finishTimePanel.add(finishTimeLB);
-
-    	this.add(startTimePanel);
-    	this.add(finishTimePanel);
+    	HorizontalPanel timeStartEndPanel = new HorizontalPanel();
+    	timeStartEndPanel.addStyleName(cStyle.timeStartEndPanel());
+    	timeStartEndPanel.setVerticalAlignment(ALIGN_MIDDLE);
+    	timeStartEndPanel.add(startTimeCB);
+    	timeStartEndPanel.add(startTimeLB);
+    	SimplePanel spacerPanel = new SimplePanel();
+    	spacerPanel.addStyleName(cStyle.spacerPanel());
+    	timeStartEndPanel.add(spacerPanel);
+    	timeStartEndPanel.add(finishTimeCB);
+    	timeStartEndPanel.add(finishTimeLB);
+    	this.add(timeStartEndPanel);
     	
     	freeDaysLabel.addStyleName(cStyle.onlyCheckBox());
     	sundayBox.addStyleName(cStyle.onlyCheckBox());
@@ -133,7 +138,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 			}
     		
     	});
-    	
+        	
     	coursesConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
     	this.add(coursesConstraintsPanel);
     	this.setStyleName(cStyle.constraintsPanel());
@@ -142,30 +147,50 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     
     public void displayCoursesConstraints(List<Course> selectedCourses){
     	coursesConstraintsPanel.clear();
+    	coursesConstraintsPanel.addStyleName(cStyle.coursesConstraintsPanel());
+    	if (!selectedCourses.isEmpty()){
+        	SimplePanel horizontalLine = new SimplePanel();
+        	horizontalLine.setStyleName(cStyle.horizontalLine());
+        	coursesConstraintsPanel.add(horizontalLine);
+    		coursesConstraintsPanel.add(coursesConstraintsLabel);
+        	coursesConstraintsLabel.addStyleName(cStyle.onlyCheckBox());
+    	}
     	for (Course course : selectedCourses){
     		Label courseName = new Label(course.getName());
     		courseName.addStyleName(cStyle.onlyCheckBox());
     		HorizontalPanel courseConstraintsPanel = new HorizontalPanel();
     		courseConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
-    		InlineCheckBox courseLectureCB = new InlineCheckBox("הרצאה");
-    		courseLectureCB.addStyleName(cStyle.timeCheckBox());
+    		courseConstraintsPanel.setVerticalAlignment(ALIGN_MIDDLE);
+    		courseConstraintsPanel.addStyleName(cStyle.courseConstraintsPanel());
+    		
+    		InlineCheckBox courseLectureCB = new InlineCheckBox("בחר הרצאה");
+    		courseLectureCB.addStyleName(cStyle.courseCheckBox());
     		final ListBox lectureOptions = new ListBox();
-    		lectureOptions.addStyleName(cStyle.timeListBox());
+    		lectureOptions.addStyleName(cStyle.courseListBox());
     		for (LessonGroup lessonGroup : course.getLectures()){
+    			String listBoxOption = new String("קבוצה " + lessonGroup.getGroupNum() + ": ");
     			for (Lesson lesson : lessonGroup.getLessons()){
-    				lectureOptions.addItem(lesson.getStartTime().toHebrewString());
+    				listBoxOption += lesson.getStartTime().toHebrewString() + ", ";
     			}
+    			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
+				lectureOptions.addItem(listBoxOption);
     		}
+    		lectureOptions.addItem("ללא הרצאה");
     		lectureOptions.setEnabled(false);
-    		InlineCheckBox courseTutorialsCB = new InlineCheckBox("תרגול");
-    		courseTutorialsCB.addStyleName(cStyle.timeCheckBox());
+    		
+    		InlineCheckBox courseTutorialsCB = new InlineCheckBox("בחר תרגול");
+    		courseTutorialsCB.addStyleName(cStyle.courseCheckBox());
     		final ListBox tutorialsOptions = new ListBox();
-    		tutorialsOptions.addStyleName(cStyle.timeListBox());
+    		tutorialsOptions.addStyleName(cStyle.courseListBox());
     		for (LessonGroup lessonGroup : course.getTutorials()){
+    			String listBoxOption = new String("קבוצה " + lessonGroup.getGroupNum() + ": ");
     			for (Lesson lesson : lessonGroup.getLessons()){
-    				tutorialsOptions.addItem(lesson.getStartTime().toHebrewString());
+    				listBoxOption += lesson.getStartTime().toHebrewString() + ", ";
     			}
+    			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
+    			tutorialsOptions.addItem(listBoxOption);
     		}
+    		lectureOptions.addItem("ללא תרגול");
     		tutorialsOptions.setEnabled(false);
     		courseLectureCB.addClickHandler(new ClickHandler(){
 
@@ -189,11 +214,20 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
         		
         	});
 
+
     		courseConstraintsPanel.add(courseName);
-    		courseConstraintsPanel.add(courseLectureCB);
-    		courseConstraintsPanel.add(lectureOptions);
-    		courseConstraintsPanel.add(courseTutorialsCB);
-    		courseConstraintsPanel.add(tutorialsOptions);
+    		
+    		FormGroup lectureFormGroup = new FormGroup();
+    		lectureFormGroup.add(courseLectureCB);
+    		lectureFormGroup.add(lectureOptions);
+    		courseConstraintsPanel.add(lectureFormGroup);
+        	SimplePanel spacerPanel = new SimplePanel();
+        	spacerPanel.addStyleName(cStyle.spacerPanel());
+    		courseConstraintsPanel.add(spacerPanel);
+    		FormGroup tutorialsFormGroup = new FormGroup();
+    		tutorialsFormGroup.add(courseTutorialsCB);
+    		tutorialsFormGroup.add(tutorialsOptions);
+    		courseConstraintsPanel.add(tutorialsFormGroup);
 
     		coursesConstraintsPanel.add(courseConstraintsPanel);
     	}

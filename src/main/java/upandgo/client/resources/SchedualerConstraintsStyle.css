@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 .constraintsPanel {
+	width: 100%;
 }
 
 .constraintsPanel tr{
@@ -10,8 +11,38 @@
 .constraintsLabel{
 }
 
+.timeStartEndPanel{
+	
+}
+
+.timeStartEndPanel td{
+	padding-left: 1em;
+}
+
+.spacerPanel{
+	padding-left: 2em;
+}
+
+.horizontalLine{
+	witdh: 100%;
+	border: 1px solid #e5e5e5;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	
+}
+
+.coursesConstraintsPanel{
+	width: 100%;
+}
+
+.courseConstraintsPanel td{
+	padding-left: 1em;
+}
+
 .onlyCheckBox{
-	margin: 1em;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	margin-left: 1em;
 }
 
 .onlyCheckBox span{
@@ -24,7 +55,8 @@
 
 
 .timeCheckBox {
-	margin: 1em;
+	margin-bottom: 1em;
+	margin-top: 1em;
 	padding-left: 0px;
 }
 
@@ -37,5 +69,19 @@
 }
 
 .timeListBox{
-		margin: 1em;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	padding: 2px 2px;
+}
+
+.courseCheckBox{
+	padding-left: 0px;
+}
+
+.courseCheckBox span{
+	padding-right: 20px;
+}
+
+.courseListBox{
+	padding: 2px 2px;
 }
