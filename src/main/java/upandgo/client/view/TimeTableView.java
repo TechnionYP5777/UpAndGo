@@ -16,6 +16,11 @@ import org.gwtbootstrap3.client.ui.html.Text;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -64,8 +69,8 @@ public class TimeTableView extends HorizontalPanel {
 	WeekTime userEventTime = new WeekTime();
 	TextBox userEventDescBox = new TextBox();
 	ListBox userEventDurationListBox = new ListBox();
-	Button userEventBoxSaveButton = new Button("שמור");
-	Button userEventBoxDeleteButton = new Button("מחק");
+	Button userEventBoxSaveButton = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור");
+	Button userEventBoxDeleteButton = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק");
 
 	private List<FlexTable> daysTables = new ArrayList<>();
 	private List<LessonDetailsView> lessonsDetailsViews = new ArrayList<>();
@@ -177,7 +182,7 @@ public class TimeTableView extends HorizontalPanel {
 					if (cell.getElement().hasClassName(ttStyle.noEvent())){
 			            Log.info("TimeTableView clicked on " + dayFinal + " " + rowIndex);
 			            userEventBox.setTitle("הוספת אירוע ב" + userEventTime.toHebrewString());
-			            
+			            userEventBoxDeleteButton.setVisible(false);
 			            userEventDescBox.clear();
 			            setUserEventDurationListBox(userEventTime.getTime(),LocalTime.of(0,0),dayTable);
 			            
@@ -187,6 +192,7 @@ public class TimeTableView extends HorizontalPanel {
 						if (userEvent!=null){
 							Log.info("TimeTableView clicked on user event cell " + userEvent.getDescription());
 				            userEventBox.setTitle("עריכת אירוע ב" + userEventTime.toHebrewString());
+				            userEventBoxDeleteButton.setVisible(true);
 							userEventDescBox.setText(userEvent.getDescription());
 							setUserEventDurationListBox(userEvent.getWeekTime().getTime(),userEvent.getDuration(),dayTable);
 							userEventDurationListBox.setSelectedIndex(localTimeToSpan(userEvent.getDuration())-1);
@@ -247,7 +253,6 @@ public class TimeTableView extends HorizontalPanel {
 				VerticalPanel eventContent = new VerticalPanel();
 				eventContent.setStyleName(ttStyle.hasEventContent());
 				eventContent.setHorizontalAlignment(ALIGN_CENTER);
-				eventContent.add(new Label("אירוע"));
 				eventContent.add(new Label(userEvent.getDescription()));
 				
 				SimplePanel eventWrap = new SimplePanel();
@@ -439,15 +444,34 @@ public class TimeTableView extends HorizontalPanel {
 	private Modal InitializeUserEventBox(){
 		userEventBox = new Modal();
 		ModalFooter userEventBoxFooter = new ModalFooter();
-		userEventBoxFooter.add(userEventBoxSaveButton);
+		
+		userEventBoxSaveButton.setStyleName("btn btn-success");
+		userEventBoxDeleteButton.setStyleName("btn btn-danger");
+				
 		userEventBoxFooter.add(userEventBoxDeleteButton);
+		userEventBoxFooter.add(userEventBoxSaveButton);
 		userEventBox.setFade(true);
 		userEventBox.setDataKeyboard(true);
 		
 		userEventBox.setTitle("הוספת אירוע");
 		
+		userEventDescBox.addStyleName(ttStyle.userEventDescTextBox());
+		userEventDurationListBox.addStyleName(ttStyle.userEventDuraListBox());
+		
+		userEventDescBox.addKeyDownHandler(new KeyDownHandler() {
+			
+			@Override
+			public void onKeyDown(KeyDownEvent event) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER){
+					userEventBoxSaveButton.click();
+				}
+				
+			}
+		});
+		
 		ModalBody userEventBoxBody = new ModalBody();
 		Grid userEventBoxBodyGrid = new Grid(2,2);
+		userEventBoxBodyGrid.setStyleName(ttStyle.userEventBoxGrid());
 		userEventBoxBodyGrid.setWidget(0, 0, new Text("תיאור"));
 		userEventBoxBodyGrid.setWidget(0, 1, userEventDescBox);
 		userEventBoxBodyGrid.setWidget(1, 0, new Text("משך"));

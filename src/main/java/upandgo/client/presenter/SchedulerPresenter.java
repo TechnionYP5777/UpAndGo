@@ -647,6 +647,7 @@ public class SchedulerPresenter implements Presenter {
 	void displaySchedule(){
 		if (lessonGroupsList.isEmpty() || lessonGroupsList.size() < sched_index){
 			view.displaySchedule(null, colorMap, getUserEvents());
+			view.setCurrentScheduleIndex(0, 0);
 			return;
 		}
 		view.displaySchedule(lessonGroupsList.get(sched_index), colorMap, getUserEvents());
