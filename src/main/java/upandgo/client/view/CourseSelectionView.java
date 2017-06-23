@@ -160,7 +160,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setColor("Red");
     	
 		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelay(500).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelay(350).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
 			
 			@Override
 			public IsWidget getContent(Element element) {

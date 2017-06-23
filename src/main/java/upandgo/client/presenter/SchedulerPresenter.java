@@ -18,6 +18,7 @@ import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.hamcrest.core.IsNot;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
@@ -91,6 +92,8 @@ public class SchedulerPresenter implements Presenter {
 	protected boolean isSignedIn = false;
 	
 	ScrollPanel examsBar;
+	
+	boolean isMoedAExams = true;
 
 	public interface Display {
 
@@ -159,7 +162,7 @@ public class SchedulerPresenter implements Presenter {
 		public void scheduleBuilt();
 		
 		
-		public void updateExamsBar(List<Course> courses);
+		public void updateExamsBar(List<Course> courses, boolean isMoedA);
 		
 		public HasClickHandlers getExamButton();
 
@@ -170,6 +173,11 @@ public class SchedulerPresenter implements Presenter {
 		public void openExamsBar();
 		
 		public List<UserEvent> getUserEvents();
+		
+		public HasClickHandlers getMoedAButton();
+		
+		public HasClickHandlers getMoedBButton();
+
 
 	}
 
@@ -189,7 +197,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onClearAllCourses() {
 				selectedCourses.clear();
-				view.updateExamsBar(selectedCourses);
+				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
 			
 		});
@@ -219,7 +227,7 @@ public class SchedulerPresenter implements Presenter {
 						break;
 					}
 				}
-				view.updateExamsBar(selectedCourses);
+				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
 		});
 
@@ -233,7 +241,7 @@ public class SchedulerPresenter implements Presenter {
 					@Override
 					public void onSuccess(Course result) {
 						selectedCourses.add(result);
-						view.updateExamsBar(selectedCourses);
+						view.updateExamsBar(selectedCourses, isMoedAExams);
 					}
 
 					@Override
@@ -470,7 +478,24 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});	
 
+		view.getMoedAButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				isMoedAExams = true;
+				view.updateExamsBar(selectedCourses, isMoedAExams);
+				
+			}
+		});
 		
+		view.getMoedBButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				isMoedAExams = false;
+				view.updateExamsBar(selectedCourses, isMoedAExams);
+			}
+		});
 	}
 
 	@Override
@@ -602,7 +627,7 @@ public class SchedulerPresenter implements Presenter {
 				for (Course course : result){
 					selectedCourses.add(course);
 				}
-				view.updateExamsBar(selectedCourses);
+				view.updateExamsBar(selectedCourses, isMoedAExams);
 				Log.info("chosen lessons were updated.");
 			}
 			
