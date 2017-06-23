@@ -3,7 +3,6 @@ package upandgo.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -46,5 +45,7 @@ public interface CoursesService extends RemoteService {
 	public List<LessonGroup> getSchedule();
 	
 	public String getSomeString();
+	
+	public void exportSchedule(List<LessonGroup> sched);
 	
 }

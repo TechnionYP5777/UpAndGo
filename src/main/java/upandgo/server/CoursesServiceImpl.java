@@ -10,8 +10,8 @@ import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
 import upandgo.client.CoursesService;
+import upandgo.server.model.CalendarModel;
 import upandgo.server.model.CourseModel;
-import upandgo.server.model.TimeTableModel;
 import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
@@ -47,6 +47,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
 	private final CourseModel model;
+	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
 		Log.warn("in course service constractor");
@@ -141,5 +142,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	@Override
 	public List<LessonGroup> getSchedule() {
 		return model.loadChosenLessonGroups();
+	}
+	
+	@Override
+	public void exportSchedule(List<LessonGroup> sched) {
+		calendarModel.createCalendar(sched);
 	}
 }

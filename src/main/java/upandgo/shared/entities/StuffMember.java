@@ -61,6 +61,10 @@ public class StuffMember implements IsSerializable {
 	public String getTitle() {
 		return title;
 	}
+	
+	public String getFullName() {
+		return title+" "+fName+" "+lName;
+	}
 
 //	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml,
 //			final String office1, final List<LocalTime> ofHours) {

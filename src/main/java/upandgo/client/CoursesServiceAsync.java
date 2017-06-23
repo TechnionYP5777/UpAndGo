@@ -43,4 +43,5 @@ public interface CoursesServiceAsync {
 	
 	public void getSomeString(AsyncCallback<String> callback);
 	
+	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }
