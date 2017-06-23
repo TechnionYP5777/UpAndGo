@@ -203,8 +203,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map) {
-		timeTableView.displaySchedule(schedule, map);
+	public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events) {
+		timeTableView.displaySchedule(lessons, map, events);
 		
 	}
 	
@@ -479,11 +479,23 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 	
 	@Override
-	public List<UserEvent> getUserEvents() {
-		return timeTableView.getUserEvents();
-		
+	public Modal getUserEventBox(){
+		return timeTableView.userEventBox;
 	}
-
-
+	
+	@Override
+	public UserEvent getUserEvent(){
+		return timeTableView.getUserEvent();
+	}
+	
+	@Override
+	public HasClickHandlers getUserEventBoxSaveButton() {
+		return timeTableView.userEventBoxSaveButton;
+	}
+	
+	@Override
+	public HasClickHandlers getUserEventBoxDeleteButton() {
+		return timeTableView.userEventBoxDeleteButton;
+	}
 
 }

@@ -40,7 +40,7 @@ public class UserEvent {
 
 
 	public Lesson getAsLesson(){
-		return new Lesson(null,time,time.addDuration(duration),description,Type.LECTURE,10,"999999","user events");
+		return new Lesson(null,time,time.addDuration(duration),description,Type.LECTURE,999,"999999","user events");
 	}
 	
 	
