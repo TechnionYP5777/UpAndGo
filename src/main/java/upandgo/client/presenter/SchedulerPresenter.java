@@ -6,9 +6,9 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.WeekTime;
-import upandgo.shared.entities.constraint.TimeConstraint;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 //import java.util.function.Consumer;
@@ -48,9 +48,6 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
-import upandgo.shared.entities.Day;
-import upandgo.shared.entities.Lesson;
-import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -85,7 +82,7 @@ public class SchedulerPresenter implements Presenter {
 
 	protected List<Course> selectedCourses;
 	protected List<List<LessonGroup>> lessonGroupsList;
-	protected List<UserEvent> userEvents;
+	protected Map<WeekTime,UserEvent> userEvents = new HashMap<>();
 	protected int sched_index;
 	protected Map<String, Color> colorMap;
 
@@ -107,14 +104,9 @@ public class SchedulerPresenter implements Presenter {
 
 		public HasClickHandlers saveSchedule();
 
-		public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map); // if
-																						// (schedule
-		public void drawCollisionView(List<CourseTuple> solvers);																				// =
-		//void drawCollisionView(List<upandgo.client.view.CourseTuple> solvers);
-		// null)
-																						// then
-																						// clear
-																						// schedule
+		public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events);
+		
+		public void drawCollisionView(List<CourseTuple> solvers);
 
 		public void setSelectedCourses(List<Course> selectedCourses);
 		
@@ -171,13 +163,20 @@ public class SchedulerPresenter implements Presenter {
 		public void collapseExamsBar();
 		
 		public void openExamsBar();
-		
+	
 		public List<UserEvent> getUserEvents();
 		
 		public HasClickHandlers getMoedAButton();
 		
 		public HasClickHandlers getMoedBButton();
 
+		public UserEvent getUserEvent();
+		
+		public Modal getUserEventBox();
+		
+		public HasClickHandlers getUserEventBoxSaveButton();
+		
+		public HasClickHandlers getUserEventBoxDeleteButton();
 
 	}
 
@@ -332,10 +331,9 @@ public class SchedulerPresenter implements Presenter {
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				view.setSchedule(null, colorMap);
+				lessonGroupsList.clear();
+				displaySchedule();
 				eventBus.fireEvent(new clearScheduleEvent());
-				view.setCurrentScheduleIndex(0, 0);
-
 			}
 		});
 
@@ -354,16 +352,11 @@ public class SchedulerPresenter implements Presenter {
 				if (lessonGroupsList.size() <= sched_index + 1) {
 					return;
 				}
-				++sched_index;
-
-				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
-				setNotesOnLessonsModals();
 				
-				if (lessonGroupsList.size() <= sched_index + 1) {
-					view.setNextEnable(false);
-				}
-				view.setPrevEnable(true);
-				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				++sched_index;
+				displaySchedule();
+				
+
 			}
 		});
 
@@ -374,16 +367,9 @@ public class SchedulerPresenter implements Presenter {
 				if (sched_index <= 0) {
 					return;
 				}
-				--sched_index;
-
-				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
-				setNotesOnLessonsModals();
 				
-				if (sched_index <= 0) {
-					view.setPrevEnable(false);
-				}
-				view.setNextEnable(true);
-				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				--sched_index;
+				displaySchedule();
 
 			}
 		});
@@ -476,15 +462,14 @@ public class SchedulerPresenter implements Presenter {
 					view.openExamsBar();
 				}
 			}
-		});	
-
+		});
+		
 		view.getMoedAButton().addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				isMoedAExams = true;
 				view.updateExamsBar(selectedCourses, isMoedAExams);
-				
 			}
 		});
 		
@@ -496,6 +481,41 @@ public class SchedulerPresenter implements Presenter {
 				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
 		});
+		
+		view.getUserEventBoxSaveButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				userEvents.put(view.getUserEvent().getWeekTime(), view.getUserEvent());
+				Log.info("SchedulerPresenter: saved user event on " + view.getUserEvent().getWeekTime());
+				view.getUserEventBox().hide();
+				if (lessonGroupsList.isEmpty()){
+					displaySchedule();
+				} else {
+					buildScheduleAndSearchForCurrentOne();
+				}
+				
+			}
+		});
+
+
+				
+		view.getUserEventBoxDeleteButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				userEvents.remove(view.getUserEvent().getWeekTime());
+				Log.info("SchedulerPresenter: removed user event on " + view.getUserEvent().getWeekTime());
+				view.getUserEventBox().hide();
+				if (lessonGroupsList.isEmpty()){
+					displaySchedule();
+				} else {
+					buildScheduleAndSearchForCurrentOne();
+				}
+			}
+		});
+		
+
 	}
 
 	@Override
@@ -518,43 +538,40 @@ public class SchedulerPresenter implements Presenter {
 		}
 	}
 
+	void buildScheduleAndSearchForCurrentOne(){
+		List<LessonGroup> currentSchedule = new ArrayList<LessonGroup>(lessonGroupsList.get(sched_index));
+		buildSchedule();
+		sched_index = findIndexOfLessonGroupList(currentSchedule);
+		Log.info("SchedulerPresenter: found currentSchedule index " + sched_index);
+		displaySchedule();
+	}
+	
 	void buildSchedule() {
 		Log.info("Build schedule: getChosenCoursesList success");
 		if (selectedCourses.isEmpty()) {
 			Log.info("Build schedule: no chosen courses");
 			lessonGroupsList.clear();
-			view.setSchedule(null, colorMap);
+			displaySchedule();
 			view.scheduleBuilt();
 			return;
 		}
 		
-/*		TimeConstraint tc = new TimeConstraint(new WeekTime(Day.SUNDAY,LocalTime.of(10, 00)),new WeekTime(Day.SUNDAY,LocalTime.of(13, 00)));
-		List<TimeConstraint> tcList = new ArrayList<>();
-		tcList.add(tc);*/
-
-		Log.info("Build schedule: before userEventLesson");
-		//UserEvent userEvent = new UserEvent(new WeekTime(Day.TUESDAY,LocalTime.of(8, 30)), "blablabla", LocalTime.of(1, 30));
-		//Lesson userEventLesson = new Lesson(null,new WeekTime(Day.TUESDAY,LocalTime.of(8, 30)),new WeekTime(Day.TUESDAY,LocalTime.of(10, 30)),"testt",Type.LECTURE,10,"999999","user events");
-		//Lesson userEventLesson = userEvent.getAsLesson();
-		Log.info("Build schedule: before userEventsLessonGroup");
-		LessonGroup userEventsLessonGroup = new LessonGroup(10);
-		for (UserEvent userEvent : view.getUserEvents()){
+		
+		// This creates a dummy course for the scheduler that contains all user events
+		LessonGroup userEventsLessonGroup = new LessonGroup(999);
+		for (UserEvent userEvent : getUserEvents()){
 			userEventsLessonGroup.addLesson(userEvent.getAsLesson());
 		}
-		//userEventsLessonGroup.addLesson(userEventLesson);
-		Log.info("Build schedule: before userEventCourse");
 		Course userEventCourse = new Course("user events","999999","user events",new ArrayList<StuffMember>(),0.0,null,null,new ArrayList<Course>(),new ArrayList<Course>());
 		userEventCourse.addLecturesLessonGroup(userEventsLessonGroup);
-		userEventCourse.addTutorialLessonGroup(new LessonGroup(10));
-
-		Log.info("Build schedule: before selectedCoursesAndEvents");
+		userEventCourse.addTutorialLessonGroup(new LessonGroup(999));
+		
 		List<Course> selectedCoursesAndEvents = new ArrayList<Course>(selectedCourses);
 		selectedCoursesAndEvents.add(userEventCourse);
 		
-		
 		Log.info("Build schedule: before Scheduler.getTimetablesList");
 		//final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
-		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCourses, null);
+		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
 		
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
@@ -607,7 +624,7 @@ public class SchedulerPresenter implements Presenter {
 			});*/
 			Log.info("Build schedule: A schedule was build");
 
-			view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
+			displaySchedule();
 
 			if (lessonGroupsList.size()>1){
 				view.setNextEnable(true);
@@ -649,12 +666,37 @@ public class SchedulerPresenter implements Presenter {
 				lessonGroupsList.clear();
 				lessonGroupsList.add(result);
 				sched_index = 0;
-				view.setSchedule(lessonGroupsList.get(sched_index), colorMap);
+				displaySchedule();
 				view.scheduleBuilt();
 				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
 				Log.info("schedule was updated. it has " + String.valueOf(result.size()) + " LessonGroups.");
 			}
 		});
+	}
+	
+	void displaySchedule(){
+		if (lessonGroupsList.isEmpty() || lessonGroupsList.size() < sched_index){
+			view.displaySchedule(null, colorMap, getUserEvents());
+			view.setCurrentScheduleIndex(0, 0);
+			return;
+		}
+		view.displaySchedule(lessonGroupsList.get(sched_index), colorMap, getUserEvents());
+		setNotesOnLessonsModals();	
+		view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+		if (lessonGroupsList.size() <= 1){
+			view.setNextEnable(false);
+			view.setPrevEnable(false);
+		} else if (lessonGroupsList.size() <= sched_index + 1) {
+			view.setNextEnable(false);
+			view.setPrevEnable(true);
+		} else if (sched_index <= 0) {
+			view.setNextEnable(true);
+			view.setPrevEnable(false);
+		} else {
+			view.setNextEnable(true);
+			view.setPrevEnable(true);
+		}
+		
 	}
 	
 	
@@ -663,6 +705,33 @@ public class SchedulerPresenter implements Presenter {
 			//Log.info("SchedulerPresenter: course " + course.getId() + " has " + course.getNotes().size() + " notes");
 			view.setNotesOnLessonModal(course.getId(), course.getNotes());
 		}
+	}
+	
+	List<UserEvent> getUserEvents(){
+		return new ArrayList<UserEvent>(userEvents.values());
+	}
+	
+	
+	int findIndexOfLessonGroupList(List<LessonGroup> listToFind){
+		for (int i = 0 ; i < lessonGroupsList.size() ; i++){
+			List<LessonGroup> lessonGroupList = lessonGroupsList.get(i);
+		
+			if (compareListOfLessonGroup(lessonGroupList, listToFind)){
+				return i;
+			}
+		}
+		return 0; 
+	}
+
+	static boolean compareListOfLessonGroup(List<LessonGroup> list1, List<LessonGroup> list2){
+		for (LessonGroup lessonGroup : list1){
+			if (lessonGroup.getGroupNum() != 999){
+				if (!list2.contains(lessonGroup)){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
