@@ -1,12 +1,18 @@
 package upandgo.client.view;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.Well;
 import org.gwtbootstrap3.client.ui.constants.WellSize;
 import org.gwtbootstrap3.client.ui.html.Text;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -15,15 +21,23 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import elemental.css.CSSStyleDeclaration.Unit;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
+import upandgo.shared.entities.LocalTime;
+import upandgo.shared.model.scedule.constraintsPool;
 
 public class SchedulerControlsView extends VerticalPanel{
 
 	private SchedualerControlsStyle scStyle = Resources.INSTANCE.schedualerControlsStyle();
-
+	
+	private constraintsPool cp;
+	private LocalTime startTime;
+	private LocalTime endTime;
+	private List<Boolean> vectorDaysOff; 
+	
 	Button buildSchedule = new Button("<i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
 	Button clearSchedule = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;נקה מערכת");
 	Button setConstrains = new Button("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הגדר אילוצים");
@@ -102,6 +116,29 @@ public class SchedulerControlsView extends VerticalPanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				if (schedualerConstraintsView.startTimeCB.getValue()) {
+					int index = schedualerConstraintsView.startTimeLB.getSelectedIndex();
+					startTime = LocalTime.of(index+8, 30);	
+				} else {
+					startTime = null;
+				}
+				if (schedualerConstraintsView.finishTimeCB.getValue()) {
+					int index = schedualerConstraintsView.finishTimeLB.getSelectedIndex();
+					endTime = LocalTime.of(index+8, 30);
+				} else {
+					endTime = null;
+				}
+								
+				cp = new constraintsPool(false, schedualerConstraintsView.minWindowsCB.getValue(), startTime, endTime);
+				vectorDaysOff = new ArrayList();
+				vectorDaysOff.add(schedualerConstraintsView.sundayBox.getValue());
+				vectorDaysOff.add(schedualerConstraintsView.mondayBox.getValue());
+				vectorDaysOff.add(schedualerConstraintsView.tuesdayBox.getValue());
+				vectorDaysOff.add(schedualerConstraintsView.wednesdayBox.getValue());
+				vectorDaysOff.add(schedualerConstraintsView.thursdayBox.getValue());
+				cp.addVectorDaysOff(vectorDaysOff);
+				int test = schedualerConstraintsView.coursesConstraintsPanel.getWidgetCount();
+				
 				constraintsBox.hide();
 				
 			}

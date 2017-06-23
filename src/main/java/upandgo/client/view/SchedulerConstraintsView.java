@@ -5,6 +5,7 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -16,6 +17,7 @@ import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 
 
@@ -27,7 +29,9 @@ import upandgo.shared.entities.course.Course;
 public class SchedulerConstraintsView extends VerticalPanel implements ModalComponent{
 	
 	//InlineCheckBox daysOffCB = new InlineCheckBox("מספר מקסימלי של ימים חופשיים");
-
+	
+	boolean test = false;
+	
 	HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("עפ\"י ימי חופש:");
 	InlineCheckBox sundayBox = new InlineCheckBox("ראשון"); 
@@ -114,6 +118,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 			@Override
 			public void onClick(ClickEvent event) {
 		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+		        test = checked;
 		        startTimeLB.setEnabled(checked.booleanValue());
 			}
     		
@@ -132,7 +137,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	coursesConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
     	this.add(coursesConstraintsPanel);
     	this.setStyleName(cStyle.constraintsPanel());
-
+    	
     }
     
     public void displayCoursesConstraints(List<Course> selectedCourses){
@@ -167,6 +172,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     			@Override
     			public void onClick(ClickEvent event) {
     		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+    		        Log.info("lectures are " + checked);
     		        lectureOptions.setEnabled(checked.booleanValue());
     			}
         		
@@ -177,6 +183,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     			@Override
     			public void onClick(ClickEvent event) {
     		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+    		        Log.info("tutorials are " + checked);
     		        tutorialsOptions.setEnabled(checked.booleanValue());
     			}
         		
