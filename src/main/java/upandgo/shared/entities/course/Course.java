@@ -33,7 +33,7 @@ public class Course implements IsSerializable {
 	protected Exam aTerm;
 	protected Exam bTerm;
 
-	final protected List<StuffMember> stuff;
+	protected List<StuffMember> stuff;
 
 	protected List<LessonGroup> lectures;
 	protected List<LessonGroup> tutorials;

@@ -12,7 +12,20 @@ package upandgo.client.view;
 
 import java.util.List;
 
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
+import com.google.gwt.dom.client.Element;
 import com.allen_sauer.gwt.log.client.Log;
+import com.arcbees.gquery.tooltip.client.Tooltip;
+import com.arcbees.gquery.tooltip.client.TooltipImpl;
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipTrigger;
+import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEvent;
+import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEventHandler;
+import com.arcbees.gquery.tooltip.client.event.HideTooltipEvent;
+import com.arcbees.gquery.tooltip.client.event.HideTooltipEventHandler;
+import com.arcbees.gquery.tooltip.client.event.ShowTooltipEvent;
+import com.arcbees.gquery.tooltip.client.event.ShowTooltipEventHandler;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.FontStyle;
 import com.google.gwt.dom.client.Style.Unit;
@@ -21,12 +34,16 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.query.client.Function;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.RowStyles;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -40,7 +57,12 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
 import upandgo.client.presenter.CourseListPresenter;
+import upandgo.shared.entities.StuffMember;
+import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+
+import static com.google.gwt.query.client.GQuery.$;
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 
 
 public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display  {
@@ -54,11 +76,8 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private TextBox searchCourse = new TextBox();
     private ScrollPanel cclp = new ScrollPanel();
     private ScrollPanel sclp = new ScrollPanel();
-    private HTML examsBar;
-    private HTML examsBarB;
     private Button clearCourses = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
-    private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
-    String hoveredCourseDetail = "Loading...";
+    Course hoveredCourse = null;
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
     public CourseSelectionView(){
     	InitializePanel();
@@ -140,22 +159,49 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
     	
-//		//Course Tooltip functionality
-//    	TooltipOptions options = new TooltipOptions().withDelayShow(300).withDelayHide(100).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipContentProvider() {
-//			
-//			@Override
-//			public String getContent(Element element) {
-//				@SuppressWarnings("boxing")
-//				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-//				return rowNum != absoluteRowIndex ? "Loading..." : hoveredCourseDetail;
-//			}
-//		});
-//    	//options.withContainer("element");
-//    	options.withSelector("tbody tr");
-//    	
-//    	
-//    	$(ccl).as(Tooltip).tooltip(options);
-//    	$(scl).as(Tooltip).tooltip(options);
+		//Course Tooltip functionality
+    	TooltipOptions options = new TooltipOptions().withDelay(350).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+			
+			@Override
+			public IsWidget getContent(Element element) {
+				@SuppressWarnings("boxing")
+				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+
+				String html = "<div>";
+				if(rowNum == absoluteRowIndex && hoveredCourse!=null){
+					html+= "<b>" + hoveredCourse.getName() + "</b><br/>";
+					html+="<div align=right>";
+					html+="<u>" + "מספר הקורס:" + "</u>" + " " +hoveredCourse.getId() + "<br/>";
+					html+="<u>" + "נקודות:" +"</u>" + " " + hoveredCourse.getPoints() + "<br/>";
+					html+="<u>" + "סגל הקורס:" + "</u>" + " " ;
+					if(!hoveredCourse.getStuff().isEmpty()){
+						for(StuffMember sm : hoveredCourse.getStuff()){
+							html+= sm.getTitle()+ " " + sm.getFirstName()+ " "  + sm.getLastName() + ", ";
+						}
+						html = html.substring(0, html.length()-3);
+						html+=".";
+					}
+					html+="<br/>";
+					html+="<u>" + "הערות:" + "</u><ul>";
+					for(String s : hoveredCourse.getNotes()){
+						html+="<li>" + s + "</li>";
+					}
+					html+="</ul>";
+						
+					//html+="<br/>";
+					html+="<a href=\"https://ug3.technion.ac.il/rishum/course?MK=" + hoveredCourse.getId() + "&CATINFO=&SEM=201602\">קישור לאתר הקורס</a>";
+				}
+				html += "</div></div>";
+				
+				return new HTML(html);
+			//	? "Loading..." : hoveredCourseDetail;
+			}
+		});
+    	options.withSelector("tbody tr");
+    	  	
+    	
+    	$(ccl).as(Tooltip).tooltip(options);
+    	$(scl).as(Tooltip).tooltip(options);
     	
     	
     	
@@ -201,7 +247,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setSelectedCourses(List<CourseId> courses) {
-		Log.info("dsfsfsfsfsfsfsdfsfsfsfsdfsdfsfsd");
 		selectedModel.setList(courses);
 		ccl.setRowCount(selectedModel.getList().size(), true);
 		ccl.setVisibleRange(0, courses.size());
@@ -212,7 +257,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		deselectedModel.setList(is);
 		scl.setRowCount(is.size(), true);
 		scl.setVisibleRange(0, is.size());
-		Log.info("csfscscsd  " + is.size());
 		
 	}
 	@Override
@@ -252,17 +296,13 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		
 	}
 	@Override
-	public void setHoveredCourseDetail(String detail) {
-		hoveredCourseDetail = detail;
+	public void setHoveredCourseDetail(Course detail) {
+		hoveredCourse = detail;
 		
 	}
 	@Override
 	public Widget getAsWidget() {
 		return this.asWidget();
-	}
-	@Override
-	public Widget getExamsBar() {
-		return examsScrollPanel;
 	}
 	@Override
 	public HasClickHandlers getClearCoursesButton() {
@@ -280,6 +320,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		ccl.setRowCount(selectedModel.getList().size(), true);
 		
 		
-	} 
+	}
     
 }

@@ -66,6 +66,16 @@ public class WeekTime implements IsSerializable {
 		return a.getDay().compareTo(b.getDay()) != 0 ? a.getDay().compareTo(b.getDay())
 				: a.getTime().compareTo(b.getTime());
 	}
+	
+	public WeekTime addDuration(final LocalTime duration){
+		int minutes = this.time.getMinute() + duration.getMinute();
+		int hours = this.time.getHour() + duration.getHour();
+		if (minutes>=60){
+			hours++;
+			minutes = minutes -60;
+		}
+		return new WeekTime(this.day,LocalTime.of(hours,minutes));
+	}
 
 	public int compareTo(final WeekTime b) {
 		return getDay().compareTo(b.getDay()) != 0 ? getDay().compareTo(b.getDay()) : getTime().compareTo(b.getTime());
@@ -109,6 +119,6 @@ public class WeekTime implements IsSerializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(day, time);
+		return Objects.hash(day);
 	}
 }

@@ -14,6 +14,7 @@ import org.gwtbootstrap3.client.ui.ModalFooter;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -29,8 +30,10 @@ import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
 import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.CourseTuple;
@@ -86,7 +89,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 11, Unit.EM, 0, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 1, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 0.5, Unit.EM);
 		this.getWidgetContainerElement(scrollableTimeTable).getStyle().setProperty("transition", "bottom 0.3s linear 0s");
 		
 		this.add(examsScrollPanel);
@@ -100,7 +103,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(examsControlsView);
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
-		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 2.5, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 5.9, Unit.EM);
 
 		
 		}
@@ -202,8 +205,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void setSchedule(List<LessonGroup> schedule, Map<String, Color> map) {
-		timeTableView.displaySchedule(schedule, map);
+	public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events) {
+		timeTableView.displaySchedule(lessons, map, events);
 		
 	}
 	
@@ -341,132 +344,128 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	public HasClickHandlers getExamButton(){
 		return examsControlsView.examsButton;
 	}
+	
+	@Override
+	public HasClickHandlers getMoedAButton(){
+		return examsControlsView.moedA;
+	}
+	@Override
+	public HasClickHandlers getMoedBButton(){
+		return examsControlsView.moedB;
+	}
 
 	@Override
-	public void updateExamsBar(List<Course> courses) {
-		List<Course> is = new ArrayList<>(), isB = new ArrayList<>();
+	public void updateExamsBar(List<Course> courses, boolean isMoedA) {
+		List<Course> is = new ArrayList<>();
 		Map<Course, String> courseColors = new HashMap<>();
-	    for(int i = 0; i < courses.size(); i++){
-	    	Course c = courses.get(i);
-	    	if(c.getaTerm()!=null){
-	    		is.add(c);
-	    		courseColors.put(c,Color.valueOf(i).toString());
-	    	}
-	    	if(c.getaTerm()!=null)
-	    		isB.add(c);
-	    }
-	    Log.info("updating exams");
-	    Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
-
-			@Override
-			public int compare(Course o1, Course o2) {
-				return o1.getaTerm().compare(o2.getaTerm());
+		long width=0;
+		String examsBarHTML = "";
+		Exam exami = null, examiPlusOne = null;
+		if(isMoedA){
+			for (int i = 0; i < courses.size(); ++i) {
+				
+				Course c = courses.get(i);
+				if (c.getaTerm() != null) {
+					is.add(c);
+					courseColors.put(c, Color.valueOf(i).toString());
+				}
 			}
-		}));
-	    Collections.sort(isB,(new Comparator<Course>() { //sort courses by their final exam date
+		 	Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
 
-			@Override
-			public int compare(Course o1, Course o2) {
-				return o1.getbTerm().compare(o2.getbTerm());
+				@Override
+				public int compare(Course o1, Course o2) {
+					return o1.getaTerm().compare(o2.getaTerm());
+				}
+			}));
+		}
+		else{
+			for (int i = 0; i < courses.size(); ++i) {
+				
+				Course c = courses.get(i);
+				if (c.getbTerm() != null) {
+					is.add(c);
+					courseColors.put(c, Color.valueOf(i).toString());
+				}
 			}
-		}));
-	    long width=0;
-		String examsAlephBarHTML = "";
-		for(int i=0; i < is.size(); i++){
+			Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
+
+				@Override
+				public int compare(Course o1, Course o2) {
+					return o1.getbTerm().compare(o2.getbTerm());
+				}
+			}));
+		}
+	   	   
+		for(int i=0; i < is.size(); ++i){
+			exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
 			if(i == is.size()-1){
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				break;
 			}
-			int daysBetween = is.get(i+1).getaTerm().daysBetweenExams(is.get(i).getaTerm());
+			examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
+			int daysBetween = examiPlusOne.daysBetweenExams(exami);
 			if(daysBetween == 0 ){			
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff0000;\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff0000;\"> <b><u>" + exami.toString() + "</u></b><br><b>" + exami.getTimeToDisplay() + is.get(i).getName() + "</b>";
 				width+=275;
 				while(daysBetween == 0 &&  i < is.size()-1){
-					i++;
-					examsAlephBarHTML+="<br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName();
-					daysBetween = is.get(i+1).getaTerm().daysBetweenExams(is.get(i).getaTerm());
+					++i;
+					exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
+					examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
+					examsBarHTML+="<br><b>" + exami.getTimeToDisplay() + is.get(i).getName() + "</b>";
+					daysBetween = examiPlusOne.daysBetweenExams(exami);
 				}
-				examsAlephBarHTML+="</div>";
+				examsBarHTML+="</div>";
 				if(daysBetween > 0 ){
-					for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
-						examsAlephBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
+					for(String k : examiPlusOne.datesBetweenExams(exami)){
+						examsBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
 						width+=85;
 					}
 				}
 				
 			}
 			else{
-				examsAlephBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + is.get(i).getaTerm().toString() + "</u></b><br>" + is.get(i).getaTerm().getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
-				for(String k : is.get(i+1).getaTerm().datesBetweenExams(is.get(i).getaTerm())){
-					examsAlephBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
+				for(String k : examiPlusOne.datesBetweenExams(exami)){
+					examsBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
 					width+=85;
 				}
 			}
 		}
-		long widthb=0;
-		String examsBetBarHTML = "";
-		for(int i=0; i < isB.size(); i++){
-			if(i == isB.size()-1){
-				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</div> ";
-				widthb+=275;
-				break;
-			}
-			int daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
-			Log.info("$$#$#$#" + daysBetween);
-			if(daysBetween == 0 ){			
-				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff4d4d;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br><b>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName()+"</b>";
-				widthb+=275;
-				while(daysBetween == 0 &&  i < isB.size()-1){
-					i++;
-					examsBetBarHTML+="<br><b>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</b>";
-					daysBetween = isB.get(i+1).getaTerm().daysBetweenExams(isB.get(i).getaTerm());
-				}
-				examsBetBarHTML+="</div>";
-				if(daysBetween > 0 ){
-					for(int k = 0 ; k < daysBetween-1; k++){
-						examsBetBarHTML+="<div  class=\"child\" style=\"background-color:#85e085; \"></div>";
-						widthb+=85;
-					}
-				}
-				
-			}
-			else{
-				examsBetBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ffff80;\"> <b><u>" + isB.get(i).getaTerm().toString() + "</u></b><br>" + isB.get(i).getaTerm().getTimeToDisplay() + isB.get(i).getName() + "</div> ";
-				widthb+=275;
-				for(int k = 0 ; k < daysBetween-1; k++){
-					examsBetBarHTML+="<div class=\"child\" style=\"background-color:#85e085;\"></div>";
-					widthb+=85;
-				}
-			}
-		}
-		Log.info("begin of updateLists/7");
-		examsBar = new HTML(examsAlephBarHTML);
+		examsBar = new HTML(examsBarHTML);
 		examsBar.addStyleName("horizontal-scroll-wrapper");
 		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
 		examsScrollPanel.setWidget(examsBar);
-//			examsBarB = new HTML(examsBetBarHTML);
-//			examsBarB.addStyleName("horizontal-scroll-wrapper");
-//			examsBarB.getElement().getStyle().setWidth(widthb, Unit.PX);
-//			examsScrollPanel.setWidget(examsBarB);
-
 		
 		
 	}
 
 	@Override
 	public void collapseExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 1, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 0.5, Unit.EM);
 		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 0, Unit.EM);
+		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.HIDDEN);
+		examsControlsView.moedA.getElement().getStyle().setOpacity(0);
+		examsControlsView.moedA.getElement().getStyle().setProperty("transition", "visibility 0s linear 0.3s,opacity 0.3s linear");
 		
+		examsControlsView.moedB.getElement().getStyle().setVisibility(Visibility.HIDDEN);
+		examsControlsView.moedB.getElement().getStyle().setOpacity(0);
+		examsControlsView.moedB.getElement().getStyle().setProperty("transition", "visibility 0s linear 0.3s,opacity 0.3s linear");
 		
 	}
 
 	@Override
 	public void openExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 7, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 6, Unit.EM);
 		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 5, Unit.EM);
+		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.VISIBLE);
+		examsControlsView.moedA.getElement().getStyle().setOpacity(1);
+		examsControlsView.moedA.getElement().getStyle().setProperty("transitionDelay","0s");
+		
+		examsControlsView.moedB.getElement().getStyle().setVisibility(Visibility.VISIBLE);
+		examsControlsView.moedB.getElement().getStyle().setOpacity(1);
+		examsControlsView.moedB.getElement().getStyle().setProperty("transitionDelay","0s");
 		
 	}
 
@@ -476,7 +475,25 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		timeTableView.setNotesOnLessonModal(courseId, courseNotes);
 		
 	}
-
-
+	
+	@Override
+	public Modal getUserEventBox(){
+		return timeTableView.userEventBox;
+	}
+	
+	@Override
+	public UserEvent getUserEvent(){
+		return timeTableView.getUserEvent();
+	}
+	
+	@Override
+	public HasClickHandlers getUserEventBoxSaveButton() {
+		return timeTableView.userEventBoxSaveButton;
+	}
+	
+	@Override
+	public HasClickHandlers getUserEventBoxDeleteButton() {
+		return timeTableView.userEventBoxDeleteButton;
+	}
 
 }

@@ -91,7 +91,7 @@
 }
 
 .hasEvent:hover{
-  color: yellow;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .hasEventContent{
@@ -273,9 +273,45 @@
 }
 
 
-
-
-
 .noEvent{
-	border: 1px solid #d3d7cf
+	border: 1px solid #d3d7cf;
+}
+
+.noEvent:hover{
+   	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+}
+
+.userEvent .hasEventWrap{
+	background: #555753;
+}
+
+.userEvent .hasEventWrap:after{
+	background: linear-gradient(transparent, #555753);
+}
+
+@external td;
+.userEventBoxGrid{
+    border-collapse: separate;
+    width: 100%;
+}
+.userEventBoxGrid td{
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.userEventDescTextBox{
+}
+
+.userEventDuraListBox{
+	width: 100px;
+}
+
+@external .modal-footer .btn;
+.modal-footer {
+	text-align: left;
+}
+
+.modal-footer .btn{
+	margin-left: 20px;
 }

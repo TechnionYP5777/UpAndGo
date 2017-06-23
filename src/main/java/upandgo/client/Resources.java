@@ -42,6 +42,14 @@ public interface Resources extends ClientBundle {
 		 String hasEventWrap();
 		 
 		 String hasEventContent();
+		 
+		 String userEvent();
+		 
+		 String userEventBoxGrid();
+		 
+		 String userEventDescTextBox();
+		 
+		 String userEventDuraListBox();
 
 	 }
 	 

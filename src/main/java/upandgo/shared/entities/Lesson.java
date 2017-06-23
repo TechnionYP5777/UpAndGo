@@ -124,32 +124,17 @@ public class Lesson implements IsSerializable {
 
 	public boolean IsClashWith(final Lesson xxx) {
 		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
-				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0
+				|| startTime.compareTo(xxx.getStartTime()) < 0 && endTime.compareTo(xxx.getEndTime()) > 0;
 
-		// THOSE COMMENTS ARE HERE SINCE ITS ALMOST IMPOSSIBLE 
-		// TO UNDERSTAND THE IDEA BEHIND THE SPARTANIZED VERSION OF IT
-		/*
-		 * return (startTime.compareTo(xxx.getStartTime()) != 0 &&
-		 * startTime.compareTo(xxx.getStartTime()) <= 0 ||
-		 * startTime.compareTo(xxx.getEndTime()) >= 0) &&
-		 * (endTime.compareTo(xxx.getStartTime()) <= 0 ||
-		 * endTime.compareTo(xxx.getEndTime()) >= 0) &&
-		 * endTime.compareTo(xxx.getEndTime()) != 0;
-		 */
 	}
 
 	public boolean IsClashWith(final TimeConstraint xxx) {
 		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
-				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0
+				|| startTime.compareTo(xxx.getStartTime()) < 0 && endTime.compareTo(xxx.getEndTime()) > 0;
 
-		/*
-		 * return (startTime.compareTo(xxx.getStartTime()) != 0 &&
-		 * startTime.compareTo(xxx.getStartTime()) <= 0 ||
-		 * startTime.compareTo(xxx.getEndTime()) >= 0) &&
-		 * (endTime.compareTo(xxx.getStartTime()) <= 0 ||
-		 * endTime.compareTo(xxx.getEndTime()) >= 0) &&
-		 * endTime.compareTo(xxx.getEndTime()) != 0;
-		 */
+
 	}
 
 	@Override

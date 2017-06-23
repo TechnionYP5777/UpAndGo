@@ -77,7 +77,8 @@ public class LessonGroup implements IsSerializable {
 	@Override
 	public boolean equals(final Object other) {
 		return other != null
-				&& (other == this || other instanceof LessonGroup && ((LessonGroup) other).groupNum == groupNum);
+				&& (other == this || other instanceof LessonGroup && ((LessonGroup) other).groupNum == groupNum)
+				&& ((LessonGroup) other).getCourseID() == this.getCourseID();
 	}
 
 	@Override
