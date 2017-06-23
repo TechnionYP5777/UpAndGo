@@ -163,9 +163,7 @@ public class SchedulerPresenter implements Presenter {
 		public void collapseExamsBar();
 		
 		public void openExamsBar();
-	
-		public List<UserEvent> getUserEvents();
-		
+			
 		public HasClickHandlers getMoedAButton();
 		
 		public HasClickHandlers getMoedBButton();
