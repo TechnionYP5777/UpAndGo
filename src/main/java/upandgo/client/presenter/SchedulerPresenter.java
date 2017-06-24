@@ -54,6 +54,7 @@ import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
 import upandgo.shared.model.scedule.ConstraintsPool;
+import upandgo.shared.model.scedule.ConstraintsPool.CourseConstraint;
 import upandgo.shared.model.scedule.CourseTuple;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
@@ -407,6 +408,7 @@ public class SchedulerPresenter implements Presenter {
 				constraintsPool = new ConstraintsPool(true,true,LocalTime.of(9,0),LocalTime.of(12,0));
 				constraintsPool.setDayOff(Day.MONDAY, true);
 				constraintsPool.setDayOff(Day.THURSDAY, true);
+				constraintsPool.addCourseConstraint("014003",true, CourseConstraint.NO_LESSON, true, 12);
 				Log.info("SchedulerPresenter: before setConstraintsPool");
 				view.setConstraintsPool(selectedCourses, constraintsPool);
 				//view.setSelectedCourses(selectedCourses);

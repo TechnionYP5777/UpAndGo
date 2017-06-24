@@ -25,6 +25,7 @@ import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.ConstraintsPool;
+import upandgo.shared.model.scedule.ConstraintsPool.CourseConstraint;
 
 
 /**
@@ -269,7 +270,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     		lectureFormGroup.add(courseLectureCB);
     		lectureFormGroup.add(lectureOptions);
     		courseConstraintsPanel.add(lectureFormGroup);*/
-    		
+
     		courseConstraintsPanel.add(getCourseConstraintsListBox(course.getId(),course.getLectures(),Type.LECTURE));
     		
         	SimplePanel spacerPanel = new SimplePanel();
@@ -304,8 +305,36 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
 			courseConstraintOptions.addItem(listBoxOption,String.valueOf(lessonGroup.getGroupNum()));
 		}
-		courseConstraintOptions.addItem("ללא " + lessonType,String.valueOf(-1));
+		courseConstraintOptions.addItem("ללא " + lessonType,String.valueOf(CourseConstraint.NO_LESSON));
 		courseConstraintOptions.setEnabled(false);
+		
+		if (lessonType == Type.LECTURE && localConstraintsPool.getCourseConstraints().containsKey(courseId)){
+			CourseConstraint courseConstraint = localConstraintsPool.getCourseConstraints().get(courseId);
+			if (courseConstraint.isSpecificLecture() == true){
+				for (int i=0; i < courseConstraintOptions.getItemCount(); i++) {
+					if (courseConstraintOptions.getValue(i).equals(String.valueOf(courseConstraint.getLectureLessonGroup()))){
+						courseConstraintOptions.setSelectedIndex(i);
+						break;
+				    }
+				}
+			}
+			courseConstraintCB.setValue(courseConstraint.isSpecificLecture());
+
+		}
+		
+		if (lessonType == Type.TUTORIAL && localConstraintsPool.getCourseConstraints().containsKey(courseId)){
+			CourseConstraint courseConstraint = localConstraintsPool.getCourseConstraints().get(courseId);
+			if (courseConstraint.isSpecificTutorial() == true){
+				for (int i=0; i < courseConstraintOptions.getItemCount(); i++) {
+					Log.info("SchedulerConstraintsView: getCourseConstraintsListBox comparing " + courseConstraintOptions.getValue(i) + " to " + String.valueOf(courseConstraint.getTutorialLessonGroup()));
+					if (courseConstraintOptions.getValue(i).equals(String.valueOf(courseConstraint.getTutorialLessonGroup()))){
+						courseConstraintOptions.setSelectedIndex(i);
+						break;
+				    }
+				}
+			}
+			courseConstraintCB.setValue(courseConstraint.isSpecificTutorial());
+		}
 		
 		courseConstraintCB.addClickHandler(new ClickHandler() {
 			@Override

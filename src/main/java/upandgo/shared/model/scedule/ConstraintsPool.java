@@ -22,6 +22,8 @@ public class ConstraintsPool {
 	
 	public class CourseConstraint {
 		
+		public static final int NO_LESSON = -1;
+		
 		private boolean specificLecture = false;
 		private int lectureLessonGroup = 0;
 		
@@ -32,12 +34,12 @@ public class ConstraintsPool {
 			
 		}
 		
-		public CourseConstraint(boolean specificLecture, int lectureDetails, 
-				boolean specificTutorial, int tutorialDetails) {
+		public CourseConstraint(boolean specificLecture, int lectureLessonGroup, 
+				boolean specificTutorial, int tutorialLessonGroup) {
 			this.specificLecture = specificLecture;
-			this.lectureLessonGroup = lectureDetails;
+			this.lectureLessonGroup = lectureLessonGroup;
 			this.specificTutorial = specificTutorial;
-			this.tutorialLessonGroup = tutorialDetails;
+			this.tutorialLessonGroup = tutorialLessonGroup;
 		}
 		
 		public CourseConstraint(CourseConstraint otherCourseConstraint) {
@@ -140,7 +142,9 @@ public class ConstraintsPool {
 		this.maxFinishTime = maxFinishTime;
 	}
 
-	public void addCourseConstranit(String courseId, CourseConstraint cc) {
+	public void addCourseConstraint(String courseId, boolean specificLecture, int lectureLessonGroup, 
+			boolean specificTutorial, int tutorialLessonGroup) {
+		CourseConstraint cc = new CourseConstraint(specificLecture, lectureLessonGroup, specificTutorial, tutorialLessonGroup);
 		courseConstraints.put(courseId,cc);
 	}
 	
