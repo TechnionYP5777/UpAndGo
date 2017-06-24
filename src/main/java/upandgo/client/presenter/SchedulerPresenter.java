@@ -44,6 +44,8 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
+import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -86,6 +88,7 @@ public class SchedulerPresenter implements Presenter {
 
 	public interface Display {
 
+		//TODO: some refactoring here
 		public HasClickHandlers clearSchedule();
 
 		public HasClickHandlers buildSchedule();
@@ -99,8 +102,6 @@ public class SchedulerPresenter implements Presenter {
 		public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events);
 		
 		public void drawCollisionView(List<CourseTuple> solvers);
-
-		public void setSelectedCourses(List<Course> selectedCourses);
 		
 		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);
 		
@@ -112,6 +113,11 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void setNotesOnLessonModal(String courseId, List<String> courseNotes);
 		
+		public Modal getLessonModal();
+		public Button getLessonModalCreateConstraintButton();
+		public Button getLessonModalRemoveConstraintButton();
+		public Lesson getLessonModelCurrentLesson();
+				
 		public Modal getCollisionModal();
 		
 		public Button getCollisionModalButton();
@@ -323,6 +329,57 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
+		view.getLessonModal().addShowHandler(new ModalShowHandler() {
+			
+			@Override
+			public void onShow(ModalShowEvent evt) {
+				Lesson lesson = view.getLessonModelCurrentLesson();
+				if (lesson == null){
+					return;
+				}
+				CourseConstraint courseConstraint = constraintsPool.getCourseConstraints().get(lesson.getCourseId());
+				if (courseConstraint == null){
+					return;
+				}
+				if (lesson.getType()==Type.LECTURE && courseConstraint.isSpecificLecture()
+						|| lesson.getType()==Type.TUTORIAL && courseConstraint.isSpecificTutorial() ){
+					view.getLessonModalCreateConstraintButton().setVisible(false);
+					view.getLessonModalRemoveConstraintButton().setVisible(true);
+				} else {
+					view.getLessonModalCreateConstraintButton().setVisible(true);
+					view.getLessonModalRemoveConstraintButton().setVisible(false);
+				}
+			}
+		});
+		
+		view.getLessonModalCreateConstraintButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Lesson lesson = view.getLessonModelCurrentLesson();
+				if (lesson == null){
+					return;
+				}
+				constraintsPool.setCourseConstraint(lesson.getCourseId(), lesson.getType(), true, lesson.getGroup());
+				view.getLessonModal().hide();
+				buildScheduleAndSearchForCurrentOne();
+			}
+		});
+		
+		view.getLessonModalRemoveConstraintButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Lesson lesson = view.getLessonModelCurrentLesson();
+				if (lesson == null){
+					return;
+				}
+				constraintsPool.setCourseConstraint(lesson.getCourseId(), lesson.getType(), false, 0);
+				view.getLessonModal().hide();
+				buildScheduleAndSearchForCurrentOne();
+			}
+		});
+		
 		view.getCollisionModalButton().addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -486,13 +543,21 @@ public class SchedulerPresenter implements Presenter {
 				if (courseConstraint.isSpecificLecture()){
 					for (LessonGroup lessonGroup : new ArrayList<>(course.getLectures())){
 						if (lessonGroup.getGroupNum() != courseConstraint.getLectureLessonGroup())
+							//lessonGroup.setConstrained(false);
 							course.getLectures().remove(lessonGroup);
+					}
+					for (LessonGroup lessonGroup : course.getLectures()){
+						lessonGroup.setConstrained(true);
 					}
 				}
 				if (courseConstraint.isSpecificTutorial()){
 					for (LessonGroup lessonGroup : new ArrayList<>(course.getTutorials())){
 						if (lessonGroup.getGroupNum() != courseConstraint.getTutorialLessonGroup())
+							//lessonGroup.setConstrained(false);
 							course.getTutorials().remove(lessonGroup);
+					}
+					for (LessonGroup lessonGroup : course.getTutorials()){
+						lessonGroup.setConstrained(true);
 					}
 				}
 			}
@@ -574,7 +639,6 @@ public class SchedulerPresenter implements Presenter {
 		}
 		view.scheduleBuilt();
 		view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
-		setNotesOnLessonsModals();
 	}
 	
 	void updateScheduleAndChosenLessons() {

@@ -23,20 +23,27 @@ public class LessonGroup implements IsSerializable {
 	public static final int UNINITIALIZED_GROUP_NUM = -1;
 
 	private int groupNum;
+	private boolean isConstrained = false;
 	private List<Lesson> lessons;
 
 	public LessonGroup() {
 		groupNum = UNINITIALIZED_GROUP_NUM;
+		isConstrained = false;
 		lessons = new ArrayList<>();
 	}
 	
 	public LessonGroup(LessonGroup other) {
 		groupNum = other.getGroupNum();
-		lessons = new ArrayList<>(other.getLessons());
+		isConstrained = other.isConstrained();
+		lessons = new ArrayList<>(other.getLessons().size());
+		for (int i = 0 ; i < other.getLessons().size() ; i++){
+			lessons.add(new Lesson(other.getLessons().get(i)));
+		}
 	}
 
 	public LessonGroup(final int GroupNumber) {
 		groupNum = GroupNumber;
+		isConstrained = false;
 		lessons = new ArrayList<>();
 	}
 
@@ -60,6 +67,14 @@ public class LessonGroup implements IsSerializable {
 		if (groupNum == UNINITIALIZED_GROUP_NUM)
 			throw new IllegalArgumentException();
 		lessons.add(xxx);
+	}
+
+	public boolean isConstrained() {
+		return isConstrained;
+	}
+
+	public void setConstrained(boolean isConstrained) {
+		this.isConstrained = isConstrained;
 	}
 
 	public boolean isClashWith(final LessonGroup g) {
