@@ -7,6 +7,10 @@
 .constraintsPanel tr{
 }
 
+.constraintsPanel input{
+	top: -2px;
+}
+
 
 .constraintsLabel{
 }
@@ -72,6 +76,7 @@
 	margin-bottom: 1em;
 	margin-top: 1em;
 	padding: 2px 2px;
+	height: 25px;
 }
 
 .courseCheckBox{
@@ -84,4 +89,5 @@
 
 .courseListBox{
 	padding: 2px 2px;
+	height: 25px;
 }

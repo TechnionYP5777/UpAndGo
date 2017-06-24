@@ -23,6 +23,7 @@ import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.ConstraintsPool;
 import upandgo.shared.model.scedule.ConstraintsPool.CourseConstraint;
@@ -35,10 +36,12 @@ import upandgo.shared.model.scedule.ConstraintsPool.CourseConstraint;
 
 public class SchedulerConstraintsView extends VerticalPanel implements ModalComponent{
 	
-	private ConstraintsPool localConstraintsPool = new ConstraintsPool();
+	ConstraintsPool localConstraintsPool = new ConstraintsPool();
 	
-	boolean test = false;
-	
+	static final int FIRST_HOUR_LIMIT = 8;
+	static final int LAST_HOUR_LIMIT = 20;
+	static final int HOUR_CHUNKS = 1;
+		
 	HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("עפ\"י ימי חופש:");
 	InlineCheckBox sundayBox = new InlineCheckBox("ראשון"); 
@@ -66,22 +69,21 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
 
 	public SchedulerConstraintsView(){
 		
-	    InitializeTimeLBs();
     	InitializePanel();
+    	InitializeDaysOff();
+		InitializeTimeConstraints();
     	cStyle.ensureInjected();
     	
     }
 	
-	private void InitializeTimeLBs(){
-    	for(int i = 1; i<13; i++){
-    		startTimeLB.addItem(Integer.toString(i+7)+":30");
-    		finishTimeLB.addItem(Integer.toString(i+7)+":30");
-    	}
-    	startTimeLB.setEnabled(false);
-    	finishTimeLB.setEnabled(false);
-
-	}
-	    
+    static LocalTime rowIndexToLocalTime (int rowIndex){
+    	return LocalTime.of(rowIndex+FIRST_HOUR_LIMIT, 30);
+    }
+	
+    static int localTimeToRowIndex (LocalTime time){
+    	return (time.getHour()-FIRST_HOUR_LIMIT);
+    }
+    
     private void InitializePanel(){
     	this.setHorizontalAlignment(ALIGN_RIGHT);
 
@@ -109,6 +111,25 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	timeStartEndPanel.add(finishTimeLB);
     	this.add(timeStartEndPanel);
     	
+    	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
+    	minWindowsCB.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setBlankSpaceCount(checked);
+			}
+		});
+
+        	
+    	coursesConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
+    	this.add(coursesConstraintsPanel);
+    	this.setStyleName(cStyle.constraintsPanel());
+    	
+    }
+    
+    private void InitializeDaysOff(){
+    	
     	freeDaysLabel.addStyleName(cStyle.onlyCheckBox());
     	sundayBox.addStyleName(cStyle.onlyCheckBox());
     	mondayBox.addStyleName(cStyle.onlyCheckBox());
@@ -116,40 +137,104 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	wednesdayBox.addStyleName(cStyle.onlyCheckBox());
     	thursdayBox.addStyleName(cStyle.onlyCheckBox());
     	
-    	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
+    	sundayBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setDayOff(Day.SUNDAY,checked);
+			}
+		});
+    	mondayBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setDayOff(Day.MONDAY,checked);
+			}
+		});
+    	tuesdayBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setDayOff(Day.TUESDAY,checked);
+			}
+		});
+    	wednesdayBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setDayOff(Day.WEDNESDAY,checked);
+			}
+		});
+    	thursdayBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean checked = ((InlineCheckBox) event.getSource()).getValue().booleanValue();
+				localConstraintsPool.setDayOff(Day.THURSDAY,checked);
+			}
+		});
     	
-    	startTimeCB.addStyleName(cStyle.timeCheckBox());
-    	finishTimeCB.addStyleName(cStyle.timeCheckBox());
+    }
+    
+	private void InitializeTimeConstraints(){		
+    	for(int i = FIRST_HOUR_LIMIT; i<=LAST_HOUR_LIMIT; i++){
+    		startTimeLB.addItem(LocalTime.of(i, 30).toString());
+    		finishTimeLB.addItem(LocalTime.of(i, 30).toString());
+    	}
+    	startTimeLB.setEnabled(false);
+    	finishTimeLB.setEnabled(false);
     	
     	startTimeLB.addStyleName(cStyle.timeListBox());
     	finishTimeLB.addStyleName(cStyle.timeListBox());
+
+    	
+    	startTimeLB.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				localConstraintsPool.setMinStartTime(rowIndexToLocalTime(startTimeLB.getSelectedIndex()));
+			}
+		});
+    	
+    	finishTimeLB.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				localConstraintsPool.setMaxFinishTime(rowIndexToLocalTime(finishTimeLB.getSelectedIndex()));				
+			}
+		});
+    	
+    	startTimeCB.addStyleName(cStyle.timeCheckBox());
+    	finishTimeCB.addStyleName(cStyle.timeCheckBox());
     	
     	startTimeCB.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
-		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
-		        test = checked;
-		        startTimeLB.setEnabled(checked.booleanValue());
+		        if (((InlineCheckBox) event.getSource()).getValue().booleanValue()){
+		        	localConstraintsPool.setMinStartTime(rowIndexToLocalTime(finishTimeLB.getSelectedIndex()));
+		        	startTimeLB.setEnabled(true);
+		        } else {
+		        	localConstraintsPool.setMinStartTime(null);
+		        	startTimeLB.setEnabled(false);
+		        }
 			}
-    		
     	});
     	
     	finishTimeCB.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
-		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
-		        finishTimeLB.setEnabled(checked.booleanValue());
+		        if (((InlineCheckBox) event.getSource()).getValue().booleanValue()){
+		        	localConstraintsPool.setMaxFinishTime(rowIndexToLocalTime(finishTimeLB.getSelectedIndex()));
+		        	finishTimeLB.setEnabled(true);
+		        } else {
+		        	localConstraintsPool.setMaxFinishTime(null);
+		        	finishTimeLB.setEnabled(false);
+		        }
 			}
-    		
     	});
-        	
-    	coursesConstraintsPanel.setHorizontalAlignment(ALIGN_RIGHT);
-    	this.add(coursesConstraintsPanel);
-    	this.setStyleName(cStyle.constraintsPanel());
-    	
-    }
+
+	}
     
     public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool){
     	localConstraintsPool = new ConstraintsPool(constraintsPool);
@@ -164,14 +249,14 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	
     	if (localConstraintsPool.getMinStartTime()!=null){
     		startTimeCB.setValue(true);
-    		startTimeLB.setSelectedIndex(TimeTableView.localTimeToRowIndex(localConstraintsPool.getMinStartTime()));
+    		startTimeLB.setSelectedIndex(localTimeToRowIndex(localConstraintsPool.getMinStartTime()));
     	} else {
     		startTimeCB.setValue(false);
     	}
     	
     	if (localConstraintsPool.getMaxFinishTime()!=null){
     		finishTimeCB.setValue(true);
-    		finishTimeLB.setSelectedIndex(TimeTableView.localTimeToRowIndex(localConstraintsPool.getMaxFinishTime()));
+    		finishTimeLB.setSelectedIndex(localTimeToRowIndex(localConstraintsPool.getMaxFinishTime()));
     	} else {
     		finishTimeCB.setValue(false);
     	}

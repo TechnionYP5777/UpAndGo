@@ -41,8 +41,8 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 	
 	final Modal constraintsBox = new Modal();
-	Button constraintsBoxSaveButton = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור");
-	Button constraintsBoxCancelButton = new Button("בטל");
+	Button constraintsBoxSaveButton = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור שינויים");
+	Button constraintsBoxCancelButton = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בטל שינויים");
 
 	SchedulerConstraintsView schedualerConstraintsView;
 
@@ -108,7 +108,7 @@ public class SchedulerControlsView extends VerticalPanel{
 	private void InitializeConstraintsBox(){
 		ModalFooter constraintsBoxFooter = new ModalFooter();
 		constraintsBoxSaveButton.setStyleName("btn btn-success");
-
+		constraintsBoxCancelButton.setStyleName("btn btn-danger");
 /*		 = new Button("שמור וסגור", new ClickHandler() {
 			
 			@Override
