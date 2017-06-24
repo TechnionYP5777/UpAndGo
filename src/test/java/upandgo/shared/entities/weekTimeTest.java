@@ -1,21 +1,11 @@
-package upandgo.server.model.course;
-/**
- * @author kobybs
- * @since 25-12-16
- */
+package upandgo.shared.entities;
 
 import static org.junit.Assert.*;
 
-import upandgo.shared.entities.LocalTime;
-
-import org.junit.Assert;
 import org.junit.Test;
 
-import upandgo.shared.entities.Day;
-import upandgo.shared.entities.WeekTime;
-
 @SuppressWarnings("static-method")
-public class WeekTimeTests {
+public class weekTimeTest {
 
 	@Test
 	public void test_a() {
