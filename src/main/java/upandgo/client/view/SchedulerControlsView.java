@@ -109,37 +109,6 @@ public class SchedulerControlsView extends VerticalPanel{
 		ModalFooter constraintsBoxFooter = new ModalFooter();
 		constraintsBoxSaveButton.setStyleName("btn btn-success");
 		constraintsBoxCancelButton.setStyleName("btn btn-danger");
-/*		 = new Button("שמור וסגור", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				if (schedualerConstraintsView.startTimeCB.getValue()) {
-					int index = schedualerConstraintsView.startTimeLB.getSelectedIndex();
-					startTime = LocalTime.of(index+8, 30);	
-				} else {
-					startTime = null;
-				}
-				if (schedualerConstraintsView.finishTimeCB.getValue()) {
-					int index = schedualerConstraintsView.finishTimeLB.getSelectedIndex();
-					endTime = LocalTime.of(index+8, 30);
-				} else {
-					endTime = null;
-				}
-								
-				cp = new constraintsPool(false, schedualerConstraintsView.minWindowsCB.getValue(), startTime, endTime);
-				vectorDaysOff = new ArrayList();
-				vectorDaysOff.add(schedualerConstraintsView.sundayBox.getValue());
-				vectorDaysOff.add(schedualerConstraintsView.mondayBox.getValue());
-				vectorDaysOff.add(schedualerConstraintsView.tuesdayBox.getValue());
-				vectorDaysOff.add(schedualerConstraintsView.wednesdayBox.getValue());
-				vectorDaysOff.add(schedualerConstraintsView.thursdayBox.getValue());
-				cp.addVectorDaysOff(vectorDaysOff);
-				int test = schedualerConstraintsView.coursesConstraintsPanel.getWidgetCount();
-				
-				constraintsBox.hide();
-				
-			}
-		});*/
 		 
 		constraintsBoxCancelButton.addClickHandler(new ClickHandler() {
 			
@@ -154,7 +123,6 @@ public class SchedulerControlsView extends VerticalPanel{
 		constraintsBox.setTitle("הגדרת אילוצים");
 		ModalBody schedualerConstraintsViewModalBody = new ModalBody();
 		schedualerConstraintsViewModalBody.add(schedualerConstraintsView);
-		//constraintsBox.add(schedualerConstraintsView);
 		constraintsBox.add(schedualerConstraintsViewModalBody);
 		constraintsBox.add(constraintsBoxFooter);
 	}

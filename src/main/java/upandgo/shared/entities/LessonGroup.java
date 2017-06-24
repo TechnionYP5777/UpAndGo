@@ -29,6 +29,11 @@ public class LessonGroup implements IsSerializable {
 		groupNum = UNINITIALIZED_GROUP_NUM;
 		lessons = new ArrayList<>();
 	}
+	
+	public LessonGroup(LessonGroup other) {
+		groupNum = other.getGroupNum();
+		lessons = new ArrayList<>(other.getLessons());
+	}
 
 	public LessonGroup(final int GroupNumber) {
 		groupNum = GroupNumber;

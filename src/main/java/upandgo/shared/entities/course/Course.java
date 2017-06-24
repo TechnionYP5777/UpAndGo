@@ -43,11 +43,14 @@ public class Course implements IsSerializable {
 	protected int laboratoryHours;
 	protected int projectHours;
 
+	@Deprecated
 	final protected List<CourseListener> listeners;
 
 	protected List<String> notes;
 	
+	@Deprecated
 	final protected List<Course> prerequisites;
+	@Deprecated
 	final protected List<Course> corequisites;
 	protected boolean done;
 	protected boolean passThisSemester;
@@ -104,6 +107,33 @@ public class Course implements IsSerializable {
 		done = false;
 		passThisSemester = true;
 
+	}
+	
+	public Course(Course other){
+		this.name = other.name;
+		this.id = other.id;
+		this.faculty = other.faculty;
+		this.points = other.points;
+		this.aTerm = other.aTerm;
+		this.bTerm = other.bTerm;
+		
+		this.stuff = new ArrayList<>(other.getStuff());
+		this.lectures = new ArrayList<>(other.getLectures());
+		this.tutorials = new ArrayList<>(other.getTutorials());
+		
+		this.listeners = null;
+		this.prerequisites = null;
+		this.corequisites = null;
+		
+		this.laboratoryHours = other.getLectureHours();
+		this.tutorialHours = other.getTutorialHours();
+		this.laboratoryHours = other.getLaboratoryHours();
+		this.projectHours = other.getProjectHours();
+		
+		this.notes = new ArrayList<>(other.getNotes());
+		
+		this.done = other.done;
+		this.passThisSemester = other.passThisSemester;
 	}
 
 	public void addLecturesLessonGroup(final LessonGroup xxx) {

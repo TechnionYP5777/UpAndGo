@@ -76,11 +76,11 @@ public class SchedulerPresenter implements Presenter {
 	CoursesServiceAsync rpcService;
 
 	// constraints fields
-	protected boolean isDaysoffCount;
-	protected boolean isBlankSpaceCount;
-	protected LocalTime minStartTime;
-	protected LocalTime maxFinishTime;
-	protected List<Boolean> vectorDaysOff;
+	//protected boolean isDaysoffCount;
+	//protected boolean isBlankSpaceCount;
+	//protected LocalTime minStartTime;
+	//protected LocalTime maxFinishTime;
+	//protected List<Boolean> vectorDaysOff;
 	
 	protected boolean examBarVisable;		
 
@@ -194,9 +194,9 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus = eventBus;
 		this.view = display;
 		this.rpcService = rpc;
-		this.isBlankSpaceCount = this.isDaysoffCount = false;
-		this.minStartTime = null;
-		this.maxFinishTime = null;
+		//this.isBlankSpaceCount = this.isDaysoffCount = false;
+		//this.minStartTime = null;
+		//this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
 		
 		
@@ -278,7 +278,7 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});*/
 
-		view.getMinWindowsElement().addClickHandler(new ClickHandler() {
+/*		view.getMinWindowsElement().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (view.isMinWindowsChecked(event)) {
@@ -335,7 +335,7 @@ public class SchedulerPresenter implements Presenter {
 				maxFinishTime = view.getReqFinishTime();
 				Log.info("Finish time value was changed to " + maxFinishTime.toString());
 			}
-		});
+		});*/
 
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
@@ -429,7 +429,9 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("SchedulerPresenter: CourseConstraint " + entry.getKey() + " " + entry.getValue());
 				}
 				view.getConstraintsModal().hide();
-				
+				if (!lessonGroupsList.isEmpty()){
+					buildSchedule();
+				}
 			}
 		});
 		
@@ -584,6 +586,30 @@ public class SchedulerPresenter implements Presenter {
 			return;
 		}
 		
+		List<Course> constrainedCourses = new ArrayList<>(selectedCourses.size());
+		for (int i = 0 ; i < selectedCourses.size() ; i++){
+			constrainedCourses.add(new Course(selectedCourses.get(i)));
+		}
+		
+		for (Course course : constrainedCourses){
+			if (constraintsPool.getCourseConstraints().containsKey(course.getId())){
+				CourseConstraint courseConstraint = constraintsPool.getCourseConstraints().get(course.getId());
+				if (courseConstraint.isSpecificLecture()){
+					for (LessonGroup lessonGroup : new ArrayList<>(course.getLectures())){
+						if (lessonGroup.getGroupNum() != courseConstraint.getLectureLessonGroup())
+							course.getLectures().remove(lessonGroup);
+					}
+				}
+				if (courseConstraint.isSpecificTutorial()){
+					for (LessonGroup lessonGroup : new ArrayList<>(course.getTutorials())){
+						if (lessonGroup.getGroupNum() != courseConstraint.getTutorialLessonGroup())
+							course.getTutorials().remove(lessonGroup);
+					}
+				}
+			}
+		}
+		
+		Log.info("SchedulerPresenter: selectedCourses " + selectedCourses.get(0).getTutorials());
 		
 		// This creates a dummy course for the scheduler that contains all user events
 		LessonGroup userEventsLessonGroup = new LessonGroup(999);
@@ -597,9 +623,13 @@ public class SchedulerPresenter implements Presenter {
 		List<Course> selectedCoursesAndEvents = new ArrayList<Course>(selectedCourses);
 		selectedCoursesAndEvents.add(userEventCourse);
 		
+		List<Course> constrainedCoursesAndEvents = new ArrayList<Course>(constrainedCourses);
+		constrainedCoursesAndEvents.add(userEventCourse);
+
+		
 		Log.info("Build schedule: before Scheduler.getTimetablesList");
 		//final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
-		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
+		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(constrainedCoursesAndEvents, null);
 		
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
@@ -607,14 +637,17 @@ public class SchedulerPresenter implements Presenter {
 		//Log.info("unsorted tables size: " + unsortedTables.size());
 		//Log.info("unsorted tables: " + unsortedTables);
 		//Log.info("Build schedule: before Scheduler.sortedBy");
-		vectorDaysOff = new ArrayList();
+/*		vectorDaysOff = new ArrayList();
 		vectorDaysOff.add(view.getSundayCheckbox().getValue());
 		vectorDaysOff.add(view.getMondayCheckbox().getValue());
 		vectorDaysOff.add(view.getTuesdayCheckbox().getValue());
 		vectorDaysOff.add(view.getWednesdayCheckbox().getValue());
 		vectorDaysOff.add(view.getThursdayCheckbox().getValue());
-		Log.info("days off vector: " + vectorDaysOff);
-		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime, vectorDaysOff);
+		Log.info("days off vector: " + vectorDaysOff);*/
+		
+		
+		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,true, constraintsPool.isBlankSpaceCount(),
+				constraintsPool.getMinStartTime(), constraintsPool.getMaxFinishTime(), constraintsPool.getVectorDaysOff());
 		Log.info("corrrect sorted tables size: " + sorted.size());
 		//Log.info("*** found time table: " + sorted.get(0) + " ***");
 		//Log.info("correct sorted tables: " + sorted);
