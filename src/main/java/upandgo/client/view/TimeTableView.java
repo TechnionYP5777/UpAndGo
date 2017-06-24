@@ -398,26 +398,7 @@ public class TimeTableView extends HorizontalPanel {
 		lessonDetailsBoxFooter.add(lessonDetailsBoxButton);
 		lessonDetailsBox.setFade(true);
 		
-		switch (lesson.getType()) {
-			case LABORATORY:
-				lessonDetailsBox.setTitle("מעבדה - "  + lesson.getCourseId());
-				break;
-			case LECTURE:
-				lessonDetailsBox.setTitle("הרצאה - "  + lesson.getCourseId());
-				break;
-			case PROJECT:
-				lessonDetailsBox.setTitle("פרויקט - "  + lesson.getCourseId());
-				break;
-			case SPORT:
-				lessonDetailsBox.setTitle("ספורט - "  + lesson.getCourseId());
-				break;
-			case TUTORIAL:
-				lessonDetailsBox.setTitle("תרגול - "  + lesson.getCourseId());
-				break;
-			default:
-				lessonDetailsBox.setTitle(lesson.getCourseId());
-				break;
-		}
+		lessonDetailsBox.setTitle(lesson.getType().toString() + " - " + lesson.getCourseId());
 		
 		LessonDetailsView lessonDetailsView = new LessonDetailsView(lesson);
 		lessonsDetailsViews.add(lessonDetailsView);

@@ -19,7 +19,18 @@ public class Lesson implements IsSerializable {
 	private static final long serialVersionUID = 903076596050490635L;
 
 	public enum Type implements IsSerializable{
-		LECTURE, TUTORIAL, LABORATORY, PROJECT, SPORT
+		LECTURE("הרצאה"), TUTORIAL("תרגול"), LABORATORY("מעבדה"), PROJECT("פרויקט"), SPORT("ספורט");
+		
+		private final String hebrewString;
+		
+		private Type(final String hebrewString){
+			this.hebrewString = hebrewString;
+		}
+		
+		@Override
+		public String toString(){
+			return hebrewString;
+		}
 	}
 
 	protected StuffMember representer;
