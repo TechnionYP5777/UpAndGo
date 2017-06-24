@@ -20,24 +20,25 @@ public class StuffMember implements IsSerializable {
 	public String fName;
 	public String lName;
 	public String title;
-	public String email;
-	public String office;
-	public List<LocalTime> officeHours;
+//	public String email;
+//	public String office;
+//	public List<LocalTime> officeHours;
 
 	public StuffMember(){
 		fName = null;
 		lName = null;
 		title = null;
-		email = null;
-		office = null;
-		officeHours = null;
+//		email = null;
+//		office = null;
+//		officeHours = null;
 	}
 	
 	public StuffMember(final String fName1, final String lName1) {
 		// THIS CONSTRCUTOR MADE FOR TESTS, DO NOT USE WITHOUT A GOOD REASON
 		fName = fName1;
 		lName = lName1;
-		officeHours = null;
+		title = "";
+//		officeHours = null;
 	}
 
 	public StuffMember(final String fName1, final String lName1, final String title) {
@@ -45,8 +46,8 @@ public class StuffMember implements IsSerializable {
 		fName = fName1;
 		lName = lName1;
 		this.title = title;
-		office = email = "";
-		officeHours = null;
+//		office = email = "";
+//		officeHours = null;
 	}
 
 	public String getFirstName() {
@@ -61,15 +62,15 @@ public class StuffMember implements IsSerializable {
 		return title;
 	}
 
-	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml,
-			final String office1, final List<LocalTime> ofHours) {
-		fName = fName1;
-		lName = lName1;
-		title = ttl;
-		email = eml;
-		office = office1;
-		officeHours = new ArrayList<>(ofHours);
-	}
+//	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml,
+//			final String office1, final List<LocalTime> ofHours) {
+//		fName = fName1;
+//		lName = lName1;
+//		title = ttl;
+//		email = eml;
+//		office = office1;
+//		officeHours = new ArrayList<>(ofHours);
+//	}
 
 	@Override
 	public boolean equals(final Object xxx) {
