@@ -64,6 +64,14 @@ public class TimeTableView extends HorizontalPanel {
 	private FlexTable wednesdayTable = new FlexTable();
 	private FlexTable thursdayTable = new FlexTable();
 	
+	Modal lessonDetailsBox = null;
+	ModalBody lessonDetailsBoxBody = null;
+	Button lessonDetailsBoxCreateConstraintButton = new Button("<i class=\"fa fa-external-link\" aria-hidden=\"true\"></i>&nbsp;&nbsp;צור אילוץ");
+	Button lessonDetailsBoxRemoveConstraintButton = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הסר אילוץ");
+	Lesson lessonDetailsBoxCurrentLesson = null;
+	String lessonDetailCurrentCourseId = null;
+	int lessonDetailCurrentGroup = 0;
+
 	Map<WeekTime,UserEvent> userEvents = new HashMap<>();
 	Modal userEventBox = null;
 	WeekTime userEventTime = new WeekTime();
@@ -81,6 +89,7 @@ public class TimeTableView extends HorizontalPanel {
 	
 	public TimeTableView(){
     	InitializePanel();
+    	InitializeLessonDetailsBox();
     	InitializeUserEventBox();
     	ttStyle.ensureInjected();
     }
@@ -297,7 +306,7 @@ public class TimeTableView extends HorizontalPanel {
 				Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
-					SimplePanel eventWrap = createLessonPanel(l);
+					SimplePanel eventWrap = createLessonPanel(l,lg.isConstrained());
 
 					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
@@ -312,31 +321,21 @@ public class TimeTableView extends HorizontalPanel {
  		}		
  	}
  	
- 	private SimplePanel createLessonPanel(Lesson l){
+ 	private SimplePanel createLessonPanel(final Lesson lesson, boolean isConstrained){
 		VerticalPanel eventContent = new VerticalPanel();
 		eventContent.setStyleName(ttStyle.hasEventContent());
 		eventContent.setHorizontalAlignment(ALIGN_CENTER);
 		
-		switch (l.getType()) {
-			case LABORATORY:
-				eventContent.add(new Label("מעבדה - "  + l.getCourseId()));
-				break;
-			case LECTURE:
-				eventContent.add(new Label("הרצאה - "  + l.getCourseId()));
-				break;
-			case PROJECT:
-				eventContent.add(new Label("פרויקט - "  + l.getCourseId()));
-				break;
-			case SPORT:
-				eventContent.add(new Label("ספורט - "  + l.getCourseId()));
-				break;
-			case TUTORIAL:
-				eventContent.add(new Label("תרגול - "  + l.getCourseId()));
-				break;
-			default:
-				eventContent.add(new Label(l.getCourseId()));
-				break;
+		String courseTitle = new String();
+		if (isConstrained){
+			courseTitle += "*** ";
 		}
+		courseTitle += lesson.getType().toString() + " - " + lesson.getCourseId();
+		if (isConstrained){
+			courseTitle += " ***";
+		}
+		eventContent.add(new Label(courseTitle));
+
 
 		eventContent.setHorizontalAlignment(ALIGN_RIGHT);
 		Grid eventContentGrid = new Grid(4,2);
@@ -345,14 +344,14 @@ public class TimeTableView extends HorizontalPanel {
 		eventContentGrid.getCellFormatter().setHorizontalAlignment(2, 0, ALIGN_CENTER);
 		eventContentGrid.getCellFormatter().setHorizontalAlignment(3, 0, ALIGN_CENTER);
 		eventContentGrid.setHTML(0, 0, "<i class=\"fa fa-book\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-		eventContentGrid.setHTML(0, 1, l.getCourseName());
+		eventContentGrid.setHTML(0, 1, lesson.getCourseName());
 		eventContentGrid.setHTML(1, 0, "<i class=\"fa fa-building-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-		eventContentGrid.setHTML(1, 1, l.getPlace());
+		eventContentGrid.setHTML(1, 1, lesson.getPlace());
 		eventContentGrid.setHTML(2, 0, "<i class=\"fa fa-users\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-		eventContentGrid.setHTML(2, 1, "קבוצה&nbsp;" + String.valueOf(l.getGroup()));
-		if (l.getRepresenter()!=null){
+		eventContentGrid.setHTML(2, 1, "קבוצה&nbsp;" + String.valueOf(lesson.getGroup()));
+		if (lesson.getRepresenter()!=null){
 			eventContentGrid.setHTML(3, 0, "<i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i>&nbsp;&nbsp;");
-			eventContentGrid.setHTML(3, 1, l.getRepresenter().getTitle() + "&nbsp;" + l.getRepresenter().getLastName() + "&nbsp;" + l.getRepresenter().getFirstName());
+			eventContentGrid.setHTML(3, 1, lesson.getRepresenter().getTitle() + "&nbsp;" + lesson.getRepresenter().getLastName() + "&nbsp;" + lesson.getRepresenter().getFirstName());
 		}
 		
 		eventContent.add(eventContentGrid);
@@ -360,20 +359,27 @@ public class TimeTableView extends HorizontalPanel {
 		SimplePanel eventWrap = new SimplePanel();
 		eventWrap.add(eventContent);
 		eventWrap.addStyleName(ttStyle.hasEventWrap());
-		if(colorMap != null && colorMap.containsKey(l.getCourseId())){
+		if(colorMap != null && colorMap.containsKey(lesson.getCourseId())){
 			//Log.info("for course: " + l.getCourseId() + " use: " + colorMap.get(l.getCourseId()).name() );
-			eventWrap.getElement().setAttribute("eventNum", colorMap.get(l.getCourseId()).name() );
+			eventWrap.getElement().setAttribute("eventNum", colorMap.get(lesson.getCourseId()).name() );
 		}else{
 			eventWrap.getElement().setAttribute("eventNum", "ORANGERED");
 		}
 		
-		final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
-		
+		//final Modal lessonDetailsBox = InitializeLessonDetailsBox(l);
+		final LessonDetailsView lessonDetailsView = new LessonDetailsView(lesson);
+		lessonsDetailsViews.add(lessonDetailsView);
+
 		eventWrap.sinkEvents(Event.ONCLICK);
 		eventWrap.addHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				lessonDetailsBox.setTitle(lesson.getType().toString() + " - " + lesson.getCourseId());
+				lessonDetailsBoxCurrentLesson = lesson;
+				lessonDetailsBoxRemoveConstraintButton.setVisible(false);
+				lessonDetailsBoxBody.clear();
+				lessonDetailsBoxBody.add(lessonDetailsView);
 				lessonDetailsBox.show();
 				
 			}
@@ -383,11 +389,10 @@ public class TimeTableView extends HorizontalPanel {
 		return eventWrap;
  	}
  	
- 	
-	private Modal InitializeLessonDetailsBox(Lesson lesson){
-		final Modal lessonDetailsBox = new Modal();
-		ModalFooter lessonDetailsBoxFooter = new ModalFooter();
-		Button lessonDetailsBoxButton = new Button("סגור", new ClickHandler() {
+ 	private void InitializeLessonDetailsBox(){
+ 		lessonDetailsBox = new Modal();
+ 		ModalFooter lessonDetailsBoxFooter = new ModalFooter();
+		Button lessonDetailsBoxCloseButton = new Button("סגור", new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -395,20 +400,21 @@ public class TimeTableView extends HorizontalPanel {
 				
 			}
 		});
-		lessonDetailsBoxFooter.add(lessonDetailsBoxButton);
+		lessonDetailsBoxCloseButton.setStyleName("btn btn-default");
+		lessonDetailsBoxCreateConstraintButton.setStyleName("btn btn-success");
+		lessonDetailsBoxRemoveConstraintButton.setStyleName("btn btn-danger");
+		lessonDetailsBoxFooter.add(lessonDetailsBoxCreateConstraintButton);
+		lessonDetailsBoxFooter.add(lessonDetailsBoxRemoveConstraintButton);
+		lessonDetailsBoxFooter.add(lessonDetailsBoxCloseButton);
 		lessonDetailsBox.setFade(true);
 		
-		lessonDetailsBox.setTitle(lesson.getType().toString() + " - " + lesson.getCourseId());
+		lessonDetailsBoxBody = new ModalBody();
 		
-		LessonDetailsView lessonDetailsView = new LessonDetailsView(lesson);
-		lessonsDetailsViews.add(lessonDetailsView);
-
-		ModalBody lessonDetailsBoxBody = new ModalBody();
-		lessonDetailsBoxBody.add(lessonDetailsView);
 		lessonDetailsBox.add(lessonDetailsBoxBody);
 		lessonDetailsBox.add(lessonDetailsBoxFooter);
-		return lessonDetailsBox;
-	}
+
+ 	}
+ 	
 	
 	public void setNotesOnLessonModal(String courseId, List<String> courseNotes){
 		for (LessonDetailsView lessonDetailsView : lessonsDetailsViews){
@@ -422,7 +428,7 @@ public class TimeTableView extends HorizontalPanel {
 
 	}
 	
-	private Modal InitializeUserEventBox(){
+	private void InitializeUserEventBox(){
 		userEventBox = new Modal();
 		ModalFooter userEventBoxFooter = new ModalFooter();
 		
@@ -462,8 +468,6 @@ public class TimeTableView extends HorizontalPanel {
 		
 		userEventBox.add(userEventBoxBody);
 		userEventBox.add(userEventBoxFooter);
-
-		return userEventBox;
 	}
 	
 	public UserEvent getUserEvent(){

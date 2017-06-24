@@ -27,6 +27,7 @@ import upandgo.client.Resources.MainStyle;
 import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.Exam;
+import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
@@ -209,11 +210,6 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool){
 		schedualerConstraintsView.setConstraintsPool(selectedCourses, constraintsPool);
-	}
-	
-	@Override
-	public void setSelectedCourses(List<Course> selectedCourses){
-		schedualerConstraintsView.displayCoursesConstraints(selectedCourses);
 	}
 	
 	@Override
@@ -404,7 +400,26 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public void setNotesOnLessonModal(String courseId, List<String> courseNotes) {
 		timeTableView.setNotesOnLessonModal(courseId, courseNotes);
-		
+	}
+	
+	@Override
+	public Button getLessonModalCreateConstraintButton() {
+		return timeTableView.lessonDetailsBoxCreateConstraintButton;
+	}
+	
+	@Override
+	public Button getLessonModalRemoveConstraintButton() {
+		return timeTableView.lessonDetailsBoxRemoveConstraintButton;
+	}
+
+	@Override
+	public Modal getLessonModal(){
+		return timeTableView.lessonDetailsBox;
+	}
+
+	@Override
+	public Lesson getLessonModelCurrentLesson() {
+		return timeTableView.lessonDetailsBoxCurrentLesson;
 	}
 	
 	@Override
@@ -426,5 +441,6 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	public HasClickHandlers getUserEventBoxDeleteButton() {
 		return timeTableView.userEventBoxDeleteButton;
 	}
+
 
 }

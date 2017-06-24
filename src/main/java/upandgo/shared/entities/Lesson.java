@@ -71,6 +71,18 @@ public class Lesson implements IsSerializable {
 		courseId = c;
 		courseName = n;
 	}
+	
+	public Lesson(Lesson other){
+		representer = other.getRepresenter();
+		startTime = other.getStartTime();
+		endTime = other.getEndTime();
+		place = other.getPlace();
+		type = other.getType();
+		group = other.getGroup();
+		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
+		courseId = other.getCourseId();
+		courseName = other.getCourseName();
+	}
 
 	public String getCourseId() {
 		return courseId;

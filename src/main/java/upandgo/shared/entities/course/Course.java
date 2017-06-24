@@ -118,8 +118,14 @@ public class Course implements IsSerializable {
 		this.bTerm = other.bTerm;
 		
 		this.stuff = new ArrayList<>(other.getStuff());
-		this.lectures = new ArrayList<>(other.getLectures());
-		this.tutorials = new ArrayList<>(other.getTutorials());
+		this.lectures = new ArrayList<>(other.getLectures().size());
+		for (int i = 0 ; i < other.getLectures().size() ; i++){
+			this.lectures.add(new LessonGroup(other.getLectures().get(i)));
+		}
+		this.tutorials = new ArrayList<>(other.getTutorials().size());
+		for (int i = 0 ; i < other.getTutorials().size() ; i++){
+			this.tutorials.add(new LessonGroup(other.getTutorials().get(i)));
+		}
 		
 		this.listeners = null;
 		this.prerequisites = null;
