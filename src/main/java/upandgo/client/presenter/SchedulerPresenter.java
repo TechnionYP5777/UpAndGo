@@ -17,17 +17,12 @@ import java.util.Map.Entry;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
-import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.hamcrest.core.IsNot;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -49,7 +44,6 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
-import upandgo.shared.entities.Day;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
@@ -74,13 +68,6 @@ public class SchedulerPresenter implements Presenter {
 	Display view;
 	EventBus eventBus;
 	CoursesServiceAsync rpcService;
-
-	// constraints fields
-	//protected boolean isDaysoffCount;
-	//protected boolean isBlankSpaceCount;
-	//protected LocalTime minStartTime;
-	//protected LocalTime maxFinishTime;
-	//protected List<Boolean> vectorDaysOff;
 	
 	protected boolean examBarVisable;		
 
@@ -124,21 +111,6 @@ public class SchedulerPresenter implements Presenter {
 		public HasClickHandlers getConstraintsBoxSaveButton();
 		
 		public void setNotesOnLessonModal(String courseId, List<String> courseNotes);
-
-		public boolean isDayOffChecked(ClickEvent event);
-
-		public HasClickHandlers getMinWindowsElement();
-		public InlineCheckBox getSundayCheckbox();
-		public InlineCheckBox getMondayCheckbox();
-		public InlineCheckBox getTuesdayCheckbox();
-		public InlineCheckBox getWednesdayCheckbox();
-		public InlineCheckBox getThursdayCheckbox();
-
-		public boolean isMinWindowsChecked(ClickEvent event);
-
-		public HasClickHandlers getStartTimeElement();
-
-		public HasChangeHandlers getStartTimeList();
 		
 		public Modal getCollisionModal();
 		
@@ -146,18 +118,6 @@ public class SchedulerPresenter implements Presenter {
 		public List<RadioButton> getCollisionRadios();
 		public List<CourseTuple> getCollisionSolversTuples();
 		
-		public boolean isStartTimeChecked(ClickEvent event);
-
-		public LocalTime getReqStartTime(); // result in format HH:MM
-
-		public HasClickHandlers getFinishTimeElement();
-
-		public HasChangeHandlers getFinishTimeList();
-
-		public boolean isFinishTimeChecked(ClickEvent event);
-
-		public LocalTime getReqFinishTime(); // result in format HH:MM
-
 		public void setPrevEnable(boolean enable);
 
 		public void setNextEnable(boolean enable);
@@ -264,78 +224,6 @@ public class SchedulerPresenter implements Presenter {
 
 	@Override
 	public void bind() {
-
-		/*view.getDaysOffElement().addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				if (view.isDayOffChecked(event)) {
-					isDaysoffCount = true;
-					Log.info("daysOff button was selected");
-				} else {
-					isDaysoffCount = false;
-					Log.info("daysOff button was deselected");
-				}
-			}
-		});*/
-
-/*		view.getMinWindowsElement().addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				if (view.isMinWindowsChecked(event)) {
-					isBlankSpaceCount = true;
-					Log.info("minWindows button was selected");
-				} else {
-					isBlankSpaceCount = false;
-					Log.info("minWindows button was deselected");
-				}
-
-			}
-		});
-
-		view.getStartTimeElement().addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				if (view.isStartTimeChecked(event)) {
-					minStartTime = view.getReqStartTime();
-					Log.info("Start time value was selected and it is " + minStartTime.toString());
-				} else {
-					minStartTime = null;
-					Log.info("Start time value was deselected");
-				}
-			}
-		});
-
-		view.getStartTimeList().addChangeHandler(new ChangeHandler() {
-
-			@Override
-			public void onChange(ChangeEvent arg0) {
-				minStartTime = view.getReqStartTime();
-				Log.info("Start time value was changed to " + minStartTime.toString());
-			}
-		});
-
-		view.getFinishTimeElement().addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				if (view.isFinishTimeChecked(event)) {
-					maxFinishTime = view.getReqFinishTime();
-					Log.info("End time value was selected and it is " + maxFinishTime.toString());
-				} else {
-					maxFinishTime = null;
-					Log.info("Start time value was deselected");
-				}
-			}
-		});
-
-		view.getFinishTimeList().addChangeHandler(new ChangeHandler() {
-
-			@Override
-			public void onChange(ChangeEvent arg0) {
-				maxFinishTime = view.getReqFinishTime();
-				Log.info("Finish time value was changed to " + maxFinishTime.toString());
-			}
-		});*/
 
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
@@ -586,6 +474,7 @@ public class SchedulerPresenter implements Presenter {
 			return;
 		}
 		
+		// Create new list of courses based on user's constraints
 		List<Course> constrainedCourses = new ArrayList<>(selectedCourses.size());
 		for (int i = 0 ; i < selectedCourses.size() ; i++){
 			constrainedCourses.add(new Course(selectedCourses.get(i)));
@@ -636,15 +525,7 @@ public class SchedulerPresenter implements Presenter {
 		Log.info("color map: " + colorMap);
 		//Log.info("unsorted tables size: " + unsortedTables.size());
 		//Log.info("unsorted tables: " + unsortedTables);
-		//Log.info("Build schedule: before Scheduler.sortedBy");
-/*		vectorDaysOff = new ArrayList();
-		vectorDaysOff.add(view.getSundayCheckbox().getValue());
-		vectorDaysOff.add(view.getMondayCheckbox().getValue());
-		vectorDaysOff.add(view.getTuesdayCheckbox().getValue());
-		vectorDaysOff.add(view.getWednesdayCheckbox().getValue());
-		vectorDaysOff.add(view.getThursdayCheckbox().getValue());
-		Log.info("days off vector: " + vectorDaysOff);*/
-		
+		//Log.info("Build schedule: before Scheduler.sortedBy");		
 		
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,true, constraintsPool.isBlankSpaceCount(),
 				constraintsPool.getMinStartTime(), constraintsPool.getMaxFinishTime(), constraintsPool.getVectorDaysOff());

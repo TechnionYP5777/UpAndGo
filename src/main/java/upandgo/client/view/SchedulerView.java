@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
@@ -15,9 +14,6 @@ import org.gwtbootstrap3.client.ui.ModalFooter;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.Visibility;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -32,7 +28,6 @@ import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.LessonGroup;
-import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
@@ -254,86 +249,6 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	@Override
 	public List<CourseTuple> getCollisionSolversTuples(){
 		return solversTuples;
-	}
-
-	/*
-	@Override
-	public HasClickHandlers getDaysOffElement() {
-		return schedualerConstraintsView.daysOffCB;
-	}*/
-
-	@Override
-	public boolean isDayOffChecked(ClickEvent event) {
-		return ((InlineCheckBox) event.getSource()).getValue();
-	}
-
-	@Override
-	public HasClickHandlers getMinWindowsElement() {
-		return schedualerConstraintsView.minWindowsCB;
-		//return null;
-	}
-	@Override
-	public InlineCheckBox getSundayCheckbox(){
-		return schedualerConstraintsView.sundayBox;
-	}
-	public InlineCheckBox getMondayCheckbox(){
-		return schedualerConstraintsView.mondayBox;
-	}
-	public InlineCheckBox getTuesdayCheckbox(){
-		return schedualerConstraintsView.tuesdayBox;
-	}
-	public InlineCheckBox getWednesdayCheckbox(){
-		return schedualerConstraintsView.wednesdayBox;
-	}
-	public InlineCheckBox getThursdayCheckbox(){
-		return schedualerConstraintsView.thursdayBox;
-	}
-
-	@Override
-	public boolean isMinWindowsChecked(ClickEvent event) {
-		return ((InlineCheckBox) event.getSource()).getValue();
-	}
-
-	@Override
-	public HasClickHandlers getStartTimeElement() {
-		return schedualerConstraintsView.startTimeCB;
-	}
-
-	@Override
-	public boolean isStartTimeChecked(ClickEvent event) {
-		return ((InlineCheckBox) event.getSource()).getValue();
-	}
-
-	@Override
-	public LocalTime getReqStartTime() {
-		int index = schedualerConstraintsView.startTimeLB.getSelectedIndex();
-		return LocalTime.of(index+8, 30);
-	}
-
-	@Override
-	public HasClickHandlers getFinishTimeElement() {
-		return schedualerConstraintsView.finishTimeLB;
-	}
-
-	@Override
-	public boolean isFinishTimeChecked(ClickEvent event) {
-		return ((InlineCheckBox) event.getSource()).getValue();
-	}
-
-	@Override
-	public LocalTime getReqFinishTime() {
-		int index = schedualerConstraintsView.finishTimeLB.getSelectedIndex();
-		return LocalTime.of(index+8, 30);
-	}
-
-	@Override
-	public HasChangeHandlers getStartTimeList() {
-		return schedualerConstraintsView.startTimeLB;
-	}
-
-	@Override
-	public HasChangeHandlers getFinishTimeList() {
-		return schedualerConstraintsView.finishTimeLB;
 	}
 	
 	@Override

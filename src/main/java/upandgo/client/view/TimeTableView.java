@@ -297,7 +297,7 @@ public class TimeTableView extends HorizontalPanel {
 				Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
-					SimplePanel eventWrap = createEventPanel(l);
+					SimplePanel eventWrap = createLessonPanel(l);
 
 					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
@@ -312,7 +312,7 @@ public class TimeTableView extends HorizontalPanel {
  		}		
  	}
  	
- 	private SimplePanel createEventPanel(Lesson l){
+ 	private SimplePanel createLessonPanel(Lesson l){
 		VerticalPanel eventContent = new VerticalPanel();
 		eventContent.setStyleName(ttStyle.hasEventContent());
 		eventContent.setHorizontalAlignment(ALIGN_CENTER);
