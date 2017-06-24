@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 //import java.util.function.Consumer;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
@@ -84,7 +85,7 @@ public class SchedulerPresenter implements Presenter {
 	protected boolean examBarVisable;		
 
 	protected List<Course> selectedCourses;
-	protected ConstraintsPool constraintsPool;
+	protected ConstraintsPool constraintsPool = new ConstraintsPool();
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected Map<WeekTime,UserEvent> userEvents = new HashMap<>();
 	protected int sched_index;
@@ -116,7 +117,11 @@ public class SchedulerPresenter implements Presenter {
 		
 		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);
 		
-		public Modal getContraintsModal();
+		public ConstraintsPool getConstraintsPool();
+		
+		public Modal getConstraintsModal();
+		
+		public HasClickHandlers getConstraintsBoxSaveButton();
 		
 		public void setNotesOnLessonModal(String courseId, List<String> courseNotes);
 
@@ -401,19 +406,32 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
-		view.getContraintsModal().addShowHandler(new ModalShowHandler(){
+		view.getConstraintsModal().addShowHandler(new ModalShowHandler(){
 			@Override
 			public void onShow(ModalShowEvent evt) {
 				Log.info("SchedulerPresenter: Constraints modal show event");
-				constraintsPool = new ConstraintsPool(true,true,LocalTime.of(9,0),LocalTime.of(12,0));
+/*				constraintsPool = new ConstraintsPool(true,true,LocalTime.of(9,0),LocalTime.of(12,0));
 				constraintsPool.setDayOff(Day.MONDAY, true);
 				constraintsPool.setDayOff(Day.THURSDAY, true);
-				constraintsPool.addCourseConstraint("014003",true, CourseConstraint.NO_LESSON, true, 12);
-				Log.info("SchedulerPresenter: before setConstraintsPool");
+				constraintsPool.setCourseConstraint("014003",true, CourseConstraint.NO_LESSON, true, 12);*/
 				view.setConstraintsPool(selectedCourses, constraintsPool);
 				//view.setSelectedCourses(selectedCourses);
 			}
 		});	
+		
+		view.getConstraintsBoxSaveButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				constraintsPool = new ConstraintsPool(view.getConstraintsPool());
+				Log.info("SchedulerPresenter: constraintsPool recived ");
+				for (Entry<String,CourseConstraint> entry : constraintsPool.getCourseConstraints().entrySet()){
+					Log.info("SchedulerPresenter: CourseConstraint " + entry.getKey() + " " + entry.getValue());
+				}
+				view.getConstraintsModal().hide();
+				
+			}
+		});
 		
 		view.getCollisionModalButton().addClickHandler(new ClickHandler() {
 			

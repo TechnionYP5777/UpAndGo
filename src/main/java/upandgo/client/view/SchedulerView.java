@@ -222,8 +222,18 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 	
 	@Override
-	public Modal getContraintsModal(){
+	public ConstraintsPool getConstraintsPool(){
+		return schedualerConstraintsView.getConstraintsPool();
+	}
+	
+	@Override
+	public Modal getConstraintsModal(){
 		return schedualerControlsView.constraintsBox;
+	}
+	
+	@Override
+	public HasClickHandlers getConstraintsBoxSaveButton() {
+		return schedualerControlsView.constraintsBoxSaveButton;
 	}
 	
 	@Override

@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import upandgo.shared.entities.Day;
+import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LocalTime;
 
 public class ConstraintsPool {
@@ -49,6 +50,17 @@ public class ConstraintsPool {
 			this.tutorialLessonGroup = otherCourseConstraint.getTutorialLessonGroup();
 		}
 		
+		public void setSpecificLesson(Type lessonType, boolean specific, int lessonGroup){
+			if (lessonType == Type.LECTURE){
+				specificLecture = specific;
+				lectureLessonGroup = lessonGroup;
+			} else if (lessonType == Type.TUTORIAL){
+				specificTutorial = specific;
+				tutorialLessonGroup = lessonGroup;
+			}
+			
+		}
+		
 		public boolean isSpecificLecture() {
 			return specificLecture;
 		}
@@ -63,6 +75,16 @@ public class ConstraintsPool {
 		
 		public int getTutorialLessonGroup() {
 			return tutorialLessonGroup;
+		}
+		
+		@Override
+		public String toString(){
+			String result = new String();
+			if (specificLecture)
+				result += "Specific Lecture Group: " + lectureLessonGroup + " ";
+			if (specificTutorial)
+				result += "Specific Tutorial Group: " + tutorialLessonGroup;
+			return result;
 		}
 			
 	}
@@ -142,10 +164,20 @@ public class ConstraintsPool {
 		this.maxFinishTime = maxFinishTime;
 	}
 
-	public void addCourseConstraint(String courseId, boolean specificLecture, int lectureLessonGroup, 
+	public void setCourseConstraint(String courseId, boolean specificLecture, int lectureLessonGroup, 
 			boolean specificTutorial, int tutorialLessonGroup) {
 		CourseConstraint cc = new CourseConstraint(specificLecture, lectureLessonGroup, specificTutorial, tutorialLessonGroup);
 		courseConstraints.put(courseId,cc);
+	}
+	
+	public void setCourseConstraint(String courseId, Type lessonType, boolean specific, int lessonGroup) {
+		if (courseConstraints.containsKey(courseId)){
+			courseConstraints.get(courseId).setSpecificLesson(lessonType, specific, lessonGroup);
+		} else {
+			CourseConstraint cc = new CourseConstraint();
+			cc.setSpecificLesson(lessonType, specific, lessonGroup);
+			courseConstraints.put(courseId,cc);
+		}
 	}
 	
 	public Map<String,CourseConstraint> getCourseConstraints() {
