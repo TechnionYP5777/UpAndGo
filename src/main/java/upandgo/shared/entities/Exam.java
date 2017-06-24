@@ -25,13 +25,13 @@ public class Exam implements IsSerializable{
 	public Exam(String format) {
 		time = day = month = dayOfMonth = year = "";
 		String[] splited = format.split(" ");
-		if (splited.length == 5) {
-			this.time = splited[0];
-			this.dayOfMonth = splited[1];
-			this.month = splited[2];
-			this.year = splited[3];
-			this.day = hebDayConverter(splited[4]);
-		}
+		if (splited.length != 5)
+			return;
+		this.time = splited[0];
+		this.dayOfMonth = splited[1];
+		this.month = splited[2];
+		this.year = splited[3];
+		this.day = hebDayConverter(splited[4]);
 		
 	}
 	
@@ -90,7 +90,7 @@ public class Exam implements IsSerializable{
 		return getDate() + " יום " + day;
 	}
 	
-	public String compareString() {
+	private String compareString() {
 		return year + month + dayOfMonth;
 	}
 	
