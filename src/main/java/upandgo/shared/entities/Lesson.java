@@ -39,7 +39,6 @@ public class Lesson implements IsSerializable {
 	protected String place;
 	protected Type type;
 	protected int group;
-	// protected int day;
 	protected String courseId;
 	protected String courseName;
 
@@ -48,9 +47,7 @@ public class Lesson implements IsSerializable {
 		startTime = null;
 		endTime = null;
 		place = null;
-		//type = t;
 		group = 0;
-		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		courseId = null;
 		courseName = null;
 	}
