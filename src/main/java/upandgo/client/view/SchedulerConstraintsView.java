@@ -8,6 +8,8 @@ import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ModalComponent;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -17,9 +19,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerConstraintsStyle;
+import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
+import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
+import upandgo.shared.model.scedule.ConstraintsPool;
 
 
 /**
@@ -29,7 +34,7 @@ import upandgo.shared.entities.course.Course;
 
 public class SchedulerConstraintsView extends VerticalPanel implements ModalComponent{
 	
-	//InlineCheckBox daysOffCB = new InlineCheckBox("מספר מקסימלי של ימים חופשיים");
+	private ConstraintsPool localConstraintsPool = new ConstraintsPool();
 	
 	boolean test = false;
 	
@@ -145,9 +150,38 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     	
     }
     
+    public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool){
+    	localConstraintsPool = new ConstraintsPool(constraintsPool);
+    	
+    	sundayBox.setValue(localConstraintsPool.getVectorDaysOff().get(Day.SUNDAY.ordinal()));
+    	mondayBox.setValue(localConstraintsPool.getVectorDaysOff().get(Day.MONDAY.ordinal()));
+    	tuesdayBox.setValue(localConstraintsPool.getVectorDaysOff().get(Day.TUESDAY.ordinal()));
+    	wednesdayBox.setValue(localConstraintsPool.getVectorDaysOff().get(Day.WEDNESDAY.ordinal()));
+    	thursdayBox.setValue(localConstraintsPool.getVectorDaysOff().get(Day.THURSDAY.ordinal()));
+    	
+    	minWindowsCB.setValue(localConstraintsPool.isBlankSpaceCount());
+    	
+    	if (localConstraintsPool.getMinStartTime()!=null){
+    		startTimeCB.setValue(true);
+    		startTimeLB.setSelectedIndex(TimeTableView.localTimeToRowIndex(localConstraintsPool.getMinStartTime()));
+    	} else {
+    		startTimeCB.setValue(false);
+    	}
+    	
+    	if (localConstraintsPool.getMaxFinishTime()!=null){
+    		finishTimeCB.setValue(true);
+    		finishTimeLB.setSelectedIndex(TimeTableView.localTimeToRowIndex(localConstraintsPool.getMaxFinishTime()));
+    	} else {
+    		finishTimeCB.setValue(false);
+    	}
+    	
+    	displayCoursesConstraints(selectedCourses);
+    }
+    
     public void displayCoursesConstraints(List<Course> selectedCourses){
     	coursesConstraintsPanel.clear();
     	coursesConstraintsPanel.addStyleName(cStyle.coursesConstraintsPanel());
+    	
     	if (!selectedCourses.isEmpty()){
         	SimplePanel horizontalLine = new SimplePanel();
         	horizontalLine.setStyleName(cStyle.horizontalLine());
@@ -155,6 +189,7 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     		coursesConstraintsPanel.add(coursesConstraintsLabel);
         	coursesConstraintsLabel.addStyleName(cStyle.onlyCheckBox());
     	}
+    	
     	for (Course course : selectedCourses){
     		Label courseName = new Label(course.getName());
     		courseName.addStyleName(cStyle.onlyCheckBox());
@@ -163,9 +198,11 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     		courseConstraintsPanel.setVerticalAlignment(ALIGN_MIDDLE);
     		courseConstraintsPanel.addStyleName(cStyle.courseConstraintsPanel());
     		
+/*    		// Lecture course constraints
     		InlineCheckBox courseLectureCB = new InlineCheckBox("בחר הרצאה");
     		courseLectureCB.addStyleName(cStyle.courseCheckBox());
     		final ListBox lectureOptions = new ListBox();
+    		lectureOptions.setId(course.getId());
     		lectureOptions.addStyleName(cStyle.courseListBox());
     		for (LessonGroup lessonGroup : course.getLectures()){
     			String listBoxOption = new String("קבוצה " + lessonGroup.getGroupNum() + ": ");
@@ -173,14 +210,34 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     				listBoxOption += lesson.getStartTime().toHebrewString() + ", ";
     			}
     			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
-				lectureOptions.addItem(listBoxOption);
+				lectureOptions.addItem(listBoxOption,String.valueOf(lessonGroup.getGroupNum()));
     		}
-    		lectureOptions.addItem("ללא הרצאה");
+    		lectureOptions.addItem("ללא הרצאה",String.valueOf(-1));
     		lectureOptions.setEnabled(false);
     		
+    		courseLectureCB.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+					if (checked){
+						Log.info("SchedulerConstraintsView: course " + lectureOptions.getId() + " group " + lectureOptions.getSelectedValue());
+					}
+    		        lectureOptions.setEnabled(checked.booleanValue());
+				}
+			});
+    		
+    		lectureOptions.addChangeHandler(new ChangeHandler() {
+				@Override
+				public void onChange(ChangeEvent event) {
+					Log.info("SchedulerConstraintsView: course " + lectureOptions.getId() + " group " + lectureOptions.getSelectedValue());
+				}
+			});*/    		
+    		
+/*    		// Tutorial course constraints
     		InlineCheckBox courseTutorialsCB = new InlineCheckBox("בחר תרגול");
     		courseTutorialsCB.addStyleName(cStyle.courseCheckBox());
     		final ListBox tutorialsOptions = new ListBox();
+    		//tutorialsOptions.setId(course.getId());
     		tutorialsOptions.addStyleName(cStyle.courseListBox());
     		for (LessonGroup lessonGroup : course.getTutorials()){
     			String listBoxOption = new String("קבוצה " + lessonGroup.getGroupNum() + ": ");
@@ -190,18 +247,9 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
     			tutorialsOptions.addItem(listBoxOption);
     		}
-    		lectureOptions.addItem("ללא תרגול");
+    		tutorialsOptions.addItem("ללא תרגול");
     		tutorialsOptions.setEnabled(false);
-    		courseLectureCB.addClickHandler(new ClickHandler(){
 
-    			@Override
-    			public void onClick(ClickEvent event) {
-    		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
-    		        Log.info("lectures are " + checked);
-    		        lectureOptions.setEnabled(checked.booleanValue());
-    			}
-        		
-        	});
     		
     		courseTutorialsCB.addClickHandler(new ClickHandler(){
 
@@ -213,24 +261,74 @@ public class SchedulerConstraintsView extends VerticalPanel implements ModalComp
     			}
         		
         	});
-
+*/
 
     		courseConstraintsPanel.add(courseName);
     		
-    		FormGroup lectureFormGroup = new FormGroup();
+/*    		FormGroup lectureFormGroup = new FormGroup();
     		lectureFormGroup.add(courseLectureCB);
     		lectureFormGroup.add(lectureOptions);
-    		courseConstraintsPanel.add(lectureFormGroup);
+    		courseConstraintsPanel.add(lectureFormGroup);*/
+    		
+    		courseConstraintsPanel.add(getCourseConstraintsListBox(course.getId(),course.getLectures(),Type.LECTURE));
+    		
         	SimplePanel spacerPanel = new SimplePanel();
         	spacerPanel.addStyleName(cStyle.spacerPanel());
     		courseConstraintsPanel.add(spacerPanel);
-    		FormGroup tutorialsFormGroup = new FormGroup();
+    		
+    		
+    		courseConstraintsPanel.add(getCourseConstraintsListBox(course.getId(),course.getTutorials(),Type.TUTORIAL));
+
+    		
+/*    		FormGroup tutorialsFormGroup = new FormGroup();
     		tutorialsFormGroup.add(courseTutorialsCB);
     		tutorialsFormGroup.add(tutorialsOptions);
-    		courseConstraintsPanel.add(tutorialsFormGroup);
+    		courseConstraintsPanel.add(tutorialsFormGroup);*/
 
     		coursesConstraintsPanel.add(courseConstraintsPanel);
     	}
+    }
+    
+    private FormGroup getCourseConstraintsListBox(String courseId, List<LessonGroup> lessonGroups, Type lessonType){
+    	
+		InlineCheckBox courseConstraintCB = new InlineCheckBox("בחר " + lessonType);
+		courseConstraintCB.addStyleName(cStyle.courseCheckBox());
+		final ListBox courseConstraintOptions = new ListBox();
+		courseConstraintOptions.setId(courseId);
+		courseConstraintOptions.addStyleName(cStyle.courseListBox());
+		for (LessonGroup lessonGroup : lessonGroups){
+			String listBoxOption = new String("קבוצה " + lessonGroup.getGroupNum() + ": ");
+			for (Lesson lesson : lessonGroup.getLessons()){
+				listBoxOption += lesson.getStartTime().toHebrewString() + ", ";
+			}
+			listBoxOption = listBoxOption.substring(0, listBoxOption.length()-2);
+			courseConstraintOptions.addItem(listBoxOption,String.valueOf(lessonGroup.getGroupNum()));
+		}
+		courseConstraintOptions.addItem("ללא " + lessonType,String.valueOf(-1));
+		courseConstraintOptions.setEnabled(false);
+		
+		courseConstraintCB.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
+				if (checked){
+					Log.info("SchedulerConstraintsView: course " + courseConstraintOptions.getId() + " group " + courseConstraintOptions.getSelectedValue());
+				}
+				courseConstraintOptions.setEnabled(checked.booleanValue());
+			}
+		});
+		
+		courseConstraintOptions.addChangeHandler(new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				Log.info("SchedulerConstraintsView: course " + courseConstraintOptions.getId() + " group " + courseConstraintOptions.getSelectedValue());
+			}
+		});  
+		
+		FormGroup courseConstraintFormGroup = new FormGroup();
+		courseConstraintFormGroup.add(courseConstraintCB);
+		courseConstraintFormGroup.add(courseConstraintOptions);
+		return courseConstraintFormGroup;
     }
 	
 

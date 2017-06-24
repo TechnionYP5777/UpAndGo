@@ -36,6 +36,7 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Color;
+import upandgo.shared.model.scedule.ConstraintsPool;
 import upandgo.shared.model.scedule.CourseTuple;
 
 public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Display{
@@ -208,6 +209,11 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events) {
 		timeTableView.displaySchedule(lessons, map, events);
 		
+	}
+	
+	@Override
+	public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool){
+		schedualerConstraintsView.setConstraintsPool(selectedCourses, constraintsPool);
 	}
 	
 	@Override

@@ -20,13 +20,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import upandgo.client.Resources;
 import upandgo.client.Resources.SchedualerControlsStyle;
 import upandgo.shared.entities.LocalTime;
-import upandgo.shared.model.scedule.constraintsPool;
+import upandgo.shared.model.scedule.ConstraintsPool;
 
 public class SchedulerControlsView extends VerticalPanel{
 
 	private SchedualerControlsStyle scStyle = Resources.INSTANCE.schedualerControlsStyle();
 	
-	private constraintsPool cp;
+	private ConstraintsPool cp;
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private List<Boolean> vectorDaysOff; 
@@ -41,7 +41,9 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 	
 	final Modal constraintsBox = new Modal();
-		
+	Button constraintsBoxSaveButton = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור");
+	Button constraintsBoxCancelButton = new Button("בטל");
+
 	SchedulerConstraintsView schedualerConstraintsView;
 
 	public SchedulerControlsView(){
@@ -105,7 +107,9 @@ public class SchedulerControlsView extends VerticalPanel{
 	
 	private void InitializeConstraintsBox(){
 		ModalFooter constraintsBoxFooter = new ModalFooter();
-		Button constraintsBoxButton = new Button("שמור וסגור", new ClickHandler() {
+		constraintsBoxSaveButton.setStyleName("btn btn-success");
+
+/*		 = new Button("שמור וסגור", new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -135,8 +139,17 @@ public class SchedulerControlsView extends VerticalPanel{
 				constraintsBox.hide();
 				
 			}
+		});*/
+		 
+		constraintsBoxCancelButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				constraintsBox.hide();
+			}
 		});
-		constraintsBoxFooter.add(constraintsBoxButton);
+		constraintsBoxFooter.add(constraintsBoxCancelButton);
+		constraintsBoxFooter.add(constraintsBoxSaveButton);
 		constraintsBox.setFade(true);
 		constraintsBox.setTitle("הגדרת אילוצים");
 		ModalBody schedualerConstraintsViewModalBody = new ModalBody();

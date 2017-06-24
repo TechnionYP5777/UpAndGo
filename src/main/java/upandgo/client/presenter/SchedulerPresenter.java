@@ -48,10 +48,12 @@ import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
+import upandgo.shared.entities.Day;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
+import upandgo.shared.model.scedule.ConstraintsPool;
 import upandgo.shared.model.scedule.CourseTuple;
 import upandgo.shared.model.scedule.Scheduler;
 import upandgo.shared.model.scedule.Timetable;
@@ -81,6 +83,7 @@ public class SchedulerPresenter implements Presenter {
 	protected boolean examBarVisable;		
 
 	protected List<Course> selectedCourses;
+	protected ConstraintsPool constraintsPool;
 	protected List<List<LessonGroup>> lessonGroupsList;
 	protected Map<WeekTime,UserEvent> userEvents = new HashMap<>();
 	protected int sched_index;
@@ -109,6 +112,8 @@ public class SchedulerPresenter implements Presenter {
 		public void drawCollisionView(List<CourseTuple> solvers);
 
 		public void setSelectedCourses(List<Course> selectedCourses);
+		
+		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);
 		
 		public Modal getContraintsModal();
 		
@@ -398,8 +403,13 @@ public class SchedulerPresenter implements Presenter {
 		view.getContraintsModal().addShowHandler(new ModalShowHandler(){
 			@Override
 			public void onShow(ModalShowEvent evt) {
-				Log.info("Constraints modal show event");
-				view.setSelectedCourses(selectedCourses);
+				Log.info("SchedulerPresenter: Constraints modal show event");
+				constraintsPool = new ConstraintsPool(true,true,LocalTime.of(9,0),LocalTime.of(12,0));
+				constraintsPool.setDayOff(Day.MONDAY, true);
+				constraintsPool.setDayOff(Day.THURSDAY, true);
+				Log.info("SchedulerPresenter: before setConstraintsPool");
+				view.setConstraintsPool(selectedCourses, constraintsPool);
+				//view.setSelectedCourses(selectedCourses);
 			}
 		});	
 		
