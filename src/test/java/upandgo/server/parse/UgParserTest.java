@@ -9,6 +9,7 @@ import org.junit.Test;
 import upandgo.server.parse.UgParser;
 import upandgo.shared.entities.Faculty;
 
+@Ignore
 public class UgParserTest {
 
 	

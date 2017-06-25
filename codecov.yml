@@ -1,4 +1,3 @@
 coverage:
   ignore: 
-    - "src/main/java/property/*"
-    - "src/main/java/command/*"
+    - "src/main/java/upandgo/client/*"

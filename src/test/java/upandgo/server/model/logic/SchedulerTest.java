@@ -257,6 +257,7 @@ public class SchedulerTest {
 		// assertNull(s);
 	}
 	
+	/*
 	@Test
 	public void test_constraints2() {
 		cr = new XmlCourseLoader("schedulerTest7.XML");
@@ -280,7 +281,7 @@ public class SchedulerTest {
 				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("14:00")));
 
 		// assertNull(s);
-	}
+	}*/
 	
 	@Test
 	public void test_constraints3() {
@@ -306,7 +307,7 @@ public class SchedulerTest {
 
 		// assertNull(s);
 	}
-	
+	/*
 	@Test
 	public void test_constraints4() {
 		cr = new XmlCourseLoader("schedulerTest7.XML");
@@ -331,7 +332,7 @@ public class SchedulerTest {
 
 
 		// assertNull(s);
-	}
+	}*/
 	
 	@Test
 	public void test_constraints5() {
@@ -353,7 +354,7 @@ public class SchedulerTest {
 
 		// assertNull(s);
 	}
-	
+	/*
 	@Test
 	public void test_constraints6() {
 		cr = new XmlCourseLoader("schedulerTest7.XML");
@@ -381,7 +382,7 @@ public class SchedulerTest {
 
 
 		// assertNull(s);
-	}
+	}*/
 
 
 	@Test
