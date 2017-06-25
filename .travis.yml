@@ -33,7 +33,7 @@ before_install:
 
 # add this if you use maven for your project and want to verify mvn build is successful and all unit tests pass.
 script:
- - gcloud auth activate-service-account kobybs@gmail.com --key-file upandgo-f116a2b8afe5.json
+ - gcloud auth activate-service-account --key-file upandgo-f116a2b8afe5.json
  - mvn test
  - mvn cobertura:cobertura
 
