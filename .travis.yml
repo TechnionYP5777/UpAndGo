@@ -21,7 +21,7 @@ before_install:
 #   python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
 #  fi
 
-# Here we use the decrypted service account credentials to authenticate the command line tool
+# Here we use the decrypted service account credentials to authenticate the command line toolll
 
 
 
