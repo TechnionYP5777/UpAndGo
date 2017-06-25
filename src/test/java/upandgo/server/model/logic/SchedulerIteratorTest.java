@@ -24,7 +24,7 @@ public class SchedulerIteratorTest {
 
 	@After
 	public void after() {
-		System.out.println("***");
+		///System.out.println("***");
 	}
 
 	@Test
@@ -32,14 +32,14 @@ public class SchedulerIteratorTest {
 		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		System.out.println(courses);
+		///System.out.println(courses);
 
 		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
 		for (final Timetable xxx : tl)
-			System.out.println("rank: " + xxx.getRankOfDaysoff());
+			///System.out.println("rank: " + xxx.getRankOfDaysoff());
 		for (@SuppressWarnings("deprecation")
 		final Iterator<Timetable> xxx = Scheduler.sortedBy(tl, false, false); xxx.hasNext();)
-			System.out.println(xxx.next().getRankOfDaysoff());
+			///System.out.println(xxx.next().getRankOfDaysoff());
 
 		// System.out.println(tl);
 		/*
@@ -63,14 +63,14 @@ public class SchedulerIteratorTest {
 		cr = new XmlCourseLoader("schedulerTest8.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		System.out.println(courses);
+		///System.out.println(courses);
 
 		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null), true, false); it
 				.hasNext();) {
 			final Timetable currentTable = it.next();
-			System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
-			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
-			System.out.println("time table: " + currentTable);
+			///System.out.println("days of rank: " + currentTable.getRankOfDaysoff());
+			///System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
+			//System.out.println("time table: " + currentTable);
 		}
 
 	}
@@ -81,7 +81,7 @@ public class SchedulerIteratorTest {
 		cr = new XmlCourseLoader("schedulerTest8.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		System.out.println(courses);
+		///System.out.println(courses);
 
 		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses, null);
 		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false);

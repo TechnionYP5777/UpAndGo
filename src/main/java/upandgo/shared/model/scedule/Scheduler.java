@@ -84,7 +84,7 @@ public class Scheduler implements IsSerializable{
 		for (int last = indexes.size() - 1, msb;;) {
 			
 			//Log.info("Scheduler: in for with indexes " + indexes);
-			System.out.println("*** NEW ROUND ***");
+			///System.out.println("*** NEW ROUND ***");
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 			if(!$.addConstraintsList(cs))
@@ -110,7 +110,7 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
-			System.out.println("lessons: " + $.getLessonGroups());
+			///System.out.println("lessons: " + $.getLessonGroups());
 			//b = $.collisionSolver();
 			if (b) {
 				//System.out.println("^found");
@@ -206,7 +206,7 @@ public class Scheduler implements IsSerializable{
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
 		for (int last = indexes.size() - 1, msb;;) {
-			System.out.println(indexes);
+			///System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 

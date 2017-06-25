@@ -82,7 +82,7 @@ public class Schedule implements Serializable {
 			lessons.add(xxx);
 			return true;
 		}*/
-		System.out.println("addLesson: " + xxx);
+		//System.out.println("addLesson: " + xxx);
 		
 		
 		edgeCounter.put(xxx.getCourseID(), 0);
@@ -95,7 +95,7 @@ public class Schedule implements Serializable {
 				//return false;*/
 		
 		for (final LessonGroup l : lessons){
-			System.out.println("check of " + l + " against " + xxx);
+			//System.out.println("check of " + l + " against " + xxx);
 			if (l.isClashWith(xxx)){
 				collisions.add(new Collision(l.getCourseID(), xxx.getCourseID()));
 				edgeCounter.put(l.getCourseID(), edgeCounter.get(l.getCourseID())+1);
@@ -124,7 +124,7 @@ public class Schedule implements Serializable {
 	 */
 	public boolean collisionSolver(){
 		// this code is equivalent of finding a vertex cover of size 1. 
-		System.out.println("collisions: " + collisions);
+		///System.out.println("collisions: " + collisions);
 		// step 0: if there are no collisions(edges) so there is no conflict 
 		// 			and there is no need to solve it. 
 		if(collisions.isEmpty())

@@ -28,7 +28,7 @@ public class scheduleTimetablesTest {
 
 	@After
 	public void after() {
-		System.out.println("***");
+		///System.out.println("***");
 	}
 
 	@Test
@@ -36,10 +36,10 @@ public class scheduleTimetablesTest {
 		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		System.out.println(courses);
+		///System.out.println(courses);
 
 		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
-		System.out.println("Schedule: " + s);
+		///System.out.println("Schedule: " + s);
 
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
@@ -57,14 +57,14 @@ public class scheduleTimetablesTest {
 		cr = new XmlCourseLoader("schedulerTest.XML");
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		System.out.println(courses);
+		///System.out.println(courses);
 
 		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
-		System.out.println(tl);
+		///System.out.println(tl);
 
 		assert tl.size() == 4;
-		for (final Timetable xxx : tl)
-			System.out.println("rank: " + xxx.getRankOfDaysoff());
+		/*for (final Timetable xxx : tl)
+			System.out.println("rank: " + xxx.getRankOfDaysoff());*/
 	}
 
 }
