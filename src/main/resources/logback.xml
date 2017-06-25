@@ -10,12 +10,12 @@
 	</appender>
 
 	<!-- Send logs to both console and file audit -->
-	 <logger name="upandgo" level="DEBUG"
+	 <logger name="upandgo" level="INFO"
 		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 
