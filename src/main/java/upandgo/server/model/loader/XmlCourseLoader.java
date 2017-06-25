@@ -117,25 +117,25 @@ public class XmlCourseLoader extends CourseLoader {
 
 	    // coursesList = xmlParser.getCourses(path);
 	    // Get data from REP XML file.
-	    Log.warn(new File(".").getAbsolutePath() + "&&&&&&&&&");
-	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
-//	    try {
-//	      ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-//	      try (InputStream credStream = classloader.getResourceAsStream(googleStorageCredentials)) {
-//	        
-//	        optionsBuilder.setCredentials(ServiceAccountCredentials.fromStream(credStream));
-//	      }
-//	    } catch (IOException e) {
-//	      // TODO Auto-generated catch block
-//	      e.printStackTrace();
-//	    }
-	    
-	    CoursesServiceImpl.someString = "We have got our credentials!";
-	    
-	    optionsBuilder.setProjectId(projectId);
-	    Storage storage = optionsBuilder.build().getService();
-	    loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
-	    
+//	    Log.warn(new File(".").getAbsolutePath() + "&&&&&&&&&");
+//	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
+////	    try {
+////	      ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+////	      try (InputStream credStream = classloader.getResourceAsStream(googleStorageCredentials)) {
+////	        
+////	        optionsBuilder.setCredentials(ServiceAccountCredentials.fromStream(credStream));
+////	      }
+////	    } catch (IOException e) {
+////	      // TODO Auto-generated catch block
+////	      e.printStackTrace();
+////	    }
+//	    
+//	    CoursesServiceImpl.someString = "We have got our credentials!";
+//	    
+//	    optionsBuilder.setProjectId(projectId);
+//	    Storage storage = optionsBuilder.build().getService();
+//	    loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
+//	    
 	    coursesById = new TreeMap<>();
 	    coursesByName = new TreeMap<>();
 	    getCourses();
@@ -459,10 +459,10 @@ public class XmlCourseLoader extends CourseLoader {
 
 	private void getCourses() {
 		try {
-//			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-//					.parse(new FileInputStream(new File(REP_XML_PATH))).getElementsByTagName("course");
 			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(coursesInfo).getElementsByTagName("course");
+					.parse(new FileInputStream(new File("resources/testXML/" + coursesInfoFilename))).getElementsByTagName("course");
+			/*final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(coursesInfo).getElementsByTagName("course");*/
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
