@@ -15,6 +15,22 @@ branches:
   - master
 
 
+before_install:
+# Install Google App Engine Python SDK
+#- if [ ! -d "${GAE_PYTHONPATH}" ]; then
+#   python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
+#  fi
+
+# Here we use the decrypted service account credentials to authenticate the command line tool
+- gcloud auth activate-service-account --key-file upandgo-f116a2b8afe5.json
+
+deploy:
+  provider: gae
+  keyfile: upandgo-f116a2b8afe5.json
+  project: upandgo-168508
+
+
+
 # add this if you use maven for your project and want to verify mvn build is successful and all unit tests pass.
 script:
  - gcloud auth application-default login
