@@ -35,6 +35,7 @@ before_install:
 
 # add this if you use maven for your project and want to verify mvn build is successful and all unit tests pass.
 script:
+ - gcloud auth application-default login --force
  - mvn test
  - mvn cobertura:cobertura
 
