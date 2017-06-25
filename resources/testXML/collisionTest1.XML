@@ -25,7 +25,7 @@
 			<moedB day="13" month="09" year="2016" time="09:00"/>
 		</exams>
 		<lecture>
-			<lesson building="ריק" day="א" roomNumber="3" timeEnd="17:00" timeStart="16:00"/>
+			<lesson building="ריקק" day="א" roomNumber="3" timeEnd="17:00" timeStart="16:00"/>
 			<lecturer name="ריק" title="ריק"/>
 			<tutorials>
 			</tutorials>
