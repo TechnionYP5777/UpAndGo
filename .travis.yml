@@ -40,10 +40,6 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 - gcloud auth application-default login
 - gcloud auth activate-service-account --key-file upandgo-f116a2b8afe5.json
 
-deploy:
-  provider: gae
-  keyfile: upandgo-f116a2b8afe5.json
-  project: upandgo-168508
 
 
 
