@@ -39,7 +39,7 @@ public class UgParserTest {
 
 	@Test
 	public void testCreateCourseElement(){
-		UgParser.createCourseElement("faculty","274364");
+		UgParser.createCourseElement("faculty","394800");
 	}
 	
 	@Test

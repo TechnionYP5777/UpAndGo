@@ -179,11 +179,11 @@ public class UgParser {
 	
 	public static void createCourseElement(final String faculty, final String courseID) {
 		
-		if (Integer.parseInt(courseID) >= 394800){
+/*		if (Integer.parseInt(courseID) >= 394800){
 			//parse course sport
 			return;
 		}
-		
+		*/
 		try {
 			final org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			final org.w3c.dom.Element rootElement = doc.createElement("courses");
@@ -257,6 +257,24 @@ public class UgParser {
 			}
 			Elements lessonElements = courseSchedulingTable.getElementsByTag("tr");
 	
+			if (Integer.parseInt(courseID) >= 394800) { //Sport Course
+				for (int i = 1 ; i < lessonElements.size() ; i ++){
+					Element lessonElement = lessonElements.get(i);
+					if (lessonElement.children().size() < 8){
+						continue;
+					}
+					lessonType = Type.SPORT;
+					System.out.println("----------------");
+					System.out.println("type: " + lessonType);
+					System.out.println("group: " + lessonElement.child(7).html());
+					if (notEmpty(lessonElement.child(5))){
+						System.out.println("name: " + lessonElement.child(5).html());						
+					}
+					createLessonElement(lessonElement);					
+				}
+				return;
+			}
+			
 			for (int i = 1 ; i < lessonElements.size() ; i ++){
 				Element lessonElement = lessonElements.get(i);
 				if (lessonElement.children().size() >= 7){ //start a lesson group
