@@ -27,6 +27,16 @@ public class Lesson implements IsSerializable {
 			this.hebrewString = hebrewString;
 		}
 		
+		public static Type fromString(String text){
+			if (text == null){
+				return null;
+			}
+			for (Type type : Type.values())
+				if (type.hebrewString.equals(text))
+					return type;
+			return null;
+		}
+		
 		@Override
 		public String toString(){
 			return hebrewString;
