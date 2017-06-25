@@ -173,6 +173,10 @@ public class UgParser {
 		
 	}
 	
+	private static boolean notEmpty(Element element){
+		return !element.html().equals("&nbsp;");
+	}
+	
 	public static void createCourseElement(final String faculty, final String courseID) {
 		
 		if (Integer.parseInt(courseID) >= 394800){
@@ -191,7 +195,51 @@ public class UgParser {
 
 			System.out.println("points: " + coursePointsTable.select("th:contains(נקודות)").get(0).parent().nextElementSibling().child(0).html());
 			
-			if (!coursePage.select("th:contains(הערות)").isEmpty()){
+			//final Element courseHoursTable = coursePointsTable.child(0).child(0).child(4).child(0);
+			final Element courseHoursTable = coursePointsTable.select("th:containsOwn(שעות)").get(0).parent();
+			final Elements courseHours = courseHoursTable.children();
+		
+			if (notEmpty(courseHours.get(4))){
+				System.out.println("hoursLecture: " + courseHours.get(4).html());
+			}
+			if (notEmpty(courseHours.get(3))){
+				System.out.println("hoursTutorial: " + courseHours.get(3).html());
+			}
+			if (notEmpty(courseHours.get(2))){
+				System.out.println("hoursLab: " + courseHours.get(2).html());
+			}
+			if (notEmpty(courseHours.get(1))){
+				System.out.println("hoursProject: " + courseHours.get(1).html());
+			}
+
+			
+			final Element courseExamsTable = coursePage.getElementById("sylexam");
+			if (courseExamsTable!=null){
+				final Elements courseExams = courseExamsTable.getElementsByTag("tr");
+				for (int i = 1 ; i < courseExams.size() ; i ++){
+					int rowSize = courseExams.get(i).children().size();
+					if (notEmpty(courseExams.get(i).child(rowSize-1))){
+						Element courseExam = courseExams.get(i);
+						String moed = courseExam.child(rowSize-1).html();
+						if (moed.equals("א")){
+							System.out.print("moedA: ");
+						} else if (moed.equals("ב")){
+							System.out.print("moedB: ");
+						}
+						if (notEmpty(courseExam.child(rowSize-2))){
+							System.out.print("day " + courseExam.child(rowSize-2).html().substring(0,2) + " ");
+							System.out.print("month " + courseExam.child(rowSize-2).html().substring(3,5) + " ");
+							System.out.print("year " + courseExam.child(rowSize-2).html().substring(6,10) + " ");
+						}
+						if (notEmpty(courseExam.child(rowSize-4))){
+							System.out.print("time " + courseExam.child(rowSize-4).html().substring(0,5));
+						}
+					}
+					System.out.println("");
+				}
+			}
+			
+			if (!coursePage.select("th:contains(הערות)").isEmpty() && coursePage.select("th:contains(הערות)").get(0).hasAttr("align")){
 				final Element courseNotesTable = coursePage.select("th:contains(הערות)").get(0).parent().parent();
 				Elements notesElements = courseNotesTable.getElementsByTag("tr");
 				for (int i = 1 ; i < notesElements.size() ; i ++){
@@ -223,9 +271,14 @@ public class UgParser {
 					System.out.println("----------------");
 					System.out.println("type: " + lessonType);
 					System.out.println("group: " + lessonElement.child(6).html());
-					if (!lessonElement.child(4).html().equals("&nbsp;")){
-						System.out.println("title: " + lessonElement.child(4).html().split(" ")[0]);
-						System.out.println("name: " + lessonElement.child(4).html().substring(lessonElement.child(4).html().indexOf(" ")+1));
+					if (notEmpty(lessonElement.child(4))){
+						String[] lecturers = lessonElement.child(4).html().split("<br>");
+						for (String lecturer : lecturers){
+							if (!lecturer.trim().isEmpty()){
+								System.out.println("title: " + lecturer.split(" ")[0]);
+								System.out.println("name: " + lecturer.substring(lessonElement.child(4).html().indexOf(" ")+1));
+							}
+						}
 					}
 					createLessonElement(lessonElement);
 					while (i+1 < lessonElements.size() && lessonElements.get(i+1).children().size() < 7 && lessonElements.get(i+1).children().size() >= 4){
@@ -274,19 +327,19 @@ public class UgParser {
 	public static void createLessonElement(final Element lessonElement){
 		//System.out.println("day: " + lessonElement.child(3).text());
 
-		if (!lessonElement.child(3).html().equals("&nbsp;")){
+		if (notEmpty(lessonElement.child(3))){
 			System.out.println("day: " + Day.fromLetter(lessonElement.child(3).html()).toLetter());
 		}
-		if (!lessonElement.child(2).html().equals("&nbsp;")){
+		if (notEmpty(lessonElement.child(2))){
 			System.out.println("startHour: " + lessonElement.child(2).html().substring(0, 2));
 			System.out.println("startMinute: " + lessonElement.child(2).html().substring(3, 5));
 			System.out.println("endHour: " + lessonElement.child(2).html().substring(6, 8));
 			System.out.println("endMinute: " + lessonElement.child(2).html().substring(9, 11));
 		}
-		if (!lessonElement.child(1).html().equals("&nbsp;")){
+		if (notEmpty(lessonElement.child(1))){
 			System.out.println("building: " + lessonElement.child(1).html());
 		}
-		if (!lessonElement.child(0).html().equals("&nbsp;")){
+		if (notEmpty(lessonElement.child(0))){
 			System.out.println("room: " + lessonElement.child(0).html());
 		}
 	}
