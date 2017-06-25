@@ -20,7 +20,7 @@ public class XmlCourseLoaderTest2 {
 
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("schedulerTest6.XML");
+		cr = new XmlCourseLoader("schedulerTest6.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		for(Course c : courses){

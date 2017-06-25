@@ -101,7 +101,8 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	private static String googleStorageCredentials = "upandgo-bf957bbe2318.json";
 	  
-	  public XmlCourseLoader(final String REP_XML_PATH) {
+	
+	public XmlCourseLoader(final String REP_XML_PATH, boolean test_flag) {
 	    super(REP_XML_PATH);
 	    coursesInfoFilename = REP_XML_PATH;
 	    //coursesInfoFilename = "loadOf6CoursesTest.XML";
@@ -138,7 +139,48 @@ public class XmlCourseLoader extends CourseLoader {
 //	    
 	    coursesById = new TreeMap<>();
 	    coursesByName = new TreeMap<>();
-	    getCourses();
+	    getCourses(test_flag);
+	  }
+	
+	
+	  public XmlCourseLoader(final String REP_XML_PATH) {
+	    super(REP_XML_PATH);
+	    coursesInfoFilename = REP_XML_PATH;
+	    //coursesInfoFilename = "loadOf6CoursesTest.XML";
+//	    XmlCourseLoader.REP_XML_PATH = REP_XML_PATH;
+
+	    // if (!new File(path).exists())
+	    // RepFile.getCoursesNamesAndIds();
+
+	    // Create a data dir for saving changes if it does not exists
+	    // final File dataDir = new File(DATA_DIR_PATH);
+	    // if (!dataDir.exists() || !dataDir.isDirectory())
+	    // dataDir.mkdir();
+
+	    // coursesList = xmlParser.getCourses(path);
+	    // Get data from REP XML file.
+	    Log.debug(new File(".").getAbsolutePath() + "&&&&&&&&&");
+	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
+//	    try {
+//	      ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+//	      try (InputStream credStream = classloader.getResourceAsStream(googleStorageCredentials)) {
+//	        
+//	        optionsBuilder.setCredentials(ServiceAccountCredentials.fromStream(credStream));
+//	      }
+//	    } catch (IOException e) {
+//	      // TODO Auto-generated catch block
+//	      e.printStackTrace();
+//	    }
+	    
+	    CoursesServiceImpl.someString = "We have got our credentials!";
+	    
+	    optionsBuilder.setProjectId(projectId);
+	    Storage storage = optionsBuilder.build().getService();
+	    loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
+	    
+	    coursesById = new TreeMap<>();
+	    coursesByName = new TreeMap<>();
+	    getCourses(false);
 	  }
 
 	@Override
@@ -457,12 +499,16 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private void getCourses() {
+	private void getCourses(boolean test_flag) {
 		try {
-			final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+			NodeList coursesList;
+			if(test_flag){
+				coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(new FileInputStream(new File("resources/testXML/" + coursesInfoFilename))).getElementsByTagName("course");
-			/*final NodeList coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(coursesInfo).getElementsByTagName("course");*/
+			}else{
+				coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(coursesInfo).getElementsByTagName("course");
+			}
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)

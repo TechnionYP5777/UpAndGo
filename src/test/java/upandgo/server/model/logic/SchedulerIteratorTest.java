@@ -29,18 +29,21 @@ public class SchedulerIteratorTest {
 
 	@Test
 	public void test_a() {
-		cr = new XmlCourseLoader("schedulerTest.XML");
+		cr = new XmlCourseLoader("schedulerTest.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		///System.out.println(courses);
 
 		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
-		for (final Timetable xxx : tl)
+		//for (final Timetable xxx : tl)
 			///System.out.println("rank: " + xxx.getRankOfDaysoff());
-		for (@SuppressWarnings("deprecation")
+			
+		/*for (@SuppressWarnings("deprecation")
+		
 		final Iterator<Timetable> xxx = Scheduler.sortedBy(tl, false, false); xxx.hasNext();)
-			///System.out.println(xxx.next().getRankOfDaysoff());
-
+			System.out.println(xxx.next().getRankOfDaysoff());
+*/
+			
 		// System.out.println(tl);
 		/*
 		 * Timetable t = Scheduler.getTimetablesList(courses).get(0);
@@ -60,7 +63,7 @@ public class SchedulerIteratorTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_b() {
-		cr = new XmlCourseLoader("schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		///System.out.println(courses);
@@ -78,7 +81,7 @@ public class SchedulerIteratorTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_c() {
-		cr = new XmlCourseLoader("schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		///System.out.println(courses);

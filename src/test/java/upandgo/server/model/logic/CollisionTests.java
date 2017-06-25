@@ -29,7 +29,7 @@ public class CollisionTests {
 	
 	@Test
 	public void test1() {
-		cr = new XmlCourseLoader("collisionTest1.XML");
+		cr = new XmlCourseLoader("collisionTest1.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -56,7 +56,7 @@ public class CollisionTests {
 	
 	@Test
 	public void test2() {
-		cr = new XmlCourseLoader("collisionTest2.XML");
+		cr = new XmlCourseLoader("collisionTest2.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);

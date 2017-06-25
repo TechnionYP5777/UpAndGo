@@ -66,11 +66,11 @@ public class Scheduler implements IsSerializable{
 		idToNameMap = mapCoursesToNames(lcourse);
 		collisionSolvers = new ArrayList<>();
 				
-		Log.info("Scheduler: in getTimetablesList with " + lcourse.size() + " courses:" + lcourse);
+		Log.debug("Scheduler: in getTimetablesList with " + lcourse.size() + " courses:" + lcourse);
 		
 		// TO REMOVE
 		if(lcourse.get(0) != null)
-			Log.info(lcourse.get(0).toString());
+			Log.debug(lcourse.get(0).toString());
 		
 		final List<Timetable> result = new ArrayList<>();
 		//Log.info("Scheduler: here");
@@ -79,7 +79,7 @@ public class Scheduler implements IsSerializable{
 		//Log.info("Scheduler: here");
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
-		Log.info("max indexes:" + max);
+		Log.debug("max indexes:" + max);
 
 		for (int last = indexes.size() - 1, msb;;) {
 			
@@ -165,7 +165,7 @@ public class Scheduler implements IsSerializable{
 					indexes.set(xxx, 0);
 			}
 		}
-		Log.info("Found " + result.size() + " correct results");
+		Log.debug("Found " + result.size() + " correct results");
 		return result;
 	}
 	
@@ -285,11 +285,11 @@ public class Scheduler implements IsSerializable{
 			//Log.info("Scheduler: in initMainArr course " + xxx.getId());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
-			Log.info("Scheduler: course: " + xxx.getId() + " getLectures: " + xxx.getLectures());
+			Log.debug("Scheduler: course: " + xxx.getId() + " getLectures: " + xxx.getLectures());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
 			//Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
-			Log.info("Scheduler: course: " + xxx.getId() + " getLuts: " + xxx.getTutorials());
+			Log.debug("Scheduler: course: " + xxx.getId() + " getLuts: " + xxx.getTutorials());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
 		}

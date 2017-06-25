@@ -19,7 +19,7 @@ public class LessonTest {
 
 	@Test
 	public void test_a() {
-		cr = new XmlCourseLoader("schedulerTest5.XML");
+		cr = new XmlCourseLoader("schedulerTest5.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 
@@ -30,7 +30,7 @@ public class LessonTest {
 
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("schedulerTest6.XML");
+		cr = new XmlCourseLoader("schedulerTest6.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 

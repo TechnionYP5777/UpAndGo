@@ -21,7 +21,7 @@ public class XmlCourseLoaderTest {
 
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("test.XML");
+		cr = new XmlCourseLoader("test.XML", true);
 		// cr = new XmlCourseLoader("REP.XML");
 	}
 

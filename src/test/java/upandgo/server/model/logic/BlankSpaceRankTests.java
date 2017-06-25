@@ -54,7 +54,7 @@ public class BlankSpaceRankTests {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_a() {
-		cr = new XmlCourseLoader("schedulerTest9.XML");
+		cr = new XmlCourseLoader("schedulerTest9.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
@@ -62,17 +62,17 @@ public class BlankSpaceRankTests {
 		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null), true, false); it
 				.hasNext();) {
 			final Timetable currentTable = it.next();
-			System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
-			System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
-			System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.parse("10:00")));
-			System.out.println("time table: " + currentTable);
+			//System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
+			//System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
+			//System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.parse("10:00")));
+			//System.out.println("time table: " + currentTable);
 		}
 
 	}
 
 	@Test
 	public void test_b() {
-		cr = new XmlCourseLoader("schedulerTest8.XML");
+		cr = new XmlCourseLoader("schedulerTest8.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
 		System.out.println(courses);
