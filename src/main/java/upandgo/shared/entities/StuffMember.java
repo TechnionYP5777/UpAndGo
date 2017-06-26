@@ -1,7 +1,5 @@
 package upandgo.shared.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -15,22 +13,16 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * 
  */
 public class StuffMember implements IsSerializable {
-	//private static final long serialVersionUID = 7103892149028991099L;
-
+	
 	public String fName;
 	public String lName;
 	public String title;
-//	public String email;
-//	public String office;
-//	public List<LocalTime> officeHours;
 
 	public StuffMember(){
 		fName = null;
 		lName = null;
 		title = null;
-//		email = null;
-//		office = null;
-//		officeHours = null;
+
 	}
 	
 	public StuffMember(final String fName1, final String lName1) {
@@ -38,7 +30,6 @@ public class StuffMember implements IsSerializable {
 		fName = fName1;
 		lName = lName1;
 		title = "";
-//		officeHours = null;
 	}
 
 	public StuffMember(final String fName1, final String lName1, final String title) {
@@ -46,8 +37,6 @@ public class StuffMember implements IsSerializable {
 		fName = fName1;
 		lName = lName1;
 		this.title = title;
-//		office = email = "";
-//		officeHours = null;
 	}
 
 	public String getFirstName() {
@@ -65,16 +54,6 @@ public class StuffMember implements IsSerializable {
 	public String getFullName() {
 		return title+" "+fName+" "+lName;
 	}
-
-//	public StuffMember(final String fName1, final String lName1, final String ttl, final String eml,
-//			final String office1, final List<LocalTime> ofHours) {
-//		fName = fName1;
-//		lName = lName1;
-//		title = ttl;
-//		email = eml;
-//		office = office1;
-//		officeHours = new ArrayList<>(ofHours);
-//	}
 
 	@Override
 	public boolean equals(final Object xxx) {
