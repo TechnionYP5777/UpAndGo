@@ -443,4 +443,9 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 
+	@Override
+	public HasClickHandlers exportScheduleButton() {
+		return schedualerControlsView.exportSchedule;
+	}
+
 }

@@ -64,5 +64,22 @@
 		<filter-name>ObjectifyFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
+	<servlet>
+		<servlet-name>oauth2Callback</servlet-name>
+		<servlet-class>upandgo.server.OAuth2Callback</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>oauth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CalendarAuth</servlet-name>
+		<servlet-class>upandgo.server.CalendarAuthServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CalendarAuth</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 </web-app>

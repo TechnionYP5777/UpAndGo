@@ -1,5 +1,6 @@
 package upandgo.server;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,8 @@ import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
 import upandgo.client.CoursesService;
+import upandgo.server.model.CalendarModel;
 import upandgo.server.model.CourseModel;
-import upandgo.server.model.TimeTableModel;
 import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
@@ -46,7 +47,8 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private String REP_XML_PATH = "201602.XML";
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
-	private CourseModel model;
+	private final CourseModel model;
+	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
 		Log.warn("in course service constractor");
@@ -149,4 +151,17 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		model = new CourseModel(loader);
 	};
 
+	public void exportSchedule(List<LessonGroup> sched) throws IOException {
+		try {
+			someString += "\n111";
+			calendarModel.createCalendar(sched);
+			someString += "\n222";
+		} catch (IOException e) {
+			someString += "\n333\n";
+			someString += e.getMessage();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
+		}
+	}
 }

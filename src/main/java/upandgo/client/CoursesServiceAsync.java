@@ -45,4 +45,5 @@ public interface CoursesServiceAsync {
 	
 	public void setSemester(String semesterId, AsyncCallback<Void> callback);
 	
+	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }

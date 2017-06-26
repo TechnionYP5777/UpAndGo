@@ -46,6 +46,8 @@ public class SchedulerControlsView extends VerticalPanel{
 
 	SchedulerConstraintsView schedualerConstraintsView;
 
+	Button exportSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;יצוא מערכת");
+
 	public SchedulerControlsView(){
 		this.schedualerConstraintsView = new SchedulerConstraintsView();
     	InitializePanel();
@@ -71,6 +73,7 @@ public class SchedulerControlsView extends VerticalPanel{
 		this.add(nextSchedule);
 		this.add(prevSchedule);
 		this.add(saveSchedule);
+		this.add(exportSchedule);
 		//this.add(new SchedualerConstraintsView());
 		
 		buildSchedule.setStyleName("btn btn-success");
@@ -79,6 +82,7 @@ public class SchedulerControlsView extends VerticalPanel{
 		nextSchedule.setStyleName("btn btn-primary");
 		prevSchedule.setStyleName("btn btn-primary");
 		saveSchedule.setStyleName("btn btn-info");
+		exportSchedule.setStyleName("btn btn-info");
 		
 		scheduleWell.addStyleName(scStyle.SchedulerIndexWell());
 		scheduleWell.setSize(WellSize.SMALL);
