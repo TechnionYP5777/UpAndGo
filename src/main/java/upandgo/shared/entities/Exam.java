@@ -75,10 +75,7 @@ public class Exam implements IsSerializable{
 	}
 	
 	public String getTimeToDisplay() {
-		if ("00:00".equals(time)) {
-			return "";
-		}
-		return time + " - ";
+		return "00:00".equals(time) ? "" : time + " - ";
 	}
 	
 	public String getDate() {
@@ -97,22 +94,12 @@ public class Exam implements IsSerializable{
 	@SuppressWarnings("boxing")
 	private static Boolean isLeap(String year) {
 		int yearnum = Integer.parseInt(year);
-		if (((yearnum % 4 == 0) && (yearnum % 100 != 0)) || (yearnum % 400 == 0)) {
-			return true;
-		}
-		return false;
+		return (yearnum % 4 == 0) && (yearnum % 100 != 0) || yearnum % 400 == 0;
 	}
 	
-	public int compare(Exam exam) {
-		int examA = Integer.parseInt(this.compareString());
-		int examB = Integer.parseInt(exam.compareString());
-		if (examA > examB) {
-			return 1;
-		}
-		if (examA == examB) {
-			return 0;
-		} 
-		return -1;
+	public int compare(Exam x) {
+		int examA = Integer.parseInt(this.compareString()), examB = Integer.parseInt(x.compareString());
+		return examA > examB ? 1 : examA != examB ? -1 : 0;
 	}
 	
 	//the exams should be in order, exama must be early then examb
@@ -126,23 +113,22 @@ public class Exam implements IsSerializable{
 			examb = temp;
 		}
 		int res = 0;
-		if (isLeap(exama.getYear())) {
+		if (isLeap(exama.getYear()))
 			monthDays[1] = 29;
-		}
 		if (exama.getMonth().equals(examb.getMonth())) {
 			monthDays[1] = 28;
 			return Integer.parseInt(examb.getDayOfMonth()) - Integer.parseInt(exama.getDayOfMonth());
 		}
-		for (int i = Integer.parseInt(exama.getMonth()); i < Integer.parseInt(examb.getMonth()) -1 ; i++) {
+		for (int i = Integer.parseInt(exama.getMonth()); i < Integer.parseInt(examb.getMonth()) -1 ; ++i)
 			res += monthDays[i];
-		}
-		res += (monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth()))
+		res += monthDays[Integer.parseInt(exama.getMonth()) - 1] - Integer.parseInt(exama.getDayOfMonth())
 				+ Integer.parseInt(examb.getDayOfMonth());
 		monthDays[1] = 28;
 		return res;
 	}
 	
 	//the exams should be in order, exama must be early then examb
+	@SuppressWarnings("boxing")
 	public List<String> datesBetweenExams (Exam examb) {
 		Exam exama = this;
 		if (exama.compare(examb) > 0) {
@@ -152,24 +138,15 @@ public class Exam implements IsSerializable{
 		}
 		int examMonthA = Integer.parseInt(exama.getMonth());
 		int examMonthB = Integer.parseInt(examb.getMonth());
-		int dayIndex = Integer.parseInt(exama.getDayOfMonth()) + 1;
-		int monthIndex;
+		int dayIndex = Integer.parseInt(exama.getDayOfMonth()) + 1, monthIndex;
 		List<String> res = new ArrayList<>();
-		if (isLeap(exama.getYear())) {
+		if (isLeap(exama.getYear()))
 			monthDays[1] = 29;
-		}
-		while (examMonthA <= examMonthB) {
-			if (examMonthA == examMonthB) {
-				monthIndex = Integer.parseInt(examb.getDayOfMonth()) - 1;
-			} else {
-				monthIndex = monthDays[examMonthA -1];
-			}
-			while (dayIndex <= monthIndex) {
-				res.add(dayIndex + "." +  examMonthA);		
-				dayIndex++;
-			}
+		for (; examMonthA <= examMonthB; ++examMonthA) {
+			monthIndex = examMonthA != examMonthB ? monthDays[examMonthA - 1] : Integer.parseInt(examb.getDayOfMonth()) - 1;
+			for (; dayIndex <= monthIndex; ++dayIndex)
+				res.add(dayIndex + "." + examMonthA);
 			dayIndex = 1;
-			examMonthA++;
 		}
 		monthDays[1] = 28;
 		return res;

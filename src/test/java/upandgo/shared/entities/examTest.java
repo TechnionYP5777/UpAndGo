@@ -41,35 +41,29 @@ public class examTest {
 	@Test
 	public void hebDayConverterTest() {
 		String[] res = new String[] {"א'", "ב'", "ג'", "ד'", "ה'", "ו'", "ש'"};
-		for (int i = 0; i < res.length; i++) {
-			Exam exam = new Exam("13:00 08 08 2017" + " " + (i+1));
-			assertEquals(res[i], exam.getDay());
-		}
+		for (int i = 0; i < res.length; ++i)
+			assertEquals(res[i], (new Exam("13:00 08 08 2017 " + (i + 1))).getDay());
 	}
 	
 	@Test
 	public void getTimeToDisplayShouldReturnEmptyStringIfTimeInvalid() {
-		Exam exam = new Exam("00:00 08 08 2017 4");
-		assertEquals("", exam.getTimeToDisplay());
+		assertEquals("", (new Exam("00:00 08 08 2017 4")).getTimeToDisplay());
 		
 	}
 	
 	@Test
 	public void getTimeToDisplayShouldStringInCorrectFormat() {
-		Exam exam = new Exam("13:00 08 08 2017 4");
-		assertEquals("13:00 - ", exam.getTimeToDisplay());	
+		assertEquals("13:00 - ", (new Exam("13:00 08 08 2017 4")).getTimeToDisplay());	
 	}
 	
 	@Test
 	public void getDateTest() {
-		Exam exam = new Exam("13:00 20 08 2017 4");
-		assertEquals("20.08", exam.getDate());	
+		assertEquals("20.08", (new Exam("13:00 20 08 2017 4")).getDate());	
 	}
 	
 	@Test
 	public void toStringTest() {
-		Exam exam = new Exam("13:00 20 08 2017 4");
-		assertEquals("20.08 יום ד'", exam.toString());	
+		assertEquals("20.08 יום ד'", (new Exam("13:00 20 08 2017 4")).toString());	
 	}
 	
 	@Test
@@ -92,48 +86,40 @@ public class examTest {
 	public void daysBetweenExamsTest() {
 		Exam exama = new Exam("13:00 20 08 2017 4");
 		Exam examb = new Exam("13:00 19 08 2017 4");
+		Exam examc = new Exam("13:00 19 11 2017 4");
 				
 		assertEquals(1, examb.daysBetweenExams(exama));
 		assertEquals(1, exama.daysBetweenExams(examb));
+		assertEquals(92, examb.daysBetweenExams(examc));
 	}
 	
 	@Test
 	public void daysBetweenExamsLeapYearTest() {
-		Exam exama = new Exam("13:00 28 02 2004 4");
-		Exam examb = new Exam("13:00 01 03 2004 4");
-				
-		assertEquals(2, examb.daysBetweenExams(exama));
+		assertEquals(2, (new Exam("13:00 01 03 2004 4")).daysBetweenExams(new Exam("13:00 28 02 2004 4")));
 	}
 	
 	@Test
 	public void daysBetweenExamsNotLeapYearTest() {
-		Exam exama = new Exam("13:00 28 02 2017 4");
-		Exam examb = new Exam("13:00 01 03 2017 4");
-				
-		assertEquals(1, examb.daysBetweenExams(exama));
+		assertEquals(1, (new Exam("13:00 01 03 2017 4")).daysBetweenExams(new Exam("13:00 28 02 2017 4")));
 	}
 	
 	@Test
 	public void datesBetweenExamsTest() {
-		Exam exama = new Exam("13:00 20 02 2017 4");
-		Exam examb = new Exam("13:00 24 02 2017 4");
+		Exam exama = new Exam("13:00 20 02 2017 4"), examb = new Exam("13:00 24 02 2017 4");
 		String[] res = new String[] { "21.2", "22.2", "23.2" };
-		for (int i = 0; i < res.length; i++) {
+		for (int i = 0; i < res.length; ++i) {
 			assertEquals(res[i], exama.datesBetweenExams(examb).get(i));
+			assertEquals(res[i], examb.datesBetweenExams(exama).get(i));
 		}
 	}
 	
 	@Test
 	public void datesBetweenExamsLeapYearTest() {
-		Exam exama = new Exam("13:00 28 02 2004 4");
-		Exam examb = new Exam("13:00 02 03 2004 4");
+		Exam exama = new Exam("13:00 28 02 2004 4"), examb = new Exam("13:00 02 03 2004 4");
 		String[] res = new String[] { "29.2", "1.3"};
-		for (int i = 0; i < res.length; i++) {
+		for (int i = 0; i < res.length; ++i)
 			assertEquals(res[i], exama.datesBetweenExams(examb).get(i));
-		}
 	}
-	
-	
-	
+
 
 }
