@@ -3,6 +3,8 @@ package upandgo.server;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -45,49 +47,58 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		ObjectifyService.register(CoursesEntity.class);
 	}
 	
-	private Semester currentSemester = Semester.WINTER16;
-	private String REP_XML_PATH = "201602.XML";
+	private Semester defaultSemester = Semester.WINTER16;
+	//private String REP_XML_PATH = "201602.XML";
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
 	private CourseModel model;
+	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
 	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
 		Log.warn("in course service constractor");
 		// Log.info("entered c'tor of CourseServiceImple");
-
-		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
-		model = new CourseModel(loader);
 	}
-
-	// this one doesn't seem to be in use
-	public CoursesServiceImpl(String path) {
-		REP_XML_PATH = path;
-		XmlCourseLoader loader = new XmlCourseLoader(REP_XML_PATH);
-		model = new CourseModel(loader);
+	
+	private void initilalizeCourseModel(Semester semester){
+		XmlCourseLoader loader = new XmlCourseLoader(semester.getId()+".XML");
+		CourseModel model = new CourseModel(loader);
+		courseModels.put(semester, model);
 	}
 
 	@Override
-	public ArrayList<CourseId> getSelectedCourses() {
-		return (ArrayList<CourseId>) model.loadChosenCourses();
+	public ArrayList<CourseId> getSelectedCourses(Semester semester) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		return (ArrayList<CourseId>) courseModels.get(semester).loadChosenCourses();
 	}
 
 	@Override
-	public ArrayList<CourseId> getNotSelectedCourses(String query, String faculty) {
-		ArrayList<CourseId> res = (ArrayList<CourseId>) model.loadQueryByFaculty(query, faculty);
+	public ArrayList<CourseId> getNotSelectedCourses(Semester semester, String query, String faculty) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		ArrayList<CourseId> res = (ArrayList<CourseId>) courseModels.get(semester).loadQueryByFaculty(query, faculty);
 		Log.warn("CourseServiceImple got: " + res.get(0).getTitle() + "*" + res.get(0).aTerm() + "*"
 				+ res.get(0).bTerm());
 		return res;
 	}
 
 	@Override
-	public ArrayList<String> getFaculties() {
-		return (ArrayList<String>) model.loadFacultyNames();
+	public ArrayList<String> getFaculties(Semester semester) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		return (ArrayList<String>) courseModels.get(semester).loadFacultyNames();
 	}
 
 	@Override
-	public Course getCourseDetails(CourseId id) {
-		return model.getCourseById(id.number());
+	public Course getCourseDetails(Semester semester, CourseId id) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		return courseModels.get(semester).getCourseById(id.number());
 	}
 
 	@Override
@@ -97,28 +108,31 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public void selectCourse(CourseId id) {
-		Log.info("^&^&^&^&&^&&^&&^picked course: " + id.number());
+/*		Log.info("^&^&^&^&&^&&^&&^picked course: " + id.number());
 		someString = "here0";
 		model.pickCourse(id.number());
-		model.saveChosenCourses(model.getChosenCourseNames());
+		model.saveChosenCourses(model.getChosenCourseNames());*/
 	}
 
 	@Override
 	public void unselectCourse(CourseId id) {
-		model.dropCourse(id.number());
-		model.saveChosenCourses(model.getChosenCourseNames());
+/*		model.dropCourse(id.number());
+		model.saveChosenCourses(model.getChosenCourseNames());*/
 	}
 
 	@Override
-	public List<Course> getChosenCoursesList() {
-		return model.getPickedCoursesList();
+	public List<Course> getChosenCoursesList(Semester semester) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		return courseModels.get(semester).getPickedCoursesList();
 	}
 
 	static public String someString = "empty";
 
 	@Override
 	public String getSomeString() {
-		return someString;
+		return "getSomeString " + model.getPickedCoursesList().size() + " " + model.getPickedCoursesList().toString();
 	}
 
 	@Override
@@ -128,9 +142,12 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 
 	@Override
-	public void unselectAllCourses() {
-		model.UnselectAllCourses();
-		model.saveChosenCourses(model.getChosenCourseNames());
+	public void unselectAllCourses(Semester semester) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		courseModels.get(semester).UnselectAllCourses();
+		courseModels.get(semester).saveChosenCourses(courseModels.get(semester).getChosenCourseNames());
 		
 	}
 	
@@ -149,14 +166,17 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	
 	@Override
 	public void setSemester(Semester semester){
+		//currentSemester = semester;
 		XmlCourseLoader loader = new XmlCourseLoader(semester.getId()+".XML");
 		model = new CourseModel(loader);
+		model.setSemester(semester);
 	}
 	
 	@Override
 	public Semester getSemester(){
-		return currentSemester;
+		return model.getSemester();
 	};
+	
 
 	public void exportSchedule(List<LessonGroup> sched) throws IOException {
 		try {
@@ -171,4 +191,5 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}
+	
 }

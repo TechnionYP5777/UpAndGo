@@ -61,6 +61,8 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
     List<AnchorListItem> semesterListItems = new ArrayList<>();
     Modal semesterModal = new Modal();
 	Button semesterModalAcceptButton = new Button("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;אשר");
+	Button tempButton = new Button("כתוב סמסטר בלוג");
+	Button tempButton2 = new Button("כתוב קורסים שנבחרו בלוג");
 	org.gwtbootstrap3.client.ui.Button signInButton = new org.gwtbootstrap3.client.ui.Button("כניסה / הרשמה");
 	
 	public NavBarView(){
@@ -106,10 +108,11 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterText.setWidth("30%");
 		semesterText.getElement().getStyle().setTextAlign(TextAlign.CENTER);
 		navbarCol.add(semesterText);
-
+		//navbarCol.add(tempButton);
+		navbarCol.add(tempButton2);
 		
 		navbar.add(navbarCol);
-
+		
 		this.add(navbar);
 		//this.addStyleName(nvStyle.navBarPanel());
 		
@@ -162,6 +165,16 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	@Override
 	public HasClickHandlers getSemesterModalAcceptButton(){
 		return this.semesterModalAcceptButton;
+	}
+	
+	@Override
+	public HasClickHandlers getTempButton(){
+		return this.tempButton;
+	}
+	
+	@Override
+	public HasClickHandlers getTempButton2(){
+		return this.tempButton2;
 	}
 	
 	@Override

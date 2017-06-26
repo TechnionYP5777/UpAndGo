@@ -39,6 +39,7 @@ import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
 import upandgo.client.event.CollidingCourseDeselectedEventHandler;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;
@@ -116,7 +117,7 @@ public class CourseListPresenter implements Presenter {
 			public void onAuthenticationChanged(AuthenticationEvent event) {
 				isSignedIn = event.isSignedIn();
 				if (isSignedIn)
-					rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+					rpcService.getSelectedCourses(currentSemester, new FetchSelectedCoursesAsyncCallback());
 			}
 		});
 		
@@ -134,6 +135,7 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onSemesterChange(ChangeSemesterEvent event) {
 				Log.info("CourseListPresenter: Got semester change event: " + event.getSemester().getId());
+				currentSemester = event.getSemester();
 				getFacultiesAndCourses();
 			}
 			
@@ -143,6 +145,7 @@ public class CourseListPresenter implements Presenter {
 	CoursesServiceAsync rpcService;
 	Display display;
 	EventBus eventBus;
+	Semester currentSemester = Semester.WINTER16;
 
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;
@@ -178,7 +181,7 @@ public class CourseListPresenter implements Presenter {
 				else
 					selectedFaculty = faculties.get($);
 
-				rpcService.getNotSelectedCourses(courseQuery, selectedFaculty,
+				rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 
 			}
@@ -211,7 +214,7 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(hoveredCourse, new GetCourseDetailsCallback());
+						rpcService.getCourseDetails(currentSemester, hoveredCourse, new GetCourseDetailsCallback());
 					}
 					//display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
@@ -260,7 +263,7 @@ public class CourseListPresenter implements Presenter {
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
 					if (!newCourseId.equals(hoveredCourse)) {
 						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(hoveredCourse, new
+						rpcService.getCourseDetails(currentSemester, hoveredCourse, new
 								GetCourseDetailsCallback());
 					}
 //					display.getNotSelectedCoursesList().getRowElement(event.getIndex()).getCells()
@@ -323,7 +326,7 @@ public class CourseListPresenter implements Presenter {
 				notSelectedCourses.addAll(allCourses);
 				display.updateLists();
 				if(isSignedIn){
-					rpcService.unselectAllCourses(new AsyncCallback<Void>() {
+					rpcService.unselectAllCourses(currentSemester, new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 							Window.alert("Error while unselecting all course.");
@@ -365,14 +368,14 @@ public class CourseListPresenter implements Presenter {
 	}
 	
 	void getFacultiesAndCourses(){
-		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
+		rpcService.getFaculties(currentSemester, new FetchFacultiesAsyncCallback());
 		if (isSignedIn)
-			rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
+			rpcService.getSelectedCourses(currentSemester, new FetchSelectedCoursesAsyncCallback());
 		else {
 			selectedCourses = new ArrayList<>();
 			display.setSelectedCourses(selectedCourses);
 		}
-		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+		rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 
 	}
 

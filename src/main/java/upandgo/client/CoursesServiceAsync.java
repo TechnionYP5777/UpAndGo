@@ -20,13 +20,13 @@ import upandgo.shared.entities.course.CourseId;
  */
 
 public interface CoursesServiceAsync {
-	public void getSelectedCourses(AsyncCallback<ArrayList<CourseId>> callback);
+	public void getSelectedCourses(Semester semester, AsyncCallback<ArrayList<CourseId>> callback);
 
-	public void getNotSelectedCourses(String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
+	public void getNotSelectedCourses(Semester semester, String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
 	
-	public void getFaculties(AsyncCallback<ArrayList<String>> callback);
+	public void getFaculties(Semester semester, AsyncCallback<ArrayList<String>> callback);
 
-	public void getCourseDetails(CourseId id,AsyncCallback<Course> callback);
+	public void getCourseDetails(Semester semester, CourseId id,AsyncCallback<Course> callback);
 
 	public void getCourseLectures(String id,AsyncCallback<List<LessonGroup>> callback);
 	
@@ -34,9 +34,9 @@ public interface CoursesServiceAsync {
 
 	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
 	
-	public void unselectAllCourses(AsyncCallback<Void> callback);
+	public void unselectAllCourses(Semester semester, AsyncCallback<Void> callback);
 	
-	public void getChosenCoursesList(AsyncCallback<List<Course>> callback);
+	public void getChosenCoursesList(Semester semester, AsyncCallback<List<Course>> callback);
 	
 	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 
@@ -47,6 +47,6 @@ public interface CoursesServiceAsync {
 	public void setSemester(Semester semester, AsyncCallback<Void> callback);
 	
 	public void getSemester(AsyncCallback<Semester> callback);
-	
+		
 	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }

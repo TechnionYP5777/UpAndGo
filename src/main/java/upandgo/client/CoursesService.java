@@ -24,13 +24,13 @@ import upandgo.shared.entities.course.CourseId;
 @RemoteServiceRelativePath("coursesManipulations")
 public interface CoursesService extends RemoteService {
 	
-	public ArrayList<CourseId> getSelectedCourses();
+	public ArrayList<CourseId> getSelectedCourses(Semester semester);
 
-	public ArrayList<CourseId> getNotSelectedCourses(String query, String faculty);
+	public ArrayList<CourseId> getNotSelectedCourses(Semester semester, String query, String faculty);
 	
-	public ArrayList<String> getFaculties();
+	public ArrayList<String> getFaculties(Semester semester);
 
-	public Course getCourseDetails(CourseId id);
+	public Course getCourseDetails(Semester semester, CourseId id);
 	
 	public List<LessonGroup> getCourseLectures(String id);
 
@@ -38,9 +38,9 @@ public interface CoursesService extends RemoteService {
 
 	public void unselectCourse(CourseId id);
 	
-	public void unselectAllCourses();
+	public void unselectAllCourses(Semester semester);
 	
-	public List<Course> getChosenCoursesList();
+	public List<Course> getChosenCoursesList(Semester semester);
 	
 	public void saveSchedule (List<LessonGroup> sched);
 	
@@ -51,7 +51,7 @@ public interface CoursesService extends RemoteService {
 	public void setSemester(Semester semester);
 	
 	public Semester getSemester();
-
+	
 	public void exportSchedule(List<LessonGroup> sched) throws IOException;
 
 }

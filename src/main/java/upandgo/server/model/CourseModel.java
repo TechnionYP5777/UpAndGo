@@ -19,6 +19,7 @@ import java.util.TreeSet;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;
@@ -33,6 +34,7 @@ import upandgo.shared.utils.FuzzySearch;
  */
 public class CourseModel { // implements Model {
 
+	protected Semester semester = Semester.WINTER16;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	protected List<Course> pickedCourseList;
@@ -235,4 +237,14 @@ public class CourseModel { // implements Model {
 	public List<LessonGroup> loadChosenLessonGroups() {
 		return loader.loadChosenLessonGroups();
 	}
+
+	public Semester getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
+	}
+	
+	
 }

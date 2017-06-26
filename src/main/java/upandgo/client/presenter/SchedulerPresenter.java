@@ -3,6 +3,7 @@ package upandgo.client.presenter;
 import com.google.gwt.event.shared.EventBus;
 
 import upandgo.shared.entities.LocalTime;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.WeekTime;
@@ -77,6 +78,7 @@ public class SchedulerPresenter implements Presenter {
 	
 	protected boolean examBarVisable;		
 
+	protected Semester currentSemester = Semester.WINTER16;
 	protected List<Course> selectedCourses;
 	protected ConstraintsPool constraintsPool = new ConstraintsPool();
 	protected List<List<LessonGroup>> lessonGroupsList;
@@ -215,7 +217,7 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSelectCourse(SelectCourseEvent event) {
 				Log.info("SchedulerPresenter: SelectCourseEvent: " + event.getId().number());
-				rpcService.getCourseDetails(event.getId(), new AsyncCallback<Course>() {
+				rpcService.getCourseDetails(currentSemester, event.getId(), new AsyncCallback<Course>() {
 
 					@Override
 					public void onSuccess(Course result) {
@@ -236,6 +238,7 @@ public class SchedulerPresenter implements Presenter {
 
 			@Override
 			public void onSemesterChange(ChangeSemesterEvent event) {
+				currentSemester = event.getSemester();
 				lessonGroupsList.clear();
 				displaySchedule();
 			}
@@ -685,7 +688,7 @@ public class SchedulerPresenter implements Presenter {
 	
 	void updateScheduleAndChosenLessons() {
 		Log.info("updating schedule and chosen lessons...");
-		rpcService.getChosenCoursesList(new AsyncCallback<List<Course>>() {
+		rpcService.getChosenCoursesList(currentSemester, new AsyncCallback<List<Course>>() {
 			
 			@Override
 			public void onSuccess(List<Course> result) {
@@ -726,6 +729,8 @@ public class SchedulerPresenter implements Presenter {
 		if (lessonGroupsList.isEmpty() || lessonGroupsList.size() < sched_index){
 			view.displaySchedule(null, colorMap, getUserEvents());
 			view.setCurrentScheduleIndex(0, 0);
+			view.setNextEnable(false);
+			view.setPrevEnable(false);
 			return;
 		}
 		view.displaySchedule(lessonGroupsList.get(sched_index), colorMap, getUserEvents());

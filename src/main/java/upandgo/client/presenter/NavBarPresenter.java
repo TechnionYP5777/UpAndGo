@@ -55,6 +55,10 @@ public class NavBarPresenter implements Presenter {
 		public NavbarText getSemesterText();
 		
 		public void markChoosenSemesterEntry(Semester semester);
+		
+		public HasClickHandlers getTempButton();
+		
+		public HasClickHandlers getTempButton2();
 	}
 
 	static String signInMessage = "Sign In";
@@ -83,7 +87,7 @@ public class NavBarPresenter implements Presenter {
 		this.eventBus = eventBus;
 		this.currentSemester = Semester.WINTER16;
 		
-		coursesService.getSemester(new AsyncCallback<Semester>() {
+/*		coursesService.getSemester(new AsyncCallback<Semester>() {
 			
 			@Override
 			public void onSuccess(Semester arg0) {
@@ -97,7 +101,7 @@ public class NavBarPresenter implements Presenter {
 				Log.info("NavBarPresenter: onFailure semester " + arg0);
 				
 			}
-		});
+		});*/
 	}
 
 	@Override
@@ -154,7 +158,51 @@ public class NavBarPresenter implements Presenter {
 		
 		display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
 		
+		
 		display.markChoosenSemesterEntry(currentSemester);
+		
+/*		display.getTempButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				coursesService.getSemester(new AsyncCallback<Semester>() {
+					
+					@Override
+					public void onSuccess(Semester arg0) {
+						Log.info("NavBarPresenter: onSuccess semester " + arg0.getId());
+						currentSemester = arg0;
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable arg0) {
+						Log.info("NavBarPresenter: onFailure semester " + arg0);
+						
+					}
+				});				
+			}
+		});*/
+		
+		display.getTempButton2().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				coursesService.getSomeString(new AsyncCallback<String>() {
+					
+					@Override
+					public void onSuccess(String arg0) {
+						Log.info("NavBarPresenter: onSuccess " + arg0);
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable arg0) {
+						Log.info("NavBarPresenter: onFailure " + arg0);
+						
+					}
+				});				
+			}
+		});
 	}
 
 	@Override
