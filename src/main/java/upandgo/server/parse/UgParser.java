@@ -1,5 +1,6 @@
 package upandgo.server.parse;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,6 +14,14 @@ import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -166,10 +175,29 @@ public class UgParser {
 	
 	public static void createCoursesXMLDocument() {
 		
-		for (Entry<String,String> courses : getCoursesIDAndFaculty(true,"201602").entrySet()){
-			System.out.println("info for: " + courses.getKey() + " faculty " + courses.getValue());
-			createCourseElement(courses.getValue(), courses.getKey());
+		try {
+			org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			org.w3c.dom.Element rootElement = doc.createElement("courses");
+			doc.appendChild(rootElement);
+			
+			for (Entry<String,String> courses : getCoursesIDAndFaculty(true,"201602").entrySet()){
+				System.out.println("info for: " + courses.getKey() + " faculty " + courses.getValue());
+				final org.w3c.dom.Element courseElement = createCourseElement(doc, courses.getValue(), courses.getKey());
+				if (courseElement.hasChildNodes()){
+					rootElement.appendChild(courseElement);					
+				}
+			}
+			
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform(new DOMSource(doc), new StreamResult(new File("REPFILE/201602.XML")));
+
+
+		} catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	
 		
 	}
 	
@@ -177,189 +205,267 @@ public class UgParser {
 		return !element.html().equals("&nbsp;");
 	}
 	
-	public static void createCourseElement(final String faculty, final String courseID) {
-		
-/*		if (Integer.parseInt(courseID) >= 394800){
-			//parse course sport
-			return;
-		}
-		*/
+	public static org.w3c.dom.Element createCourseElement(org.w3c.dom.Document doc, final String faculty, final String courseID) {
+				
+		Element coursePage = null;
 		try {
-			final org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			final org.w3c.dom.Element rootElement = doc.createElement("courses");
-			//org.w3c.dom.Element prepOptionElement = doc.createElement("PrerOption");
-			final Element coursePage = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID));
-			final Element coursePointsTable = coursePage.getElementById("points");
-			//coursePointsTable.select("tbody:contains(נקודות)").get(1)
-			//System.out.println(coursePointsTable);
-
-			System.out.println("points: " + coursePointsTable.select("th:contains(נקודות)").get(0).parent().nextElementSibling().child(0).html());
-			
-			//final Element courseHoursTable = coursePointsTable.child(0).child(0).child(4).child(0);
-			final Element courseHoursTable = coursePointsTable.select("th:containsOwn(שעות)").get(0).parent();
-			final Elements courseHours = courseHoursTable.children();
+			coursePage = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-			if (notEmpty(courseHours.get(4))){
-				System.out.println("hoursLecture: " + courseHours.get(4).html());
-			}
-			if (notEmpty(courseHours.get(3))){
-				System.out.println("hoursTutorial: " + courseHours.get(3).html());
-			}
-			if (notEmpty(courseHours.get(2))){
-				System.out.println("hoursLab: " + courseHours.get(2).html());
-			}
-			if (notEmpty(courseHours.get(1))){
-				System.out.println("hoursProject: " + courseHours.get(1).html());
-			}
+		if (coursePage == null){
+			return null;
+		}
+		
+		final org.w3c.dom.Element courseElement = doc.createElement("course");
+		
+		courseElement.setAttribute("faculty",faculty);
+		courseElement.setAttribute("id", courseID);
+		
+		//System.out.println("name: " + coursePage.select("span:containsOwn("+courseID+")").get(0).html().substring(9));
+		courseElement.setAttribute("name",coursePage.select("span:containsOwn("+courseID+")").get(0).html().substring(9));
+		
+		final Element coursePointsTable = coursePage.getElementById("points");
 
-			
-			final Element courseExamsTable = coursePage.getElementById("sylexam");
-			if (courseExamsTable!=null){
-				final Elements courseExams = courseExamsTable.getElementsByTag("tr");
-				for (int i = 1 ; i < courseExams.size() ; i ++){
-					int rowSize = courseExams.get(i).children().size();
-					if (notEmpty(courseExams.get(i).child(rowSize-1))){
-						Element courseExam = courseExams.get(i);
-						String moed = courseExam.child(rowSize-1).html();
-						if (moed.equals("א")){
-							System.out.print("moedA: ");
-						} else if (moed.equals("ב")){
-							System.out.print("moedB: ");
-						}
-						if (notEmpty(courseExam.child(rowSize-2))){
-							System.out.print("day " + courseExam.child(rowSize-2).html().substring(0,2) + " ");
-							System.out.print("month " + courseExam.child(rowSize-2).html().substring(3,5) + " ");
-							System.out.print("year " + courseExam.child(rowSize-2).html().substring(6,10) + " ");
-						}
-						if (notEmpty(courseExam.child(rowSize-4))){
-							System.out.print("time " + courseExam.child(rowSize-4).html().substring(0,5));
-						}
-					}
-					System.out.println("");
-				}
-			}
-			
-			if (!coursePage.select("th:contains(הערות)").isEmpty() && coursePage.select("th:contains(הערות)").get(0).hasAttr("align")){
-				final Element courseNotesTable = coursePage.select("th:contains(הערות)").get(0).parent().parent();
-				Elements notesElements = courseNotesTable.getElementsByTag("tr");
-				for (int i = 1 ; i < notesElements.size() ; i ++){
-					System.out.println("note: ");
-					String noteHtml = notesElements.get(i).child(0).html().replace("<br>","bbbbrrrr"); // Otherwise line breaks will be ignored
-					System.out.println(Jsoup.parse(noteHtml).text().replace("bbbbrrrr", "\n"));
-				}
-			}
-			
-			final Element courseSchedulingTable = coursePage.getElementById("scheduling");
-			int currentLectureGroup = 0;
-			Type lessonType = null;
-			if (courseSchedulingTable == null){
-				return;
-			}
-			Elements lessonElements = courseSchedulingTable.getElementsByTag("tr");
+		//System.out.println("points: " + coursePointsTable.select("th:contains(נקודות)").get(0).parent().nextElementSibling().child(0).html());
+		courseElement.setAttribute("points", coursePointsTable.select("th:contains(נקודות)").get(0).parent().nextElementSibling().child(0).html());
+		
+		final Element courseHoursTable = coursePointsTable.select("th:containsOwn(שעות)").get(0).parent();
+		final Elements courseHours = courseHoursTable.children();
+		
+		if (notEmpty(courseHours.get(4))){
+			//System.out.println("hoursLecture: " + courseHours.get(4).html());
+			courseElement.setAttribute("hoursLecture", courseHours.get(4).html());
+		}
+		if (notEmpty(courseHours.get(3))){
+			//System.out.println("hoursTutorial: " + courseHours.get(3).html());
+			courseElement.setAttribute("hoursTutorial", courseHours.get(3).html());
+		}
+		if (notEmpty(courseHours.get(2))){
+			//System.out.println("hoursLab: " + courseHours.get(2).html());
+			courseElement.setAttribute("hoursLab", courseHours.get(2).html());
+		}
+		if (notEmpty(courseHours.get(1))){
+			//System.out.println("hoursProject: " + courseHours.get(1).html());
+			courseElement.setAttribute("hoursProject", courseHours.get(1).html());
+		}
+
+		
+		final org.w3c.dom.Element examsElement = createExamsElement(doc, coursePage);
+		if (examsElement.hasChildNodes()){
+			courseElement.appendChild(examsElement);			
+		}
+		
+		final Element courseSchedulingTable = coursePage.getElementById("scheduling");
+		int currentLectureGroup = 0;
+		Type lessonType = null;
+		if (courseSchedulingTable == null){
+			return courseElement;
+		}
+		Elements lessonTableRows = courseSchedulingTable.getElementsByTag("tr");
 	
-			if (Integer.parseInt(courseID) >= 394800) { //Sport Course
-				for (int i = 1 ; i < lessonElements.size() ; i ++){
-					Element lessonElement = lessonElements.get(i);
-					if (lessonElement.children().size() < 8){
-						continue;
-					}
-					lessonType = Type.SPORT;
-					System.out.println("----------------");
-					System.out.println("type: " + lessonType);
-					System.out.println("group: " + lessonElement.child(7).html());
-					if (notEmpty(lessonElement.child(5))){
-						System.out.println("name: " + lessonElement.child(5).html());						
-					}
-					createLessonElement(lessonElement);					
+		if (Integer.parseInt(courseID) >= 394800) { //Sport Course
+			courseElement.setAttribute("faculty","מקצועות ספורט");
+			for (int i = 1 ; i < lessonTableRows.size() ; i ++){
+				org.w3c.dom.Element sportElement = doc.createElement("sport");
+				Element lessonTableRow = lessonTableRows.get(i);
+				if (lessonTableRow.children().size() < 8){
+					continue;
 				}
-				return;
+				lessonType = Type.SPORT;
+				//System.out.println("----------------");
+				//System.out.println("type: " + lessonType);
+				//System.out.println("group: " + lessonTableRow.child(7).html());
+				sportElement.setAttribute("group", lessonTableRow.child(7).html());
+				if (notEmpty(lessonTableRow.child(5))){
+					//System.out.println("name: " + lessonTableRow.child(5).html());
+					sportElement.setAttribute("name", lessonTableRow.child(5).html());
+				}
+				sportElement.appendChild(createLessonElement(doc,lessonTableRow));					
+				while (i+1 < lessonTableRows.size() && lessonTableRows.get(i+1).children().size() < 7 && lessonTableRows.get(i+1).children().size() >= 4){
+					sportElement.appendChild(createLessonElement(doc, lessonTableRows.get(++i)));
+				}
+				courseElement.appendChild(sportElement);
 			}
 			
-			for (int i = 1 ; i < lessonElements.size() ; i ++){
-				Element lessonElement = lessonElements.get(i);
-				if (lessonElement.children().size() >= 7){ //start a lesson group
-					lessonType = Type.fromString(lessonElement.child(5).html());
-					int group = Integer.parseInt(lessonElement.child(6).html());
-					if (lessonType == Type.LECTURE){
-						if (currentLectureGroup == group)
-							continue;
-						else
-							currentLectureGroup = group;
-					}
-					System.out.println("----------------");
-					System.out.println("type: " + lessonType);
-					System.out.println("group: " + lessonElement.child(6).html());
-					if (notEmpty(lessonElement.child(4))){
-						String[] lecturers = lessonElement.child(4).html().split("<br>");
-						for (String lecturer : lecturers){
-							if (!lecturer.trim().isEmpty()){
-								System.out.println("title: " + lecturer.split(" ")[0]);
-								System.out.println("name: " + lecturer.substring(lessonElement.child(4).html().indexOf(" ")+1));
+			final org.w3c.dom.Element notesElement = createNotesElement(doc, coursePage);
+			if (notesElement.hasChildNodes()){
+				courseElement.appendChild(notesElement);			
+			}
+			
+			return courseElement;
+		}
+		
+		org.w3c.dom.Element lectureElement = null;
+		org.w3c.dom.Element lessonGroupElement = null;
+		for (int i = 1 ; i < lessonTableRows.size() ; i ++){
+			Element lessonTableRow = lessonTableRows.get(i);
+			if (lessonTableRow.children().size() >= 7){ //start a lesson group
+				lessonType = Type.fromString(lessonTableRow.child(5).html());
+				int group = Integer.parseInt(lessonTableRow.child(6).html());
+				if (lessonType == Type.LECTURE){
+					if (currentLectureGroup == group)
+						continue;
+					lectureElement = doc.createElement("lecture");
+					courseElement.appendChild(lectureElement);
+					lessonGroupElement = lectureElement;
+					currentLectureGroup = group;
+				} else if (lessonType == Type.TUTORIAL){
+					lessonGroupElement = doc.createElement("tutorial");
+				} else if (lessonType == Type.LABORATORY){
+					lessonGroupElement = doc.createElement("lab");
+				} else if (lessonType == Type.PROJECT){
+					lessonGroupElement = doc.createElement("group");
+				} else {
+					continue;
+				}
+				
+				lessonGroupElement.setAttribute("group", lessonTableRow.child(6).html());
+				
+		
+				//System.out.println("----------------");
+				//System.out.println("type: " + lessonType);
+				//System.out.println("group: " + lessonTableRow.child(6).html());
+
+				lessonGroupElement.appendChild(createLessonElement(doc, lessonTableRow));
+				while (i+1 < lessonTableRows.size() && lessonTableRows.get(i+1).children().size() < 7 && lessonTableRows.get(i+1).children().size() >= 4){
+					lessonGroupElement.appendChild(createLessonElement(doc, lessonTableRows.get(++i)));
+				}
+				
+				if (notEmpty(lessonTableRow.child(4))){
+					String[] lecturers = lessonTableRow.child(4).html().split("<br>");
+					for (String lecturer : lecturers){
+						if (!lecturer.trim().isEmpty()){
+							org.w3c.dom.Element lecturerElement = null;
+							if (lessonType == Type.LECTURE){
+								lecturerElement = doc.createElement("lecturer");
+							} else if (lessonType == Type.TUTORIAL){
+								lecturerElement = doc.createElement("assistant");
+							} else if (lessonType == Type.LABORATORY){
+								lecturerElement = doc.createElement("guide");
+							} else if (lessonType == Type.PROJECT){
+								lecturerElement = doc.createElement("moderator");
+							} else {
+								continue;
 							}
+							lecturerElement.setAttribute("title", lecturer.split(" ")[0]);
+							lecturerElement.setAttribute("name", lecturer.substring(lessonTableRow.child(4).html().indexOf(" ")+1));
+							lessonGroupElement.appendChild(lecturerElement);
+							//System.out.println("title: " + lecturer.split(" ")[0]);
+							//System.out.println("name: " + lecturer.substring(lessonTableRow.child(4).html().indexOf(" ")+1));
 						}
 					}
-					createLessonElement(lessonElement);
-					while (i+1 < lessonElements.size() && lessonElements.get(i+1).children().size() < 7 && lessonElements.get(i+1).children().size() >= 4){
-						createLessonElement(lessonElements.get(++i));
-						
-					}
+				}
+				
+/*				if (lessonType == Type.LECTURE){
+					courseElement.appendChild(lectureElement);
+				} else {
+					lectureElement.appendChild(lessonGroupElement);
+				}*/
+				
+				if (currentLectureGroup != group && currentLectureGroup == group/10*10 && lectureElement != null){
+					lectureElement.appendChild(lessonGroupElement);
+				} else {
+					courseElement.appendChild(lessonGroupElement);
 				}
 			}
-/*			for (Element lessonElement : courseSchedulingTable.getElementsByTag("tr")){
-				if (lessonElement.childNodeSize() >= 7){ //start a lesson group
-					lessonType = Type.fromString(lessonElement.child(5).html());
-					int group = Integer.parseInt(lessonElement.child(6).html());
-					if (lessonType == Type.LECTURE && currentLectureGroup == group){
-						continue;
-					}					
-					System.out.println("----------------");
-					System.out.println("type: " + lessonType);
-					System.out.println("group: " + lessonElement.child(6).html());
-
-
-				}
-				if (lessonElement.childNodeSize() >= 4 && lessonType != null){
-					int group = Integer.parseInt(lessonElement.child(6).html());
-					if (lessonType == Type.LECTURE && currentLectureGroup != group){
-						currentLectureGroup = group;
-						createLessonElement(lessonElement);
-					} else if (lessonType == Type.TUTORIAL) {
-						System.out.println("----------------");
-						System.out.println("type: " + lessonType);
-						System.out.println("group: " + lessonElement.child(6).html());
-						createLessonElement(lessonElement);
-					}
-
-				}
-			}
-*/
-			
-		
-
-			
-		} catch (/*TransformerException |*/ IOException | ParserConfigurationException xxx) {
-			xxx.printStackTrace();
 		}
+		
+		final org.w3c.dom.Element notesElement = createNotesElement(doc, coursePage);
+		if (notesElement.hasChildNodes()){
+			courseElement.appendChild(notesElement);			
+		}
+		
+		return courseElement;
+			
 	}
-		
-	public static void createLessonElement(final Element lessonElement){
-		//System.out.println("day: " + lessonElement.child(3).text());
+	
+	
+	public static org.w3c.dom.Element createExamsElement(org.w3c.dom.Document doc, final Element coursePage){
+		final org.w3c.dom.Element examsElement = doc.createElement("exams");
+		final Element courseExamsTable = coursePage.getElementById("sylexam");
+		if (courseExamsTable!=null){
+			final Elements courseExams = courseExamsTable.getElementsByTag("tr");
+			for (int i = 1 ; i < courseExams.size() ; i ++){
+				int rowSize = courseExams.get(i).children().size();
+				if (notEmpty(courseExams.get(i).child(rowSize-1))){
+					Element courseExam = courseExams.get(i);
+					String moed = courseExam.child(rowSize-1).html();
+					final org.w3c.dom.Element examElement = doc.createElement("exam");;
+					if (moed.equals("א")){
+						doc.renameNode(examElement, null, "moedA");
+						//System.out.print("moedA: ");
+					} else if (moed.equals("ב")){
+						doc.renameNode(examElement, null, "moedB");
+						//System.out.print("moedB: ");	
+					}
+					if (notEmpty(courseExam.child(rowSize-4))){
+						examElement.setAttribute("time", courseExam.child(rowSize-4).html().substring(0,5));
+						//System.out.print("time " + courseExam.child(rowSize-4).html().substring(0,5));
+					} else { //for compatibility with rep file parser
+						examElement.setAttribute("time", "00:00");
+					}
+					if (notEmpty(courseExam.child(rowSize-2))){
+						examElement.setAttribute("day", courseExam.child(rowSize-2).html().substring(0,2));
+						examElement.setAttribute("month", courseExam.child(rowSize-2).html().substring(3,5));
+						examElement.setAttribute("year", courseExam.child(rowSize-2).html().substring(6,10));
+						//System.out.print("day " + courseExam.child(rowSize-2).html().substring(0,2) + " ");
+						//System.out.print("month " + courseExam.child(rowSize-2).html().substring(3,5) + " ");
+						//System.out.print("year " + courseExam.child(rowSize-2).html().substring(6,10) + " ");
+						examsElement.appendChild(examElement);
+					}
 
-		if (notEmpty(lessonElement.child(3))){
-			System.out.println("day: " + Day.fromLetter(lessonElement.child(3).html()).toLetter());
+				}
+				//System.out.println("");
+			}
 		}
-		if (notEmpty(lessonElement.child(2))){
-			System.out.println("startHour: " + lessonElement.child(2).html().substring(0, 2));
-			System.out.println("startMinute: " + lessonElement.child(2).html().substring(3, 5));
-			System.out.println("endHour: " + lessonElement.child(2).html().substring(6, 8));
-			System.out.println("endMinute: " + lessonElement.child(2).html().substring(9, 11));
+		return examsElement;
+	}
+	
+	public static org.w3c.dom.Element createNotesElement(org.w3c.dom.Document doc, final Element coursePage){
+		final org.w3c.dom.Element notesElement = doc.createElement("notes");
+		if (!coursePage.select("th:contains(הערות)").isEmpty() && coursePage.select("th:contains(הערות)").get(0).hasAttr("align")){
+			final Element courseNotesTable = coursePage.select("th:contains(הערות)").get(0).parent().parent();
+			Elements notesTableRows = courseNotesTable.getElementsByTag("tr");
+			for (int i = 1 ; i < notesTableRows.size() ; i ++){
+				//System.out.println("note: ");
+				final org.w3c.dom.Element noteElement = doc.createElement("note");
+				String noteHtml = notesTableRows.get(i).child(0).html().replace("<br>","bbbbrrrr"); // Otherwise line breaks will be ignored
+				noteElement.appendChild(doc.createTextNode(Jsoup.parse(noteHtml).text().replace("bbbbrrrr", "\n")));
+				//System.out.println(Jsoup.parse(noteHtml).text().replace("bbbbrrrr", "\n"));
+				notesElement.appendChild(noteElement);
+			}
 		}
-		if (notEmpty(lessonElement.child(1))){
-			System.out.println("building: " + lessonElement.child(1).html());
+		return notesElement;
+	}
+	
+		
+	public static org.w3c.dom.Element createLessonElement(org.w3c.dom.Document doc, final Element lessonTableRow){
+		final org.w3c.dom.Element lessonElement = doc.createElement("lesson");
+
+		if (notEmpty(lessonTableRow.child(3))){
+			lessonElement.setAttribute("day", Day.fromLetter(lessonTableRow.child(3).html()).toLetter());
+			//System.out.println("day: " + Day.fromLetter(lessonTableRow.child(3).html()).toLetter());
 		}
-		if (notEmpty(lessonElement.child(0))){
-			System.out.println("room: " + lessonElement.child(0).html());
+		if (notEmpty(lessonTableRow.child(2))){
+			lessonElement.setAttribute("timeStart", lessonTableRow.child(2).html().substring(0, 5));
+			lessonElement.setAttribute("timeEnd", lessonTableRow.child(2).html().substring(6, 11));
+			//System.out.println("startHour: " + lessonTableRow.child(2).html().substring(0, 2));
+			//System.out.println("startMinute: " + lessonTableRow.child(2).html().substring(3, 5));
+			//System.out.println("endHour: " + lessonTableRow.child(2).html().substring(6, 8));
+			//System.out.println("endMinute: " + lessonTableRow.child(2).html().substring(9, 11));
 		}
+		if (notEmpty(lessonTableRow.child(1))){
+			lessonElement.setAttribute("building", lessonTableRow.child(1).html());
+			//System.out.println("building: " + lessonTableRow.child(1).html());
+		}
+		if (notEmpty(lessonTableRow.child(0))){
+			lessonElement.setAttribute("roomNumber", lessonTableRow.child(0).html());
+			//System.out.println("room: " + lessonTableRow.child(0).html());
+		}
+		
+		return lessonElement;
 	}
 
 

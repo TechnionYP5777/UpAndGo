@@ -21,7 +21,7 @@ public class XmlCourseLoaderTest {
 
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("test.XML", true);
+		cr = new XmlCourseLoader("201602.XML", true);
 		// cr = new XmlCourseLoader("REP.XML");
 	}
 
@@ -29,7 +29,7 @@ public class XmlCourseLoaderTest {
 	public void testLoadAllCourses() {
 		// Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		final TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
-
+		System.out.println("testLoadAllCourses " + coursesMap.size());
 		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
 		assert "פיסיקה 2ממ".equals(coursesMap.get("114075").getName());
