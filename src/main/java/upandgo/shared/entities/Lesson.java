@@ -1,6 +1,5 @@
 package upandgo.shared.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -16,8 +15,7 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  * 
  */
 public class Lesson implements IsSerializable {
-	private static final long serialVersionUID = 903076596050490635L;
-
+	
 	public enum Type implements IsSerializable{
 		LECTURE("הרצאה"), TUTORIAL("תרגול"), LABORATORY("מעבדה"), PROJECT("פרויקט"), SPORT("ספורט");
 		
@@ -28,12 +26,10 @@ public class Lesson implements IsSerializable {
 		}
 		
 		public static Type fromString(String text){
-			if (text == null){
-				return null;
-			}
-			for (Type type : Type.values())
-				if (type.hebrewString.equals(text))
-					return type;
+			if (text != null)
+				for (Type type : Type.values())
+					if (type.hebrewString.equals(text))
+						return type;
 			return null;
 		}
 		
@@ -49,7 +45,6 @@ public class Lesson implements IsSerializable {
 	protected String place;
 	protected Type type;
 	protected int group;
-	// protected int day;
 	protected String courseId;
 	protected String courseName;
 
@@ -58,9 +53,7 @@ public class Lesson implements IsSerializable {
 		startTime = null;
 		endTime = null;
 		place = null;
-		//type = t;
 		group = 0;
-		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		courseId = null;
 		courseName = null;
 	}
@@ -68,16 +61,12 @@ public class Lesson implements IsSerializable {
 	
 	public Lesson(final StuffMember repr, WeekTime theStartTime, WeekTime endTime, final String place1,
 			final Type t, final int g, final String c, final String n) {
-//		if (theStartTime == null || place1 == null)
-//			throw new NullPointerException();
-
 		representer = repr;
 		startTime = theStartTime;
 		this.endTime = endTime;
 		place = place1;
 		type = t;
 		group = g;
-		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		courseId = c;
 		courseName = n;
 	}
@@ -89,7 +78,6 @@ public class Lesson implements IsSerializable {
 		place = other.getPlace();
 		type = other.getType();
 		group = other.getGroup();
-		// this.day = (theStartTime.getDay().getValue()) % 7 + 1 ;
 		courseId = other.getCourseId();
 		courseName = other.getCourseName();
 	}
@@ -115,12 +103,10 @@ public class Lesson implements IsSerializable {
 	}
 
 	public String getRoomNumber() {
-		if (!place.isEmpty()) {
-			final String[] $ = place.split(" ");
-			if ($.length > 1)
-				return $[$.length - 1];
-		}
-		return "";
+		if (place.isEmpty())
+			return "";
+		final String[] $ = place.split(" ");
+		return $.length <= 1 ? "" : $[$.length - 1];
 	}
 
 	public WeekTime getEndTime() {
@@ -138,7 +124,6 @@ public class Lesson implements IsSerializable {
 	// return value between 0 to 6.
 	public int getDay() {
 		return startTime.getDay().ordinal();
-		//return startTime.getDay() == DayOfWeek.SUNDAY ? 0 : startTime.getDay().getValue();
 	}
 
 	@Override
