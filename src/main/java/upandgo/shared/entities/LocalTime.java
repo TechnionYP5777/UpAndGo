@@ -6,7 +6,7 @@ public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	private int hour;
 	private int minute;
 	
-	private LocalTime(){
+	public LocalTime(){
 		this.hour = 0;
 		this.minute = 0;
 	}
@@ -32,11 +32,8 @@ public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	}
 
 	@Override
-	public int compareTo(LocalTime o) {
-		if(this.hour != o.hour){
-			return this.hour - o.hour;
-		}
-		return this.minute - o.minute;
+	public int compareTo(LocalTime t) {
+		return this.hour != t.hour ? this.hour - t.hour : this.minute - t.minute;
 	}
 	
 	public int getHour(){
@@ -49,11 +46,11 @@ public class LocalTime implements Comparable<LocalTime>, IsSerializable {
 	
 	@Override
 	public String toString(){
-		return hour + ":" + ((minute < 10) ? "0"+minute : ""+minute);
+		return hour + ":" + (minute < 10 ? "0" : "") + minute;
 	}
 
-	public static LocalTime parse(String string) {
-		String[] parts = string.split(":");
+	public static LocalTime parse(String s) {
+		String[] parts = s.split(":");
 		return new LocalTime(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
 	}
 }

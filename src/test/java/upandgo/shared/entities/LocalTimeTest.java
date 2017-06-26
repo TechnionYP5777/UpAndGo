@@ -10,8 +10,13 @@ public class LocalTimeTest {
 	public void constructorTest() {
 		LocalTime time = LocalTime.of(9, 30);
 		
+		LocalTime time2 = new LocalTime();
+		
 		assertEquals(9, time.getHour());
 		assertEquals(30, time.getMinute());
+		
+		assertEquals(0, time2.getHour());
+		assertEquals(0, time2.getMinute());
 	}
 	
 	@Test
@@ -21,8 +26,8 @@ public class LocalTimeTest {
 		LocalTime time3 = LocalTime.of(9, 12);
 		
 		assertEquals(0, time1.compareTo(time1));
-		assertTrue(time3.compareTo(time1) < 0);
-		assertTrue(time2.compareTo(time1) > 0);
+		assert time3.compareTo(time1) < 0;
+		assert time2.compareTo(time1) > 0;
 	}
 	
 	@Test
