@@ -25,6 +25,8 @@ import upandgo.client.CoursesServiceAsync;
 import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
+import upandgo.client.event.ChangeSemesterEvent;
+import upandgo.shared.entities.Semester;
 
 public class NavBarPresenter implements Presenter {
 
@@ -70,12 +72,12 @@ public class NavBarPresenter implements Presenter {
 				@Override
 				public void onClick(ClickEvent event) {
 					Log.info("NavBarPresenter: user clicked on semester " + semesterItem.getId());
-/*					coursesService.setSemester(semesterItem.getId(), new AsyncCallback<Void>() {
+					coursesService.setSemester(semesterItem.getId(), new AsyncCallback<Void>() {
 						
 						@Override
 						public void onSuccess(Void result) {
 							Log.info("NavBarPresenter: onSuccess on semester " + semesterItem.getId());
-							
+							eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(semesterItem.getId())));
 						}
 						
 						@Override
@@ -83,7 +85,7 @@ public class NavBarPresenter implements Presenter {
 							Log.info("NavBarPresenter: onFailure on semester " + semesterItem.getId());
 							
 						}
-					});*/
+					});
 				}
 			});
 		}

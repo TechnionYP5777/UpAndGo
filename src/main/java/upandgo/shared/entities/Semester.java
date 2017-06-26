@@ -13,6 +13,13 @@ public enum Semester implements IsSerializable {
 		this.name = name;
 		this.id = id;
 	}
+	
+	public static Semester fromId(String id){
+		for (Semester semester : Semester.values())
+			if (semester.id.equals(id))
+				return semester;
+		return null;
+	}
 
 	public String getName() {
 		return name;
