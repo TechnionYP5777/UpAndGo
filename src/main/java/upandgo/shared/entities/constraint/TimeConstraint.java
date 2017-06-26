@@ -12,13 +12,11 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
-	
-
-	
-	
+		
 	public boolean isClashWith(final Lesson xxx) {
 		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
-				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
+				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0
+				|| startTime.compareTo(xxx.getStartTime()) < 0 && endTime.compareTo(xxx.getEndTime()) > 0;
 	}
 	
 	@Override
@@ -36,45 +34,6 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 
 	}
 	
-	// TO BE REMOVED ONCE ASSURED THERE IS NO NEED FOR THAT FUNCTIONALITY
-	/*public boolean isCLashWIth(TimeConstraint newc) {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
-	
-	
-	/* TO BE REMOVED ONCE MADE SOME PROGRESS WITH THE PROJECT THE ASsUREs
-	 * THERE IS NOT NEED FOR THAT FUNCTIONALITY
-	@Override
-	public boolean canMeetConstraint(final Course c) {
-		for (final LessonGroup xxx : c.getLectures())
-			if (!clashWithLessonGroup(xxx))
-				return true;
-		return false;
-	}
-
-	@Override
-	public List<LessonGroup> groupsMeetsConstraint(final Course c) {
-		final List<LessonGroup> $ = new ArrayList<>();
-		for (final LessonGroup xxx : c.getLectures())
-			if (!clashWithLessonGroup(xxx))
-				$.add(xxx);
-		return $;
-	}
-
-	private boolean clashWithLessonGroup(final LessonGroup g) {
-		for (final Lesson xxx : g.getLessons())
-			if (clashWithLesson(xxx))
-				return true;
-		return false;
-	}
-
-	// DO NOT SPARTANIZE
-	private boolean clashWithLesson(final Lesson xxx) {
-		return startTime.compareTo(xxx.getStartTime()) >= 0 && startTime.compareTo(xxx.getEndTime()) < 0
-				|| endTime.compareTo(xxx.getStartTime()) > 0 && endTime.compareTo(xxx.getEndTime()) <= 0;
-	} */
-
 	public WeekTime getStartTime() {
 		return startTime;
 	}
