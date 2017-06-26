@@ -86,7 +86,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(scrollableTimeTable);
 		this.setWidgetLeftRight(scrollableTimeTable, 11, Unit.EM, 0, Unit.EM);
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 0.5, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 1, Unit.EM);
 		this.getWidgetContainerElement(scrollableTimeTable).getStyle().setProperty("transition", "bottom 0.3s linear 0s");
 		
 		this.add(examsScrollPanel);
@@ -96,7 +96,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(schedualerControlsView);
 		this.setWidgetLeftWidth(schedualerControlsView, 0, Unit.EM, 10, Unit.EM);
-		this.setWidgetTopBottom(schedualerControlsView, 5, Unit.EM, 1, Unit.EM);
+		this.setWidgetTopBottom(schedualerControlsView, 1, Unit.EM, 1, Unit.EM);
 		
 		this.add(examsControlsView);
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
@@ -370,7 +370,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void collapseExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 0.5, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 1, Unit.EM);
 		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 0, Unit.EM);
 		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.HIDDEN);
 		examsControlsView.moedA.getElement().getStyle().setOpacity(0);
@@ -384,7 +384,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void openExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 5, Unit.EM, 6, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 6, Unit.EM);
 		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 5, Unit.EM);
 		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.VISIBLE);
 		examsControlsView.moedA.getElement().getStyle().setOpacity(1);

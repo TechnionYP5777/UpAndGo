@@ -173,16 +173,16 @@ public class UgParser {
 		return $;
 	}
 	
-	public static void createCoursesXMLDocument() {
+	public static void createCoursesXMLDocument(String semesterId) {
 		
 		try {
 			org.w3c.dom.Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			org.w3c.dom.Element rootElement = doc.createElement("courses");
 			doc.appendChild(rootElement);
 			
-			for (Entry<String,String> courses : getCoursesIDAndFaculty(true,"201602").entrySet()){
+			for (Entry<String,String> courses : getCoursesIDAndFaculty(true,semesterId).entrySet()){
 				System.out.println("info for: " + courses.getKey() + " faculty " + courses.getValue());
-				final org.w3c.dom.Element courseElement = createCourseElement(doc, courses.getValue(), courses.getKey());
+				final org.w3c.dom.Element courseElement = createCourseElement(doc, semesterId, courses.getValue(), courses.getKey());
 				if (courseElement.hasChildNodes()){
 					rootElement.appendChild(courseElement);					
 				}
@@ -190,7 +190,7 @@ public class UgParser {
 			
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(new DOMSource(doc), new StreamResult(new File("REPFILE/201602.XML")));
+			transformer.transform(new DOMSource(doc), new StreamResult(new File("REPFILE/"+semesterId+".XML")));
 
 
 		} catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) {
@@ -205,11 +205,11 @@ public class UgParser {
 		return !element.html().equals("&nbsp;");
 	}
 	
-	public static org.w3c.dom.Element createCourseElement(org.w3c.dom.Document doc, final String faculty, final String courseID) {
+	public static org.w3c.dom.Element createCourseElement(org.w3c.dom.Document doc, String semesterId, final String faculty, final String courseID) {
 				
 		Element coursePage = null;
 		try {
-			coursePage = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID));
+			coursePage = Scraper.getDocumentFromURL(new URL(GRADUATE_SEARCH_URL + courseID + "&SEM=" + semesterId));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

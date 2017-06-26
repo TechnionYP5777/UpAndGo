@@ -155,7 +155,7 @@ class AppController implements Presenter {
 		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
 		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
 		
-		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, eventBus, navBarView);
+		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, coursesService, eventBus, navBarView);
 		
 		CourseListPresenter clPresenter = new CourseListPresenter(coursesService,eventBus,courseSelectionView);
 		
@@ -163,9 +163,9 @@ class AppController implements Presenter {
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		
+		nbPresenter.go(mainView);
 		clPresenter.go(mainView);
 		sPresenter.go(mainView);
-		nbPresenter.go(mainView);
 			
 		
 	}

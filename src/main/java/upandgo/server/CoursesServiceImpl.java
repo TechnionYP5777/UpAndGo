@@ -46,7 +46,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private String REP_XML_PATH = "201602.XML";
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
-	private final CourseModel model;
+	private CourseModel model;
 
 	public CoursesServiceImpl() {
 		Log.warn("in course service constractor");
@@ -142,4 +142,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	public List<LessonGroup> getSchedule() {
 		return model.loadChosenLessonGroups();
 	}
+	
+	@Override
+	public void setSemester(String semesterId){
+		XmlCourseLoader loader = new XmlCourseLoader(semesterId+".XML");
+		model = new CourseModel(loader);
+	};
+
 }

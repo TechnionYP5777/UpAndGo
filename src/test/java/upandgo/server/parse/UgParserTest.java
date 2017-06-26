@@ -23,7 +23,7 @@ import org.junit.Test;
 import upandgo.server.parse.UgParser;
 import upandgo.shared.entities.Faculty;
 
-@Ignore
+//@Ignore
 public class UgParserTest {
 
 	
@@ -63,7 +63,7 @@ public class UgParserTest {
 		}
 		org.w3c.dom.Element rootElement = doc.createElement("courses");
 		doc.appendChild(rootElement);
-		rootElement.appendChild(UgParser.createCourseElement(doc,"faculty","046041"));
+		rootElement.appendChild(UgParser.createCourseElement(doc,"201602","faculty","046041"));
 		
 		try {
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -78,6 +78,6 @@ public class UgParserTest {
 	
 	@Test
 	public void testCreateCoursesXMLDocument(){
-		UgParser.createCoursesXMLDocument();
+		UgParser.createCoursesXMLDocument("201603");
 	}
 }

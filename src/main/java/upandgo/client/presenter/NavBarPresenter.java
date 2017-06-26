@@ -1,7 +1,13 @@
 package upandgo.client.presenter;
 
+import java.util.List;
+
+import org.gwtbootstrap3.client.ui.AnchorButton;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
+
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -15,6 +21,7 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+import upandgo.client.CoursesServiceAsync;
 import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
@@ -25,12 +32,17 @@ public class NavBarPresenter implements Presenter {
 		<T extends HasClickHandlers & HasText> T getSignInOutButton();
 
 		Widget getAsWidget();
+		
+		public List<AnchorListItem> getSemesterListItems();
+		
+		public AnchorButton getSemesterButton();
 	}
 
 	static String signInMessage = "Sign In";
 	static String signOutMessage = "Sign Out";
 	
 	protected LoginServiceAsync rpcService;
+	protected CoursesServiceAsync coursesService;
 	protected Display display;
 	protected EventBus eventBus;
 
@@ -41,8 +53,9 @@ public class NavBarPresenter implements Presenter {
 	protected HandlerRegistration signInOutHandler = null;
 
 	@Inject
-	public NavBarPresenter(LoginServiceAsync rpc, EventBus eventBus, Display display) {
+	public NavBarPresenter(LoginServiceAsync rpc, CoursesServiceAsync coursesService, EventBus eventBus, Display display) {
 		this.rpcService = rpc;
+		this.coursesService = coursesService;
 		this.display = display;
 		this.eventBus = eventBus;
 	}
@@ -50,6 +63,30 @@ public class NavBarPresenter implements Presenter {
 	@Override
 	public void bind() {
 		refreshUser();
+				
+		for (final AnchorListItem semesterItem : display.getSemesterListItems()){
+			semesterItem.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					Log.info("NavBarPresenter: user clicked on semester " + semesterItem.getId());
+/*					coursesService.setSemester(semesterItem.getId(), new AsyncCallback<Void>() {
+						
+						@Override
+						public void onSuccess(Void result) {
+							Log.info("NavBarPresenter: onSuccess on semester " + semesterItem.getId());
+							
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							Log.info("NavBarPresenter: onFailure on semester " + semesterItem.getId());
+							
+						}
+					});*/
+				}
+			});
+		}
 	}
 
 	@Override
@@ -66,6 +103,9 @@ public class NavBarPresenter implements Presenter {
 
 		panel.setWidgetLeftRight(display.getAsWidget(), 0, Unit.EM, 0, Unit.EM);
 		panel.setWidgetTopHeight(display.getAsWidget(), 0, Unit.EM, 4, Unit.EM);
+		
+		
+		display.getAsWidget().getElement().getParentElement().getStyle().setPosition(Position.STATIC);
 
 	}
 

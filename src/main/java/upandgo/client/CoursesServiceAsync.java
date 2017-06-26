@@ -43,4 +43,6 @@ public interface CoursesServiceAsync {
 	
 	public void getSomeString(AsyncCallback<String> callback);
 	
+	public void setSemester(String semesterId, AsyncCallback<Void> callback);
+	
 }

@@ -47,4 +47,6 @@ public interface CoursesService extends RemoteService {
 	
 	public String getSomeString();
 	
+	public void setSemester(String semesterId);
+	
 }
