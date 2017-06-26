@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -47,7 +48,9 @@ public interface CoursesService extends RemoteService {
 	
 	public String getSomeString();
 
-	public void setSemester(String semesterId);
+	public void setSemester(Semester semester);
+	
+	public Semester getSemester();
 
 	public void exportSchedule(List<LessonGroup> sched) throws IOException;
 

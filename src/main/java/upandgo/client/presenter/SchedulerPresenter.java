@@ -37,6 +37,8 @@ import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
+import upandgo.client.event.ChangeSemesterEvent;
+import upandgo.client.event.ChangeSemesterEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
@@ -228,6 +230,16 @@ public class SchedulerPresenter implements Presenter {
 					}
 				});
 			}
+		});
+		
+		this.eventBus.addHandler(ChangeSemesterEvent.TYPE, new ChangeSemesterEventHandler(){
+
+			@Override
+			public void onSemesterChange(ChangeSemesterEvent event) {
+				lessonGroupsList.clear();
+				displaySchedule();
+			}
+			
 		});
 	}
 

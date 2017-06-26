@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -43,7 +44,9 @@ public interface CoursesServiceAsync {
 	
 	public void getSomeString(AsyncCallback<String> callback);
 	
-	public void setSemester(String semesterId, AsyncCallback<Void> callback);
+	public void setSemester(Semester semester, AsyncCallback<Void> callback);
+	
+	public void getSemester(AsyncCallback<Semester> callback);
 	
 	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }

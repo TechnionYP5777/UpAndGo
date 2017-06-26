@@ -2,11 +2,17 @@ package upandgo.client.presenter;
 
 import java.util.List;
 
+import org.gwtbootstrap3.client.shared.event.ModalHiddenEvent;
+import org.gwtbootstrap3.client.shared.event.ModalHiddenHandler;
 import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.NavbarText;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -26,6 +32,7 @@ import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.ChangeSemesterEvent;
+import upandgo.client.event.ChangeSemesterEventHandler;
 import upandgo.shared.entities.Semester;
 
 public class NavBarPresenter implements Presenter {
@@ -38,6 +45,16 @@ public class NavBarPresenter implements Presenter {
 		public List<AnchorListItem> getSemesterListItems();
 		
 		public AnchorButton getSemesterButton();
+		
+		public Modal initializeSemesterModal(Semester semester);
+		
+		public HasClickHandlers getSemesterModalAcceptButton();
+		
+		public void semesterModalAcceptButtonSetSpin(boolean spin);
+		
+		public NavbarText getSemesterText();
+		
+		public void markChoosenSemesterEntry(Semester semester);
 	}
 
 	static String signInMessage = "Sign In";
@@ -54,12 +71,33 @@ public class NavBarPresenter implements Presenter {
 	
 	protected HandlerRegistration signInOutHandler = null;
 
+	Semester currentSemester;
+	Semester requestedSemester;
+	Modal semesterModal;
+	
 	@Inject
 	public NavBarPresenter(LoginServiceAsync rpc, CoursesServiceAsync coursesService, EventBus eventBus, Display display) {
 		this.rpcService = rpc;
 		this.coursesService = coursesService;
 		this.display = display;
 		this.eventBus = eventBus;
+		this.currentSemester = Semester.WINTER16;
+		
+		coursesService.getSemester(new AsyncCallback<Semester>() {
+			
+			@Override
+			public void onSuccess(Semester arg0) {
+				Log.info("NavBarPresenter: onSuccess semester " + arg0.getId());
+				currentSemester = arg0;
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable arg0) {
+				Log.info("NavBarPresenter: onFailure semester " + arg0);
+				
+			}
+		});
 	}
 
 	@Override
@@ -72,23 +110,51 @@ public class NavBarPresenter implements Presenter {
 				@Override
 				public void onClick(ClickEvent event) {
 					Log.info("NavBarPresenter: user clicked on semester " + semesterItem.getId());
-					coursesService.setSemester(semesterItem.getId(), new AsyncCallback<Void>() {
-						
+					requestedSemester = Semester.fromId(semesterItem.getId());
+					semesterModal = display.initializeSemesterModal(requestedSemester);
+					semesterModal.show();
+					semesterModal.addHiddenHandler(new ModalHiddenHandler() {
 						@Override
-						public void onSuccess(Void result) {
-							Log.info("NavBarPresenter: onSuccess on semester " + semesterItem.getId());
-							eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(semesterItem.getId())));
-						}
-						
-						@Override
-						public void onFailure(Throwable caught) {
-							Log.info("NavBarPresenter: onFailure on semester " + semesterItem.getId());
-							
+						public void onHidden(ModalHiddenEvent evt) {
+							display.semesterModalAcceptButtonSetSpin(false);
 						}
 					});
 				}
 			});
 		}
+		
+		display.getSemesterModalAcceptButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent arg0) {
+				Log.info("NavBarPresenter: user accepted semester change " + requestedSemester.getId());
+				display.semesterModalAcceptButtonSetSpin(true);
+				coursesService.setSemester(requestedSemester, new AsyncCallback<Void>() {
+	
+					@Override
+					public void onSuccess(Void result) {
+						Log.info("NavBarPresenter: onSuccess on semester " + requestedSemester.getId());
+						eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(requestedSemester.getId())));
+						currentSemester = requestedSemester;
+						display.getSemesterText().clear();
+						display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
+						semesterModal.hide();
+						display.markChoosenSemesterEntry(currentSemester);
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Log.info("NavBarPresenter: onFailure on semester " + requestedSemester.getId());
+						
+					}
+				});
+				
+			}
+		});
+		
+		display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
+		
+		display.markChoosenSemesterEntry(currentSemester);
 	}
 
 	@Override

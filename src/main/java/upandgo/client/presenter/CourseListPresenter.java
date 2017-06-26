@@ -396,6 +396,7 @@ public class CourseListPresenter implements Presenter {
 			result.remove(new CourseId());
 			notSelectedCourses =result;
 			allCourses = new ArrayList<>(result);
+			Log.error("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 

@@ -17,6 +17,7 @@ import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -44,6 +45,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		ObjectifyService.register(CoursesEntity.class);
 	}
 	
+	private Semester currentSemester = Semester.WINTER16;
 	private String REP_XML_PATH = "201602.XML";
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
@@ -146,9 +148,14 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	@Override
-	public void setSemester(String semesterId){
-		XmlCourseLoader loader = new XmlCourseLoader(semesterId+".XML");
+	public void setSemester(Semester semester){
+		XmlCourseLoader loader = new XmlCourseLoader(semester.getId()+".XML");
 		model = new CourseModel(loader);
+	}
+	
+	@Override
+	public Semester getSemester(){
+		return currentSemester;
 	};
 
 	public void exportSchedule(List<LessonGroup> sched) throws IOException {
