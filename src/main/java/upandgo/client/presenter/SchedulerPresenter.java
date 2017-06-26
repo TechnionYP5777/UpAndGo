@@ -7,6 +7,7 @@ import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.WeekTime;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,6 +42,7 @@ import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.UnselectCourseEventHandler;
 import upandgo.client.event.clearScheduleEvent;
+import upandgo.client.presenter.CourseListPresenter.GetSomeStringAsyncCallback;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
@@ -153,6 +155,7 @@ public class SchedulerPresenter implements Presenter {
 		
 		public HasClickHandlers getUserEventBoxDeleteButton();
 
+		public HasClickHandlers exportScheduleButton();
 	}
 
 	@Inject
@@ -420,8 +423,6 @@ public class SchedulerPresenter implements Presenter {
 				view.getCollisionModal().hide();
 				
 				buildSchedule();
-				
-				
 			}
 		});
 		
@@ -472,8 +473,6 @@ public class SchedulerPresenter implements Presenter {
 				
 			}
 		});
-
-
 				
 		view.getUserEventBoxDeleteButton().addClickHandler(new ClickHandler() {
 			
@@ -490,7 +489,37 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
+		view.exportScheduleButton().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Log.info("export schedule was requested");
+				if (!isSignedIn) {
+					Window.alert("Please, sign in first!");
+					return;
+				}
+				rpcService.exportSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						if(caught instanceof IOException) {
+							Window.alert("Please, grant us permission. Then try again.");
+							Window.Location.assign(caught.getMessage());
+							return;
+						}
+						Window.alert("Error while exporting schedule:\n"+caught.getMessage());
+						Log.error("Error while exporting schedule.");
+						Log.error(caught.getMessage());
+						rpcService.getSomeString(new GetSomeStringAsyncCallback());
+						
+					}
 
+					@Override
+					public void onSuccess(Void result) {
+						Log.info("schedule was exported successfully");
+						rpcService.getSomeString(new GetSomeStringAsyncCallback());
+					}
+				});
+			}
+		});
 	}
 
 	@Override
@@ -738,6 +767,22 @@ public class SchedulerPresenter implements Presenter {
 			}
 		}
 		return true;
+	}
+	
+	class GetSomeStringAsyncCallback implements AsyncCallback<String> {
+		@Override
+		public void onSuccess(String result) {
+			// Window.alert(result);
+			Log.info(result);
+		}
+
+		@Override
+		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+			Window.alert("Cthulhu has awoken!!!!!!!!!");
+			Log.error("Cthulhu has awoken!!!!!!!!");
+			Log.error("**+++++++++++" + caught.getLocalizedMessage() + "**+++++++++++" + caught.getMessage());
+
+		}
 	}
 	
 }

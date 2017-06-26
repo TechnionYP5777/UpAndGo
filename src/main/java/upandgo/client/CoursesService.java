@@ -1,5 +1,6 @@
 package upandgo.client;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,6 @@ public interface CoursesService extends RemoteService {
 	
 	public String getSomeString();
 	
-	public void exportSchedule(List<LessonGroup> sched);
+	public void exportSchedule(List<LessonGroup> sched) throws IOException;
 	
 }

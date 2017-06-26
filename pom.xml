@@ -152,7 +152,7 @@
 			<version>0.9.3</version>
 			<scope>provided</scope>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
@@ -181,12 +181,16 @@
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.9.53</version>
 		</dependency>
-	    <dependency>
-	      <groupId>com.google.apis</groupId>
-	      <artifactId>google-api-services-calendar</artifactId>
-	      <version>v3-rev249-1.22.0</version>
-	    </dependency>
-
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev249-1.22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-appengine</artifactId>
+			<version>1.22.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
