@@ -1,6 +1,5 @@
 package upandgo.shared.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +17,10 @@ import upandgo.shared.entities.constraint.TimeConstraint;
  */
 public class LessonGroup implements IsSerializable {
 
-	private static final long serialVersionUID = 4547987607914277140L;
-
 	public static final int UNINITIALIZED_GROUP_NUM = -1;
 
 	private int groupNum;
-	private boolean isConstrained = false;
+	private boolean isConstrained;
 	private List<Lesson> lessons;
 
 	public LessonGroup() {
@@ -36,9 +33,8 @@ public class LessonGroup implements IsSerializable {
 		groupNum = other.getGroupNum();
 		isConstrained = other.isConstrained();
 		lessons = new ArrayList<>(other.getLessons().size());
-		for (int i = 0 ; i < other.getLessons().size() ; i++){
+		for (int i = 0 ; i < other.getLessons().size() ; ++i)
 			lessons.add(new Lesson(other.getLessons().get(i)));
-		}
 	}
 
 	public LessonGroup(final int GroupNumber) {
@@ -110,10 +106,7 @@ public class LessonGroup implements IsSerializable {
 
 	@Override
 	public String toString() {
-		// return "group number: " + groupNum + " lessons: " + lessons;
 		String $ = "group number: " + groupNum + " lessons: ";
-		// ret.concat("ok");
-		// ret += "ok";
 		for (final Lesson xxx : lessons)
 			$ = $.concat("\n" + xxx);
 		return $ = $.concat("\n");
