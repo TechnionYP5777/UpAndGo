@@ -47,7 +47,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	private String REP_XML_PATH = "201602.XML";
 	//private String REP_XML_PATH = "loadOf6CoursesTest.XML";
 
-	private final CourseModel model;
+	private CourseModel model;
 	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
