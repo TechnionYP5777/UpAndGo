@@ -28,4 +28,9 @@ public class DayTest {
 		assert(Day.FRIDAY.compareTo(Day.FRIDAY) == 0);
 		assert(Day.FRIDAY.compareTo(Day.TUESDAY) > 0);
 	}
+	
+	@Test
+	public void testc() {
+		assertNull(Day.fromLetter("ז"));
+	}
 }
