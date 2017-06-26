@@ -88,8 +88,6 @@ public class WeekTime implements IsSerializable {
 				return "שישי " + time;
 			case MONDAY:
 				return "שני " + time;
-			case SATURDAY:
-				return "שבת " + time;
 			case SUNDAY:
 				return "ראשון " + time;
 			case THURSDAY:
@@ -99,7 +97,7 @@ public class WeekTime implements IsSerializable {
 			case WEDNESDAY:
 				return "רביעי " + time;
 			default:
-				return "יום טוב";
+				return "שבת " + time;
 		}
 	}
 

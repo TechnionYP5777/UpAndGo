@@ -91,9 +91,19 @@ public class weekTimeTest {
 		assertEquals("חמישי 10:30", time5.toHebrewString());
 		assertEquals("שישי 10:30", time6.toHebrewString());
 		assertEquals("שבת 10:30", time7.toHebrewString());
+	}
+	
+	@Test
+	public void test_k() {
+		WeekTime time1 = new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"));
+		WeekTime time2 = new WeekTime(Day.MONDAY, LocalTime.parse("10:30"));
+		WeekTime time3 = new WeekTime(Day.MONDAY, LocalTime.parse("11:30"));
+		WeekTime time4 = new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"));
 		
-		
-		
+		assertEquals(1, WeekTime.compareTo(time2, time1));
+		assertEquals(-1, WeekTime.compareTo(time1, time2));
+		assertEquals(1, WeekTime.compareTo(time3, time2));
+		assertEquals(0, WeekTime.compareTo(time4, time1));
 	}
 	
 }
