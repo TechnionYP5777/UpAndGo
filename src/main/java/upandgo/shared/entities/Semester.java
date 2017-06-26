@@ -9,6 +9,11 @@ public enum Semester implements IsSerializable {
 	private final String name;
 	private final String id;
 	
+	private Semester(){
+		this.name = "";
+		this.id = "";
+	}
+	
 	private Semester(final String name, final String id){
 		this.name = name;
 		this.id = id;
