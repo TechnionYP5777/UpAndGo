@@ -1,6 +1,5 @@
 package upandgo.shared.entities;
 
-import java.io.Serializable;
 /**
  * @author kobybs
  * @since 25-12-16
@@ -22,11 +21,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 public class WeekTime implements IsSerializable {
-	
-	private static final long serialVersionUID = -7431131009009123098L;
-
+		
 	private Day day;
-	private LocalTime time; // = LocalTime.of(22, 15);
+	private LocalTime time; 
 
 	public WeekTime() {
 		this.day = null;
@@ -57,8 +54,8 @@ public class WeekTime implements IsSerializable {
 		return a.getTime().getMinute() + 60 * (a.getTime().getHour() - b.getTime().getHour()) - b.getTime().getMinute();
 	}
 	
-	public static int difference(final LocalTime a, LocalTime b){
-		return a.getMinute() + 60 * (a.getHour() - b.getHour()) - b.getMinute();
+	public static int difference(final LocalTime t, LocalTime b){
+		return t.getMinute() + 60 * (t.getHour() - b.getHour()) - b.getMinute();
 	}
 	
 
@@ -68,13 +65,12 @@ public class WeekTime implements IsSerializable {
 	}
 	
 	public WeekTime addDuration(final LocalTime duration){
-		int minutes = this.time.getMinute() + duration.getMinute();
-		int hours = this.time.getHour() + duration.getHour();
-		if (minutes>=60){
-			hours++;
-			minutes = minutes -60;
-		}
-		return new WeekTime(this.day,LocalTime.of(hours,minutes));
+		int minutes = duration.getMinute() + this.time.getMinute(), hours = duration.getHour() + this.time.getHour();
+		if (minutes < 60)
+			return new WeekTime(this.day, LocalTime.of(hours, minutes));
+		++hours;
+		minutes -= 60;
+		return new WeekTime(this.day, LocalTime.of(hours, minutes));
 	}
 
 	public int compareTo(final WeekTime b) {
@@ -84,11 +80,6 @@ public class WeekTime implements IsSerializable {
 	@Override
 	public boolean equals(final Object d) {
 		return d instanceof WeekTime && compareTo((WeekTime) d) == 0;
-		/*
-		 * return d != null && (d == this || d instanceof WeekTime &&
-		 * (this.day.equals(((WeekTime) d).getDay())) &&
-		 * ((this.time).equals(((WeekTime) d).getTime())));
-		 */
 	}
 	
 	public String toHebrewString(){
