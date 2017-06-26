@@ -27,9 +27,11 @@ public class FaclutyTest {
 		Faculty facultyb = new Faculty("14", "מתמטיקה");
 		Faculty facultyc = new Faculty("23", "מדעי המחשב");
 		
-		assertFalse(facultya.equals(facultyb));
-		assertTrue(facultya.equals(facultyc));
-		assertTrue(facultya.equals(facultya));
+		assert !facultya.equals(new Exam("13:00 08 08 2017 4"));
+		assert !facultya.equals(null);
+		assert !facultya.equals(facultyb);
+		assert facultya.equals(facultyc);
+		assert facultya.equals(facultya);
 	}
 
 }
