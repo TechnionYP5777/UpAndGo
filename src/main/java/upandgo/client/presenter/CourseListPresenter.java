@@ -32,6 +32,8 @@ import com.google.inject.Inject;
 import upandgo.client.CoursesServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
+import upandgo.client.event.ChangeSemesterEvent;
+import upandgo.client.event.ChangeSemesterEventHandler;
 import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
@@ -125,6 +127,16 @@ public class CourseListPresenter implements Presenter {
 				deselectCourse(c);
 				
 			}
+		});
+		
+		this.eventBus.addHandler(ChangeSemesterEvent.TYPE, new ChangeSemesterEventHandler(){
+
+			@Override
+			public void onSemesterChange(ChangeSemesterEvent event) {
+				Log.info("CourseListPresenter: Got semester change event: " + event.getSemester().getId());
+				getFacultiesAndCourses();
+			}
+			
 		});
 	}
 
@@ -348,7 +360,11 @@ public class CourseListPresenter implements Presenter {
 		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 
 		// rpcService.getSomeString(new GetSomeStringAsyncCallback());
+		getFacultiesAndCourses();
 		
+	}
+	
+	void getFacultiesAndCourses(){
 		rpcService.getFaculties(new FetchFacultiesAsyncCallback());
 		if (isSignedIn)
 			rpcService.getSelectedCourses(new FetchSelectedCoursesAsyncCallback());
@@ -357,6 +373,7 @@ public class CourseListPresenter implements Presenter {
 			display.setSelectedCourses(selectedCourses);
 		}
 		rpcService.getNotSelectedCourses(courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+
 	}
 
 	class FetchSelectedCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
