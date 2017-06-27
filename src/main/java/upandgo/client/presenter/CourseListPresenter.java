@@ -418,7 +418,7 @@ public class CourseListPresenter implements Presenter {
 	class FetchFacultiesAsyncCallback implements AsyncCallback<ArrayList<String>> {
 		@Override
 		public void onSuccess(ArrayList<String> result) {
-			faculties = result;
+			faculties = new ArrayList<>(result);
 			display.setFaculties(faculties);
 		}
 

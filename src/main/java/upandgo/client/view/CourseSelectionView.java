@@ -261,6 +261,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void setFaculties(List<String> faculties) {
+		this.faculties.clear();
 		for(String s : faculties)
 			this.faculties.addItem(s);
 		
