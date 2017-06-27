@@ -1,8 +1,6 @@
 package upandgo.shared.model.scedule;
 
 
-import upandgo.shared.entities.course.CourseId;
-
 public class Collision {
 	public final String c1;
 	public final String c2;
@@ -12,9 +10,6 @@ public class Collision {
 	    this.c2 = c2; 
 	} 
 	
-	/*
-	@Override
-	public */
 	@Override
 	public boolean equals(Object other){
 	    if (other == null) return false;
