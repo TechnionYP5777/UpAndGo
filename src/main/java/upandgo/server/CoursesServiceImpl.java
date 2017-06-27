@@ -61,7 +61,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	
 	private void initilalizeCourseModel(Semester semester){
 		XmlCourseLoader loader = new XmlCourseLoader(semester.getId()+".XML");
-		CourseModel model = new CourseModel(loader);
+		CourseModel model = new CourseModel(loader,semester);
 		courseModels.put(semester, model);
 	}
 
@@ -80,6 +80,16 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		}
 		return selectesCoursesIDs;
 	}
+	
+	@Override
+	public ArrayList<CourseId> getAllCourses(Semester semester) {
+		if (!courseModels.containsKey(semester)){
+			initilalizeCourseModel(semester);
+		}
+		ArrayList<CourseId> res = (ArrayList<CourseId>) courseModels.get(semester).loadAllCourses();
+		Log.warn("CourseServiceImple got: " + res.size() + " courses from loader");
+		return res;
+	}
 
 	@Override
 	public ArrayList<CourseId> getNotSelectedCourses(Semester semester, String query, String faculty) {
@@ -87,8 +97,8 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 			initilalizeCourseModel(semester);
 		}
 		ArrayList<CourseId> res = (ArrayList<CourseId>) courseModels.get(semester).loadQueryByFaculty(query, faculty);
-		Log.warn("CourseServiceImple got: " + res.get(0).getTitle() + "*" + res.get(0).aTerm() + "*"
-				+ res.get(0).bTerm());
+/*		Log.warn("CourseServiceImple got: " + res.get(0).getTitle() + "*" + res.get(0).aTerm() + "*"
+				+ res.get(0).bTerm());*/
 		return res;
 	}
 
@@ -121,10 +131,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		if (!courseModels.containsKey(semester)){
 			initilalizeCourseModel(semester);
 		}
-		List<String> chosenCourses = new ArrayList<>(courseModels.get(semester).loadChosenCourses());
+		courseModels.get(semester).saveChosenCourse(id.number());
+/*		List<String> chosenCourses = new ArrayList<>(courseModels.get(semester).loadChosenCourses());
 		chosenCourses.add(id.number());
 		courseModels.get(semester).saveChosenCourses(chosenCourses);
-		//model.saveChosenCourses(model.getChosenCourseNames());
+*/		//model.saveChosenCourses(model.getChosenCourseNames());
 	}
 
 	@Override
@@ -132,9 +143,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		if (!courseModels.containsKey(semester)){
 			initilalizeCourseModel(semester);
 		}
-		List<String> chosenCourses = new ArrayList<>(courseModels.get(semester).loadChosenCourses());
+		courseModels.get(semester).removeChosenCourse(id.number());
+
+/*		List<String> chosenCourses = new ArrayList<>(courseModels.get(semester).loadChosenCourses());
 		chosenCourses.remove(id.number());
-		courseModels.get(semester).saveChosenCourses(chosenCourses);
+		courseModels.get(semester).saveChosenCourses(chosenCourses);*/
 
 /*		model.dropCourse(id.number());
 		model.saveChosenCourses(model.getChosenCourseNames());*/
@@ -154,6 +167,11 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	public String getSomeString() {
 		return courseModels.get(Semester.WINTER16).loadChosenCourses().toString();
 	}
+	
+	@Override
+	public String getSelectedCoursesString(Semester semester){
+		return courseModels.get(semester).loadChosenCourses().toString();
+	}
 
 
 	@Override
@@ -161,7 +179,16 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		if (!courseModels.containsKey(semester)){
 			initilalizeCourseModel(semester);
 		}
-		courseModels.get(semester).saveChosenCourses(new ArrayList<String>());
+		courseModels.get(semester).removeAllChosenCourse();
+
+/*		CoursesEntity coursesEntity = courseModels.get(semester).loadChosenCourses();
+		if (coursesEntity == null){
+			return;
+		}
+		coursesEntity.removeAllCourses(semester.getId());
+		courseModels.get(semester).saveChosenCourses(coursesEntity);
+*/
+		//courseModels.get(semester).saveChosenCourses(new ArrayList<String>());
 		
 	}
 	

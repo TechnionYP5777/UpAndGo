@@ -2,6 +2,7 @@ package upandgo.server.model.loader;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import upandgo.shared.entities.Faculty;
@@ -38,9 +39,9 @@ public abstract class CourseLoader {
 
 	public abstract List<String> loadAllCourseNames();
 
-	public abstract void saveChosenCourseNames(List<String> names);
+	public abstract void saveChosenCourses(CoursesEntity courseEntity);
 
-	public abstract List<String> loadChosenCourseNames();
+	public abstract CoursesEntity loadChosenCourses();
 
 	public abstract void saveChosenLessonGroups(List<LessonGroup> gs);
 

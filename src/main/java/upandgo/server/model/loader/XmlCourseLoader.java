@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -212,7 +213,7 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public void saveChosenCourseNames(final List<String> names) {
+	public void saveChosenCourses(final CoursesEntity coursesEntity) {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
@@ -221,8 +222,9 @@ public class XmlCourseLoader extends CourseLoader {
 			return;
 		}
 		
-		CoursesEntity ce = new CoursesEntity(user.getUserId(), names);
-		CoursesServiceImpl.ofy().defer().save().entity(ce);
+		coursesEntity.setId(user.getUserId());
+		//CoursesEntity ce = new CoursesEntity(user.getUserId(), courses);
+		CoursesServiceImpl.ofy().defer().save().entity(coursesEntity);
 		
 //		try {
 //			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -255,18 +257,19 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public List<String> loadChosenCourseNames() {
-		final List<String> $ = new ArrayList<>();
+	public CoursesEntity loadChosenCourses() {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		
+
 		if(user == null) {
 			Log.warn("User was not signed in. selected courses could not be loaded!");
-			return $;
+			return null;
 		}
 		
+		final CoursesEntity $ = new CoursesEntity(user.getUserId());
+
 		CoursesEntity ce = CoursesServiceImpl.ofy().load().type(CoursesEntity.class).id(user.getUserId()).now();
-		return ce != null ? ce.courses : $;
+		return ce != null ? ce : $;
 		
 //		if (!new File(CHOSEN_COURSES_PATH).exists())
 //			return Collections.emptyList();

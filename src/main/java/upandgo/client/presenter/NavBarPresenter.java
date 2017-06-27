@@ -174,7 +174,7 @@ public class NavBarPresenter implements Presenter {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				coursesService.getSomeString(new AsyncCallback<String>() {
+				coursesService.getSelectedCoursesString(currentSemester, new AsyncCallback<String>() {
 					
 					@Override
 					public void onSuccess(String arg0) {

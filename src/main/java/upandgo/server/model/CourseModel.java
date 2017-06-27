@@ -17,6 +17,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import upandgo.server.model.loader.CourseLoader;
+import upandgo.server.model.loader.CoursesEntity;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
@@ -34,16 +35,17 @@ import upandgo.shared.utils.FuzzySearch;
  */
 public class CourseModel { // implements Model {
 
-	//protected Semester semester = Semester.WINTER16;
+	protected Semester semester = Semester.WINTER16;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	//protected List<Course> pickedCourseList;
 	protected CourseLoader loader;
 	protected List<Faculty> facultyList;
 
-	public CourseModel(final CourseLoader loader) {
+	public CourseModel(final CourseLoader loader, Semester semester) {
 		//pickedCourseList = new ArrayList<>();
 		this.loader = loader;
+		this.semester = semester;
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
 		facultyList = loader.loadFaculties();
@@ -157,17 +159,58 @@ public class CourseModel { // implements Model {
 		return new CourseId(course.getId(),course.getName(),course.getaTerm(),course.getbTerm());
 	}
 
-	public void saveChosenCourses(final List<String> names) {
-		loader.saveChosenCourseNames(names);
+	public void saveChosenCourse(final String courseID) {
+		CoursesEntity coursesEntity = loader.loadChosenCourses();
+		if (coursesEntity == null){
+			return;
+		}
+		coursesEntity.addCourse(semester.getId(), courseID);
+		loader.saveChosenCourses(coursesEntity);
+		//loader.saveChosenCourses(courseEntity);
+	}
+	
+	public void removeChosenCourse(final String courseID) {
+		CoursesEntity coursesEntity = loader.loadChosenCourses();
+		if (coursesEntity == null){
+			return;
+		}
+		coursesEntity.removeCourse(semester.getId(), courseID);
+		loader.saveChosenCourses(coursesEntity);
+		//loader.saveChosenCourses(courseEntity);
+	}
+	
+	public void removeAllChosenCourse() {
+		CoursesEntity coursesEntity = loader.loadChosenCourses();
+		if (coursesEntity == null){
+			return;
+		}
+		coursesEntity.removeAllCourses(semester.getId());
+		loader.saveChosenCourses(coursesEntity);
+		//loader.saveChosenCourses(courseEntity);
 	}
 	
 	public List<String> loadChosenCourses() {
-		return loader.loadChosenCourseNames();
+		CoursesEntity coursesEntity = loader.loadChosenCourses();
+		if (coursesEntity == null){
+			return new ArrayList<>();
+		}
+		return coursesEntity.getCourses(semester.getId());
+		//return loader.loadChosenCourses();
 	}
 	
 /*	public List<Course> getPickedCoursesList () {
 		return pickedCourseList;
 	}*/
+	
+	public List<CourseId> loadAllCourses(){
+		List<CourseId> res = new ArrayList<>();
+		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
+			Course c = entry.getValue();
+			res.add(new CourseId(c.getId(), c.getName(),c.getaTerm(), c.getbTerm()));
+		}
+		return res;
+		
+	}
 	
 	private List<CourseId> getNotSelectedCoursesByFaculty(final String faculty){
 		List<CourseId> res = new ArrayList<>();

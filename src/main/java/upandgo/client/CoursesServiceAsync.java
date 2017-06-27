@@ -24,6 +24,8 @@ public interface CoursesServiceAsync {
 
 	public void getNotSelectedCourses(Semester semester, String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
 	
+	public void getAllCourses(Semester semester, AsyncCallback<ArrayList<CourseId>> callback);
+	
 	public void getFaculties(Semester semester, AsyncCallback<ArrayList<String>> callback);
 
 	public void getCourseDetails(Semester semester, CourseId id,AsyncCallback<Course> callback);
@@ -43,6 +45,8 @@ public interface CoursesServiceAsync {
 	public void loadSchedule(AsyncCallback<List<LessonGroup>> callback);
 	
 	public void getSomeString(AsyncCallback<String> callback);
+	
+	public void getSelectedCoursesString(Semester semester, AsyncCallback<String> callback);
 			
 	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }

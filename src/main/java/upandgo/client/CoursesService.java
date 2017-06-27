@@ -28,6 +28,8 @@ public interface CoursesService extends RemoteService {
 
 	public ArrayList<CourseId> getNotSelectedCourses(Semester semester, String query, String faculty);
 	
+	public ArrayList<CourseId> getAllCourses(Semester semester);
+	
 	public ArrayList<String> getFaculties(Semester semester);
 
 	public Course getCourseDetails(Semester semester, CourseId id);
@@ -47,6 +49,8 @@ public interface CoursesService extends RemoteService {
 	public List<LessonGroup> loadSchedule();
 	
 	public String getSomeString();
+	
+	public String getSelectedCoursesString(Semester semester);
 	
 	public void exportSchedule(List<LessonGroup> sched) throws IOException;
 
