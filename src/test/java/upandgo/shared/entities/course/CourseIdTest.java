@@ -22,12 +22,15 @@ public class CourseIdTest {
 		CourseId course = new CourseId("999999", "אנליזה", new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		CourseId course2 = new CourseId("999899", "בלה", new Exam("13:00 10 07 2017 4"), new Exam("13:00 13 12 2017 4"));
 		CourseId course3 = new CourseId(null, null, new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
+		CourseId course4 = new CourseId(null, "בלה", new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		
 		assert !course.equals(null);
 		assert course.equals(course);
 		assert !course.equals(new Exam("13:00 08 08 2017 4"));
 		assert !course3.equals(course2);
 		assert !course2.equals(course3);
+		assert !course.equals(course4);
+		assert !course4.equals(course);
 	}
 	
 	@Test
