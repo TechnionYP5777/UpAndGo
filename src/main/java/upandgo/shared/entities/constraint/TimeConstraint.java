@@ -41,14 +41,5 @@ public class TimeConstraint implements Constraint<TimeConstraint> {
 	public WeekTime getEndTime() {
 		return endTime;
 	}
-
-
-
-	
-
-
-	
-
-
 	
 }

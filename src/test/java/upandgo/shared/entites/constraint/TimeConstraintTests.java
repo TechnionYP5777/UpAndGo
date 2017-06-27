@@ -1,8 +1,6 @@
-package upandgo.server.model.course;
+package upandgo.shared.entites.constraint;
 
 import upandgo.shared.entities.LocalTime;
-
-import javax.validation.constraints.AssertFalse;
 
 import org.junit.Test;
 
