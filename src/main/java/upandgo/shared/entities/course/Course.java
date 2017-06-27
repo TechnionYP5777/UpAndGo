@@ -1,6 +1,6 @@
 package upandgo.shared.entities.course;
 
-import java.time.LocalDateTime;
+
 /**
  * @author nikita
  * @author kobybs (made changes)
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
-import upandgo.shared.model.scedule.Collision;
+
 
 /**
  * 
@@ -79,8 +79,6 @@ public class Course implements IsSerializable {
 		lectures = new ArrayList<>();
 		tutorials = new ArrayList<>();
 
-		projectHours = laboratoryHours = tutorialHours = lectureHours = 0;
-		
 		notes = new ArrayList<>();
 
 	}
@@ -100,12 +98,6 @@ public class Course implements IsSerializable {
 		this.tutorials = new ArrayList<>(other.getTutorials().size());
 		for (int i = 0 ; i < other.getTutorials().size() ; ++i)
 			this.tutorials.add(new LessonGroup(other.getTutorials().get(i)));
-		
-		this.laboratoryHours = other.getLectureHours();
-		this.tutorialHours = other.getTutorialHours();
-		this.laboratoryHours = other.getLaboratoryHours();
-		this.projectHours = other.getProjectHours();
-		
 		this.notes = new ArrayList<>(other.getNotes());
 	}
 
@@ -150,6 +142,9 @@ public class Course implements IsSerializable {
 	}
 
 	public List<StuffMember> getStuff() {
+		if (stuff == null) {
+			return new ArrayList<>(); 
+		}
 		return new ArrayList<>(stuff);
 	}
 
@@ -159,26 +154,6 @@ public class Course implements IsSerializable {
 
 	public List<LessonGroup> getTutorialsLG() {
 		return new ArrayList<>(tutorials);
-	}
-
-	public int getLectureHours() {
-		return lectureHours;
-	}
-
-	public int getTutorialHours() {
-		return tutorialHours;
-	}
-
-	public int getLaboratoryHours() {
-		return laboratoryHours;
-	}
-
-	public int getProjectHours() {
-		return projectHours;
-	}
-
-	public int getTotalHours() {
-		return laboratoryHours + lectureHours + projectHours + tutorialHours;
 	}
 
 	public void addNote(final String note){
