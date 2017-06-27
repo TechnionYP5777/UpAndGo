@@ -615,7 +615,7 @@ public class SchedulerPresenter implements Presenter {
 		for (UserEvent userEvent : getUserEvents()){
 			userEventsLessonGroup.addLesson(userEvent.getAsLesson());
 		}
-		Course userEventCourse = new Course("user events","999999","user events",new ArrayList<StuffMember>(),0.0,null,null,new ArrayList<Course>(),new ArrayList<Course>());
+		Course userEventCourse = new Course("user events","999999","user events",new ArrayList<StuffMember>(),0.0,null,null);
 		userEventCourse.addLecturesLessonGroup(userEventsLessonGroup);
 		userEventCourse.addTutorialLessonGroup(new LessonGroup(999));
 		

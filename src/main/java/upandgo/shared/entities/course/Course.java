@@ -43,20 +43,10 @@ public class Course implements IsSerializable {
 	protected int laboratoryHours;
 	protected int projectHours;
 
-	@Deprecated
-	final protected List<CourseListener> listeners;
-
 	protected List<String> notes;
 	
-	@Deprecated
-	final protected List<Course> prerequisites;
-	@Deprecated
-	final protected List<Course> corequisites;
-	protected boolean done;
-	protected boolean passThisSemester;
-
 	@SuppressWarnings("unused")
-	private Course() {
+	public Course() {
 		// here because GWT needs it
 		name = id = faculty = "";
 		points = 0;
@@ -64,10 +54,7 @@ public class Course implements IsSerializable {
 		bTerm = null;
 
 		stuff = null;
-		listeners = null;
-		prerequisites = null;
-		corequisites = null;
-		
+	
 		lectures = null;
 		tutorials = null;
 		
@@ -75,15 +62,11 @@ public class Course implements IsSerializable {
 	}
 	
 	public Course(final String name1, final String id1, final String faculty1, final List<StuffMember> st,
-			final double acPoints, Exam aT, Exam bT, final List<Course> prerequisitesList, final List<Course> corequisitesList) {
+			final double acPoints, Exam aT, Exam bT/*, final List<Course> prerequisitesList, final List<Course> corequisitesList*/) {
 
 		if (name1 == null || faculty1 == null)
 			throw new NullPointerException();
-		/*
-		 * if (name1.isEmpty()) throw new
-		 * RuntimeException("The empty field was found!\n"); //$NON-NLS-1$
-		 */
-
+	
 		name = name1;
 		id = id1;
 		faculty = faculty1;
@@ -96,16 +79,9 @@ public class Course implements IsSerializable {
 		lectures = new ArrayList<>();
 		tutorials = new ArrayList<>();
 
-		listeners = new ArrayList<>();
-
 		projectHours = laboratoryHours = tutorialHours = lectureHours = 0;
 		
 		notes = new ArrayList<>();
-
-		prerequisites = new ArrayList<>(prerequisitesList);
-		corequisites = new ArrayList<>(corequisitesList);
-		done = false;
-		passThisSemester = true;
 
 	}
 	
@@ -119,17 +95,11 @@ public class Course implements IsSerializable {
 		
 		this.stuff = new ArrayList<>(other.getStuff());
 		this.lectures = new ArrayList<>(other.getLectures().size());
-		for (int i = 0 ; i < other.getLectures().size() ; i++){
+		for (int i = 0 ; i < other.getLectures().size() ; ++i)
 			this.lectures.add(new LessonGroup(other.getLectures().get(i)));
-		}
 		this.tutorials = new ArrayList<>(other.getTutorials().size());
-		for (int i = 0 ; i < other.getTutorials().size() ; i++){
+		for (int i = 0 ; i < other.getTutorials().size() ; ++i)
 			this.tutorials.add(new LessonGroup(other.getTutorials().get(i)));
-		}
-		
-		this.listeners = null;
-		this.prerequisites = null;
-		this.corequisites = null;
 		
 		this.laboratoryHours = other.getLectureHours();
 		this.tutorialHours = other.getTutorialHours();
@@ -137,9 +107,6 @@ public class Course implements IsSerializable {
 		this.projectHours = other.getProjectHours();
 		
 		this.notes = new ArrayList<>(other.getNotes());
-		
-		this.done = other.done;
-		this.passThisSemester = other.passThisSemester;
 	}
 
 	public void addLecturesLessonGroup(final LessonGroup xxx) {
@@ -214,53 +181,12 @@ public class Course implements IsSerializable {
 		return laboratoryHours + lectureHours + projectHours + tutorialHours;
 	}
 
-/*	public static CourseBuilder giveCourseBuilderTo(@SuppressWarnings("unused") final CourseLoader xxx) {
-		return new CourseBuilder();
-	}*/
-
-	public void addListener(final CourseListener xxx) {
-		listeners.add(xxx);
-	}
-
-	public void removeListener(final CourseListener xxx) {
-		listeners.remove(xxx);
-	}
-
-	public void updateListeners() {
-		for (final CourseListener xxx : listeners)
-			xxx.getUpdate(this);
-	}
-
-	public boolean getDone() {
-		return done;
-	}
-
-	public void MarkDone() {
-		done = true;
-	}
-
-	public boolean isPassThisSemester() {
-		return passThisSemester;
-	}
-
-	public void markAsNotPass() {
-		passThisSemester = false;
-	}
-	
 	public void addNote(final String note){
 		notes.add(note);
 	}
 	
 	public List<String> getNotes() {
 		return notes;
-	}
-
-	public List<Course> getPrerequisites() {
-		return prerequisites;
-	}
-
-	public List<Course> getCorequisites() {
-		return corequisites;
 	}
 
 	@Override

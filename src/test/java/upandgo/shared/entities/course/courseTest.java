@@ -8,7 +8,8 @@ public class courseTest {
 
 	@Test
 	public void test() {
-//		fail("Not yet implemented");
+		Course course = new Course();
+		
 	}
 
 }

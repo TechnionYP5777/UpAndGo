@@ -21,7 +21,7 @@ public class CourseIdTest {
 	public void equalsTest() {
 		CourseId course = new CourseId("999999", "אנליזה", new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		CourseId course2 = new CourseId("999899", "בלה", new Exam("13:00 10 07 2017 4"), new Exam("13:00 13 12 2017 4"));
-		CourseId course3 = new CourseId();
+		CourseId course3 = new CourseId(null, null, new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		
 		assert !course.equals(null);
 		assert course.equals(course);

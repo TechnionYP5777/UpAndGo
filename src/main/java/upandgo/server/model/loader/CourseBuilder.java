@@ -146,7 +146,7 @@ public class CourseBuilder {
 	}
 
 	public Course build() {
-		final Course $ = new Course(name, id, faculty, stuff, points, aTerm, bTerm, prerequisites, corequisites);
+		final Course $ = new Course(name, id, faculty, stuff, points, aTerm, bTerm);
 		for (final LessonGroup xxx : lectures)
 			$.addLecturesLessonGroup(xxx);
 		for (final LessonGroup xxx : tutorials)
