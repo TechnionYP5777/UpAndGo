@@ -32,5 +32,11 @@ public class DayTest {
 	@Test
 	public void testc() {
 		assertNull(Day.fromLetter("ז"));
+		assertEquals(Day.SUNDAY, Day.fromLetter("א"));
+	}
+	
+	@Test
+	public void testd() {
+		assertEquals("א", Day.SUNDAY.toLetter());
 	}
 }
