@@ -256,7 +256,7 @@ public class XmlCourseLoader extends CourseLoader {
 
 	@Override
 	public List<String> loadChosenCourseNames() {
-		final List<String> $ = new LinkedList<>();
+		final List<String> $ = new ArrayList<>();
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		

@@ -28,25 +28,21 @@ public interface CoursesServiceAsync {
 
 	public void getCourseDetails(Semester semester, CourseId id,AsyncCallback<Course> callback);
 
-	public void getCourseLectures(String id,AsyncCallback<List<LessonGroup>> callback);
+	//public void getCourseLectures(String id,AsyncCallback<List<LessonGroup>> callback);
 	
-	public void selectCourse(CourseId id, AsyncCallback<Void> callback);
+	public void selectCourse(Semester semester, CourseId id, AsyncCallback<Void> callback);
 
-	public void unselectCourse(CourseId id, AsyncCallback<Void> callback);
+	public void unselectCourse(Semester semester, CourseId id, AsyncCallback<Void> callback);
 	
 	public void unselectAllCourses(Semester semester, AsyncCallback<Void> callback);
 	
-	public void getChosenCoursesList(Semester semester, AsyncCallback<List<Course>> callback);
+	//public void getChosenCoursesList(Semester semester, AsyncCallback<List<Course>> callback);
 	
 	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 
-	public void getSchedule(AsyncCallback<List<LessonGroup>> callback);
+	public void loadSchedule(AsyncCallback<List<LessonGroup>> callback);
 	
 	public void getSomeString(AsyncCallback<String> callback);
-	
-	public void setSemester(Semester semester, AsyncCallback<Void> callback);
-	
-	public void getSemester(AsyncCallback<Semester> callback);
-		
+			
 	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
 }

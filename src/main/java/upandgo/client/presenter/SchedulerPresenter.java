@@ -687,29 +687,40 @@ public class SchedulerPresenter implements Presenter {
 	}
 	
 	void updateScheduleAndChosenLessons() {
-		Log.info("updating schedule and chosen lessons...");
-		rpcService.getChosenCoursesList(currentSemester, new AsyncCallback<List<Course>>() {
+		Log.info("SchedulerPresenter: updating schedule and chosen lessons...");
+		rpcService.getSelectedCourses(currentSemester, new AsyncCallback<ArrayList<CourseId>>() {
 			
 			@Override
-			public void onSuccess(List<Course> result) {
-				for (Course course : result){
-					selectedCourses.add(course);
-				}
-				view.updateExamsBar(selectedCourses, isMoedAExams);
-				Log.info("chosen lessons were updated.");
+			public void onSuccess(ArrayList<CourseId> result) {
+				Log.info("SchedulerPresenter: loaded selected courses Ids into scheduler!");
+				for (final CourseId courseId : result){
+					rpcService.getCourseDetails(currentSemester, courseId,new AsyncCallback<Course>() {
+						@Override
+						public void onSuccess(Course result) {
+							selectedCourses.add(result);
+							Log.info("SchedulerPresenter: Selected course " + result.getId() + " was loaded");
+						}
+						@Override
+						public void onFailure(Throwable caught) {
+							Log.info("SchedulerPresenter: Failed on selected course " + courseId.name());
+						}
+					});
+					
+				}				
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.warn("Uh-oh, couldn't load selected courses into scheduler!");
+				Log.warn("SchedulerPresenter: Uh-oh, couldn't load selected courses into scheduler!");
+				
 			}
 		});
 
-		rpcService.getSchedule(new AsyncCallback<List<LessonGroup>>() {
+/*		rpcService.getSchedule(new AsyncCallback<List<LessonGroup>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.warn("Uh-oh, couldn't load schedule!");
+				Log.warn("SchedulerPresenter: Uh-oh, couldn't load schedule!");
 			}
 
 			@Override
@@ -722,7 +733,7 @@ public class SchedulerPresenter implements Presenter {
 				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
 				Log.info("schedule was updated. it has " + String.valueOf(result.size()) + " LessonGroups.");
 			}
-		});
+		});*/
 	}
 	
 	void displaySchedule(){

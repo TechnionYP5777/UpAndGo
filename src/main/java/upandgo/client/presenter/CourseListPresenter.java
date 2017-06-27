@@ -388,8 +388,8 @@ public class CourseListPresenter implements Presenter {
 
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Window.alert("Error fetching selected courses.");
-			Log.error("Error fetching selected courses.");
+			//Window.alert("Error fetching selected courses.");
+			Log.error("CourseListPresenter: Error fetching selected courses.");
 		}
 	}
 
@@ -399,7 +399,7 @@ public class CourseListPresenter implements Presenter {
 			result.remove(new CourseId());
 			notSelectedCourses =result;
 			allCourses = new ArrayList<>(result);
-			Log.error("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
+			Log.info("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
 
@@ -472,16 +472,16 @@ public class CourseListPresenter implements Presenter {
 			}
 			display.updateLists();
 			if (isSignedIn) {
-				rpcService.unselectCourse($, new AsyncCallback<Void>() {
+				rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-						Window.alert("Error while unselecting course.");
-						Log.error("Error while unselecting course.");
+						//Window.alert("CourseListPresenter: Error while unselecting course.");
+						Log.error("CourseListPresenter: Error while unselecting course.");
 					}
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-
+						Log.error("CourseListPresenter: Success while unselecting course.");
 						eventBus.fireEvent(new UnselectCourseEvent($));
 						
 					}
@@ -503,7 +503,7 @@ public class CourseListPresenter implements Presenter {
 			display.updateLists();
 			if (isSignedIn) {
 				Log.info("CourseListPresenter: upadted localy, now call rpc" );
-				rpcService.selectCourse($, new AsyncCallback<Void>() {
+				rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 						Window.alert("Error while selecting course.");

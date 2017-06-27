@@ -34,26 +34,26 @@ import upandgo.shared.utils.FuzzySearch;
  */
 public class CourseModel { // implements Model {
 
-	protected Semester semester = Semester.WINTER16;
+	//protected Semester semester = Semester.WINTER16;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
-	protected List<Course> pickedCourseList;
+	//protected List<Course> pickedCourseList;
 	protected CourseLoader loader;
 	protected List<Faculty> facultyList;
 
 	public CourseModel(final CourseLoader loader) {
-		pickedCourseList = new ArrayList<>();
+		//pickedCourseList = new ArrayList<>();
 		this.loader = loader;
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
 		facultyList = loader.loadFaculties();
-		for (final String id : this.loader.loadChosenCourseNames()){
+/*		for (final String id : this.loader.loadChosenCourseNames()){
 			if(coursesById.get(id) != null)
 				pickedCourseList.add(coursesById.get(id));
-		}
+		}*/
 	}
 
-	public void pickCourse(final String id) {
+/*	public void pickCourse(final String id) {
 		if (id == null)
 			throw new NullPointerException();
 		final Course pickedCourse = getCourseById(id);
@@ -75,7 +75,7 @@ public class CourseModel { // implements Model {
 //					λ.getaTerm(), λ.getbTerm()));
 //		}
 		
-	}
+	}*/
 
 	public void addCourse(final String name) {
 		if (name == null)
@@ -91,7 +91,7 @@ public class CourseModel { // implements Model {
 		return new ArrayList<>(coursesById.keySet());
 	}
 
-	public void dropCourse(final String id) {
+/*	public void dropCourse(final String id) {
 		if (id == null)
 			throw new NullPointerException();
 		final Course droppedCourse = getCourseById(id);
@@ -109,7 +109,7 @@ public class CourseModel { // implements Model {
 //					λ.getaTerm(), λ.getbTerm()));
 //		}
 		
-	}
+	}*/
 
 	public Course getCourseByName(final String name) {
 		if (name == null)
@@ -123,21 +123,22 @@ public class CourseModel { // implements Model {
 		return coursesById.get(id);
 	}
 	
-	public List<LessonGroup> getCourseLectures(final String id) {
+/*	public List<LessonGroup> getCourseLectures(final String id) {
 		if (id == null)
 			throw new NullPointerException();
 		return coursesById.get(id).getLectures();
-	}
+	}*/
 
-	public List<String> getChosenCourseNames() {
+/*	public List<String> getChosenCourseNames() {
 		final List<String> $ = new ArrayList<>();
 		Iterator<Course> it = pickedCourseList.iterator();
 		while(it.hasNext())
 			$.add(it.next().getId());
 		
 		return $;
-	}
+	}*/
 
+/*	@Deprecated
 	public List<CourseId> loadChosenCourses() {
 		// save picking in DB
 		final HashSet<CourseId> pickedList = new HashSet<>();
@@ -149,21 +150,31 @@ public class CourseModel { // implements Model {
 		}
 		
 		return new ArrayList<>(pickedList);
+	}*/
+	
+	public CourseId getCourseId(String id) {
+		Course course = coursesById.get(id);
+		return new CourseId(course.getId(),course.getName(),course.getaTerm(),course.getbTerm());
 	}
 
 	public void saveChosenCourses(final List<String> names) {
 		loader.saveChosenCourseNames(names);
 	}
 	
-	public List<Course> getPickedCoursesList () {
-		return pickedCourseList;
+	public List<String> loadChosenCourses() {
+		return loader.loadChosenCourseNames();
 	}
+	
+/*	public List<Course> getPickedCoursesList () {
+		return pickedCourseList;
+	}*/
 	
 	private List<CourseId> getNotSelectedCoursesByFaculty(final String faculty){
 		List<CourseId> res = new ArrayList<>();
+		List<String> chosenCourses = loadChosenCourses();
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
-			if((faculty.isEmpty() && !pickedCourseList.contains(c)) || (c.getFaculty().equals(faculty)) && !pickedCourseList.contains(c))
+			if((faculty.isEmpty() && !chosenCourses.contains(c.getId()) )|| (c.getFaculty().equals(faculty)) && !chosenCourses.contains(c.getId()))
 				res.add(new CourseId(c.getId(), c.getName(),
 						c.getaTerm(), c.getbTerm()));
 			
@@ -213,9 +224,9 @@ public class CourseModel { // implements Model {
 		return faculties;
 	}
 
-	public List<Course> loadChosenCoursesDetails() {
+/*	public List<Course> loadChosenCoursesDetails() {
 		return pickedCourseList;
-	}
+	}*/
 
 	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
@@ -225,10 +236,10 @@ public class CourseModel { // implements Model {
 		// TODO: implement it
 	}
 
-	public void UnselectAllCourses() {
+/*	public void UnselectAllCourses() {
 		pickedCourseList.clear();
 		
-	}
+	}*/
 	
 	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
 		loader.saveChosenLessonGroups(xxx);
@@ -238,13 +249,13 @@ public class CourseModel { // implements Model {
 		return loader.loadChosenLessonGroups();
 	}
 
-	public Semester getSemester() {
+/*	public Semester getSemester() {
 		return semester;
 	}
 
 	public void setSemester(Semester semester) {
 		this.semester = semester;
-	}
+	}*/
 	
 	
 }

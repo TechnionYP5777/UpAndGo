@@ -133,25 +133,12 @@ public class NavBarPresenter implements Presenter {
 			public void onClick(ClickEvent arg0) {
 				Log.info("NavBarPresenter: user accepted semester change " + requestedSemester.getId());
 				display.semesterModalAcceptButtonSetSpin(true);
-				coursesService.setSemester(requestedSemester, new AsyncCallback<Void>() {
-	
-					@Override
-					public void onSuccess(Void result) {
-						Log.info("NavBarPresenter: onSuccess on semester " + requestedSemester.getId());
-						eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(requestedSemester.getId())));
-						currentSemester = requestedSemester;
-						display.getSemesterText().clear();
-						display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
-						semesterModal.hide();
-						display.markChoosenSemesterEntry(currentSemester);
-					}
-					
-					@Override
-					public void onFailure(Throwable caught) {
-						Log.info("NavBarPresenter: onFailure on semester " + requestedSemester.getId());
-						
-					}
-				});
+				eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(requestedSemester.getId())));
+				currentSemester = requestedSemester;
+				display.getSemesterText().clear();
+				display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
+				semesterModal.hide();
+				display.markChoosenSemesterEntry(currentSemester);
 				
 			}
 		});

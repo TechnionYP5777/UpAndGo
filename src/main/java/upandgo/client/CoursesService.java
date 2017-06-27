@@ -32,25 +32,21 @@ public interface CoursesService extends RemoteService {
 
 	public Course getCourseDetails(Semester semester, CourseId id);
 	
-	public List<LessonGroup> getCourseLectures(String id);
+	//public List<LessonGroup> getCourseLectures(String id);
 
-	public void selectCourse(CourseId id);
+	public void selectCourse(Semester semester, CourseId id);
 
-	public void unselectCourse(CourseId id);
+	public void unselectCourse(Semester semester, CourseId id);
 	
 	public void unselectAllCourses(Semester semester);
 	
-	public List<Course> getChosenCoursesList(Semester semester);
+	//public List<Course> getChosenCoursesList(Semester semester);
 	
 	public void saveSchedule (List<LessonGroup> sched);
 	
-	public List<LessonGroup> getSchedule();
+	public List<LessonGroup> loadSchedule();
 	
 	public String getSomeString();
-
-	public void setSemester(Semester semester);
-	
-	public Semester getSemester();
 	
 	public void exportSchedule(List<LessonGroup> sched) throws IOException;
 
