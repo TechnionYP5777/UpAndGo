@@ -25,14 +25,17 @@ public class ConstraintsPool {
 		
 		public static final int NO_LESSON = -1;
 		
-		private boolean specificLecture = false;
-		private int lectureLessonGroup = 0;
+		private boolean specificLecture;
+		private int lectureLessonGroup;
 		
-		private boolean specificTutorial = false; 
-		private int tutorialLessonGroup = 0;
+		private boolean specificTutorial; 
+		private int tutorialLessonGroup;
 		
 		public CourseConstraint(){
-			
+			this.specificLecture = false;
+			this.lectureLessonGroup = 0;
+			this.specificTutorial = false;
+			this.tutorialLessonGroup = 0;
 		}
 		
 		public CourseConstraint(boolean specificLecture, int lectureLessonGroup, 
@@ -88,10 +91,10 @@ public class ConstraintsPool {
 		}
 			
 	}
-	private boolean isDaysoffCount = false;
-	private boolean isBlankSpaceCount = false;
-	private LocalTime minStartTime = null;
-	private LocalTime maxFinishTime = null;
+	private boolean isDaysoffCount;
+	private boolean isBlankSpaceCount;
+	private LocalTime minStartTime;
+	private LocalTime maxFinishTime;
 	private List<Boolean> vectorDaysOff; 
 	private Map<String,CourseConstraint> courseConstraints;
 	
@@ -101,9 +104,8 @@ public class ConstraintsPool {
 		this.minStartTime = null;
 		this.maxFinishTime = null;
 		this.vectorDaysOff = new ArrayList<>();
-		for (int i = 0 ; i < 5 ; i++){
+		for (int i = 0 ; i < 5 ; ++i)
 			this.vectorDaysOff.add(Boolean.FALSE);
-		}
 		this.courseConstraints = new HashMap<>();
 	}
 	
@@ -114,9 +116,8 @@ public class ConstraintsPool {
 		this.minStartTime = minStartTime;
 		this.maxFinishTime = maxFinishTime;
 		this.vectorDaysOff = new ArrayList<>();
-		for (int i = 0 ; i < 5 ; i++){
+		for (int i = 0 ; i < 5 ; ++i)
 			this.vectorDaysOff.add(Boolean.FALSE);
-		}
 		this.courseConstraints = new HashMap<>();
 	}
 	
@@ -127,9 +128,8 @@ public class ConstraintsPool {
 		this.maxFinishTime = otherConstraintsPool.getMaxFinishTime();
 		this.vectorDaysOff = new ArrayList<>(otherConstraintsPool.getVectorDaysOff());
 		this.courseConstraints = new HashMap<>();
-		for (Entry<String, CourseConstraint> entry : otherConstraintsPool.getCourseConstraints().entrySet()){
+		for (Entry<String, CourseConstraint> entry : otherConstraintsPool.getCourseConstraints().entrySet())
 			this.courseConstraints.put(entry.getKey(), new CourseConstraint(entry.getValue()));
-		}
 	}
 	
 	public boolean isDaysoffCount() {
@@ -166,14 +166,14 @@ public class ConstraintsPool {
 
 	public void setCourseConstraint(String courseId, boolean specificLecture, int lectureLessonGroup, 
 			boolean specificTutorial, int tutorialLessonGroup) {
-		CourseConstraint cc = new CourseConstraint(specificLecture, lectureLessonGroup, specificTutorial, tutorialLessonGroup);
-		courseConstraints.put(courseId,cc);
+		courseConstraints.put(courseId,
+				new CourseConstraint(specificLecture, lectureLessonGroup, specificTutorial, tutorialLessonGroup));
 	}
 	
 	public void setCourseConstraint(String courseId, Type lessonType, boolean specific, int lessonGroup) {
-		if (courseConstraints.containsKey(courseId)){
+		if (courseConstraints.containsKey(courseId))
 			courseConstraints.get(courseId).setSpecificLesson(lessonType, specific, lessonGroup);
-		} else {
+		else {
 			CourseConstraint cc = new CourseConstraint();
 			cc.setSpecificLesson(lessonType, specific, lessonGroup);
 			courseConstraints.put(courseId,cc);
@@ -188,8 +188,8 @@ public class ConstraintsPool {
 		vectorDaysOff = list;
 	}
 	
-	public void setDayOff(Day day, Boolean dayOff) {
-		vectorDaysOff.set(day.ordinal(), dayOff);
+	public void setDayOff(Day d, Boolean dayOff) {
+		vectorDaysOff.set(d.ordinal(), dayOff);
 	}
 	
 	public List<Boolean> getVectorDaysOff() {
