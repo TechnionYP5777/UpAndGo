@@ -4,7 +4,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 import upandgo.shared.entities.Exam;
 
-//import upandgo.shared.entities.Exam;
+
 
 /**
  * 

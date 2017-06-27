@@ -14,7 +14,7 @@ import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.constraint.TimeConstraint;
 import upandgo.shared.entities.course.Course;
 
-@SuppressWarnings("static-method")
+
 public class TimeConstraintTests {
 
 	@Test
