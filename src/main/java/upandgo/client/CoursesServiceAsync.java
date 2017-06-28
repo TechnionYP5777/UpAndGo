@@ -40,9 +40,9 @@ public interface CoursesServiceAsync {
 	
 	//public void getChosenCoursesList(Semester semester, AsyncCallback<List<Course>> callback);
 	
-	public void saveSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
+	public void saveSchedule(Semester semester, List<LessonGroup> sched, AsyncCallback<Void> callback);
 
-	public void loadSchedule(AsyncCallback<List<LessonGroup>> callback);
+	public void loadSchedule(Semester semester, AsyncCallback<List<LessonGroup>> callback);
 	
 	public void getSomeString(AsyncCallback<String> callback);
 	

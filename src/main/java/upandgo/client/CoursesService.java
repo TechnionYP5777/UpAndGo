@@ -44,9 +44,9 @@ public interface CoursesService extends RemoteService {
 	
 	//public List<Course> getChosenCoursesList(Semester semester);
 	
-	public void saveSchedule (List<LessonGroup> sched);
+	public void saveSchedule (Semester semester, List<LessonGroup> sched);
 	
-	public List<LessonGroup> loadSchedule();
+	public List<LessonGroup> loadSchedule(Semester semester);
 	
 	public String getSomeString();
 	

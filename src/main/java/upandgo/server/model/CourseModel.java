@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.CoursesEntity;
+import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
@@ -179,12 +180,35 @@ public class CourseModel { // implements Model {
 		// TODO: implement it
 	}
 	
-	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
-		loader.saveChosenLessonGroups(xxx);
+	public void saveChosenLessonGroups(final List<LessonGroup> lessonGroups) {
+		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		scheduleEntity.removeAllLessons(semester.getId());
+		
+		for (LessonGroup lg : lessonGroups){
+			scheduleEntity.addLesson(semester.getId(), lg.getCourseID(), lg.getGroupNum());
+		}
+		
+		loader.saveChosenLessonGroups(scheduleEntity);
 	}
 	
 	public List<LessonGroup> loadChosenLessonGroups() {
-		return loader.loadChosenLessonGroups();
+		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		List<LessonGroup> lgList = new ArrayList<>();
+		if (scheduleEntity == null){
+			return lgList;
+		}
+		
+		for (ScheduleEntity.Lesson lesson : scheduleEntity.getLessons(semester.getId())){
+			Course course = coursesById.get(lesson.getCourseId());
+			if (course == null)
+				continue;
+			LessonGroup lessonGroup = course.getLessonGroup(lesson.getGroupNum());
+			if (lessonGroup == null)
+				continue;
+			lgList.add(lessonGroup);
+		}
+		
+		return lgList;
 	}
 
 	

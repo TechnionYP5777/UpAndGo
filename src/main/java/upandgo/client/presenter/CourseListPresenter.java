@@ -394,6 +394,9 @@ public class CourseListPresenter implements Presenter {
 			display.setSelectedCourses(selectedCourses);
 			display.setSelectedLoadingAnimation(false);
 			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+			for (CourseId courseId : selectedCourses){
+				eventBus.fireEvent(new SelectCourseEvent(courseId));
+			}
 		}
 
 		@Override

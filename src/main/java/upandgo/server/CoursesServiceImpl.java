@@ -145,13 +145,18 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
     }
 	
 	@Override
-	public void saveSchedule(List<LessonGroup> sched) {
-		return; //TODO: implement
+	public void saveSchedule(Semester s, List<LessonGroup> sched) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		courseModels.get(s).saveChosenLessonGroups(sched);
+
 	}
 
 	@Override
-	public List<LessonGroup> loadSchedule() {
-		return new ArrayList<>(); //TODO: implement
+	public List<LessonGroup> loadSchedule(Semester s) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		return courseModels.get(s).loadChosenLessonGroups();
 	}
 	
 	@Override

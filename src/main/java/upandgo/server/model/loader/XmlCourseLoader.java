@@ -169,7 +169,7 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public void saveChosenLessonGroups(final List<LessonGroup> gs) {
+	public void saveChosenLessonGroups(final ScheduleEntity scheduleEntity) {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
@@ -178,36 +178,23 @@ public class XmlCourseLoader extends CourseLoader {
 			return;
 		}
 		
-		List<ScheduleEntity.Lesson> lessons = new ArrayList<>();
-		for (LessonGroup group : gs){
-			lessons.add(new ScheduleEntity.Lesson(group.getGroupNum(), group.getCourseID()));
-		}
-		
-		ScheduleEntity se = new ScheduleEntity(user.getUserId(), lessons);
-		CoursesServiceImpl.ofy().defer().save().entity(se);
+		scheduleEntity.setId(user.getUserId());
+		CoursesServiceImpl.ofy().defer().save().entity(scheduleEntity);
 	}
 
 	@Override
-	public List<LessonGroup> loadChosenLessonGroups() {
-		List<LessonGroup> $ = new LinkedList<>();
+	public ScheduleEntity loadChosenLessonGroups() {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		
+
 		if(user == null) {
-			Log.warn("User was not signed in. schedule could not be loaded!");
-			return $;
+			Log.warn("User was not signed in. selected courses could not be loaded!");
+			return null;
 		}
 		
-		ScheduleEntity ce = CoursesServiceImpl.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
-		Iterator<ScheduleEntity.Lesson> it = ((ce != null) && (ce.lessons != null)) ?
-																ce.lessons.iterator() :
-																	new ArrayList<ScheduleEntity.Lesson>().iterator();
-		while (it.hasNext()) {
-			ScheduleEntity.Lesson lesson = it.next();
-			addLessonsToLessonGroup(new LessonGroup(lesson.groupNum), lesson.courseId, String.valueOf(lesson.groupNum));
-		}
-		
-		return $;
+		ScheduleEntity scheduleEntity = CoursesServiceImpl.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
+		return scheduleEntity != null ? scheduleEntity : new ScheduleEntity(user.getUserId());
+
 	}
 
 	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {

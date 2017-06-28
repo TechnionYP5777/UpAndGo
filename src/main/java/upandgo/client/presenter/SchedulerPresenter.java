@@ -247,6 +247,7 @@ public class SchedulerPresenter implements Presenter {
 			public void onSemesterChange(ChangeSemesterEvent event) {
 				currentSemester = event.getSemester();
 				lessonGroupsList.clear();
+				selectedCourses.clear();
 				displaySchedule();
 			}
 			
@@ -305,21 +306,21 @@ public class SchedulerPresenter implements Presenter {
 		view.saveSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("Save schedule was requested");
+				Log.info("SchedulerPresenter: Save schedule was requested");
 				if (!isSignedIn) {
-					Window.alert("Please, sign in first!");
+					Window.alert("SchedulerPresenter: Please, sign in first!");
 					return;
 				}
-				rpcService.saveSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
+				rpcService.saveSchedule(currentSemester, lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Error while saving schedule.");
-						Log.error("Error while saving schedule.");
+						//Window.alert("SchedulerPresenter: Error while saving schedule.");
+						Log.error("SchedulerPresenter: Error while saving schedule.");
 					}
 
 					@Override
 					public void onSuccess(Void result) {
-						Log.info("schedule was saved successfully");
+						Log.info("SchedulerPresenter: schedule was saved successfully");
 					}
 				});
 			}
@@ -726,7 +727,7 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 
-/*		rpcService.getSchedule(new AsyncCallback<List<LessonGroup>>() {
+		rpcService.loadSchedule(currentSemester, new AsyncCallback<List<LessonGroup>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -738,12 +739,13 @@ public class SchedulerPresenter implements Presenter {
 				lessonGroupsList.clear();
 				lessonGroupsList.add(result);
 				sched_index = 0;
+				colorMap = Scheduler.mapLessonGroupsToColors(result);
 				displaySchedule();
 				view.scheduleBuilt();
 				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
-				Log.info("schedule was updated. it has " + String.valueOf(result.size()) + " LessonGroups.");
+				Log.info("SchedulerPresenter: schedule was loaded. it has " + String.valueOf(result.size()) + " LessonGroups.");
 			}
-		});*/
+		});
 	}
 	
 	void displaySchedule(){

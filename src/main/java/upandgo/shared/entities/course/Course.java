@@ -116,6 +116,18 @@ public class Course implements IsSerializable {
 	public List<LessonGroup> getTutorials() {
 		return tutorials;
 	}
+	
+	public LessonGroup getLessonGroup(int groupNum){
+		for(LessonGroup lessonGroup : lectures){
+			if (lessonGroup.getGroupNum() == groupNum)
+				return lessonGroup;
+		}
+		for(LessonGroup lessonGroup : tutorials){
+			if (lessonGroup.getGroupNum() == groupNum)
+				return lessonGroup;
+		}
+		return null;
+	}
 
 	public String getName() {
 		return name;

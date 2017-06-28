@@ -2,13 +2,15 @@ package upandgo.server.model.loader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class ScheduleEntity {
-	static class Lesson {
+	public static class Lesson {
 
 		public int groupNum;
 		public String courseId;
@@ -18,11 +20,19 @@ public class ScheduleEntity {
 			courseId = "";
 		}
 		
-		public Lesson(int gn, String cid) {
+		public Lesson(String cid, int gn) {
 			groupNum = gn;
 			courseId = cid;
 		}
 		
+		public int getGroupNum() {
+			return groupNum;
+		}
+
+		public String getCourseId() {
+			return courseId;
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -53,14 +63,50 @@ public class ScheduleEntity {
 	}
 	
 	@Id public String id;	// user's userId
-	public List<Lesson> lessons;
+	//public List<Lesson> lessons;
+	public Map<String,List<Lesson>> lessons;
 	
-	ScheduleEntity() {
-		lessons = new ArrayList<>();
+	public ScheduleEntity() {
+		id = "";
+		lessons = new TreeMap<>();
 	}
 	
-	ScheduleEntity(String i, List<Lesson> l) {
+	public ScheduleEntity(String id) {
+		this.id = id;
+		this.lessons = new TreeMap<>();
+	}
+	
+/*	ScheduleEntity(String i, List<Lesson> l) {
 		lessons = l;
 		id = i;
+	}*/
+	
+	public void setId(String id){
+		this.id = id;
+	}
+	
+	public List<Lesson> getLessons(String semesterId){
+		if (lessons.containsKey(semesterId)){
+			return lessons.get(semesterId);
+		}
+		return new ArrayList<>();
+	}
+	
+	public void addLesson(String semesterId, String courseId, int groupNum){
+		Lesson newLesson = new Lesson(courseId, groupNum);
+		if (lessons.containsKey(semesterId)){
+			lessons.get(semesterId).add(newLesson);
+		}
+		else{
+			List<Lesson> lessonsList = new ArrayList<>();
+			lessonsList.add(newLesson);
+			lessons.put(semesterId, lessonsList);
+		}
+	}
+	
+	public void removeAllLessons(String semesterId){
+		if (lessons.containsKey(semesterId)){
+			lessons.remove(semesterId);
+		}
 	}
 }
