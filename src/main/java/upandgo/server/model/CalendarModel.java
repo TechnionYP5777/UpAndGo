@@ -15,6 +15,8 @@ import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -22,6 +24,7 @@ import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpTransport;
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.appengine.datastore.AppEngineDataStoreFactory;
 import com.google.api.client.extensions.appengine.http.UrlFetchTransport;
@@ -59,26 +62,16 @@ public class CalendarModel {
 	
 	public CalendarModel() {}
 
-	@Deprecated
-	public void deleteCalendarIfExists() throws IOException {
-		// it doesn't work
-	    String userId = UserServiceFactory.getUserService().getCurrentUser().getUserId();
-	    Credential credential = newFlow().loadCredential(userId);
-		calendarService = getCalendarService(credential);
-		
-		// Delete a calendar list entry
-		try {
-			calendarService.calendarList().delete(calendarName).execute();
-			CoursesServiceImpl.someString += "\ndeleted calendar";
-		} catch (IOException e) {
-			CoursesServiceImpl.someString += "\ncouldn't delete calendar";
-			e.printStackTrace();
-		}
-	}
-
 	public void createCalendar(List<LessonGroup> lessons) throws IOException {
-	    String userId = UserServiceFactory.getUserService().getCurrentUser().getUserId();
-	    Credential credential = newFlow().loadCredential(userId);
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		
+		if(user == null) {
+			Log.warn("User was not signed in. schedule could not be exported!");
+			return;
+		}
+		
+	    Credential credential = newFlow().loadCredential(user.getUserId());
 		calendarService = getCalendarService(credential);
 		
 		CoursesServiceImpl.someString += "\ngot credentials for creating";
@@ -102,7 +95,7 @@ public class CalendarModel {
 //			System.out.println(createdCalendarListEntry.getSummary());
 		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
 
-		String userEmail = UserServiceFactory.getUserService().getCurrentUser().getEmail();
+		String userEmail = user.getEmail();
 		for(LessonGroup l: lessons) {
 			if(l == null)
 				continue;
@@ -148,10 +141,10 @@ public class CalendarModel {
 				continue;
 			String startTimeStr =
 					lessonTimeToRfc(l.getStartTime().getDay(), l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute());
-			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Israel");
+			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Universal");
 			String endTimeStr =
 					lessonTimeToRfc(l.getEndTime().getDay(), l.getEndTime().getTime().getHour(), l.getEndTime().getTime().getMinute());
-			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Israel");
+			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Universal");
 			
 			//create event:
 			Event event = new Event()
