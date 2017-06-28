@@ -12,7 +12,6 @@ import com.googlecode.objectify.annotation.Id;
 public class CoursesEntity {
 	
 	@Id public String id;	// user's userId
-	//public List<String> courses;
 	public Map<String,List<String>> courses;
 	
 	CoursesEntity(){
@@ -21,16 +20,10 @@ public class CoursesEntity {
 	}
 	
 	CoursesEntity(String id) {
-		//courses = new ArrayList<>();
 		this.id = id;
 		this.courses = new TreeMap<>();
 	}
-	
-/*	CoursesEntity(String i, List<String> c) {
-		courses = c;
-		id = i;
-	}*/
-	
+
 	public void setId(String id){
 		this.id = id;
 	}

@@ -3,18 +3,10 @@ package upandgo.server.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import com.google.common.collect.Collections2;		 
-import com.google.common.collect.Lists;
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.common.base.Predicate;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.CoursesEntity;
@@ -38,46 +30,16 @@ public class CourseModel { // implements Model {
 	protected Semester semester = Semester.WINTER16;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
-	//protected List<Course> pickedCourseList;
 	protected CourseLoader loader;
 	protected List<Faculty> facultyList;
 
 	public CourseModel(final CourseLoader loader, Semester semester) {
-		//pickedCourseList = new ArrayList<>();
 		this.loader = loader;
 		this.semester = semester;
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
 		facultyList = loader.loadFaculties();
-/*		for (final String id : this.loader.loadChosenCourseNames()){
-			if(coursesById.get(id) != null)
-				pickedCourseList.add(coursesById.get(id));
-		}*/
 	}
-
-/*	public void pickCourse(final String id) {
-		if (id == null)
-			throw new NullPointerException();
-		final Course pickedCourse = getCourseById(id);
-		Log.info("current picked list: " + pickedCourseList);
-		if (pickedCourseList.contains(pickedCourse)){
-			Log.info("1/already have: " + id);
-			Log.info("2/already have: " + pickedCourse);
-			return;
-		}
-
-		// save picking in DB
-		//final TreeSet<CourseId> pickedList = new TreeSet<>();
-		pickedCourseList.add(pickedCourse);
-		
-//		Iterator<Course> it = pickedCourseList.iterator();
-//		while(it.hasNext()) {
-//			Course λ = it.next();
-//			pickedList.add(new CourseId(λ.getId(), λ.getName(),
-//					λ.getaTerm(), λ.getbTerm()));
-//		}
-		
-	}*/
 
 	public void addCourse(final String name) {
 		if (name == null)
@@ -93,26 +55,6 @@ public class CourseModel { // implements Model {
 		return new ArrayList<>(coursesById.keySet());
 	}
 
-/*	public void dropCourse(final String id) {
-		if (id == null)
-			throw new NullPointerException();
-		final Course droppedCourse = getCourseById(id);
-		if (!pickedCourseList.contains(droppedCourse))
-			return;
-
-		// save picking in DB
-		//final TreeSet<CourseId> pickedList = new TreeSet<>();
-		pickedCourseList.remove(droppedCourse);
-		
-//		Iterator<Course> it = pickedCourseList.iterator();
-//		while(it.hasNext()) {
-//			Course λ = it.next();
-//			pickedList.add(new CourseId(λ.getId(), λ.getName(),
-//					λ.getaTerm(), λ.getbTerm()));
-//		}
-		
-	}*/
-
 	public Course getCourseByName(final String name) {
 		if (name == null)
 			throw new NullPointerException();
@@ -124,35 +66,6 @@ public class CourseModel { // implements Model {
 			throw new NullPointerException();
 		return coursesById.get(id);
 	}
-	
-/*	public List<LessonGroup> getCourseLectures(final String id) {
-		if (id == null)
-			throw new NullPointerException();
-		return coursesById.get(id).getLectures();
-	}*/
-
-/*	public List<String> getChosenCourseNames() {
-		final List<String> $ = new ArrayList<>();
-		Iterator<Course> it = pickedCourseList.iterator();
-		while(it.hasNext())
-			$.add(it.next().getId());
-		
-		return $;
-	}*/
-
-/*	@Deprecated
-	public List<CourseId> loadChosenCourses() {
-		// save picking in DB
-		final HashSet<CourseId> pickedList = new HashSet<>();
-		Iterator<Course> it = pickedCourseList.iterator();
-		while(it.hasNext()) {
-			Course λ = it.next();
-			pickedList.add(new CourseId(λ.getId(), λ.getName(),
-					λ.getaTerm(), λ.getbTerm()));
-		}
-		
-		return new ArrayList<>(pickedList);
-	}*/
 	
 	public CourseId getCourseId(String id) {
 		Course course = coursesById.get(id);
@@ -166,7 +79,6 @@ public class CourseModel { // implements Model {
 		}
 		coursesEntity.addCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
-		//loader.saveChosenCourses(courseEntity);
 	}
 	
 	public void removeChosenCourse(final String courseID) {
@@ -176,7 +88,6 @@ public class CourseModel { // implements Model {
 		}
 		coursesEntity.removeCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
-		//loader.saveChosenCourses(courseEntity);
 	}
 	
 	public void removeAllChosenCourse() {
@@ -186,7 +97,6 @@ public class CourseModel { // implements Model {
 		}
 		coursesEntity.removeAllCourses(semester.getId());
 		loader.saveChosenCourses(coursesEntity);
-		//loader.saveChosenCourses(courseEntity);
 	}
 	
 	public List<String> loadChosenCourses() {
@@ -195,12 +105,7 @@ public class CourseModel { // implements Model {
 			return new ArrayList<>();
 		}
 		return coursesEntity.getCourses(semester.getId());
-		//return loader.loadChosenCourses();
 	}
-	
-/*	public List<Course> getPickedCoursesList () {
-		return pickedCourseList;
-	}*/
 	
 	public List<CourseId> loadAllCourses(){
 		List<CourseId> res = new ArrayList<>();
@@ -258,12 +163,6 @@ public class CourseModel { // implements Model {
 	 */
 	public List<String> loadFacultyNames() {
 		final List<String> faculties = new ArrayList<>();
-/*		Iterator<Faculty> it = facultyList.iterator();
-		while(it.hasNext()) {
-			String facultyName = it.next().getName();
-			if (!faculties.contains(facultyName))
-				faculties.add(facultyName);
-		}*/
 		for (Faculty faculty : facultyList){
 			if (!faculties.contains(faculty.getName()))
 				faculties.add(faculty.getName());
@@ -271,9 +170,6 @@ public class CourseModel { // implements Model {
 		return faculties;
 	}
 
-/*	public List<Course> loadChosenCoursesDetails() {
-		return pickedCourseList;
-	}*/
 
 	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
@@ -282,11 +178,6 @@ public class CourseModel { // implements Model {
 	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
 		// TODO: implement it
 	}
-
-/*	public void UnselectAllCourses() {
-		pickedCourseList.clear();
-		
-	}*/
 	
 	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
 		loader.saveChosenLessonGroups(xxx);
@@ -296,13 +187,5 @@ public class CourseModel { // implements Model {
 		return loader.loadChosenLessonGroups();
 	}
 
-/*	public Semester getSemester() {
-		return semester;
-	}
-
-	public void setSemester(Semester semester) {
-		this.semester = semester;
-	}*/
-	
 	
 }
