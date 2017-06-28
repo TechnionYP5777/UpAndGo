@@ -40,7 +40,7 @@ public class courseTest {
 		List list  = new ArrayList<StuffMember>();
 		list.add(staff);
 		Course course = new Course(null, "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017")
-				, new Exam("13:00 08 10 2017"));
+				,new Exam("13:00 08 10 2017"));
 	}
 	
 	@Test(expected = NullPointerException.class)
