@@ -13,6 +13,8 @@ public interface Resources extends ClientBundle {
 	 
 	 interface CourseListStyle extends CssResource {
 		   String ChosenCourses();
+		   
+		   String loadingLogo();
 	 }
 	 
 	 interface DialogBoxStyle extends CssResource {	 
@@ -103,6 +105,7 @@ public interface Resources extends ClientBundle {
 	 
 	 interface CourseListCellStyle extends CssResource{
 		 String courseListCellPanel();
+		 
 	 }
 	 
 	 interface LessonDetailsStyle extends CssResource{

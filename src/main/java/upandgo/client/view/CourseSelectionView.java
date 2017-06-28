@@ -27,6 +27,7 @@ import com.arcbees.gquery.tooltip.client.event.HideTooltipEventHandler;
 import com.arcbees.gquery.tooltip.client.event.ShowTooltipEvent;
 import com.arcbees.gquery.tooltip.client.event.ShowTooltipEventHandler;
 import com.google.gwt.dom.client.Style.BorderStyle;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.FontStyle;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -48,6 +49,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
@@ -75,8 +77,12 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private ListBox faculties = new ListBox(); //faculties
     private TextBox searchCourse = new TextBox();
     private ScrollPanel cclp = new ScrollPanel();
+    private SimplePanel cclpp = new SimplePanel();
     private ScrollPanel sclp = new ScrollPanel();
+    private SimplePanel sclpp = new SimplePanel();
     private Button clearCourses = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
+    private HTML ccLoadingLogo = new HTML("<i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>");
+    private HTML scLoadingLogo = new HTML("<i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>");
     Course hoveredCourse = null;
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
     public CourseSelectionView(){
@@ -138,9 +144,24 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 			}
 		});
 	    sclp.add(scl);
+	    sclp.setHeight("100%");
+
 	    sclp.getElement().getStyle().setBorderStyle(BorderStyle.SOLID);
 	    sclp.getElement().getStyle().setBorderWidth(1, Unit.PX);
 	    sclp.getElement().getStyle().setBorderColor("LightGray");
+
+	    sclpp.add(sclp);
+	    cclpp.add(cclp);
+	    ccLoadingLogo.setStyleName(Resources.INSTANCE.courseListStyle().loadingLogo());
+	    scLoadingLogo.setStyleName(Resources.INSTANCE.courseListStyle().loadingLogo());
+	    sclpp.getElement().appendChild(scLoadingLogo.getElement());
+	    cclpp.getElement().appendChild(ccLoadingLogo.getElement());
+
+	    //sclp.getParent().getElement().appendChild(loadingLogo.getElement().cloneNode(true));
+	    //this.getElement().appendChild(loadingLogo.getElement().cloneNode(true));
+	    //sclp.getElement().getParentElement().appendChild(loadingLogo.getElement().cloneNode(true));
+    	//this.add(loadingLogo);
+
     	
     	//initializing faculty selection
     	faculties.setWidth("100%");
@@ -212,20 +233,20 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	
     	//this.getElement().getStyle().setMargin(10, Unit.PX);  I think it looks better without it, everything the same height. Yaniv
     	this.add(cc);
-	    this.add(cclp);
+	    this.add(cclpp);
 	    this.add(sc);
 	    this.add(clearCourses);
 	    this.add(faculties);
 	    this.add(searchCourse);
-	    this.add(sclp);
+	    this.add(sclpp);
 	 
 	    this.setWidgetTopBottom(cc, 0, Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(cclp, 2,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopHeight(cclpp, 2,  Unit.EM, 15, Unit.EM);
 	    this.setWidgetTopBottom(clearCourses, 17.3,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(sc, 18,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(faculties, 20,  Unit.EM, 0, Unit.EM);
 	    this.setWidgetTopBottom(searchCourse, 23,  Unit.EM, 0, Unit.EM);
-	    this.setWidgetTopBottom(sclp, 26,  Unit.EM, 0, Unit.EM);
+	    this.setWidgetTopBottom(sclpp, 26,  Unit.EM, 0, Unit.EM);
     }
     
     // Implementation of Display
@@ -311,16 +332,32 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	}
 	@Override
 	public void updateLists() {
-
+		deselectedModel.refresh();
+		selectedModel.refresh();
 
 		scl.setVisibleRange(0, deselectedModel.getList().size());
 		scl.setRowCount(deselectedModel.getList().size(), true);
 		
 		ccl.setVisibleRange(0, selectedModel.getList().size());
 		ccl.setRowCount(selectedModel.getList().size(), true);
-		deselectedModel.refresh();
-		selectedModel.refresh();
 		
 	}
     
+	@Override
+	public void setSelectedLoadingAnimation(boolean animate){
+		if (animate){
+			ccLoadingLogo.getElement().getStyle().setDisplay(Display.BLOCK);
+		} else {
+			ccLoadingLogo.getElement().getStyle().setDisplay(Display.NONE);
+		}
+	}
+	
+	@Override
+	public void setNotSelectedLoadingAnimation(boolean animate){
+		if (animate){
+			scLoadingLogo.getElement().getStyle().setDisplay(Display.BLOCK);
+		} else {
+			scLoadingLogo.getElement().getStyle().setDisplay(Display.NONE);
+		}
+	}
 }

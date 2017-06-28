@@ -19,3 +19,16 @@
     right: auto !important;
     position: absolute;
 }
+
+.loadingLogo{
+	display: none;
+    position: absolute;
+    top: 45%;
+    bottom: 0px;
+    right: 45%;
+    left: 0px;
+    z-index: 9;
+    text-align: center;
+    width: 3em;
+    height: 3em;
+}

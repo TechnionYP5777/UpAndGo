@@ -101,6 +101,10 @@ public class CourseListPresenter implements Presenter {
 		String getCourseQuery(KeyUpEvent event);
 
 		Widget getAsWidget();
+		
+		void setSelectedLoadingAnimation(boolean animate);
+		
+		void setNotSelectedLoadingAnimation(boolean animate);
 	}
 
 	@Inject
@@ -180,7 +184,7 @@ public class CourseListPresenter implements Presenter {
 					selectedFaculty = "";
 				else
 					selectedFaculty = faculties.get($);
-
+				display.setNotSelectedLoadingAnimation(true);
 				rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty,
 						new FetchNotSelectedCoursesAsyncCallback());
 
@@ -369,10 +373,13 @@ public class CourseListPresenter implements Presenter {
 	}
 	
 	void getFacultiesAndCourses(){
+		Log.info("CourseListPresenter: setLoadingAnimation true");
+		display.setNotSelectedLoadingAnimation(true);
 		rpcService.getFaculties(currentSemester, new FetchFacultiesAsyncCallback());
-		if (isSignedIn)
+		if (isSignedIn){
+			display.setSelectedLoadingAnimation(true);
 			rpcService.getSelectedCourses(currentSemester, new FetchSelectedCoursesAsyncCallback());
-		else {
+		} else {
 			selectedCourses = new ArrayList<>();
 			display.setSelectedCourses(selectedCourses);
 			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
@@ -385,6 +392,7 @@ public class CourseListPresenter implements Presenter {
 		public void onSuccess(ArrayList<CourseId> result) {
 			selectedCourses = result;
 			display.setSelectedCourses(selectedCourses);
+			display.setSelectedLoadingAnimation(false);
 			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 		}
 
@@ -404,6 +412,9 @@ public class CourseListPresenter implements Presenter {
 			allCourses.addAll(selectedCourses);
 			Log.info("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
 			display.setNotSelectedCourses(notSelectedCourses);
+			Log.info("CourseListPresenter: setLoadingAnimation false");
+			display.setNotSelectedLoadingAnimation(false);
+
 		}
 
 		@Override
