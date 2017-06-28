@@ -7,14 +7,21 @@
   
 }
 
-.choosenSemesterEntry{
-	background-color: #d3e4d0;
+ .choosenSemesterEntry{
 }
 
 .choosenSemesterEntry:hover{
-	background-color: #d3e4d0;
-}
+} 
 
 .choosenSemesterEntry a{
 	cursor: default;
+	font-weight: bolder;
+}
+
+@external .dropdown-menu
+.dropdown-menu li {
+	background-color: black;
+}
+.dropdown-menu li:hover {
+	background-color: black;
 }

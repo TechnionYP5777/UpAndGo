@@ -92,7 +92,6 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterButton.setDataToggle(Toggle.DROPDOWN);
 		semesterButton.setText("בחר סמסטר");
 		semesterList.add(semesterButton);
-		semesterList.setPull(Pull.LEFT);		
 		for (Semester semester : Semester.values()){
 			AnchorListItem semesterListItem = new AnchorListItem();
 			semesterListItem.setId(semester.getId());
@@ -102,14 +101,15 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		}
 		semesterList.add(semesterMenu);
 		navbarNav.add(semesterList);
+		navbarNav.setPull(Pull.NONE);
 		navbarCol.add(navbarNav);
 
-		semesterText.setPull(Pull.NONE);
+/*		semesterText.setPull(Pull.RIGHT);
 		semesterText.setWidth("30%");
 		semesterText.getElement().getStyle().setTextAlign(TextAlign.CENTER);
-		navbarCol.add(semesterText);
+		navbarCol.add(semesterText);*/
 		//navbarCol.add(tempButton);
-		navbarCol.add(tempButton2);
+		//navbarCol.add(tempButton2);
 		
 		navbar.add(navbarCol);
 		

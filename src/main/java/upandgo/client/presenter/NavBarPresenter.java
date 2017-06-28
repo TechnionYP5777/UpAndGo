@@ -135,16 +135,18 @@ public class NavBarPresenter implements Presenter {
 				display.semesterModalAcceptButtonSetSpin(true);
 				eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(requestedSemester.getId())));
 				currentSemester = requestedSemester;
-				display.getSemesterText().clear();
+/*				display.getSemesterText().clear();
 				display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
+*/				display.getSemesterButton().setText(currentSemester.getName());
 				semesterModal.hide();
 				display.markChoosenSemesterEntry(currentSemester);
 				
 			}
 		});
 		
-		display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
+		//display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
 		
+		display.getSemesterButton().setText(currentSemester.getName());
 		
 		display.markChoosenSemesterEntry(currentSemester);
 		
