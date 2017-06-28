@@ -43,25 +43,14 @@ public class Scheduler implements IsSerializable{
 		return colorMap;
 	}
 	
-	/*
-	public static Map<String, Color> namesMap(){
-		return namesMap;
-	}*/
-	
-	/*public static List<String> getCollisionSolvers(){
-		return collisionSolvers;
-	}*/
 	public static List<CourseTuple> getCollisionSolvers(){
 		List<CourseTuple> res = new ArrayList<>();
-		for(String s : collisionSolvers){
+		for(String s : collisionSolvers)
 			res.add(new CourseTuple(s, idToNameMap.get(s)));
-		}
 		return res;
 	}
 	
 	public static List<Timetable> getTimetablesList(final List<Course> lcourse, final List<TimeConstraint> cs) {
-		//Map<Course, Color> colorsMap = new HashMap();
-		//Map<Course, Color> colorsMap = mapCoursesToColors(lcourse);
 		colorMap = mapCoursesToColors(lcourse);
 		idToNameMap = mapCoursesToNames(lcourse);
 		collisionSolvers = new ArrayList<>();
@@ -73,18 +62,14 @@ public class Scheduler implements IsSerializable{
 			Log.debug(lcourse.get(0).toString());
 		
 		final List<Timetable> result = new ArrayList<>();
-		//Log.info("Scheduler: here");
-
+		
 		final ArrayList<List<LessonGroup>> lessonsGroupArray = initMainArr(lcourse);
-		//Log.info("Scheduler: here");
-
+		
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
 		Log.debug("max indexes:" + max);
 
 		for (int last = indexes.size() - 1, msb;;) {
 			
-			//Log.info("Scheduler: in for with indexes " + indexes);
-			///System.out.println("*** NEW ROUND ***");
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 			if(!$.addConstraintsList(cs))
@@ -110,40 +95,25 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
-			///System.out.println("lessons: " + $.getLessonGroups());
-			//b = $.collisionSolver();
-			if (b) {
-				//System.out.println("^found");
-				//Log.info("Found");
-				//$.collisionSolver();  - was here but seems unnececary to me, return if any problems appear
-				if(!$.hasCollision())
-					result.add($.getTimetable()); // return $;
-				else{
-					if(!collisionSolvers.contains($.getCollisionSolver()))
-						collisionSolvers.add($.getCollisionSolver());
-				}
-				/*if($.getCollisionsCount() == 0)
-					result.add($.getTimetable()); // return $;
-				else
-					collisions.add($.getLastCollision());*/
-			}
+			if (b)
+				if (!$.hasCollision())
+					result.add($.getTimetable());
+				else if (!collisionSolvers.contains($.getCollisionSolver()))
+					collisionSolvers.add($.getCollisionSolver());
 
 			if (!b) {
 				indexes.set(lastAdded, indexes.get(lastAdded) + 1);
-				if (indexes.get(lastAdded) > max.get(lastAdded)) {
-					msb = lastAdded - 1;
-					// find lowest index which is not yet maxed
-					for (; msb >= 0; --msb)
-						if (indexes.get(msb) < max.get(msb))
-							break;
-					// if every index is max than we made all combinations
-					if (msb < 0)
+				if (indexes.get(lastAdded) <= max.get(lastAdded))
+					continue;
+				msb = lastAdded - 1;
+				for (; msb >= 0; --msb)
+					if (indexes.get(msb) < max.get(msb))
 						break;
-					// increase msb and zero everything to its right
-					indexes.set(msb, indexes.get(msb) + 1);
-					for (int xxx = msb + 1; xxx <= last; ++xxx)
-						indexes.set(xxx, 0);
-				}
+				if (msb < 0)
+					break;
+				indexes.set(msb, indexes.get(msb) + 1);
+				for (int xxx = msb + 1; xxx <= last; ++xxx)
+					indexes.set(xxx, 0);
 				continue;
 			}
 
@@ -173,12 +143,8 @@ public class Scheduler implements IsSerializable{
 	
 	public static Map<String, String> mapCoursesToNames(final List<Course> lcourse){
 		Map<String, String> nameMap = new HashMap<>();
-		//for(int c = 0; c < lcourse.size(); c++){
-			//colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
-		//}
-		for(Course c : lcourse){
+		for(Course c : lcourse)
 			nameMap.put(c.getId(), c.getName());
-		}
 		
 		return nameMap;
 	}
@@ -187,9 +153,8 @@ public class Scheduler implements IsSerializable{
 	
 	public static Map<String, Color> mapCoursesToColors(final List<Course> lcourse){
 		Map<String, Color> colorsMap = new HashMap<>();
-		for(int c = 0; c < lcourse.size(); c++){
+		for(int c = 0; c < lcourse.size(); ++c)
 			colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
-		}
 		
 		return colorsMap;
 	}
@@ -206,7 +171,6 @@ public class Scheduler implements IsSerializable{
 
 		final ArrayList<Integer> indexes = initIndexes(lessonsGroupArray.size()), max = initMax(lessonsGroupArray);
 		for (int last = indexes.size() - 1, msb;;) {
-			///System.out.println(indexes);
 			final List<LessonGroup> lessons = getScheduleByIndexes(lessonsGroupArray, indexes);
 			final Schedule $ = new Schedule();
 
@@ -231,8 +195,7 @@ public class Scheduler implements IsSerializable{
 					break;
 
 			}
-			//b = $.collisionSolver();
-			
+					
 			if (b && !$.hasCollision())
 				return $;
 
@@ -279,16 +242,11 @@ public class Scheduler implements IsSerializable{
 
 
 	private static ArrayList<List<LessonGroup>> initMainArr(final List<Course> lcourse) {
-		//Log.info("Scheduler: in initMainArr with "+ lcourse.size() + " courses");
 		final ArrayList<List<LessonGroup>> $ = new ArrayList<>();
 		for (final Course xxx : lcourse) {
-			//Log.info("Scheduler: in initMainArr course " + xxx.getId());
-			//Log.info("Scheduler: in initMainArr testing if course.getLectures(): " + xxx.getLectures());
-			//Log.info("Scheduler: in initMainArr testing if course.getLectures().isEmpty(): " + xxx.getLectures().size());
 			Log.debug("Scheduler: course: " + xxx.getId() + " getLectures: " + xxx.getLectures());
 			if (!xxx.getLectures().isEmpty())
 				$.add(xxx.getLectures());
-			//Log.info("Scheduler: in initMainArr testing if course.getTutorials().isEmpty(): " + xxx.getTutorials().size());
 			Log.debug("Scheduler: course: " + xxx.getId() + " getLuts: " + xxx.getTutorials());
 			if (!xxx.getTutorials().isEmpty())
 				$.add(xxx.getTutorials());
