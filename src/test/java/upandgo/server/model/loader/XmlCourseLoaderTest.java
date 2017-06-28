@@ -14,14 +14,14 @@ import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
 
-@Ignore
+//@Ignore
 public class XmlCourseLoaderTest {
 
 	CourseLoader cr;
 
 	@Before
 	public void initialize() {
-		cr = new XmlCourseLoader("201602.XML", true);
+		cr = new XmlCourseLoader("testd.XML", true);
 		// cr = new XmlCourseLoader("REP.XML");
 	}
 
@@ -30,7 +30,7 @@ public class XmlCourseLoaderTest {
 		// Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		final TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
 		System.out.println("testLoadAllCourses " + coursesMap.size());
-		assert "שיטות במיקרוסקופיה אופטית ביו-רפו".equals(coursesMap.get("338534").getName());
+		assert "אנליזה נומרית 1".equals(coursesMap.get("234107").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
 		assert "פיסיקה 2ממ".equals(coursesMap.get("114075").getName());
 		assert "מעבר חום".equals(coursesMap.get("034041").getName());
@@ -53,18 +53,20 @@ public class XmlCourseLoaderTest {
 		assert "הנדסת חשמל".equals(String.valueOf(coursesMap.get("044202").getFaculty()));
 		assert "רפואה".equals(String.valueOf(coursesMap.get("274349").getFaculty()));
 		assert "הנדסת תעשיה וניהול".equals(String.valueOf(coursesMap.get("097120").getFaculty()));
-
-		assert "2017-07-13T00:00".equals(coursesMap.get("134153").getaTerm() + "");
-		assert "2017-07-18T00:00".equals(coursesMap.get("035022").getaTerm() + "");
+		
+		assert "13.07 יום ה'".equals(coursesMap.get("134153").getaTerm() + "");
+		assert "18.07 יום ג'".equals(coursesMap.get("035022").getaTerm() + "");
 		assertNull(coursesMap.get("205719").getaTerm());
-		assert "2017-07-09T00:00".equals(coursesMap.get("014852").getaTerm() + "");
-		assert "2017-07-12T00:00".equals(coursesMap.get("236635").getaTerm() + "");
-
-		assert "2017-09-25T00:00".equals(coursesMap.get("044148").getbTerm() + "");
+				
+		assert "09.07 יום א'".equals(coursesMap.get("014852").getaTerm() + "");
+		assert "12.07 יום ד'".equals(coursesMap.get("236635").getaTerm() + "");
+		
+		assert "25.09 יום ב'".equals(coursesMap.get("044148").getbTerm() + "");
 		assertNull(coursesMap.get("394820-12").getaTerm());
-		assert "2017-09-25T00:00".equals(coursesMap.get("014003").getbTerm() + "");
-		assert "2017-10-17T00:00".equals(coursesMap.get("095113").getbTerm() + "");
-		assert "2017-10-03T00:00".equals(coursesMap.get("236353").getbTerm() + "");
+		
+		assert "25.09 יום ב'".equals(coursesMap.get("014003").getbTerm() + "");
+		assert "17.10 יום ג'".equals(coursesMap.get("095113").getbTerm() + "");
+		assert "03.10 יום ג'".equals(coursesMap.get("236353").getbTerm() + "");
 
 		assert coursesMap.get("236350").getStuff().size() == 1;
 		assert "ג.נקבלי".equals(coursesMap.get("236350").getStuff().get(0).getLastName());
@@ -228,14 +230,14 @@ public class XmlCourseLoaderTest {
 			System.out.println(xxx.getId() + "---" + xxx.getName());
 	}
 
-	@Test
-	public void testloadChosenLessonGroups() {
-		cr.loadChosenLessonGroups();
-	}
-
-	@After
-	public void deleteXml() {
-		// new File("data/ChosenCourses.xml").delete();
-	}
+//	@Test
+//	public void testloadChosenLessonGroups() {
+//		cr.loadChosenLessonGroups();
+//	}
+//
+//	@After
+//	public void deleteXml() {
+//		// new File("data/ChosenCourses.xml").delete();
+//	}
 
 }
