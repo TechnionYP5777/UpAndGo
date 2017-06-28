@@ -14,7 +14,6 @@ import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.course.Course;
 
-//@Ignore
 public class XmlCourseLoaderTest {
 
 	CourseLoader cr;
