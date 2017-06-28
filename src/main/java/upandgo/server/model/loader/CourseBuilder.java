@@ -126,24 +126,11 @@ public class CourseBuilder {
 	}
 
 	public CourseBuilder addNote(final String note){
-		if (!notes.contains(note)){
-			notes.add(note);			
-		}
+		if (!notes.contains(note))
+			notes.add(note);
 		return this;
 	}
 	
-	public CourseBuilder addPrerequisitesCourse(final Course xxx) {
-		if (!prerequisites.contains(xxx))
-			prerequisites.add(xxx);
-		return this;
-	}
-
-	public CourseBuilder addCorequisitesCourse(final Course xxx) {
-		if (!corequisites.contains(xxx))
-			corequisites.add(xxx);
-		return this;
-	}
-
 	public Course build() {
 		final Course $ = new Course(name, id, faculty, stuff, points, aTerm, bTerm);
 		for (final LessonGroup xxx : lectures)
