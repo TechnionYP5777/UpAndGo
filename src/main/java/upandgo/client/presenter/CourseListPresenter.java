@@ -324,13 +324,14 @@ public class CourseListPresenter implements Presenter {
 				selectedCourses.clear();
 				notSelectedCourses.clear();
 				notSelectedCourses.addAll(allCourses);
+				Collections.sort(notSelectedCourses);
 				display.updateLists();
 				if(isSignedIn){
 					rpcService.unselectAllCourses(currentSemester, new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-							Window.alert("Error while unselecting all course.");
-							Log.error("Error while unselecting all course.");
+							//Window.alert("Error while unselecting all course.");
+							Log.error("CourseListPresenter: Error while unselecting all course.");
 						}
 	
 						@Override
@@ -374,8 +375,8 @@ public class CourseListPresenter implements Presenter {
 		else {
 			selectedCourses = new ArrayList<>();
 			display.setSelectedCourses(selectedCourses);
+			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 		}
-		rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 
 	}
 
@@ -384,6 +385,7 @@ public class CourseListPresenter implements Presenter {
 		public void onSuccess(ArrayList<CourseId> result) {
 			selectedCourses = result;
 			display.setSelectedCourses(selectedCourses);
+			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
 		}
 
 		@Override
@@ -399,6 +401,7 @@ public class CourseListPresenter implements Presenter {
 			result.remove(new CourseId());
 			notSelectedCourses =result;
 			allCourses = new ArrayList<>(result);
+			allCourses.addAll(selectedCourses);
 			Log.info("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
 			display.setNotSelectedCourses(notSelectedCourses);
 		}
@@ -410,8 +413,8 @@ public class CourseListPresenter implements Presenter {
 					+ caught.getMessage() + "&&"
 					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
 					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
-			Window.alert("Error fetching not selected courses.");
-			Log.error("Error fetching not selected courses.");
+			Window.alert("CourseListPresenter: Error fetching not selected courses.");
+			Log.error("CourseListPresenter: Error fetching not selected courses.");
 		}
 	}
 
@@ -424,8 +427,8 @@ public class CourseListPresenter implements Presenter {
 
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Window.alert("Error fetching faculties.");
-			Log.error("Error fetching faculties.");
+			//Window.alert("Error fetching faculties.");
+			Log.error("CourseListPresenter: Error fetching faculties.");
 
 		}
 	}
@@ -433,8 +436,8 @@ public class CourseListPresenter implements Presenter {
 	class GetCourseDetailsCallback implements AsyncCallback<Course> {
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Window.alert("Error while getting information about course.");
-			Log.error("Error while getting information about selecting course.");
+			//Window.alert("CourseListPresenter: Error while getting information about course.");
+			Log.error("CourseListPresenter: Error while getting information about selecting course.");
 		}
 
 		@Override
@@ -470,6 +473,7 @@ public class CourseListPresenter implements Presenter {
 					notSelectedCourses.add(c);
 				}
 			}
+			Collections.sort(notSelectedCourses);
 			display.updateLists();
 			if (isSignedIn) {
 				rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
@@ -481,7 +485,7 @@ public class CourseListPresenter implements Presenter {
 
 					@Override
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
-						Log.error("CourseListPresenter: Success while unselecting course.");
+						Log.info("CourseListPresenter: Success while unselecting course.");
 						eventBus.fireEvent(new UnselectCourseEvent($));
 						
 					}
@@ -506,8 +510,8 @@ public class CourseListPresenter implements Presenter {
 				rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-						Window.alert("Error while selecting course.");
-						Log.error("Error while selecting course.");
+						Window.alert("CourseListPresenter: Error while selecting course.");
+						Log.error("CourseListPresenter: Error while selecting course.");
 					}
 
 					@Override
