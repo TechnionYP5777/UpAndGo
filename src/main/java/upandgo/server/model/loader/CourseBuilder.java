@@ -7,7 +7,6 @@ import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.StuffMember;
-import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.entities.course.Course;
 
 public class CourseBuilder {
