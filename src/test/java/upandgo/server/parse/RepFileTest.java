@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import upandgo.server.parse.RepFile;
 
-@Ignore
+
 public class RepFileTest {
 
 	@Test

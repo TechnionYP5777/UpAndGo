@@ -23,7 +23,6 @@ import org.junit.Test;
 import upandgo.server.parse.UgParser;
 import upandgo.shared.entities.Faculty;
 
-@Ignore
 public class UgParserTest {
 
 	
@@ -76,6 +75,7 @@ public class UgParserTest {
 
 	}
 	
+
 	@Test
 	public void testCreateCoursesXMLDocument(){
 		UgParser.createCoursesXMLDocument("201603");

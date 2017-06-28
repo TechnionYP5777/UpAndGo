@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import upandgo.server.parse.HebReverse;
 
-@Ignore
+
 public class HebReverseTest {
 
 	@Test
