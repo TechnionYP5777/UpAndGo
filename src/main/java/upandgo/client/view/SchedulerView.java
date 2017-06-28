@@ -7,13 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
+import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.Visibility;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -168,6 +172,66 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		constraintsBox.show();
 		Log.info("was here/1");*/
+	}
+	
+	
+	@Override
+	public void drawEmptyListView(){
+		
+		
+		final Modal semesterModal = new Modal();
+		semesterModal.setFade(true);
+		semesterModal.setTitle("לא נבחרו קורסים");
+		
+		ModalBody semesterModalBody = new ModalBody();
+		semesterModalBody.add(new Heading(HeadingSize.H4,"לא ניתן לבנות מערכת ללא קורסים, אנא בחר קורסים מתוך הרשימה בצד ימין."));
+		semesterModal.add(semesterModalBody);
+		
+		ModalFooter semesterModalFooter = new ModalFooter();
+		Button semesterModalAcceptButton = new Button("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הבנתי");
+		semesterModalAcceptButton.setStyleName("btn btn-success");
+		semesterModalAcceptButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent arg0) {
+				semesterModal.hide();
+			}
+		});
+
+		semesterModalFooter.add(semesterModalAcceptButton);
+		semesterModal.add(semesterModalFooter);
+		semesterModal.show();
+		//Log.info("SchedulerView: course list was was empty");
+	}
+	
+	
+	@Override
+	public void drawManyCollisionView(){
+		
+		
+		final Modal semesterModal = new Modal();
+		semesterModal.setFade(true);
+		semesterModal.setTitle("יותר מדי התנגשויות");
+		
+		ModalBody semesterModalBody = new ModalBody();
+		semesterModalBody.add(new Heading(HeadingSize.H4,"לא ניתן להשלים את בניית המערכת בשל עודף התנגשויות,"));
+		semesterModalBody.add(new Heading(HeadingSize.H4,"אנא וותר על חלק מהקורסים ונסה שוב."));
+		semesterModal.add(semesterModalBody);
+		
+		ModalFooter semesterModalFooter = new ModalFooter();
+		Button semesterModalAcceptButton = new Button("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הבנתי");
+		semesterModalAcceptButton.setStyleName("btn btn-success");
+		semesterModalAcceptButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent arg0) {
+				semesterModal.hide();
+			}
+		});
+		
+		semesterModalFooter.add(semesterModalAcceptButton);
+		semesterModal.add(semesterModalFooter);
+		semesterModal.show();
+		//Log.info("SchedulerView: Too many collisions found");
+
 	}
 	
 	

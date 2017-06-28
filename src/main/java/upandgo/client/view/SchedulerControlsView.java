@@ -36,7 +36,7 @@ public class SchedulerControlsView extends VerticalPanel{
 	Button setConstrains = new Button("<i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הגדר אילוצים");
 	
 	Well scheduleWell = new Well();
-	Button nextSchedule = new Button("מערכת באה&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
+	Button nextSchedule = new Button("המערכת הבאה&nbsp;&nbsp;<i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i>");
 	Button prevSchedule = new Button("<i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מערכת קודמת");
 	Button saveSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;שמור מערכת");
 	

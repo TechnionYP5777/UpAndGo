@@ -19,7 +19,11 @@ import java.util.Map.Entry;
 
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.ModalFooter;
+import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Style.Unit;
@@ -108,6 +112,8 @@ public class SchedulerPresenter implements Presenter {
 		public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events);
 		
 		public void drawCollisionView(List<CourseTuple> solvers);
+		public void drawManyCollisionView();
+		public void drawEmptyListView();
 		
 		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);
 		
@@ -140,6 +146,7 @@ public class SchedulerPresenter implements Presenter {
 		public void updateExamsBar(List<Course> courses, boolean isMoedA);
 		
 		public HasClickHandlers getExamButton();
+
 
 		public Widget getAsWidget();
 		
@@ -567,12 +574,13 @@ public class SchedulerPresenter implements Presenter {
 	}
 	
 	void buildSchedule() {
-		Log.info("Build schedule: getChosenCoursesList success");
+		Log.info("SchedulerPresenter: getChosenCoursesList success");
 		if (selectedCourses.isEmpty()) {
-			Log.info("Build schedule: no chosen courses");
+			Log.info("SchedulerPresenter: chosen course list was was empty");
 			lessonGroupsList.clear();
 			displaySchedule();
 			view.scheduleBuilt();
+			view.drawEmptyListView();
 			return;
 		}
 		
@@ -652,13 +660,15 @@ public class SchedulerPresenter implements Presenter {
 		if (sorted.isEmpty()) {
 			//Window.alert("Error - There are no possible schedule.");
 			//Log.error("Error - There are no possible schedule.");
-			Log.info("check if can solve it");
+			Log.info("SchedulerPresenter: found collisions, try to solve them");
 			if(!Scheduler.getCollisionSolvers().isEmpty()){
-				Log.info("Draw Collision View");
-				Log.info("Col solvers: " + Scheduler.getCollisionSolvers());
+				//Log.info("Draw Collision View");
+				//Log.info("Col solvers: " + Scheduler.getCollisionSolvers());
 			view.drawCollisionView(Scheduler.getCollisionSolvers());
 			}else{
-				Log.info("cannot solver it");
+				view.drawManyCollisionView();
+				
+				Log.info("SchedulerPresenter: found too many collisions and cannot solve any of them");
 			}
 		} else {
 			lessonGroupsList.clear();
