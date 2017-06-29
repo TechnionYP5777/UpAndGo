@@ -300,6 +300,7 @@ public class XmlCourseLoader extends CourseLoader {
 							if (n.getNodeType() == Node.ELEMENT_NODE) {
 								createLessonGroup(cb, n, p, "tutorial");
 								createLessonGroup(cb, n, p, "lab");
+								createLessonGroup(cb, n, p, "project");
 								final NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 								for (int g = 0; g < lessonList.getLength(); ++g) {
 									final Node m = lessonList.item(g);
@@ -310,7 +311,7 @@ public class XmlCourseLoader extends CourseLoader {
 										if (!((Element) m).getAttribute("roomNumber").isEmpty())
 											place += " " + ((Element) m).getAttribute("roomNumber");
 										cb.addLectureGroup(groupNum).addLessonToGroup(groupNum,
-												createLesson(n, m, 0, convertStrToDay(((Element) m).getAttribute("day")), groupNum,
+												createLesson(n, m, 0, Day.fromLetter(((Element) m).getAttribute("day")), groupNum,
 														place, Lesson.Type.LECTURE, "lecturer", ((Element) p).getAttribute("id"),
 														((Element) p).getAttribute("name")));
 									}
@@ -385,9 +386,9 @@ public class XmlCourseLoader extends CourseLoader {
 			for (int f = 0; f < sportLessonsList.getLength() ; ++f){
 				final Node h = sportLessonsList.item(f);
 				if (h.getNodeType() == Node.ELEMENT_NODE
-						&& convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
+						&& Day.fromLetter(((Element) h).getAttribute("day")) != null)
 					b.addTutorialGroup(sportGroupNum).addLessonToGroup(sportGroupNum,
-							createLesson(n, h, i, convertStrToDay(((Element) h).getAttribute("day")), sportGroupNum,
+							createLesson(n, h, i, Day.fromLetter(((Element) h).getAttribute("day")), sportGroupNum,
 									((Element) h).getAttribute("building"), Type.SPORT, "assistant", sportCourseId,
 									sportCourseName));
 			}
@@ -395,6 +396,18 @@ public class XmlCourseLoader extends CourseLoader {
 			b.cleartutorialGroup();
 		}
 		b.clearNotes();
+	}
+	
+	private static Type getTypeFromString(final String s){
+		if ("tutorial".equals(s)){
+			return Type.TUTORIAL;
+		} else if ("lab".equals(s)){
+			return Type.LABORATORY;
+		} else if ("project".equals(s)){
+			return Type.PROJECT;
+		} else {
+			return Type.LECTURE;
+		}
 	}
 
 	public void createLessonGroup(final CourseBuilder b, final Node n, final Node p, final String s) {
@@ -410,11 +423,11 @@ public class XmlCourseLoader extends CourseLoader {
 				//
 				final NodeList lessonList = ((Element) n).getElementsByTagName("lesson");
 				for (int f = 0; f < lessonList.getLength(); ++f) {
-					Lesson.Type t = "lab".equals(s) ? Type.LABORATORY : "sport".equals(s) ? Type.SPORT : Type.TUTORIAL;
+					Lesson.Type t = getTypeFromString(s);
 					final Node h = lessonList.item(f);
 					final Element parentNode = (Element) ((Element) h).getParentNode();
-					if ("lab".equals(parentNode.getNodeName()))
-						t = Type.LABORATORY;
+					if (!s.equals(parentNode.getNodeName()))
+						continue;
 					int parentGroup = parentNode.hasAttribute("group") ? 0
 							: !((Element) parentNode.getParentNode()).hasAttribute("group") ? -1
 									: Integer.parseInt(((Element) parentNode.getParentNode()).getAttribute("group"));
@@ -427,9 +440,9 @@ public class XmlCourseLoader extends CourseLoader {
 							String place = ((Element) h).getAttribute("building");
 							if (!((Element) h).getAttribute("roomNumber").isEmpty())
 								place += " " + ((Element) h).getAttribute("roomNumber");
-							if (convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
+							if (Day.fromLetter(((Element) h).getAttribute("day")) != null)
 								b.addTutorialGroup(tutorialGroupNum).addLessonToGroup(tutorialGroupNum,
-										createLesson(n, h, g, convertStrToDay(((Element) h).getAttribute("day")), tutorialGroupNum,
+										createLesson(n, h, g, Day.fromLetter(((Element) h).getAttribute("day")), tutorialGroupNum,
 												place, t, "assistant", ((Element) p).getAttribute("id"), ((Element) p).getAttribute("name")));
 						}
 					}
@@ -476,7 +489,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-	public static Day convertStrToDay(final String xxx) {
+/*	private static Day convertStrToDay(final String xxx) {
 		switch (xxx) {
 		case "א":
 			return Day.SUNDAY;
@@ -493,7 +506,7 @@ public class XmlCourseLoader extends CourseLoader {
 		default:
 			return Day.SATURDAY;
 		}
-	}
+	}*/
 
 //	private static Month convertStrToMonth(final String xxx) {
 //		switch (xxx) {

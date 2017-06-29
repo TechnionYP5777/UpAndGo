@@ -258,8 +258,6 @@ public class UgParser {
 		}
 		
 		final Element courseSchedulingTable = coursePage.getElementById("scheduling");
-		int currentLectureGroup = 0;
-		Type lessonType = null;
 		if (courseSchedulingTable == null){
 			return courseElement;
 		}
@@ -273,7 +271,7 @@ public class UgParser {
 				if (lessonTableRow.children().size() < 8){
 					continue;
 				}
-				lessonType = Type.SPORT;
+				Type lessonType = Type.SPORT;
 				//System.out.println("----------------");
 				//System.out.println("type: " + lessonType);
 				//System.out.println("group: " + lessonTableRow.child(7).html());
@@ -297,6 +295,9 @@ public class UgParser {
 			return courseElement;
 		}
 		
+		
+		int currentLectureGroup = 0;
+		Type lessonType = null;	
 		org.w3c.dom.Element lectureElement = null;
 		org.w3c.dom.Element lessonGroupElement = null;
 		for (int i = 1 ; i < lessonTableRows.size() ; i ++){
@@ -314,9 +315,21 @@ public class UgParser {
 				} else if (lessonType == Type.TUTORIAL){
 					lessonGroupElement = doc.createElement("tutorial");
 				} else if (lessonType == Type.LABORATORY){
+					if (currentLectureGroup != group/10*10){
+						currentLectureGroup = group/10*10;
+						lectureElement = doc.createElement("lecture");
+						lectureElement.setAttribute("group",String.valueOf(currentLectureGroup));
+						courseElement.appendChild(lectureElement);
+					}
 					lessonGroupElement = doc.createElement("lab");
 				} else if (lessonType == Type.PROJECT){
-					lessonGroupElement = doc.createElement("group");
+					if (currentLectureGroup != group/10*10){
+						currentLectureGroup = group/10*10;
+						lectureElement = doc.createElement("lecture");
+						lectureElement.setAttribute("group",String.valueOf(currentLectureGroup));
+						courseElement.appendChild(lectureElement);
+					}
+					lessonGroupElement = doc.createElement("project");
 				} else {
 					continue;
 				}
@@ -364,7 +377,7 @@ public class UgParser {
 					lectureElement.appendChild(lessonGroupElement);
 				}*/
 				
-				if (currentLectureGroup != group && currentLectureGroup == group/10*10 && lectureElement != null){
+				if (lessonType != Type.LECTURE && currentLectureGroup == group/10*10 && lectureElement != null){
 					lectureElement.appendChild(lessonGroupElement);
 				} else {
 					courseElement.appendChild(lessonGroupElement);
