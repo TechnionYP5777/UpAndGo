@@ -151,6 +151,8 @@ public class SchedulerPresenter implements Presenter {
 		public void setExportScheduleAsWarning();
 		
 		public void setExportScheduleAsSuccess();
+		
+		public Widget getAsWidget();
 	}
 
 	@Inject
