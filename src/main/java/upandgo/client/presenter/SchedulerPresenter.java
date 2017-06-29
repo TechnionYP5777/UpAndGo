@@ -215,6 +215,7 @@ public class SchedulerPresenter implements Presenter {
 						break;
 					}
 				}
+				constraintsPool.removeCourseConstraint(event.getId().number());
 				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
 		});
@@ -370,12 +371,13 @@ public class SchedulerPresenter implements Presenter {
 				if (lesson == null){
 					return;
 				}
-				CourseConstraint courseConstraint = constraintsPool.getCourseConstraints().get(lesson.getCourseId());
-				if (courseConstraint == null){
+				if (!constraintsPool.getCourseConstraints().containsKey(lesson.getCourseId())){
+					view.getLessonModalCreateConstraintButton().setVisible(true);
 					return;
 				}
+				CourseConstraint courseConstraint = constraintsPool.getCourseConstraints().get(lesson.getCourseId());
 				if (lesson.getType()==Type.LECTURE && courseConstraint.isSpecificLecture()
-						|| lesson.getType()==Type.TUTORIAL && courseConstraint.isSpecificTutorial() ){
+						|| lesson.getType()!=Type.LECTURE && courseConstraint.isSpecificTutorial() ){
 					view.getLessonModalCreateConstraintButton().setVisible(false);
 					view.getLessonModalRemoveConstraintButton().setVisible(true);
 				} else {
@@ -391,8 +393,10 @@ public class SchedulerPresenter implements Presenter {
 			public void onClick(ClickEvent event) {
 				Lesson lesson = view.getLessonModelCurrentLesson();
 				if (lesson == null){
+					Log.info("SchedulerPresenter: user wants constraint on non existing course");
 					return;
 				}
+				Log.info("SchedulerPresenter: user wants constraint on " + lesson.getCourseId());
 				constraintsPool.setCourseConstraint(lesson.getCourseId(), lesson.getType(), true, lesson.getGroup());
 				view.getLessonModal().hide();
 				buildScheduleAndSearchForCurrentOne();
