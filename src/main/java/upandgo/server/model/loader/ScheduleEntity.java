@@ -63,7 +63,6 @@ public class ScheduleEntity {
 	}
 	
 	@Id public String id;	// user's userId
-	//public List<Lesson> lessons;
 	public Map<String,List<Lesson>> lessons;
 	
 	public ScheduleEntity() {
@@ -75,11 +74,6 @@ public class ScheduleEntity {
 		this.id = id;
 		this.lessons = new TreeMap<>();
 	}
-	
-/*	ScheduleEntity(String i, List<Lesson> l) {
-		lessons = l;
-		id = i;
-	}*/
 	
 	public void setId(String id){
 		this.id = id;
