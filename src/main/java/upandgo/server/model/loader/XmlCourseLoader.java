@@ -241,7 +241,7 @@ public class XmlCourseLoader extends CourseLoader {
 //
 //	}
 
-	private static void setStaffList(final CourseBuilder b, final Node p, final String s) {
+	public static void setStaffList(final CourseBuilder b, final Node p, final String s) {
 		final NodeList TicList = ((Element) p).getElementsByTagName(s);
 		for (int k = 0; k < TicList.getLength(); ++k) {
 			final Node n = TicList.item(k);
@@ -259,7 +259,7 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private void getCourses(boolean test_flag) {
+	public void getCourses(boolean test_flag) {
 		try {
 			NodeList coursesList;
 			coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(!test_flag ? coursesInfo
@@ -338,7 +338,7 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private Exam createExam(Node p, String examType) {
+	public Exam createExam(Node p, String examType) {
 		String examTime = ((Element)p).getElementsByTagName(examType).item(0).getAttributes() .getNamedItem("time").getNodeValue();
 		String examDayOfMonth = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day").getNodeValue();
 		String examMonth = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("month").getNodeValue();
@@ -358,7 +358,7 @@ public class XmlCourseLoader extends CourseLoader {
 				+ cal.get(Calendar.DAY_OF_WEEK));
 	}
 
-	private void sportParsing(final CourseBuilder b, final Node p) {
+	public void sportParsing(final CourseBuilder b, final Node p) {
 		b.setFaculty(((Element) p).getAttribute("faculty"));
 		b.setPoints(Double.parseDouble(((Element) p).getAttribute("points")));
 		String courseId = ((Element) p).getAttribute("id");
@@ -397,7 +397,7 @@ public class XmlCourseLoader extends CourseLoader {
 		b.clearNotes();
 	}
 
-	private void createLessonGroup(final CourseBuilder b, final Node n, final Node p, final String s) {
+	public void createLessonGroup(final CourseBuilder b, final Node n, final Node p, final String s) {
 		final NodeList tutorialList = ((Element) n).getElementsByTagName(s);
 		for (int g = 0; g < tutorialList.getLength(); ++g) {
 			final Node m = tutorialList.item(g);
@@ -441,7 +441,7 @@ public class XmlCourseLoader extends CourseLoader {
 
 	}
 
-	private static StuffMember findStaffByName(final CourseBuilder b, final String[] splited) {
+	public static StuffMember findStaffByName(final CourseBuilder b, final String[] splited) {
 		String firstName = "";
 		for (int j = 0; j < splited.length - 1; ++j) {
 			firstName += splited[j];
@@ -454,7 +454,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return null;
 	}
 
-	private Lesson createLesson(final Node n, final Node h, final int index, final Day lectureDay, final int groupNum,
+	public Lesson createLesson(final Node n, final Node h, final int index, final Day lectureDay, final int groupNum,
 			final String place, final Lesson.Type t, final String staff, final String courseId, final String courseName) {
 		return new Lesson(
 				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
@@ -466,7 +466,7 @@ public class XmlCourseLoader extends CourseLoader {
 				place, t, groupNum, courseId, courseName);
 	}
 
-	private String findLGStaff(final Node n, final int groupNum, final String staff) {
+	public String findLGStaff(final Node n, final int groupNum, final String staff) {
 		for (int $ = 0; $ < ((Element) n).getElementsByTagName(staff).getLength(); ++$)
 			if (((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group")
 					&& Integer.parseInt(((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode())
@@ -476,7 +476,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-	private static Day convertStrToDay(final String xxx) {
+	public static Day convertStrToDay(final String xxx) {
 		switch (xxx) {
 		case "א":
 			return Day.SUNDAY;
