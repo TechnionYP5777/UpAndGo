@@ -1,6 +1,6 @@
 package upandgo.server.model.loader;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.TreeMap;
 
@@ -21,14 +21,14 @@ public class XmlCourseLoaderTest {
 	@Before
 	public void initialize() {
 		cr = new XmlCourseLoader("testd.XML", true);
-		// cr = new XmlCourseLoader("REP.XML");
 	}
 
 	@Test
-	public void testLoadAllCourses() {
+	public void test_a() {
 		// Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		final TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
-		System.out.println("testLoadAllCourses " + coursesMap.size());
+		assertNull(cr.loadAllCourseNames());
+		assertEquals(1027, cr.loadAllCoursesByName().size());
 		assert "אנליזה נומרית 1".equals(coursesMap.get("234107").getName());
 		assert "טי.אר.אקס-מעורב".equals(coursesMap.get("394800-13").getName());
 		assert "פיסיקה 2ממ".equals(coursesMap.get("114075").getName());
@@ -168,60 +168,14 @@ public class XmlCourseLoaderTest {
 		 */
 
 	}
-
+	
 	@Test
-	public void testLoadedLessons() {
-		/*
-		 * TreeMap<String, Course> coursesMap = cr.loadAllCourses();
-		 * System.out.println("lectures: " +
-		 * coursesMap.get("123456").getLecturesLG() ); System.out.println(
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).
-		 * getRepresenter().getLastName() );
-		 * 
-		 * assert "טולוז".equals(
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).
-		 * getRepresenter().getLastName());
-		 * 
-		 * assert
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).
-		 * getStartTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(12,
-		 * 30))); assert
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(0).
-		 * getEndTime().equals(new WeekTime(DayOfWeek.SUNDAY, LocalTime.of(14,
-		 * 30)));
-		 * 
-		 * assert
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(1).
-		 * getStartTime().equals(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(12,
-		 * 30))); assert
-		 * coursesMap.get("123456").getLecturesLG().get(0).getLessons().get(1).
-		 * getEndTime().equals(new WeekTime(DayOfWeek.MONDAY, LocalTime.of(14,
-		 * 30)));
-		 */
+	public void test_b() {
+//		
+//		assertNull(cr.loadChosenCourses());
 	}
 
-	@Test
-	public void testSaveChosenCourseNames() {
-		/*
-		 * List<String> names = new LinkedList<>(); names.add("מבוא לחתולים");
-		 * names.add("טורי חתולים ופוררריה"); names.add("'אלרגיות למתקדמים ת");
-		 * cr.saveChosenCourseNames(names); assert (new
-		 * File("data/ChosenCourses.xml")).exists();
-		 */
-	}
-
-	@Test
-	public void testLoadChosenCourseNames() {
-		/*
-		 * List<String> names = new LinkedList<>(); names.add("מבוא לחתולים");
-		 * names.add("טורי חתולים ופוררריה"); names.add("'אלרגיות למתקדמים ת");
-		 * cr.saveChosenCourseNames(names); assert (new
-		 * File("data/ChosenCourses.xml")).exists();
-		 * //cr.loadChosenCourseNames().forEach(name ->
-		 * System.out.println(name)); assert cr.loadChosenCourseNames().size()
-		 * == 3;
-		 */
-	}
+	
 
 	@Test
 	public void testLoadFaculties() {
@@ -229,14 +183,5 @@ public class XmlCourseLoaderTest {
 			System.out.println(xxx.getId() + "---" + xxx.getName());
 	}
 
-//	@Test
-//	public void testloadChosenLessonGroups() {
-//		cr.loadChosenLessonGroups();
-//	}
-//
-//	@After
-//	public void deleteXml() {
-//		// new File("data/ChosenCourses.xml").delete();
-//	}
 
 }

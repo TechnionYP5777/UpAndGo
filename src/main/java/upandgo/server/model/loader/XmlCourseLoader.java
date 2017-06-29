@@ -10,8 +10,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -102,8 +100,7 @@ public class XmlCourseLoader extends CourseLoader {
 	    CoursesServiceImpl.someString = "We have got our credentials!";
 	    
 	    optionsBuilder.setProjectId(projectId);
-	    Storage storage = optionsBuilder.build().getService();
-	    loadCoursesInfo(storage, BlobId.of(bucketId, coursesInfoFilename));
+	    loadCoursesInfo(optionsBuilder.build().getService(), BlobId.of(bucketId, coursesInfoFilename));
 	    
 	    coursesById = new TreeMap<>();
 	    coursesByName = new TreeMap<>();
@@ -139,23 +136,21 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 	@Override
-	public void saveChosenCourses(final CoursesEntity coursesEntity) {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
+	public void saveChosenCourses(final CoursesEntity e) {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
 		
 		if(user == null) {
 			Log.warn("User was not signed in. selected courses could not be saved!");
 			return;
 		}
 		
-		coursesEntity.setId(user.getUserId());
-		CoursesServiceImpl.ofy().defer().save().entity(coursesEntity);
+		e.setId(user.getUserId());
+		CoursesServiceImpl.ofy().defer().save().entity(e);
 	}
 
 	@Override
 	public CoursesEntity loadChosenCourses() {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
+		User user = UserServiceFactory.getUserService().getCurrentUser();
 
 		if(user == null) {
 			Log.warn("User was not signed in. selected courses could not be loaded!");
@@ -165,27 +160,25 @@ public class XmlCourseLoader extends CourseLoader {
 		final CoursesEntity $ = new CoursesEntity(user.getUserId());
 
 		CoursesEntity ce = CoursesServiceImpl.ofy().load().type(CoursesEntity.class).id(user.getUserId()).now();
-		return ce != null ? ce : $;
+		return ce == null ? $ : ce;
 	}
 
 	@Override
-	public void saveChosenLessonGroups(final ScheduleEntity scheduleEntity) {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
+	public void saveChosenLessonGroups(final ScheduleEntity e) {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
 		
 		if(user == null) {
 			Log.warn("User was signed in. schedule could not be saved!");
 			return;
 		}
 		
-		scheduleEntity.setId(user.getUserId());
-		CoursesServiceImpl.ofy().defer().save().entity(scheduleEntity);
+		e.setId(user.getUserId());
+		CoursesServiceImpl.ofy().defer().save().entity(e);
 	}
 
 	@Override
 	public ScheduleEntity loadChosenLessonGroups() {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
+		User user = UserServiceFactory.getUserService().getCurrentUser();
 
 		if(user == null) {
 			Log.warn("User was not signed in. selected courses could not be loaded!");
@@ -197,60 +190,58 @@ public class XmlCourseLoader extends CourseLoader {
 
 	}
 
-	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
-		try {
-			if(coursesInfo == null) {
-				System.out.println("Can't download DB: No such object");
-				return;
-			}
+//	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
+//		try {
+//			if(coursesInfo == null) {
+//				System.out.println("Can't download DB: No such object");
+//				return;
+//			}
+//
+//			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(coursesInfo);
+//			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
+//			final Element courseElement = (Element) ((NodeList) XPathFactory.newInstance().newXPath()
+//					.compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
+//			System.out.println(courseElement.getAttribute("name"));
+//			System.out.println(courseElement.getAttribute("id"));
+//			System.out.println(groupNum);
+//			final List<Node> lessonGroupList = new ArrayList<>();
+//			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
+//			for (int xxx = 0; xxx < lectureList.getLength(); ++xxx)
+//				lessonGroupList.add(lectureList.item(xxx));
+//			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
+//			for (int xxx = 0; xxx < tutorialList.getLength(); ++xxx)
+//				lessonGroupList.add(tutorialList.item(xxx));
+//			final NodeList labList = courseElement.getElementsByTagName("lab");
+//			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
+//				lessonGroupList.add(labList.item(xxx));
+//			for(Node groupNode : lessonGroupList)
+//				if (((Element) groupNode).getAttribute("group").equals(groupNum))
+//					try {
+//						final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
+//						for (int f = 0; f < lessonList.getLength(); ++f) {
+//							final Node h = lessonList.item(f);
+//							if (h.getNodeType() == Node.ELEMENT_NODE)
+//								g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
+//										convertStrToDay(((Element) h).getAttribute("day")),
+//										LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
+//												: ((Element) h).getAttribute("timeStart"))),
+//										new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
+//												.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
+//														: ((Element) h).getAttribute("timeEnd"))),
+//										"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
+//										courseElement.getAttribute("id"), courseElement.getAttribute("name")));
+//						}
+//					} catch (final XPathExpressionException xxx) {
+//						xxx.printStackTrace();
+//					}
+//			System.out.println(g.getLessons().size());
+//		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
+//			xxx.printStackTrace();
+//		}
+//
+//	}
 
-			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(coursesInfo);
-			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
-			final Element courseElement = (Element) ((NodeList) XPathFactory.newInstance().newXPath()
-					.compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
-			System.out.println(courseElement.getAttribute("name"));
-			System.out.println(courseElement.getAttribute("id"));
-			System.out.println(groupNum);
-			final List<Node> lessonGroupList = new ArrayList<>();
-			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-			for (int xxx = 0; xxx < lectureList.getLength(); ++xxx)
-				lessonGroupList.add(lectureList.item(xxx));
-			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-			for (int xxx = 0; xxx < tutorialList.getLength(); ++xxx)
-				lessonGroupList.add(tutorialList.item(xxx));
-			final NodeList labList = courseElement.getElementsByTagName("lab");
-			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
-				lessonGroupList.add(labList.item(xxx));
-			for(Node groupNode : lessonGroupList){
-				if (((Element) groupNode).getAttribute("group").equals(groupNum))
-				try {
-					final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode,
-							XPathConstants.NODESET);
-					for (int f = 0; f < lessonList.getLength(); ++f) {
-						final Node h = lessonList.item(f);
-						if (h.getNodeType() == Node.ELEMENT_NODE)
-							g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
-									convertStrToDay(((Element) h).getAttribute("day")),
-									LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
-											: ((Element) h).getAttribute("timeStart"))),
-									new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
-											.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
-													: ((Element) h).getAttribute("timeEnd"))),
-									"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
-									courseElement.getAttribute("id"), courseElement.getAttribute("name")));
-					}
-				} catch (final XPathExpressionException xxx) {
-					xxx.printStackTrace();
-				}
-			}
-			System.out.println(g.getLessons().size());
-		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
-			xxx.printStackTrace();
-		}
-
-	}
-
-	private static void setStaffList(final CourseBuilder cb, final Node p, final String s) {
+	private static void setStaffList(final CourseBuilder b, final Node p, final String s) {
 		final NodeList TicList = ((Element) p).getElementsByTagName(s);
 		for (int k = 0; k < TicList.getLength(); ++k) {
 			final Node n = TicList.item(k);
@@ -262,7 +253,7 @@ public class XmlCourseLoader extends CourseLoader {
 					if (j + 1 != splited.length - 1)
 						firstName += " ";
 				}
-				cb.addStuffMember(new StuffMember(firstName, splited[splited.length - 1],
+				b.addStuffMember(new StuffMember(firstName, splited[splited.length - 1],
 						((Element) n).getAttributes().getNamedItem("title").getNodeValue()));
 			}
 		}
@@ -271,13 +262,9 @@ public class XmlCourseLoader extends CourseLoader {
 	private void getCourses(boolean test_flag) {
 		try {
 			NodeList coursesList;
-			if(test_flag){
-				coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(new FileInputStream(new File("resources/testXML/" + coursesInfoFilename))).getElementsByTagName("course");
-			}else{
-				coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(coursesInfo).getElementsByTagName("course");
-			}
+			coursesList = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(!test_flag ? coursesInfo
+					: new FileInputStream(new File("resources/testXML/" + coursesInfoFilename)))
+									.getElementsByTagName("course");
 			for (int i = 0; i < coursesList.getLength(); ++i) {
 				final Node p = coursesList.item(i);
 				if (p.getNodeType() == Node.ELEMENT_NODE)
@@ -333,10 +320,8 @@ public class XmlCourseLoader extends CourseLoader {
 						final NodeList notesList = ((Element) p).getElementsByTagName("note");
 						for (int n = 0 ; n < notesList.getLength() ; ++n){
 							final Node note = notesList.item(n);
-							if (note.getNodeType() == Node.ELEMENT_NODE){
-								//Log.info(note.getTextContent());
+							if (note.getNodeType() == Node.ELEMENT_NODE)
 								cb.addNote(note.getTextContent());
-							}
 						}
 						final Course c = cb.build();
 						coursesById.put(c.getId(), c);
@@ -369,8 +354,8 @@ public class XmlCourseLoader extends CourseLoader {
 			e.printStackTrace();
 		}
 		
-		int examDay = cal.get(Calendar.DAY_OF_WEEK); 
-		return new Exam(examTime + " " + examDayOfMonth + " " + examMonth + " " + examYear + " " + examDay);
+		return new Exam(examTime + " " + examDayOfMonth + " " + examMonth + " " + examYear + " "
+				+ cal.get(Calendar.DAY_OF_WEEK));
 	}
 
 	private void sportParsing(final CourseBuilder b, final Node p) {
@@ -381,9 +366,8 @@ public class XmlCourseLoader extends CourseLoader {
 		final NodeList notesList = ((Element) p).getElementsByTagName("note");
 		for (int n = 0 ; n < notesList.getLength() ; ++n){
 			final Node note = notesList.item(n);
-			if (note.getNodeType() == Node.ELEMENT_NODE){
+			if (note.getNodeType() == Node.ELEMENT_NODE)
 				b.addNote(note.getTextContent());
-			}
 		}
 		final NodeList sportsList = ((Element) p).getElementsByTagName("sport");
 		for (int i = 0; i < sportsList.getLength(); ++i) {
@@ -400,13 +384,12 @@ public class XmlCourseLoader extends CourseLoader {
 			final NodeList sportLessonsList = ((Element) n).getElementsByTagName("lesson");
 			for (int f = 0; f < sportLessonsList.getLength() ; ++f){
 				final Node h = sportLessonsList.item(f);
-				if (h.getNodeType() == Node.ELEMENT_NODE){
-					String place = ((Element) h).getAttribute("building");
-					if (convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
-						b.addTutorialGroup(sportGroupNum).addLessonToGroup(sportGroupNum,
-								createLesson(n, h, i, convertStrToDay(((Element) h).getAttribute("day")),
-										sportGroupNum, place, Type.SPORT, "assistant", sportCourseId, sportCourseName));
-				}
+				if (h.getNodeType() == Node.ELEMENT_NODE
+						&& convertStrToDay(((Element) h).getAttribute("day")) != Day.SATURDAY)
+					b.addTutorialGroup(sportGroupNum).addLessonToGroup(sportGroupNum,
+							createLesson(n, h, i, convertStrToDay(((Element) h).getAttribute("day")), sportGroupNum,
+									((Element) h).getAttribute("building"), Type.SPORT, "assistant", sportCourseId,
+									sportCourseName));
 			}
 			coursesById.put(((Element) p).getAttribute("id") + "-" + ((Element) n).getAttribute("group"), b.build());
 			b.cleartutorialGroup();
@@ -458,14 +441,14 @@ public class XmlCourseLoader extends CourseLoader {
 
 	}
 
-	private static StuffMember findStaffByName(final CourseBuilder cb, final String[] splited) {
+	private static StuffMember findStaffByName(final CourseBuilder b, final String[] splited) {
 		String firstName = "";
 		for (int j = 0; j < splited.length - 1; ++j) {
 			firstName += splited[j];
 			if (j + 1 != splited.length - 1)
 				firstName += " ";
 		}
-		for (final StuffMember $ : cb.getStaffList())
+		for (final StuffMember $ : b.getStaffList())
 			if ($.getFirstName().equals(firstName) && $.getLastName().equals(splited[splited.length - 1]))
 				return $;
 		return null;
@@ -512,34 +495,34 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
-	private static Month convertStrToMonth(final String xxx) {
-		switch (xxx) {
-		case "01":
-			return Month.JANUARY;
-		case "02":
-			return Month.FEBRUARY;
-		case "03":
-			return Month.MARCH;
-		case "04":
-			return Month.APRIL;
-		case "05":
-			return Month.MAY;
-		case "06":
-			return Month.JUNE;
-		case "07":
-			return Month.JULY;
-		case "08":
-			return Month.AUGUST;
-		case "09":
-			return Month.SEPTEMBER;
-		case "10":
-			return Month.OCTOBER;
-		case "11":
-			return Month.NOVEMBER;
-		default:
-			return Month.DECEMBER;
-		}
-	}
+//	private static Month convertStrToMonth(final String xxx) {
+//		switch (xxx) {
+//		case "01":
+//			return Month.JANUARY;
+//		case "02":
+//			return Month.FEBRUARY;
+//		case "03":
+//			return Month.MARCH;
+//		case "04":
+//			return Month.APRIL;
+//		case "05":
+//			return Month.MAY;
+//		case "06":
+//			return Month.JUNE;
+//		case "07":
+//			return Month.JULY;
+//		case "08":
+//			return Month.AUGUST;
+//		case "09":
+//			return Month.SEPTEMBER;
+//		case "10":
+//			return Month.OCTOBER;
+//		case "11":
+//			return Month.NOVEMBER;
+//		default:
+//			return Month.DECEMBER;
+//		}
+//	}
 
 	@Override
 	public List<Faculty> loadFaculties() {
@@ -570,8 +553,8 @@ public class XmlCourseLoader extends CourseLoader {
 	}
 
 
-	private static void loadCoursesInfo(Storage storage, BlobId blobId) {
-		Blob blob = storage.get(blobId);
+	private static void loadCoursesInfo(Storage s, BlobId i) {
+		Blob blob = s.get(i);
 
 		if (blob == null) {
 			System.out.println("Can't download DB: No such object");
@@ -580,25 +563,19 @@ public class XmlCourseLoader extends CourseLoader {
 
 		List<InputStream> streams = new ArrayList<>();
 
-		if (blob.getSize().longValue() < 1_000_000) {
-			// Blob is small read all its content in one request
-			byte[] content = blob.getContent();
-			streams.add(new ByteArrayInputStream(content));
-		} else {
-			// When Blob size is big or unknown use the blob's channel
-			// reader.
+		if (blob.getSize().longValue() < 1_000_000)
+			streams.add(new ByteArrayInputStream(blob.getContent()));
+		else
 			try (ReadChannel reader = blob.reader()) {
-				ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
-				while (reader.read(bytes) > 0) {
+				for (ByteBuffer bytes = ByteBuffer.allocate(65536); reader.read(bytes) > 0;) {
 					bytes.flip();
 					streams.add(new ByteArrayInputStream(bytes.array()));
 					bytes.clear();
 				}
-			} catch(@SuppressWarnings("unused") IOException e) {
+			} catch (@SuppressWarnings("unused") IOException e) {
 				System.out.println("Can't download DB: read error");
 				return;
 			}
-		}
 
 		coursesInfo = new SequenceInputStream(Collections.enumeration(streams));
 	}
