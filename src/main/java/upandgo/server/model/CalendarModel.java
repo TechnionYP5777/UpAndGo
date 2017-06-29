@@ -79,7 +79,7 @@ public class CalendarModel {
 		// Create a new calendar
 		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
 		calendar.setSummary(calendarName);
-		calendar.setTimeZone("Israel");
+		calendar.setTimeZone("Universal");
 
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar).execute();
