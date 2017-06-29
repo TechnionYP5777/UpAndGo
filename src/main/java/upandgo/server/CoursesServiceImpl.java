@@ -45,7 +45,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		ObjectifyService.register(CoursesEntity.class);
 	}
 	
-	private Semester defaultSemester = Semester.WINTER16;
+	private Semester defaultSemester = Semester.WINTER17;
 
 	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
 	private final CalendarModel calendarModel = new CalendarModel();
@@ -120,7 +120,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public String getSomeString() {
-		return courseModels.get(Semester.WINTER16).loadChosenCourses().toString();
+		return " ";
 	}
 	
 	@Override

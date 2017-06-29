@@ -8,14 +8,14 @@ public class SemesterTest {
 
 	@Test
 	public void testa() {
-		assertEquals(Semester.WINTER16, Semester.fromId("201602"));
+		assertEquals(Semester.SPRING16, Semester.fromId("201602"));
 		assertEquals(Semester.SUMMER16, Semester.fromId("201603"));
 		assertNull(Semester.fromId("201604"));
 	}
 	
 	@Test
 	public void testb() {
-		assertEquals("חורף 2016/17 תשע\"ז", Semester.fromId("201602").getName());
+		assertEquals("אביב 2016/17 תשע\"ז", Semester.fromId("201602").getName());
 	}
 	
 	@Test

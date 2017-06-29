@@ -40,7 +40,7 @@ public class LessonDetailsView extends VerticalPanel implements ModalComponent{
 			this.add(new Heading(HeadingSize.H4, "מרצה: " + lesson.getRepresenter().getTitle() + " " + lesson.getRepresenter().getLastName() + " " + lesson.getRepresenter().getFirstName()));
 		}
 		
-		Anchor ugLink = new Anchor("קישור ל-UG", "https://ug3.technion.ac.il/rishum/course?MK=" + lesson.getCourseId() + "&CATINFO=&SEM=201602");
+		Anchor ugLink = new Anchor("קישור ל-UG", "https://ug3.technion.ac.il/rishum/course?MK=" + lesson.getCourseId());
 		ugLink.setTarget("_blank");
 				
 		this.add(new Heading(HeadingSize.H4, "הערות על הקורס: "));

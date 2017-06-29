@@ -28,7 +28,7 @@ import upandgo.shared.utils.FuzzySearch;
  */
 public class CourseModel { // implements Model {
 
-	protected Semester semester = Semester.WINTER16;
+	protected Semester semester;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	protected CourseLoader loader;

@@ -76,8 +76,8 @@ public class UgParserTest {
 	}
 	
 
-	@Test
+/*	@Test
 	public void testCreateCoursesXMLDocument(){
-		UgParser.createCoursesXMLDocument("201603");
-	}
+		UgParser.createCoursesXMLDocument("201701");
+	}*/
 }

@@ -82,7 +82,7 @@ public class SchedulerPresenter implements Presenter {
 	
 	protected boolean examBarVisable;		
 
-	protected Semester currentSemester = Semester.WINTER16;
+	protected Semester currentSemester;
 	protected List<Course> selectedCourses;
 	protected ConstraintsPool constraintsPool = new ConstraintsPool();
 	protected List<List<LessonGroup>> lessonGroupsList;
@@ -170,10 +170,11 @@ public class SchedulerPresenter implements Presenter {
 	}
 
 	@Inject
-	public SchedulerPresenter( Display display, EventBus eventBus, CoursesServiceAsync rpc) {
+	public SchedulerPresenter( Display display, EventBus eventBus, CoursesServiceAsync rpc, Semester defaultSemester) {
 		this.eventBus = eventBus;
 		this.view = display;
 		this.rpcService = rpc;
+		this.currentSemester = defaultSemester;
 		//this.isBlankSpaceCount = this.isDaysoffCount = false;
 		//this.minStartTime = null;
 		//this.maxFinishTime = null;
