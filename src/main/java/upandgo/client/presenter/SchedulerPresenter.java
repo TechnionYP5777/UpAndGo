@@ -100,13 +100,9 @@ public class SchedulerPresenter implements Presenter {
 
 		//TODO: some refactoring here
 		public HasClickHandlers clearSchedule();
-
 		public HasClickHandlers buildSchedule();
-
 		public HasClickHandlers nextSchedule();
-
 		public HasClickHandlers prevSchedule();
-
 		public HasClickHandlers saveSchedule();
 
 		public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events);
@@ -115,14 +111,10 @@ public class SchedulerPresenter implements Presenter {
 		public void drawManyCollisionView();
 		public void drawEmptyListView();
 		
-		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);
-		
-		public ConstraintsPool getConstraintsPool();
-		
-		public Modal getConstraintsModal();
-		
-		public HasClickHandlers getConstraintsBoxSaveButton();
-		
+		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);		
+		public ConstraintsPool getConstraintsPool();		
+		public Modal getConstraintsModal();		
+		public HasClickHandlers getConstraintsBoxSaveButton();		
 		public void setNotesOnLessonModal(String courseId, List<String> courseNotes);
 		
 		public Modal getLessonModal();
@@ -131,42 +123,29 @@ public class SchedulerPresenter implements Presenter {
 		public Lesson getLessonModelCurrentLesson();
 				
 		public Modal getCollisionModal();
-		
 		public Button getCollisionModalButton();
 		public List<RadioButton> getCollisionRadios();
 		public List<CourseTuple> getCollisionSolversTuples();
 		
 		public void setPrevEnable(boolean enable);
-
 		public void setNextEnable(boolean enable);
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
-		
-		
+				
 		public void updateExamsBar(List<Course> courses, boolean isMoedA);
-		
 		public HasClickHandlers getExamButton();
-
-
-		public Widget getAsWidget();
-		
 		public void collapseExamsBar();
-		
 		public void openExamsBar();
-			
 		public HasClickHandlers getMoedAButton();
-		
 		public HasClickHandlers getMoedBButton();
 
 		public UserEvent getUserEvent();
-		
 		public Modal getUserEventBox();
-		
 		public HasClickHandlers getUserEventBoxSaveButton();
-		
 		public HasClickHandlers getUserEventBoxDeleteButton();
-
 		public HasClickHandlers exportScheduleButton();
+		
+		public Widget getAsWidget();
 	}
 
 	@Inject
@@ -251,6 +230,7 @@ public class SchedulerPresenter implements Presenter {
 				lessonGroupsList.clear();
 				selectedCourses.clear();
 				displaySchedule();
+				view.updateExamsBar(selectedCourses, isMoedAExams);
 				if (isSignedIn){
 					updateScheduleAndChosenLessons();
 				}
@@ -722,6 +702,7 @@ public class SchedulerPresenter implements Presenter {
 						public void onSuccess(Course result) {
 							selectedCourses.add(result);
 							Log.info("SchedulerPresenter: Selected course " + result.getId() + " was loaded");
+							view.updateExamsBar(selectedCourses, isMoedAExams);
 						}
 						@Override
 						public void onFailure(Throwable caught) {
@@ -754,7 +735,11 @@ public class SchedulerPresenter implements Presenter {
 				colorMap = Scheduler.mapLessonGroupsToColors(result);
 				displaySchedule();
 				view.scheduleBuilt();
-				view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				if (result.isEmpty()){
+					view.setCurrentScheduleIndex(0, 0);
+				} else {
+					view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				}
 				Log.info("SchedulerPresenter: schedule was loaded. it has " + String.valueOf(result.size()) + " LessonGroups.");
 			}
 		});
