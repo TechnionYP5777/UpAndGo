@@ -24,13 +24,14 @@ public class CourseIdTest {
 		CourseId course3 = new CourseId(null, null, new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		CourseId course4 = new CourseId(null, "בלה", new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
 		
+		
 		assert !course.equals(null);
 		assert course.equals(course);
 		assert !course.equals(new Exam("13:00 08 08 2017 4"));
 		assert !course3.equals(course2);
 		assert !course2.equals(course3);
-		assert !course.equals(course4);
-		assert !course4.equals(course);
+		assert !course2.equals(course4);
+		assert !course4.equals(course2);
 	}
 	
 	@Test

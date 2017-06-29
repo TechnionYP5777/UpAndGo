@@ -31,6 +31,7 @@ public class SchedulerTest {
 		assertEquals(4, t.size());
 		assertEquals(2,Scheduler.getColorMap().size());
 		assertEquals(1, Scheduler.getCollisionSolvers().size());
+		assertEquals(2, Scheduler.mapLessonGroupsToColors(t.get(0).getLessonGroups()).size());
 		List<Boolean> x = new ArrayList<>(Arrays.asList(true, true,true,true,true));
 		assertEquals(4, Scheduler.ListSortedBy(t ,true, true, 
 				LocalTime.of(9, 30), LocalTime.of(17, 30), x).size());
