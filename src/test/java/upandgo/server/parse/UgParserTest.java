@@ -1,8 +1,13 @@
 package upandgo.server.parse;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +22,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.jsoup.nodes.Element;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -72,7 +78,24 @@ public class UgParserTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
+		
+	}
+	
+	@Test
+	public void test_a() throws MalformedURLException, IOException{
+		assertEquals(3129,UgParser.getCoursesIDAndFaculty(false, "201602").size());
+		assertEquals(1236,UgParser.getCoursesIDAndFaculty(true, "201602").size());
+		assertEquals(1236,UgParser.getAllCoursesNamesAndID().size());
+		org.w3c.dom.Document doc = null;
+		try {
+			doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		org.w3c.dom.Element elem = UgParser.createCourseElement(doc, "201602", "מקצועות ספורט", "394800");
+		UgParser.createExamsElement(doc, Scraper.getDocumentFromURL(new URL("http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=" + "394800" + "&SEM=" + "201602")));
+//		UgParser.createCoursesXMLDocument("201602");
 	}
 	
 
