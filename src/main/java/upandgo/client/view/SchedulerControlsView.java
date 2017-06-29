@@ -46,7 +46,7 @@ public class SchedulerControlsView extends VerticalPanel{
 
 	SchedulerConstraintsView schedualerConstraintsView;
 
-	Button exportSchedule = new Button("<i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;יצוא מערכת");
+	Button exportSchedule = new Button("<i class=\"fa fa-clone\" aria-hidden=\"true\"></i>&nbsp;&nbsp;יצוא מערכת");
 
 	public SchedulerControlsView(){
 		this.schedualerConstraintsView = new SchedulerConstraintsView();

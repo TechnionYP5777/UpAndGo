@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.LayoutPanel;
  */
 
 public abstract interface Presenter {
-	void bind();	// TODO: do I need this???
-	void unbind();	// TODO: do I need this???
+	void bind();
+	void unbind();
 	public abstract void go(LayoutPanel panel);
 }

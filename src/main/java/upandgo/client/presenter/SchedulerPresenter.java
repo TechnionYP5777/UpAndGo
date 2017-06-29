@@ -143,9 +143,14 @@ public class SchedulerPresenter implements Presenter {
 		public Modal getUserEventBox();
 		public HasClickHandlers getUserEventBoxSaveButton();
 		public HasClickHandlers getUserEventBoxDeleteButton();
-		public HasClickHandlers exportScheduleButton();
+
+		public HasClickHandlers getExportScheduleButton();
 		
-		public Widget getAsWidget();
+		public void setExportScheduleText(String text);
+		
+		public void setExportScheduleAsWarning();
+		
+		public void setExportScheduleAsSuccess();
 	}
 
 	@Inject
@@ -492,7 +497,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getUserEventBoxDeleteButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				userEvents.remove(view.getUserEvent().getWeekTime());
 				Log.info("SchedulerPresenter: removed user event on " + view.getUserEvent().getWeekTime());
 				view.getUserEventBox().hide();
@@ -504,20 +509,22 @@ public class SchedulerPresenter implements Presenter {
 			}
 		});
 		
-		view.exportScheduleButton().addClickHandler(new ClickHandler() {
+		view.getExportScheduleButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				Log.info("export schedule was requested");
 				if (!isSignedIn) {
-					Window.alert("Please, sign in first!");
+					view.setExportScheduleAsWarning();
+					view.setExportScheduleText("בבקשה, כנס למערכת לפני זה");
 					return;
 				}
 				rpcService.exportSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						if(caught instanceof IOException) {
-							Window.alert("Please, grant us permission. Then try again.");
-							Window.Location.assign(caught.getMessage());
+							view.setExportScheduleAsWarning();
+							view.setExportScheduleText("בבקשה, תן לנו הרשאות ואז תלחץ שוב ל\"יצוא מערכת\"");
+							Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
 							return;
 						}
 						Window.alert("Error while exporting schedule:\n"+caught.getMessage());
@@ -528,8 +535,10 @@ public class SchedulerPresenter implements Presenter {
 					}
 
 					@Override
-					public void onSuccess(Void result) {
+					public void onSuccess(@SuppressWarnings("unused") Void result) {
 						Log.info("schedule was exported successfully");
+						view.setExportScheduleAsSuccess();
+						view.setExportScheduleText("המערכת היוצא בהצלחה");
 						rpcService.getSomeString(new GetSomeStringAsyncCallback());
 					}
 				});
