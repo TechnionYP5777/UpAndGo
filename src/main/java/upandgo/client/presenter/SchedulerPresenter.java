@@ -249,6 +249,9 @@ public class SchedulerPresenter implements Presenter {
 				lessonGroupsList.clear();
 				selectedCourses.clear();
 				displaySchedule();
+				if (isSignedIn){
+					updateScheduleAndChosenLessons();
+				}
 			}
 			
 		});
@@ -311,7 +314,11 @@ public class SchedulerPresenter implements Presenter {
 					Window.alert("SchedulerPresenter: Please, sign in first!");
 					return;
 				}
-				rpcService.saveSchedule(currentSemester, lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
+				List<LessonGroup> listToSave = new ArrayList<>();
+				if (lessonGroupsList.size() > sched_index){
+					listToSave = lessonGroupsList.get(sched_index);
+				}
+				rpcService.saveSchedule(currentSemester, listToSave, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						//Window.alert("SchedulerPresenter: Error while saving schedule.");
