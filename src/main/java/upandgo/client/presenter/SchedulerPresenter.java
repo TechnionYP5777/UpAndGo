@@ -526,8 +526,8 @@ public class SchedulerPresenter implements Presenter {
 						if(caught instanceof IOException) {
 							view.setExportScheduleAsWarning();
 							view.setExportScheduleText("בבקשה, תן לנו הרשאות ואז תלחץ שוב ל\"יצוא מערכת\"");
-							Window.Location.assign(caught.getMessage());
-//							Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
+//							Window.Location.assign(caught.getMessage());
+							Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
 							rpcService.getSomeString(new GetSomeStringAsyncCallback());
 							return;
 						}
