@@ -37,7 +37,8 @@ public class CourseIdTest {
 	@Test
 	public void Testc() {
 		CourseId course = new CourseId("999999", "אנליזה", new Exam("13:00 08 08 2017 4"), new Exam("13:00 08 10 2017 4"));
-		assertEquals("אנליזה - 999999", course.getTitle());
+
+		assertEquals("999999 - אנליזה", course.getTitle());
 	}
 	
 	@Test
