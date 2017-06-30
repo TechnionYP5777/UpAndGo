@@ -99,8 +99,11 @@ public class Scheduler implements IsSerializable{
 			if (b)
 				if (!$.hasCollision())
 					result.add($.getTimetable());
-				else if (!collisionSolvers.contains($.getCollisionSolver()))
+				else if (!collisionSolvers.contains($.getCollisionSolver())){
 					collisionSolvers.add($.getCollisionSolver());
+					if($.hasDualCollision())
+						collisionSolvers.add($.getCollisionSolver2());
+				}
 
 			if (!b) {
 				indexes.set(lastAdded, indexes.get(lastAdded) + 1);

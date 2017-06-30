@@ -194,16 +194,25 @@ public class SchedulerPresenter implements Presenter {
 
 			@Override
 			public void onUnselectCourse(UnselectCourseEvent event) {
+				Log.info("unslected/1");
 				Iterator<Course> it = selectedCourses.iterator();
+				Log.info("unslected/2");
 				while (it.hasNext()) {
+					Log.info("unslected/3");
 					Course c = it.next();
+					Log.info("unslected/4");
 					if (c.getId() == event.getId().number()) {
+						Log.info("unslected/5");
 						selectedCourses.remove(c);
+						Log.info("unslected/6");
 						break;
 					}
 				}
+				Log.info("unslected/7");
 				constraintsPool.removeCourseConstraint(event.getId().number());
+				Log.info("unslected/8");
 				view.updateExamsBar(selectedCourses, isMoedAExams);
+				Log.info("unslected/9");
 			}
 		});
 
@@ -431,20 +440,24 @@ public class SchedulerPresenter implements Presenter {
 				Log.info("Asked to drop course id: " + dropId);
 				
 				Course droppedCourse = null;
-				
+				Log.info("drop/1");
+				Log.info("drop/selected: " + selectedCourses);
 				for(Course c : selectedCourses){
 					if(c.getId().equals(dropId)){
+						Log.info("drop/found");
 						droppedCourse = c;
 						selectedCourses.remove(c);
+						Log.info("drop/removed");
 						break;
 					}
 				}
-				
+				Log.info("drop/2");
 				eventBus.fireEvent(new CollidingCourseDeselectedEvent(new CourseId(droppedCourse.getId(), droppedCourse.getName(), droppedCourse.getaTerm(), droppedCourse.getbTerm())));
-				
+				Log.info("drop/3");
 				view.getCollisionModal().hide();
-				
+				Log.info("drop/4");
 				buildSchedule();
+				Log.info("drop/5");
 			}
 		});
 		

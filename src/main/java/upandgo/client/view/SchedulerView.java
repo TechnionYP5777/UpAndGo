@@ -356,11 +356,15 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void updateExamsBar(List<Course> courses, boolean isMoedA) {
+		Log.info("courses: " + courses);
 		List<Course> is = new ArrayList<>();
+		Log.info("update/1");
 		Map<Course, String> courseColors = new HashMap<>();
 		long width=0;
+		Log.info("update/2");
 		String examsBarHTML = "";
 		Exam exami = null, examiPlusOne = null;
+		Log.info("update/3");
 		if(isMoedA){
 			for (int i = 0; i < courses.size(); ++i) {
 				
@@ -377,6 +381,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 					return o1.getaTerm().compare(o2.getaTerm());
 				}
 			}));
+		 	Log.info("update/4");
 		}
 		else{
 			for (int i = 0; i < courses.size(); ++i) {
@@ -395,6 +400,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 				}
 			}));
 		}
+		Log.info("update/5");
 	   	   
 		for(int i=0; i < is.size(); ++i){
 			exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
@@ -403,6 +409,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 				width+=275;
 				break;
 			}
+			Log.info("update/6");
 			examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
 			int daysBetween = examiPlusOne.daysBetweenExams(exami);
 			if(daysBetween == 0 ){			
@@ -433,12 +440,13 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 				}
 			}
 		}
+		Log.info("update/7");
 		examsBar = new HTML(examsBarHTML);
 		examsBar.addStyleName("horizontal-scroll-wrapper");
 		examsBar.getElement().getStyle().setWidth(width, Unit.PX);
 		examsScrollPanel.setWidget(examsBar);
 		
-		
+		Log.info("update/8");
 	}
 
 	@Override
