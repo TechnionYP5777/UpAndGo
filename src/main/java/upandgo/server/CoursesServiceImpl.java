@@ -22,6 +22,7 @@ import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Color;
 
 /**
  * 
@@ -160,16 +161,12 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	@Override
-	public void exportSchedule(List<LessonGroup> sched) throws IOException {
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException {
 		try {
 			someString += "\n111";
-			calendarModel.createCalendar(sched);
+			calendarModel.createCalendar(sched, colorMap);
 			someString += "\n222";
 		} catch (IOException e) {
-//			someString += "\n333\n";
-//			someString += e.getMessage();
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}

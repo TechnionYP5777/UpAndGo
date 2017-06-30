@@ -2,6 +2,7 @@ package upandgo.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -9,6 +10,7 @@ import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Color;
 
 /**
  * 
@@ -48,5 +50,5 @@ public interface CoursesServiceAsync {
 	
 	public void getSelectedCoursesString(Semester semester, AsyncCallback<String> callback);
 			
-	public void exportSchedule(List<LessonGroup> sched, AsyncCallback<Void> callback);
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, AsyncCallback<Void> callback);
 }

@@ -520,7 +520,7 @@ public class SchedulerPresenter implements Presenter {
 					view.setExportScheduleText("בבקשה, כנס למערכת לפני זה");
 					return;
 				}
-				rpcService.exportSchedule(lessonGroupsList.get(sched_index), new AsyncCallback<Void>() {
+				rpcService.exportSchedule(lessonGroupsList.get(sched_index), colorMap, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						if(caught instanceof IOException) {

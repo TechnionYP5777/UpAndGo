@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +38,7 @@ import upandgo.server.CoursesServiceImpl;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.model.scedule.Color;
 
 public class CalendarModel {
 	private static final String calendarName = "Technion's Lessons Schedule";
@@ -64,7 +66,7 @@ public class CalendarModel {
 	
 	public CalendarModel() {}
 
-	public void createCalendar(List<LessonGroup> lessons) throws IOException {
+	public void createCalendar(List<LessonGroup> lessons, Map<String, Color> colorMap) throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
@@ -84,22 +86,21 @@ public class CalendarModel {
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar).execute();
 		calendarId = createdCalendar.getId();
-		// Create a new calendar list entry
-		CalendarListEntry calendarListEntry = new CalendarListEntry();
-		calendarListEntry.setId(calendarId);
-
-		// Insert the new calendar list entry
-		CalendarListEntry createdCalendarListEntry;
-		createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
-		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
+//		// Create a new calendar list entry
+//		CalendarListEntry calendarListEntry = new CalendarListEntry();
+//		calendarListEntry.setId(calendarId);
+//
+//		// Insert the new calendar list entry
+//		CalendarListEntry createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
+//		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
 
 		String userEmail = user.getEmail();
 		for(LessonGroup l: lessons) {
 			if(l == null)
 				continue;
-			List<Event> events = createEvents(l);
+			List<Event> events = createEvents(l, colorMap.get(l.getCourseID()));
 			for(Event ev: events) {
-				ev.setAttendees(Arrays.asList(new EventAttendee().setEmail(userEmail)));
+//				ev.setAttendees(Arrays.asList(new EventAttendee().setEmail(userEmail)));
 				Event res = calendarService.events().insert(calendarId, ev).execute();
 //					System.out.printf("Event created: %s\n", res.getHtmlLink());
 				CoursesServiceImpl.someString += "\nEvent created: " + res.getHtmlLink();
@@ -131,7 +132,7 @@ public class CalendarModel {
 		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, cred).build();
 	}
 	
-	private static List<Event> createEvents(LessonGroup lg) {
+	private static List<Event> createEvents(LessonGroup lg, Color color) {
 		List<Event> events = new ArrayList<>();
 		
 		for(Lesson l: lg.getLessons()) {
@@ -152,6 +153,7 @@ public class CalendarModel {
 				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+((l.getRepresenter()==null) ? "" : l.getRepresenter().getFullName()))
 				    .setStart(startTime).setEnd(endTime)
 				    .setRecurrence(Arrays.asList("RRULE:FREQ=WEEKLY"));
+//				    .setColorId(color.name());	TODO: translate to color id
 			events.add(event);
 		}
 		

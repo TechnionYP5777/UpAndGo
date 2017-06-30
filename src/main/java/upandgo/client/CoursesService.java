@@ -3,6 +3,7 @@ package upandgo.client;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -11,6 +12,7 @@ import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Color;
 
 /**
  * 
@@ -52,6 +54,6 @@ public interface CoursesService extends RemoteService {
 	
 	public String getSelectedCoursesString(Semester semester);
 	
-	public void exportSchedule(List<LessonGroup> sched) throws IOException;
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException;
 
 }
