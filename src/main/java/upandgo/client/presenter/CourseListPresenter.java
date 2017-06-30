@@ -108,11 +108,11 @@ public class CourseListPresenter implements Presenter {
 	}
 
 	@Inject
-	public CourseListPresenter(CoursesServiceAsync rpc, EventBus eventBus, Display display) {
+	public CourseListPresenter(CoursesServiceAsync rpc, EventBus eventBus, Display display, Semester defaultSemester) {
 		this.rpcService = rpc;
 		this.display = display;
 		this.eventBus = eventBus;
-		
+		this.currentSemester = defaultSemester;
 		
 		
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
@@ -149,7 +149,7 @@ public class CourseListPresenter implements Presenter {
 	CoursesServiceAsync rpcService;
 	Display display;
 	EventBus eventBus;
-	Semester currentSemester = Semester.WINTER16;
+	Semester currentSemester;
 
 	List<CourseId> selectedCourses;
 	List<CourseId> notSelectedCourses;

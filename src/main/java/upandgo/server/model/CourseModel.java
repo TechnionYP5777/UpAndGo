@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.CoursesEntity;
+import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
@@ -27,7 +28,7 @@ import upandgo.shared.utils.FuzzySearch;
  */
 public class CourseModel { // implements Model {
 
-	protected Semester semester = Semester.WINTER16;
+	protected Semester semester;
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	protected CourseLoader loader;
@@ -74,27 +75,24 @@ public class CourseModel { // implements Model {
 
 	public void saveChosenCourse(final String courseID) {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.addCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
 	}
 	
 	public void removeChosenCourse(final String courseID) {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.removeCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
 	}
 	
 	public void removeAllChosenCourse() {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.removeAllCourses(semester.getId());
 		loader.saveChosenCourses(coursesEntity);
 	}
@@ -122,6 +120,7 @@ public class CourseModel { // implements Model {
 		List<String> chosenCourses = loadChosenCourses();
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
+			System.out.println(c.getFaculty());
 			if((faculty.isEmpty() && !chosenCourses.contains(c.getId()) )|| (c.getFaculty().equals(faculty)) && !chosenCourses.contains(c.getId()))
 				res.add(new CourseId(c.getId(), c.getName(),
 						c.getaTerm(), c.getbTerm()));
@@ -171,20 +170,43 @@ public class CourseModel { // implements Model {
 	}
 
 
-	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
-		// TODO: implement it
-	}
-
-	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
-		// TODO: implement it
-	}
+//	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
+//		// TODO: implement it
+//	}
+//
+//	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
+//		// TODO: implement it
+//	}
 	
-	public void saveChosenLessonGroups(final List<LessonGroup> xxx) {
-		loader.saveChosenLessonGroups(xxx);
+	public void saveChosenLessonGroups(final List<LessonGroup> lessonGroups) {
+		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		scheduleEntity.removeAllLessons(semester.getId());
+		
+		for (LessonGroup lg : lessonGroups){
+			scheduleEntity.addLesson(semester.getId(), lg.getCourseID(), lg.getGroupNum());
+		}
+		
+		loader.saveChosenLessonGroups(scheduleEntity);
 	}
 	
 	public List<LessonGroup> loadChosenLessonGroups() {
-		return loader.loadChosenLessonGroups();
+		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		List<LessonGroup> lgList = new ArrayList<>();
+		if (scheduleEntity == null){
+			return lgList;
+		}
+		
+		for (ScheduleEntity.Lesson lesson : scheduleEntity.getLessons(semester.getId())){
+			Course course = coursesById.get(lesson.getCourseId());
+			if (course == null)
+				continue;
+			LessonGroup lessonGroup = course.getLessonGroup(lesson.getGroupNum());
+			if (lessonGroup == null)
+				continue;
+			lgList.add(lessonGroup);
+		}
+		
+		return lgList;
 	}
 
 	

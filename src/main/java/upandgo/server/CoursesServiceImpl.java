@@ -22,6 +22,7 @@ import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
+import upandgo.shared.model.scedule.Color;
 
 /**
  * 
@@ -45,7 +46,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		ObjectifyService.register(CoursesEntity.class);
 	}
 	
-	private Semester defaultSemester = Semester.WINTER16;
+	private Semester defaultSemester = Semester.WINTER17;
 
 	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
 	private final CalendarModel calendarModel = new CalendarModel();
@@ -120,7 +121,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public String getSomeString() {
-		return courseModels.get(Semester.WINTER16).loadChosenCourses().toString();
+		return someString;
 	}
 	
 	@Override
@@ -145,26 +146,27 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
     }
 	
 	@Override
-	public void saveSchedule(List<LessonGroup> sched) {
-		return; //TODO: implement
+	public void saveSchedule(Semester s, List<LessonGroup> sched) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		courseModels.get(s).saveChosenLessonGroups(sched);
+
 	}
 
 	@Override
-	public List<LessonGroup> loadSchedule() {
-		return new ArrayList<>(); //TODO: implement
+	public List<LessonGroup> loadSchedule(Semester s) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		return courseModels.get(s).loadChosenLessonGroups();
 	}
 	
-
-	public void exportSchedule(List<LessonGroup> sched) throws IOException {
+	@Override
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException {
 		try {
 			someString += "\n111";
-			calendarModel.createCalendar(sched);
+			calendarModel.createCalendar(sched, colorMap);
 			someString += "\n222";
 		} catch (IOException e) {
-			someString += "\n333\n";
-			someString += e.getMessage();
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}

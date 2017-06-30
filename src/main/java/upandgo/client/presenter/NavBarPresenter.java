@@ -80,12 +80,12 @@ public class NavBarPresenter implements Presenter {
 	Modal semesterModal;
 	
 	@Inject
-	public NavBarPresenter(LoginServiceAsync rpc, CoursesServiceAsync coursesService, EventBus eventBus, Display display) {
+	public NavBarPresenter(LoginServiceAsync rpc, CoursesServiceAsync coursesService, EventBus eventBus, Display display, Semester defaultSemester) {
 		this.rpcService = rpc;
 		this.coursesService = coursesService;
 		this.display = display;
 		this.eventBus = eventBus;
-		this.currentSemester = Semester.WINTER16;
+		this.currentSemester = defaultSemester;
 		
 /*		coursesService.getSemester(new AsyncCallback<Semester>() {
 			

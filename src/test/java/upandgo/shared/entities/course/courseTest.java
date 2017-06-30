@@ -61,13 +61,16 @@ public class courseTest {
 				, new Exam("13:00 08 10 2017"));
 		
 		LessonGroup lg = new LessonGroup();
+		LessonGroup lg2 = new LessonGroup();
 		lg.setGroupNum(10);
+		lg2.setGroupNum(5);
 		lg.setConstrained(true);
 		lg.addLesson(new Lesson(new StuffMember("אולמן", "טאוב"), new WeekTime(Day.SUNDAY, LocalTime.parse("10:30")),
 				new WeekTime(Day.SUNDAY, LocalTime.parse("12:30")), "טאוב 5", Type.LECTURE, 10, "999999", "אנליזה"));
-		
+		lg2.addLesson(new Lesson(new StuffMember("אולמן", "טאוב"), new WeekTime(Day.SUNDAY, LocalTime.parse("10:30")),
+				new WeekTime(Day.SUNDAY, LocalTime.parse("12:30")), "טאוב 5", Type.TUTORIAL, 5, "999999", "אנליזה"));
 		course.addLecturesLessonGroup(lg);
-		course.addTutorialLessonGroup(lg);
+		course.addTutorialLessonGroup(lg2);
 		course.addNote("קורס מעפן, לא להירשם");
 		Course course2 = new Course(course);
 		assertEquals("אנליזה", course2.getName());
@@ -77,6 +80,9 @@ public class courseTest {
 		assertEquals(1, course.getLecturesLG().size());
 		assertEquals(1, course.getTutorialsLG().size());
 		assertEquals("קורס מעפן, לא להירשם", course.getNotes().get(0));
+		assertEquals("999999", course.getLessonGroup(10).getCourseID());
+		assertEquals("999999", course.getLessonGroup(5).getCourseID());
+		
 	}
 	
 	@Test

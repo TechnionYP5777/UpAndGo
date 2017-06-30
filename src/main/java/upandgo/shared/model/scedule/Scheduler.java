@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -155,6 +156,18 @@ public class Scheduler implements IsSerializable{
 		Map<String, Color> colorsMap = new HashMap<>();
 		for(int c = 0; c < lcourse.size(); ++c)
 			colorsMap.put(lcourse.get(c).getId(), Color.valueOf(c));
+		
+		return colorsMap;
+	}
+	
+	public static Map<String, Color> mapLessonGroupsToColors(final List<LessonGroup> lgList){
+		Map<String, Color> colorsMap = new HashMap<>();
+		List<String> coursesIds = new ArrayList<>();
+		for (LessonGroup lg : lgList)
+			if (!coursesIds.contains(lg.getCourseID()))
+				coursesIds.add(lg.getCourseID());
+		for (int c = 0; c < coursesIds.size(); ++c)
+			colorsMap.put(coursesIds.get(c), Color.valueOf(c));
 		
 		return colorsMap;
 	}

@@ -57,7 +57,7 @@ public class ConstraintsPool {
 			if (lessonType == Type.LECTURE){
 				specificLecture = specific;
 				lectureLessonGroup = lessonGroup;
-			} else if (lessonType == Type.TUTORIAL){
+			} else {
 				specificTutorial = specific;
 				tutorialLessonGroup = lessonGroup;
 			}
@@ -178,6 +178,11 @@ public class ConstraintsPool {
 			cc.setSpecificLesson(lessonType, specific, lessonGroup);
 			courseConstraints.put(courseId,cc);
 		}
+	}
+	
+	public void removeCourseConstraint(String courseId) {
+		if (courseConstraints.containsKey(courseId))
+			courseConstraints.remove(courseId);
 	}
 	
 	public Map<String,CourseConstraint> getCourseConstraints() {

@@ -25,6 +25,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -303,10 +304,16 @@ public class TimeTableView extends HorizontalPanel {
 				LocalTime endTime = l.getEndTime().getTime();
 				int startCell = (WeekTime.difference(startTime, LocalTime.parse("08:30"))/30) + 1;
 				int span = WeekTime.difference(endTime, startTime)/30;
+				boolean isTooEarly = false;
+				if (startCell < 1){
+					span -= (-startCell+1);
+					startCell = 1;
+					isTooEarly = true;
+				}
 				Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
-					SimplePanel eventWrap = createLessonPanel(l,lg.isConstrained());
+					SimplePanel eventWrap = createLessonPanel(l,lg.isConstrained(), isTooEarly);
 
 					daysTables.get(l.getDay()).setWidget(startCell, 0, eventWrap);
 					daysTables.get(l.getDay()).getFlexCellFormatter().setRowSpan(startCell, 0, span);
@@ -321,20 +328,28 @@ public class TimeTableView extends HorizontalPanel {
  		}		
  	}
  	
- 	private SimplePanel createLessonPanel(final Lesson lesson, boolean isConstrained){
+ 	private SimplePanel createLessonPanel(final Lesson lesson, boolean isConstrained, boolean isTooEarly){
 		VerticalPanel eventContent = new VerticalPanel();
 		eventContent.setStyleName(ttStyle.hasEventContent());
 		eventContent.setHorizontalAlignment(ALIGN_CENTER);
 		
-		String courseTitle = new String();
+		String courseTitle = lesson.getType().toString() + " - " + lesson.getCourseId();
+		if (isConstrained){
+			String pinned = "<i class=\"fa fa-thumb-tack\" aria-hidden=\"true\"></i>";
+			courseTitle = pinned + pinned + pinned + " " + courseTitle + " " + pinned + pinned + pinned;
+		} else if (isTooEarly){
+			String upArrow = "<i class=\"fa fa-angle-double-up\" aria-hidden=\"true\"></i>";
+			courseTitle = upArrow + upArrow + upArrow + " " +  courseTitle + " " + upArrow + upArrow + upArrow;
+		}
+/*		String courseTitle = new String();
 		if (isConstrained){
 			courseTitle += "*** ";
 		}
 		courseTitle += lesson.getType().toString() + " - " + lesson.getCourseId();
 		if (isConstrained){
 			courseTitle += " ***";
-		}
-		eventContent.add(new Label(courseTitle));
+		}*/
+		eventContent.add(new HTML(courseTitle));
 
 
 		eventContent.setHorizontalAlignment(ALIGN_RIGHT);

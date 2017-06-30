@@ -6,6 +6,8 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
+import com.google.inject.Provides;
+import com.google.inject.name.Named;
 import com.google.gwt.event.shared.EventBus;
 
 import upandgo.client.event.GetCourseDetailsEvent;
@@ -29,6 +31,7 @@ import upandgo.client.presenter.NavBarPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.client.view.NavBarView;
+import upandgo.shared.entities.Semester;
 
 /**
  * 
@@ -146,20 +149,23 @@ class AppController implements Presenter {
 		panel.add(mainView);
 
 	}
+	
+
 
 	public void initMainView(){
 		final Injector injector = Injector.INSTANCE;
-		mainView = new LayoutPanel();
+		mainView = new LayoutPanel();		
 		
 		NavBarPresenter.Display navBarView = injector.getNavBarPresenterDisplay();
 		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
 		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
+		Semester defaultSemester = Semester.WINTER17;
 		
-		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, coursesService, eventBus, navBarView);
+		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, coursesService, eventBus, navBarView, defaultSemester);
 		
-		CourseListPresenter clPresenter = new CourseListPresenter(coursesService,eventBus,courseSelectionView);
+		CourseListPresenter clPresenter = new CourseListPresenter(coursesService,eventBus,courseSelectionView, defaultSemester);
 		
-		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, coursesService);
+		SchedulerPresenter sPresenter = new SchedulerPresenter(schedualerView, eventBus, coursesService, defaultSemester);
 		
 		Resources.INSTANCE.mainStyle().ensureInjected();
 		

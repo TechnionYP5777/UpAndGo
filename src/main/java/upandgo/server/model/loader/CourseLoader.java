@@ -43,9 +43,9 @@ public abstract class CourseLoader {
 
 	public abstract CoursesEntity loadChosenCourses();
 
-	public abstract void saveChosenLessonGroups(List<LessonGroup> gs);
+	public abstract void saveChosenLessonGroups(ScheduleEntity scheduleEntity);
 
-	public abstract List<LessonGroup> loadChosenLessonGroups();
+	public abstract ScheduleEntity loadChosenLessonGroups();
 
 	public abstract List<Faculty> loadFaculties();
 }

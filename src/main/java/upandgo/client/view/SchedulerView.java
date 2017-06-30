@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import upandgo.client.Resources;
 import upandgo.client.Resources.MainStyle;
+import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.shared.entities.Exam;
@@ -57,7 +58,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	List<RadioButton> radios;
 	List<CourseTuple> solversTuples;
 	
-
+	ExportScheduleModal exportScheduleModal = new ExportScheduleModal();
+	
 	public SchedulerView(){
 		InitializePanel();
 		InitializeCollisionBox();
@@ -106,7 +108,14 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
 		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 5.9, Unit.EM);
 
-		
+		schedualerControlsView.exportSchedule.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+				exportScheduleModal.setText("הפעולה מתבצעת, אנא המתן");
+				exportScheduleModal.setAsLoading();
+				exportScheduleModal.show();
+			}
+		});
 		}
 	
 	
@@ -508,8 +517,23 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 
 	@Override
-	public HasClickHandlers exportScheduleButton() {
+	public HasClickHandlers getExportScheduleButton() {
 		return schedualerControlsView.exportSchedule;
+	}
+	
+	@Override
+	public void setExportScheduleText(String text) {
+		exportScheduleModal.setText(text);
+	}
+	
+	@Override
+	public void setExportScheduleAsWarning() {
+		exportScheduleModal.setAsWarning();
+	}
+	
+	@Override
+	public void setExportScheduleAsSuccess() {
+		exportScheduleModal.setAsSuccess();
 	}
 
 }

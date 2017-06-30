@@ -6,15 +6,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.Calendar.Calendars;
+import com.google.api.services.calendar.Calendar.Calendars.Insert;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -22,6 +27,7 @@ import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpTransport;
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.appengine.datastore.AppEngineDataStoreFactory;
 import com.google.api.client.extensions.appengine.http.UrlFetchTransport;
@@ -32,6 +38,7 @@ import upandgo.server.CoursesServiceImpl;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
+import upandgo.shared.model.scedule.Color;
 
 public class CalendarModel {
 	private static final String calendarName = "Technion's Lessons Schedule";
@@ -59,56 +66,41 @@ public class CalendarModel {
 	
 	public CalendarModel() {}
 
-	@Deprecated
-	public void deleteCalendarIfExists() throws IOException {
-		// it doesn't work
-	    String userId = UserServiceFactory.getUserService().getCurrentUser().getUserId();
-	    Credential credential = newFlow().loadCredential(userId);
-		calendarService = getCalendarService(credential);
+	public void createCalendar(List<LessonGroup> lessons, Map<String, Color> colorMap) throws IOException {
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
 		
-		// Delete a calendar list entry
-		try {
-			calendarService.calendarList().delete(calendarName).execute();
-			CoursesServiceImpl.someString += "\ndeleted calendar";
-		} catch (IOException e) {
-			CoursesServiceImpl.someString += "\ncouldn't delete calendar";
-			e.printStackTrace();
+		if(user == null) {
+			Log.warn("User was not signed in. schedule could not be exported!");
+			return;
 		}
-	}
-
-	public void createCalendar(List<LessonGroup> lessons) throws IOException {
-	    String userId = UserServiceFactory.getUserService().getCurrentUser().getUserId();
-	    Credential credential = newFlow().loadCredential(userId);
-		calendarService = getCalendarService(credential);
 		
-		CoursesServiceImpl.someString += "\ngot credentials for creating";
+	    Credential credential = newFlow().loadCredential(user.getUserId());
+		calendarService = getCalendarService(credential);
 		
 		// Create a new calendar
 		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
 		calendar.setSummary(calendarName);
-		calendar.setTimeZone("Israel");
-
+		calendar.setTimeZone("Universal");
+		
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar).execute();
 		calendarId = createdCalendar.getId();
-		// Create a new calendar list entry
-		CalendarListEntry calendarListEntry = new CalendarListEntry();
-		calendarListEntry.setId(calendarId);
-		CoursesServiceImpl.someString += "\ncreated calendar";
+//		// Create a new calendar list entry
+//		CalendarListEntry calendarListEntry = new CalendarListEntry();
+//		calendarListEntry.setId(calendarId);
+//
+//		// Insert the new calendar list entry
+//		CalendarListEntry createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
+//		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
 
-		// Insert the new calendar list entry
-		CalendarListEntry createdCalendarListEntry;
-		createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
-//			System.out.println(createdCalendarListEntry.getSummary());
-		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
-
-		String userEmail = UserServiceFactory.getUserService().getCurrentUser().getEmail();
+		String userEmail = user.getEmail();
 		for(LessonGroup l: lessons) {
 			if(l == null)
 				continue;
-			List<Event> events = createEvents(l);
+			List<Event> events = createEvents(l, colorMap.get(l.getCourseID()));
 			for(Event ev: events) {
-				ev.setAttendees(Arrays.asList(new EventAttendee().setEmail(userEmail)));
+//				ev.setAttendees(Arrays.asList(new EventAttendee().setEmail(userEmail)));
 				Event res = calendarService.events().insert(calendarId, ev).execute();
 //					System.out.printf("Event created: %s\n", res.getHtmlLink());
 				CoursesServiceImpl.someString += "\nEvent created: " + res.getHtmlLink();
@@ -140,27 +132,28 @@ public class CalendarModel {
 		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, cred).build();
 	}
 	
-	private static List<Event> createEvents(LessonGroup lg) {
+	private static List<Event> createEvents(LessonGroup lg, Color color) {
 		List<Event> events = new ArrayList<>();
-			
+		
 		for(Lesson l: lg.getLessons()) {
 			if(l == null)
 				continue;
+			
 			String startTimeStr =
 					lessonTimeToRfc(l.getStartTime().getDay(), l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute());
-			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Israel");
+			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Universal");
 			String endTimeStr =
 					lessonTimeToRfc(l.getEndTime().getDay(), l.getEndTime().getTime().getHour(), l.getEndTime().getTime().getMinute());
-			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Israel");
+			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Universal");
 			
 			//create event:
 			Event event = new Event()
 					.setSummary(l.getCourseId()+"\n"+l.getCourseName())
-					.setLocation(l.getPlace()+", "+l.getRoomNumber())
-				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+l.getRepresenter().getFullName())
+					.setLocation((l.getPlace()==null) ? "" : l.getPlace()+", "+l.getRoomNumber())
+				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+((l.getRepresenter()==null) ? "" : l.getRepresenter().getFullName()))
 				    .setStart(startTime).setEnd(endTime)
 				    .setRecurrence(Arrays.asList("RRULE:FREQ=WEEKLY"));
-
+//				    .setColorId(color.name());	TODO: translate to color id
 			events.add(event);
 		}
 		
