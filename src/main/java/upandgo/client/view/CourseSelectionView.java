@@ -97,7 +97,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	selectedModel.addDataDisplay(ccl);
     	ccl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
-    	ccl.setWidth("100%"); 	
+    	ccl.setWidth("100%");
     	Column<CourseId, String> selectedCourseColumn = new Column<CourseId, String>(new SelectedCourseCell()) {
 			
     		@Override

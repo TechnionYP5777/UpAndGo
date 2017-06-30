@@ -64,7 +64,7 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	}
 
 	public String getTitle() {
-		return name + " - " + number;
+		return number + " - " + name;
 	}
 
 	public String name() {

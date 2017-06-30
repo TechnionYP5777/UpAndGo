@@ -22,10 +22,10 @@ public class NotSelectedCourseCell extends AbstractCell<String> {
 	public void render(@SuppressWarnings("unused") Context c, String value, SafeHtmlBuilder sb) {
 	    if (value == null)
 			return;
-	   
-	    String parts[] = value.split(" - ");
-			sb.appendHtmlConstant("<div class=\"course\"><div class=\"course-name\">" + parts[0] + "</div> -" + parts[1]
-					+ "<button type=\"button\" class=\"btn btn-success cell-button\">"
+	    
+	    	
+			sb.appendHtmlConstant("<div style=\"width:17.4vw;\"><div class=\"course\">" + value
+					+ "</div><button type=\"button\" class=\"btn btn-success cell-button\">"
 					+ "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בחר</button></div>");
 		
 	}

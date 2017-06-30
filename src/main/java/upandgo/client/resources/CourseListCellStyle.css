@@ -8,13 +8,11 @@
 .course{
 	cursor: default;
 	user-select: none;
-}
-
-.course-name{
-	margin-left: 2px;
-	max-width: 63%; 
+	max-width: 78%; 
 	overflow: hidden;
 	white-space: nowrap; 
+	display:inline-block;
+  	text-overflow: ellipsis;
 	float:right;
 }
 
