@@ -83,9 +83,9 @@ public class UgParserTest {
 	
 	@Test
 	public void test_a() throws MalformedURLException, IOException{
-		assertEquals(3129,UgParser.getCoursesIDAndFaculty(false, "201602").size());
-		assertEquals(1236,UgParser.getCoursesIDAndFaculty(true, "201602").size());
-		assertEquals(1236,UgParser.getAllCoursesNamesAndID().size());
+		assertEquals(3137,UgParser.getCoursesIDAndFaculty(false, "201602").size());
+		assertEquals(1237,UgParser.getCoursesIDAndFaculty(true, "201602").size());
+		assertEquals(1237,UgParser.getAllCoursesNamesAndID().size());
 		org.w3c.dom.Document doc = null;
 		try {
 			doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
