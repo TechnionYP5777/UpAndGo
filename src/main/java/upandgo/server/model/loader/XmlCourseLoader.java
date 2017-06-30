@@ -97,7 +97,7 @@ public class XmlCourseLoader extends CourseLoader {
 	    Log.debug(new File(".").getAbsolutePath() + "&&&&&&&&&");
 	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
 	    
-	    CoursesServiceImpl.someString = "We have got our credentials!";
+	    CoursesServiceImpl.someString += "We have got our credentials!";
 	    
 	    optionsBuilder.setProjectId(projectId);
 	    loadCoursesInfo(optionsBuilder.build().getService(), BlobId.of(bucketId, coursesInfoFilename));

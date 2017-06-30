@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.Calendar.Calendars;
+import com.google.api.services.calendar.Calendar.Calendars.Insert;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
@@ -74,25 +76,21 @@ public class CalendarModel {
 	    Credential credential = newFlow().loadCredential(user.getUserId());
 		calendarService = getCalendarService(credential);
 		
-		CoursesServiceImpl.someString += "\ngot credentials for creating";
-		
 		// Create a new calendar
 		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
 		calendar.setSummary(calendarName);
 		calendar.setTimeZone("Universal");
-
+		
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar).execute();
 		calendarId = createdCalendar.getId();
 		// Create a new calendar list entry
 		CalendarListEntry calendarListEntry = new CalendarListEntry();
 		calendarListEntry.setId(calendarId);
-		CoursesServiceImpl.someString += "\ncreated calendar";
 
 		// Insert the new calendar list entry
 		CalendarListEntry createdCalendarListEntry;
 		createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
-//			System.out.println(createdCalendarListEntry.getSummary());
 		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
 
 		String userEmail = user.getEmail();
@@ -135,10 +133,11 @@ public class CalendarModel {
 	
 	private static List<Event> createEvents(LessonGroup lg) {
 		List<Event> events = new ArrayList<>();
-			
+		
 		for(Lesson l: lg.getLessons()) {
 			if(l == null)
 				continue;
+			
 			String startTimeStr =
 					lessonTimeToRfc(l.getStartTime().getDay(), l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute());
 			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Universal");
@@ -149,11 +148,10 @@ public class CalendarModel {
 			//create event:
 			Event event = new Event()
 					.setSummary(l.getCourseId()+"\n"+l.getCourseName())
-					.setLocation(l.getPlace()+", "+l.getRoomNumber())
-				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+l.getRepresenter().getFullName())
+					.setLocation((l.getPlace()==null) ? "" : l.getPlace()+", "+l.getRoomNumber())
+				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+((l.getRepresenter()==null) ? "" : l.getRepresenter().getFullName()))
 				    .setStart(startTime).setEnd(endTime)
 				    .setRecurrence(Arrays.asList("RRULE:FREQ=WEEKLY"));
-
 			events.add(event);
 		}
 		

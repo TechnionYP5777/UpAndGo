@@ -111,6 +111,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		schedualerControlsView.exportSchedule.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+				exportScheduleModal.setText("הפעולה מתבצעת, אנא המתן");
+				exportScheduleModal.setAsLoading();
 				exportScheduleModal.show();
 			}
 		});

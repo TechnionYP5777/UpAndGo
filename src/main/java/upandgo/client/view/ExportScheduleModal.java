@@ -48,11 +48,21 @@ public class ExportScheduleModal extends Modal implements HasText {
 	}
 	
 	void setAsWarning() {
+		okButton.setHTML("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;המשך");
 		okButton.setStyleName("btn btn-warning");
+		okButton.setEnabled(true);
 	}
 	
 	void setAsSuccess() {
+		okButton.setHTML("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;המשך");
 		okButton.setStyleName("btn btn-success");
+		okButton.setEnabled(true);
+	}
+	
+	void setAsLoading() {
+		okButton.setHTML("<i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בתהליך");
+		okButton.setStyleName("btn btn-info");
+		okButton.setEnabled(false);
 	}
 
 	@Override

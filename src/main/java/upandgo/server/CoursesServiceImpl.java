@@ -120,7 +120,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	@Override
 	public String getSomeString() {
-		return " ";
+		return someString;
 	}
 	
 	@Override
@@ -166,10 +166,10 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 			calendarModel.createCalendar(sched);
 			someString += "\n222";
 		} catch (IOException e) {
-			someString += "\n333\n";
-			someString += e.getMessage();
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			someString += "\n333\n";
+//			someString += e.getMessage();
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}
