@@ -75,27 +75,24 @@ public class CourseModel { // implements Model {
 
 	public void saveChosenCourse(final String courseID) {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.addCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
 	}
 	
 	public void removeChosenCourse(final String courseID) {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.removeCourse(semester.getId(), courseID);
 		loader.saveChosenCourses(coursesEntity);
 	}
 	
 	public void removeAllChosenCourse() {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null)
 			return;
-		}
 		coursesEntity.removeAllCourses(semester.getId());
 		loader.saveChosenCourses(coursesEntity);
 	}
@@ -123,6 +120,7 @@ public class CourseModel { // implements Model {
 		List<String> chosenCourses = loadChosenCourses();
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
+			System.out.println(c.getFaculty());
 			if((faculty.isEmpty() && !chosenCourses.contains(c.getId()) )|| (c.getFaculty().equals(faculty)) && !chosenCourses.contains(c.getId()))
 				res.add(new CourseId(c.getId(), c.getName(),
 						c.getaTerm(), c.getbTerm()));
@@ -172,13 +170,13 @@ public class CourseModel { // implements Model {
 	}
 
 
-	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
-		// TODO: implement it
-	}
-
-	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
-		// TODO: implement it
-	}
+//	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
+//		// TODO: implement it
+//	}
+//
+//	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
+//		// TODO: implement it
+//	}
 	
 	public void saveChosenLessonGroups(final List<LessonGroup> lessonGroups) {
 		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
