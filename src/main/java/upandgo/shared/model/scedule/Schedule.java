@@ -31,6 +31,7 @@ public class Schedule implements Serializable {
 	private List<Collision> collisions;
 	private Map<String, Integer> edgeCounter;
 	private String collisionSolver;
+	private String collisionSolver2;
 
 	public Schedule() {
 		lessons = new ArrayList<>();
@@ -40,6 +41,7 @@ public class Schedule implements Serializable {
 		edgeCounter = new HashMap<>();
 		
 		collisionSolver = null;
+		collisionSolver2 = null;
 		//collisions = 0;
 		
 	}
@@ -129,6 +131,11 @@ public class Schedule implements Serializable {
 		// 			and there is no need to solve it. 
 		if(collisions.isEmpty())
 			return true;
+		if(collisions.size() == 1){
+			collisionSolver = collisions.get(0).c1;
+			collisionSolver2 = collisions.get(0).c2;
+			return true;
+		}
 		
 		// step 1: find the vertex with the highest degree
 		String maxID = null;
@@ -156,6 +163,8 @@ public class Schedule implements Serializable {
 			collisionSolver = maxID;
 			return true;
 		}*/
+		
+		// step 2 : if the collision degree is 
 		if(collisions.size() == max){
 			collisionSolver = maxID;
 			return true;
@@ -169,8 +178,14 @@ public class Schedule implements Serializable {
 		return collisions.size() > 0;
 	}
 	
+	public boolean hasDualCollision(){
+		return collisions.size() == 1;
+	}
 	public String getCollisionSolver(){
 		return collisionSolver;
+	}
+	public String getCollisionSolver2(){
+		return collisionSolver2;
 	}
 	/*
 	public Collision getLastCollision(){
