@@ -22,5 +22,11 @@ public class SemesterTest {
 	public void testc() {
 		assertEquals("201602", Semester.fromId("201602").getId());
 	}
+	
+	@Test
+	public void testd() {
+		assertEquals(Semester.WINTER17.getStartDate(),"22/10/2017");
+		assertEquals(Semester.WINTER17.getEndDate(),"25/01/2018");
+	}
 
 }
