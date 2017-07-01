@@ -448,11 +448,11 @@ public class CourseListPresenter implements Presenter {
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
-			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
+/*			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
 					+ caught.getMessage() + "&&"
 					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
 					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
-			Window.alert("CourseListPresenter: Error fetching not selected courses.");
+			Window.alert("CourseListPresenter: Error fetching not selected courses.");*/
 			Log.error("CourseListPresenter: Error fetching not selected courses.");
 		}
 	}

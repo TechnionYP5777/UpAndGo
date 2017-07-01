@@ -97,6 +97,8 @@ public interface Resources extends ClientBundle {
 		 //String navBarPanel();
 		 
 		 String choosenSemesterEntry();
+		 
+		 String navBarLink();
 	 }
 	 
 	 interface ExamsBarStyle extends CssResource{

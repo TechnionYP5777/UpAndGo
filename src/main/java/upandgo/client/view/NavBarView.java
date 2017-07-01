@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.Divider;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Heading;
-import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ListDropDown;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
@@ -25,9 +25,9 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
-import org.gwtbootstrap3.client.ui.html.Text;
 
-import com.google.gwt.dom.client.Style.TextAlign;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -35,7 +35,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-import upandgo.client.LoginDialog;
 import upandgo.client.Resources;
 import upandgo.client.Resources.NavBarStyle;
 
@@ -54,7 +53,6 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	NavbarHeader header = new NavbarHeader();
 	NavbarBrand brand = new NavbarBrand();
 	NavbarText signInText = new NavbarText();
-	NavbarText semesterText = new NavbarText();
     ListDropDown semesterList = new ListDropDown();
     AnchorButton semesterButton = new AnchorButton();
     DropDownMenu semesterMenu = new DropDownMenu();
@@ -100,44 +98,38 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 			semesterMenu.add(semesterListItem);
 		}
 		semesterList.add(semesterMenu);
+	
+		AnchorListItem helpLink = new AnchorListItem("מדריך למשתמש");
+		helpLink.setHref("https://github.com/TechnionYP5777/UpAndGo/wiki/User-Manual-Version-2.0");
+		helpLink.addStyleName(nvStyle.navBarLink());
+		
+		Node hrefNode = helpLink.getElement().getChild(0);
+		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
+			((Element)hrefNode).setAttribute("target", "_blank");
+		}
+		
+		AnchorListItem reviewLink = new AnchorListItem("שליחת משוב");
+		reviewLink.setHref("https://goo.gl/forms/xMXAzYbbYw1md5ls2");
+		reviewLink.addStyleName(nvStyle.navBarLink());
+		
+		hrefNode = reviewLink.getElement().getChild(0);
+		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
+			((Element)hrefNode).setAttribute("target", "_blank");
+		}
+
+		navbarNav.add(reviewLink);
+		navbarNav.add(helpLink);
 		navbarNav.add(semesterList);
 		navbarNav.setPull(Pull.NONE);
-		navbarCol.add(navbarNav);
 
-/*		semesterText.setPull(Pull.RIGHT);
-		semesterText.setWidth("30%");
-		semesterText.getElement().getStyle().setTextAlign(TextAlign.CENTER);
-		navbarCol.add(semesterText);*/
-		//navbarCol.add(tempButton);
-		//navbarCol.add(tempButton2);
-		
+		navbarCol.add(navbarNav);
 		navbar.add(navbarCol);
 		
 		this.add(navbar);
 		//this.addStyleName(nvStyle.navBarPanel());
 		
 		
-//		signInButton.addClickHandler(new ClickHandler() {
-//			
-//			@Override
-//			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
-//
-//				Modal loginBox = new Modal();
-//				loginBox.setFade(true);
-//				loginBox.setTitle("כניסה / הרשמה");
-//				loginBox.setId("login");
-//				loginBox.add(new LoginDialog());
-//				loginBox.show();
-//
-///*				// TODO Auto-generated method stub
-//				LoginDialog myDialog = new LoginDialog();
-//
-//	            int left = Window.getClientWidth()/ 3;
-//	            int top = Window.getClientHeight()/ 3;
-//	            myDialog.setPopupPosition(left, top);
-//	            myDialog.show();*/
-//			}
-//		});
+
 		
 	}
 
@@ -192,7 +184,7 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterModal.setTitle("אזהרה");
 		
 		ModalBody semesterModalBody = new ModalBody();
-		semesterModalBody.add(new Heading(HeadingSize.H4,"שינוי סמסטר יוביל למחיקת כל השינויים שלא נשמרו."));
+		semesterModalBody.add(new Heading(HeadingSize.H4,"שינוי סמסטר יוביל למחיקת מערכת שלא נשמרה."));
 		semesterModalBody.add(new Heading(HeadingSize.H4,"האם אתה בטוח שברצונך לעבור לסמסטר " + semester.getName() + "?"));
 		semesterModal.add(semesterModalBody);
 		
@@ -211,12 +203,7 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterModalFooter.add(semesterModalAcceptButton);
 		semesterModal.add(semesterModalFooter);
 		return semesterModal;
-	}
-	
-	@Override
-	public NavbarText getSemesterText(){
-		return this.semesterText;
-	}
+	}	
 	
 	@Override
 	public void markChoosenSemesterEntry(Semester semester){
