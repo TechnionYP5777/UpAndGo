@@ -95,12 +95,12 @@ public class UgParserTest {
 		}
 		org.w3c.dom.Element elem = UgParser.createCourseElement(doc, "201602", "מקצועות ספורט", "394800");
 		UgParser.createExamsElement(doc, Scraper.getDocumentFromURL(new URL("http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=" + "394800" + "&SEM=" + "201602")));
-//		UgParser.createCoursesXMLDocument("201602");
+		//UgParser.createCoursesXMLDocument("201603");
 	}
 	
 
-/*	@Test
+	@Test
 	public void testCreateCoursesXMLDocument(){
-		UgParser.createCoursesXMLDocument("201701");
-	}*/
+		UgParser.createCoursesXMLDocument("201603");
+	}
 }
