@@ -9,17 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.arcbees.gquery.tooltip.client.Tooltip;
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEvent;
-import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEventHandler;
 import com.arcbees.gquery.tooltip.client.event.ShowTooltipEvent;
 import com.arcbees.gquery.tooltip.client.event.ShowTooltipEventHandler;
 import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
-import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -33,19 +29,16 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.GQuery;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
@@ -55,11 +48,11 @@ import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.AuthenticationEventHandler;
 import upandgo.client.event.ChangeSemesterEvent;
 import upandgo.client.event.ChangeSemesterEventHandler;
-import upandgo.client.event.SelectCourseEvent;
-import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
 import upandgo.client.event.CollidingCourseDeselectedEventHandler;
+import upandgo.client.event.SelectCourseEvent;
+import upandgo.client.event.UnselectCourseEvent;
 import upandgo.shared.entities.Semester;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.course.Course;
@@ -173,8 +166,8 @@ public class CourseListPresenter implements Presenter {
 	EventBus eventBus;
 	Semester currentSemester;
 
-	List<CourseId> selectedCourses;
-	List<CourseId> notSelectedCourses;
+	List<CourseId> selectedCourses = new ArrayList<>();
+	List<CourseId> notSelectedCourses = new ArrayList<>();
 	List<CourseId> allCourses;
 	List<String> faculties;
 	String courseQuery = "";
@@ -208,8 +201,8 @@ public class CourseListPresenter implements Presenter {
 				else
 					selectedFaculty = faculties.get($);
 				display.setNotSelectedLoadingAnimation(true);
-				rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty,
-						new FetchNotSelectedCoursesAsyncCallback());
+				rpcService.getNotSelectedCourses(currentSemester, "", selectedFaculty,
+						new FetchFacultyCoursesAsyncCallback());
 
 			}
 		});
@@ -319,27 +312,7 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				courseQuery = display.getCourseQuery(event);
-				if(courseQuery.isEmpty()){
-					notSelectedCourses.clear();
-					notSelectedCourses.addAll(allCourses);
-					display.updateLists();
-					return;
-				}
-				
-				notSelectedCourses.clear();
-				for(CourseId c : allCourses){
-					if(FuzzySearch.similarity(courseQuery, c.getTitle()) > 50)
-						notSelectedCourses.add(c);
-				}
-				
-				Collections.sort(notSelectedCourses, new Comparator<CourseId>() {
-					@Override
-					public int compare(CourseId o1, CourseId o2) {
-						return (FuzzySearch.similarity(courseQuery, o2.getTitle()) - FuzzySearch.similarity(courseQuery, o1.getTitle()));
-					}
-					
-				});
-				display.updateLists();
+				executeCourseSearch();
 			}
 			
 		});
@@ -403,14 +376,14 @@ public class CourseListPresenter implements Presenter {
 	void getFacultiesAndCourses(){
 		Log.info("CourseListPresenter: setLoadingAnimation true");
 		display.setNotSelectedLoadingAnimation(true);
-		rpcService.getFaculties(currentSemester, new FetchFacultiesAsyncCallback());
+		rpcService.getFaculties(currentSemester, new FetchFacultiesAsyncCallback());	
 		if (isSignedIn){
 			display.setSelectedLoadingAnimation(true);
 			rpcService.getSelectedCourses(currentSemester, new FetchSelectedCoursesAsyncCallback());
 		} else {
-			selectedCourses = new ArrayList<>();
-			display.setSelectedCourses(selectedCourses);
 			rpcService.getNotSelectedCourses(currentSemester, courseQuery, selectedFaculty, new FetchNotSelectedCoursesAsyncCallback());
+			display.setSelectedCourses(selectedCourses);
+			
 		}
 
 	}
@@ -435,13 +408,45 @@ public class CourseListPresenter implements Presenter {
 		@Override
 		public void onSuccess(ArrayList<CourseId> result) {
 			result.remove(new CourseId());
-			notSelectedCourses =result;
-			allCourses = new ArrayList<>(result);
-			allCourses.addAll(selectedCourses);
-			Log.info("CourseListPresenter: allCourses size " + allCourses.size() + " notSelectedCourses size " + notSelectedCourses.size());
+			allCourses = result;
+			notSelectedCourses.clear();
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
+					notSelectedCourses.add(c);
+			}
+			display.setNotSelectedLoadingAnimation(false);
 			display.setNotSelectedCourses(notSelectedCourses);
 			Log.info("CourseListPresenter: setLoadingAnimation false");
+			
+
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
+					+ caught.getMessage() + "&&"
+					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
+					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
+			Window.alert("CourseListPresenter: Error fetching not selected courses.");
+			Log.error("CourseListPresenter: Error fetching not selected courses.");
+		}
+	}
+	
+	class FetchFacultyCoursesAsyncCallback implements AsyncCallback<ArrayList<CourseId>> {
+		@Override
+		public void onSuccess(ArrayList<CourseId> result) {
+			result.remove(new CourseId());
+			allCourses = result;
+			notSelectedCourses.clear();
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
+					notSelectedCourses.add(c);
+			}
+			executeCourseSearch();
 			display.setNotSelectedLoadingAnimation(false);
+			display.setNotSelectedCourses(notSelectedCourses);
+			Log.info("CourseListPresenter: setLoadingAnimation false");
 
 		}
 
@@ -514,6 +519,7 @@ public class CourseListPresenter implements Presenter {
 					notSelectedCourses.add(c);
 				}
 			}
+			executeCourseSearch();
 			display.updateLists();
 			if (isSignedIn) {
 				rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
@@ -570,10 +576,18 @@ public class CourseListPresenter implements Presenter {
 		return false;
 	}
 	
+	boolean isCourseNumNotSelected(String courseNum){
+		for(CourseId c : notSelectedCourses){
+			if(c.number().equals(courseNum))
+				return true;
+		}
+		return false;
+	}
+	
 	//Course Tooltip functionality
 	private TooltipOptions getOptions(boolean selectedCourses){
 		
-    	TooltipOptions options = new TooltipOptions().withDelay(100).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayShow(70).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
 			
 			@Override
 			public IsWidget getContent(Element element) {
@@ -631,7 +645,7 @@ public class CourseListPresenter implements Presenter {
 								
 							}
 						};
-					maybeRemoveTooltip.schedule(70);
+					maybeRemoveTooltip.schedule(20);
 					
 				}
 			});
@@ -651,19 +665,46 @@ public class CourseListPresenter implements Presenter {
 							GQuery tt = event.getTooltip();
 							@Override
 							public void run() {
-								if(!isCourseNumSelected(courseId)){
+								if(isCourseNumNotSelected(courseId)){
 									
 									tt.remove();
 								}
 								
 							}
 						};
-					maybeRemoveTooltip.schedule(70);
+					maybeRemoveTooltip.schedule(20);
 					
 				}
 			});
     	}
     	return options;
+	}
+
+	void executeCourseSearch() {
+		if(courseQuery.isEmpty()){
+			notSelectedCourses.clear();
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
+					notSelectedCourses.add(c);
+			}
+			display.updateLists();
+			return;
+		}
+		
+		notSelectedCourses.clear();
+		for(CourseId c : allCourses){
+			if(FuzzySearch.similarity(courseQuery, c.getTitle()) > 50 && (!selectedCourses.contains(c)))
+				notSelectedCourses.add(c);
+		}
+		
+		Collections.sort(notSelectedCourses, new Comparator<CourseId>() {
+			@Override
+			public int compare(CourseId o1, CourseId o2) {
+				return (FuzzySearch.similarity(courseQuery, o2.getTitle()) - FuzzySearch.similarity(courseQuery, o1.getTitle()));
+			}
+			
+		});
+		display.updateLists();
 	}
 	
 

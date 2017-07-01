@@ -11,8 +11,8 @@ package upandgo.shared.utils;
 
 public class FuzzySearch {
 	
-	public static int similarity(String s1, String s2) {
-		String[] words1 = s1.split(" ");
+	public static int similarity(String query, String s2) {
+		String[] words1 = query.split(" ");
 		String[] words2 = s2.split(" ");
 		int similarity=0;
 		int max_similarity_per_word = 0;
@@ -28,11 +28,14 @@ public class FuzzySearch {
 		return similarity;
 		
 	}
-	private static int similarity_aux(String s1, String s2) {
-		String longer = s1, shorter = s2;
-		if (s1.length() < s2.length()) {
+	private static int similarity_aux(String query, String s2) {
+		if(s2.contains(query)){
+			return 100 * query.length() / s2.length() + 10;
+		}
+		String longer = query, shorter = s2;
+		if (query.length() < s2.length()) {
 			longer = s2;
-			shorter = s1;
+			shorter = query;
 		}
 		int longerLength = longer.length();
 		return longerLength == 0 ? 100
