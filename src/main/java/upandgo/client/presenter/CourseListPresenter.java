@@ -1,13 +1,25 @@
 package upandgo.client.presenter;
 
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+import static com.google.gwt.query.client.GQuery.$;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.arcbees.gquery.tooltip.client.Tooltip;
+import com.arcbees.gquery.tooltip.client.TooltipOptions;
+import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
+import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEvent;
+import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEventHandler;
+import com.arcbees.gquery.tooltip.client.event.ShowTooltipEvent;
+import com.arcbees.gquery.tooltip.client.event.ShowTooltipEventHandler;
 import com.google.gwt.dom.client.BrowserEvents;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -21,10 +33,19 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.query.client.Function;
+import com.google.gwt.query.client.GQuery;
+import com.google.gwt.regexp.shared.MatchResult;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.inject.Inject;
@@ -40,6 +61,7 @@ import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.CollidingCourseDeselectedEvent;
 import upandgo.client.event.CollidingCourseDeselectedEventHandler;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;
@@ -158,7 +180,8 @@ public class CourseListPresenter implements Presenter {
 	String courseQuery = "";
 
 	String selectedFaculty = "";
-	CourseId hoveredCourse = null;
+	CourseId hoveredCourseId = null;
+	Course hoveredCourse = null;
 	int hoveredRow = -1;
 	
 	
@@ -216,15 +239,15 @@ public class CourseListPresenter implements Presenter {
 					}
 					
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
-					if(!newCourseId.equals(hoveredCourse)) {
-						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(currentSemester, hoveredCourse, new GetCourseDetailsCallback());
+					if(!newCourseId.equals(hoveredCourseId)) {
+						hoveredCourseId = newCourseId;
+						rpcService.getCourseDetails(currentSemester, hoveredCourseId, new GetCourseDetailsCallback());
 					}
 					//display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
-						hoveredCourse = null;
+						hoveredCourseId = null;
 						hoveredRow = -1;
 						display.setHoveredRow(-1);
 						display.setHoveredCourseDetail(null);
@@ -265,9 +288,9 @@ public class CourseListPresenter implements Presenter {
 						return;
 					}
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
-					if (!newCourseId.equals(hoveredCourse)) {
-						hoveredCourse = newCourseId;
-						rpcService.getCourseDetails(currentSemester, hoveredCourse, new
+					if (!newCourseId.equals(hoveredCourseId)) {
+						hoveredCourseId = newCourseId;
+						rpcService.getCourseDetails(currentSemester, hoveredCourseId, new
 								GetCourseDetailsCallback());
 					}
 //					display.getNotSelectedCoursesList().getRowElement(event.getIndex()).getCells()
@@ -275,7 +298,7 @@ public class CourseListPresenter implements Presenter {
 				}
 
 				if (isMouseOut) {
-					hoveredCourse = null;
+					hoveredCourseId = null;
 					hoveredRow = -1;
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail(null);
@@ -349,6 +372,11 @@ public class CourseListPresenter implements Presenter {
 				}
 			}
 		});
+		
+ 
+    	$(display.getNotSelectedCoursesList()).as(Tooltip).tooltip(getOptions(false));
+    	$(display.getSelectedCoursesList()).as(Tooltip).tooltip(getOptions(true));
+
 		
 
 	}
@@ -453,8 +481,9 @@ public class CourseListPresenter implements Presenter {
 
 		@Override
 		public void onSuccess(Course result) {
-			display.setHoveredRow(hoveredRow);
-			display.setHoveredCourseDetail(result);
+			//display.setHoveredRow(hoveredRow);
+			//display.setHoveredCourseDetail(result);
+			hoveredCourse = result;
 		}
 	}
 
@@ -474,6 +503,7 @@ public class CourseListPresenter implements Presenter {
 		}
 	}
 	void deselectCourse(CourseId deselectedCourse) {
+
 		final CourseId $;
 		$ = deselectedCourse != null ? deselectedCourse : display.getSelectedCourse(selectedClickedRow);
 		if ($ != null) {
@@ -484,7 +514,6 @@ public class CourseListPresenter implements Presenter {
 					notSelectedCourses.add(c);
 				}
 			}
-			Collections.sort(notSelectedCourses);
 			display.updateLists();
 			if (isSignedIn) {
 				rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
@@ -508,16 +537,12 @@ public class CourseListPresenter implements Presenter {
 	}
 
 	void selectCourse() {
-		Log.info("CourseListPresenter: request to select course");
 		final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
-		Log.info("CourseListPresenter: course id is:" + $.number());
 		if ($ != null) {
-			Log.info("CourseListPresenter: isSignedIn is: " + isSignedIn);
-			notSelectedCourses.remove($);
 			selectedCourses.add($);
+			notSelectedCourses.remove($);
 			display.updateLists();
 			if (isSignedIn) {
-				Log.info("CourseListPresenter: upadted localy, now call rpc" );
 				rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -532,12 +557,115 @@ public class CourseListPresenter implements Presenter {
 					}
 				});
 			} else {
-				Log.info("CourseListPresenter: is not signed in");
 				eventBus.fireEvent(new SelectCourseEvent($));
 			}
 		}
 	}
 	
+	boolean isCourseNumSelected(String courseNum){
+		for(CourseId c : selectedCourses){
+			if(c.number().equals(courseNum))
+				return true;
+		}
+		return false;
+	}
+	
+	//Course Tooltip functionality
+	private TooltipOptions getOptions(boolean selectedCourses){
+		
+    	TooltipOptions options = new TooltipOptions().withDelay(100).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+			
+			@Override
+			public IsWidget getContent(Element element) {
+				@SuppressWarnings("boxing")
+				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
+
+				String html = "<div>";
+				if(hoveredRow == absoluteRowIndex && hoveredCourse!=null){
+					html+= "<b>" + hoveredCourse.getName() + "</b><br/>";
+					html+="<div align=right>";
+					html+="<u>" + "מספר הקורס:" + "</u>" + " " + hoveredCourse.getId() + "<br/>";
+					html+="<u>" + "נקודות:" +"</u>" + " " + hoveredCourse.getPoints() + "<br/>";
+					html+="<u>" + "סגל הקורס:" + "</u>" + " " ;
+					if(!hoveredCourse.getStuff().isEmpty()){
+						for(StuffMember sm : hoveredCourse.getStuff()){
+							html+= sm.getTitle()+ " " + sm.getFirstName()+ " "  + sm.getLastName() + ", ";
+						}
+						html = html.substring(0, html.length()-3);
+						html+=".";
+					}
+					html+="<br/>";
+					html+="<u>" + "הערות:" + "</u><ul>";
+					for(String s : hoveredCourse.getNotes()){
+						html+="<li>" + s + "</li>";
+					}
+					html+="</ul>";
+				
+				}
+				html += "</div></div>";
+				
+				return new HTML(html);
+			//	? "Loading..." : hoveredCourseDetail;
+			}
+		});
+    	options.withSelector("tbody tr");
+    	if(!selectedCourses){
+	    	options.addShowTooltipEventHandler(new ShowTooltipEventHandler() {
+				@Override
+				public void onShow(final ShowTooltipEvent event) {
+					
+			
+					Element e = event.getTooltip().elements()[0];
+					
+				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
+					MatchResult m = pattern.exec(e.getInnerHTML());
+					final String courseId = m.getGroup(0).substring(0, 6);
+					Log.error("$$$course num = " + courseId);
+						Timer maybeRemoveTooltip = new Timer() {
+							GQuery tt = event.getTooltip();
+							@Override
+							public void run() {
+								if(isCourseNumSelected(courseId)){
+									
+									tt.remove();
+								}
+								
+							}
+						};
+					maybeRemoveTooltip.schedule(70);
+					
+				}
+			});
+    	}
+    	else{
+    		options.addShowTooltipEventHandler(new ShowTooltipEventHandler() {
+				@Override
+				public void onShow(final ShowTooltipEvent event) {
+					
+			
+					Element e = event.getTooltip().elements()[0];
+					
+				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
+					MatchResult m = pattern.exec(e.getInnerHTML());
+					final String courseId = m.getGroup(0).substring(5, 11);
+						Timer maybeRemoveTooltip = new Timer() {
+							GQuery tt = event.getTooltip();
+							@Override
+							public void run() {
+								if(!isCourseNumSelected(courseId)){
+									
+									tt.remove();
+								}
+								
+							}
+						};
+					maybeRemoveTooltip.schedule(70);
+					
+				}
+			});
+    	}
+    	return options;
+	}
 	
 
 }

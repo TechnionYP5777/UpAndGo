@@ -4,7 +4,8 @@
 
 
 .courseSelectionRow:hover .cell-button{
-	display: inline;
+	transition-delay:0.15s;
+	visibility: visible;
 	
 }
 .ChosenCourses{

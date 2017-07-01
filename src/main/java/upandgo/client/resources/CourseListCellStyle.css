@@ -17,8 +17,10 @@
 }
 
 .cell-button{
-	display: none;
+	display: inline;
 	font-size:10px; 
 	float:left; 
 	padding: 1px 3px;
+	visibility: hidden;
+	transition: visibility;
 }

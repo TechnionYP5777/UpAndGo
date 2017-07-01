@@ -1,6 +1,9 @@
 package upandgo.client.view;
 
 
+import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
+import static com.google.gwt.query.client.GQuery.$;
+
 /**
  * 
  * @author danabra
@@ -12,20 +15,12 @@ package upandgo.client.view;
 
 import java.util.List;
 
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipContentProvider;
-import com.google.gwt.dom.client.Element;
 import com.allen_sauer.gwt.log.client.Log;
-import com.arcbees.gquery.tooltip.client.Tooltip;
-import com.arcbees.gquery.tooltip.client.TooltipImpl;
 import com.arcbees.gquery.tooltip.client.TooltipOptions;
 import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipTrigger;
 import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEvent;
 import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEventHandler;
-import com.arcbees.gquery.tooltip.client.event.HideTooltipEvent;
-import com.arcbees.gquery.tooltip.client.event.HideTooltipEventHandler;
-import com.arcbees.gquery.tooltip.client.event.ShowTooltipEvent;
-import com.arcbees.gquery.tooltip.client.event.ShowTooltipEventHandler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.FontStyle;
@@ -35,13 +30,12 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.query.client.Function;
-import com.google.gwt.query.client.GQuery;
+import com.google.gwt.regexp.shared.MatchResult;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.RowStyles;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -62,9 +56,6 @@ import upandgo.client.presenter.CourseListPresenter;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
-
-import static com.google.gwt.query.client.GQuery.$;
-import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
 
 
 public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display  {
@@ -180,51 +171,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	sc.getElement().getStyle().setFontSize(1.2, Unit.EM);
     	sc.getElement().getStyle().setColor("Red");
     	
-		//Course Tooltip functionality
-    	TooltipOptions options = new TooltipOptions().withDelay(350).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
-			
-			@Override
-			public IsWidget getContent(Element element) {
-				@SuppressWarnings("boxing")
-				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
-
-				String html = "<div>";
-				if(rowNum == absoluteRowIndex && hoveredCourse!=null){
-					html+= "<b>" + hoveredCourse.getName() + "</b><br/>";
-					html+="<div align=right>";
-					html+="<u>" + "מספר הקורס:" + "</u>" + " " +hoveredCourse.getId() + "<br/>";
-					html+="<u>" + "נקודות:" +"</u>" + " " + hoveredCourse.getPoints() + "<br/>";
-					html+="<u>" + "סגל הקורס:" + "</u>" + " " ;
-					if(!hoveredCourse.getStuff().isEmpty()){
-						for(StuffMember sm : hoveredCourse.getStuff()){
-							html+= sm.getTitle()+ " " + sm.getFirstName()+ " "  + sm.getLastName() + ", ";
-						}
-						html = html.substring(0, html.length()-3);
-						html+=".";
-					}
-					html+="<br/>";
-					html+="<u>" + "הערות:" + "</u><ul>";
-					for(String s : hoveredCourse.getNotes()){
-						html+="<li>" + s + "</li>";
-					}
-					html+="</ul>";
-						
-					//html+="<br/>";
-					html+="<a href=\"https://ug3.technion.ac.il/rishum/course?MK=" + hoveredCourse.getId() + "&CATINFO=&SEM=201602\">קישור לאתר הקורס</a>";
-				}
-				html += "</div></div>";
-				
-				return new HTML(html);
-			//	? "Loading..." : hoveredCourseDetail;
-			}
-		});
-    	options.withSelector("tbody tr");
-    	  	
-    	
-    	$(ccl).as(Tooltip).tooltip(options);
-    	$(scl).as(Tooltip).tooltip(options);
-    	
-    	
+		
     	
     	
     	//initializing clear course button
