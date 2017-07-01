@@ -30,7 +30,8 @@ public class FuzzySearch {
 	}
 	private static int similarity_aux(String query, String s2) {
 		if(s2.contains(query)){
-			return 100 * query.length() / s2.length() + 10;
+			int res = 100 * query.length() / s2.length() + 10;
+			return res > 100 ? 100: res;
 		}
 		String longer = query, shorter = s2;
 		if (query.length() < s2.length()) {

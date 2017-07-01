@@ -8,9 +8,10 @@ public class FuzzySearchTest {
 
 	@Test
 	public void test() {
-		assertEquals(50, FuzzySearch.similarity("הנדסת חשמל", "הנדסה כימית"));
+		assert(50 <= FuzzySearch.similarity("הנדסת חשמל", "הנדסה כימית"));
 		assertEquals(100, FuzzySearch.similarity("הנדסת חשמל", "הנדסת חשמל"));
 		assertEquals(0, FuzzySearch.similarity("הנדסת חשמל", "234123"));
+		assert(50 < FuzzySearch.similarity("236", "236924"));
 	}
 
 }
