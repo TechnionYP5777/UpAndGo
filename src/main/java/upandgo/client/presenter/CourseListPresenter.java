@@ -620,7 +620,6 @@ public class CourseListPresenter implements Presenter {
 				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
 					MatchResult m = pattern.exec(e.getInnerHTML());
 					final String courseId = m.getGroup(0).substring(0, 6);
-					Log.error("$$$course num = " + courseId);
 						Timer maybeRemoveTooltip = new Timer() {
 							GQuery tt = event.getTooltip();
 							@Override
@@ -647,7 +646,7 @@ public class CourseListPresenter implements Presenter {
 					
 				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
 					MatchResult m = pattern.exec(e.getInnerHTML());
-					final String courseId = m.getGroup(0).substring(5, 11);
+					final String courseId = m.getGroup(0).substring(0, 6);
 						Timer maybeRemoveTooltip = new Timer() {
 							GQuery tt = event.getTooltip();
 							@Override
