@@ -51,9 +51,7 @@ public class NavBarPresenter implements Presenter {
 		public HasClickHandlers getSemesterModalAcceptButton();
 		
 		public void semesterModalAcceptButtonSetSpin(boolean spin);
-		
-		public NavbarText getSemesterText();
-		
+				
 		public void markChoosenSemesterEntry(Semester semester);
 		
 		public HasClickHandlers getTempButton();

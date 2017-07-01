@@ -10,7 +10,7 @@ under development
 
 Introduction
 
-The project goal is to help the students of computer science faculty, 
+The project goal is to help the students of the Technion, 
 with creating a study schedule for the upcoming semester.
 
 Up&Go will create the schedule based on:
@@ -39,5 +39,7 @@ Modules :
 - Data loader
 - Model
 - Controller
+
+please refer to our [User Manual](https://github.com/TechnionYP5777/UpAndGo/wiki/User-Manual-Version-2.0).
 
 

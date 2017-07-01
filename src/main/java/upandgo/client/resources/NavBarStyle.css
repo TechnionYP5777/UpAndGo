@@ -25,3 +25,7 @@
 .dropdown-menu li:hover {
 	background-color: black;
 }
+
+.navBarLink{
+	margin-right: 3em;
+}
