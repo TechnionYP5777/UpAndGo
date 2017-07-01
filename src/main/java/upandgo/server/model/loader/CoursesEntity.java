@@ -14,7 +14,7 @@ public class CoursesEntity {
 	@Id public String id;	// user's userId
 	public Map<String,List<String>> courses;
 	
-	CoursesEntity(){
+	public CoursesEntity(){
 		this.id = "";
 		this.courses = new TreeMap<>();
 	}
@@ -56,6 +56,11 @@ public class CoursesEntity {
 		if (courses.containsKey(semesterId)){
 			courses.remove(semesterId);
 		}
+	}
+	
+	@Override
+	public String toString(){
+		return courses.toString();
 	}
 
 }

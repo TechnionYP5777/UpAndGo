@@ -87,5 +87,10 @@ public class CourseId implements Comparable<CourseId>, IsSerializable {
 	public Exam bTerm() {
 		return bTerm;
 	}
+	
+	@Override
+	public String toString(){
+		return number;
+	}
 
 }
