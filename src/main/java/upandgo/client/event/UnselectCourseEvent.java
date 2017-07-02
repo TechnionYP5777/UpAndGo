@@ -30,8 +30,8 @@ public class UnselectCourseEvent extends GwtEvent<UnselectCourseEventHandler> {
 	}
 
 	@Override
-	protected void dispatch(UnselectCourseEventHandler handler) {
-		handler.onUnselectCourse(this);
+	protected void dispatch(UnselectCourseEventHandler h) {
+		h.onUnselectCourse(this);
 		
 	}
 }

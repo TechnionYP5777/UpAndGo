@@ -12,5 +12,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface prevScheduleEventHandler extends EventHandler {
-	void onPrevSchedule(prevScheduleEvent event);
+	void onPrevSchedule(prevScheduleEvent e);
 }

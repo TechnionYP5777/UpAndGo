@@ -11,10 +11,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Binder;
 
 import upandgo.client.Resources.DialogBoxStyle;
-import upandgo.client.Resources.NavBarStyle;
 
 // sol found here: http://stackoverflow.com/questions/6913081/gwt-popup-and-uibinder-panel-or-dialogbox
 public class LoginDialog extends DialogBox implements ModalComponent{
@@ -28,6 +26,7 @@ public class LoginDialog extends DialogBox implements ModalComponent{
     private DialogBoxStyle diaStyle = Resources.INSTANCE.dialogBoxStyle();
 	
     interface Binder extends UiBinder<Widget, LoginDialog> {
+    	//Do nothing
     }
     
     public LoginDialog() {
@@ -44,7 +43,7 @@ public class LoginDialog extends DialogBox implements ModalComponent{
     } 
     
     @UiHandler("okButton")
-    void onDismiss(ClickEvent e) {
+    void onDismiss(@SuppressWarnings("unused") ClickEvent e) {
       hide();
     }
 }

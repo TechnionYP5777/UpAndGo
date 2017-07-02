@@ -17,9 +17,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * 
  */
 
-
-
-
 public class WeekTime implements IsSerializable {
 		
 	private Day day;

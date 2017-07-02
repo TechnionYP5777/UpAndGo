@@ -10,7 +10,6 @@ package upandgo.client.event;
  */
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
 
 public class ClearAllCoursesEvent extends GwtEvent<ClearAllCoursesEventHandler> {
 	public static Type<ClearAllCoursesEventHandler> TYPE = new Type<>();
@@ -24,8 +23,8 @@ public class ClearAllCoursesEvent extends GwtEvent<ClearAllCoursesEventHandler> 
 	}
 
 	@Override
-	protected void dispatch(ClearAllCoursesEventHandler handler) {
-		handler.onClearAllCourses();
+	protected void dispatch(ClearAllCoursesEventHandler h) {
+		h.onClearAllCourses();
 		
 	}
 

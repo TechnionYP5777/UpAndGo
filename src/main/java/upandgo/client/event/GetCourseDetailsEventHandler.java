@@ -12,5 +12,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface GetCourseDetailsEventHandler extends EventHandler {
-	void onHighlightCourse(GetCourseDetailsEvent event);
+	void onHighlightCourse(GetCourseDetailsEvent e);
 }

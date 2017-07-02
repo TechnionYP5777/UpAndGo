@@ -22,11 +22,8 @@ public class UpAndGo implements EntryPoint {
 
 	@SuppressWarnings("static-method")
 	void loadUpAndGo() {
-		final Injector injector = Injector.INSTANCE;
-
-		AppController appViewer = new AppController((CoursesServiceAsync) GWT.create(CoursesService.class),
-				(LoginServiceAsync) GWT.create(LoginService.class), injector.getEventBus());
-
-		appViewer.go(RootLayoutPanel.get());
+		(new AppController((CoursesServiceAsync) GWT.create(CoursesService.class),
+				(LoginServiceAsync) GWT.create(LoginService.class), Injector.INSTANCE.getEventBus()))
+						.go(RootLayoutPanel.get());
 	}
 }

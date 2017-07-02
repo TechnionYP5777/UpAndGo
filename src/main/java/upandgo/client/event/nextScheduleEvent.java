@@ -1,7 +1,6 @@
 package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * 
@@ -22,8 +21,8 @@ public class nextScheduleEvent extends GwtEvent<nextScheduleEventHandler>{
 	}
 
 	@Override
-	protected void dispatch(nextScheduleEventHandler handler) {
-		handler.onNextSchedule(this);
+	protected void dispatch(nextScheduleEventHandler h) {
+		h.onNextSchedule(this);
 		
 	}
 }

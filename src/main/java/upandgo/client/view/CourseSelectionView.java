@@ -1,8 +1,6 @@
 package upandgo.client.view;
 
 
-import static com.arcbees.gquery.tooltip.client.Tooltip.Tooltip;
-import static com.google.gwt.query.client.GQuery.$;
 
 /**
  * 
@@ -15,12 +13,6 @@ import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.List;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.arcbees.gquery.tooltip.client.TooltipOptions;
-import com.arcbees.gquery.tooltip.client.TooltipOptions.TooltipPlacement;
-import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEvent;
-import com.arcbees.gquery.tooltip.client.event.BeforeShowTooltipEventHandler;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.FontStyle;
@@ -30,15 +22,12 @@ import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.RowStyles;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -53,7 +42,6 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 import upandgo.client.Resources;
 import upandgo.client.presenter.CourseListPresenter;
-import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
@@ -74,7 +62,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private Button clearCourses = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;מחק הכל");
     private HTML ccLoadingLogo = new HTML("<i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>");
     private HTML scLoadingLogo = new HTML("<i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>");
-    Course hoveredCourse = null;
+    Course hoveredCourse;
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
     public CourseSelectionView(){
     	InitializePanel();
@@ -89,21 +77,18 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	ccl.setSelectionModel(new SingleSelectionModel<CourseId>());
     	ccl.addStyleName(Resources.INSTANCE.courseListStyle().ChosenCourses());
     	ccl.setWidth("100%");
-    	Column<CourseId, String> selectedCourseColumn = new Column<CourseId, String>(new SelectedCourseCell()) {
-			
-    		@Override
+    	ccl.addColumn(new Column<CourseId, String>(new SelectedCourseCell()) {
+			@Override
 			public String getValue(CourseId object) {
 				return object.getTitle();
 			}
-		};
-		
-		ccl.addColumn(selectedCourseColumn);
+		});
 	    DefaultSelectionEventManager<CourseId> selectionEventManager1 = DefaultSelectionEventManager.createCheckboxManager(0); // Limit selection to checkboxes in column 0.
 	    ccl.setSelectionModel(ccl.getSelectionModel(), selectionEventManager1);
 	    ccl.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.DISABLED);
 	    ccl.setRowStyles(new RowStyles<CourseId>() {
 			@Override
-			public String getStyleNames(CourseId row, int rowIndex) {
+			public String getStyleNames(@SuppressWarnings("unused") CourseId row, @SuppressWarnings("unused") int rowIndex) {
 				return "courseSelectionRow";
 			}
 		});
@@ -130,7 +115,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	scl.addColumn(notSelectedCOurseColumn);
     	scl.setRowStyles(new RowStyles<CourseId>() {
 			@Override
-			public String getStyleNames(CourseId row, int rowIndex) {
+			public String getStyleNames(@SuppressWarnings("unused") CourseId row, @SuppressWarnings("unused") int rowIndex) {
 				return "courseSelectionRow";
 			}
 		});
@@ -148,13 +133,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 	    sclpp.getElement().appendChild(scLoadingLogo.getElement());
 	    cclpp.getElement().appendChild(ccLoadingLogo.getElement());
 
-	    //sclp.getParent().getElement().appendChild(loadingLogo.getElement().cloneNode(true));
-	    //this.getElement().appendChild(loadingLogo.getElement().cloneNode(true));
-	    //sclp.getElement().getParentElement().appendChild(loadingLogo.getElement().cloneNode(true));
-    	//this.add(loadingLogo);
-
-    	
-    	//initializing faculty selection
+	   	//initializing faculty selection
     	faculties.setWidth("100%");
     	faculties.setHeight("2em");
  
@@ -178,7 +157,6 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     	clearCourses.setStyleName("btn btn-primary clear-button");
    
     	
-    	//this.getElement().getStyle().setMargin(10, Unit.PX);  I think it looks better without it, everything the same height. Yaniv
     	this.add(cc);
 	    this.add(cclpp);
 	    this.add(sc);
@@ -214,10 +192,10 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
 		return searchCourse;
 	}
 	@Override
-	public void setSelectedCourses(List<CourseId> courses) {
-		selectedModel.setList(courses);
+	public void setSelectedCourses(List<CourseId> is) {
+		selectedModel.setList(is);
 		ccl.setRowCount(selectedModel.getList().size(), true);
-		ccl.setVisibleRange(0, courses.size());
+		ccl.setVisibleRange(0, is.size());
 		
 	}
 	@Override
@@ -292,19 +270,11 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     
 	@Override
 	public void setSelectedLoadingAnimation(boolean animate){
-		if (animate){
-			ccLoadingLogo.getElement().getStyle().setDisplay(Display.BLOCK);
-		} else {
-			ccLoadingLogo.getElement().getStyle().setDisplay(Display.NONE);
-		}
+		ccLoadingLogo.getElement().getStyle().setDisplay(animate ? Display.BLOCK : Display.NONE);
 	}
 	
 	@Override
 	public void setNotSelectedLoadingAnimation(boolean animate){
-		if (animate){
-			scLoadingLogo.getElement().getStyle().setDisplay(Display.BLOCK);
-		} else {
-			scLoadingLogo.getElement().getStyle().setDisplay(Display.NONE);
-		}
+		scLoadingLogo.getElement().getStyle().setDisplay(animate ? Display.BLOCK : Display.NONE);
 	}
 }

@@ -19,47 +19,52 @@ import upandgo.shared.entities.Lesson.Type;
 public class courseTest {
 
 	@Test
+	@SuppressWarnings("static-method")
 	public void testa() {
 		Course course = new Course();
-		
 		assertEquals("", course.getName());
 		assertEquals("", course.getId());
 		assertEquals("", course.getFaculty());
-		assertEquals("0.0", ""+course.getPoints());
+		assertEquals("0.0", course.getPoints() + "");
 		assertNull(course.getaTerm());
 		assertNull(course.getbTerm());
-		assertTrue(course.getStuff().isEmpty());
+		assert course.getStuff().isEmpty();
 		assertNull(course.getLectures());
 		assertNull(course.getTutorials());
 		assertNull(course.getNotes());
 	}
 	
 	@Test(expected = NullPointerException.class)
+	@SuppressWarnings({ "static-method", "unchecked" })
 	public void testb() {
 		StuffMember staff = new StuffMember("אולמן", "טאוב");
-		List list  = new ArrayList<StuffMember>();
+		@SuppressWarnings("rawtypes")
+		List list = new ArrayList<StuffMember>();
 		list.add(staff);
-		Course course = new Course(null, "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017")
-				,new Exam("13:00 08 10 2017"));
+		@SuppressWarnings("unused")
+		Course course = new Course(null, "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017"),
+				new Exam("13:00 08 10 2017"));
 	}
 	
 	@Test(expected = NullPointerException.class)
+	@SuppressWarnings({ "static-method", "rawtypes", "unchecked", "unused" })
 	public void testc() {
 		StuffMember staff = new StuffMember("אולמן", "טאוב");
-		List list  = new ArrayList<StuffMember>();
+		List list = new ArrayList<StuffMember>();
 		list.add(staff);
-		Course course = new Course("אנליזה", "999999", null, list, 4.5, new Exam("13:00 08 08 2017")
-				, new Exam("13:00 08 10 2017"));
+		Course course = new Course("אנליזה", "999999", null, list, 4.5, new Exam("13:00 08 08 2017"),
+				new Exam("13:00 08 10 2017"));
 	}
 	
 	@Test
+	@SuppressWarnings({ "static-method", "unchecked" })
 	public void testd() {
 		StuffMember staff = new StuffMember("אולמן", "טאוב");
-		List list  = new ArrayList<StuffMember>();
+		@SuppressWarnings("rawtypes")
+		List list = new ArrayList<StuffMember>();
 		list.add(staff);
-		Course course = new Course("אנליזה", "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017")
-				, new Exam("13:00 08 10 2017"));
-		
+		Course course = new Course("אנליזה", "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017"),
+				new Exam("13:00 08 10 2017"));
 		LessonGroup lg = new LessonGroup();
 		LessonGroup lg2 = new LessonGroup();
 		lg.setGroupNum(10);
@@ -76,28 +81,28 @@ public class courseTest {
 		assertEquals("אנליזה", course2.getName());
 		assertEquals("999999", course2.getId());
 		assertEquals("חשמל", course2.getFaculty());
-		assertEquals("4.5", ""+course2.getPoints());
+		assertEquals("4.5", course2.getPoints() + "");
 		assertEquals(1, course.getLecturesLG().size());
 		assertEquals(1, course.getTutorialsLG().size());
 		assertEquals("קורס מעפן, לא להירשם", course.getNotes().get(0));
 		assertEquals("999999", course.getLessonGroup(10).getCourseID());
 		assertEquals("999999", course.getLessonGroup(5).getCourseID());
-		
 	}
 	
 	@Test
+	@SuppressWarnings({ "static-method", "rawtypes", "unchecked" })
 	public void teste() {
 		StuffMember staff = new StuffMember("אולמן", "טאוב");
-		List list  = new ArrayList<StuffMember>();
+		List list = new ArrayList<StuffMember>();
 		list.add(staff);
-		Course course = new Course("אנליזה", "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017")
-				, new Exam("13:00 08 10 2017"));
-		Course course2 = new Course("אנליזה", "989999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017")
-				, new Exam("13:00 08 10 2017"));
-		assertFalse(course.equals(null));
-		assertTrue(course.equals(course));
-		assertFalse(course.equals(new Exam("13:00 08 10 2017")));
-		assertFalse(course.equals(course2));
+		Course course = new Course("אנליזה", "999999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017"),
+				new Exam("13:00 08 10 2017")),
+				course2 = new Course("אנליזה", "989999", "חשמל", list, 4.5, new Exam("13:00 08 08 2017"),
+						new Exam("13:00 08 10 2017"));
+		assert !course.equals(null);
+		assert course.equals(course);
+		assert !course.equals(new Exam("13:00 08 10 2017"));
+		assert !course.equals(course2);
 	}
 	
 }

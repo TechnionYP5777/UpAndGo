@@ -34,31 +34,30 @@ import javax.servlet.http.HttpServletResponse;
 		
 public class OAuth2Callback extends AbstractAppEngineAuthorizationCodeCallbackServlet {		
 		
-	  private static final long serialVersionUID = 1L;		
+	  private static final long serialVersionUID = 1;		
 		
-	  @SuppressWarnings("unused")		
-	@Override		
-	  protected void onSuccess(HttpServletRequest req, HttpServletResponse resp, Credential credential)		
-      throws ServletException, IOException {		
-//	    resp.sendRedirect("/");		
-	  }		
+	  @Override
+	@SuppressWarnings("unused")
+	protected void onSuccess(HttpServletRequest r, HttpServletResponse resp, Credential c)
+			throws ServletException, IOException {
+		  // Do nothing
+	}		
 		
-	  @SuppressWarnings("unused")		
-	@Override		
-	  protected void onError(		
-	      HttpServletRequest req, HttpServletResponse resp, AuthorizationCodeResponseUrl errorResponse)		
-	      throws ServletException, IOException {		
-	    String nickname = UserServiceFactory.getUserService().getCurrentUser().getNickname();		
-	    resp.getWriter().print("<h3>" + nickname + ", why don't you want to play with me?</h1>");		
-	    resp.setStatus(200);		
-	    resp.addHeader("Content-Type", "text/html");		
-	  }		
+	  @Override
+	@SuppressWarnings("unused")
+	protected void onError(HttpServletRequest r, HttpServletResponse resp, AuthorizationCodeResponseUrl errorResponse)
+			throws ServletException, IOException {
+		String nickname = UserServiceFactory.getUserService().getCurrentUser().getNickname();
+		resp.getWriter().print("<h3>" + nickname + ", why don't you want to play with me?</h1>");
+		resp.setStatus(200);
+		resp.addHeader("Content-Type", "text/html");
+	}		
 		
-	  @SuppressWarnings("unused")		
-	  @Override		
-	  protected String getRedirectUri(HttpServletRequest req) throws ServletException, IOException {		
-	    return upandgo.server.model.CalendarModel.getRedirectUri(req);		
-	  }		
+	  @Override
+	@SuppressWarnings("unused")
+	protected String getRedirectUri(HttpServletRequest r) throws ServletException, IOException {
+		return upandgo.server.model.CalendarModel.getRedirectUri(r);
+	}		
 		
 	  @Override		
 	  protected AuthorizationCodeFlow initializeFlow() throws IOException {		

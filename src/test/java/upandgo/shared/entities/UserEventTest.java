@@ -9,10 +9,10 @@ import upandgo.shared.entities.Lesson.Type;
 public class UserEventTest {
 
 	@Test
+	@SuppressWarnings("static-method")
 	public void test() {
 		WeekTime time = new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"));
 		LocalTime duration = LocalTime.of(12, 30);
-		
 		UserEvent event = new UserEvent(time, "Lunch", duration);
 		assertEquals(event.getWeekTime(), time);
 		assertEquals(event.getDescription(), "Lunch");
@@ -20,24 +20,23 @@ public class UserEventTest {
 	}
 	
 	@Test
+	@SuppressWarnings("static-method")
 	public void setTest() {
 		WeekTime time = new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"));
 		LocalTime duration = LocalTime.of(12, 30);
-		
 		UserEvent event = new UserEvent(time, "Lunch", duration);
 		event.setDescription("dinner");
 		event.setDuration(LocalTime.of(11, 30));
 		event.setTime(new WeekTime(Day.SUNDAY, LocalTime.parse("9:30")));
 		assertEquals(event.getWeekTime(), new WeekTime(Day.SUNDAY, LocalTime.parse("9:30")));
 		assertEquals(event.getDescription(), "dinner");
-		
 	}
 	
 	@Test
+	@SuppressWarnings("static-method")
 	public void eventAsLessonTest() {
 		WeekTime time = new WeekTime(Day.SUNDAY, LocalTime.parse("10:30"));
 		LocalTime duration = LocalTime.of(2, 00);
-		
 		UserEvent event = new UserEvent(time, "Lunch", duration);
 		Lesson lesson = event.getAsLesson();
 		assertNull(lesson.getRepresenter());
@@ -48,7 +47,6 @@ public class UserEventTest {
 		assertEquals(999, lesson.getGroup());
 		assertEquals("999999", lesson.getCourseId());
 		assertEquals("user events", lesson.getCourseName());
-		
 	}
 
 }

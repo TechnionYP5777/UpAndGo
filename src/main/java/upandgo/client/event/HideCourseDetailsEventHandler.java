@@ -12,5 +12,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface HideCourseDetailsEventHandler extends EventHandler {
-	void onHideCourseDetails(HideCourseDetailsEvent event);
+	void onHideCourseDetails(HideCourseDetailsEvent e);
 }

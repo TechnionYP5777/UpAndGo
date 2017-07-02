@@ -12,6 +12,6 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface nextScheduleEventHandler extends EventHandler {
-	void onNextSchedule(nextScheduleEvent event);
+	void onNextSchedule(nextScheduleEvent e);
 }
 

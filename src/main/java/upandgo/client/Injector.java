@@ -13,9 +13,7 @@ import upandgo.client.presenter.SchedulerPresenter;
 public interface Injector extends Ginjector {
 
 	public static final Injector INSTANCE = GWT.create(Injector.class);
-	
-	
-	
+		
 	public EventBus getEventBus();
 	public NavBarPresenter.Display getNavBarPresenterDisplay();
 	public CourseListPresenter.Display getCourseListPresenterDisplay();

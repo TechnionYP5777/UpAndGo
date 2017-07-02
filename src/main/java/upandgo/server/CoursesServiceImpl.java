@@ -38,7 +38,7 @@ import upandgo.shared.model.scedule.Color;
 public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesService {
 
 	
-	private static final long serialVersionUID = 1193922002939188572L;
+	private static final long serialVersionUID = 0x1091A9BC6AB6955CL;
 
 	static {
 		// register Objectify-classes
@@ -48,6 +48,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	
 	private Semester defaultSemester = Semester.WINTER17;
 
+	@SuppressWarnings("unused")
 	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
 	private final CalendarModel calendarModel = new CalendarModel();
 
@@ -117,7 +118,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		courseModels.get(s).removeChosenCourse(i.number());
 	}
 
-	static public String someString = "empty";
+	public static String someString = "empty";
 
 	@Override
 	public String getSomeString() {
@@ -166,7 +167,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 			someString += "\n111";
 			calendarModel.createCalendar(sched, colorMap);
 			someString += "\n222";
-		} catch (IOException e) {
+		} catch (@SuppressWarnings("unused") IOException e) {
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}

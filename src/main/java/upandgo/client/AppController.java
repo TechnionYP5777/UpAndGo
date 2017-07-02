@@ -1,13 +1,9 @@
 package upandgo.client;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
-import com.google.inject.Provides;
-import com.google.inject.name.Named;
 import com.google.gwt.event.shared.EventBus;
 
 import upandgo.client.event.GetCourseDetailsEvent;
@@ -30,7 +26,6 @@ import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.NavBarPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
-import upandgo.client.view.NavBarView;
 import upandgo.shared.entities.Semester;
 
 /**
@@ -66,7 +61,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(buildScheduleEvent.TYPE, new buildScheduleEventHandler() {
 
 			@Override
-			public void onBuildSchedule(@SuppressWarnings("unused") buildScheduleEvent event) {
+			public void onBuildSchedule(@SuppressWarnings("unused") buildScheduleEvent e) {
 				Log.info("Build Schedule Event");
 				
 			}
@@ -75,7 +70,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(clearScheduleEvent.TYPE, new clearScheduleEventHandler() {
 
 			@Override
-			public void onClearSchedule(@SuppressWarnings("unused") clearScheduleEvent event) {
+			public void onClearSchedule(@SuppressWarnings("unused") clearScheduleEvent e) {
 				Log.info("Clear Schedule Event");
 				
 			}
@@ -84,7 +79,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(GetCourseDetailsEvent.TYPE, new GetCourseDetailsEventHandler() {
 
 			@Override
-			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent event) {//need to be implemented with DI
+			public void onHighlightCourse(@SuppressWarnings("unused") GetCourseDetailsEvent e) {//need to be implemented with DI
 				
 			}
 		});
@@ -92,7 +87,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(nextScheduleEvent.TYPE, new nextScheduleEventHandler() {
 
 			@Override
-			public void onNextSchedule(@SuppressWarnings("unused") nextScheduleEvent event) {
+			public void onNextSchedule(@SuppressWarnings("unused") nextScheduleEvent e) {
 				Log.info("Next Schedule Event");
 				
 			}
@@ -101,7 +96,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(prevScheduleEvent.TYPE, new prevScheduleEventHandler() {
 
 			@Override
-			public void onPrevSchedule(@SuppressWarnings("unused") prevScheduleEvent event) {
+			public void onPrevSchedule(@SuppressWarnings("unused") prevScheduleEvent e) {
 				Log.info("Previous Schedule Event");
 				
 			}
@@ -110,7 +105,7 @@ class AppController implements Presenter {
 		eventBus.addHandler(saveScheduleEvent.TYPE, new saveScheduleEventHandler() {
 
 			@Override
-			public void onSaveSchedule(@SuppressWarnings("unused") saveScheduleEvent event) {
+			public void onSaveSchedule(@SuppressWarnings("unused") saveScheduleEvent e) {
 				Log.info("Save Schedule Event");
 				
 			}
@@ -119,8 +114,8 @@ class AppController implements Presenter {
 		eventBus.addHandler(SelectCourseEvent.TYPE, new SelectCourseEventHandler() {
 
 			@Override
-			public void onSelectCourse(SelectCourseEvent event) {
-				Log.info("Course " + event.getId().getTitle() + " Selected");
+			public void onSelectCourse(SelectCourseEvent e) {
+				Log.info("Course " + e.getId().getTitle() + " Selected");
 				
 			}
 		});
@@ -128,8 +123,8 @@ class AppController implements Presenter {
 		eventBus.addHandler(UnselectCourseEvent.TYPE, new UnselectCourseEventHandler() {
 
 			@Override
-			public void onUnselectCourse(UnselectCourseEvent event) {
-				Log.info("Course " + event.getId().getTitle() + " Unselected");
+			public void onUnselectCourse(UnselectCourseEvent e) {
+				Log.info("Course " + e.getId().getTitle() + " Unselected");
 				
 			}
 		});
@@ -137,7 +132,7 @@ class AppController implements Presenter {
 
 	@Override
 	public void unbind() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 	}
 

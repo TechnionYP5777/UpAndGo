@@ -19,7 +19,6 @@ public class Scraper {
 
 	public static Document getDocumentFromURL(final URL xxx) throws IOException {
 		return Jsoup.parse(xxx, 15000);
-		// return Jsoup.connect((xxx + "")).timeout(15000).get();
 	}
 
 	public static Document getSearchResults(final String xxx, final Map<String, String> dataMap) throws IOException {

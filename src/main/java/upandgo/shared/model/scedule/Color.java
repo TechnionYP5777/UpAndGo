@@ -3,6 +3,7 @@ package upandgo.shared.model.scedule;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("boxing")
 public enum Color {
 	ORANGERED("ORANGERED", "#FF4500"),
 	GOLD("GOLD", "#FFD700"),
@@ -27,6 +28,7 @@ public enum Color {
 	
 	
 	
+	@SuppressWarnings("unused")
 	private static Map<Integer, Color> map = new HashMap<Integer, Color>();
 	private String name;  
 	private String hex;
@@ -45,7 +47,8 @@ public enum Color {
         return map.get(ordinal);
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
         return this.name;
      }
     

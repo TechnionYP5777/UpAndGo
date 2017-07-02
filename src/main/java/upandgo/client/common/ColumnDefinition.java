@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public abstract class ColumnDefinition<T> {
 
-	public abstract Widget render(T t, StringBuilder sb);
+	public abstract Widget render(T t, StringBuilder b);
 
 	@SuppressWarnings("static-method")
 	public boolean isClickable() {

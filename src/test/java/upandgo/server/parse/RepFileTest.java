@@ -1,6 +1,5 @@
 package upandgo.server.parse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import upandgo.server.parse.RepFile;

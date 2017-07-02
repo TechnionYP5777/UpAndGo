@@ -16,12 +16,7 @@ import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -34,9 +29,7 @@ import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.Lesson;
-import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.LocalTime;
-import upandgo.shared.entities.Month;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.WeekTime;
 import upandgo.shared.entities.Lesson.Type;
@@ -44,7 +37,6 @@ import upandgo.shared.entities.course.Course;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.cloud.ReadChannel;
 import com.google.cloud.storage.Blob;
@@ -67,18 +59,22 @@ import java.io.SequenceInputStream;
  * 
  */
 public class XmlCourseLoader extends CourseLoader {
+	@SuppressWarnings("unused")
 	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
+	@SuppressWarnings("unused")
 	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
+	@SuppressWarnings("unused")
 	private static final String CHOSEN_LESSON_GROUPS_SER = "data/ChosenLessonGroups.ser";
 
 	TreeMap<String, Course> coursesById;
 	TreeMap<String, Course> coursesByName;
 
-	private static InputStream coursesInfo = null;
+	private static InputStream coursesInfo;
 	private static String projectId = "upandgo-168508";
 	private static String bucketId = "upandgo-168508.appspot.com";
 	private static String coursesInfoFilename = "test.XML";
 	
+	@SuppressWarnings("unused")
 	private static String googleStorageCredentials = "upandgo-bf957bbe2318.json";
 	  
 	
@@ -109,19 +105,19 @@ public class XmlCourseLoader extends CourseLoader {
 
 	@Override
 	public HashMap<String, Course> loadCourses(@SuppressWarnings("unused") final List<String> names) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void updateCourse(@SuppressWarnings("unused") final Course __) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 	}
 
 	@Override
 	public List<String> loadAllCourseNames() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
@@ -190,57 +186,6 @@ public class XmlCourseLoader extends CourseLoader {
 
 	}
 
-//	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
-//		try {
-//			if(coursesInfo == null) {
-//				System.out.println("Can't download DB: No such object");
-//				return;
-//			}
-//
-//			final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(coursesInfo);
-//			final XPathExpression lessonExpr = XPathFactory.newInstance().newXPath().compile("lesson");
-//			final Element courseElement = (Element) ((NodeList) XPathFactory.newInstance().newXPath()
-//					.compile("//course[@id=\"" + courseID + "\"]").evaluate(doc, XPathConstants.NODESET)).item(0);
-//			System.out.println(courseElement.getAttribute("name"));
-//			System.out.println(courseElement.getAttribute("id"));
-//			System.out.println(groupNum);
-//			final List<Node> lessonGroupList = new ArrayList<>();
-//			final NodeList lectureList = courseElement.getElementsByTagName("lecture");
-//			for (int xxx = 0; xxx < lectureList.getLength(); ++xxx)
-//				lessonGroupList.add(lectureList.item(xxx));
-//			final NodeList tutorialList = courseElement.getElementsByTagName("tutorial");
-//			for (int xxx = 0; xxx < tutorialList.getLength(); ++xxx)
-//				lessonGroupList.add(tutorialList.item(xxx));
-//			final NodeList labList = courseElement.getElementsByTagName("lab");
-//			for (int xxx = 0; xxx < labList.getLength(); ++xxx)
-//				lessonGroupList.add(labList.item(xxx));
-//			for(Node groupNode : lessonGroupList)
-//				if (((Element) groupNode).getAttribute("group").equals(groupNum))
-//					try {
-//						final NodeList lessonList = (NodeList) lessonExpr.evaluate(groupNode, XPathConstants.NODESET);
-//						for (int f = 0; f < lessonList.getLength(); ++f) {
-//							final Node h = lessonList.item(f);
-//							if (h.getNodeType() == Node.ELEMENT_NODE)
-//								g.addLesson(new Lesson(new StuffMember("temp", "temp"), new WeekTime(
-//										convertStrToDay(((Element) h).getAttribute("day")),
-//										LocalTime.parse("".equals(((Element) h).getAttribute("timeStart")) ? "00:00"
-//												: ((Element) h).getAttribute("timeStart"))),
-//										new WeekTime(convertStrToDay(((Element) h).getAttribute("day")), LocalTime
-//												.parse("".equals(((Element) h).getAttribute("timeEnd")) ? "00:00"
-//														: ((Element) h).getAttribute("timeEnd"))),
-//										"nowhere", Lesson.Type.LECTURE, Integer.parseInt(groupNum),
-//										courseElement.getAttribute("id"), courseElement.getAttribute("name")));
-//						}
-//					} catch (final XPathExpressionException xxx) {
-//						xxx.printStackTrace();
-//					}
-//			System.out.println(g.getLessons().size());
-//		} catch (XPathExpressionException | SAXException | ParserConfigurationException | IOException xxx) {
-//			xxx.printStackTrace();
-//		}
-//
-//	}
-
 	public static void setStaffList(final CourseBuilder b, final Node p, final String s) {
 		final NodeList TicList = ((Element) p).getElementsByTagName(s);
 		for (int k = 0; k < TicList.getLength(); ++k) {
@@ -259,6 +204,7 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public void getCourses(boolean test_flag) {
 		try {
 			NodeList coursesList;
@@ -339,6 +285,7 @@ public class XmlCourseLoader extends CourseLoader {
 		}
 	}
 
+	@SuppressWarnings("static-method")
 	public Exam createExam(Node p, String examType) {
 		String examTime = ((Element)p).getElementsByTagName(examType).item(0).getAttributes() .getNamedItem("time").getNodeValue();
 		String examDayOfMonth = ((Element) p).getElementsByTagName(examType).item(0).getAttributes().getNamedItem("day").getNodeValue();
@@ -467,7 +414,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return null;
 	}
 
-	public Lesson createLesson(final Node n, final Node h, final int index, final Day lectureDay, final int groupNum,
+	public Lesson createLesson(final Node n, final Node h, @SuppressWarnings("unused") final int index, final Day lectureDay, final int groupNum,
 			final String place, final Lesson.Type t, final String staff, final String courseId, final String courseName) {
 		return new Lesson(
 				((Element) n).getElementsByTagName(staff).getLength() == 0 ? null
@@ -479,6 +426,7 @@ public class XmlCourseLoader extends CourseLoader {
 				place, t, groupNum, courseId, courseName);
 	}
 
+	@SuppressWarnings("static-method")
 	public String findLGStaff(final Node n, final int groupNum, final String staff) {
 		for (int $ = 0; $ < ((Element) n).getElementsByTagName(staff).getLength(); ++$)
 			if (((Element) ((Element) n).getElementsByTagName(staff).item($).getParentNode()).hasAttribute("group")
@@ -489,53 +437,6 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-/*	private static Day convertStrToDay(final String xxx) {
-		switch (xxx) {
-		case "א":
-			return Day.SUNDAY;
-		case "ב":
-			return Day.MONDAY;
-		case "ג":
-			return Day.TUESDAY;
-		case "ד":
-			return Day.WEDNESDAY;
-		case "ה":
-			return Day.THURSDAY;
-		case "ו":
-			return Day.FRIDAY;
-		default:
-			return Day.SATURDAY;
-		}
-	}*/
-
-//	private static Month convertStrToMonth(final String xxx) {
-//		switch (xxx) {
-//		case "01":
-//			return Month.JANUARY;
-//		case "02":
-//			return Month.FEBRUARY;
-//		case "03":
-//			return Month.MARCH;
-//		case "04":
-//			return Month.APRIL;
-//		case "05":
-//			return Month.MAY;
-//		case "06":
-//			return Month.JUNE;
-//		case "07":
-//			return Month.JULY;
-//		case "08":
-//			return Month.AUGUST;
-//		case "09":
-//			return Month.SEPTEMBER;
-//		case "10":
-//			return Month.OCTOBER;
-//		case "11":
-//			return Month.NOVEMBER;
-//		default:
-//			return Month.DECEMBER;
-//		}
-//	}
 
 	@Override
 	public List<Faculty> loadFaculties() {

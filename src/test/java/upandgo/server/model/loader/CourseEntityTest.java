@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.course.Course;
 
 public class CourseEntityTest {
@@ -15,16 +14,17 @@ public class CourseEntityTest {
 	CourseLoader cr;
 	
 	@Test
+	@SuppressWarnings("static-method")
 	public void test_a() {
 		CoursesEntity course = new CoursesEntity();
 		assertEquals("", course.id);
 		assertEquals(0, course.courses.size());
-		
 		CoursesEntity course2 = new CoursesEntity("999999");
 		assertEquals("999999", course2.id);
 	}
 	
 	@Test
+	@SuppressWarnings("static-method")
 	public void test_b() {
 		CoursesEntity course = new CoursesEntity();
 		course.setId("888888");

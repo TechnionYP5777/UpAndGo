@@ -51,8 +51,6 @@ public class RepFile {
 	private static final String SEPARATING_LINE = "^\\+\\-+\\+(\\n|\\Z)";
 	private static final String SEPARATING_DOUBLE_LINE = "^\\+\\=+\\+\\n";
 	private static final String FACULTY_NAME = "(?<FacultyName>.+?)";
-	// private static final String FACULTY_COURSES =
-	// "(?<FacultyCourses>.+?(?=^\\+\\=+\\+\\n))";
 	private static final String FACULTY_COURSES = "(?<FacultyCourses>.+?(?=(^\\s*$)|\\Z))";
 	private static final String COURSE_SUMMERY = "(?<CourseSummery>.+?\\n.+?\\n)";
 	private static final String COURSE_INFO_AND_LESSONS = "(?<CourseInfoAndLessons>(.+?\\n)+?(?=" + SEPARATING_LINE
@@ -120,8 +118,6 @@ public class RepFile {
 			for (final Matcher regexMatcher = Pattern
 					.compile("^\\+\\-+\\+\\n\\|\\s*(?<CourseID>\\d{6})\\s+(?<CourseName>)", Pattern.MULTILINE)
 					.matcher(getRepFileAsString()); regexMatcher.find();) {
-				// System.out.println(regexMatcher.group("CourseID") + " " +
-				// regexMatcher.group("CourseName"));
 				final Element course = doc.createElement("Course");
 				course.setAttribute("id", regexMatcher.group("CourseID"));
 				final Element courseName = doc.createElement("name");

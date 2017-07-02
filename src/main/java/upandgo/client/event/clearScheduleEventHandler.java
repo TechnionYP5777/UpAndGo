@@ -12,6 +12,6 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface clearScheduleEventHandler extends EventHandler {
-	void onClearSchedule(clearScheduleEvent event);
+	void onClearSchedule(clearScheduleEvent e);
 }
 

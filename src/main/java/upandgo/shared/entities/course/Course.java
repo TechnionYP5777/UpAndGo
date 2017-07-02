@@ -45,7 +45,6 @@ public class Course implements IsSerializable {
 
 	protected List<String> notes;
 	
-	@SuppressWarnings("unused")
 	public Course() {
 		// here because GWT needs it
 		name = id = faculty = "";

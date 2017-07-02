@@ -15,8 +15,7 @@ public class HideCourseDetailsEvent extends GwtEvent<HideCourseDetailsEventHandl
 	public static Type<HideCourseDetailsEventHandler> TYPE = new Type<>();
 
 	public HideCourseDetailsEvent() {
-		// empty
-	  }
+	}
 
 	@Override
 	public Type<HideCourseDetailsEventHandler> getAssociatedType() {
@@ -24,8 +23,8 @@ public class HideCourseDetailsEvent extends GwtEvent<HideCourseDetailsEventHandl
 	}
 
 	@Override
-	protected void dispatch(HideCourseDetailsEventHandler handler) {
-		handler.onHideCourseDetails(this);
+	protected void dispatch(HideCourseDetailsEventHandler h) {
+		h.onHideCourseDetails(this);
 
 	}
 }

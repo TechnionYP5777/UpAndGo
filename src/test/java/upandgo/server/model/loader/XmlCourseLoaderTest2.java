@@ -26,13 +26,6 @@ public class XmlCourseLoaderTest2 {
 		for(Course c : courses){
 			System.out.println("course: " + c);
 		}
-		/*
-		System.out.println("first: " + courses.get(0).getLectures().get(0).getLessons().get(0));
-		System.out.println("second: " + courses.get(0).getTutorials().get(0).getLessons().get(0));
-		assert courses.get(0).getLectures().get(0).getLessons().get(0)
-				.IsClashWith(courses.get(0).getTutorials().get(0).getLessons().get(0));
-		*/
-		// assertNull(s);
 	}
 
 }

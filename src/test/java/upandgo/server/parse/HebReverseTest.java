@@ -3,7 +3,6 @@ package upandgo.server.parse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import upandgo.server.parse.HebReverse;

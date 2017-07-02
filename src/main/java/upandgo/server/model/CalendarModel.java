@@ -11,12 +11,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.Calendar.Calendars;
-import com.google.api.services.calendar.Calendar.Calendars.Insert;
 import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -58,15 +54,15 @@ public class CalendarModel {
 
 	private static String clientSecretJson = "/client_secret.json";
 	
-	private static GoogleClientSecrets clientSecrets = null;
+	private static GoogleClientSecrets clientSecrets;
 	
-	private Calendar calendarService = null;
+	private Calendar calendarService;
 	
-	private String calendarId = null;
+	private String calendarId;
 	
 	public CalendarModel() {}
 
-	public void createCalendar(List<LessonGroup> lessons, Map<String, Color> colorMap) throws IOException {
+	public void createCalendar(List<LessonGroup> gs, Map<String, Color> colorMap) throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		
@@ -86,38 +82,24 @@ public class CalendarModel {
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar).execute();
 		calendarId = createdCalendar.getId();
-//		// Create a new calendar list entry
-//		CalendarListEntry calendarListEntry = new CalendarListEntry();
-//		calendarListEntry.setId(calendarId);
-//
-//		// Insert the new calendar list entry
-//		CalendarListEntry createdCalendarListEntry = calendarService.calendarList().insert(calendarListEntry).execute();
-//		CoursesServiceImpl.someString += "\ninserted calendar: " + createdCalendarListEntry.getSummary();
 
-		String userEmail = user.getEmail();
-		for(LessonGroup l: lessons) {
-			if(l == null)
-				continue;
-			List<Event> events = createEvents(l, colorMap.get(l.getCourseID()));
-			for(Event ev: events) {
-//				ev.setAttendees(Arrays.asList(new EventAttendee().setEmail(userEmail)));
-				Event res = calendarService.events().insert(calendarId, ev).execute();
-//					System.out.printf("Event created: %s\n", res.getHtmlLink());
-				CoursesServiceImpl.someString += "\nEvent created: " + res.getHtmlLink();
-			}
-		}
+		user.getEmail();
+		for(LessonGroup l: gs)
+			if (l != null)
+				for (Event ev : createEvents(l, colorMap.get(l.getCourseID())))
+					CoursesServiceImpl.someString += "\nEvent created: "
+							+ calendarService.events().insert(calendarId, ev).execute().getHtmlLink();
 	}
 
 	private static GoogleClientSecrets getClientCredential() throws IOException {
-	    if (clientSecrets == null) {
-	        clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-	            new InputStreamReader(CalendarModel.class.getResourceAsStream(clientSecretJson)));
-	      }
+	    if (clientSecrets == null)
+			clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
+					new InputStreamReader(CalendarModel.class.getResourceAsStream(clientSecretJson)));
 	  return clientSecrets;
 	}
 	
-	public static String getRedirectUri(HttpServletRequest req) {
-		GenericUrl url = new GenericUrl(req.getRequestURL().toString());
+	public static String getRedirectUri(HttpServletRequest r) {
+		GenericUrl url = new GenericUrl(r.getRequestURL().toString());
 		url.setRawPath("/oauth2callback");
 		return url.build();
 	}
@@ -128,43 +110,35 @@ public class CalendarModel {
 	        DATA_STORE_FACTORY).setAccessType("offline").build();
 	}
 	
-	private static Calendar getCalendarService(Credential cred) {
-		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, cred).build();
+	private static Calendar getCalendarService(Credential c) {
+		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, c).build();
 	}
 	
-	private static List<Event> createEvents(LessonGroup lg, Color color) {
+	private static List<Event> createEvents(LessonGroup g, @SuppressWarnings("unused") Color c) {
 		List<Event> events = new ArrayList<>();
 		
-		for(Lesson l: lg.getLessons()) {
-			if(l == null)
-				continue;
-			
-			String startTimeStr =
-					lessonTimeToRfc(l.getStartTime().getDay(), l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute());
-			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr)).setTimeZone("Universal");
-			String endTimeStr =
-					lessonTimeToRfc(l.getEndTime().getDay(), l.getEndTime().getTime().getHour(), l.getEndTime().getTime().getMinute());
-			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Universal");
-			
-			//create event:
-			Event event = new Event()
-					.setSummary(l.getCourseId()+"\n"+l.getCourseName())
-					.setLocation((l.getPlace()==null) ? "" : l.getPlace()+", "+l.getRoomNumber())
-				    .setDescription(String.valueOf(l.getGroup())+"\n"+l.getType().name()+"\n"+((l.getRepresenter()==null) ? "" : l.getRepresenter().getFullName()))
-				    .setStart(startTime).setEnd(endTime)
-				    .setRecurrence(Arrays.asList("RRULE:FREQ=WEEKLY"));
-//				    .setColorId(color.name());	TODO: translate to color id
-			events.add(event);
-		}
+		for(Lesson l: g.getLessons())
+			if (l != null)
+				events.add(new Event().setSummary(l.getCourseId() + "\n" + l.getCourseName())
+						.setLocation((l.getPlace() == null) ? "" : l.getPlace() + ", " + l.getRoomNumber())
+						.setDescription(String.valueOf(l.getGroup()) + "\n" + l.getType().name() + "\n"
+								+ ((l.getRepresenter() == null) ? "" : l.getRepresenter().getFullName()))
+						.setStart(new EventDateTime()
+								.setDateTime(new DateTime(lessonTimeToRfc(l.getStartTime().getDay(),
+										l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute())))
+								.setTimeZone("Universal"))
+						.setEnd(new EventDateTime()
+								.setDateTime(new DateTime(lessonTimeToRfc(l.getEndTime().getDay(),
+										l.getEndTime().getTime().getHour(), l.getEndTime().getTime().getMinute())))
+								.setTimeZone("Universal"))
+						.setRecurrence(Arrays.asList("RRULE:FREQ=WEEKLY")));
 		
 		return events;
 	}
 	
-	private static String lessonTimeToRfc(Day day, int hour, int minute) {
-		// TODO: it's just a workaround. need smth better:
-		String dayStr = String.valueOf(tokenDay + day.ordinal());
+	private static String lessonTimeToRfc(Day d, int hour, int minute) {
+		String dayStr = String.valueOf(tokenDay + d.ordinal()), hourStr = String.valueOf(hour);
 		
-		String hourStr = String.valueOf(hour);
 		if(hour < 10)
 			hourStr = "0"+hourStr;
 		
@@ -179,12 +153,9 @@ public class CalendarModel {
    * Returns an {@link IOException} (but not a subclass) in order to work around restrictive GWT
    * serialization policy.
    */
-  public static IOException wrappedIOException(IOException e) {
-    if (e.getClass() == IOException.class) {
-      return e;
-    }
-    return new IOException(e.getMessage());
-  }
+  public static IOException wrappedIOException(IOException x) {
+	return x.getClass() == IOException.class ? x : new IOException(x.getMessage());
+}
 }
 
 

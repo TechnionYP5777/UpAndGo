@@ -1,7 +1,6 @@
 package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * 
@@ -22,8 +21,8 @@ public class saveScheduleEvent extends GwtEvent<saveScheduleEventHandler>{
 	}
 
 	@Override
-	protected void dispatch(saveScheduleEventHandler handler) {
-		handler.onSaveSchedule(this);
+	protected void dispatch(saveScheduleEventHandler h) {
+		h.onSaveSchedule(this);
 		
 	}
 }

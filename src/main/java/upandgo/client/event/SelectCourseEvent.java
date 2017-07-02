@@ -31,8 +31,8 @@ public class SelectCourseEvent extends GwtEvent<SelectCourseEventHandler>{
 	}
 
 	@Override
-	protected void dispatch(SelectCourseEventHandler handler) {
-		handler.onSelectCourse(this);
+	protected void dispatch(SelectCourseEventHandler h) {
+		h.onSelectCourse(this);
 		
 	}
 

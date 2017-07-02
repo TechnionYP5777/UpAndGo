@@ -7,11 +7,12 @@ import org.junit.Test;
 public class FuzzySearchTest {
 
 	@Test
+	@SuppressWarnings("static-method")
 	public void test() {
-		assert(50 <= FuzzySearch.similarity("הנדסת חשמל", "הנדסה כימית"));
+		assert (FuzzySearch.similarity("הנדסת חשמל", "הנדסה כימית") >= 50);
 		assertEquals(100, FuzzySearch.similarity("הנדסת חשמל", "הנדסת חשמל"));
 		assertEquals(0, FuzzySearch.similarity("הנדסת חשמל", "234123"));
-		assert(50 < FuzzySearch.similarity("236", "236924"));
+		assert (FuzzySearch.similarity("236", "236924") > 50);
 	}
 
 }

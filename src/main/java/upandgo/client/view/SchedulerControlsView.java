@@ -1,7 +1,6 @@
 package upandgo.client.view;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.gwtbootstrap3.client.ui.Modal;
@@ -11,7 +10,6 @@ import org.gwtbootstrap3.client.ui.Well;
 import org.gwtbootstrap3.client.ui.constants.WellSize;
 import org.gwtbootstrap3.client.ui.html.Text;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -26,9 +24,13 @@ public class SchedulerControlsView extends VerticalPanel{
 
 	private SchedualerControlsStyle scStyle = Resources.INSTANCE.schedualerControlsStyle();
 	
+	@SuppressWarnings("unused")
 	private ConstraintsPool cp;
+	@SuppressWarnings("unused")
 	private LocalTime startTime;
+	@SuppressWarnings("unused")
 	private LocalTime endTime;
+	@SuppressWarnings("unused")
 	private List<Boolean> vectorDaysOff; 
 	
 	Button buildSchedule = new Button("<i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
@@ -74,8 +76,7 @@ public class SchedulerControlsView extends VerticalPanel{
 		this.add(prevSchedule);
 		this.add(saveSchedule);
 		this.add(exportSchedule);
-		//this.add(new SchedualerConstraintsView());
-		
+				
 		buildSchedule.setStyleName("btn btn-success");
 		clearSchedule.setStyleName("btn btn-danger");
 		setConstrains.setStyleName("btn btn-warning");
@@ -94,7 +95,7 @@ public class SchedulerControlsView extends VerticalPanel{
 
 		buildSchedule.addClickHandler(new ClickHandler(){
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 				buildSchedule.setHTML("<i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בנה מערכת");
 			}
     		
@@ -102,7 +103,7 @@ public class SchedulerControlsView extends VerticalPanel{
 		
 		setConstrains.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
 				constraintsBox.show();
 			}
 		});
@@ -117,7 +118,7 @@ public class SchedulerControlsView extends VerticalPanel{
 		constraintsBoxCancelButton.addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 				constraintsBox.hide();
 			}
 		});
@@ -132,7 +133,7 @@ public class SchedulerControlsView extends VerticalPanel{
 	}
 	
 	public void setPrevEnable(boolean enable){
-		prevSchedule.setEnabled(enable);;
+		prevSchedule.setEnabled(enable);
 	}
 	
 	public void setNextEnable(boolean enable){
@@ -141,9 +142,8 @@ public class SchedulerControlsView extends VerticalPanel{
 	
 	public void setCurrentScheduleIndex(int index, int max){
 		scheduleWell.clear();
-		if (index!=0){
+		if (index!=0)
 			scheduleWell.add(new Text(max + " / " + index));
-		}
 		
 	}
 	

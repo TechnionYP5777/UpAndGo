@@ -17,8 +17,9 @@ import upandgo.shared.entities.Semester;
 public class InjectorModule extends AbstractGinModule {
 	
 	@Provides
+	@SuppressWarnings("static-method")
 	public Semester provideDefaultSemester() {
-	  return Semester.SPRING16;
+		return Semester.SPRING16;
 	}
 
 	@Override

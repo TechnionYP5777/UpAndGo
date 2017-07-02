@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -312,9 +310,7 @@ public class Scheduler implements IsSerializable{
 			public int compare(Timetable t1, Timetable t2) {
 				Double rank1 = 0.0, rank2 = 0.0;
 				if (byDaysoff) {
-					//probably irrevelant now when we use seperate days.
-					//rank1 += t1.getRankOfDaysoff();
-					//rank2 += t2.getRankOfDaysoff();
+					//Do nothing					
 				}
 				if (byBlankSpace) {
 					rank1 += t1.getRankOfBlankSpace();

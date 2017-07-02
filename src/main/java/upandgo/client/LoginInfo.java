@@ -4,7 +4,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class LoginInfo implements IsSerializable {
 
-  private boolean loggedIn = false;
+  private boolean loggedIn;
   private String loginUrl;
   private String logoutUrl;
   private String emailAddress;

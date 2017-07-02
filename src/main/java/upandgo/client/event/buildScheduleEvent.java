@@ -1,7 +1,6 @@
 package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * 
@@ -22,8 +21,8 @@ public class buildScheduleEvent extends GwtEvent<buildScheduleEventHandler>{
 	}
 
 	@Override
-	protected void dispatch(buildScheduleEventHandler handler) {
-		handler.onBuildSchedule(this);
+	protected void dispatch(buildScheduleEventHandler h) {
+		h.onBuildSchedule(this);
 		
 	}
 }

@@ -22,33 +22,29 @@ import upandgo.shared.model.scedule.Color;
  */
 
 public interface CoursesServiceAsync {
-	public void getSelectedCourses(Semester semester, AsyncCallback<ArrayList<CourseId>> callback);
+	public void getSelectedCourses(Semester s, AsyncCallback<ArrayList<CourseId>> is);
 
-	public void getNotSelectedCourses(Semester semester, String query, String faculty, AsyncCallback<ArrayList<CourseId>> callback);
+	public void getNotSelectedCourses(Semester s, String query, String faculty, AsyncCallback<ArrayList<CourseId>> is);
 	
-	public void getAllCourses(Semester semester, AsyncCallback<ArrayList<CourseId>> callback);
+	public void getAllCourses(Semester s, AsyncCallback<ArrayList<CourseId>> is);
 	
-	public void getFaculties(Semester semester, AsyncCallback<ArrayList<String>> callback);
+	public void getFaculties(Semester s, AsyncCallback<ArrayList<String>> ss);
 
-	public void getCourseDetails(Semester semester, CourseId id,AsyncCallback<Course> callback);
+	public void getCourseDetails(Semester s, CourseId i,AsyncCallback<Course> c);
 
-	//public void getCourseLectures(String id,AsyncCallback<List<LessonGroup>> callback);
-	
-	public void selectCourse(Semester semester, CourseId id, AsyncCallback<Void> callback);
+	public void selectCourse(Semester s, CourseId i, AsyncCallback<Void> v);
 
-	public void unselectCourse(Semester semester, CourseId id, AsyncCallback<Void> callback);
+	public void unselectCourse(Semester s, CourseId i, AsyncCallback<Void> v);
 	
-	public void unselectAllCourses(Semester semester, AsyncCallback<Void> callback);
+	public void unselectAllCourses(Semester s, AsyncCallback<Void> v);
 	
-	//public void getChosenCoursesList(Semester semester, AsyncCallback<List<Course>> callback);
-	
-	public void saveSchedule(Semester semester, List<LessonGroup> sched, AsyncCallback<Void> callback);
+	public void saveSchedule(Semester s, List<LessonGroup> sched, AsyncCallback<Void> v);
 
-	public void loadSchedule(Semester semester, AsyncCallback<List<LessonGroup>> callback);
+	public void loadSchedule(Semester s, AsyncCallback<List<LessonGroup>> gs);
 	
-	public void getSomeString(AsyncCallback<String> callback);
+	public void getSomeString(AsyncCallback<String> s);
 	
-	public void getSelectedCoursesString(Semester semester, AsyncCallback<String> callback);
+	public void getSelectedCoursesString(Semester s, AsyncCallback<String> callback);
 			
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, AsyncCallback<Void> callback);
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, AsyncCallback<Void> v);
 }

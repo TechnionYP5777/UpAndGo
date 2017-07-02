@@ -39,10 +39,10 @@ public class CalendarAuthServlet extends AbstractAppEngineAuthorizationCodeServl
 		
   static final String GWT_MODULE_NAME = "upandgo";		
 		
-  private static final long serialVersionUID = 1L;		
+  private static final long serialVersionUID = 1;		
 		
   @Override		
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)		
+  protected void doGet(HttpServletRequest r, HttpServletResponse response)		
       throws IOException {		
     response.setContentType("text/html");		
     response.setCharacterEncoding("UTF-8");		
@@ -52,12 +52,12 @@ public class CalendarAuthServlet extends AbstractAppEngineAuthorizationCodeServl
 	    writer.println("<title>" + APP_NAME + "</title>");		
 	    writer.println(		
 	        "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + GWT_MODULE_NAME + ".css\">");		
-	    writer.println("<script type=\"text/javascript\" language=\"javascript\" " + "src=\""		
+	    writer.println("<script type=\"text/javascript\" language=\"javascript\" src=\""		
 	        + GWT_MODULE_NAME + "/" + GWT_MODULE_NAME + ".nocache.js\"></script>");		
 	    writer.println("</head><body>");		
 	    UserService userService = UserServiceFactory.getUserService();		
-	    writer.println("<div class=\"header\"><b>" + request.getUserPrincipal().getName() + "</b> | "		
-	        + "<a href=\"" + userService.createLogoutURL(request.getRequestURL().toString())		
+	    writer.println("<div class=\"header\"><b>" + r.getUserPrincipal().getName() + "</b> | "		
+	        + "<a href=\"" + userService.createLogoutURL(r.getRequestURL().toString())		
 	        + "\">Log out</a> | "		
 	        + "<a href=\"http://code.google.com/p/google-api-java-client/source/browse"		
 	        + "/calendar-appengine-sample?repo=samples\">See source code for "		

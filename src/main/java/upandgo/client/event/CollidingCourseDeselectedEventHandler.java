@@ -15,5 +15,5 @@ import com.google.gwt.event.shared.EventHandler;
 import upandgo.shared.entities.course.CourseId;
 
 public interface CollidingCourseDeselectedEventHandler extends EventHandler {
-	void onCollidedCourseDeselected(CourseId c);
+	void onCollidedCourseDeselected(CourseId i);
 }

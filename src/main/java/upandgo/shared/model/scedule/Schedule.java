@@ -8,7 +8,6 @@ import java.util.Map;
 
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.constraint.TimeConstraint;
-import upandgo.shared.entities.course.Course;
 
 /**
  * @author kobybs
@@ -19,15 +18,10 @@ import upandgo.shared.entities.course.Course;
  * 
  */
 public class Schedule implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8446677507440908429L;
+	private static final long serialVersionUID = -0x7538A070CB4C188DL;
 	
 	private final List<LessonGroup> lessons;
 	private final List<TimeConstraint> constraints;
-	//private int collisions;
-	//private Collision lastCollisionFound;
 	private List<Collision> collisions;
 	private Map<String, Integer> edgeCounter;
 	private String collisionSolver;
@@ -42,16 +36,9 @@ public class Schedule implements Serializable {
 		
 		collisionSolver = null;
 		collisionSolver2 = null;
-		//collisions = 0;
 		
 	}
-	
-	/*
-	public int getCollisionsCount(){
-		return collisions;
-	}
-	*/
-	
+		
 	public boolean addConstraintsList(final List<TimeConstraint> constraintsList) {
 		if(constraintsList == null)
 			return true;
@@ -75,44 +62,20 @@ public class Schedule implements Serializable {
 	 * @return true if lessonGroup can be added to lessond without causing a
 	 *         collision && if first cllision already happend, else - seting firstCo.. to true
 	 */
+	@SuppressWarnings("boxing")
 	public boolean addLesson(final LessonGroup xxx) {
-		/*
-		 * if(!lessons.contains(xxx)) // add equals to lessonsgroup
-		 * lessons.add(xxx);
-		 */
-		/*if (lessons.isEmpty()) {
-			lessons.add(xxx);
-			return true;
-		}*/
-		//System.out.println("addLesson: " + xxx);
-		
-		
+			
 		edgeCounter.put(xxx.getCourseID(), 0);
 		
-		/*for (final TimeConstraint c : constraints)
-			if (c.isClashWith(xxx))
-				
-				//collisions.add
-				//collisions++;
-				//return false;*/
-		
 		for (final LessonGroup l : lessons){
-			//System.out.println("check of " + l + " against " + xxx);
 			if (l.isClashWith(xxx)){
 				collisions.add(new Collision(l.getCourseID(), xxx.getCourseID()));
 				edgeCounter.put(l.getCourseID(), edgeCounter.get(l.getCourseID())+1);
 				edgeCounter.put(xxx.getCourseID(), edgeCounter.get(xxx.getCourseID())+1);
-				
-				//collisions++;
-				//lastCollisionFound = new Collision(l.getCourseID(), xxx.getCourseID());
-		
-				//l.getCourseID()
 			}
 		}
 		
 		
-		//if(lessons.size() > 1)
-		//	return false;
 		lessons.add(xxx);
 		return true;
 	}
@@ -124,6 +87,7 @@ public class Schedule implements Serializable {
 	 * removing him can solve all collisions. in that case this function will update
 	 * the collision variable to be that course.
 	 */
+	@SuppressWarnings("boxing")
 	public boolean collisionSolver(){
 		// this code is equivalent of finding a vertex cover of size 1. 
 		///System.out.println("collisions: " + collisions);
@@ -147,35 +111,17 @@ public class Schedule implements Serializable {
 			}
 		}
 		
-		// step 2: remove all edges of that vertex.
-		/*List<Collision> remove = new ArrayList<>();
-		for(Collision c : collisions){
-			if(c.c1.equals(maxID) || c.c2.equals(maxID))
-				remove.add(c);
-		}
-		List<Collision> collisionDup = new ArrayList<>(collisions);
-		for(Collision c : remove){
-			collisionDup.remove(c);
-		}
 		
-		// step 3: if there are any more edges than conflict cannot be resolved.
-		if(collisionDup.isEmpty()){
-			collisionSolver = maxID;
-			return true;
-		}*/
 		
 		// step 2 : if the collision degree is 
-		if(collisions.size() == max){
-			collisionSolver = maxID;
-			return true;
-		}
-		
-		
-		return false;
+		if (collisions.size() != max)
+			return false;
+		collisionSolver = maxID;
+		return true;
 	}
 	
 	public boolean hasCollision(){
-		return collisions.size() > 0;
+		return !collisions.isEmpty();
 	}
 	
 	public boolean hasDualCollision(){
@@ -187,40 +133,7 @@ public class Schedule implements Serializable {
 	public String getCollisionSolver2(){
 		return collisionSolver2;
 	}
-	/*
-	public Collision getLastCollision(){
-		return lastCollisionFound;
-	}*/
-	
-	/*
-	/**
-	 * 
-	 * @param xxx
-	 * @return true if lessonGroup can be added to lessond without causing a
-	 *         collision
-	 */
-//	public boolean addLesson(final LessonGroup xxx) {
-//		/*
-//		 * if(!lessons.contains(xxx)) // add equals to lessonsgroup
-//		 * lessons.add(xxx);
-//		 */
-//		/*if (lessons.isEmpty()) {
-//			lessons.add(xxx);
-//			return true;
-//		}*/
-//		
-//		
-//		for (final TimeConstraint c : constraints)
-//			if (c.isClashWith(xxx))
-//				return false;
-//		
-//		for (final LessonGroup l : lessons)
-//			if (l.isClashWith(xxx))
-//				return false;
-//		lessons.add(xxx);
-//		return true;
-//	}*/
-	
+		
 	public Timetable getTimetable() {
 		return new Timetable(lessons);
 
@@ -232,51 +145,7 @@ public class Schedule implements Serializable {
 		return lessons;
 	}
 
-	// to be removed after some progress on the project assures that there is no
-	// need for that functionality
-	/*public void removeLesson(final LessonGroup xxx) {
-		lessons.remove(xxx);
-	}
-
-	public void addConstraint(final TimeConstraint xxx) {
-		if (!constraints.contains(xxx))
-			constraints.add(xxx);
-	}
-
-	public void removeConstraint(final TimeConstraint xxx) {
-		constraints.remove(xxx);
-	}
-
-	public List<TimeConstraint> getConstraints() {
-		return constraints;
-	}
-
-	public List<LessonGroup> getLessonGroups() {
-		return lessons;
-	}
-
 	
-
-	public boolean hasLesson(final LessonGroup xxx) {
-		return lessons.contains(xxx);
-	}
-
-	public boolean hasConstraint(final TimeConstraint xxx) {
-		return constraints.contains(xxx);
-	}
-
-	public boolean isLegalSchedule() {
-		for (int i = 0; i < lessons.size(); ++i) {
-			for (int j = i + 1; j < lessons.size(); ++j)
-				if (lessons.get(i).isCLashWIth(lessons.get(j)))
-					return false;
-			for (final TimeConstraint xxx : constraints)
-				if (lessons.get(i).isCLashWIth(xxx))
-					return false;
-		}
-		return true;
-	}*/
-
 	@Override
 	public String toString() {
 		return lessons + "";

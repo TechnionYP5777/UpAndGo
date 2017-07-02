@@ -3,7 +3,6 @@ package upandgo.client.event;
 import com.google.gwt.event.shared.GwtEvent;
 
 import upandgo.shared.entities.Semester;
-import upandgo.shared.entities.course.CourseId;
 
 /**
  * 
@@ -31,8 +30,8 @@ public class ChangeSemesterEvent extends GwtEvent<ChangeSemesterEventHandler> {
 	}
 
 	@Override
-	protected void dispatch(ChangeSemesterEventHandler handler) {
-		handler.onSemesterChange(this);
+	protected void dispatch(ChangeSemesterEventHandler h) {
+		h.onSemesterChange(this);
 
 	}
 }

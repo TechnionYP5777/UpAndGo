@@ -20,10 +20,7 @@ public class NotSelectedCourseCell extends AbstractCell<String> {
 	}
 	@Override
 	public void render(@SuppressWarnings("unused") Context c, String value, SafeHtmlBuilder sb) {
-	    if (value == null)
-			return;
-	    
-	    	
+	    if (value != null)
 			sb.appendHtmlConstant("<div style=\"width:17.4vw;\"><div class=\"course\">" + value
 					+ "</div><button type=\"button\" class=\"btn btn-success cell-button\">"
 					+ "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בחר</button></div>");

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
-import org.gwtbootstrap3.client.ui.Divider;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.ListDropDown;
@@ -69,12 +68,6 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
     }
 
 	private void InitializePanel() {
-		//this.addStyleName(nvStyle.NavBarPanel());
-		//this.addStyleName("navbar navbar-toggleable-md navbar-light bg-faded");
-		//appTitle.addStyleName("navbar-brand");
-		//this.add(appTitle);
-		
-		//navbar.setPosition(NavbarPosition.FIXED_TOP);
 		brand.setText("Up&Go");
 		signInText.setPull(Pull.RIGHT);
 		signInText.setPaddingRight(15);
@@ -104,18 +97,16 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		helpLink.addStyleName(nvStyle.navBarLink());
 		
 		Node hrefNode = helpLink.getElement().getChild(0);
-		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
-			((Element)hrefNode).setAttribute("target", "_blank");
-		}
+		if (hrefNode.getNodeType() == Node.ELEMENT_NODE)
+			((Element) hrefNode).setAttribute("target", "_blank");
 		
 		AnchorListItem reviewLink = new AnchorListItem("שליחת משוב");
 		reviewLink.setHref("https://goo.gl/forms/xMXAzYbbYw1md5ls2");
 		reviewLink.addStyleName(nvStyle.navBarLink());
 		
 		hrefNode = reviewLink.getElement().getChild(0);
-		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
-			((Element)hrefNode).setAttribute("target", "_blank");
-		}
+		if (hrefNode.getNodeType() == Node.ELEMENT_NODE)
+			((Element) hrefNode).setAttribute("target", "_blank");
 
 		navbarNav.add(reviewLink);
 		navbarNav.add(helpLink);
@@ -125,16 +116,11 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		navbarCol.add(navbarNav);
 		navbar.add(navbarCol);
 		
-		this.add(navbar);
-		//this.addStyleName(nvStyle.navBarPanel());
-		
-		
-
-		
+		this.add(navbar);		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends HasClickHandlers & HasText> T getSignInOutButton() {
 		return (T) signInButton;
 	}
@@ -178,14 +164,14 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	}
 		
 	@Override
-	public Modal initializeSemesterModal(Semester semester){
+	public Modal initializeSemesterModal(Semester s){
 		semesterModal = new Modal();
 		semesterModal.setFade(true);
 		semesterModal.setTitle("אזהרה");
 		
 		ModalBody semesterModalBody = new ModalBody();
 		semesterModalBody.add(new Heading(HeadingSize.H4,"שינוי סמסטר יוביל למחיקת מערכת שלא נשמרה."));
-		semesterModalBody.add(new Heading(HeadingSize.H4,"האם אתה בטוח שברצונך לעבור לסמסטר " + semester.getName() + "?"));
+		semesterModalBody.add(new Heading(HeadingSize.H4,"האם אתה בטוח שברצונך לעבור לסמסטר " + s.getName() + "?"));
 		semesterModal.add(semesterModalBody);
 		
 		ModalFooter semesterModalFooter = new ModalFooter();
@@ -193,7 +179,7 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterModalCancelButton.setStyleName("btn btn-success");
 		semesterModalCancelButton.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
 				semesterModal.hide();
 			}
 		});
@@ -206,17 +192,15 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	}	
 	
 	@Override
-	public void markChoosenSemesterEntry(Semester semester){
-		for (final AnchorListItem semesterItem : semesterListItems){
-			if (semesterItem.getId().equals(semester.getId())){
+	public void markChoosenSemesterEntry(Semester s){
+		for (final AnchorListItem semesterItem : semesterListItems)
+			if (semesterItem.getId().equals(s.getId())) {
 				semesterItem.setEnabled(false);
 				semesterItem.setStyleName(nvStyle.choosenSemesterEntry());
 			} else {
 				semesterItem.setEnabled(true);
 				semesterItem.removeStyleName(nvStyle.choosenSemesterEntry());
 			}
-
-		}
 	}
 
 }

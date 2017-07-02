@@ -26,33 +26,29 @@ import upandgo.shared.model.scedule.Color;
 @RemoteServiceRelativePath("coursesManipulations")
 public interface CoursesService extends RemoteService {
 	
-	public ArrayList<CourseId> getSelectedCourses(Semester semester);
+	public ArrayList<CourseId> getSelectedCourses(Semester s);
 
-	public ArrayList<CourseId> getNotSelectedCourses(Semester semester, String query, String faculty);
+	public ArrayList<CourseId> getNotSelectedCourses(Semester s, String query, String faculty);
 	
-	public ArrayList<CourseId> getAllCourses(Semester semester);
+	public ArrayList<CourseId> getAllCourses(Semester s);
 	
-	public ArrayList<String> getFaculties(Semester semester);
+	public ArrayList<String> getFaculties(Semester s);
 
-	public Course getCourseDetails(Semester semester, CourseId id);
+	public Course getCourseDetails(Semester s, CourseId i);
 	
-	//public List<LessonGroup> getCourseLectures(String id);
+	public void selectCourse(Semester s, CourseId i);
 
-	public void selectCourse(Semester semester, CourseId id);
-
-	public void unselectCourse(Semester semester, CourseId id);
+	public void unselectCourse(Semester s, CourseId i);
 	
-	public void unselectAllCourses(Semester semester);
+	public void unselectAllCourses(Semester s);
 	
-	//public List<Course> getChosenCoursesList(Semester semester);
+	public void saveSchedule (Semester s, List<LessonGroup> sched);
 	
-	public void saveSchedule (Semester semester, List<LessonGroup> sched);
-	
-	public List<LessonGroup> loadSchedule(Semester semester);
+	public List<LessonGroup> loadSchedule(Semester s);
 	
 	public String getSomeString();
 	
-	public String getSelectedCoursesString(Semester semester);
+	public String getSelectedCoursesString(Semester s);
 	
 	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException;
 

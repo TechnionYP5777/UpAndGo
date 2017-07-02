@@ -2,8 +2,6 @@ package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import upandgo.shared.entities.course.CourseId;
-
 /**
  * 
  * @author Nikita Dizhur
@@ -30,8 +28,7 @@ public class AuthenticationEvent extends GwtEvent<AuthenticationEventHandler> {
 	}
 
 	@Override
-	protected void dispatch(AuthenticationEventHandler handler) {
-		handler.onAuthenticationChanged(this);
-		
+	protected void dispatch(AuthenticationEventHandler h) {
+		h.onAuthenticationChanged(this);
 	}
 }

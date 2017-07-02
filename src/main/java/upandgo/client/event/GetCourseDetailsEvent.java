@@ -31,8 +31,8 @@ public class GetCourseDetailsEvent extends GwtEvent<GetCourseDetailsEventHandler
 	}
 
 	@Override
-	protected void dispatch(GetCourseDetailsEventHandler handler) {
-		handler.onHighlightCourse(this);
+	protected void dispatch(GetCourseDetailsEventHandler h) {
+		h.onHighlightCourse(this);
 
 	}
 }

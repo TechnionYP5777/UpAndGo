@@ -1,7 +1,6 @@
 package upandgo.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * 
@@ -22,8 +21,8 @@ public class clearScheduleEvent extends GwtEvent<clearScheduleEventHandler>{
 	}
 
 	@Override
-	protected void dispatch(clearScheduleEventHandler handler) {
-		handler.onClearSchedule(this);
+	protected void dispatch(clearScheduleEventHandler h) {
+		h.onClearSchedule(this);
 		
 	}
 }

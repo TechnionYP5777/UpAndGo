@@ -5,7 +5,6 @@ package upandgo.server.model.logic;
  */
 
 import upandgo.shared.entities.LocalTime;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,26 +30,6 @@ public class BlankSpaceRankTests {
 		System.out.println("***");
 	}
 
-	/*
-	 * @Test public void test_a() { cr = new
-	 * XmlCourseLoader("resources/testXML/schedulerTest.XML");
-	 * 
-	 * List<Course> courses = new ArrayList<>(cr.loadAllCourses().values());
-	 * System.out.println(courses);
-	 * 
-	 * 
-	 * List<Timetable> tl = Scheduler.getTimetablesList(courses); for(Timetable
-	 * xxx : tl) System.out.println("rank: " + xxx.getRankOfDaysoff());
-	 * Iterator<Timetable> it = Scheduler.sortedBy(tl, false, false); while
-	 * (it.hasNext()) { System.out.println(it.next().getRankOfDaysoff()); }
-	 * 
-	 * 
-	 * //System.out.println(tl);
-	 * 
-	 * }
-	 * 
-	 */
-
 	@Test
 	@SuppressWarnings("deprecation")
 	public void test_a() {
@@ -61,11 +40,8 @@ public class BlankSpaceRankTests {
 
 		for (final Iterator<Timetable> it = Scheduler.sortedBy(Scheduler.getTimetablesList(courses, null), true, false); it
 				.hasNext();) {
+			@SuppressWarnings("unused")
 			final Timetable currentTable = it.next();
-			//System.out.println("\ndays of rank: " + currentTable.getRankOfDaysoff());
-			//System.out.println("blank space rank: " + currentTable.getRankOfBlankSpace());
-			//System.out.println("time start of 10:00 rank: " + currentTable.getRankOfStartTime(LocalTime.parse("10:00")));
-			//System.out.println("time table: " + currentTable);
 		}
 
 	}
@@ -80,7 +56,7 @@ public class BlankSpaceRankTests {
 		final List<Timetable> tablesList = Scheduler.getTimetablesList(courses, null);
 		Iterator<Timetable> it = Scheduler.sortedBy(tablesList, true, false, LocalTime.parse("10:00"), null);
 		Timetable currentTable = it.next();
-		assertTrue(currentTable.getRankOfDaysoff() == 4);
+		assert currentTable.getRankOfDaysoff() == 4;
 		assert currentTable.getRankOfBlankSpace() == 1.75;
 		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 0.5;
 
@@ -112,12 +88,6 @@ public class BlankSpaceRankTests {
 		assert currentTable.getRankOfDaysoff() == 4;
 		assert currentTable.getRankOfBlankSpace() == 1.75;
 		assert currentTable.getRankOfStartTime(LocalTime.parse("10:00")) == 0.5;
-
-		/*
-		 * it = Scheduler.sortedBy(tablesList, false, true); assert
-		 * it.next().getRankOfBlankSpace() == 2.0; assert
-		 * it.next().getRankOfBlankSpace() == 1.75;
-		 */
 
 	}
 

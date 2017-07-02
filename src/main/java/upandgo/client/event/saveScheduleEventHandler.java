@@ -12,5 +12,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface saveScheduleEventHandler extends EventHandler {
-	void onSaveSchedule(saveScheduleEvent event);
+	void onSaveSchedule(saveScheduleEvent e);
 }

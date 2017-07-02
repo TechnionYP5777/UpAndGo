@@ -26,7 +26,7 @@ public class ExportScheduleModal extends Modal implements HasText {
 		okButton.addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 				ExportScheduleModal.this.hide();
 			}
 		});

@@ -7,12 +7,9 @@ import org.gwtbootstrap3.client.shared.event.ModalHiddenHandler;
 import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.client.ui.NavbarText;
-import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -32,7 +29,6 @@ import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.ChangeSemesterEvent;
-import upandgo.client.event.ChangeSemesterEventHandler;
 import upandgo.shared.entities.Semester;
 
 public class NavBarPresenter implements Presenter {
@@ -46,13 +42,13 @@ public class NavBarPresenter implements Presenter {
 		
 		public AnchorButton getSemesterButton();
 		
-		public Modal initializeSemesterModal(Semester semester);
+		public Modal initializeSemesterModal(Semester s);
 		
 		public HasClickHandlers getSemesterModalAcceptButton();
 		
 		public void semesterModalAcceptButtonSetSpin(boolean spin);
 				
-		public void markChoosenSemesterEntry(Semester semester);
+		public void markChoosenSemesterEntry(Semester s);
 		
 		public HasClickHandlers getTempButton();
 		
@@ -67,11 +63,11 @@ public class NavBarPresenter implements Presenter {
 	protected Display display;
 	protected EventBus eventBus;
 
-	protected LoginInfo loginInfo = null;
+	protected LoginInfo loginInfo;
 	String signInHref = "";
 	String signOutHref = "";
 	
-	protected HandlerRegistration signInOutHandler = null;
+	protected HandlerRegistration signInOutHandler;
 
 	Semester currentSemester;
 	Semester requestedSemester;
@@ -84,33 +80,17 @@ public class NavBarPresenter implements Presenter {
 		this.display = display;
 		this.eventBus = eventBus;
 		this.currentSemester = defaultSemester;
-		
-/*		coursesService.getSemester(new AsyncCallback<Semester>() {
-			
-			@Override
-			public void onSuccess(Semester arg0) {
-				Log.info("NavBarPresenter: onSuccess semester " + arg0.getId());
-				currentSemester = arg0;
-				
-			}
-			
-			@Override
-			public void onFailure(Throwable arg0) {
-				Log.info("NavBarPresenter: onFailure semester " + arg0);
-				
-			}
-		});*/
 	}
 
 	@Override
 	public void bind() {
 		refreshUser();
 				
-		for (final AnchorListItem semesterItem : display.getSemesterListItems()){
+		for (final AnchorListItem semesterItem : display.getSemesterListItems())
 			semesterItem.addClickHandler(new ClickHandler() {
-				
 				@Override
-				public void onClick(ClickEvent event) {
+				@SuppressWarnings("unused")
+				public void onClick(ClickEvent e) {
 					Log.info("NavBarPresenter: user clicked on semester " + semesterItem.getId());
 					requestedSemester = Semester.fromId(semesterItem.getId());
 					semesterModal = display.initializeSemesterModal(requestedSemester);
@@ -123,57 +103,30 @@ public class NavBarPresenter implements Presenter {
 					});
 				}
 			});
-		}
 		
 		display.getSemesterModalAcceptButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent arg0) {
 				Log.info("NavBarPresenter: user accepted semester change " + requestedSemester.getId());
 				display.semesterModalAcceptButtonSetSpin(true);
 				eventBus.fireEvent(new ChangeSemesterEvent(Semester.fromId(requestedSemester.getId())));
 				currentSemester = requestedSemester;
-/*				display.getSemesterText().clear();
-				display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
-*/				display.getSemesterButton().setText(currentSemester.getName());
+				display.getSemesterButton().setText(currentSemester.getName());
 				semesterModal.hide();
 				display.markChoosenSemesterEntry(currentSemester);
 				
 			}
 		});
 		
-		//display.getSemesterText().add(new Span("סמסטר פעיל: " + currentSemester.getName()));
-		
 		display.getSemesterButton().setText(currentSemester.getName());
 		
 		display.markChoosenSemesterEntry(currentSemester);
 		
-/*		display.getTempButton().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				coursesService.getSemester(new AsyncCallback<Semester>() {
-					
-					@Override
-					public void onSuccess(Semester arg0) {
-						Log.info("NavBarPresenter: onSuccess semester " + arg0.getId());
-						currentSemester = arg0;
-						
-					}
-					
-					@Override
-					public void onFailure(Throwable arg0) {
-						Log.info("NavBarPresenter: onFailure semester " + arg0);
-						
-					}
-				});				
-			}
-		});*/
-		
 		display.getTempButton2().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(ClickEvent event) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 				coursesService.getSelectedCoursesString(currentSemester, new AsyncCallback<String>() {
 					
 					@Override
@@ -194,18 +147,18 @@ public class NavBarPresenter implements Presenter {
 
 	@Override
 	public void unbind() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 	}
 
 	@Override
-	public void go(LayoutPanel panel) {
+	public void go(LayoutPanel p) {
 		bind();
 		
-		panel.add(display.getAsWidget());
+		p.add(display.getAsWidget());
 
-		panel.setWidgetLeftRight(display.getAsWidget(), 0, Unit.EM, 0, Unit.EM);
-		panel.setWidgetTopHeight(display.getAsWidget(), 0, Unit.EM, 4, Unit.EM);
+		p.setWidgetLeftRight(display.getAsWidget(), 0, Unit.EM, 0, Unit.EM);
+		p.setWidgetTopHeight(display.getAsWidget(), 0, Unit.EM, 4, Unit.EM);
 		
 		
 		display.getAsWidget().getElement().getParentElement().getStyle().setPosition(Position.STATIC);
@@ -215,7 +168,7 @@ public class NavBarPresenter implements Presenter {
 	class LogInClickHandler implements ClickHandler {
 
 		@Override
-		public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+		public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 			Log.warn("entered LogInClickHandler onClick");
 			if(signInOutHandler != null)
 				signInOutHandler.removeHandler();
@@ -224,25 +177,21 @@ public class NavBarPresenter implements Presenter {
 			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
 			Window.Location.assign(signInHref);
 			eventBus.fireEvent(new AuthenticationEvent(true));
-//			refreshUser();
 		}
 	}
 
 	class LogOutClickHandler implements ClickHandler {
 
 		@Override
-		public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+		public void onClick(@SuppressWarnings("unused") ClickEvent e) {
 			Log.warn("entered LogOutClickHandler onClick");
 			if(signInOutHandler != null)
 				signInOutHandler.removeHandler();
 			Log.warn("user's info: " + loginInfo.isLoggedIn() + " " + loginInfo.getNickname());
-//			Log.warn("user have logged-out");
-//			signInLink.setHref(loginInfo.getLoginUrl());
 			display.getSignInOutButton().setText(signInMessage);
 			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
 			eventBus.fireEvent(new AuthenticationEvent(false));
 			Window.Location.assign(signOutHref);
-//			refreshUser();
 		}
 	}
 
@@ -251,7 +200,6 @@ public class NavBarPresenter implements Presenter {
 			@Override
 			public void onFailure(Throwable error) {
 				Log.warn("here333" + error.getLocalizedMessage());
-				// TODO: add some backup logic
 			}
 
 			@Override

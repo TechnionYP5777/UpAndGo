@@ -48,8 +48,7 @@ public class CourseModel { // implements Model {
 		final List<String> prevCourseList = getCoursesNames();
 		coursesById.put(name, loader.loadCourse(name));
 
-		final List<String> curCourseList = new ArrayList<>(prevCourseList);
-		curCourseList.remove(name);
+		(new ArrayList<>(prevCourseList)).remove(name);
 	}
 
 	public List<String> getCoursesNames() {
@@ -99,7 +98,7 @@ public class CourseModel { // implements Model {
 	
 	public List<String> loadChosenCourses() {
 		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
+		if (coursesEntity == null) {
 			return new ArrayList<>();
 		}
 		return coursesEntity.getCourses(semester.getId());
@@ -140,10 +139,9 @@ public class CourseModel { // implements Model {
 		
 		List<CourseId> relevantCourses = new ArrayList<>();
 		relevantCourses.add(new CourseId());
-		for(CourseId c : getNotSelectedCoursesByFaculty(faculty)){
-			if(FuzzySearch.similarity(query, c.getTitle()) > 50)
+		for(CourseId c : getNotSelectedCoursesByFaculty(faculty))
+			if (FuzzySearch.similarity(query, c.getTitle()) > 50)
 				relevantCourses.add(c);
-		}
 		
 		Collections.sort(relevantCourses, new Comparator<CourseId>() {
 			@Override
@@ -162,29 +160,19 @@ public class CourseModel { // implements Model {
 	 */
 	public List<String> loadFacultyNames() {
 		final List<String> faculties = new ArrayList<>();
-		for (Faculty faculty : facultyList){
+		for (Faculty faculty : facultyList)
 			if (!faculties.contains(faculty.getName()))
 				faculties.add(faculty.getName());
-		}
 		return faculties;
 	}
 
 
-//	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
-//		// TODO: implement it
-//	}
-//
-//	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
-//		// TODO: implement it
-//	}
-	
-	public void saveChosenLessonGroups(final List<LessonGroup> lessonGroups) {
+	public void saveChosenLessonGroups(final List<LessonGroup> gs) {
 		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
 		scheduleEntity.removeAllLessons(semester.getId());
 		
-		for (LessonGroup lg : lessonGroups){
+		for (LessonGroup lg : gs)
 			scheduleEntity.addLesson(semester.getId(), lg.getCourseID(), lg.getGroupNum());
-		}
 		
 		loader.saveChosenLessonGroups(scheduleEntity);
 	}
@@ -192,19 +180,15 @@ public class CourseModel { // implements Model {
 	public List<LessonGroup> loadChosenLessonGroups() {
 		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
 		List<LessonGroup> lgList = new ArrayList<>();
-		if (scheduleEntity == null){
-			return lgList;
-		}
-		
-		for (ScheduleEntity.Lesson lesson : scheduleEntity.getLessons(semester.getId())){
-			Course course = coursesById.get(lesson.getCourseId());
-			if (course == null)
-				continue;
-			LessonGroup lessonGroup = course.getLessonGroup(lesson.getGroupNum());
-			if (lessonGroup == null)
-				continue;
-			lgList.add(lessonGroup);
-		}
+		if (scheduleEntity != null)
+			for (ScheduleEntity.Lesson lesson : scheduleEntity.getLessons(semester.getId())) {
+				Course course = coursesById.get(lesson.getCourseId());
+				if (course == null)
+					continue;
+				LessonGroup lessonGroup = course.getLessonGroup(lesson.getGroupNum());
+				if (lessonGroup != null)
+					lgList.add(lessonGroup);
+			}
 		
 		return lgList;
 	}

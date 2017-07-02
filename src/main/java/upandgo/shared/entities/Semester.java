@@ -1,8 +1,5 @@
 package upandgo.shared.entities;
 
-import java.util.Date;
-
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum Semester implements IsSerializable {
@@ -12,8 +9,6 @@ public enum Semester implements IsSerializable {
 	
 	private final String name;
 	private final String id;
-	//private final Date startDate;
-	//private final Date endDate;
 	private final String startDate;
 	private final String endDate;
 	
@@ -27,9 +22,6 @@ public enum Semester implements IsSerializable {
 	private Semester(final String name, final String id, final String startDate, final String endDate){
 		this.name = name;
 		this.id = id;
-/*		DateTimeFormat format = DateTimeFormat.getFormat("dd/MM/yyyy");
-		this.startDate = format.parse(startDate);
-		this.endDate = format.parse(endDate);*/
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}

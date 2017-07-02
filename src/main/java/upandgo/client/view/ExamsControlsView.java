@@ -19,6 +19,7 @@ public class ExamsControlsView extends VerticalPanel{
 	private ExamsControlsStyle ecStyle = Resources.INSTANCE.examsControlsStyle();
 
 	Button examsButton = new Button("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;לוח מבחנים");
+	@SuppressWarnings("serial")
 	RadioButton moedA = new RadioButton("group1", new SafeHtml() {
 		
 		@Override
@@ -26,6 +27,7 @@ public class ExamsControlsView extends VerticalPanel{
 			return "מועד א'";
 		}
 	});
+	@SuppressWarnings("serial")
 	RadioButton moedB = new RadioButton("group1", new SafeHtml() {
 		
 		@Override
@@ -47,8 +49,7 @@ public class ExamsControlsView extends VerticalPanel{
 
 		this.setVerticalAlignment(ALIGN_BOTTOM);
 		this.setHorizontalAlignment(ALIGN_CENTER);
-		//this.setStyleName(scStyle.SchedulerControlsPanel());
-		
+				
 		examsButton.setStyleName("btn btn-warning");
 		moedA.setStyleName("btn btn-default");
 		moedB.setStyleName("btn btn-default");
@@ -64,7 +65,6 @@ public class ExamsControlsView extends VerticalPanel{
 		moedB.getElement().getStyle().setOpacity(0);
 		moedB.getElement().getStyle().setProperty("transition", "visibility 0s linear 0.3s,opacity 0.3s linear");
 		
-		//moedA.setFocus(true);
 		moadim.setDataToggle(Toggle.BUTTONS);
 		
 		moadim.add(moedA);

@@ -21,14 +21,14 @@ import upandgo.shared.entities.course.Course;
 import upandgo.shared.model.scedule.Schedule;
 import upandgo.shared.model.scedule.Timetable;
 
-@SuppressWarnings({"static-method","deprecation"})
+@SuppressWarnings("deprecation")
 public class scheduleTimetablesTest {
 
 	CourseLoader cr;
 
 	@After
 	public void after() {
-		///System.out.println("***");
+		//Do nothing
 	}
 
 	@Test
@@ -36,11 +36,9 @@ public class scheduleTimetablesTest {
 		cr = new XmlCourseLoader("schedulerTest.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		///System.out.println(courses);
-
+		
 		final Schedule s = Scheduler.schedule(courses, new ArrayList<TimeConstraint>());
-		///System.out.println("Schedule: " + s);
-
+		
 		assert s.getLessonGroups().get(0).getLessons().get(0).getStartTime()
 				.equals(new WeekTime(Day.SUNDAY, LocalTime.parse("10:00")));
 		assert s.getLessonGroups().get(1).getLessons().get(0).getStartTime()
@@ -57,14 +55,11 @@ public class scheduleTimetablesTest {
 		cr = new XmlCourseLoader("schedulerTest.XML", true);
 
 		final List<Course> courses = new ArrayList<>(cr.loadAllCoursesById().values());
-		///System.out.println(courses);
-
+		
 		final List<Timetable> tl = Scheduler.getTimetablesList(courses, null);
-		///System.out.println(tl);
-
+		
 		assert tl.size() == 4;
-		/*for (final Timetable xxx : tl)
-			System.out.println("rank: " + xxx.getRankOfDaysoff());*/
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 public class FaclutyTest {
 
 	@Test
+	@SuppressWarnings("static-method")
 	public void test() {
 		Faculty faculty = new Faculty("23", "מדעי המחשב");
 		assertEquals("23", faculty.getId());
@@ -14,6 +15,7 @@ public class FaclutyTest {
 	}
 	
 	@Test
+	@SuppressWarnings("static-method")
 	public void setTest() {
 		Faculty faculty = new Faculty("23", "מדעי המחשב");
 		faculty.setId("99");
@@ -22,11 +24,11 @@ public class FaclutyTest {
 		assertEquals("בלה בלה", faculty.getName());
 	}
 	@Test
+	@SuppressWarnings("static-method")
 	public void equalsTest() {
 		Faculty facultya = new Faculty("23", "מדעי המחשב");
 		Faculty facultyb = new Faculty("14", "מתמטיקה");
 		Faculty facultyc = new Faculty("23", "מדעי המחשב");
-		
 		assert !facultya.equals(new Exam("13:00 08 08 2017 4"));
 		assert !facultya.equals(null);
 		assert !facultya.equals(facultyb);

@@ -12,5 +12,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface buildScheduleEventHandler extends EventHandler {
-	void onBuildSchedule(buildScheduleEvent event);
+	void onBuildSchedule(buildScheduleEvent e);
 }

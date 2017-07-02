@@ -11,5 +11,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 
 public interface ChangeSemesterEventHandler extends EventHandler {
-	void onSemesterChange(ChangeSemesterEvent event);
+	void onSemesterChange(ChangeSemesterEvent e);
 }

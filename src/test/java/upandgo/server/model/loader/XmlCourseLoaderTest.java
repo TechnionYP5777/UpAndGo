@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.TreeMap;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import upandgo.server.model.loader.CourseLoader;
@@ -25,7 +23,6 @@ public class XmlCourseLoaderTest {
 
 	@Test
 	public void test_a() {
-		// Course course = CourseLoader.loadCourse("àðìéæä ðåîøéú 1");
 		final TreeMap<String, Course> coursesMap = cr.loadAllCoursesById();
 		assertNull(cr.loadAllCourseNames());
 		assertEquals(1027, cr.loadAllCoursesByName().size());

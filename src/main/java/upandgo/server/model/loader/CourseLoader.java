@@ -2,11 +2,9 @@ package upandgo.server.model.loader;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 import upandgo.shared.entities.Faculty;
-import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.course.Course;
 
 
@@ -43,7 +41,7 @@ public abstract class CourseLoader {
 
 	public abstract CoursesEntity loadChosenCourses();
 
-	public abstract void saveChosenLessonGroups(ScheduleEntity scheduleEntity);
+	public abstract void saveChosenLessonGroups(ScheduleEntity e);
 
 	public abstract ScheduleEntity loadChosenLessonGroups();
 

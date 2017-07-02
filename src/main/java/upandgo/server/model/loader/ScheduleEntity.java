@@ -36,28 +36,21 @@ public class ScheduleEntity {
 		@Override
 		public int hashCode() {
 			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((courseId == null) ? 0 : courseId.hashCode());
-			result = prime * result + groupNum;
-			return result;
+			return groupNum + prime * (prime + ((courseId == null) ? 0 : courseId.hashCode()));
 		}
 		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
+		public boolean equals(Object o) {
+			if (o == this)
 				return true;
-			if (obj == null)
+			if (o == null || getClass() != o.getClass())
 				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Lesson other = (Lesson) obj;
+			Lesson other = (Lesson) o;
 			if (courseId == null) {
 				if (other.courseId != null)
 					return false;
 			} else if (!courseId.equals(other.courseId))
 				return false;
-			if (groupNum != other.groupNum)
-				return false;
-			return true;
+			return groupNum == other.groupNum;
 		}
 		
 	}
