@@ -11,6 +11,8 @@
   
   <!-- For development, a default of `DEBUG` is recommended -->
   <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+  
+  <set-property name="log_DivLogger" value="DISABLED" />
 
 
   <!-- Send client logging to server -->

@@ -4,7 +4,7 @@
 
 
 .courseSelectionRow:hover .cell-button{
-	transition-delay:0.165s;
+	transition-delay:0.21s;
 	visibility: visible;
 	
 }

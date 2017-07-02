@@ -6,7 +6,7 @@ import java.util.Map;
 @SuppressWarnings("boxing")
 public enum Color {
 	GOLD("GOLD", "#FFD700"),
-	PALETURQUOISE("PALETURQUOISE", "#AFEEEE"),
+	PALETURQUOISE("PALETURQUOISE", "#0dc19d"),
 	SLATEBLUE("SLATEBLUE", "#6A5ACD"),
 	BLUEVIOLET("BLUEVIOLET", "#8A2BE2"),
 	BROWN("BROWN", "#A52A2A"),

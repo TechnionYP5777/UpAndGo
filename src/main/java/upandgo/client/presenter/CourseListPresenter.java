@@ -417,11 +417,11 @@ public class CourseListPresenter implements Presenter {
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
-			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
-					+ caught.getMessage() + "&&"
-					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
-					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
-			Window.alert("CourseListPresenter: Error fetching not selected courses.");
+			//Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
+			//		+ caught.getMessage() + "&&"
+			//		+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
+			//		+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
+			//Window.alert("CourseListPresenter: Error fetching not selected courses.");
 			Log.error("CourseListPresenter: Error fetching not selected courses.");
 		}
 	}
@@ -569,7 +569,7 @@ public class CourseListPresenter implements Presenter {
 	//Course Tooltip functionality
 	private TooltipOptions getOptions(@SuppressWarnings("hiding") boolean selectedCourses){
 		
-    	TooltipOptions options = new TooltipOptions().withDelayShow(110).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayShow(170).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
 			
 			@Override
 			public IsWidget getContent(Element element) {
