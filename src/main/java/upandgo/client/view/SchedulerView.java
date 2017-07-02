@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.InlineRadio;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
@@ -54,8 +55,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
 	ExamsControlsView examsControlsView = new ExamsControlsView();
 	Modal collisionBox = new Modal();
-	Button collisionBoxButton = new Button("הסר קורס");
-	List<RadioButton> radios;
+	Button collisionBoxButton = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הסר קורס");
+	List<InlineRadio> radios;
 	List<CourseTuple> solversTuples;
 	
 	ExportScheduleModal exportScheduleModal = new ExportScheduleModal();
@@ -135,7 +136,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		
 		
-		
+		collisionBoxButton.setStyleName("btn btn-success");
 		collisionBoxFooter.add(collisionBoxButton);
 		collisionBox.setFade(true);
 		collisionBox.setTitle("פתרון התנגשויות");
@@ -311,7 +312,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 	
 	@Override
-	public List<RadioButton> getCollisionRadios(){
+	public List<InlineRadio> getCollisionRadios(){
 		return radios;
 	}
 	

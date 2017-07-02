@@ -20,6 +20,7 @@ import java.util.Map.Entry;
 import org.gwtbootstrap3.client.shared.event.ModalShowEvent;
 import org.gwtbootstrap3.client.shared.event.ModalShowHandler;
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.InlineRadio;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalFooter;
@@ -124,7 +125,7 @@ public class SchedulerPresenter implements Presenter {
 				
 		public Modal getCollisionModal();
 		public Button getCollisionModalButton();
-		public List<RadioButton> getCollisionRadios();
+		public List<InlineRadio> getCollisionRadios();
 		public List<CourseTuple> getCollisionSolversTuples();
 		
 		public void setPrevEnable(boolean enable);
@@ -435,7 +436,6 @@ public class SchedulerPresenter implements Presenter {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("god damn1");
 				Log.info("radios: " + view.getCollisionRadios());
 				
 				/*for(RadioButton r : view.getCollisionRadios()){
@@ -444,7 +444,7 @@ public class SchedulerPresenter implements Presenter {
 				}*/
 				
 				// find choosen course to drop
-				List<RadioButton> radios = view.getCollisionRadios();
+				List<InlineRadio> radios = view.getCollisionRadios();
 				String dropId = null;
 				for(int i = 0; i < radios.size(); i++){
 					Log.info(radios.get(i).getText() + " " + radios.get(i).getValue());
@@ -452,29 +452,31 @@ public class SchedulerPresenter implements Presenter {
 						dropId = view.getCollisionSolversTuples().get(i).getCourseId();
 				}
 				if(dropId == null)
-					Log.error("Drop id is null");
+					Log.error("SchedulerPresenter: Drop id is null");
 				
-				Log.info("Asked to drop course id: " + dropId);
+				Log.info("SchedulerPresenter: Asked to drop course id: " + dropId);
+				
+				if(dropId.equals("999999")){
+					userEvents.clear();
+					view.getCollisionModal().hide();
+					buildSchedule();
+					return;
+				}
 				
 				Course droppedCourse = null;
-				Log.info("drop/1");
-				Log.info("drop/selected: " + selectedCourses);
+				Log.info("SchedulerPresenter: drop/selected: " + selectedCourses);
 				for(Course c : selectedCourses){
 					if(c.getId().equals(dropId)){
-						Log.info("drop/found");
+						Log.info("SchedulerPresenter: drop/found");
 						droppedCourse = c;
 						selectedCourses.remove(c);
-						Log.info("drop/removed");
+						Log.info("SchedulerPresenter: drop/removed");
 						break;
 					}
 				}
-				Log.info("drop/2");
 				eventBus.fireEvent(new CollidingCourseDeselectedEvent(new CourseId(droppedCourse.getId(), droppedCourse.getName(), droppedCourse.getaTerm(), droppedCourse.getbTerm())));
-				Log.info("drop/3");
 				view.getCollisionModal().hide();
-				Log.info("drop/4");
 				buildSchedule();
-				Log.info("drop/5");
 			}
 		});
 		
@@ -881,7 +883,7 @@ public class SchedulerPresenter implements Presenter {
 
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Window.alert("Cthulhu has awoken!!!!!!!!!");
+			//Window.alert("Cthulhu has awoken!!!!!!!!!");
 			Log.error("Cthulhu has awoken!!!!!!!!");
 			Log.error("**+++++++++++" + caught.getLocalizedMessage() + "**+++++++++++" + caught.getMessage());
 

@@ -155,6 +155,9 @@ public class CourseListPresenter implements Presenter {
 			public void onSemesterChange(ChangeSemesterEvent event) {
 				Log.info("CourseListPresenter: Got semester change event: " + event.getSemester().getId());
 				currentSemester = event.getSemester();
+				for (CourseId course : selectedCourses){
+					deselectCourse(course);
+				}
 				getFacultiesAndCourses();
 			}
 			
@@ -422,12 +425,12 @@ public class CourseListPresenter implements Presenter {
 		@Override
 		public void onFailure(Throwable caught) {
 			caught.printStackTrace();
-			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
+/*			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
 					+ caught.getMessage() + "&&"
 					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
 					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
 			Window.alert("CourseListPresenter: Error fetching not selected courses.");
-			Log.error("CourseListPresenter: Error fetching not selected courses.");
+*/			Log.error("CourseListPresenter: Error fetching not selected courses.");
 		}
 	}
 	
@@ -499,7 +502,7 @@ public class CourseListPresenter implements Presenter {
 
 		@Override
 		public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-			Window.alert("Cthulhu has awoken!!!!!!!!!");
+			//Window.alert("Cthulhu has awoken!!!!!!!!!");
 			Log.error("Cthulhu has awoken!!!!!!!!");
 			Log.error("**+++++++++++" + caught.getLocalizedMessage() + "**+++++++++++" + caught.getMessage());
 
@@ -550,7 +553,7 @@ public class CourseListPresenter implements Presenter {
 				rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-						Window.alert("CourseListPresenter: Error while selecting course.");
+						//Window.alert("CourseListPresenter: Error while selecting course.");
 						Log.error("CourseListPresenter: Error while selecting course.");
 					}
 

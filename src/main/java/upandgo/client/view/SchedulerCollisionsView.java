@@ -3,8 +3,11 @@ package upandgo.client.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.InlineRadio;
 import org.gwtbootstrap3.client.ui.ModalComponent;
+import org.gwtbootstrap3.client.ui.constants.HeadingSize;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -33,7 +36,7 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 	//HorizontalPanel freeDaysPanel = new HorizontalPanel();
 	Label freeDaysLabel = new Label("קיימות התנגשויות שלא מאפשרות להשלים את בניית המערכת. אנא וותר על אחד מהקורסים הבאים על מנת לפתור אותן:");
 	List<CourseTuple> solvers;
-	List<RadioButton> radios;
+	List<InlineRadio> radios;
 
 	
 	private SchedualerConstraintsStyle cStyle = Resources.INSTANCE.schedualerConstraintsStyle();
@@ -42,14 +45,14 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 		
 	    //InitializeTimeLBs();
 		Log.info("SchedCol/1");
-		radios = new ArrayList<RadioButton>();
+		radios = new ArrayList<InlineRadio>();
     	InitializePanel();
     	cStyle.ensureInjected();
     	Log.info("SchedCol/2");
     	
     }
 	
-	public List<RadioButton> getRadios(){
+	public List<InlineRadio> getRadios(){
 		return radios;
 	}
 	
@@ -61,15 +64,22 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 		Log.info("SchedCol/3");
 		this.solvers = solvers;
 		
-		for(RadioButton r : radios){
+		for(InlineRadio r : radios){
 			this.remove(r);
 		}
 		radios.clear();
 		
 		for(CourseTuple s : solvers){
-    		RadioButton r = new RadioButton("radioGroup", s.getCourseId() + " - " + s.getCourseName());
+			InlineRadio r;
+			if (s.getCourseId().equals("999999")){
+				r = new InlineRadio("radioGroup", "אירועים אישיים");
+			} else {
+	    		r = new InlineRadio("radioGroup", s.getCourseId() + " - " + s.getCourseName());
+			}
+			r.addStyleName(Resources.INSTANCE.schedualerConstraintsStyle().onlyCheckBox());
     		radios.add(r);
     		this.add(r);
+
     	}
 		
 		// set first by default
@@ -82,62 +92,11 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 	    
     private void InitializePanel(){
     	this.setHorizontalAlignment(ALIGN_RIGHT);
+    	
+    	this.add(new Heading(HeadingSize.H5,"קיימות התנגשויות שלא מאפשרות להשלים את בניית המערכת."));
+    	this.add(new Heading(HeadingSize.H5,"אנא וותר על אחד מהקורסים הבאים על מנת לפתור אותן:"));
+    	
 
-    	//this.add(daysOffCB);
-    	
-    	/*freeDaysPanel.add(freeDaysLabel);
-    	freeDaysPanel.add(sundayBox);
-    	freeDaysPanel.add(mondayBox);
-    	freeDaysPanel.add(tuesdayBox);
-    	freeDaysPanel.add(wednesdayBox);
-    	freeDaysPanel.add(thursdayBox);
-    	this.add(freeDaysPanel);*/
-    	this.add(freeDaysLabel);
-    	
-    	
-    	/*
-    	HorizontalPanel startTimePanel = new HorizontalPanel();
-    	startTimePanel.add(startTimeCB);
-    	startTimePanel.add(startTimeLB);
-    	
-    	HorizontalPanel finishTimePanel = new HorizontalPanel();
-    	finishTimePanel.add(finishTimeCB);
-    	finishTimePanel.add(finishTimeLB);
-
-    	this.add(startTimePanel);
-    	this.add(finishTimePanel);
-    	*/
-    	
-    	/*
-    	minWindowsCB.addStyleName(cStyle.onlyCheckBox());
-    	freeDaysPanel.addStyleName(cStyle.onlyCheckBox());
-
-    	startTimeCB.addStyleName(cStyle.timeCheckBox());
-    	finishTimeCB.addStyleName(cStyle.timeCheckBox());
-    	
-    	startTimeLB.addStyleName(cStyle.timeListBox());
-    	finishTimeLB.addStyleName(cStyle.timeListBox());
-    	
-    	startTimeCB.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
-		        startTimeLB.setEnabled(checked.booleanValue());
-			}
-    		
-    	});
-    	
-    	finishTimeCB.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-		        Boolean checked = ((InlineCheckBox) event.getSource()).getValue();
-		        finishTimeLB.setEnabled(checked.booleanValue());
-			}
-    		
-    	});
-    	*/
     	this.setStyleName(cStyle.constraintsPanel());
 
     }
