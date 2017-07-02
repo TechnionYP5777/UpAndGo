@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
-import org.gwtbootstrap3.client.ui.Divider;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.ListDropDown;
@@ -21,6 +20,7 @@ import org.gwtbootstrap3.client.ui.NavbarText;
 import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.HeadingSize;
+import org.gwtbootstrap3.client.ui.constants.IconSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
@@ -31,6 +31,7 @@ import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -86,9 +87,17 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		navbar.add(header);
 		navbarCol.add(signInText);
 		
+		brand.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.Location.reload();
+			}
+		});
 		
 		semesterButton.setDataToggle(Toggle.DROPDOWN);
 		semesterButton.setText("בחר סמסטר");
+		semesterButton.setIcon(IconType.CALENDAR_O);
 		semesterList.add(semesterButton);
 		for (Semester semester : Semester.values()){
 			AnchorListItem semesterListItem = new AnchorListItem();
@@ -99,24 +108,52 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		}
 		semesterList.add(semesterMenu);
 	
-		AnchorListItem helpLink = new AnchorListItem("מדריך למשתמש");
+		final AnchorListItem helpLink = new AnchorListItem("מדריך למשתמש");
 		helpLink.setHref("https://github.com/TechnionYP5777/UpAndGo/wiki/User-Manual-Version-2.0");
 		helpLink.addStyleName(nvStyle.navBarLink());
-		
+		helpLink.setIcon(IconType.QUESTION_CIRCLE_O);
 		Node hrefNode = helpLink.getElement().getChild(0);
 		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
 			((Element)hrefNode).setAttribute("target", "_blank");
 		}
+		helpLink.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				helpLink.setFocus(false);				
+			}
+		});
 		
-		AnchorListItem reviewLink = new AnchorListItem("שליחת משוב");
+		final AnchorListItem reviewLink = new AnchorListItem("שליחת משוב");
 		reviewLink.setHref("https://goo.gl/forms/xMXAzYbbYw1md5ls2");
 		reviewLink.addStyleName(nvStyle.navBarLink());
-		
+		reviewLink.setIcon(IconType.PENCIL_SQUARE_O);
 		hrefNode = reviewLink.getElement().getChild(0);
 		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
 			((Element)hrefNode).setAttribute("target", "_blank");
 		}
-
+		reviewLink.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				reviewLink.setFocus(false);				
+			}
+		});
+		
+		final AnchorListItem gitLink = new AnchorListItem("הפרויקט ב- GitHub");
+		gitLink.setHref("https://github.com/TechnionYP5777/UpAndGo");
+		gitLink.addStyleName(nvStyle.navBarLink());
+		gitLink.setIcon(IconType.GITHUB);
+		hrefNode = gitLink.getElement().getChild(0);
+		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
+			((Element)hrefNode).setAttribute("target", "_blank");
+		}
+		gitLink.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				gitLink.setFocus(false);				
+			}
+		});
+		
+		navbarNav.add(gitLink);
 		navbarNav.add(reviewLink);
 		navbarNav.add(helpLink);
 		navbarNav.add(semesterList);
