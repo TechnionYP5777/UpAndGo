@@ -774,7 +774,9 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSuccess(List<LessonGroup> result) {
 				lessonGroupsList.clear();
-				lessonGroupsList.add(result);
+				if (!result.isEmpty()){
+					lessonGroupsList.add(result);
+				}
 				sched_index = 0;
 				colorMap = Scheduler.mapLessonGroupsToColors(result);
 				displaySchedule();

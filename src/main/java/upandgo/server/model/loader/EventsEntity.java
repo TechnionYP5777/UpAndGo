@@ -121,7 +121,7 @@ public class EventsEntity {
 	
 	public void removeAllEvents(String semesterId){
 		if (events.containsKey(semesterId)){
-			events.remove(semesterId);
+			events.put(semesterId,new ArrayList<Event>());
 		}
 	}
 	

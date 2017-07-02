@@ -14,6 +14,7 @@ import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.Navbar;
 import org.gwtbootstrap3.client.ui.NavbarBrand;
 import org.gwtbootstrap3.client.ui.NavbarCollapse;
+import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
 import org.gwtbootstrap3.client.ui.NavbarHeader;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.NavbarText;
@@ -49,8 +50,8 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	private NavBarStyle nvStyle = Resources.INSTANCE.navBarStyle();
 	
 	Navbar navbar = new Navbar();
-	NavbarNav navbarNav = new NavbarNav();
 	NavbarCollapse navbarCol = new NavbarCollapse();
+	NavbarCollapseButton navBarColButton = new NavbarCollapseButton();
 	NavbarHeader header = new NavbarHeader();
 	NavbarBrand brand = new NavbarBrand();
 	NavbarText signInText = new NavbarText();
@@ -83,7 +84,11 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		signInButton.setSize(ButtonSize.EXTRA_SMALL);
 		signInButton.setType(ButtonType.LINK);
 		signInButton.setIcon(IconType.USER_CIRCLE);
+		
+		navBarColButton.setDataTarget("navbar-links-collapse");
+		
 		header.add(brand);
+		header.add(navBarColButton);
 		navbar.add(header);
 		navbarCol.add(signInText);
 		
@@ -110,7 +115,7 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	
 		final AnchorListItem helpLink = new AnchorListItem("מדריך למשתמש");
 		helpLink.setHref("https://github.com/TechnionYP5777/UpAndGo/wiki/User-Manual-Version-2.0");
-		helpLink.addStyleName(nvStyle.navBarLink());
+		//helpLink.addStyleName(nvStyle.navBarLink());
 		helpLink.setIcon(IconType.QUESTION_CIRCLE_O);
 		Node hrefNode = helpLink.getElement().getChild(0);
 		if (hrefNode.getNodeType() == Node.ELEMENT_NODE){
@@ -153,13 +158,21 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 			}
 		});
 		
-		navbarNav.add(gitLink);
-		navbarNav.add(reviewLink);
-		navbarNav.add(helpLink);
-		navbarNav.add(semesterList);
-		navbarNav.setPull(Pull.NONE);
-
-		navbarCol.add(navbarNav);
+		NavbarNav navbarNavLinks = new NavbarNav();
+		
+		navbarNavLinks.add(gitLink);
+		navbarNavLinks.add(reviewLink);
+		navbarNavLinks.add(helpLink);
+		
+		NavbarNav navbarNavSemester = new NavbarNav();
+		navbarNavSemester.add(semesterList);
+		
+		navbarNavLinks.setPull(Pull.NONE);
+		navbarNavSemester.setPull(Pull.RIGHT);
+		navbarCol.add(navbarNavSemester);
+		navbarCol.add(navbarNavLinks);
+		navbarCol.setId("navbar-links-collapse");
+		
 		navbar.add(navbarCol);
 		
 		this.add(navbar);
@@ -221,20 +234,20 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterModal.setTitle("אזהרה");
 		
 		ModalBody semesterModalBody = new ModalBody();
-		semesterModalBody.add(new Heading(HeadingSize.H4,"שינוי סמסטר יוביל למחיקת מערכת שלא נשמרה."));
+		semesterModalBody.add(new Heading(HeadingSize.H4,"שינוי סמסטר יוביל למחיקת שינויים במערכת שלא נשמרו."));
 		semesterModalBody.add(new Heading(HeadingSize.H4,"האם אתה בטוח שברצונך לעבור לסמסטר " + semester.getName() + "?"));
 		semesterModal.add(semesterModalBody);
 		
 		ModalFooter semesterModalFooter = new ModalFooter();
 		Button semesterModalCancelButton = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בטל");
-		semesterModalCancelButton.setStyleName("btn btn-success");
+		semesterModalCancelButton.setStyleName("btn btn-danger");
 		semesterModalCancelButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent arg0) {
 				semesterModal.hide();
 			}
 		});
-		semesterModalAcceptButton.setStyleName("btn btn-danger");
+		semesterModalAcceptButton.setStyleName("btn btn-success");
 		
 		semesterModalFooter.add(semesterModalCancelButton);
 		semesterModalFooter.add(semesterModalAcceptButton);
