@@ -16,10 +16,12 @@ import upandgo.client.CoursesService;
 import upandgo.server.model.CalendarModel;
 import upandgo.server.model.CourseModel;
 import upandgo.server.model.loader.CoursesEntity;
+import upandgo.server.model.loader.EventsEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
@@ -38,18 +40,19 @@ import upandgo.shared.model.scedule.Color;
 public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesService {
 
 	
-	private static final long serialVersionUID = 0x1091A9BC6AB6955CL;
+	private static final long serialVersionUID = 1193922002939188572L;
 
 	static {
 		// register Objectify-classes
 		ObjectifyService.register(ScheduleEntity.class);
 		ObjectifyService.register(CoursesEntity.class);
+		ObjectifyService.register(EventsEntity.class);
+
 	}
 	
 	private Semester defaultSemester = Semester.WINTER17;
 
-	@SuppressWarnings("unused")
-	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
+	private Map<Semester,CourseModel> courseModels = new TreeMap<>();
 	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
@@ -162,12 +165,28 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	@Override
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException {
+	public void saveUserEvents(Semester s, List<UserEvent> userEvents) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		courseModels.get(s).saveUserEvents(userEvents);
+
+	}
+
+	@Override
+	public List<UserEvent> loadUserEvents(Semester s) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		return courseModels.get(s).loadUserEvents();
+	}
+	
+	@Override
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, Semester semester) throws IOException {
 		try {
 			someString += "\n111";
-			calendarModel.createCalendar(sched, colorMap);
+			calendarModel.createCalendar(sched, colorMap, semester);
 			someString += "\n222";
-		} catch (@SuppressWarnings("unused") IOException e) {
+		} catch (IOException e) {
+			someString += "\n\n\n"+e.getMessage()+"\n\n\n";
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}

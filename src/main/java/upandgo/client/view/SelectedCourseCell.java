@@ -27,7 +27,7 @@ public class SelectedCourseCell extends AbstractCell<String> {
 	    int idx = value.lastIndexOf("-");
 	    @SuppressWarnings("unused")
 		String parts[] = {value.substring(0, idx), value.substring(idx+1)}; 
-	    sb.appendHtmlConstant("<div style=\"width:17.4vw;\"><div class=\"course\">" + value
+	    sb.appendHtmlConstant("<div style=\"width:16.8vw;\"><div class=\"course\">" + value
 				+ "</div><button type=\"button\" class=\"btn btn-danger cell-button\" >"
 				+ "<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הסר</button></div>");
 		

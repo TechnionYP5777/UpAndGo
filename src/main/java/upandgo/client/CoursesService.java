@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
@@ -44,12 +45,16 @@ public interface CoursesService extends RemoteService {
 	
 	public void saveSchedule (Semester s, List<LessonGroup> sched);
 	
-	public List<LessonGroup> loadSchedule(Semester s);
+	public List<LessonGroup> loadSchedule(Semester semester);
+		
+	public List<UserEvent> loadUserEvents(Semester s);
 	
+	public void saveUserEvents(Semester s, List<UserEvent> userEvents);
+
 	public String getSomeString();
 	
 	public String getSelectedCoursesString(Semester s);
 	
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException;
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, Semester semester) throws IOException;
 
 }

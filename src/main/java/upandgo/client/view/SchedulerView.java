@@ -106,12 +106,12 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(examsControlsView);
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
-		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 5.9, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 7, Unit.EM);
 
 		schedualerControlsView.exportSchedule.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
-				exportScheduleModal.setText("הפעולה מתבצעת, אנא המתן");
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+				exportScheduleModal.setText("הייצוא של מערכת שעות שלך ל-Google Calendar בתהליך, אנא המתן");
 				exportScheduleModal.setAsLoading();
 				exportScheduleModal.show();
 			}
@@ -235,14 +235,14 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void displaySchedule(List<LessonGroup> gs, Map<String, Color> m, List<UserEvent> es) {
-		timeTableView.displaySchedule(gs, m, es);
+	public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events) {
+		timeTableView.displaySchedule(lessons, map, events);
 		
 	}
 	
 	@Override
-	public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool p){
-		schedualerConstraintsView.setConstraintsPool(selectedCourses, p);
+	public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool){
+		schedualerConstraintsView.setConstraintsPool(selectedCourses, constraintsPool);
 	}
 	
 	@Override
@@ -315,84 +315,109 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 	}
 
 	@Override
-	public void updateExamsBar(List<Course> cs, boolean isMoedA) {
-		Log.info("courses: " + cs);
+	public void updateExamsBar(List<Course> courses, boolean isMoedA) {
+		Log.info("courses: " + courses);
 		List<Course> is = new ArrayList<>();
 		Map<Course, String> courseColors = new HashMap<>();
 		long width=0;
 		String examsBarHTML = "";
 		Exam exami = null, examiPlusOne = null;
 		if(isMoedA){
-			for (int i = 0; i < cs.size(); ++i) {
+			for (int i = 0; i < courses.size(); ++i) {
 				
-				Course c = cs.get(i);
+				Course c = courses.get(i);
 				if (c.getaTerm() != null) {
 					is.add(c);
 					courseColors.put(c, Color.valueOf(i).toString());
 				}
 			}
-		 	Collections.sort(is,new Comparator<Course>() {
+		 	Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
+
 				@Override
 				public int compare(Course o1, Course o2) {
 					return o1.getaTerm().compare(o2.getaTerm());
 				}
-			});
+			}));
 		}
 		else{
-			for (int i = 0; i < cs.size(); ++i) {
+			for (int i = 0; i < courses.size(); ++i) {
 				
-				Course c = cs.get(i);
+				Course c = courses.get(i);
 				if (c.getbTerm() != null) {
 					is.add(c);
 					courseColors.put(c, Color.valueOf(i).toString());
 				}
 			}
-			Collections.sort(is,new Comparator<Course>() {
+			Collections.sort(is,(new Comparator<Course>() { //sort courses by their final exam date
+
 				@Override
 				public int compare(Course o1, Course o2) {
 					return o1.getbTerm().compare(o2.getbTerm());
 				}
-			});
+			}));
 		}
 	   	   
 		for(int i=0; i < is.size(); ++i){
 			exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
 			if(i == is.size()-1){
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"border-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				break;
 			}
 			examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
 			int daysBetween = examiPlusOne.daysBetweenExams(exami);
-			if (daysBetween != 0) {
-				examsBarHTML += "<div align=\"center\" class=\"big-child\" style=\"background-color:"
-						+ courseColors.get(is.get(i)) + "\"> <b><u>" + exami.toString() + "</u></b><br>"
-						+ exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
-				width += 275;
-				for (String k : examiPlusOne.datesBetweenExams(exami)) {
-					examsBarHTML += "<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k
-							+ "</div>";
-					width += 85;
-				}
-			} else {
-				examsBarHTML += "<div align=\"center\" class=\"big-child\" style=\"background-color:#ff0000;\"> <b><u>"
-						+ exami.toString() + "</u></b><br><b>" + exami.getTimeToDisplay() + is.get(i).getName()
-						+ "</b>";
-				width += 275;
-				while (daysBetween == 0 && i < is.size() - 1) {
-					++i;
-					exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
-					examiPlusOne = isMoedA ? is.get(i + 1).getaTerm() : is.get(i + 1).getbTerm();
-					examsBarHTML += "<br><b>" + exami.getTimeToDisplay() + is.get(i).getName() + "</b>";
+			if(daysBetween == 0 ){			
+				
+				int p = i;
+				int examsNum = 1;
+				while(daysBetween == 0){
+					examsNum++;
+					++p;			
+					exami = isMoedA ? is.get(p).getaTerm() : is.get(p).getbTerm();
+					if(p == is.size()-1){
+						break;
+					}
+					examiPlusOne = isMoedA ? is.get(p+1).getaTerm() : is.get(p+1).getbTerm();
 					daysBetween = examiPlusOne.daysBetweenExams(exami);
 				}
-				examsBarHTML += "</div>";
-				if (daysBetween > 0)
-					for (String k : examiPlusOne.datesBetweenExams(exami)) {
-						examsBarHTML += "<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k
-								+ "</div>";
-						width += 85;
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"color: #D8000C;background-color: #FFBABA;\"> <b><u>" + exami.toString() + "</u></b>";
+				width+=275;
+				if(examsNum<3){
+					for(; i <= p; ++i){
+						examsBarHTML+="<br>" + exami.getTimeToDisplay() + is.get(i).getName();
 					}
+				} else {
+					examsBarHTML += "<div style=\"line-height: 1.2em;\">";
+					if (examsNum == 3)
+						for (; i <= p; ++i) {
+							examsBarHTML += exami.getTimeToDisplay() + is.get(i).getName() + "<br>";
+						}
+					else {
+						for (int j = 0; j < 2; ++j) {
+							examsBarHTML += exami.getTimeToDisplay() + is.get(i + j).getName() + "<br>";
+						}
+						examsBarHTML += "<div style=\"float:buttom; font-size: 11px;\">*יש עוד " + (examsNum - 2)
+								+ " מבחנים ביום זה שאינם מוצגים. </div>";
+					}
+					examsBarHTML += "</div>";
+				}
+				i=p;
+				examsBarHTML+="</div>";
+				if(daysBetween > 0 ){
+					for(String k : examiPlusOne.datesBetweenExams(exami)){
+						examsBarHTML+="<div align=\"left\" class=\"child\">" + k + "</div>";
+						width+=85;
+					}
+				}
+				
+			}
+			else{
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"border-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				width+=275;
+				for(String k : examiPlusOne.datesBetweenExams(exami)){
+					examsBarHTML+="<div align=\"left\" class=\"child\">" + k + "</div>";
+					width+=85;
+				}
 			}
 		}
 		examsBar = new HTML(examsBarHTML);
@@ -417,8 +442,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void openExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 6, Unit.EM);
-		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 5, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 102, Unit.PX);
+		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 84, Unit.PX);
 		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.VISIBLE);
 		examsControlsView.moedA.getElement().getStyle().setOpacity(1);
 		examsControlsView.moedA.getElement().getStyle().setProperty("transitionDelay","0s");

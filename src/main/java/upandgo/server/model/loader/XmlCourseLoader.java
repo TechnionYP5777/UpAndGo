@@ -183,7 +183,32 @@ public class XmlCourseLoader extends CourseLoader {
 		
 		ScheduleEntity scheduleEntity = CoursesServiceImpl.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
 		return scheduleEntity != null ? scheduleEntity : new ScheduleEntity(user.getUserId());
+	}
+	
+	@Override
+	public void saveUserEvents(final EventsEntity e) {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+		
+		if(user == null) {
+			Log.warn("User was signed in. schedule could not be saved!");
+			return;
+		}
+		
+		e.setId(user.getUserId());
+		CoursesServiceImpl.ofy().defer().save().entity(e);
+	}
 
+	@Override
+	public EventsEntity loadUserEvents() {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+
+		if(user == null) {
+			Log.warn("User was not signed in. selected courses could not be loaded!");
+			return null;
+		}
+		
+		EventsEntity eventsEntity = CoursesServiceImpl.ofy().load().type(EventsEntity.class).id(user.getUserId()).now();
+		return eventsEntity != null ? eventsEntity : new EventsEntity(user.getUserId());
 	}
 
 	public static void setStaffList(final CourseBuilder b, final Node p, final String s) {
@@ -436,6 +461,7 @@ public class XmlCourseLoader extends CourseLoader {
 						.getNodeValue();
 		return "";
 	}
+
 
 
 	@Override

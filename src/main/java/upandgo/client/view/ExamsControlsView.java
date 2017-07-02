@@ -49,8 +49,8 @@ public class ExamsControlsView extends VerticalPanel{
 
 		this.setVerticalAlignment(ALIGN_BOTTOM);
 		this.setHorizontalAlignment(ALIGN_CENTER);
-				
-		examsButton.setStyleName("btn btn-warning");
+		
+		examsButton.setStyleName("btn btn-primary");
 		moedA.setStyleName("btn btn-default");
 		moedB.setStyleName("btn btn-default");
 		
@@ -71,7 +71,6 @@ public class ExamsControlsView extends VerticalPanel{
 		moadim.add(moedB);
 		
 		this.add(moadim);
-		examsButton.setStyleName("btn btn-warning");
 
 		this.add(examsButton);
 		

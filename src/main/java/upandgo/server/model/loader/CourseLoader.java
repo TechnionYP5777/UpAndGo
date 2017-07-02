@@ -44,6 +44,10 @@ public abstract class CourseLoader {
 	public abstract void saveChosenLessonGroups(ScheduleEntity e);
 
 	public abstract ScheduleEntity loadChosenLessonGroups();
+	
+	public abstract void saveUserEvents(final EventsEntity e);
+	
+	public abstract EventsEntity loadUserEvents();
 
 	public abstract List<Faculty> loadFaculties();
 }

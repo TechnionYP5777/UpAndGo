@@ -8,12 +8,17 @@ import java.util.Map;
 
 import java.util.TreeMap;
 
+import com.allen_sauer.gwt.log.client.Log;
+
+import upandgo.server.CoursesServiceImpl;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
+import upandgo.server.model.loader.EventsEntity;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.utils.FuzzySearch;
@@ -191,6 +196,31 @@ public class CourseModel { // implements Model {
 			}
 		
 		return lgList;
+	}
+	
+	public void saveUserEvents(final List<UserEvent> userEvents) {
+		EventsEntity eventsEntity =  loader.loadUserEvents();
+		eventsEntity.removeAllEvents(semester.getId());
+		
+		for (UserEvent ue : userEvents){
+			eventsEntity.addEvent(semester.getId(), ue);
+		}
+		
+		loader.saveUserEvents(eventsEntity);
+	}
+	
+	public List<UserEvent> loadUserEvents() {
+		EventsEntity eventsEntity =  loader.loadUserEvents();
+		List<UserEvent> ueList = new ArrayList<>();
+		if (eventsEntity == null){
+			return ueList;
+		}
+		
+		for (EventsEntity.Event event : eventsEntity.getEvents(semester.getId())){
+			ueList.add(event.getAsUserEvent());
+		}
+		
+		return ueList;
 	}
 
 	

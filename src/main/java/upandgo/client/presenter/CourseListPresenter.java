@@ -30,6 +30,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.query.client.GQuery;
+import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.Timer;
@@ -67,6 +68,8 @@ import upandgo.shared.utils.FuzzySearch;
  * 
  */
 
+// add History management
+
 public class CourseListPresenter implements Presenter {
 
 	public interface Display {
@@ -78,9 +81,9 @@ public class CourseListPresenter implements Presenter {
 
 		HasKeyUpHandlers getCourseSearch();
 
-		void setSelectedCourses(List<CourseId> is);
+		void setSelectedCourses(List<CourseId> courses);
 
-		void setNotSelectedCourses(List<CourseId> is);
+		void setNotSelectedCourses(List<CourseId> courses);
 
 		void setFaculties(List<String> faculties);
 
@@ -96,21 +99,21 @@ public class CourseListPresenter implements Presenter {
 
 		CourseId getUnselectedCourse(int row);
 
-		int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> i); // pass
+		int getHoveredSelectedCourseRow(CellPreviewEvent<CourseId> event); // pass
 																			// -1
 																			// if
 																			// none
 
-		int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> i); // pass
+		int getHoveredNotSelectedCourseRow(CellPreviewEvent<CourseId> event); // pass
 																				// -1
 																				// if
 																				// none
 
-		int getSelectedFacultyRow(ChangeEvent e); // pass -1 if there is no
+		int getSelectedFacultyRow(ChangeEvent event); // pass -1 if there is no
 														// selectedFaculty
 														// chosen
 
-		String getCourseQuery(KeyUpEvent e);
+		String getCourseQuery(KeyUpEvent event);
 
 		Widget getAsWidget();
 		
@@ -130,8 +133,8 @@ public class CourseListPresenter implements Presenter {
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
 			
 			@Override
-			public void onAuthenticationChanged(AuthenticationEvent e) {
-				isSignedIn = e.isSignedIn();
+			public void onAuthenticationChanged(AuthenticationEvent event) {
+				isSignedIn = event.isSignedIn();
 				if (isSignedIn)
 					rpcService.getSelectedCourses(currentSemester, new FetchSelectedCoursesAsyncCallback());
 			}
@@ -140,8 +143,8 @@ public class CourseListPresenter implements Presenter {
 		this.eventBus.addHandler(CollidingCourseDeselectedEvent.TYPE, new CollidingCourseDeselectedEventHandler() {
 			
 			@Override
-			public void onCollidedCourseDeselected(CourseId i) {
-				deselectCourse(i);
+			public void onCollidedCourseDeselected(CourseId c) {
+				deselectCourse(c);
 				
 			}
 		});
@@ -149,9 +152,9 @@ public class CourseListPresenter implements Presenter {
 		this.eventBus.addHandler(ChangeSemesterEvent.TYPE, new ChangeSemesterEventHandler(){
 
 			@Override
-			public void onSemesterChange(ChangeSemesterEvent e) {
-				Log.info("CourseListPresenter: Got semester change event: " + e.getSemester().getId());
-				currentSemester = e.getSemester();
+			public void onSemesterChange(ChangeSemesterEvent event) {
+				Log.info("CourseListPresenter: Got semester change event: " + event.getSemester().getId());
+				currentSemester = event.getSemester();
 				getFacultiesAndCourses();
 			}
 			
@@ -189,8 +192,8 @@ public class CourseListPresenter implements Presenter {
 		display.getFacultyDropList().addChangeHandler(new ChangeHandler() {
 
 			@Override
-			public void onChange(ChangeEvent e) {
-				int $ = display.getSelectedFacultyRow(e);
+			public void onChange(ChangeEvent event) {
+				int $ = display.getSelectedFacultyRow(event);
 				if ($ < 0)
 					return;
 				if ($ == 0) // if it's "all faculties" option
@@ -208,7 +211,7 @@ public class CourseListPresenter implements Presenter {
 		display.getSelectedCoursesList().addDomHandler(new DoubleClickHandler() {
 
 			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent e) {
+			public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
 				deselectCourse(null);
 			}
 		}, DoubleClickEvent.getType());
@@ -216,22 +219,24 @@ public class CourseListPresenter implements Presenter {
 		display.getSelectedCoursesList().addCellPreviewHandler(new CellPreviewEvent.Handler<CourseId>() {
 
 			@Override
-			public void onCellPreview(CellPreviewEvent<CourseId> i) {
+			public void onCellPreview(CellPreviewEvent<CourseId> event) {
 
-				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(i.getNativeEvent().getType());
-				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(i.getNativeEvent().getType());
-				boolean isClick = BrowserEvents.CLICK.equals(i.getNativeEvent().getType());
+				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(event.getNativeEvent().getType());
+				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(event.getNativeEvent().getType());
+				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 
 				if (isMouseOver) {
-					hoveredRow = i.getIndex();
-					if (hoveredRow < 0)
+					hoveredRow = event.getIndex();
+					if (hoveredRow < 0) {
 						return;
+					}
 					
 					CourseId newCourseId = selectedCourses.get(hoveredRow);
 					if(!newCourseId.equals(hoveredCourseId)) {
 						hoveredCourseId = newCourseId;
 						rpcService.getCourseDetails(currentSemester, hoveredCourseId, new GetCourseDetailsCallback());
 					}
+					//display.getSelectedCoursesList().getRowElement(event.getIndex()).getCells().getItem(event.getColumn()).setTitle(newCourseId.getTitle());
 				}
 
 				if (isMouseOut) {
@@ -240,13 +245,15 @@ public class CourseListPresenter implements Presenter {
 						display.setHoveredRow(-1);
 						display.setHoveredCourseDetail(null);
 				}
-				if (!isClick)
-					return;
-				selectedClickedRow = i.getIndex();
-				EventTarget eventTarget = i.getNativeEvent().getEventTarget();
-				if ("[object HTMLButtonElement]".equals(eventTarget.toString())
-						|| "[object HTMLElement]".equals(eventTarget.toString()))
-					deselectCourse(null);
+				if (isClick) {
+
+					selectedClickedRow = event.getIndex();
+					EventTarget eventTarget = event.getNativeEvent().getEventTarget();
+					if ("[object HTMLButtonElement]".equals(eventTarget.toString())
+							|| "[object HTMLElement]".equals(eventTarget.toString())) {
+						deselectCourse(null);
+					}
+				}
 			}
 		});
 
@@ -254,7 +261,7 @@ public class CourseListPresenter implements Presenter {
 		display.getNotSelectedCoursesList().addDomHandler(new DoubleClickHandler() {
 
 			@Override
-			public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent e) {
+			public void onDoubleClick(@SuppressWarnings("unused") final DoubleClickEvent event) {
 				selectCourse();
 			}
 		}, DoubleClickEvent.getType());
@@ -262,16 +269,17 @@ public class CourseListPresenter implements Presenter {
 		display.getNotSelectedCoursesList().addCellPreviewHandler(new CellPreviewEvent.Handler<CourseId>() {
 
 			@Override
-			public void onCellPreview(CellPreviewEvent<CourseId> i) {
-				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(i.getNativeEvent().getType());
-				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(i.getNativeEvent().getType());
-				boolean isClick = BrowserEvents.CLICK.equals(i.getNativeEvent().getType());
+			public void onCellPreview(CellPreviewEvent<CourseId> event) {
+				boolean isMouseOver = BrowserEvents.MOUSEOVER.equals(event.getNativeEvent().getType());
+				boolean isMouseOut = BrowserEvents.MOUSEOUT.equals(event.getNativeEvent().getType());
+				boolean isClick = BrowserEvents.CLICK.equals(event.getNativeEvent().getType());
 
 				if (isMouseOver) {
 					
-					hoveredRow = display.getHoveredNotSelectedCourseRow(i);
-					if (hoveredRow < 0)
+					hoveredRow = display.getHoveredNotSelectedCourseRow(event);
+					if (hoveredRow < 0) {
 						return;
+					}
 					CourseId newCourseId = notSelectedCourses.get(hoveredRow);
 					if (!newCourseId.equals(hoveredCourseId)) {
 						hoveredCourseId = newCourseId;
@@ -286,21 +294,22 @@ public class CourseListPresenter implements Presenter {
 					display.setHoveredRow(-1);
 					display.setHoveredCourseDetail(null);
 				}
-				if (!isClick)
-					return;
-				unselectedClickedRow = i.getIndex();
-				EventTarget eventTarget = i.getNativeEvent().getEventTarget();
-				if ("[object HTMLButtonElement]".equals(eventTarget.toString())
-						|| "[object HTMLElement]".equals(eventTarget.toString()))
-					selectCourse();
+				if (isClick) {
+					unselectedClickedRow = event.getIndex();
+					EventTarget eventTarget = event.getNativeEvent().getEventTarget();
+					if ("[object HTMLButtonElement]".equals(eventTarget.toString())
+							|| "[object HTMLElement]".equals(eventTarget.toString())) {
+						selectCourse();
+					}
+				}
 
 			}
 		});
 
 		display.getCourseSearch().addKeyUpHandler(new KeyUpHandler() {
 			@Override
-			public void onKeyUp(KeyUpEvent e) {
-				courseQuery = display.getCourseQuery(e);
+			public void onKeyUp(KeyUpEvent event) {
+				courseQuery = display.getCourseQuery(event);
 				executeCourseSearch();
 			}
 			
@@ -309,27 +318,27 @@ public class CourseListPresenter implements Presenter {
 		display.getClearCoursesButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				selectedCourses.clear();
-				notSelectedCourses.clear();
-				notSelectedCourses.addAll(allCourses);
-				Collections.sort(notSelectedCourses);
+				executeCourseSearch();
 				display.updateLists();
-				if (!isSignedIn)
-					eventBus.fireEvent(new ClearAllCoursesEvent());
-				else
+				if(isSignedIn){
 					rpcService.unselectAllCourses(currentSemester, new AsyncCallback<Void>() {
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+							//Window.alert("Error while unselecting all course.");
 							Log.error("CourseListPresenter: Error while unselecting all course.");
 						}
-
+	
 						@Override
 						public void onSuccess(@SuppressWarnings("unused") Void result) {
 							Log.info("CourseListPresenter: got onSuccuess from server");
 							eventBus.fireEvent(new ClearAllCoursesEvent());
 						}
 					});
+				} else {
+					eventBus.fireEvent(new ClearAllCoursesEvent());
+				}
 			}
 		});
 		
@@ -343,16 +352,16 @@ public class CourseListPresenter implements Presenter {
 
 	@Override
 	public void unbind() {
-		//Do nothing
+		// Do nothing
 	}
 
 	@Override
-	public void go(LayoutPanel p) {
+	public void go(LayoutPanel panel) {
 		bind();
 
-		p.add(display.getAsWidget());
-		p.setWidgetRightWidth(display.getAsWidget(), 1, Unit.EM, 20, Unit.PCT);
-		p.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
+		panel.add(display.getAsWidget());
+		panel.setWidgetRightWidth(display.getAsWidget(), 1, Unit.EM, 20, Unit.PCT);
+		panel.setWidgetTopBottom(display.getAsWidget(), 4.5, Unit.EM, 1, Unit.EM);
 
 		getFacultiesAndCourses();
 		
@@ -394,9 +403,10 @@ public class CourseListPresenter implements Presenter {
 			result.remove(new CourseId());
 			allCourses = result;
 			notSelectedCourses.clear();
-			for(CourseId c : allCourses)
-				if (!selectedCourses.contains(c))
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
 					notSelectedCourses.add(c);
+			}
 			display.setNotSelectedLoadingAnimation(false);
 			display.setNotSelectedCourses(notSelectedCourses);
 			Log.info("CourseListPresenter: setLoadingAnimation false");
@@ -409,8 +419,8 @@ public class CourseListPresenter implements Presenter {
 			caught.printStackTrace();
 			Window.alert("FetchNotSelectedCoursesAsyncCallback got: " + caught.getLocalizedMessage() + "*"
 					+ caught.getMessage() + "&&"
-					+ (caught.getCause() == null ? "" : caught.getCause().getLocalizedMessage()) + "*"
-					+ (caught.getCause() == null ? "*" : caught.getCause().getMessage()) + "end");
+					+ (caught.getCause() != null ? caught.getCause().getLocalizedMessage() : "") + "*"
+					+ (caught.getCause() != null ? caught.getCause().getMessage() : "*") + "end");
 			Window.alert("CourseListPresenter: Error fetching not selected courses.");
 			Log.error("CourseListPresenter: Error fetching not selected courses.");
 		}
@@ -422,9 +432,10 @@ public class CourseListPresenter implements Presenter {
 			result.remove(new CourseId());
 			allCourses = result;
 			notSelectedCourses.clear();
-			for(CourseId c : allCourses)
-				if (!selectedCourses.contains(c))
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
 					notSelectedCourses.add(c);
+			}
 			executeCourseSearch();
 			display.setNotSelectedLoadingAnimation(false);
 			display.setNotSelectedCourses(notSelectedCourses);
@@ -483,97 +494,105 @@ public class CourseListPresenter implements Presenter {
 
 		final CourseId $;
 		$ = deselectedCourse != null ? deselectedCourse : display.getSelectedCourse(selectedClickedRow);
-		if ($ == null)
-			return;
-		selectedCourses.remove($);
-		notSelectedCourses.clear();
-		for (CourseId c : allCourses)
-			if (!selectedCourses.contains(c))
-				notSelectedCourses.add(c);
-		executeCourseSearch();
-		display.updateLists();
-		if (!isSignedIn)
-			eventBus.fireEvent(new UnselectCourseEvent($));
-		else
-			rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
-				@Override
-				public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-					Log.error("CourseListPresenter: Error while unselecting course.");
+		if ($ != null) {
+			selectedCourses.remove($);
+			notSelectedCourses.clear();
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c)){
+					notSelectedCourses.add(c);
 				}
+			}
+			executeCourseSearch();
+			display.updateLists();
+			if (isSignedIn) {
+				rpcService.unselectCourse(currentSemester, $, new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+						Log.error("CourseListPresenter: Error while unselecting course.");
+					}
 
-				@Override
-				public void onSuccess(@SuppressWarnings("unused") Void result) {
-					Log.info("CourseListPresenter: Success while unselecting course.");
-					eventBus.fireEvent(new UnselectCourseEvent($));
-				}
-			});
+					@Override
+					public void onSuccess(@SuppressWarnings("unused") Void result) {
+						Log.info("CourseListPresenter: Success while unselecting course.");
+						eventBus.fireEvent(new UnselectCourseEvent($));
+						
+					}
+				});
+			} else {
+				eventBus.fireEvent(new UnselectCourseEvent($));
+			}
+		}
 	}
 
 	void selectCourse() {
 		final CourseId $ = display.getUnselectedCourse(unselectedClickedRow);
-		if ($ == null)
-			return;
-		selectedCourses.add($);
-		notSelectedCourses.remove($);
-		display.updateLists();
-		if (!isSignedIn)
-			eventBus.fireEvent(new SelectCourseEvent($));
-		else
-			rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
-				@Override
-				public void onFailure(@SuppressWarnings("unused") Throwable caught) {
-					Window.alert("CourseListPresenter: Error while selecting course.");
-					Log.error("CourseListPresenter: Error while selecting course.");
-				}
+		if ($ != null) {
+			selectedCourses.add($);
+			notSelectedCourses.remove($);
+			display.updateLists();
+			if (isSignedIn) {
+				rpcService.selectCourse(currentSemester, $, new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+						Window.alert("CourseListPresenter: Error while selecting course.");
+						Log.error("CourseListPresenter: Error while selecting course.");
+					}
 
-				@Override
-				public void onSuccess(@SuppressWarnings("unused") Void result) {
-					Log.info("CourseListPresenter: got onSuccuess from server");
-					eventBus.fireEvent(new SelectCourseEvent($));
-				}
-			});
+					@Override
+					public void onSuccess(@SuppressWarnings("unused") Void result) {
+						Log.info("CourseListPresenter: got onSuccuess from server");
+						eventBus.fireEvent(new SelectCourseEvent($));
+					}
+				});
+			} else {
+				eventBus.fireEvent(new SelectCourseEvent($));
+			}
+		}
 	}
 	
 	boolean isCourseNumSelected(String courseNum){
-		for(CourseId c : selectedCourses)
-			if (c.number().equals(courseNum))
+		for(CourseId c : selectedCourses){
+			if(c.number().equals(courseNum))
 				return true;
+		}
 		return false;
 	}
 	
 	boolean isCourseNumNotSelected(String courseNum){
-		for(CourseId c : notSelectedCourses)
-			if (c.number().equals(courseNum))
+		for(CourseId c : notSelectedCourses){
+			if(c.number().equals(courseNum))
 				return true;
+		}
 		return false;
 	}
 	
 	//Course Tooltip functionality
-	@SuppressWarnings("hiding")
-	private TooltipOptions getOptions(boolean selectedCourses){
+	private TooltipOptions getOptions(@SuppressWarnings("hiding") boolean selectedCourses){
 		
-    	TooltipOptions options = new TooltipOptions().withDelayShow(70).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayShow(110).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
 			
 			@Override
-			public IsWidget getContent(Element e) {
+			public IsWidget getContent(Element element) {
 				@SuppressWarnings("boxing")
-				int absoluteRowIndex = Integer.valueOf($(e).attr("__gwt_row"));
+				int absoluteRowIndex = Integer.valueOf($(element).attr("__gwt_row"));
 
 				String html = "<div>";
 				if(hoveredRow == absoluteRowIndex && hoveredCourse!=null){
 					html+= "<b>" + hoveredCourse.getName() + "</b><br/>";
-					html+="<div align=right><u>מספר הקורס:</u> " + hoveredCourse.getId() + "<br/><u>"
-							+ "נקודות:</u> " + hoveredCourse.getPoints() + "<br/><u>סגל הקורס:</u> " ;
+					html+="<div align=right>";
+					html+="<u>מספר הקורס:</u> " + hoveredCourse.getId() + "<br/><u>נקודות:</u> "
+							+ hoveredCourse.getPoints() + "<br/><u>סגל הקורס:</u> " ;
 					if(!hoveredCourse.getStuff().isEmpty()){
-						for(StuffMember sm : hoveredCourse.getStuff())
-							html += sm.getTitle() + " " + sm.getFirstName() + " " + sm.getLastName() + ", ";
+						for(StuffMember sm : hoveredCourse.getStuff()){
+							html+= sm.getTitle()+ " " + sm.getFirstName()+ " "  + sm.getLastName() + ", ";
+						}
 						html = html.substring(0, html.length()-3);
 						html+=".";
 					}
-					html+="<br/>";
-					html+="<u>הערות:</u><ul>";
-					for(String s : hoveredCourse.getNotes())
-						html += "<li>" + s + "</li>";
+					html+="<br/><u>הערות:</u><ul>";
+					for(String s : hoveredCourse.getNotes()){
+						html+="<li>" + s + "</li>";
+					}
 					html+="</ul>";
 				
 				}
@@ -585,33 +604,41 @@ public class CourseListPresenter implements Presenter {
     	options.withSelector("tbody tr");
     	options.addShowTooltipEventHandler(!selectedCourses ? new ShowTooltipEventHandler() {
 			@Override
-			public void onShow(final ShowTooltipEvent e) {
-				final String courseId = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br")
-						.exec(e.getTooltip().elements()[0].getInnerHTML()).getGroup(0).substring(0, 6);
-				new Timer() {
-					GQuery tt = e.getTooltip();
+			public void onShow(final ShowTooltipEvent event) {
+				Element e = event.getTooltip().elements()[0];
+				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
+				MatchResult m = pattern.exec(e.getInnerHTML());
+				final String courseId = m.getGroup(0).substring(0, 6);
+				Timer maybeRemoveTooltip = new Timer() {
+					GQuery tt = event.getTooltip();
 
 					@Override
 					public void run() {
-						if (isCourseNumSelected(courseId))
+						if (isCourseNumSelected(courseId)) {
 							tt.remove();
+						}
 					}
-				}.schedule(20);
+				};
+				maybeRemoveTooltip.schedule(20);
 			}
 		} : new ShowTooltipEventHandler() {
 			@Override
-			public void onShow(final ShowTooltipEvent e) {
-				final String courseId = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br")
-						.exec(e.getTooltip().elements()[0].getInnerHTML()).getGroup(0).substring(0, 6);
-				new Timer() {
-					GQuery tt = e.getTooltip();
+			public void onShow(final ShowTooltipEvent event) {
+				Element e = event.getTooltip().elements()[0];
+				RegExp pattern = RegExp.compile("[0-9][0-9][0-9][0-9][0-9][0-9]<br");
+				MatchResult m = pattern.exec(e.getInnerHTML());
+				final String courseId = m.getGroup(0).substring(0, 6);
+				Timer maybeRemoveTooltip = new Timer() {
+					GQuery tt = event.getTooltip();
 
 					@Override
 					public void run() {
-						if (isCourseNumNotSelected(courseId))
+						if (!isCourseNumSelected(courseId)) {
 							tt.remove();
+						}
 					}
-				}.schedule(20);
+				};
+				maybeRemoveTooltip.schedule(20);
 			}
 		});
     	return options;
@@ -620,17 +647,19 @@ public class CourseListPresenter implements Presenter {
 	void executeCourseSearch() {
 		if(courseQuery.isEmpty()){
 			notSelectedCourses.clear();
-			for(CourseId c : allCourses)
-				if (!selectedCourses.contains(c))
+			for(CourseId c : allCourses){
+				if(!selectedCourses.contains(c))
 					notSelectedCourses.add(c);
+			}
 			display.updateLists();
 			return;
 		}
 		
 		notSelectedCourses.clear();
-		for(CourseId c : allCourses)
-			if (FuzzySearch.similarity(courseQuery, c.getTitle()) > 50 && (!selectedCourses.contains(c)))
+		for(CourseId c : allCourses){
+			if(FuzzySearch.similarity(courseQuery, c.getTitle()) > 50 && (!selectedCourses.contains(c)))
 				notSelectedCourses.add(c);
+		}
 		
 		Collections.sort(notSelectedCourses, new Comparator<CourseId>() {
 			@Override

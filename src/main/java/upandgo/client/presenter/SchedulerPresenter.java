@@ -91,19 +91,20 @@ public class SchedulerPresenter implements Presenter {
 
 	public interface Display {
 
+		//some refactoring here
 		public HasClickHandlers clearSchedule();
 		public HasClickHandlers buildSchedule();
 		public HasClickHandlers nextSchedule();
 		public HasClickHandlers prevSchedule();
 		public HasClickHandlers saveSchedule();
 
-		public void displaySchedule(List<LessonGroup> gs, Map<String, Color> m, List<UserEvent> es);
+		public void displaySchedule(List<LessonGroup> lessons, Map<String, Color> map, List<UserEvent> events);
 		
 		public void drawCollisionView(List<CourseTuple> solvers);
 		public void drawManyCollisionView();
 		public void drawEmptyListView();
 		
-		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool p);		
+		public void setConstraintsPool(List<Course> selectedCourses, ConstraintsPool constraintsPool);		
 		public ConstraintsPool getConstraintsPool();		
 		public Modal getConstraintsModal();		
 		public HasClickHandlers getConstraintsBoxSaveButton();		
@@ -124,7 +125,7 @@ public class SchedulerPresenter implements Presenter {
 		public void setCurrentScheduleIndex(int index, int max);
 		public void scheduleBuilt();
 				
-		public void updateExamsBar(List<Course> cs, boolean isMoedA);
+		public void updateExamsBar(List<Course> courses, boolean isMoedA);
 		public HasClickHandlers getExamButton();
 		public void collapseExamsBar();
 		public void openExamsBar();
@@ -153,6 +154,9 @@ public class SchedulerPresenter implements Presenter {
 		this.view = display;
 		this.rpcService = rpc;
 		this.currentSemester = defaultSemester;
+		//this.isBlankSpaceCount = this.isDaysoffCount = false;
+		//this.minStartTime = null;
+		//this.maxFinishTime = null;
 		this.selectedCourses = new ArrayList<>();
 		
 		
@@ -171,17 +175,18 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus.addHandler(AuthenticationEvent.TYPE, new AuthenticationEventHandler() {
 
 			@Override
-			public void onAuthenticationChanged(AuthenticationEvent e) {
-				isSignedIn = e.isSignedIn();
-				if (isSignedIn)
+			public void onAuthenticationChanged(AuthenticationEvent event) {
+				isSignedIn = event.isSignedIn();
+				if (isSignedIn) {
 					updateScheduleAndChosenLessons();
+				}
 			}
 		});
 
 		this.eventBus.addHandler(UnselectCourseEvent.TYPE, new UnselectCourseEventHandler() {
 
 			@Override
-			public void onUnselectCourse(UnselectCourseEvent e) {
+			public void onUnselectCourse(UnselectCourseEvent event) {
 				Log.info("unslected/1");
 				Iterator<Course> it = selectedCourses.iterator();
 				Log.info("unslected/2");
@@ -189,7 +194,7 @@ public class SchedulerPresenter implements Presenter {
 					Log.info("unslected/3");
 					Course c = it.next();
 					Log.info("unslected/4");
-					if (c.getId() == e.getId().number()) {
+					if (c.getId() == event.getId().number()) {
 						Log.info("unslected/5");
 						selectedCourses.remove(c);
 						Log.info("unslected/6");
@@ -197,7 +202,7 @@ public class SchedulerPresenter implements Presenter {
 					}
 				}
 				Log.info("unslected/7");
-				constraintsPool.removeCourseConstraint(e.getId().number());
+				constraintsPool.removeCourseConstraint(event.getId().number());
 				Log.info("unslected/8");
 				view.updateExamsBar(selectedCourses, isMoedAExams);
 				Log.info("unslected/9");
@@ -207,9 +212,9 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus.addHandler(SelectCourseEvent.TYPE, new SelectCourseEventHandler() {
 
 			@Override
-			public void onSelectCourse(SelectCourseEvent e) {
-				Log.info("SchedulerPresenter: SelectCourseEvent: " + e.getId().number());
-				rpcService.getCourseDetails(currentSemester, e.getId(), new AsyncCallback<Course>() {
+			public void onSelectCourse(SelectCourseEvent event) {
+				Log.info("SchedulerPresenter: SelectCourseEvent: " + event.getId().number());
+				rpcService.getCourseDetails(currentSemester, event.getId(), new AsyncCallback<Course>() {
 
 					@Override
 					public void onSuccess(Course result) {
@@ -229,14 +234,15 @@ public class SchedulerPresenter implements Presenter {
 		this.eventBus.addHandler(ChangeSemesterEvent.TYPE, new ChangeSemesterEventHandler(){
 
 			@Override
-			public void onSemesterChange(ChangeSemesterEvent e) {
-				currentSemester = e.getSemester();
+			public void onSemesterChange(ChangeSemesterEvent event) {
+				currentSemester = event.getSemester();
 				lessonGroupsList.clear();
 				selectedCourses.clear();
 				displaySchedule();
 				view.updateExamsBar(selectedCourses, isMoedAExams);
-				if (isSignedIn)
+				if (isSignedIn){
 					updateScheduleAndChosenLessons();
+				}
 			}
 			
 		});
@@ -247,7 +253,7 @@ public class SchedulerPresenter implements Presenter {
 
 		view.clearSchedule().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				lessonGroupsList.clear();
 				displaySchedule();
 				eventBus.fireEvent(new clearScheduleEvent());
@@ -256,7 +262,7 @@ public class SchedulerPresenter implements Presenter {
 
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("Build schedule: requested");
 				buildSchedule();
 			}
@@ -264,22 +270,26 @@ public class SchedulerPresenter implements Presenter {
 
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("Next schedule was requested");
-				if (lessonGroupsList.size() <= sched_index + 1)
+				if (lessonGroupsList.size() <= sched_index + 1) {
 					return;
+				}
 				
 				++sched_index;
 				displaySchedule();
+				
+
 			}
 		});
 
 		view.prevSchedule().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("Previous schedule was requested");
-				if (sched_index <= 0)
+				if (sched_index <= 0) {
 					return;
+				}
 				
 				--sched_index;
 				displaySchedule();
@@ -289,15 +299,16 @@ public class SchedulerPresenter implements Presenter {
 
 		view.saveSchedule().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("SchedulerPresenter: Save schedule was requested");
 				if (!isSignedIn) {
 					Window.alert("SchedulerPresenter: Please, sign in first!");
 					return;
 				}
 				List<LessonGroup> listToSave = new ArrayList<>();
-				if (lessonGroupsList.size() > sched_index)
+				if (lessonGroupsList.size() > sched_index){
 					listToSave = lessonGroupsList.get(sched_index);
+				}
 				rpcService.saveSchedule(currentSemester, listToSave, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(@SuppressWarnings("unused") Throwable caught) {
@@ -309,6 +320,22 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("SchedulerPresenter: schedule was saved successfully");
 					}
 				});
+				
+				List<UserEvent> eventsToSave = new ArrayList<>();
+				eventsToSave.addAll(userEvents.values());
+				Log.info("SchedulerPresenter eventsToSave size " + eventsToSave.size());
+				rpcService.saveUserEvents(currentSemester, eventsToSave, new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Log.error("SchedulerPresenter: Error while saving events.");
+						Log.error("SchedulerPresenter: " + caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(@SuppressWarnings("unused") Void result) {
+						Log.info("SchedulerPresenter: User events were saved successfully");
+					}
+				});
 			}
 		});
 		
@@ -317,20 +344,23 @@ public class SchedulerPresenter implements Presenter {
 			public void onShow(@SuppressWarnings("unused") ModalShowEvent evt) {
 				Log.info("SchedulerPresenter: Constraints modal show event");
 				view.setConstraintsPool(selectedCourses, constraintsPool);
+				
 			}
 		});	
 		
 		view.getConstraintsBoxSaveButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				constraintsPool = new ConstraintsPool(view.getConstraintsPool());
 				Log.info("SchedulerPresenter: constraintsPool recived ");
-				for (Entry<String,CourseConstraint> entry : constraintsPool.getCourseConstraints().entrySet())
+				for (Entry<String,CourseConstraint> entry : constraintsPool.getCourseConstraints().entrySet()){
 					Log.info("SchedulerPresenter: CourseConstraint " + entry.getKey() + " " + entry.getValue());
+				}
 				view.getConstraintsModal().hide();
-				if (!lessonGroupsList.isEmpty())
+				if (!lessonGroupsList.isEmpty()){
 					buildSchedule();
+				}
 			}
 		});
 		
@@ -339,8 +369,9 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onShow(@SuppressWarnings("unused") ModalShowEvent evt) {
 				Lesson lesson = view.getLessonModelCurrentLesson();
-				if (lesson == null)
+				if (lesson == null){
 					return;
+				}
 				if (!constraintsPool.getCourseConstraints().containsKey(lesson.getCourseId())){
 					view.getLessonModalCreateConstraintButton().setVisible(true);
 					return;
@@ -360,7 +391,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getLessonModalCreateConstraintButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Lesson lesson = view.getLessonModelCurrentLesson();
 				if (lesson == null){
 					Log.info("SchedulerPresenter: user wants constraint on non existing course");
@@ -376,10 +407,11 @@ public class SchedulerPresenter implements Presenter {
 		view.getLessonModalRemoveConstraintButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Lesson lesson = view.getLessonModelCurrentLesson();
-				if (lesson == null)
+				if (lesson == null){
 					return;
+				}
 				constraintsPool.setCourseConstraint(lesson.getCourseId(), lesson.getType(), false, 0);
 				view.getLessonModal().hide();
 				buildScheduleAndSearchForCurrentOne();
@@ -390,12 +422,12 @@ public class SchedulerPresenter implements Presenter {
 			
 			@Override
 			@SuppressWarnings({ "boxing", "null" })
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("god damn1");
 				Log.info("radios: " + view.getCollisionRadios());
 				List<RadioButton> radios = view.getCollisionRadios();
 				String dropId = null;
-				for (int i = 0; i < radios.size(); ++i) {
+				for (int i = 0; i < radios.size(); i++) {
 					Log.info(radios.get(i).getText() + " " + radios.get(i).getValue());
 					if (radios.get(i).getValue())
 						dropId = view.getCollisionSolversTuples().get(i).getCourseId();
@@ -406,7 +438,7 @@ public class SchedulerPresenter implements Presenter {
 				Course droppedCourse = null;
 				Log.info("drop/1");
 				Log.info("drop/selected: " + selectedCourses);
-				for (Course c : selectedCourses)
+				for (Course c : selectedCourses) {
 					if (c.getId().equals(dropId)) {
 						Log.info("drop/found");
 						droppedCourse = c;
@@ -414,6 +446,7 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("drop/removed");
 						break;
 					}
+				}
 				Log.info("drop/2");
 				eventBus.fireEvent(new CollidingCourseDeselectedEvent(new CourseId(droppedCourse.getId(),
 						droppedCourse.getName(), droppedCourse.getaTerm(), droppedCourse.getbTerm())));
@@ -428,13 +461,13 @@ public class SchedulerPresenter implements Presenter {
 		view.getExamButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
-				if (!examBarVisable) {
-					examBarVisable = true;
-					view.openExamsBar();
-				} else {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
+				if (examBarVisable){
 					examBarVisable = false;
 					view.collapseExamsBar();
+				} else {
+					examBarVisable = true;
+					view.openExamsBar();
 				}
 			}
 		});
@@ -442,7 +475,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getMoedAButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				isMoedAExams = true;
 				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
@@ -451,7 +484,7 @@ public class SchedulerPresenter implements Presenter {
 		view.getMoedBButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				isMoedAExams = false;
 				view.updateExamsBar(selectedCourses, isMoedAExams);
 			}
@@ -460,14 +493,15 @@ public class SchedulerPresenter implements Presenter {
 		view.getUserEventBoxSaveButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				userEvents.put(view.getUserEvent().getWeekTime(), view.getUserEvent());
 				Log.info("SchedulerPresenter: saved user event on " + view.getUserEvent().getWeekTime());
 				view.getUserEventBox().hide();
-				if (lessonGroupsList.isEmpty())
+				if (lessonGroupsList.isEmpty()){
 					displaySchedule();
-				else
+				} else {
 					buildScheduleAndSearchForCurrentOne();
+				}
 				
 			}
 		});
@@ -475,49 +509,53 @@ public class SchedulerPresenter implements Presenter {
 		view.getUserEventBoxDeleteButton().addClickHandler(new ClickHandler() {
 			
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				userEvents.remove(view.getUserEvent().getWeekTime());
 				Log.info("SchedulerPresenter: removed user event on " + view.getUserEvent().getWeekTime());
 				view.getUserEventBox().hide();
-				if (lessonGroupsList.isEmpty())
+				if (lessonGroupsList.isEmpty()){
 					displaySchedule();
-				else
+				} else {
 					buildScheduleAndSearchForCurrentOne();
+				}
 			}
 		});
 		
 		view.getExportScheduleButton().addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(@SuppressWarnings("unused") ClickEvent e) {
+			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
 				Log.info("export schedule was requested");
 				if (!isSignedIn) {
 					view.setExportScheduleAsWarning();
 					view.setExportScheduleText("בבקשה, כנס למערכת לפני זה");
 				} else
-					rpcService.exportSchedule(lessonGroupsList.get(sched_index), colorMap, new AsyncCallback<Void>() {
-						@Override
-						public void onFailure(Throwable caught) {
-							if (caught instanceof IOException) {
-								view.setExportScheduleAsWarning();
-								view.setExportScheduleText("בבקשה, תן לנו הרשאות ואז תלחץ שוב ל\"יצוא מערכת\"");
-								Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
-								rpcService.getSomeString(new GetSomeStringAsyncCallback());
-								return;
-							}
-							Window.alert("Error while exporting schedule:\n" + caught.getMessage());
-							Log.error("Error while exporting schedule.");
-							Log.error(caught.getMessage());
-							rpcService.getSomeString(new GetSomeStringAsyncCallback());
-						}
+					rpcService.exportSchedule(lessonGroupsList.get(sched_index), colorMap, currentSemester,
+							new AsyncCallback<Void>() {
+								@Override
+								public void onFailure(Throwable caught) {
+									if (caught instanceof IOException) {
+										view.setExportScheduleAsWarning();
+										view.setExportScheduleText(
+												"בבקשה, תן לנו הרשאות לגשת ל-Google Calendar שלך ואז תלחץ שוב ל\"יצוא מערכת\"");
+										Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
+										Log.error("error: \n" + caught.getMessage());
+										rpcService.getSomeString(new GetSomeStringAsyncCallback());
+										return;
+									}
+									Window.alert("Error while exporting schedule:\n" + caught.getMessage());
+									Log.error("Error while exporting schedule.");
+									Log.error(caught.getMessage());
+									rpcService.getSomeString(new GetSomeStringAsyncCallback());
+								}
 
-						@Override
-						public void onSuccess(@SuppressWarnings("unused") Void result) {
-							Log.info("schedule was exported successfully");
-							view.setExportScheduleAsSuccess();
-							view.setExportScheduleText("המערכת היוצאה בהצלחה");
-							rpcService.getSomeString(new GetSomeStringAsyncCallback());
-						}
-					});
+								@Override
+								public void onSuccess(@SuppressWarnings("unused") Void result) {
+									Log.info("schedule was exported successfully");
+									view.setExportScheduleAsSuccess();
+									view.setExportScheduleText("המערכת יוצאה בהצלחה ל-Google Calendar");
+									rpcService.getSomeString(new GetSomeStringAsyncCallback());
+								}
+							});
 			}
 		});
 	}
@@ -528,17 +566,19 @@ public class SchedulerPresenter implements Presenter {
 
 	}
 	@Override
-	public void go(final LayoutPanel p) {
+	public void go(final LayoutPanel panel) {
 		bind();
 				
 		examBarVisable = false;			
 		
-		p.add(view.getAsWidget());
-		p.setWidgetLeftRight(view.getAsWidget(), 1, Unit.EM, 22, Unit.PCT);
-		p.setWidgetTopBottom(view.getAsWidget(), 4, Unit.EM, 0, Unit.EM);
+		panel.add(view.getAsWidget());
+		panel.setWidgetLeftRight(view.getAsWidget(), 1, Unit.EM, 22, Unit.PCT);
+		panel.setWidgetTopBottom(view.getAsWidget(), 4, Unit.EM, 0, Unit.EM);
 
-		if (isSignedIn)
+		if (isSignedIn) {
 			updateScheduleAndChosenLessons();
+			
+		}
 	}
 
 	void buildScheduleAndSearchForCurrentOne(){
@@ -550,7 +590,6 @@ public class SchedulerPresenter implements Presenter {
 		displaySchedule();
 	}
 	
-	@SuppressWarnings("unused")
 	void buildSchedule() {
 		Log.info("SchedulerPresenter: getChosenCoursesList success");
 		if (selectedCourses.isEmpty()) {
@@ -564,45 +603,56 @@ public class SchedulerPresenter implements Presenter {
 		
 		// Create new list of courses based on user's constraints
 		List<Course> constrainedCourses = new ArrayList<>(selectedCourses.size());
-		for (int i = 0 ; i < selectedCourses.size() ; ++i)
+		for (int i = 0 ; i < selectedCourses.size() ; i++){
 			constrainedCourses.add(new Course(selectedCourses.get(i)));
+		}
 		
-		for (Course course : constrainedCourses)
-			if (constraintsPool.getCourseConstraints().containsKey(course.getId())) {
+		for (Course course : constrainedCourses){
+			if (constraintsPool.getCourseConstraints().containsKey(course.getId())){
 				CourseConstraint courseConstraint = constraintsPool.getCourseConstraints().get(course.getId());
-				if (courseConstraint.isSpecificLecture()) {
-					for (LessonGroup lessonGroup : new ArrayList<>(course.getLectures()))
+				if (courseConstraint.isSpecificLecture()){
+					for (LessonGroup lessonGroup : new ArrayList<>(course.getLectures())){
 						if (lessonGroup.getGroupNum() != courseConstraint.getLectureLessonGroup())
 							course.getLectures().remove(lessonGroup);
-					for (LessonGroup lessonGroup : course.getLectures())
+					}
+					for (LessonGroup lessonGroup : course.getLectures()){
 						lessonGroup.setConstrained(true);
+					}
 				}
-				if (courseConstraint.isSpecificTutorial()) {
-					for (LessonGroup lessonGroup : new ArrayList<>(course.getTutorials()))
+				if (courseConstraint.isSpecificTutorial()){
+					for (LessonGroup lessonGroup : new ArrayList<>(course.getTutorials())){
 						if (lessonGroup.getGroupNum() != courseConstraint.getTutorialLessonGroup())
 							course.getTutorials().remove(lessonGroup);
-					for (LessonGroup lessonGroup : course.getTutorials())
+					}
+					for (LessonGroup lessonGroup : course.getTutorials()){
 						lessonGroup.setConstrained(true);
+					}
 				}
 			}
+		}
 		
 		Log.info("SchedulerPresenter: selectedCourses " + selectedCourses.get(0).getTutorials());
 		
 		// This creates a dummy course for the scheduler that contains all user events
 		LessonGroup userEventsLessonGroup = new LessonGroup(999);
-		for (UserEvent userEvent : getUserEvents())
+		for (UserEvent userEvent : getUserEvents()){
 			userEventsLessonGroup.addLesson(userEvent.getAsLesson());
+		}
 		Course userEventCourse = new Course("user events","999999","user events",new ArrayList<StuffMember>(),0.0,null,null);
 		userEventCourse.addLecturesLessonGroup(userEventsLessonGroup);
 		userEventCourse.addTutorialLessonGroup(new LessonGroup(999));
 		
-		new ArrayList<Course>(selectedCourses).add(userEventCourse);
+		@SuppressWarnings("unused")
+		List<Course> selectedCoursesAndEvents = new ArrayList<Course>(selectedCourses);
+		selectedCoursesAndEvents.add(userEventCourse);
 		
+		@SuppressWarnings("unused")
 		List<Course> constrainedCoursesAndEvents = new ArrayList<Course>(constrainedCourses);
 		constrainedCoursesAndEvents.add(userEventCourse);
 
 		
 		Log.info("Build schedule: before Scheduler.getTimetablesList");
+		
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(constrainedCoursesAndEvents, null);
 		
 		colorMap = Scheduler.getColorMap();
@@ -615,9 +665,9 @@ public class SchedulerPresenter implements Presenter {
 		Log.info("Build schedule: after Scheduler.sortedBy");
 		if (sorted.isEmpty()) {
 			Log.info("SchedulerPresenter: found collisions, try to solve them");
-			if(!Scheduler.getCollisionSolvers().isEmpty())
+			if(!Scheduler.getCollisionSolvers().isEmpty()){
 				view.drawCollisionView(Scheduler.getCollisionSolvers());
-			else{
+			}else{
 				view.drawManyCollisionView();
 				
 				Log.info("SchedulerPresenter: found too many collisions and cannot solve any of them");
@@ -625,14 +675,23 @@ public class SchedulerPresenter implements Presenter {
 		} else {
 			lessonGroupsList.clear();
 			sched_index = 0;
-			for (Timetable table : sorted)
+			for (Timetable table : sorted){
 				lessonGroupsList.add(table.getLessonGroups());
+			}
+			//Consumer can't compile on client side
+/*							tables.forEach(new Consumer<Timetable>() {
+				@Override
+				public void accept(Timetable λ) {
+					lessonGroupsList.add(λ.getLessonGroups());
+				}
+			});*/
 			Log.info("Build schedule: A schedule was build");
 
 			displaySchedule();
 
-			if (lessonGroupsList.size()>1)
+			if (lessonGroupsList.size()>1){
 				view.setNextEnable(true);
+			}
 		}
 		view.scheduleBuilt();
 		view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
@@ -645,20 +704,21 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
 				Log.info("SchedulerPresenter: loaded selected courses Ids into scheduler!");
-				for (final CourseId courseId : result)
-					rpcService.getCourseDetails(currentSemester, courseId, new AsyncCallback<Course>() {
+				for (final CourseId courseId : result){
+					rpcService.getCourseDetails(currentSemester, courseId,new AsyncCallback<Course>() {
 						@Override
 						public void onSuccess(@SuppressWarnings("hiding") Course result) {
 							selectedCourses.add(result);
 							Log.info("SchedulerPresenter: Selected course " + result.getId() + " was loaded");
 							view.updateExamsBar(selectedCourses, isMoedAExams);
 						}
-
 						@Override
 						public void onFailure(@SuppressWarnings("unused") Throwable caught) {
 							Log.info("SchedulerPresenter: Failed on selected course " + courseId.name());
 						}
-					});				
+					});
+					
+				}				
 			}
 			
 			@Override
@@ -678,16 +738,38 @@ public class SchedulerPresenter implements Presenter {
 			@Override
 			public void onSuccess(List<LessonGroup> result) {
 				lessonGroupsList.clear();
-				lessonGroupsList.add(result);
+				if (!result.isEmpty()){
+					lessonGroupsList.add(result);
+				}
 				sched_index = 0;
 				colorMap = Scheduler.mapLessonGroupsToColors(result);
 				displaySchedule();
 				view.scheduleBuilt();
-				if (result.isEmpty())
+				if (result.isEmpty()){
 					view.setCurrentScheduleIndex(0, 0);
-				else
-					view.setCurrentScheduleIndex(sched_index + 1, lessonGroupsList.size());
+				} else {
+					view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
+				}
 				Log.info("SchedulerPresenter: schedule was loaded. it has " + String.valueOf(result.size()) + " LessonGroups.");
+			}
+		});
+		
+		rpcService.loadUserEvents(currentSemester, new AsyncCallback<List<UserEvent>>() {
+			
+			@Override
+			public void onSuccess(List<UserEvent> result) {
+				userEvents.clear();
+				for(UserEvent userEvent : result){
+					userEvents.put(userEvent.getWeekTime(), userEvent);
+				}
+				displaySchedule();
+				Log.info("SchedulerPresenter: " + String.valueOf(result.size()) + " user events were loaded.");
+			}
+			
+			@Override
+			public void onFailure(@SuppressWarnings("unused") Throwable caught) {
+				Log.warn("SchedulerPresenter: Uh-oh, couldn't load user events!");
+
 			}
 		});
 	}
@@ -721,8 +803,9 @@ public class SchedulerPresenter implements Presenter {
 	
 	
 	void setNotesOnLessonsModals(){
-		for(Course course : selectedCourses)
+		for(Course course : selectedCourses){
 			view.setNotesOnLessonModal(course.getId(), course.getNotes());
+		}
 	}
 	
 	@SuppressWarnings("unused")
@@ -732,16 +815,24 @@ public class SchedulerPresenter implements Presenter {
 	
 	
 	int findIndexOfLessonGroupList(List<LessonGroup> listToFind){
-		for (int i = 0 ; i < lessonGroupsList.size() ; ++i)
-			if (compareListOfLessonGroup(lessonGroupsList.get(i), listToFind))
+		for (int i = 0 ; i < lessonGroupsList.size() ; i++){
+			List<LessonGroup> lessonGroupList = lessonGroupsList.get(i);
+		
+			if (compareListOfLessonGroup(lessonGroupList, listToFind)){
 				return i;
+			}
+		}
 		return 0; 
 	}
 
 	static boolean compareListOfLessonGroup(List<LessonGroup> list1, List<LessonGroup> list2){
-		for (LessonGroup lessonGroup : list1)
-			if (lessonGroup.getGroupNum() != 999 && !list2.contains(lessonGroup))
-				return false;
+		for (LessonGroup lessonGroup : list1){
+			if (lessonGroup.getGroupNum() != 999){
+				if (!list2.contains(lessonGroup)){
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 	
