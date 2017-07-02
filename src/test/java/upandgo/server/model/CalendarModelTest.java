@@ -3,7 +3,6 @@ package upandgo.server.model;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,15 +25,15 @@ import upandgo.shared.entities.Lesson.Type;
 import upandgo.shared.model.scedule.Color;
 
 public class CalendarModelTest {	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
+	@SuppressWarnings("static-method")
 	public void testCtor() throws IOException {
 		CalendarModel model = new CalendarModel();
 		model.createCalendar(null, null, null);
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testColorToColorId() {
 		assertEquals("5", CalendarModel.colorToColorId(Color.GOLD));
 		assertEquals("7", CalendarModel.colorToColorId(Color.PALETURQUOISE));
@@ -58,9 +57,6 @@ public class CalendarModelTest {
 	}
 	
 	static class IOException2 extends IOException {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
 		IOException2(String s) {
@@ -68,46 +64,44 @@ public class CalendarModelTest {
 		}
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testWrappedIOException() {
 		assertEquals("hello", CalendarModel.wrappedIOException(new IOException("hello")).getMessage());
 		assertEquals("hello", CalendarModel.wrappedIOException(new IOException2("hello")).getMessage());
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testNewFlowNotThrowsExceptions() throws IOException {
 		@SuppressWarnings("unused")
 		GoogleAuthorizationCodeFlow flow = CalendarModel.newFlow();
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testGetRedirectUri() {
 		String testLink = "https://test.com";
 		HttpServletRequest httpServReq = Mockito.mock(HttpServletRequest.class);
 		Mockito.when(httpServReq.getRequestURL()).thenReturn(new StringBuffer(testLink));
-		assertEquals(testLink+"/oauth2callback", CalendarModel.getRedirectUri(httpServReq));
+		assertEquals(testLink + "/oauth2callback", CalendarModel.getRedirectUri(httpServReq));
 	}
 	
-	@SuppressWarnings({ "static-method", "deprecation" })
 	@Test
+	@SuppressWarnings("static-method")
 	public void testCreateEvents() {
 		LessonGroup lg = new LessonGroup(10);
-		lg.addLesson(new Lesson(new StuffMember(), new WeekTime(Day.FRIDAY, LocalTime.of(1,1)), new WeekTime(Day.FRIDAY, LocalTime.of(2,1)), "place 1",
-				Type.LECTURE, 1, "1", "1"));
-		lg.addLesson(new Lesson(null, new WeekTime(Day.FRIDAY, LocalTime.of(1,1)), new WeekTime(Day.FRIDAY, LocalTime.of(2,1)), null,
-				Type.LECTURE, 1, "1", "1"));
+		lg.addLesson(new Lesson(new StuffMember(), new WeekTime(Day.FRIDAY, LocalTime.of(1, 1)),
+				new WeekTime(Day.FRIDAY, LocalTime.of(2, 1)), "place 1", Type.LECTURE, 1, "1", "1"));
+		lg.addLesson(new Lesson(null, new WeekTime(Day.FRIDAY, LocalTime.of(1, 1)),
+				new WeekTime(Day.FRIDAY, LocalTime.of(2, 1)), null, Type.LECTURE, 1, "1", "1"));
 		lg.addLesson(null);
 		List<Event> events = CalendarModel.createEvents(lg, Color.BLUEVIOLET, Semester.WINTER17);
-		
 		assertEquals(2, events.size());
 		assertEquals(CalendarModel.colorToColorId(Color.BLUEVIOLET), events.get(0).getColorId());
 		assertEquals(CalendarModel.colorToColorId(Color.BLUEVIOLET), events.get(1).getColorId());
 		assertEquals("place 1", events.get(0).getLocation());
 		assertEquals("", events.get(1).getLocation());
-		
 		System.out.println(events.get(0).getStart().getDateTime().toStringRfc3339());
 		System.out.println(DateTime.parseRfc3339("2017-10-25T01:01:00.000Z"));
 		assertEquals(DateTime.parseRfc3339("2017-10-26T01:01:00.000Z"), events.get(0).getStart().getDateTime());
@@ -116,8 +110,8 @@ public class CalendarModelTest {
 		assertEquals(DateTime.parseRfc3339("2017-10-26T02:01:00.000Z"), events.get(1).getEnd().getDateTime());
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testLessonStartToRfc() {
 		String res = CalendarModel.lessonStartToRfc(Semester.WINTER17.getStartDate(), Day.FRIDAY, 2, 1);
 		assertEquals("2017-10-26T02:01:00Z", res);
@@ -129,8 +123,8 @@ public class CalendarModelTest {
 		assertEquals("2017-10-26T20:10:00Z", res);
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
+	@SuppressWarnings("static-method")
 	public void testGetRecurrenceRule() {
 		String res = CalendarModel.getRecurrenceRule("01/01/2000");
 		assertEquals("RRULE:FREQ=WEEKLY;UNTIL=20000101T235959Z", res);

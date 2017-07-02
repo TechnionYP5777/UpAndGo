@@ -8,9 +8,6 @@ import java.util.Map;
 
 import java.util.TreeMap;
 
-import com.allen_sauer.gwt.log.client.Log;
-
-import upandgo.server.CoursesServiceImpl;
 import upandgo.server.model.loader.CourseLoader;
 import upandgo.server.model.loader.CoursesEntity;
 import upandgo.server.model.loader.ScheduleEntity;
