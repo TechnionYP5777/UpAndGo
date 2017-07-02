@@ -1,12 +1,22 @@
 package upandgo.shared.entities;
 
+import java.util.Objects;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import upandgo.shared.entities.Lesson.Type;
 
-public class UserEvent {
+public class UserEvent implements IsSerializable{
 
 	private WeekTime time;
 	private String description;
 	private LocalTime duration;
+	
+	public UserEvent() {
+		this.time = null;
+		this.description = "";
+		this.duration = null;
+	}
 	
 	public UserEvent(WeekTime time, String description, LocalTime duration) {
 		this.time = time;
@@ -43,6 +53,16 @@ public class UserEvent {
 		return new Lesson(null,time,time.addDuration(duration),description,Type.LECTURE,999,"999999","user events");
 	}
 	
+	@Override
+	public boolean equals(final Object d) {
+		return d instanceof UserEvent && time.equals(((UserEvent) d).getWeekTime())
+				&& description.equals(((UserEvent) d).getDescription())
+				&& duration.equals(((UserEvent) d).getDuration());
+	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(time);
+	}
 	
 }

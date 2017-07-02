@@ -16,10 +16,12 @@ import upandgo.client.CoursesService;
 import upandgo.server.model.CalendarModel;
 import upandgo.server.model.CourseModel;
 import upandgo.server.model.loader.CoursesEntity;
+import upandgo.server.model.loader.EventsEntity;
 import upandgo.server.model.loader.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
@@ -44,6 +46,8 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		// register Objectify-classes
 		ObjectifyService.register(ScheduleEntity.class);
 		ObjectifyService.register(CoursesEntity.class);
+		ObjectifyService.register(EventsEntity.class);
+
 	}
 	
 	private Semester defaultSemester = Semester.WINTER17;
@@ -158,6 +162,21 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		if (!courseModels.containsKey(s))
 			initilalizeCourseModel(s);
 		return courseModels.get(s).loadChosenLessonGroups();
+	}
+	
+	@Override
+	public void saveUserEvents(Semester s, List<UserEvent> userEvents) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		courseModels.get(s).saveUserEvents(userEvents);
+
+	}
+
+	@Override
+	public List<UserEvent> loadUserEvents(Semester s) {
+		if (!courseModels.containsKey(s))
+			initilalizeCourseModel(s);
+		return courseModels.get(s).loadUserEvents();
 	}
 	
 	@Override

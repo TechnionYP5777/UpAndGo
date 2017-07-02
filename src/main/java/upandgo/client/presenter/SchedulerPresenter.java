@@ -328,6 +328,23 @@ public class SchedulerPresenter implements Presenter {
 						Log.info("SchedulerPresenter: schedule was saved successfully");
 					}
 				});
+				
+				List<UserEvent> eventsToSave = new ArrayList<>();
+				eventsToSave.addAll(userEvents.values());
+				Log.info("SchedulerPresenter eventsToSave size " + eventsToSave.size());
+				rpcService.saveUserEvents(currentSemester, eventsToSave, new AsyncCallback<Void>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						//Window.alert("SchedulerPresenter: Error while saving schedule.");
+						Log.error("SchedulerPresenter: Error while saving events.");
+						Log.error("SchedulerPresenter: " + caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						Log.info("SchedulerPresenter: User events were saved successfully");
+					}
+				});
 			}
 		});
 		
@@ -768,6 +785,25 @@ public class SchedulerPresenter implements Presenter {
 					view.setCurrentScheduleIndex(sched_index+1, lessonGroupsList.size());
 				}
 				Log.info("SchedulerPresenter: schedule was loaded. it has " + String.valueOf(result.size()) + " LessonGroups.");
+			}
+		});
+		
+		rpcService.loadUserEvents(currentSemester, new AsyncCallback<List<UserEvent>>() {
+			
+			@Override
+			public void onSuccess(List<UserEvent> result) {
+				userEvents.clear();
+				for(UserEvent userEvent : result){
+					userEvents.put(userEvent.getWeekTime(), userEvent);
+				}
+				displaySchedule();
+				Log.info("SchedulerPresenter: " + String.valueOf(result.size()) + " user events were loaded.");
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Log.warn("SchedulerPresenter: Uh-oh, couldn't load user events!");
+
 			}
 		});
 	}

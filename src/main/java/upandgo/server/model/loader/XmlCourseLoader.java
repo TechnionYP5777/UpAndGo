@@ -187,7 +187,32 @@ public class XmlCourseLoader extends CourseLoader {
 		
 		ScheduleEntity scheduleEntity = CoursesServiceImpl.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
 		return scheduleEntity != null ? scheduleEntity : new ScheduleEntity(user.getUserId());
+	}
+	
+	@Override
+	public void saveUserEvents(final EventsEntity e) {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+		
+		if(user == null) {
+			Log.warn("User was signed in. schedule could not be saved!");
+			return;
+		}
+		
+		e.setId(user.getUserId());
+		CoursesServiceImpl.ofy().defer().save().entity(e);
+	}
 
+	@Override
+	public EventsEntity loadUserEvents() {
+		User user = UserServiceFactory.getUserService().getCurrentUser();
+
+		if(user == null) {
+			Log.warn("User was not signed in. selected courses could not be loaded!");
+			return null;
+		}
+		
+		EventsEntity eventsEntity = CoursesServiceImpl.ofy().load().type(EventsEntity.class).id(user.getUserId()).now();
+		return eventsEntity != null ? eventsEntity : new EventsEntity(user.getUserId());
 	}
 
 //	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {
@@ -489,53 +514,7 @@ public class XmlCourseLoader extends CourseLoader {
 		return "";
 	}
 
-/*	private static Day convertStrToDay(final String xxx) {
-		switch (xxx) {
-		case "א":
-			return Day.SUNDAY;
-		case "ב":
-			return Day.MONDAY;
-		case "ג":
-			return Day.TUESDAY;
-		case "ד":
-			return Day.WEDNESDAY;
-		case "ה":
-			return Day.THURSDAY;
-		case "ו":
-			return Day.FRIDAY;
-		default:
-			return Day.SATURDAY;
-		}
-	}*/
 
-//	private static Month convertStrToMonth(final String xxx) {
-//		switch (xxx) {
-//		case "01":
-//			return Month.JANUARY;
-//		case "02":
-//			return Month.FEBRUARY;
-//		case "03":
-//			return Month.MARCH;
-//		case "04":
-//			return Month.APRIL;
-//		case "05":
-//			return Month.MAY;
-//		case "06":
-//			return Month.JUNE;
-//		case "07":
-//			return Month.JULY;
-//		case "08":
-//			return Month.AUGUST;
-//		case "09":
-//			return Month.SEPTEMBER;
-//		case "10":
-//			return Month.OCTOBER;
-//		case "11":
-//			return Month.NOVEMBER;
-//		default:
-//			return Month.DECEMBER;
-//		}
-//	}
 
 	@Override
 	public List<Faculty> loadFaculties() {

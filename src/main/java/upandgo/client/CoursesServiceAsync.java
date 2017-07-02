@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
+import upandgo.shared.entities.UserEvent;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 import upandgo.shared.model.scedule.Color;
@@ -46,6 +47,10 @@ public interface CoursesServiceAsync {
 
 	public void loadSchedule(Semester semester, AsyncCallback<List<LessonGroup>> callback);
 	
+	public void saveUserEvents(Semester semester, List<UserEvent> userEvents, AsyncCallback<Void> callback);
+
+	public void loadUserEvents(Semester semester, AsyncCallback<List<UserEvent>> callback);
+		
 	public void getSomeString(AsyncCallback<String> callback);
 	
 	public void getSelectedCoursesString(Semester semester, AsyncCallback<String> callback);
