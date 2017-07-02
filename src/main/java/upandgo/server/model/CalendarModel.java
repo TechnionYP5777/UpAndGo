@@ -122,7 +122,7 @@ public class CalendarModel {
 		return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, cred).build();
 	}
 
-	private static List<Event> createEvents(LessonGroup lg, Color color, Semester semester) {
+	static List<Event> createEvents(LessonGroup lg, Color color, Semester semester) {
 		List<Event> events = new ArrayList<>();
 
 		for (Lesson l : lg.getLessons()) {
@@ -139,7 +139,7 @@ public class CalendarModel {
 			
 			// create event:
 			Event event = new Event().setSummary(l.getCourseId() + "\n" + l.getCourseName())
-					.setLocation((l.getPlace() == null) ? "" : l.getPlace() + ", " + l.getRoomNumber())
+					.setLocation((l.getPlace() == null) ? "" : l.getPlace())
 					.setDescription(String.valueOf(l.getGroup()) + "\n" + l.getType().name() + "\n"
 							+ ((l.getRepresenter() == null) ? "" : l.getRepresenter().getFullName()))
 					.setStart(startTime).setEnd(endTime)
@@ -151,7 +151,7 @@ public class CalendarModel {
 		return events;
 	}
 
-	private static String lessonStartToRfc(String semsterStart, Day weekDay, int hour, int minute) {
+	static String lessonStartToRfc(String semsterStart, Day weekDay, int hour, int minute) {
 		String date = "";
 		try {
 			Date $ = new SimpleDateFormat("dd/MM/yyyy").parse(semsterStart);
@@ -180,7 +180,7 @@ public class CalendarModel {
 		return date + "T" + hourStr + ":" + minuteStr + ":00Z"; // e.g. "1985-04-12T23:20:50.52Z"
 	}
 	
-	private static String getRecurrenceRule(String semsterEnd) {
+	static String getRecurrenceRule(String semsterEnd) {
 		String date = "";
 		try {
 			Date $ = new SimpleDateFormat("dd/MM/yyyy").parse(semsterEnd);
@@ -189,7 +189,7 @@ public class CalendarModel {
 			e.printStackTrace();
 		}
 
-		return "RRULE:FREQ=WEEKLY;UNTIL=" + date + "T235959Z"; // e.g. "1985-04-12T23:20:50.52Z"
+		return "RRULE:FREQ=WEEKLY;UNTIL=" + date + "T235959Z";
 	}
 
 	/**
