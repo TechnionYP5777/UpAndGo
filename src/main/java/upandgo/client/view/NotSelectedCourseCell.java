@@ -24,7 +24,7 @@ public class NotSelectedCourseCell extends AbstractCell<String> {
 			return;
 	    
 	    	
-			sb.appendHtmlConstant("<div style=\"width:17vw;\"><div class=\"course\">" + value
+			sb.appendHtmlConstant("<div style=\"width:16.8vw;\"><div class=\"course\">" + value
 					+ "</div><button type=\"button\" class=\"btn btn-success cell-button\">"
 					+ "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;בחר</button></div>");
 		

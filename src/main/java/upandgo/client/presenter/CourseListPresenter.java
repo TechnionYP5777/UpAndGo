@@ -585,7 +585,7 @@ public class CourseListPresenter implements Presenter {
 	//Course Tooltip functionality
 	private TooltipOptions getOptions(boolean selectedCourses){
 		
-    	TooltipOptions options = new TooltipOptions().withDelayShow(70).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
+    	TooltipOptions options = new TooltipOptions().withDelayShow(110).withDelayHide(0).withAutoClose(true).withPlacement(TooltipPlacement.LEFT).withContent(new TooltipOptions.TooltipWidgetContentProvider() {
 			
 			@Override
 			public IsWidget getContent(Element element) {
