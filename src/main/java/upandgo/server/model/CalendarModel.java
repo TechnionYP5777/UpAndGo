@@ -17,8 +17,6 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.services.calendar.model.ColorDefinition;
-import com.google.api.services.calendar.model.Colors;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.appengine.api.users.User;
@@ -78,16 +76,6 @@ public class CalendarModel {
 
 		Credential credential = newFlow().loadCredential(user.getUserId());
 		calendarService = getCalendarService(credential);
-
-		Colors colors = calendarService.colors().get().execute();
-		for (Map.Entry<String, ColorDefinition> color : colors.getEvent().entrySet()) {
-			CoursesServiceImpl.someString +=("	*********************************");
-			CoursesServiceImpl.someString +=("	******ColorId : " + color.getKey());
-			CoursesServiceImpl.someString +=("  ******Background: " + color.getValue().getBackground());
-			CoursesServiceImpl.someString +=("  ******Foreground: " + color.getValue().getForeground());
-			CoursesServiceImpl.someString +=("	*********************************");
-			}
-
 		
 		// Create a new calendar
 		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
