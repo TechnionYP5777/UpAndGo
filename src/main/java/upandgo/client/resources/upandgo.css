@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 @external body;
 body{
+	overflow:hidden;
 	background: WhiteSmoke;
 	cursor: default;
   -webkit-touch-callout: none; /* iOS Safari */
