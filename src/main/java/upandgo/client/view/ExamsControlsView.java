@@ -47,9 +47,8 @@ public class ExamsControlsView extends VerticalPanel{
 
 		this.setVerticalAlignment(ALIGN_BOTTOM);
 		this.setHorizontalAlignment(ALIGN_CENTER);
-		//this.setStyleName(scStyle.SchedulerControlsPanel());
 		
-		examsButton.setStyleName("btn btn-warning");
+		examsButton.setStyleName("btn btn-primary");
 		moedA.setStyleName("btn btn-default");
 		moedB.setStyleName("btn btn-default");
 		
@@ -64,14 +63,12 @@ public class ExamsControlsView extends VerticalPanel{
 		moedB.getElement().getStyle().setOpacity(0);
 		moedB.getElement().getStyle().setProperty("transition", "visibility 0s linear 0.3s,opacity 0.3s linear");
 		
-		//moedA.setFocus(true);
 		moadim.setDataToggle(Toggle.BUTTONS);
 		
 		moadim.add(moedA);
 		moadim.add(moedB);
 		
 		this.add(moadim);
-		examsButton.setStyleName("btn btn-warning");
 
 		this.add(examsButton);
 		

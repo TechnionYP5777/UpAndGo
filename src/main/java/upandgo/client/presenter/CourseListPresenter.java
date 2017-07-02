@@ -322,9 +322,7 @@ public class CourseListPresenter implements Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				selectedCourses.clear();
-				notSelectedCourses.clear();
-				notSelectedCourses.addAll(allCourses);
-				Collections.sort(notSelectedCourses);
+				executeCourseSearch();
 				display.updateLists();
 				if(isSignedIn){
 					rpcService.unselectAllCourses(currentSemester, new AsyncCallback<Void>() {
@@ -665,7 +663,7 @@ public class CourseListPresenter implements Presenter {
 							GQuery tt = event.getTooltip();
 							@Override
 							public void run() {
-								if(isCourseNumNotSelected(courseId)){
+								if(!isCourseNumSelected(courseId)){
 									
 									tt.remove();
 								}

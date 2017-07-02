@@ -106,7 +106,7 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		
 		this.add(examsControlsView);
 		this.setWidgetLeftWidth(examsControlsView, 0, Unit.EM, 10, Unit.EM);
-		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 5.9, Unit.EM);
+		this.setWidgetBottomHeight(examsControlsView, 1, Unit.EM, 7, Unit.EM);
 
 		schedualerControlsView.exportSchedule.addClickHandler(new ClickHandler() {
 			@Override
@@ -400,36 +400,63 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 		for(int i=0; i < is.size(); ++i){
 			exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
 			if(i == is.size()-1){
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"border-color:" + courseColors.get(is.get(i)) +";\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				break;
 			}
 			examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
 			int daysBetween = examiPlusOne.daysBetweenExams(exami);
 			if(daysBetween == 0 ){			
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:#ff0000;\"> <b><u>" + exami.toString() + "</u></b><br><b>" + exami.getTimeToDisplay() + is.get(i).getName() + "</b>";
-				width+=275;
-				while(daysBetween == 0 &&  i < is.size()-1){
-					++i;
-					exami = isMoedA ? is.get(i).getaTerm() : is.get(i).getbTerm();
-					examiPlusOne = isMoedA ? is.get(i+1).getaTerm() : is.get(i+1).getbTerm();
-					examsBarHTML+="<br><b>" + exami.getTimeToDisplay() + is.get(i).getName() + "</b>";
+				
+				int p = i;
+				int examsNum = 1;
+				while(daysBetween == 0){
+					examsNum++;
+					++p;			
+					exami = isMoedA ? is.get(p).getaTerm() : is.get(p).getbTerm();
+					if(p == is.size()-1){
+						break;
+					}
+					examiPlusOne = isMoedA ? is.get(p+1).getaTerm() : is.get(p+1).getbTerm();
 					daysBetween = examiPlusOne.daysBetweenExams(exami);
 				}
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"color: #D8000C;background-color: #FFBABA;\"> <b><u>" + exami.toString() + "</u></b>";
+				width+=275;
+				if(examsNum<3){
+					for(; i <= p; ++i){
+						examsBarHTML+="<br>" + exami.getTimeToDisplay() + is.get(i).getName();
+					}
+				}
+				else if(examsNum == 3){
+					examsBarHTML+="<div style=\"line-height: 1.2em;\">";
+					for(; i <= p; ++i){
+						examsBarHTML+= exami.getTimeToDisplay() + is.get(i).getName() + "<br>";
+					}
+					examsBarHTML+="</div>";
+				}
+				else{
+					examsBarHTML+="<div style=\"line-height: 1.2em;\">";
+					for(int j = 0; j < 2; ++j){
+						examsBarHTML+=exami.getTimeToDisplay() + is.get(i+j).getName() + "<br>" ;
+					}
+					examsBarHTML+="<div style=\"float:buttom; font-size: 11px;\">" + "*יש עוד " + (examsNum-2) + " מבחנים ביום זה שאינם מוצגים." + " </div>";
+					examsBarHTML+="</div>";
+				}
+				i=p;
 				examsBarHTML+="</div>";
 				if(daysBetween > 0 ){
 					for(String k : examiPlusOne.datesBetweenExams(exami)){
-						examsBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
+						examsBarHTML+="<div align=\"left\" class=\"child\">" + k + "</div>";
 						width+=85;
 					}
 				}
 				
 			}
 			else{
-				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"background-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
+				examsBarHTML+="<div align=\"center\" class=\"big-child\" style=\"border-color:" + courseColors.get(is.get(i)) +"\"> <b><u>" + exami.toString() + "</u></b><br>" + exami.getTimeToDisplay() + is.get(i).getName() + "</div> ";
 				width+=275;
 				for(String k : examiPlusOne.datesBetweenExams(exami)){
-					examsBarHTML+="<div align=\"left\" class=\"child\" style=\"background-color:#9ae59a;\">" + k + "</div>";
+					examsBarHTML+="<div align=\"left\" class=\"child\">" + k + "</div>";
 					width+=85;
 				}
 			}
@@ -456,8 +483,8 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void openExamsBar() {
-		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 6, Unit.EM);
-		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 5, Unit.EM);
+		this.setWidgetTopBottom(scrollableTimeTable, 1, Unit.EM, 102, Unit.PX);
+		this.setWidgetBottomHeight(examsScrollPanel, 1, Unit.EM, 84, Unit.PX);
 		examsControlsView.moedA.getElement().getStyle().setVisibility(Visibility.VISIBLE);
 		examsControlsView.moedA.getElement().getStyle().setOpacity(1);
 		examsControlsView.moedA.getElement().getStyle().setProperty("transitionDelay","0s");
