@@ -54,6 +54,6 @@ public interface CoursesService extends RemoteService {
 	
 	public String getSelectedCoursesString(Semester semester);
 	
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException;
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, Semester semester) throws IOException;
 
 }

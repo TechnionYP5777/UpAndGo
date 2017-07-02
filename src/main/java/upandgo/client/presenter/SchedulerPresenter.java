@@ -533,14 +533,15 @@ public class SchedulerPresenter implements Presenter {
 					view.setExportScheduleText("בבקשה, כנס למערכת לפני זה");
 					return;
 				}
-				rpcService.exportSchedule(lessonGroupsList.get(sched_index), colorMap, new AsyncCallback<Void>() {
+				rpcService.exportSchedule(lessonGroupsList.get(sched_index), colorMap, currentSemester, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
 						if(caught instanceof IOException) {
 							view.setExportScheduleAsWarning();
-							view.setExportScheduleText("בבקשה, תן לנו הרשאות ואז תלחץ שוב ל\"יצוא מערכת\"");
+							view.setExportScheduleText("בבקשה, תן לנו הרשאות לגשת ל-Google Calendar שלך ואז תלחץ שוב ל\"יצוא מערכת\"");
 //							Window.Location.assign(caught.getMessage());
 							Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
+							Log.error("error: \n"+caught.getMessage());
 							rpcService.getSomeString(new GetSomeStringAsyncCallback());
 							return;
 						}
@@ -555,7 +556,7 @@ public class SchedulerPresenter implements Presenter {
 					public void onSuccess(@SuppressWarnings("unused") Void result) {
 						Log.info("schedule was exported successfully");
 						view.setExportScheduleAsSuccess();
-						view.setExportScheduleText("המערכת היוצאה בהצלחה");
+						view.setExportScheduleText("המערכת יוצאה בהצלחה ל-Google Calendar");
 						rpcService.getSomeString(new GetSomeStringAsyncCallback());
 					}
 				});

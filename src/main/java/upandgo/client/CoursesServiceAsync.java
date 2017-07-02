@@ -50,5 +50,5 @@ public interface CoursesServiceAsync {
 	
 	public void getSelectedCoursesString(Semester semester, AsyncCallback<String> callback);
 			
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, AsyncCallback<Void> callback);
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, Semester semester, AsyncCallback<Void> callback);
 }

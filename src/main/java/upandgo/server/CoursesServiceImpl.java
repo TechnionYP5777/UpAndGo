@@ -48,7 +48,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	
 	private Semester defaultSemester = Semester.WINTER17;
 
-	private Map<Semester,CourseModel> courseModels = new TreeMap<Semester,CourseModel>();
+	private Map<Semester,CourseModel> courseModels = new TreeMap<>();
 	private final CalendarModel calendarModel = new CalendarModel();
 
 	public CoursesServiceImpl() {
@@ -161,12 +161,13 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	@Override
-	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap) throws IOException {
+	public void exportSchedule(List<LessonGroup> sched, Map<String, Color> colorMap, Semester semester) throws IOException {
 		try {
 			someString += "\n111";
-			calendarModel.createCalendar(sched, colorMap);
+			calendarModel.createCalendar(sched, colorMap, semester);
 			someString += "\n222";
-		} catch (IOException e) {
+		} catch (@SuppressWarnings("unused") IOException e) {
+			someString += "\n\n\n"+e.getMessage()+"\n\n\n";
 			throw new IOException(CalendarModel.newFlow().newAuthorizationUrl().setRedirectUri(CalendarModel.getRedirectUri(this.getThreadLocalRequest())).build());
 		}
 	}
