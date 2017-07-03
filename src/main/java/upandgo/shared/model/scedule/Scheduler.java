@@ -101,7 +101,7 @@ public class Scheduler implements IsSerializable{
 					result.add($.getTimetable());
 				else if (!collisionSolvers.contains($.getCollisionSolver())){
 					collisionSolvers.add($.getCollisionSolver());
-					if($.hasDualCollision())
+					if($.hasDualCollision() &&  !collisionSolvers.contains($.getCollisionSolver2())  )
 						collisionSolvers.add($.getCollisionSolver2());
 				}
 
