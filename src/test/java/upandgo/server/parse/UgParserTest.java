@@ -83,7 +83,7 @@ public class UgParserTest {
 	
 	@Test
 	public void test_a() throws MalformedURLException, IOException{
-//		assertEquals(3142,UgParser.getCoursesIDAndFaculty(false, "201602").size());
+		assertEquals(3142,UgParser.getCoursesIDAndFaculty(false, "201602").size());
 		assertEquals(1237,UgParser.getCoursesIDAndFaculty(true, "201602").size());
 		assertEquals(1237,UgParser.getAllCoursesNamesAndID().size());
 		org.w3c.dom.Document doc = null;
@@ -101,6 +101,6 @@ public class UgParserTest {
 
 	@Test
 	public void testCreateCoursesXMLDocument(){
-//		UgParser.createCoursesXMLDocument("201603");
+		UgParser.createCoursesXMLDocument("201603");
 	}
 }
