@@ -557,7 +557,7 @@ public class SchedulerPresenter implements Presenter {
 					public void onFailure(Throwable caught) {
 						if(caught instanceof IOException) {
 							view.setExportScheduleAsWarning();
-							view.setExportScheduleText("בבקשה, תן לנו הרשאות לגשת ל-Google Calendar שלך ואז תלחץ שוב ל\"יצוא מערכת\"");
+							view.setExportScheduleText("בבקשה, תן לנו הרשאות לגשת ל-Google Calendar שלך בחלון שנפתח ואז תלחץ שוב ל\"יצוא מערכת\".\nאם החלון הנפתח הוא ריק, ניתן פשוט לסגור אותו - זה אומר שהמערכת זיהה שכבר נתת לה הרשאות בעבר.");
 //							Window.Location.assign(caught.getMessage());
 							Window.open(caught.getMessage(), "Ap&Go caledar permissions", "");
 							Log.error("error: \n"+caught.getMessage());
