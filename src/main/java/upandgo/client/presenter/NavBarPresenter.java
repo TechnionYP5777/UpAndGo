@@ -238,9 +238,9 @@ public class NavBarPresenter implements Presenter {
 			Log.warn("user's info: " + loginInfo.isLoggedIn() + " " + loginInfo.getNickname());
 //			Log.warn("user have logged-out");
 //			signInLink.setHref(loginInfo.getLoginUrl());
-			display.getSignInOutButton().setText(signInMessage);
-			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
-			eventBus.fireEvent(new AuthenticationEvent(false));
+//			display.getSignInOutButton().setText(signInMessage);
+//			signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
+//			eventBus.fireEvent(new AuthenticationEvent(false));
 			Window.Location.assign(signOutHref);
 //			refreshUser();
 		}
