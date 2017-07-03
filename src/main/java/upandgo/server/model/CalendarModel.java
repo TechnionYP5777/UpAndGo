@@ -157,11 +157,11 @@ public class CalendarModel {
 			Date $ = new SimpleDateFormat("dd/MM/yyyy").parse(semsterStart);
 			String euSemStartweekDay = new SimpleDateFormat("u").format($);
 			@SuppressWarnings("boxing")
-			int semStartWeekDay = (Integer.valueOf(euSemStartweekDay)+1)%7;	// +1 because we need Hebrew calendar
+			int semStartWeekDay = (Integer.valueOf(euSemStartweekDay))%7;	// +1 because we need Hebrew calendar
 	
 			int weekDayOffset = weekDay.ordinal() - semStartWeekDay;
 			if(weekDayOffset < 0)
-			weekDayOffset += 7;
+				weekDayOffset += 7;
 			
 			$ = DateUtils.addDays($, weekDayOffset);
 			date = new SimpleDateFormat("yyyy-MM-dd").format($);
