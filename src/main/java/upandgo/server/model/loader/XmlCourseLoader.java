@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -67,20 +68,15 @@ import java.io.SequenceInputStream;
  * 
  */
 public class XmlCourseLoader extends CourseLoader {
-	private static final String CHOSEN_COURSES_PATH = "data/ChosenCourses.xml";
-	private static final String CHOSEN_LESSON_GROUPS = "data/ChosenLessonGroups.xml";
-	private static final String CHOSEN_LESSON_GROUPS_SER = "data/ChosenLessonGroups.ser";
 
 	TreeMap<String, Course> coursesById;
 	TreeMap<String, Course> coursesByName;
 
 	private static InputStream coursesInfo = null;
-	private static String projectId = "upandgo-168508";
+	private static String appengineAppId = "upandgo-168508";
 	private static String bucketId = "upandgo-168508.appspot.com";
 	private static String coursesInfoFilename = "test.XML";
-	
-	private static String googleStorageCredentials = "upandgo-bf957bbe2318.json";
-	  
+		  
 	
 	public XmlCourseLoader(final String REP_XML_PATH, boolean test_flag) {
 	    super(REP_XML_PATH);
@@ -91,15 +87,25 @@ public class XmlCourseLoader extends CourseLoader {
 	  }
 	
 	
-	  public XmlCourseLoader(final String REP_XML_PATH) {
-	    super(REP_XML_PATH);
-	    coursesInfoFilename = REP_XML_PATH;
+	  public XmlCourseLoader(final String XMLFileName) {
+	    super(XMLFileName);
+	    coursesInfoFilename = XMLFileName;
 	    Log.debug(new File(".").getAbsolutePath() + "&&&&&&&&&");
 	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
 	    
+	    	    final Properties properties = new Properties();
+	    try {
+			properties.load(this.getClass().getResourceAsStream("/WEB-INF/AppConstants.properties"));
+			appengineAppId = properties.getProperty("appengineAppId");
+			bucketId = properties.getProperty("appengineAppId") + ".appspot.com";
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    
 	    CoursesServiceImpl.someString += "We have got our credentials!";
 	    
-	    optionsBuilder.setProjectId(projectId);
+	    optionsBuilder.setProjectId(appengineAppId);
 	    loadCoursesInfo(optionsBuilder.build().getService(), BlobId.of(bucketId, coursesInfoFilename));
 	    
 	    coursesById = new TreeMap<>();

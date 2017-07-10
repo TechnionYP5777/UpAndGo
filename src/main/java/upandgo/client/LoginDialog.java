@@ -13,8 +13,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Binder;
 
-import upandgo.client.Resources.DialogBoxStyle;
-import upandgo.client.Resources.NavBarStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.DialogBoxStyle;
+import upandgo.client.resources.Resources.NavBarStyle;
 
 // sol found here: http://stackoverflow.com/questions/6913081/gwt-popup-and-uibinder-panel-or-dialogbox
 public class LoginDialog extends DialogBox implements ModalComponent{

@@ -13,7 +13,7 @@ package upandgo.client.view;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
-import upandgo.client.Resources;
+import upandgo.client.resources.Resources;
 
 public class SelectedCourseCell extends AbstractCell<String> {
 	

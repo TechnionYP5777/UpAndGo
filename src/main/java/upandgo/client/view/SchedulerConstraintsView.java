@@ -17,8 +17,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.SchedualerConstraintsStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.SchedualerConstraintsStyle;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.Lesson.Type;

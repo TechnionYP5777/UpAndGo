@@ -24,7 +24,7 @@ import upandgo.shared.model.scedule.Color;
  * 
  */
 
-@RemoteServiceRelativePath("coursesManipulations")
+@RemoteServiceRelativePath("coursesService")
 public interface CoursesService extends RemoteService {
 	
 	public ArrayList<CourseId> getSelectedCourses(Semester semester);

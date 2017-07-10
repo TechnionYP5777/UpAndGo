@@ -1,5 +1,6 @@
 package upandgo.client.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -37,10 +39,10 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.NavBarStyle;
-
 import upandgo.client.presenter.NavBarPresenter;
+import upandgo.client.resources.AppConstants;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.NavBarStyle;
 import upandgo.shared.entities.Semester;
 
 public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
@@ -77,7 +79,11 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		//this.add(appTitle);
 		
 		//navbar.setPosition(NavbarPosition.FIXED_TOP);
-		brand.setText("Up&Go");
+		
+		AppConstants appConstants = GWT.create(AppConstants.class);
+		brand.setText("Up&Go " + appConstants.version());
+		//brand.setText("Up&Go");
+
 		signInText.setPull(Pull.RIGHT);
 		signInText.setPaddingRight(15);
 		signInText.add(signInButton);

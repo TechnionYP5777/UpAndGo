@@ -34,8 +34,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.UserEvent;
-import upandgo.client.Resources;
-import upandgo.client.Resources.TimeTableStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.TimeTableStyle;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;

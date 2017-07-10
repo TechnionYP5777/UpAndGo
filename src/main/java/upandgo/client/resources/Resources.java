@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
@@ -114,37 +114,37 @@ public interface Resources extends ClientBundle {
 		 String lessonDetailsPanel();
 	 }
 	 
-	@Source("resources/upandgo.css")
+	@Source("upandgo.css")
 	public MainStyle mainStyle();
 
-	@Source("resources/CourseListStyle.css")
+	@Source("CourseListStyle.css")
 	public CourseListStyle courseListStyle();
 	
-	@Source("resources/TimeTableStyle.css")
+	@Source("TimeTableStyle.css")
 	public TimeTableStyle timeTableStyle();
 	
-	@Source("resources/SchedualerControlsStyle.css")
+	@Source("SchedualerControlsStyle.css")
 	public SchedualerControlsStyle schedualerControlsStyle();
 	
-	@Source("resources/ExamsControlsStyle.css")
+	@Source("ExamsControlsStyle.css")
 	public ExamsControlsStyle examsControlsStyle();
 	
-	@Source("resources/SchedualerConstraintsStyle.css")
+	@Source("SchedualerConstraintsStyle.css")
 	public SchedualerConstraintsStyle schedualerConstraintsStyle();
 	
-	@Source("resources/NavBarStyle.css")
+	@Source("NavBarStyle.css")
 	public NavBarStyle navBarStyle();
 	
-	@Source("resources/DialogBoxStyle.css")
+	@Source("DialogBoxStyle.css")
 	public DialogBoxStyle dialogBoxStyle();
 	
-	@Source("resources/ExamsBarStyle.css")
+	@Source("ExamsBarStyle.css")
 	public ExamsBarStyle examsBarStyle();
 	
-	@Source("resources/CourseListCellStyle.css")
+	@Source("CourseListCellStyle.css")
 	public CourseListCellStyle courseListCellStyle();
 	
-	@Source("resources/LessonDetailsStyle.css")
+	@Source("LessonDetailsStyle.css")
 	public LessonDetailsStyle lessonDetailsStyle();
 	
 

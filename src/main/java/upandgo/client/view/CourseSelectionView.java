@@ -51,8 +51,8 @@ import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 
-import upandgo.client.Resources;
 import upandgo.client.presenter.CourseListPresenter;
+import upandgo.client.resources.Resources;
 import upandgo.shared.entities.StuffMember;
 import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;

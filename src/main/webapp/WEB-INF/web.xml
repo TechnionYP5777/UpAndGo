@@ -44,6 +44,6 @@
 	
 	  	<servlet-mapping>
 		    <servlet-name>CoursesServiceImpl</servlet-name>
-		    <url-pattern>/upandgo/coursesManipulations</url-pattern>
+		    <url-pattern>/upandgo/coursesService</url-pattern>
 	  	</servlet-mapping>
 </web-app>

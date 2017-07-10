@@ -11,8 +11,8 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.ExamsControlsStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.ExamsControlsStyle;
 
 public class ExamsControlsView extends VerticalPanel{
 

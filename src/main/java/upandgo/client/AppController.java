@@ -30,6 +30,7 @@ import upandgo.client.presenter.CourseListPresenter;
 import upandgo.client.presenter.NavBarPresenter;
 import upandgo.client.presenter.Presenter;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.client.resources.Resources;
 import upandgo.client.view.NavBarView;
 import upandgo.shared.entities.Semester;
 

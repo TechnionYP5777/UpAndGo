@@ -27,11 +27,11 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.MainStyle;
 import upandgo.client.event.clearScheduleEvent;
-import upandgo.client.Resources.ExamsBarStyle;
 import upandgo.client.presenter.SchedulerPresenter;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.ExamsBarStyle;
+import upandgo.client.resources.Resources.MainStyle;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;

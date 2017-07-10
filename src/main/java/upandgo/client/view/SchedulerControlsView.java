@@ -17,8 +17,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.SchedualerControlsStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.SchedualerControlsStyle;
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.model.scedule.ConstraintsPool;
 

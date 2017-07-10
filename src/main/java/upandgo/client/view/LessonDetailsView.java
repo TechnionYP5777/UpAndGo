@@ -9,8 +9,8 @@ import org.gwtbootstrap3.client.ui.html.UnorderedList;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import upandgo.client.Resources;
-import upandgo.client.Resources.LessonDetailsStyle;
+import upandgo.client.resources.Resources;
+import upandgo.client.resources.Resources.LessonDetailsStyle;
 import upandgo.shared.entities.Lesson;
 
 public class LessonDetailsView extends VerticalPanel implements ModalComponent{
