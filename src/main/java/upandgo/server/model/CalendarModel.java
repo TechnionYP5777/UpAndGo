@@ -54,7 +54,7 @@ public class CalendarModel {
 	/** Global instance of the {@link FileDataStoreFactory}. */
 	private static AppEngineDataStoreFactory DATA_STORE_FACTORY = AppEngineDataStoreFactory.getDefaultInstance();
 
-	private static String clientSecretJson = "/client_secret.json";
+	private static String clientSecretJson = "/WEB-INF/client_secret.json";
 
 	private static GoogleClientSecrets clientSecrets = null;
 
