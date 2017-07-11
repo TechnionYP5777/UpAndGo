@@ -73,8 +73,12 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 		if (selectedCourses.isEmpty())
 			return new ArrayList<>();
 		ArrayList<CourseId> selectesCoursesIDs = new ArrayList<>();
-		for (String courseId : selectedCourses)
-			selectesCoursesIDs.add(courseModels.get(s).getCourseId(courseId));
+		for (String courseId : selectedCourses){
+			CourseId course = courseModels.get(s).getCourseId(courseId);
+			if (course!=null)
+				selectesCoursesIDs.add(course);
+		}
+			
 		return selectesCoursesIDs;
 	}
 	

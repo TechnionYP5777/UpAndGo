@@ -78,6 +78,8 @@ public class CourseModel { // implements Model {
 	
 	public CourseId getCourseId(String id) {
 		Course course = coursesById.get(id);
+		if (course == null)
+			return null;
 		return new CourseId(course.getId(),course.getName(),course.getaTerm(),course.getbTerm());
 	}
 
