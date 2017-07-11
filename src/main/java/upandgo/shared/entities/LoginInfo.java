@@ -5,6 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class LoginInfo implements IsSerializable {
 
   private boolean loggedIn = false;
+  private boolean isAdmin = false;
   private String loginUrl;
   private String logoutUrl;
   private String emailAddress;
@@ -17,7 +18,15 @@ public class LoginInfo implements IsSerializable {
   public void setLoggedIn(boolean loggedIn) {
     this.loggedIn = loggedIn;
   }
+  
+  public boolean isAdmin() {
+	return isAdmin;
+  }
 
+  public void setAdmin(boolean isAdmin) {
+	this.isAdmin = isAdmin;
+  }	
+	
   public String getLoginUrl() {
     return loginUrl;
   }

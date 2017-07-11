@@ -8,6 +8,7 @@ import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.ListDropDown;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
@@ -17,6 +18,7 @@ import org.gwtbootstrap3.client.ui.NavbarBrand;
 import org.gwtbootstrap3.client.ui.NavbarCollapse;
 import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
 import org.gwtbootstrap3.client.ui.NavbarHeader;
+import org.gwtbootstrap3.client.ui.NavbarLink;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.NavbarText;
 import org.gwtbootstrap3.client.ui.constants.ButtonSize;
@@ -27,6 +29,7 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
+import org.gwtbootstrap3.client.ui.html.Span;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -55,17 +58,20 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	NavbarCollapse navbarCol = new NavbarCollapse();
 	NavbarCollapseButton navBarColButton = new NavbarCollapseButton();
 	NavbarHeader header = new NavbarHeader();
-	NavbarBrand brand = new NavbarBrand();
-	NavbarText signInText = new NavbarText();
-    ListDropDown semesterList = new ListDropDown();
+    
+	ListDropDown semesterList = new ListDropDown();
     AnchorButton semesterButton = new AnchorButton();
     DropDownMenu semesterMenu = new DropDownMenu();
     List<AnchorListItem> semesterListItems = new ArrayList<>();
     Modal semesterModal = new Modal();
 	Button semesterModalAcceptButton = new Button("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;אשר");
+	
 	Button tempButton = new Button("כתוב סמסטר בלוג");
 	Button tempButton2 = new Button("כתוב קורסים שנבחרו בלוג");
-	org.gwtbootstrap3.client.ui.Button signInButton = new org.gwtbootstrap3.client.ui.Button("כניסה / הרשמה");
+	
+	NavbarLink signInButton = new NavbarLink();
+	Span signInMessage = new Span();
+	AnchorListItem adminPanelLink = new AnchorListItem("מסך ניהול");
 	
 	public NavBarView(){
     	InitializePanel();
@@ -80,16 +86,21 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		
 		//navbar.setPosition(NavbarPosition.FIXED_TOP);
 		
+		NavbarBrand brand = new NavbarBrand();
 		//AppConstants appConstants = GWT.create(AppConstants.class);
 		//brand.setText("Up&Go " + appConstants.version());
 		brand.setText("Up&Go");
-
+		
+		Icon signInIcon = new Icon(IconType.USER_CIRCLE);
+		signInButton.setText("התחברות");
+		signInMessage.setText(" ");
+		NavbarText signInText = new NavbarText();
 		signInText.setPull(Pull.RIGHT);
 		signInText.setPaddingRight(15);
+		signInText.add(signInIcon);
+		signInText.add(signInMessage);
 		signInText.add(signInButton);
-		signInButton.setSize(ButtonSize.EXTRA_SMALL);
-		signInButton.setType(ButtonType.LINK);
-		signInButton.setIcon(IconType.USER_CIRCLE);
+
 		
 		navBarColButton.setDataTarget("navbar-links-collapse");
 		
@@ -164,8 +175,14 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 			}
 		});
 		
+		adminPanelLink.setText("מסך ניהול");
+		adminPanelLink.addStyleName(nvStyle.navBarLink());
+		adminPanelLink.setIcon(IconType.COGS);
+		adminPanelLink.setVisible(false);
+		
 		NavbarNav navbarNavLinks = new NavbarNav();
 		
+		navbarNavLinks.add(adminPanelLink);
 		navbarNavLinks.add(gitLink);
 		navbarNavLinks.add(reviewLink);
 		navbarNavLinks.add(helpLink);
@@ -191,8 +208,28 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends HasClickHandlers & HasText> T getSignInOutButton() {
-		return (T) signInButton;
+	public HasClickHandlers getSignInOutButton() {
+		return signInButton;
+	}
+	
+	@Override
+	public void setSignInMessage (boolean signedIn, String nickname){
+		if (signedIn){
+			signInMessage.setText(" שלום " + nickname + ". ");
+			signInButton.setText("התנתקות");
+		} else {
+			signInMessage.setText(" ");
+			signInButton.setText("התחברות");
+		}
+	}
+	
+	@Override
+	public void setAdmin (boolean isAdmin){
+		if (isAdmin){
+			adminPanelLink.setVisible(true);
+		} else {
+			adminPanelLink.setVisible(false);
+		}
 	}
 
 	@Override

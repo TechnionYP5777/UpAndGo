@@ -38,7 +38,11 @@ import upandgo.shared.entities.Semester;
 public class NavBarPresenter implements Presenter {
 
 	public interface Display {
-		<T extends HasClickHandlers & HasText> T getSignInOutButton();
+		public HasClickHandlers getSignInOutButton();
+		
+		public void setSignInMessage (boolean signedIn, String nickname);
+
+		public void setAdmin (boolean isAdmin);
 
 		Widget getAsWidget();
 		
@@ -59,8 +63,8 @@ public class NavBarPresenter implements Presenter {
 		public HasClickHandlers getTempButton2();
 	}
 
-	static String signInMessage = "Sign In";
-	static String signOutMessage = "Sign Out";
+	static String signInMessage = "התחברות";
+	static String signOutMessage = "לחץ להתנתקות";
 	
 	protected LoginServiceAsync rpcService;
 	protected CoursesServiceAsync coursesService;
@@ -235,8 +239,7 @@ public class NavBarPresenter implements Presenter {
 		rpcService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 			@Override
 			public void onFailure(Throwable error) {
-				Log.warn("here333" + error.getLocalizedMessage());
-				// TODO: add some backup logic
+				Log.warn("NavBarPresenter: login failed with error: " + error.getLocalizedMessage());
 			}
 
 			@Override
@@ -245,17 +248,20 @@ public class NavBarPresenter implements Presenter {
 				if (result.isLoggedIn()) {
 					if(signInOutHandler != null)
 						signInOutHandler.removeHandler();
-					Log.warn("user have signed in");
+					Log.warn("NavBarPresenter: User have signed in");
 					signOutHref = loginInfo.getLogoutUrl();
-					display.getSignInOutButton().setText("Welcome, "+loginInfo.getNickname()+".\n"+signOutMessage);
+					display.setSignInMessage(true, loginInfo.getNickname());
+					display.setAdmin(loginInfo.isAdmin());
 					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogOutClickHandler());
 					eventBus.fireEvent(new AuthenticationEvent(true));
 				} else {
 					if(signInOutHandler != null)
 						signInOutHandler.removeHandler();
-					Log.warn("user haven't signed in");
+					Log.warn("NavBarPresenter: User haven't signed in");
 					signInHref = loginInfo.getLoginUrl();
-					display.getSignInOutButton().setText(signInMessage);
+					//display.getSignInOutButton().setText(signInMessage);
+					display.setSignInMessage(false, null);
+					display.setAdmin(false);
 					signInOutHandler = display.getSignInOutButton().addClickHandler(new LogInClickHandler());
 					eventBus.fireEvent(new AuthenticationEvent(false));
 				}
