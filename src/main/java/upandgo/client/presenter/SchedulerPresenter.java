@@ -195,25 +195,16 @@ public class SchedulerPresenter implements Presenter {
 
 			@Override
 			public void onUnselectCourse(UnselectCourseEvent event) {
-				Log.info("unslected/1");
 				Iterator<Course> it = selectedCourses.iterator();
-				Log.info("unslected/2");
 				while (it.hasNext()) {
-					Log.info("unslected/3");
 					Course c = it.next();
-					Log.info("unslected/4");
 					if (c.getId() == event.getId().number()) {
-						Log.info("unslected/5");
 						selectedCourses.remove(c);
-						Log.info("unslected/6");
 						break;
 					}
 				}
-				Log.info("unslected/7");
 				constraintsPool.removeCourseConstraint(event.getId().number());
-				Log.info("unslected/8");
 				view.updateExamsBar(selectedCourses, isMoedAExams);
-				Log.info("unslected/9");
 			}
 		});
 
@@ -232,8 +223,7 @@ public class SchedulerPresenter implements Presenter {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Error while selecting course for scheduling.");
-						Log.error("Error while selecting course for scheduling.");
+						Log.error("SchedulerPresenter: Error while selecting course for scheduling.");
 					}
 				});
 			}
@@ -271,7 +261,7 @@ public class SchedulerPresenter implements Presenter {
 		view.buildSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("Build schedule: requested");
+				Log.info("SchedulerPresenter: Build schedule requested");
 				buildSchedule();
 			}
 		});
@@ -279,7 +269,7 @@ public class SchedulerPresenter implements Presenter {
 		view.nextSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("Next schedule was requested");
+				Log.info("SchedulerPresenter: Next schedule was requested");
 				if (lessonGroupsList.size() <= sched_index + 1) {
 					return;
 				}
@@ -294,7 +284,7 @@ public class SchedulerPresenter implements Presenter {
 		view.prevSchedule().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Log.info("Previous schedule was requested");
+				Log.info("SchedulerPresenter: Previous schedule was requested");
 				if (sched_index <= 0) {
 					return;
 				}
@@ -332,7 +322,7 @@ public class SchedulerPresenter implements Presenter {
 				
 				List<UserEvent> eventsToSave = new ArrayList<>();
 				eventsToSave.addAll(userEvents.values());
-				Log.info("SchedulerPresenter eventsToSave size " + eventsToSave.size());
+				Log.info("SchedulerPresenter: " + eventsToSave.size() + " User events to save");
 				rpcService.saveUserEvents(currentSemester, eventsToSave, new AsyncCallback<Void>() {
 					@Override
 					public void onFailure(Throwable caught) {
@@ -613,9 +603,9 @@ public class SchedulerPresenter implements Presenter {
 	}
 	
 	void buildSchedule() {
-		Log.info("SchedulerPresenter: getChosenCoursesList success");
+		//Log.info("SchedulerPresenter: getChosenCoursesList success");
 		if (selectedCourses.isEmpty()) {
-			Log.info("SchedulerPresenter: chosen course list was was empty");
+			Log.info("SchedulerPresenter: chosen course list was empty");
 			lessonGroupsList.clear();
 			displaySchedule();
 			view.scheduleBuilt();
@@ -654,9 +644,7 @@ public class SchedulerPresenter implements Presenter {
 				}
 			}
 		}
-		
-		Log.info("SchedulerPresenter: selectedCourses " + selectedCourses.get(0).getTutorials());
-		
+				
 		// This creates a dummy course for the scheduler that contains all user events
 		LessonGroup userEventsLessonGroup = new LessonGroup(999);
 		for (UserEvent userEvent : getUserEvents()){
@@ -673,29 +661,17 @@ public class SchedulerPresenter implements Presenter {
 		constrainedCoursesAndEvents.add(userEventCourse);
 
 		
-		Log.info("Build schedule: before Scheduler.getTimetablesList");
 		//final List<Timetable> unsortedTables= Scheduler.getTimetablesList(selectedCoursesAndEvents, null);
 		final List<Timetable> unsortedTables= Scheduler.getTimetablesList(constrainedCoursesAndEvents, null);
 		
 		//Map<Course, Color> colorMap = Scheduler.getColorMap();
 		colorMap = Scheduler.getColorMap();
-		Log.info("color map: " + colorMap);
-		//Log.info("unsorted tables size: " + unsortedTables.size());
-		//Log.info("unsorted tables: " + unsortedTables);
-		//Log.info("Build schedule: before Scheduler.sortedBy");		
+		//Log.info("SchedulerPresenter: color map: " + colorMap);
 		
 		final List<Timetable> sorted = Scheduler.ListSortedBy(unsortedTables,true, constraintsPool.isBlankSpaceCount(),
 				constraintsPool.getMinStartTime(), constraintsPool.getMaxFinishTime(), constraintsPool.getVectorDaysOff());
-		Log.info("corrrect sorted tables size: " + sorted.size());
-		//Log.info("*** found time table: " + sorted.get(0) + " ***");
-		//Log.info("correct sorted tables: " + sorted);
 		
-		/*final List<Timetable> tables = newArrayList(Scheduler.sortedBy(unsortedTables,isDaysoffCount, isBlankSpaceCount, minStartTime, maxFinishTime));
-		Log.info("sorted tables size: " + tables.size());
-		Log.info("sorted tables: " + tables);
-		*/
-		
-		Log.info("Build schedule: after Scheduler.sortedBy");
+		Log.info("SchedulerPresenter: Scheduler sorted " + sorted.size() + " tables");
 		if (sorted.isEmpty()) {
 			//Window.alert("Error - There are no possible schedule.");
 			//Log.error("Error - There are no possible schedule.");
@@ -723,7 +699,7 @@ public class SchedulerPresenter implements Presenter {
 					lessonGroupsList.add(λ.getLessonGroups());
 				}
 			});*/
-			Log.info("Build schedule: A schedule was build");
+			Log.info("SchedulerPresenter: A schedule was build");
 
 			displaySchedule();
 
@@ -741,7 +717,7 @@ public class SchedulerPresenter implements Presenter {
 			
 			@Override
 			public void onSuccess(ArrayList<CourseId> result) {
-				Log.info("SchedulerPresenter: loaded selected courses Ids into scheduler!");
+				//Log.info("SchedulerPresenter: loaded selected courses Ids into scheduler!");
 				for (final CourseId courseId : result){
 					rpcService.getCourseDetails(currentSemester, courseId,new AsyncCallback<Course>() {
 						@Override

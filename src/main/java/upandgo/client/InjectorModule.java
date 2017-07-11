@@ -18,7 +18,7 @@ public class InjectorModule extends AbstractGinModule {
 	
 	@Provides
 	public Semester provideDefaultSemester() {
-	  return Semester.SPRING16;
+	  return Semester.values()[0];
 	}
 
 	@Override

@@ -375,7 +375,7 @@ public class CourseListPresenter implements Presenter {
 	}
 	
 	void getFacultiesAndCourses(){
-		Log.info("CourseListPresenter: setLoadingAnimation true");
+		//Log.info("CourseListPresenter: setLoadingAnimation true");
 		display.setNotSelectedLoadingAnimation(true);
 		rpcService.getFaculties(currentSemester, new FetchFacultiesAsyncCallback());	
 		if (isSignedIn){
@@ -417,7 +417,7 @@ public class CourseListPresenter implements Presenter {
 			}
 			display.setNotSelectedLoadingAnimation(false);
 			display.setNotSelectedCourses(notSelectedCourses);
-			Log.info("CourseListPresenter: setLoadingAnimation false");
+			//Log.info("CourseListPresenter: setLoadingAnimation false");
 			
 
 		}
@@ -447,7 +447,7 @@ public class CourseListPresenter implements Presenter {
 			executeCourseSearch();
 			display.setNotSelectedLoadingAnimation(false);
 			display.setNotSelectedCourses(notSelectedCourses);
-			Log.info("CourseListPresenter: setLoadingAnimation false");
+			//Log.info("CourseListPresenter: setLoadingAnimation false");
 
 		}
 

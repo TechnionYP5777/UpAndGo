@@ -44,11 +44,9 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 	public SchedulerCollisionsView(){
 		
 	    //InitializeTimeLBs();
-		Log.info("SchedCol/1");
 		radios = new ArrayList<InlineRadio>();
     	InitializePanel();
     	cStyle.ensureInjected();
-    	Log.info("SchedCol/2");
     	
     }
 	
@@ -61,7 +59,6 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 	}
 	
 	public void updateList(List<CourseTuple> solvers){
-		Log.info("SchedCol/3");
 		this.solvers = solvers;
 		
 		for(InlineRadio r : radios){
@@ -86,7 +83,6 @@ public class SchedulerCollisionsView extends VerticalPanel implements ModalCompo
 		if(radios.get(0) != null)
 			radios.get(0).setValue(true);
 		 
-		Log.info("SchedCol/4");
 	}
 
 	    

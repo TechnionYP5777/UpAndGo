@@ -68,7 +68,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onBuildSchedule(@SuppressWarnings("unused") buildScheduleEvent event) {
-				Log.info("Build Schedule Event");
+				//Log.info("Build Schedule Event");
 				
 			}
 		});
@@ -77,7 +77,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onClearSchedule(@SuppressWarnings("unused") clearScheduleEvent event) {
-				Log.info("Clear Schedule Event");
+				//Log.info("Clear Schedule Event");
 				
 			}
 		});
@@ -94,7 +94,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onNextSchedule(@SuppressWarnings("unused") nextScheduleEvent event) {
-				Log.info("Next Schedule Event");
+				//Log.info("Next Schedule Event");
 				
 			}
 		});
@@ -103,7 +103,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onPrevSchedule(@SuppressWarnings("unused") prevScheduleEvent event) {
-				Log.info("Previous Schedule Event");
+				//Log.info("Previous Schedule Event");
 				
 			}
 		});
@@ -112,7 +112,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onSaveSchedule(@SuppressWarnings("unused") saveScheduleEvent event) {
-				Log.info("Save Schedule Event");
+				//Log.info("Save Schedule Event");
 				
 			}
 		});
@@ -121,7 +121,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onSelectCourse(SelectCourseEvent event) {
-				Log.info("Course " + event.getId().getTitle() + " Selected");
+				Log.info("SelectCourseEvent: Course " + event.getId().getTitle() + " Selected");
 				
 			}
 		});
@@ -130,7 +130,7 @@ class AppController implements Presenter {
 
 			@Override
 			public void onUnselectCourse(UnselectCourseEvent event) {
-				Log.info("Course " + event.getId().getTitle() + " Unselected");
+				Log.info("UnselectCourseEvent: Course " + event.getId().getTitle() + " Unselected");
 				
 			}
 		});

@@ -310,7 +310,7 @@ public class TimeTableView extends HorizontalPanel {
 					startCell = 1;
 					isTooEarly = true;
 				}
-				Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
+				//Log.info("TimeTableView: startCell: " + startCell + " span: " + span);
 
 				if (daysTables.get(l.getDay()).getText(startCell, 0).equals("")){
 					SimplePanel eventWrap = createLessonPanel(l,lg.isConstrained(), isTooEarly);

@@ -357,7 +357,6 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
 
 	@Override
 	public void updateExamsBar(List<Course> courses, boolean isMoedA) {
-		Log.info("courses: " + courses);
 		List<Course> is = new ArrayList<>();
 		Map<Course, String> courseColors = new HashMap<>();
 		long width=0;
