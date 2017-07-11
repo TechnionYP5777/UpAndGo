@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import upandgo.server.model.datastore.CoursesEntity;
 import upandgo.shared.entities.Exam;
 import upandgo.shared.entities.course.Course;
 

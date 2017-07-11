@@ -1,4 +1,4 @@
-package upandgo.server.model.loader;
+package upandgo.server.model.datastore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-import upandgo.server.model.loader.EventsEntity.Event;
+import upandgo.server.model.datastore.EventsEntity.Event;
 
 @Entity
 public class ScheduleEntity {

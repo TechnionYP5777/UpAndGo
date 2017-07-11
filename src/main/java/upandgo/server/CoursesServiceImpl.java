@@ -15,9 +15,10 @@ import com.googlecode.objectify.ObjectifyService;
 import upandgo.client.CoursesService;
 import upandgo.server.model.CalendarModel;
 import upandgo.server.model.CourseModel;
-import upandgo.server.model.loader.CoursesEntity;
-import upandgo.server.model.loader.EventsEntity;
-import upandgo.server.model.loader.ScheduleEntity;
+import upandgo.server.model.datastore.CoursesEntity;
+import upandgo.server.model.datastore.EventsEntity;
+import upandgo.server.model.datastore.GoogleDatastore;
+import upandgo.server.model.datastore.ScheduleEntity;
 import upandgo.server.model.loader.XmlCourseLoader;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
@@ -61,7 +62,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 	}
 	
 	private void initilalizeCourseModel(Semester s){
-		courseModels.put(s, new CourseModel(new XmlCourseLoader(s.getId() + ".XML"), s));
+		courseModels.put(s, new CourseModel(new XmlCourseLoader(s.getId() + ".XML"), s, new GoogleDatastore()));
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import upandgo.server.model.datastore.EventsEntity;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.UserEvent;

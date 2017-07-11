@@ -67,10 +67,12 @@ import java.io.SequenceInputStream;
  *        Class for loading courses data from xml file.
  * 
  */
-public class XmlCourseLoader extends CourseLoader {
+public class XmlCourseLoader implements CourseLoader {
 
 	TreeMap<String, Course> coursesById;
 	TreeMap<String, Course> coursesByName;
+	
+	CourseBuilder cb;
 
 	private static InputStream coursesInfo = null;
 	private static String appengineAppId = "upandgo-168508";
@@ -78,9 +80,9 @@ public class XmlCourseLoader extends CourseLoader {
 	private static String coursesInfoFilename = "test.XML";
 		  
 	
-	public XmlCourseLoader(final String REP_XML_PATH, boolean test_flag) {
-	    super(REP_XML_PATH);
-	    coursesInfoFilename = REP_XML_PATH;
+	public XmlCourseLoader(final String XMLFileName, boolean test_flag) {
+		cb = new CourseBuilder();
+	    coursesInfoFilename = XMLFileName;
 	    coursesById = new TreeMap<>();
 	    coursesByName = new TreeMap<>();
 	    getCourses(test_flag);
@@ -88,7 +90,7 @@ public class XmlCourseLoader extends CourseLoader {
 	
 	
 	  public XmlCourseLoader(final String XMLFileName) {
-	    super(XMLFileName);
+		cb = new CourseBuilder();
 	    coursesInfoFilename = XMLFileName;
 	    Log.debug(new File(".").getAbsolutePath() + "&&&&&&&&&");
 	    StorageOptions.Builder optionsBuilder = StorageOptions.newBuilder();
@@ -114,24 +116,6 @@ public class XmlCourseLoader extends CourseLoader {
 	  }
 
 	@Override
-	public HashMap<String, Course> loadCourses(@SuppressWarnings("unused") final List<String> names) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateCourse(@SuppressWarnings("unused") final Course __) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<String> loadAllCourseNames() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public TreeMap<String, Course> loadAllCoursesById() {
 		return coursesById;
 	}
@@ -139,86 +123,6 @@ public class XmlCourseLoader extends CourseLoader {
 	@Override
 	public TreeMap<String, Course> loadAllCoursesByName() {
 		return coursesByName;
-	}
-
-	@Override
-	public void saveChosenCourses(final CoursesEntity e) {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be saved!");
-			return;
-		}
-		
-		e.setId(user.getUserId());
-		CoursesServiceImpl.ofy().defer().save().entity(e);
-	}
-
-	@Override
-	public CoursesEntity loadChosenCourses() {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be loaded!");
-			return null;
-		}
-		
-		final CoursesEntity $ = new CoursesEntity(user.getUserId());
-
-		CoursesEntity ce = CoursesServiceImpl.ofy().load().type(CoursesEntity.class).id(user.getUserId()).now();
-		return ce == null ? $ : ce;
-	}
-
-	@Override
-	public void saveChosenLessonGroups(final ScheduleEntity e) {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was signed in. schedule could not be saved!");
-			return;
-		}
-		
-		e.setId(user.getUserId());
-		CoursesServiceImpl.ofy().defer().save().entity(e);
-	}
-
-	@Override
-	public ScheduleEntity loadChosenLessonGroups() {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be loaded!");
-			return null;
-		}
-		
-		ScheduleEntity scheduleEntity = CoursesServiceImpl.ofy().load().type(ScheduleEntity.class).id(user.getUserId()).now();
-		return scheduleEntity != null ? scheduleEntity : new ScheduleEntity(user.getUserId());
-	}
-	
-	@Override
-	public void saveUserEvents(final EventsEntity e) {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-		
-		if(user == null) {
-			Log.warn("User was signed in. schedule could not be saved!");
-			return;
-		}
-		
-		e.setId(user.getUserId());
-		CoursesServiceImpl.ofy().defer().save().entity(e);
-	}
-
-	@Override
-	public EventsEntity loadUserEvents() {
-		User user = UserServiceFactory.getUserService().getCurrentUser();
-
-		if(user == null) {
-			Log.warn("User was not signed in. selected courses could not be loaded!");
-			return null;
-		}
-		
-		EventsEntity eventsEntity = CoursesServiceImpl.ofy().load().type(EventsEntity.class).id(user.getUserId()).now();
-		return eventsEntity != null ? eventsEntity : new EventsEntity(user.getUserId());
 	}
 
 //	private static void addLessonsToLessonGroup(final LessonGroup g, final String courseID, final String groupNum) {

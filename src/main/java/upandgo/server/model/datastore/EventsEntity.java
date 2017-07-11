@@ -1,4 +1,4 @@
-package upandgo.server.model.loader;
+package upandgo.server.model.datastore;
 
 import java.util.ArrayList;
 import java.util.List;

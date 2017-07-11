@@ -1,4 +1,4 @@
-package upandgo.server.model.loader;
+package upandgo.server.model.datastore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class CoursesEntity {
 		this.courses = new TreeMap<>();
 	}
 	
-	CoursesEntity(String id) {
+	public CoursesEntity(String id) {
 		this.id = id;
 		this.courses = new TreeMap<>();
 	}

@@ -15,41 +15,16 @@ import upandgo.shared.entities.course.Course;
  * @author Nikita Dizhur
  * @since 06-12-16
  * 
- * Abstract class for loading courses data from outside. It can be implemented as e.g.: XmlCourseLoader, UrlCourseLoader, JsonLoader etc...
+ * interface for loading courses data from outside. It can be implemented as e.g.: XmlCourseLoader, UrlCourseLoader, JsonLoader etc...
  * 
  */
-public abstract class CourseLoader {
-	protected final CourseBuilder cb;
-	protected final String path;
+public interface CourseLoader {
 
-	public CourseLoader(final String path) {
-		cb = new CourseBuilder();
-		this.path = path;
-	}
+	public Course loadCourse(String name);
 
-	public abstract HashMap<String, Course> loadCourses(List<String> names);
+	public TreeMap<String, Course> loadAllCoursesById();
 
-	public abstract void updateCourse(Course c);
+	public TreeMap<String, Course> loadAllCoursesByName();
 
-	public abstract Course loadCourse(String name);
-
-	public abstract TreeMap<String, Course> loadAllCoursesById();
-
-	public abstract TreeMap<String, Course> loadAllCoursesByName();
-
-	public abstract List<String> loadAllCourseNames();
-
-	public abstract void saveChosenCourses(CoursesEntity courseEntity);
-
-	public abstract CoursesEntity loadChosenCourses();
-
-	public abstract void saveChosenLessonGroups(ScheduleEntity scheduleEntity);
-
-	public abstract ScheduleEntity loadChosenLessonGroups();
-	
-	public abstract void saveUserEvents(final EventsEntity e);
-	
-	public abstract EventsEntity loadUserEvents();
-
-	public abstract List<Faculty> loadFaculties();
+	public List<Faculty> loadFaculties();
 }

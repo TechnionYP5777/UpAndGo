@@ -80,9 +80,9 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		
 		//navbar.setPosition(NavbarPosition.FIXED_TOP);
 		
-		AppConstants appConstants = GWT.create(AppConstants.class);
-		brand.setText("Up&Go " + appConstants.version());
-		//brand.setText("Up&Go");
+		//AppConstants appConstants = GWT.create(AppConstants.class);
+		//brand.setText("Up&Go " + appConstants.version());
+		brand.setText("Up&Go");
 
 		signInText.setPull(Pull.RIGHT);
 		signInText.setPaddingRight(15);

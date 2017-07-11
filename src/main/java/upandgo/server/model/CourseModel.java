@@ -11,10 +11,11 @@ import java.util.TreeMap;
 import com.allen_sauer.gwt.log.client.Log;
 
 import upandgo.server.CoursesServiceImpl;
+import upandgo.server.model.datastore.CoursesEntity;
+import upandgo.server.model.datastore.Datastore;
+import upandgo.server.model.datastore.EventsEntity;
+import upandgo.server.model.datastore.ScheduleEntity;
 import upandgo.server.model.loader.CourseLoader;
-import upandgo.server.model.loader.CoursesEntity;
-import upandgo.server.model.loader.ScheduleEntity;
-import upandgo.server.model.loader.EventsEntity;
 import upandgo.shared.entities.Faculty;
 import upandgo.shared.entities.LessonGroup;
 import upandgo.shared.entities.Semester;
@@ -37,10 +38,12 @@ public class CourseModel { // implements Model {
 	protected TreeMap<String, Course> coursesById;
 	protected TreeMap<String, Course> coursesByName;
 	protected CourseLoader loader;
+	protected Datastore datastore;
 	protected List<Faculty> facultyList;
 
-	public CourseModel(final CourseLoader loader, Semester semester) {
+	public CourseModel(final CourseLoader loader, Semester semester, Datastore datastore) {
 		this.loader = loader;
+		this.datastore = datastore;
 		this.semester = semester;
 		coursesById = loader.loadAllCoursesById();
 		coursesByName = loader.loadAllCoursesByName();
@@ -78,37 +81,7 @@ public class CourseModel { // implements Model {
 		return new CourseId(course.getId(),course.getName(),course.getaTerm(),course.getbTerm());
 	}
 
-	public void saveChosenCourse(final String courseID) {
-		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null)
-			return;
-		coursesEntity.addCourse(semester.getId(), courseID);
-		loader.saveChosenCourses(coursesEntity);
-	}
-	
-	public void removeChosenCourse(final String courseID) {
-		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null)
-			return;
-		coursesEntity.removeCourse(semester.getId(), courseID);
-		loader.saveChosenCourses(coursesEntity);
-	}
-	
-	public void removeAllChosenCourse() {
-		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null)
-			return;
-		coursesEntity.removeAllCourses(semester.getId());
-		loader.saveChosenCourses(coursesEntity);
-	}
-	
-	public List<String> loadChosenCourses() {
-		CoursesEntity coursesEntity = loader.loadChosenCourses();
-		if (coursesEntity == null){
-			return new ArrayList<>();
-		}
-		return coursesEntity.getCourses(semester.getId());
-	}
+
 	
 	public List<CourseId> loadAllCourses(){
 		List<CourseId> res = new ArrayList<>();
@@ -125,7 +98,7 @@ public class CourseModel { // implements Model {
 		List<String> chosenCourses = loadChosenCourses();
 		for(Map.Entry<String, Course> entry : coursesById.entrySet()){
 			Course c = entry.getValue();
-			System.out.println(c.getFaculty());
+			//System.out.println(c.getFaculty());
 			if((faculty.isEmpty() && !chosenCourses.contains(c.getId()) )|| (c.getFaculty().equals(faculty)) && !chosenCourses.contains(c.getId()))
 				res.add(new CourseId(c.getId(), c.getName(),
 						c.getaTerm(), c.getbTerm()));
@@ -173,29 +146,57 @@ public class CourseModel { // implements Model {
 		}
 		return faculties;
 	}
-
-
-//	public void loadGilaionFrom(@SuppressWarnings("unused") final String path) {
-//		// TODO: implement it
-//	}
-//
-//	public void loadCatalogFrom(@SuppressWarnings("unused") final String path) {
-//		// TODO: implement it
-//	}
+	
+	
+	/*
+	 *  DATASTORE
+	 */
+	
+	public void saveChosenCourse(final String courseID) {
+		CoursesEntity coursesEntity = datastore.loadChosenCourses();
+		if (coursesEntity == null)
+			return;
+		coursesEntity.addCourse(semester.getId(), courseID);
+		datastore.saveChosenCourses(coursesEntity);
+	}
+	
+	public void removeChosenCourse(final String courseID) {
+		CoursesEntity coursesEntity = datastore.loadChosenCourses();
+		if (coursesEntity == null)
+			return;
+		coursesEntity.removeCourse(semester.getId(), courseID);
+		datastore.saveChosenCourses(coursesEntity);
+	}
+	
+	public void removeAllChosenCourse() {
+		CoursesEntity coursesEntity = datastore.loadChosenCourses();
+		if (coursesEntity == null)
+			return;
+		coursesEntity.removeAllCourses(semester.getId());
+		datastore.saveChosenCourses(coursesEntity);
+	}
+	
+	public List<String> loadChosenCourses() {
+		CoursesEntity coursesEntity = datastore.loadChosenCourses();
+		if (coursesEntity == null){
+			return new ArrayList<>();
+		}
+		return coursesEntity.getCourses(semester.getId());
+	}
 	
 	public void saveChosenLessonGroups(final List<LessonGroup> lessonGroups) {
-		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		ScheduleEntity scheduleEntity =  datastore.loadChosenLessonGroups();
 		scheduleEntity.removeAllLessons(semester.getId());
 		
 		for (LessonGroup lg : lessonGroups){
 			scheduleEntity.addLesson(semester.getId(), lg.getCourseID(), lg.getGroupNum());
 		}
 		
-		loader.saveChosenLessonGroups(scheduleEntity);
+		datastore.saveChosenLessonGroups(scheduleEntity);
 	}
 	
 	public List<LessonGroup> loadChosenLessonGroups() {
-		ScheduleEntity scheduleEntity =  loader.loadChosenLessonGroups();
+		ScheduleEntity scheduleEntity =  datastore.loadChosenLessonGroups();
 		List<LessonGroup> lgList = new ArrayList<>();
 		if (scheduleEntity == null){
 			return lgList;
@@ -215,18 +216,18 @@ public class CourseModel { // implements Model {
 	}
 	
 	public void saveUserEvents(final List<UserEvent> userEvents) {
-		EventsEntity eventsEntity =  loader.loadUserEvents();
+		EventsEntity eventsEntity =  datastore.loadUserEvents();
 		eventsEntity.removeAllEvents(semester.getId());
 		
 		for (UserEvent ue : userEvents){
 			eventsEntity.addEvent(semester.getId(), ue);
 		}
 		
-		loader.saveUserEvents(eventsEntity);
+		datastore.saveUserEvents(eventsEntity);
 	}
 	
 	public List<UserEvent> loadUserEvents() {
-		EventsEntity eventsEntity =  loader.loadUserEvents();
+		EventsEntity eventsEntity =  datastore.loadUserEvents();
 		List<UserEvent> ueList = new ArrayList<>();
 		if (eventsEntity == null){
 			return ueList;
