@@ -1,4 +1,4 @@
-package upandgo.client.view;
+package upandgo.client.view.scheduler;
 
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
@@ -12,13 +12,13 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.i18n.client.HasDirection;
 
-public class ExportScheduleModal extends Modal implements HasText {
+public class SchedulerExportView extends Modal implements HasText {
 
 	Button okButton = new Button("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>&nbsp;&nbsp;המשך");
 	Label text = new Label();
 	
 	
-	ExportScheduleModal() {
+	SchedulerExportView() {
 		setAsWarning();
 		setText("");
 		text.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -27,7 +27,7 @@ public class ExportScheduleModal extends Modal implements HasText {
 			
 			@Override
 			public void onClick(@SuppressWarnings("unused") ClickEvent event) {
-				ExportScheduleModal.this.hide();
+				SchedulerExportView.this.hide();
 			}
 		});
 

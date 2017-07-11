@@ -1,4 +1,4 @@
-package upandgo.client;
+package upandgo.shared.entities;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

@@ -1,4 +1,4 @@
-package upandgo.client.view;
+package upandgo.client.view.scheduler;
 
 
 import org.gwtbootstrap3.client.ui.ButtonGroup;
@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import upandgo.client.resources.Resources;
 import upandgo.client.resources.Resources.ExamsControlsStyle;
 
-public class ExamsControlsView extends VerticalPanel{
+public class SchedulerExamsControlsView extends VerticalPanel{
 
 	private ExamsControlsStyle ecStyle = Resources.INSTANCE.examsControlsStyle();
 
@@ -36,7 +36,7 @@ public class ExamsControlsView extends VerticalPanel{
 	ButtonGroup moadim = new ButtonGroup();
 	
 	
-	public ExamsControlsView(){
+	public SchedulerExamsControlsView(){
     	InitializePanel();
     	ecStyle.ensureInjected();
     }

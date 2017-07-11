@@ -49,7 +49,6 @@ import upandgo.client.event.SelectCourseEvent;
 import upandgo.client.event.SelectCourseEventHandler;
 import upandgo.client.event.UnselectCourseEvent;
 import upandgo.client.event.UnselectCourseEventHandler;
-import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.presenter.CourseListPresenter.GetSomeStringAsyncCallback;
 import upandgo.client.event.ClearAllCoursesEvent;
 import upandgo.client.event.ClearAllCoursesEventHandler;
@@ -254,7 +253,6 @@ public class SchedulerPresenter implements Presenter {
 			public void onClick(ClickEvent event) {
 				lessonGroupsList.clear();
 				displaySchedule();
-				eventBus.fireEvent(new clearScheduleEvent());
 			}
 		});
 

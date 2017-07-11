@@ -28,11 +28,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 import upandgo.client.CoursesServiceAsync;
-import upandgo.client.LoginInfo;
 import upandgo.client.LoginServiceAsync;
 import upandgo.client.event.AuthenticationEvent;
 import upandgo.client.event.ChangeSemesterEvent;
 import upandgo.client.event.ChangeSemesterEventHandler;
+import upandgo.shared.entities.LoginInfo;
 import upandgo.shared.entities.Semester;
 
 public class NavBarPresenter implements Presenter {
@@ -85,21 +85,6 @@ public class NavBarPresenter implements Presenter {
 		this.eventBus = eventBus;
 		this.currentSemester = defaultSemester;
 		
-/*		coursesService.getSemester(new AsyncCallback<Semester>() {
-			
-			@Override
-			public void onSuccess(Semester arg0) {
-				Log.info("NavBarPresenter: onSuccess semester " + arg0.getId());
-				currentSemester = arg0;
-				
-			}
-			
-			@Override
-			public void onFailure(Throwable arg0) {
-				Log.info("NavBarPresenter: onFailure semester " + arg0);
-				
-			}
-		});*/
 	}
 
 	@Override

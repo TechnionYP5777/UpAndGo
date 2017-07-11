@@ -58,7 +58,7 @@ import upandgo.shared.entities.course.Course;
 import upandgo.shared.entities.course.CourseId;
 
 
-public class CourseSelectionView extends LayoutPanel implements CourseListPresenter.Display  {
+public class CourseListView extends LayoutPanel implements CourseListPresenter.Display  {
     private CellTable<CourseId> ccl = new CellTable<>(); //chosen courses
     private ListDataProvider<CourseId> selectedModel;
     private Label cc = new Label("קורסים שנבחרו:");
@@ -76,7 +76,7 @@ public class CourseSelectionView extends LayoutPanel implements CourseListPresen
     private HTML scLoadingLogo = new HTML("<i class=\"fa fa-spinner fa-spin fa-3x fa-fw\"></i>");
     Course hoveredCourse = null;
     int rowNum = -1; //helps verify that hoveredCourseDetail is relevant
-    public CourseSelectionView(){
+    public CourseListView(){
     	InitializePanel();
     	Resources.INSTANCE.courseListStyle().ensureInjected();
 

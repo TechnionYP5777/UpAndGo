@@ -1,4 +1,4 @@
-package upandgo.client.view;
+package upandgo.client.view.scheduler;
 
 import java.util.ArrayList;
 import java.util.List;

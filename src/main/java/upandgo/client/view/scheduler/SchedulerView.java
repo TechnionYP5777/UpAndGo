@@ -1,4 +1,4 @@
-package upandgo.client.view;
+package upandgo.client.view.scheduler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,11 +23,9 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import upandgo.client.event.clearScheduleEvent;
 import upandgo.client.presenter.SchedulerPresenter;
 import upandgo.client.resources.Resources;
 import upandgo.client.resources.Resources.ExamsBarStyle;
@@ -47,19 +45,19 @@ public class SchedulerView extends LayoutPanel implements SchedulerPresenter.Dis
     private HTML examsBar;
     private HTML examsBarB;
     private com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel examsScrollPanel;
-	TimeTableView timeTableView = new TimeTableView();
+	SchedulerTimeTableView timeTableView = new SchedulerTimeTableView();
 	ScrollPanel scrollableTimeTable = new ScrollPanel(timeTableView);
 	SchedulerConstraintsView schedualerConstraintsView = new SchedulerConstraintsView();
 	SchedulerCollisionsView schedulerCollisionsView = new SchedulerCollisionsView();
 	
 	SchedulerControlsView schedualerControlsView = new SchedulerControlsView(schedualerConstraintsView);
-	ExamsControlsView examsControlsView = new ExamsControlsView();
+	SchedulerExamsControlsView examsControlsView = new SchedulerExamsControlsView();
 	Modal collisionBox = new Modal();
 	Button collisionBoxButton = new Button("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;&nbsp;הסר קורס");
 	List<InlineRadio> radios;
 	List<CourseTuple> solversTuples;
 	
-	ExportScheduleModal exportScheduleModal = new ExportScheduleModal();
+	SchedulerExportView exportScheduleModal = new SchedulerExportView();
 	
 	public SchedulerView(){
 		InitializePanel();

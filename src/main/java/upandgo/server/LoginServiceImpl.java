@@ -4,10 +4,10 @@ package upandgo.server;
 import com.google.appengine.api.users.User;		
 import com.google.appengine.api.users.UserService;		
 import com.google.appengine.api.users.UserServiceFactory;		
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;		
-		
-import upandgo.client.LoginInfo;		
-import upandgo.client.LoginService;		
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import upandgo.client.LoginService;
+import upandgo.shared.entities.LoginInfo;		
 		
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {		
 		

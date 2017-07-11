@@ -1,4 +1,4 @@
-package upandgo.client.view;
+package upandgo.client.view.scheduler;
 
 
 import java.util.ArrayList;
@@ -36,6 +36,7 @@ import upandgo.shared.entities.LocalTime;
 import upandgo.shared.entities.UserEvent;
 import upandgo.client.resources.Resources;
 import upandgo.client.resources.Resources.TimeTableStyle;
+import upandgo.client.view.LessonDetailsView;
 import upandgo.shared.entities.Day;
 import upandgo.shared.entities.Lesson;
 import upandgo.shared.entities.LessonGroup;
@@ -43,7 +44,7 @@ import upandgo.shared.entities.WeekTime;
 import upandgo.shared.model.scedule.Color;
 
 
-public class TimeTableView extends HorizontalPanel { 
+public class SchedulerTimeTableView extends HorizontalPanel { 
 	
 	static final int FIRST_HOUR = 8;
 	static final int LAST_HOUR = 20;
@@ -88,7 +89,7 @@ public class TimeTableView extends HorizontalPanel {
 	
 	private TimeTableStyle ttStyle = Resources.INSTANCE.timeTableStyle();
 	
-	public TimeTableView(){
+	public SchedulerTimeTableView(){
     	InitializePanel();
     	InitializeLessonDetailsBox();
     	InitializeUserEventBox();
