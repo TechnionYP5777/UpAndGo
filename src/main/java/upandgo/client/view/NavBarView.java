@@ -12,6 +12,7 @@ import org.gwtbootstrap3.client.ui.Icon;
 import org.gwtbootstrap3.client.ui.ListDropDown;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
+import org.gwtbootstrap3.client.ui.ModalComponent;
 import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.Navbar;
 import org.gwtbootstrap3.client.ui.NavbarBrand;
@@ -73,8 +74,12 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 	Span signInMessage = new Span();
 	AnchorListItem adminPanelLink = new AnchorListItem("מסך ניהול");
 	
+	Modal AdminModal = new Modal();
+	AdminView adminModalComponent = new AdminView(); 
+	
 	public NavBarView(){
     	InitializePanel();
+    	initializeAdminModal();
     	nvStyle.ensureInjected();
     }
 
@@ -179,6 +184,14 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		adminPanelLink.addStyleName(nvStyle.navBarLink());
 		adminPanelLink.setIcon(IconType.COGS);
 		adminPanelLink.setVisible(false);
+		adminPanelLink.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				AdminModal.show();
+				
+			}
+		});
 		
 		NavbarNav navbarNavLinks = new NavbarNav();
 		
@@ -296,6 +309,29 @@ public class NavBarView extends FlowPanel implements NavBarPresenter.Display {
 		semesterModalFooter.add(semesterModalAcceptButton);
 		semesterModal.add(semesterModalFooter);
 		return semesterModal;
+	}	
+	
+	public void initializeAdminModal(){
+		
+		AdminModal.setFade(true);
+		AdminModal.setTitle("מסך ניהול");
+		
+		ModalBody AdminModalBody = new ModalBody();
+		AdminModalBody.add(adminModalComponent);
+		AdminModal.add(AdminModalBody);
+		
+		ModalFooter AdminModalFooter = new ModalFooter();
+		Button AdminModalCloseButton = new Button("<i class=\"fa fa-times\" aria-hidden=\"true\"></i>&nbsp;&nbsp;סגור");
+		AdminModalCloseButton.setStyleName("btn btn-danger");
+		AdminModalCloseButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent arg0) {
+				AdminModal.hide();
+			}
+		});
+		AdminModalFooter.add(AdminModalCloseButton);
+		AdminModal.add(AdminModalFooter);
+		return;
 	}	
 	
 	@Override
