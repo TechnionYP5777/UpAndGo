@@ -110,23 +110,23 @@ public class CalendarModelTest {
 		
 		System.out.println(events.get(0).getStart().getDateTime().toStringRfc3339());
 		System.out.println(DateTime.parseRfc3339("2017-10-25T01:01:00.000Z"));
-		assertEquals(DateTime.parseRfc3339("2017-10-27T01:01:00.000Z"), events.get(0).getStart().getDateTime());
-		assertEquals(DateTime.parseRfc3339("2017-10-27T01:01:00.000Z"), events.get(1).getStart().getDateTime());
-		assertEquals(DateTime.parseRfc3339("2017-10-27T02:01:00.000Z"), events.get(0).getEnd().getDateTime());
-		assertEquals(DateTime.parseRfc3339("2017-10-27T02:01:00.000Z"), events.get(1).getEnd().getDateTime());
+		assertEquals(DateTime.parseRfc3339("2017-10-27T01:01:00.000+03:00"), events.get(0).getStart().getDateTime());
+		assertEquals(DateTime.parseRfc3339("2017-10-27T01:01:00.000+03:00"), events.get(1).getStart().getDateTime());
+		assertEquals(DateTime.parseRfc3339("2017-10-27T02:01:00.000+03:00"), events.get(0).getEnd().getDateTime());
+		assertEquals(DateTime.parseRfc3339("2017-10-27T02:01:00.000+03:00"), events.get(1).getEnd().getDateTime());
 	}
 	
 	@SuppressWarnings("static-method")
 	@Test
 	public void testLessonStartToRfc() {
 		String res = CalendarModel.lessonStartToRfc(Semester.WINTER17.getStartDate(), Day.FRIDAY, 2, 1);
-		assertEquals("2017-10-27T02:01:00Z", res);
+		assertEquals("2017-10-27T02:01:00+03:00", res);
 		res = CalendarModel.lessonStartToRfc(Semester.WINTER17.getStartDate(), Day.FRIDAY, 20, 1);
-		assertEquals("2017-10-27T20:01:00Z", res);
+		assertEquals("2017-10-27T20:01:00+03:00", res);
 		res = CalendarModel.lessonStartToRfc(Semester.WINTER17.getStartDate(), Day.FRIDAY, 2, 10);
-		assertEquals("2017-10-27T02:10:00Z", res);
+		assertEquals("2017-10-27T02:10:00+03:00", res);
 		res = CalendarModel.lessonStartToRfc(Semester.WINTER17.getStartDate(), Day.FRIDAY, 20, 10);
-		assertEquals("2017-10-27T20:10:00Z", res);
+		assertEquals("2017-10-27T20:10:00+03:00", res);
 	}
 	
 	@SuppressWarnings("static-method")

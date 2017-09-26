@@ -80,7 +80,7 @@ public class CalendarModel {
 		// Create a new calendar
 		com.google.api.services.calendar.model.Calendar calendar = new com.google.api.services.calendar.model.Calendar();
 		calendar.setSummary(calendarName);
-		calendar.setTimeZone("Universal");
+		calendar.setTimeZone("Israel");
 
 		// Insert the new calendar
 		com.google.api.services.calendar.model.Calendar createdCalendar = calendarService.calendars().insert(calendar)
@@ -132,10 +132,10 @@ public class CalendarModel {
 			String startTimeStr = lessonStartToRfc(semester.getStartDate(), l.getStartTime().getDay(),
 					l.getStartTime().getTime().getHour(), l.getStartTime().getTime().getMinute());
 			EventDateTime startTime = new EventDateTime().setDateTime(new DateTime(startTimeStr))
-					.setTimeZone("Universal");
+					.setTimeZone("Israel");
 			String endTimeStr = lessonStartToRfc(semester.getStartDate(), l.getEndTime().getDay(), l.getEndTime().getTime().getHour(),
 					l.getEndTime().getTime().getMinute());
-			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Universal");
+			EventDateTime endTime = new EventDateTime().setDateTime(new DateTime(endTimeStr)).setTimeZone("Israel");
 			
 			// create event:
 			Event event = new Event().setSummary(l.getCourseId() + "\n" + l.getCourseName())
@@ -177,7 +177,7 @@ public class CalendarModel {
 		if (minute < 10)
 			minuteStr = "0" + minuteStr;
 
-		return date + "T" + hourStr + ":" + minuteStr + ":00Z"; // e.g. "1985-04-12T23:20:50.52Z"
+		return date + "T" + hourStr + ":" + minuteStr + ":00+03:00"; // e.g. "1985-04-12T23:20:50.52Z"
 	}
 	
 	static String getRecurrenceRule(String semsterEnd) {
