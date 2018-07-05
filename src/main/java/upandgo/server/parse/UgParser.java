@@ -45,7 +45,8 @@ public class UgParser {
 	private static final String UG_SEARCH_URL = "https://ug3.technion.ac.il/rishum/search";
 	// private static final String UG_COURSE_URL =
 	// "https://ug3.technion.ac.il/rishum/course/";
-	private static final String GRADUATE_SEARCH_URL = "http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=";
+	//private static final String GRADUATE_SEARCH_URL = "http://www.graduate.technion.ac.il/Heb/Subjects/?SUB=";
+	private static final String GRADUATE_SEARCH_URL = "https://www.graduate.technion.ac.il/Subjects.Heb/?SUB=";
 	//private static final String PREREQUISITES_XML = "data/Prerequisites.xml";
 	static final List<String> ignoredFacutlyIds = Arrays.asList("", "7", "99", "300", "450");
 
