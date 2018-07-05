@@ -101,6 +101,6 @@ public class UgParserTest {
 
 	@Test
 	public void testCreateCoursesXMLDocument(){
-		UgParser.createCoursesXMLDocument("201602");
+		UgParser.createCoursesXMLDocument("201801");
 	}
 }
