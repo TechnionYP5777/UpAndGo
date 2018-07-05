@@ -51,7 +51,7 @@ public class CoursesServiceImpl extends RemoteServiceServlet implements CoursesS
 
 	}
 	
-	private Semester defaultSemester = Semester.WINTER17;
+	private Semester defaultSemester = Semester.WINTER18;
 
 	private Map<Semester,CourseModel> courseModels = new TreeMap<>();
 	private final CalendarModel calendarModel = new CalendarModel();

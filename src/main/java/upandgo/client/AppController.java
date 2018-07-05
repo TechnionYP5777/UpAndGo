@@ -96,7 +96,7 @@ class AppController implements Presenter {
 		NavBarPresenter.Display navBarView = injector.getNavBarPresenterDisplay();
 		CourseListPresenter.Display courseSelectionView = injector.getCourseListPresenterDisplay();
 		SchedulerPresenter.Display schedualerView = injector.getSchedulerPresenterDisplay();
-		Semester defaultSemester = Semester.WINTER17;
+		Semester defaultSemester = Semester.WINTER18;
 		
 		NavBarPresenter nbPresenter = new NavBarPresenter(loginService, coursesService, eventBus, navBarView, defaultSemester);
 		
